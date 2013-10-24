@@ -1,0 +1,13 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{#{% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}#}
+
+
+{% block register %}
+<div class="contenu">
+<div class="panel panel-default">
+  <div class="panel-body">
+{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+  </div>
+</div>
+</div>    
+{% endblock register %}

@@ -1,0 +1,3 @@
+smart_unity_boutique_homepage:
+    pattern:  /
+    defaults: { _controller: SmartUnityBoutiqueBundle:Default:index }

@@ -1,0 +1,77 @@
+<?php
+
+namespace SmartUnity\AppBundle\Entity;
+
+use FOS\UserBundle\Entity\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="membre")
+ */
+class Membre extends BaseUser
+{
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected $membre_id;
+
+   /**
+	 * @ORM\Column(type="string", length=100)
+	 */
+protected $membre_nom;
+	/**
+	 * @ORM\Column(type="string", length=100)
+	 */
+	protected $membre_prenom;
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	protected $membre_cagnotte;
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	protected $membre_reputation;
+	/**
+	 * @ORM\Column(type="text")
+	 */
+	protected $membre_avatar;
+	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	protected $membre_date;
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	protected $membre_sexe;
+	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	protected $membre_date_inscription;
+	/**
+	 * @ORM\ManyToOne(targetEntity="Role")
+	 * @ORM\JoinColumn(name="membre_role_id", referencedColumnName="role_id")
+	 */
+	protected $membre_role_id;
+	// /**
+	//  * @ORM\ManyToOne(targetEntity="Preference")
+	//  * @ORM\JoinColumn(name="membre_pref_id", referencedColumnName="preference_id")
+	//  */
+	// protected $membre_pref_id;
+	// /**
+	//  * @ORM\ManyToOne(targetEntity="Ville")
+	//  * @ORM\JoinColumn(name="membre_ville_id", referencedColumnName="ville_id")
+	//  */
+	// protected $membre_ville_id;
+	//  *
+ //     * @ORM\ManyToMany(targetEntity="Modele")
+ //     * @ORM\JoinTable(name="membres_modeles",
+ //     *      joinColumns={@ORM\JoinColumn(name="membre_id", referencedColumnName="membre_id")},
+ //     *      inverseJoinColumns={@ORM\JoinColumn(name="modele_id", referencedColumnName="modele_id")}
+ //     *      )
+ //     *
+	//  protected $membre_modeles_id;
+
+	}

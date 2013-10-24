@@ -1,0 +1,15 @@
+{% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
+{#{% form_theme form 'SmartUnityUtilisateurBundle:Form:form_div_layout.html.twig' %}#}
+
+{% block edition %}
+
+{#nian#}
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    {{ form_widget(form) }}
+    <div>
+        <input class="btn" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    </div>
+</form>
+{#<a class="active" href="{{ path('fos_user_profile_show') }}">Retour</a>#}
+<input class="btn" type="button" value="retour" onclick="javascript:history.back()">
+{% endblock %}   

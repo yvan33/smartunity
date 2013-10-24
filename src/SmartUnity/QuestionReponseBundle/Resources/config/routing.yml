@@ -1,0 +1,3 @@
+smart_unity_question_reponse_homepage:
+    pattern:  /
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Default:index }

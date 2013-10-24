@@ -1,0 +1,12 @@
+{% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
+{% block infos %}   
+     <p>pseudo3: {{app.user.username}}</p>
+     <p>E-mail: {{app.user.email}}</p>
+     <p>pseudo:</p>  
+     <p>Localisation:</p>
+     <p>Age:</p>
+     <p>Sexe:</p>
+     <p>Appareil:</p>
+     <p>Un peu plus sur moi:</p>
+     <a class="active" href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
+{% endblock %}

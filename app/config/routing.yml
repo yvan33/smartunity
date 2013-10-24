@@ -1,0 +1,42 @@
+smart_unity_question_reponse:
+    resource: "@SmartUnityQuestionReponseBundle/Resources/config/routing.yml"
+    prefix:   /QuestionReponse/
+
+smart_unity_utilisateur:
+    resource: "@SmartUnityUtilisateurBundle/Resources/config/routing.yml"
+    prefix:   /Utilisateur/
+
+smart_unity_boutique:
+    resource: "@SmartUnityBoutiqueBundle/Resources/config/routing.yml"
+    prefix:   /Boutique/
+
+smart_unity_forum:
+    resource: "@SmartUnityForumBundle/Resources/config/routing.yml"
+    prefix:   /Forum/
+
+smart_unity_admin:
+    resource: "@SmartUnityAdminBundle/Resources/config/routing.yml"
+    prefix:   /Admin/
+
+smart_unity_app:
+    resource: "@SmartUnityAppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /Utilisateur/
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profil
