@@ -2,6 +2,8 @@ parameters:
 #    smart_unity_utilisateur.example.class: SmartUnity\UtilisateurBundle\Example
 
 services:
-#    smart_unity_utilisateur.example:
-#        class: %smart_unity_utilisateur.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+   smart_unity_app.form.type:
+        class:  SmartUnity\UtilisateurBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: smartunity_user_registration }

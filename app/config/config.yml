@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: "@SmartUnityUtilisateurBundle/Resources/config/services.yml"}
 
 framework:
     #esi:             ~
@@ -75,10 +76,3 @@ fos_user:
     registration:
         form:
             type: smartunity_user_registration
-
-services:
-   smart_unity_app.form.type:
-        class:  SmartUnity\UtilisateurBundle\Form\Type\RegistrationFormType
-        arguments: [%fos_user.model.user.class%]
-        tags:
-            - { name: form.type, alias: smartunity_user_registration }

@@ -29,26 +29,26 @@ class membre extends BaseUser
      */
     protected $nom;
     
-//    /**
-//     * @var integer
-//     *
-//     * @ORM\Column(name="cagnotte", type="integer", options={"default":0})
-//     */
-//    protected $cagnotte;
-//    
-//    /**
-//     * @var integer
-//     *
-//     * @ORM\Column(name="reputation", type="integer", options={"default":0})
-//     */
-//    protected $reputation;
-// 
-//    /**
-//     * @var boolean
-//     *
-//     * @ORM\Column(name="sexe", type="boolean", options={"default":0})
-//     */
-//    protected $sexe;    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cagnotte", type="integer")
+     */
+    protected $cagnotte=0;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="reputation", type="integer")
+     */
+    protected $reputation=0;
+ 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sexe", type="boolean")
+     */
+    protected $sexe;    
 
     /**
      * Get id

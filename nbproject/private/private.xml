@@ -2,24 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Controller/RegistrationController.php</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/app/config/routing.yml</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/config/services.yml</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/AppBundle/Entity/membre.php</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/app/config/config.yml</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/config/routing.yml</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Form/Type/RegistrationFormType.php</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/views/Registration/register.html.twig</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Entity/User.php</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/views/Profile/show.html.twig</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/app/Resources/views/base.html.twig</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Form/Type/RegistrationFormType.php</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Form/DataTransformer/UserToUsernameTransformer.php</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/views/Profile/edit.html.twig</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/views/Registration/register_content.html.twig</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/app/config/security.yml</file>
-            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/views/Form/form_div_layout.html.twig</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

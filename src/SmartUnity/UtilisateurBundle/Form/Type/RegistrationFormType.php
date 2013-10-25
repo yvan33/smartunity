@@ -12,10 +12,15 @@ public function buildForm(FormBuilderInterface $builder, array $options)
         parent::buildForm($builder, $options);
 
         // Ajoutez vos champs ici, revoilà notre champ *location* :
-        $builder->add('nom');
-//        $builder->add('sexe');
+        $builder->add('nom')
+                ->add('sexe','choice',array(
+                    'choices' => array(
+                        '0'=> '', '1' => 'Masculin', '2' => 'Féminine'),
+                    'expanded' => false,
+                    'required' => false,
+                    'data' => 0
+                       ));
      
-
     }
 
     public function getName()

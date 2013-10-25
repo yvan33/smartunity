@@ -5,7 +5,14 @@
      <p>pseudo:</p>  
      <p>Localisation:</p>
      <p>Age:</p>
-     <p>Sexe:</p>
+     <p>Sexe:{%if app.user.sexe ==1 %}
+         Masculin
+         {%elseif app.user.sexe ==2%}
+         Féminin
+          {%else%}
+         Non renseigné
+        {%endif%}
+    </p>
      <p>Appareil:</p>
      <p>Un peu plus sur moi:</p>
      <a class="active" href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
