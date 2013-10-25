@@ -13,7 +13,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 
         // Ajoutez vos champs ici, revoilà notre champ *location* :
         $builder->add('nom');
-        $builder->add('sexe');
+//        $builder->add('sexe');
      
 
     }
