@@ -8,62 +8,100 @@
     
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
+{% block stylesheets %}{% endblock %}
 </head>
-<body>
-    <nav class="navbar navbar-default" role="navigation">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>s
-          <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Smart'Unity</a>
-  </div>
+    
+<!-- bg body -->
+<body style="background-color:#334A64">
+<!-- head -->
+ <div class="container" style="background-color:#edebeb;box-shadow: 0 0 30px black;">
+ 
+  <div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h"/></div>
+      <div class="col-md-5 cent-h"><div class="cent-h logo2"><a href="#" class=" pos-re valign-col-all"><img src="{{ asset('assets/img/logo-iphon.png') }}"/><p class="red-dot">1</p></a><a href="#" class="valign-col-all pad-l"><p >trol_du_31</p></a></div></div>
 
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav">
-      <li><a href="#">Questions & Solutions</a></li>
-      <li><a href="#">Boutique</a></li>
-      <li><a href="#">Smart'Café</a></li>
-
-  </ul>
-  <form class="navbar-form navbar-left" role="search">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
-<ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav ">
   <li><a href="{{ path('fos_user_registration_register') }}">Créer un compte</a></li>
   <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 Bonjour <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a> <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
 {% else %}
 <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-{% endif %}</li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-    <ul class="dropdown-menu">
-      <li><a href="#">Action</a></li>
-      <li><a href="#">Another action</a></li>
-      <li><a href="#">Something else here</a></li>
-      <li><a href="#">Separated link</a></li>
-  </ul>
-</li>
-</ul>
-</div><!-- /.navbar-collapse -->
-</nav>
+
+{% endif %}</li></ul>
+    </div>
+  </div>
+  </div>
+  
+<!-- /.navbar-collapse -->
+	<div class="row">
+		<div class="col-md-12 menu-bg">
+			<nav class="navbar navbar-inverse" role="navigation">
+         <!--navbar- mobile -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  <a class="navbar-brand" href="#">Smart'Unity</a>
+                    </button>
+                  </div>
+		<!--navbar- standar -->
+                  <div class="collapse navbar-collapse navbar-ex1-collapse menu-mar" >
+                    <ul class="nav navbar-nav">
+                      <li class="home" ><a href="#"></a></li>
+                      <li class="active"><a href="#"><p class="menu-pad">QUESTIONS & SOLUTIONS</p></a></li>
+                      <li ><a href="#"><p class="menu-pad">BOUTIQUE</p></a></li>
+                      <li ><a href="#"><p class="menu-pad">SMART'CAFE</p></a></li>
+                    </ul>
+                  </div>
+         <!--navbar- standar fin --> 
+			</nav>
+		</div>
+	</div>
+<!-- nav -->
+<div class="row">
+<div class="col-md-12" style="height:900px">
+
 {% block body %}{% endblock %}
 
     
+</div>
+</div>
+   
+<!-- footer --> 
+	<!-- footer separation --> 	
+	<div class="row">
+		<div class="col-md-12 foot-sep">
+		</div>
+	</div>
+	<!-- footer separation fin --> 	
+	<div class="row valign-row"  style="padding-top:20px; padding-bottom:20px; text-align:center">
+		<div class="col-md-2 valign-col" ><img src="{{ asset('assets/img/sn.png') }}"/>
+        	</div>
+        <div class="col-md-3 valign-col col-mar"><a href="#"><img src="{{ asset('assets/img/logo-f-f.png') }}"  class="foot-im"/></a><a href="#"><img src="{{ asset('assets/img/logo-t-f.png') }}" class="foot-im"/></a><a href="#"><img src="{{ asset('assets/img/logo-g-f.png') }}" class="foot-im"/></a>
+        	</div>
+        <div class="col-md-2 valign-col"><a href="#"><p>A propos de smart'unity</p></a>
+        	</div>
+        <div class="col-md-2 valign-col col-mar"><a href="#"><p>Conditions generales d'utilisation</p></a>
+        	</div>
+        <div class="col-md-1 valign-col col-mar"><a href="#"><p>Publicité</p></a>
+        	</div>
+        <div class="col-md-2 valign-col col-mar"><a href="#"><p>Copy right smart'unity</p></a>
+       		</div>
+	</div>
+<!-- footer --> 
+
+
+</div>
+
 <!-- Bootstrap core JavaScript --> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="{{ asset('js/jquery.js') }}"><\/script>')</script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/holder.js') }}"></script>
-    
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
 </body>
 </html>
