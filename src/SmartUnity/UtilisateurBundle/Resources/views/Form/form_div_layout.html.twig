@@ -45,28 +45,28 @@
 {% endblock textarea_widget %}
 
 {% block choice_widget %}
-{% spaceless %}
+{#{% spaceless %}#}
     {% if expanded %}
         {{ block('choice_widget_expanded') }}
     {% else %}
         {{ block('choice_widget_collapsed') }}
     {% endif %}
-{% endspaceless %}
+{#{% endspaceless %}#}
 {% endblock choice_widget %}
 
 {% block choice_widget_expanded %}
-{% spaceless %}
+{#{% spaceless %}#}
     <div {{ block('widget_container_attributes') }}>
     {% for child in form %}
         {{ form_widget(child) }}
         {{ form_label(child) }}
     {% endfor %}
     </div>
-{% endspaceless %}
+{#{% endspaceless %}#}
 {% endblock choice_widget_expanded %}
 
 {% block choice_widget_collapsed %}
-{% spaceless %}
+{#{% spaceless %}#}
     {% if required and empty_value is none and not empty_value_in_choices %}
         {% set required = false %}
     {% endif %}
@@ -84,7 +84,7 @@
         {% set options = choices %}
         {{ block('choice_widget_options') }}
     </select>
-{% endspaceless %}
+{#{% endspaceless %}#}
 {% endblock choice_widget_collapsed %}
 
 {% block choice_widget_options %}

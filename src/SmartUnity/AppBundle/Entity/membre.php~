@@ -29,26 +29,75 @@ class membre extends BaseUser
      */
     protected $nom;
     
-//    /**
-//     * @var integer
-//     *
-//     * @ORM\Column(name="cagnotte", type="integer", options={"default":0})
-//     */
-//    protected $cagnotte;
-//    
-//    /**
-//     * @var integer
-//     *
-//     * @ORM\Column(name="reputation", type="integer", options={"default":0})
-//     */
-//    protected $reputation;
-// 
-//    /**
-//     * @var boolean
-//     *
-//     * @ORM\Column(name="sexe", type="boolean", options={"default":0})
-//     */
-//    protected $sexe;    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cagnotte", type="integer")
+     */
+    protected $cagnotte=0;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="reputation", type="integer")
+     */
+    protected $reputation=0;
+ 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sexe", type="integer")
+     */
+    protected $sexe=0;    
+    
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="date_naissance", type="datetime")
+     */
+    protected $date_naissance; 
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pref_mp", type="boolean")
+     */
+    protected $pref_mp;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pref_smartcafe", type="boolean")
+     */
+    protected $pref_smartcafe;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pref_comm", type="boolean")
+     */
+    protected $pref_comm;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pref_rep", type="boolean")
+     */
+    protected $pref_rep;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pref_repValidee", type="boolean")
+     */
+    protected $pref_repValidee;    
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pref_repCertifiee", type="boolean")
+     */
+    protected $pref_repCertifiee;    
 
     /**
      * Get id
@@ -150,5 +199,28 @@ class membre extends BaseUser
     public function getSexe()
     {
         return $this->sexe;
+    }
+
+    /**
+     * Set date_naissance
+     *
+     * @param \DateTime $dateNaissance
+     * @return membre
+     */
+    public function setDateNaissance($dateNaissance)
+    {
+        $this->date_naissance = $dateNaissance;
+    
+        return $this;
+    }
+
+    /**
+     * Get date_naissance
+     *
+     * @return \DateTime 
+     */
+    public function getDateNaissance()
+    {
+        return $this->date_naissance;
     }
 }

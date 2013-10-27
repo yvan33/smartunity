@@ -1,8 +1,8 @@
 {% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
 {% block infos %}   
-     <p>pseudo3: {{app.user.username}}</p>
+     <p>pseudo: {{app.user.username}}</p>
      <p>E-mail: {{app.user.email}}</p>
-     <p>pseudo:</p>  
+     <p>Nom: {{app.user.nom}}</p>  
      <p>Localisation:</p>
      <p>Age:</p>
      <p>Sexe:{%if app.user.sexe ==1 %}

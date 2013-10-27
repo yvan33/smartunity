@@ -3,6 +3,10 @@
 	margin: 0 10% 0 10%;
 }
 
+.title_center {
+        text-align: center;
+}
+
 .colonneGauche {
 
 	width: 49%;
