@@ -28,7 +28,53 @@ public function buildForm(FormBuilderInterface $builder, array $options)
                     'expanded' => false,
                     'data' => 0
                        ))
-            ->add('date_naissance', 'date');
+            ->add('date_naissance', 'date')
+            ->add('pref_mp', 'choice', array(
+                'choices' => array(
+                '1' => 'Oui', '0' => 'Non'),
+                'expanded' => true,
+                'data' => 1
+                ))
+            ->add('pref_smartcafe', 'choice', array(
+                'label' => 'Test',
+                'choices' => array(
+                '1' => 'Oui', '0' => 'Non'),
+                'expanded' => true,
+                'data' => 1    
+            ))
+                
+                
+            ->add('pref_comm', 'choice', array(
+                'label' => 'Test',
+                'choices' => array(
+                '1' => 'Oui', '0' => 'Non'),
+                'expanded' => true,
+                'data' => 1    
+            ))
+            ->add('pref_rep', 'choice', array(
+                'label' => 'Test',
+                'choices' => array(
+                '1' => 'Oui', '0' => 'Non'),
+                'expanded' => true,
+                'data' => 1    
+            ))
+             ->add('pref_repValidee', 'choice', array(
+                'label' => 'Test',
+                'choices' => array(
+                '1' => 'Oui', '0' => 'Non'),
+                'expanded' => true,
+                'data' => 1    
+            ))
+                
+            ->add('pref_repCertifiee', 'choice', array(
+                'label' => 'Test',
+                'choices' => array(
+                '1' => 'Oui', '0' => 'Non'),
+                'expanded' => true,
+                'data' => 1    
+            ))
+                
+            ;
      
     }
 

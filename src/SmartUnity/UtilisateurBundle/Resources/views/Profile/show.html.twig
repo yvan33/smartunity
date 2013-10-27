@@ -17,3 +17,45 @@
      <p>Un peu plus sur moi:</p>
      <a class="active" href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
 {% endblock %}
+
+{% block preferences %}   
+     <p>Messages privés:{%if app.user.prefmp ==1 %}
+         Oui
+          {%else%}
+         Non
+        {%endif%}
+    </p>
+     <p>Communauté:{%if app.user.prefcomm ==1 %}
+         Oui
+          {%else%}
+         Non
+        {%endif%}
+    </p>
+     <p>Smart Café:{%if app.user.prefsmartcafe ==1 %}
+         Oui
+          {%else%}
+         Non
+        {%endif%}
+    </p>
+     <p>Reponse:{%if app.user.prefrep ==1 %}
+         Oui
+          {%else%}
+         Non
+        {%endif%}
+    </p>
+     <p>Reponses Validées:         
+        {%if app.user.prefrepValidee ==1 %}
+        Oui
+        {%else%}
+         Non
+        {%endif%}
+    </p>
+     <p>Reponses Certifiées:{%if app.user.prefrepCertifiee ==1 %}
+         Oui
+          {%else%}
+         Non
+        {%endif%}
+    </p>    
+    
+    
+{% endblock %}
