@@ -1,22 +1,44 @@
 {% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
-{% block infos %}   
-     <p>pseudo: {{app.user.username}}</p>
-     <p>E-mail: {{app.user.email}}</p>
-     <p>Nom: {{app.user.nom}}</p>  
-     <p>Localisation:</p>
-     <p>Age:</p>
-     <p>Sexe:{%if app.user.sexe ==1 %}
-         Masculin
+
+
+
+{% block infos %}  
+<div class="row  ">
+    <div class="grille-1">Pseudo:</div>
+    <div class="grille-2">{{app.user.username}}</div>
+</div>
+
+<div class="row  ">
+    <div class="grille-1">E-mail:</div>
+    <div class="grille-2">{{app.user.email}}</div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Nom:</div>
+    <div class="grille-2">{{app.user.nom}}</div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Age:</div>
+    <div class="grille-2"></div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Sexe:</div>
+    <div class="grille-2">{%if app.user.sexe ==1 %}
+        Masculin
          {%elseif app.user.sexe ==2%}
-         Féminin
+        Féminin
           {%else%}
-         Non renseigné
-        {%endif%}
-    </p>
-     <p>Appareil:</p>
-     <p>Un peu plus sur moi:</p>
-     <a class="active" href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
-{% endblock %}
+        Non renseigné
+        {%endif%}</div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Appareil:</div>
+    <div class="grille-2"></div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Un peu plus sur moi:</div>
+    <div class="grille-2"></div>
+</div>
+<a class="active" href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
 
 {% block preferences %}  
 <form method="post" action="{{ path ('smart_unity_utilisateur_setpref') }}"> 
