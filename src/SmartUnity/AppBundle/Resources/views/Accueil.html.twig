@@ -1,7 +1,12 @@
 {% extends "SmartUnityAppBundle::layout.html.twig" %}
 
 {% block body %}
-
+<?php
+include 'ChromePhp.php';
+ChromePhp::log('Hello console!');
+ChromePhp::log($_SERVER);
+ChromePhp::warn('something went wrong!');
+?>
 
 <p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 Bonjour {{ app.user.username}} 
