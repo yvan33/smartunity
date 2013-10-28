@@ -1,3 +1,35 @@
 smart_unity_question_reponse_homepage:
     pattern:  /
-    defaults: { _controller: SmartUnityQuestionReponseBundle:Default:index }
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:index }
+
+smart_unity_question_reponse_list_of_question:
+    pattern:  /liste/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestion }
+
+smart_unity_question_reponse_display_question:
+    pattern:  /question/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayQuestion }
+
+smart_unity_question_reponse_add_question:
+    pattern:  /ajouter-question/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addQuestion }
+
+smart_unity_question_reponse_add_reponse:
+    pattern:  /ajouter-reponse/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addReponse }
+
+smart_unity_question_reponse_validation_reponse:
+    pattern:  /validation/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:validationReponse }
+
+smart_unity_question_reponse_certification:
+    pattern:  /certification/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:certificationReponse }
+
+smart_unity_question_reponse_add_commentaire_question:
+    pattern:  /ajouter-comm-question/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addCommentaireQuestion }
+
+smart_unity_question_reponse_add_commentaire_reponse:
+    pattern:  /ajouter-comm-reponse/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addCommentaireReponse }
