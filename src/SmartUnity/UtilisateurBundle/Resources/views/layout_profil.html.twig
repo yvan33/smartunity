@@ -26,30 +26,15 @@
 {% endblock %}
 {% block change_password %}
 {% endblock%}
-
-
         </div>
-
+        
+{# Bloc  Mes Préférences   #}
         <div class="grille-content">
             <div class="row  ">
                 <div class="text-center"><img src="{{asset('assets/img/mes-pref.png')}}"/></div>
             </div>
-            <div class="row  ">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row  ">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row  ">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row  ">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
+            {% block preferences %} 
+            {% endblock%}
         </div>
 
     </div>
