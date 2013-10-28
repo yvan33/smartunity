@@ -1,0 +1,14 @@
+{% extends "SmartUnityAppBundle::layout.html.twig" %}
+
+{% block body %}
+
+
+<p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+Bonjour {{ app.user.username}} 
+{% endif %} </p> 
+
+<p>Accueil</p>
+
+
+
+{% endblock %}
