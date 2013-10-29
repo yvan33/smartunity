@@ -2,13 +2,20 @@ parameters:
 #    smart_unity_utilisateur.example.class: SmartUnity\UtilisateurBundle\Example
 
 services:
-   smart_unity_app.form.type:
+   smart_unity_app.registration.form.type:
         class:  SmartUnity\UtilisateurBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: smartunity_user_registration }
-   smart_unity_app.test.type:
+   
+   smart_unity_app.pref.form.type:
         class:  SmartUnity\UtilisateurBundle\Form\Type\PreferenceFormType
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: smartunity_user_preference }
+   
+   smart_unity_app.infos.form.type:
+        class:  SmartUnity\UtilisateurBundle\Form\Type\InformationsFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: smartunity_user_informations }    

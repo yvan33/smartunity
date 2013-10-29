@@ -3,13 +3,76 @@
 
 {% block edition %}
 
-{#nian#}
-<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+{#<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
     {{ form_widget(form) }}
     <div>
         <input class="btn" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
     </div>
+</form> #}
+
+<form action="{{ path('smart_unity_utilisateur_setinfos') }}" {{ form_enctype(form_infos) }} method="POST">
+
+{#{{form_start(form_infos)}}#}
+    {{form_errors(form_infos)}}
+
+    <div class="row  ">
+        <div class="grille-1">
+        {{form_label(form_infos.username)}}
+        </div>
+        <div class="grille-2">
+        {{form_widget(form_infos.username)}}
+        </div>
+    </div>
+
+    <div class="row  ">
+        <div class="grille-1">
+        {{form_label(form_infos.nom)}}
+        </div>
+        <div class="grille-2">
+        {{form_widget(form_infos.nom)}}
+        </div>
+    </div>
+
+    <div class="row  ">
+        <div class="grille-1">
+        {{form_label(form_infos.email)}}
+        </div>
+        <div class="grille-2">
+        {{form_widget(form_infos.email)}}
+        </div>
+    </div>
+
+    <div class="row  ">
+        <div class="grille-1">
+        {{form_label(form_infos.sexe)}}
+        </div>
+        <div class="grille-2">
+        {{form_widget(form_infos.sexe)}}
+        </div>
+    </div>    
+
+    <div class="row  ">
+        <div class="grille-1">
+        {{form_label(form_infos.date_naissance)}}
+        </div>
+        <div class="grille-2">
+        {{form_widget(form_infos.date_naissance)}}
+        </div>
+    </div>
+
+    <div class="row  ">
+        <div class="grille-1">Appareil:</div>
+        <div class="grille-2"></div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1">Un peu plus sur moi:</div>
+        <div class="grille-2"></div>
+    </div>
+
+    <div>
+        <input type="submit" value="Modifier mes infos" />
+    </div>   
 </form>
-{#<a class="active" href="{{ path('fos_user_profile_show') }}">Retour</a>#}
-<input class="btn" type="button" value="retour" onclick="javascript:history.back()">
+    <input class="btn" type="button" value="retour" onclick="javascript:history.back()">
+    <a class="active" href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
 {% endblock %}   

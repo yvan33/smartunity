@@ -20,9 +20,9 @@
 </div>
 <div class="row  ">
     <div class="grille-1">Sexe:</div>
-    <div class="grille-2">{%if app.user.sexe ==1 %}
+    <div class="grille-2">{%if app.user.sexe =="m" %}
         Masculin
-         {%elseif app.user.sexe ==2%}
+         {%elseif app.user.sexe =="f" %}
         Féminin
           {%else%}
         Non renseigné
@@ -36,25 +36,25 @@
     <div class="grille-1">Un peu plus sur moi:</div>
     <div class="grille-2"></div>
 </div>
-<a class="active" href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
+
 {% endblock %}
 
 {% block preferences %}  
 
- <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form) }} method="POST">
-    {{form_errors(form)}}
+ <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
+    {{form_errors(form_pref)}}
     
-    {{form_row(form.pref_mp)}}
-    {{form_row(form.pref_comm)}}
-    {{form_row(form.pref_smartcafe)}}
-    {{form_row(form.pref_rep)}}
-    {{form_row(form.pref_repValidee)}}
-    {{form_row(form.pref_repCertifiee)}}
+    {{form_row(form_pref.pref_mp)}}
+    {{form_row(form_pref.pref_comm)}}
+    {{form_row(form_pref.pref_smartcafe)}}
+    {{form_row(form_pref.pref_rep)}}
+    {{form_row(form_pref.pref_repValidee)}}
+    {{form_row(form_pref.pref_repCertifiee)}}
     <div>
         <input type="submit" value="Modifier mes preferences" />
     </div> 
 
-{{form_end(form)}}   
+{{form_end(form_pref)}}   
 </form> 
 
 {% endblock %}
