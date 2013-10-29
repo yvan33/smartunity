@@ -72,7 +72,28 @@
     <div>
         <input type="submit" value="Modifier mes infos" />
     </div>   
+    {{form_end(form_infos)}}  
 </form>
     <input class="btn" type="button" value="retour" onclick="javascript:history.back()">
     <a class="active" href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
 {% endblock %}   
+
+{% block preferences %}  
+
+ <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
+    {{form_errors(form_pref)}}
+    
+    {{form_row(form_pref.pref_mp)}}
+    {{form_row(form_pref.pref_comm)}}
+    {{form_row(form_pref.pref_smartcafe)}}
+    {{form_row(form_pref.pref_rep)}}
+    {{form_row(form_pref.pref_repValidee)}}
+    {{form_row(form_pref.pref_repCertifiee)}}
+    <div>
+        <input type="submit" value="Modifier mes preferences" />
+    </div> 
+
+{{form_end(form_pref)}}   
+</form> 
+
+{% endblock %}

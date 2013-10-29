@@ -44,11 +44,11 @@ class membre extends BaseUser
     protected $reputation=0;
  
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="sexe", type="integer")
+     * @ORM\Column(name="sexe", type="string", length=2)
      */
-    protected $sexe=0;    
+    protected $sexe;    
     
     /**
      * @var date
@@ -222,5 +222,143 @@ class membre extends BaseUser
     public function getDateNaissance()
     {
         return $this->date_naissance;
+    }
+
+    /**
+     * Set pref_mp
+     *
+     * @param boolean $prefMp
+     * @return membre
+     */
+    public function setPrefMp($prefMp)
+    {
+        $this->pref_mp = $prefMp;
+    
+        return $this;
+    }
+
+    /**
+     * Get pref_mp
+     *
+     * @return boolean 
+     */
+    public function getPrefMp()
+    {
+        return $this->pref_mp;
+    }
+
+    /**
+     * Set pref_smartcafe
+     *
+     * @param boolean $prefSmartcafe
+     * @return membre
+     */
+    public function setPrefSmartcafe($prefSmartcafe)
+    {
+        $this->pref_smartcafe = $prefSmartcafe;
+    
+        return $this;
+    }
+
+    /**
+     * Get pref_smartcafe
+     *
+     * @return boolean 
+     */
+    public function getPrefSmartcafe()
+    {
+        return $this->pref_smartcafe;
+    }
+
+    /**
+     * Set pref_comm
+     *
+     * @param boolean $prefComm
+     * @return membre
+     */
+    public function setPrefComm($prefComm)
+    {
+        $this->pref_comm = $prefComm;
+    
+        return $this;
+    }
+
+    /**
+     * Get pref_comm
+     *
+     * @return boolean 
+     */
+    public function getPrefComm()
+    {
+        return $this->pref_comm;
+    }
+
+    /**
+     * Set pref_rep
+     *
+     * @param boolean $prefRep
+     * @return membre
+     */
+    public function setPrefRep($prefRep)
+    {
+        $this->pref_rep = $prefRep;
+    
+        return $this;
+    }
+
+    /**
+     * Get pref_rep
+     *
+     * @return boolean 
+     */
+    public function getPrefRep()
+    {
+        return $this->pref_rep;
+    }
+
+    /**
+     * Set pref_repValidee
+     *
+     * @param boolean $prefRepValidee
+     * @return membre
+     */
+    public function setPrefRepValidee($prefRepValidee)
+    {
+        $this->pref_repValidee = $prefRepValidee;
+    
+        return $this;
+    }
+
+    /**
+     * Get pref_repValidee
+     *
+     * @return boolean 
+     */
+    public function getPrefRepValidee()
+    {
+        return $this->pref_repValidee;
+    }
+
+    /**
+     * Set pref_repCertifiee
+     *
+     * @param boolean $prefRepCertifiee
+     * @return membre
+     */
+    public function setPrefRepCertifiee($prefRepCertifiee)
+    {
+        $this->pref_repCertifiee = $prefRepCertifiee;
+    
+        return $this;
+    }
+
+    /**
+     * Get pref_repCertifiee
+     *
+     * @return boolean 
+     */
+    public function getPrefRepCertifiee()
+    {
+        return $this->pref_repCertifiee;
     }
 }
