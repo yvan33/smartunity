@@ -5,13 +5,30 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Additional meta content -->
+    {% block meta %}{% endblock %}
     
-    <!-- Bootstrap core CSS -->
+<!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
+
+<!-- Additional styleSheets -->
 {% block stylesheets %}{% endblock %}
+
+
+<!-- Bootstrap core JavaScript --> 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ asset('js/jquery.js') }}"><\/script>')</script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+<!-- Additional Javascript src -->
+{% block initJS %}{% endblock %}
+
+
 </head>
-    
+
+ 
 <!-- bg body -->
 <body style="background-color:#334A64">
 <!-- head -->
@@ -23,14 +40,30 @@
       <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h"/></div>
       <div class="col-md-5 cent-h"><div class="cent-h logo2"><a href="#" class=" pos-re valign-col-all"><img src="{{ asset('assets/img/logo-iphon.png') }}"/><p class="red-dot">1</p></a><a href="#" class="valign-col-all pad-l"><p >trol_du_31</p></a></div></div>
 
-      <ul class="nav navbar-nav ">
+      
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{ path('fos_user_registration_register') }}">Créer un compte</a></li>
+      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+  <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ path('fos_user_profile_show') }}">Mon compte</a></li>
+          <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+        </ul>
+      </li>
+      {% else %}
+      <li><a href="{{ path('fos_user_security_login') }}">Connexion</a> </li>
+      {% endif %}
+    </ul>      
+      
+{#      <ul class="nav navbar-nav ">
   <li><a href="{{ path('fos_user_registration_register') }}">Créer un compte</a></li>
   <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 Bonjour <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a> <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
 {% else %}
 <a href="{{ path('fos_user_security_login') }}">Connexion</a>
 
-{% endif %}</li></ul>
+{% endif %}</li></ul>#}
     </div>
   </div>
   </div>
@@ -52,8 +85,8 @@ Bonjour <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a
 		<!--navbar- standar -->
                   <div class="collapse navbar-collapse navbar-ex1-collapse menu-mar" >
                     <ul class="nav navbar-nav">
-                      <li class="home" ><a href="#"></a></li>
-                      <li class="active"><a href="#"><p class="menu-pad">QUESTIONS & SOLUTIONS</p></a></li>
+                      <li class="home"><a href="{{ path('smart_unity_app_homepage') }}"></a></li>
+                      <li class="active"><a href="{{ path('smart_unity_question_reponse_homepage') }}"><p class="menu-pad">QUESTIONS & SOLUTIONS</p></a></li>
                       <li ><a href="#"><p class="menu-pad">BOUTIQUE</p></a></li>
                       <li ><a href="#"><p class="menu-pad">SMART'CAFE</p></a></li>
                     </ul>
@@ -62,16 +95,20 @@ Bonjour <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a
 			</nav>
 		</div>
 	</div>
-<!-- nav -->
+<!-- end nav -->
+
+
+<!-- BODY -->
 <div class="row">
 <div class="col-md-12" style="height:900px">
 
 {% block body %}{% endblock %}
 
-    
 </div>
 </div>
-   
+
+<!-- end BODY-->   
+
 <!-- footer --> 
 	<!-- footer separation --> 	
 	<div class="row">
@@ -90,18 +127,17 @@ Bonjour <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a
         	</div>
         <div class="col-md-1 valign-col col-mar"><a href="#"><p>Publicité</p></a>
         	</div>
-        <div class="col-md-2 valign-col col-mar"><a href="#"><p>Copy right smart'unity</p></a>
+        <div class="col-md-2 valign-col col-mar"><a href="#"><p>Copyright Smart'Unity</p></a>
        		</div>
 	</div>
-<!-- footer --> 
-
+<!-- end footer --> 
 
 </div>
 
-<!-- Bootstrap core JavaScript --> 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ asset('js/jquery.js') }}"><\/script>')</script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<!-- call Javascript & scripts -->
+{% block callJS %}{% endblock %}
+
+
 
 </body>
 </html>

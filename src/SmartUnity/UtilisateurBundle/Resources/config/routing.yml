@@ -1,5 +1,5 @@
 smart_unity_utilisateur_setpref:
-    pattern:  /modify
+    pattern:  /modify_pref
     defaults: { _controller: SmartUnityUtilisateurBundle:Default:setPref }
 
 smart_unity_utilisateur_homepage:

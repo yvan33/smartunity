@@ -13,19 +13,18 @@ class DefaultController extends Controller
     public function setPrefAction(){
 
         	$request = $this->get('request');
-        	$user=$this->container->get('security.context')->getToken()->getUser();
+/*        	$user=$this->container->get('security.context')->getToken()->getUser();*/
+
         if ($request->getMethod() =="POST") {
 
-            $em=$this->getDoctrine()->getManager();
-            $membre=$em->merge($user);
-          /*  $membre=$em->getRepository('SmartUnityAppBundle:Membre')->find($id);*/
+            $em=$this->getDoctrine()->getManager();            
+            $membre=$em->getRepository('SmartUnityAppBundle:Membre')->find($request->request->get('id'));
             $membre->setprefmp($request->request->get('mp'));
             $membre->setprefsmartcafe($request->request->get('smartcafe'));
             $membre->setprefcomm($request->request->get('comm'));
             $membre->setprefrep($request->request->get('rep'));
-            $membre->setprefrepValidee($request->request->get('repVal'));
-            $membre->setprefrepCertifiee($request->request->get('repCert'));
-            $em->persist($membre);
+            $membre->setprefrepValidee($request->request->get('repval'));
+            $membre->setprefrepCertifiee($request->request->get('repcert'));
             $em->flush();
         }
         

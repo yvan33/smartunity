@@ -1,55 +1,100 @@
 {% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
 
 {% block profil %}
-<div class="contenu">
-  <div class="colonneGauche">
-    <section class="blocUtilisateur1">
-     <div class="panel panel-default">
-      <div class="panel-heading">Mes informations  <a class="active" href="{{ path('fos_user_profile_edit') }}">editer</a></div>
-    </button>
-      <div class="panel-body">
-       <div class="avatar"></div>
-<br>
+
+<div class="row">
+    <div class="col-md-12 text-center"><img src="{{asset('assets/img/mon-compte.png')}}" style="padding-top:20px"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-offset-1 col-md-5" style="margin-top:20px">
+
+{# Bloc  Mes Informations   #}
+        <div class="grille-content">
+            <div class="row  ">
+                <div class="text-center"><img src="{{asset('assets/img/mes-info.png')}}"/> 
+
+                    <a class="active" href="{{ path('fos_user_profile_edit') }}">editer</a>
+                </div>
+
+            </div>
+
+
 {% block infos %}     
 {% endblock %}
 {% block edition %}     
 {% endblock %}
 {% block change_password %}
 {% endblock%}
-   </div>
-   </div>
- </section>
+        </div>
+        
+{# Bloc  Mes Préférences   #}
+        <div class="grille-content">
+            <div class="row  ">
+                <div class="text-center"><img src="{{asset('assets/img/mes-pref.png')}}"/></div>
+            </div>
+            {% block preferences %} 
+            {% endblock%}
+        </div>
 
-<section class="blocUtilisateur3">
-  <div class="panel panel-default">
-    <div class="panel-heading">Mes préférences</div>
-    <div class="panel-body">
-{% block preferences %}
-{% endblock%}      
     </div>
-  </section>
-
+    <div class="col-md-5" style="margin-top:20px">
+        <div class="grille-content">
+            <div class="row  ">
+                <div class="text-center"><img src="{{asset('assets/img/ma-com.png')}}"/></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+        </div>
+        <div class="grille-content">
+            <div class="row  ">
+                <div class="text-center"><img src="{{asset('assets/img/mon-a.png')}}"/></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            
+        </div>
+    </div>
 </div>
 
-<div class="colonneDroite">
-
- <section class="blocUtilisateur2">
-   <div class="panel panel-default">
-    <div class="panel-heading">Ma communauté</div>
-    <div class="panel-body">
-      Panel content
-    </div>
-  </section>
-
-
-
-  <section class="blocUtilisateur4">
-   <div class="panel panel-default">
-    <div class="panel-heading">Mon Activité</div>
-    <div class="panel-body">
-      Panel content
-    </div>
-  </section>
-</div>
-</div>
   {% endblock %}
