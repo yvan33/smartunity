@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Question
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\questionRepository")
  */
 class question
 {
@@ -43,10 +43,23 @@ class question
     private $description;
 
     /**
-    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre")
-    * @ORM\JoinColumn(nullable=false)
-    */
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre")
+     * @ORM\JoinColumn(nullable=false)
+     */
     private $membre;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", cascade={"persist"})
+     */
+    private $appareil;
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="slug", type="string", unique=TRUE, length=150)
+     */
+    private $slug;
+    
 
     /**
      * Get id
@@ -148,5 +161,68 @@ class question
     public function getMembre()
     {
         return $this->membre;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->appareil = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add appareil
+     *
+     * @param \SmartUnity\AppBundle\appareil $appareil
+     * @return question
+     */
+    public function addAppareil(\SmartUnity\AppBundle\Entity\appareil $appareil)
+    {
+        $this->appareil[] = $appareil;
+    
+        return $this;
+    }
+
+    /**
+     * Remove appareil
+     *
+     * @param \SmartUnity\AppBundle\appareil $appareil
+     */
+    public function removeAppareil(\SmartUnity\AppBundle\Entity\appareil $appareil)
+    {
+        $this->appareil->removeElement($appareil);
+    }
+
+    /**
+     * Get appareil
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAppareil()
+    {
+        return $this->appareil;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return question
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

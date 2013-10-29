@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Reponse
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\reponseRepository")
  */
 class reponse
 {

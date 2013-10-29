@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * commentaireReponse
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\commentaireReponseRepository")
  */
 class commentaireReponse
 {
