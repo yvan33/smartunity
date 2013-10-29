@@ -1,7 +1,6 @@
 <?php
 
 namespace SmartUnity\UtilisateurBundle\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
@@ -13,17 +12,24 @@ class DefaultController extends Controller
 
     public function setPrefAction(){
 
-        $request = $this->get('request');
-
-        if ($request->getMethod =="Post") {
+        	$request = $this->get('request');
+        	$user=$this->container->get('security.context')->getToken()->getUser();
+        if ($request->getMethod() =="POST") {
 
             $em=$this->getDoctrine()->getManager();
-            $membre=$em->getRepository('SmartunityApp:Membre')->find($request->request->get('id')) ;
+            $membre=$em->merge($user);
+          /*  $membre=$em->getRepository('SmartUnityAppBundle:Membre')->find($id);*/
             $membre->setprefmp($request->request->get('mp'));
+            $membre->setprefsmartcafe($request->request->get('smartcafe'));
+            $membre->setprefcomm($request->request->get('comm'));
+            $membre->setprefrep($request->request->get('rep'));
+            $membre->setprefrepValidee($request->request->get('repVal'));
+            $membre->setprefrepCertifiee($request->request->get('repCert'));
+            $em->persist($membre);
             $em->flush();
         }
-
-        return $this->redirect($this->show('register.html.twig'));
+        
+        return $this->indexAction();
 
     }
 }

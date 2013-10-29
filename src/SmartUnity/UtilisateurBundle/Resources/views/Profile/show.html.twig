@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block preferences %}  
-<form method="post" action="{{ path ('smart_unity_utilisateur_setpref') }}"> 
+<form method="post" action="{{ path ('smart_unity_utilisateur_setpref'  ) }}"> 
     <input type="text" name="id" value={{app.user.id}} hidden>
      <p>Messages privés:{%if app.user.prefmp ==1 %}
             <input type="radio" name="mp" value="1" checked> Oui     
