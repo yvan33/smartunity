@@ -1,3 +1,11 @@
+smart_unity_utilisateur_setinfos:
+    pattern:  /modify_infos
+    defaults: { _controller: SmartUnityUtilisateurBundle:Default:setInfos }
+
+smart_unity_utilisateur_editinfos:
+    pattern:  /edit_infos
+    defaults: { _controller: SmartUnityUtilisateurBundle:Default:indexWithEditInfos }
+
 smart_unity_utilisateur_setpref:
     pattern:  /modify_pref
     defaults: { _controller: SmartUnityUtilisateurBundle:Default:setPref }
@@ -5,8 +13,6 @@ smart_unity_utilisateur_setpref:
 smart_unity_utilisateur_homepage:
     pattern:  /
     defaults: { _controller: SmartUnityUtilisateurBundle:Default:index }
-
-
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

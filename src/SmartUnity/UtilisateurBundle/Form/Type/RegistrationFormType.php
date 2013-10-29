@@ -24,9 +24,9 @@ public function buildForm(FormBuilderInterface $builder, array $options)
             
             ->add('sexe','choice',array(
                     'choices' => array(
-                        '0'=> '', '1' => 'Masculin', '2' => 'Féminine'),
+                        'na'=> 'Non défini', 'm' => 'Masculin', 'f' => 'Féminin'),
                     'expanded' => false,
-                    'data' => 0
+                    'data' => 'na'
                        ))
             ->add('date_naissance', 'date')
             ->add('pref_mp', 'choice', array(

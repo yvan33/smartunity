@@ -44,11 +44,11 @@ class membre extends BaseUser
     protected $reputation=0;
  
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="sexe", type="integer")
+     * @ORM\Column(name="sexe", type="string", length=2)
      */
-    protected $sexe=0;    
+    protected $sexe;    
     
     /**
      * @var date
