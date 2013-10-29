@@ -1,7 +1,5 @@
 {% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
 
-
-
 {% block infos %}  
 <div class="row  ">
     <div class="grille-1">Pseudo:</div>
@@ -42,87 +40,21 @@
 {% endblock %}
 
 {% block preferences %}  
-<form method="post" action="{{ path ('smart_unity_utilisateur_setpref') }}"> 
 
-    <input type="text" name="id" value={{app.user.id}} hidden>
+ <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form) }} method="POST">
+    {{form_errors(form)}}
+    
+    {{form_row(form.pref_mp)}}
+    {{form_row(form.pref_comm)}}
+    {{form_row(form.pref_smartcafe)}}
+    {{form_row(form.pref_rep)}}
+    {{form_row(form.pref_repValidee)}}
+    {{form_row(form.pref_repCertifiee)}}
+    <div>
+        <input type="submit" value="Modifier mes preferences" />
+    </div> 
 
-    <div class="row  ">
-        <div class="grille-1">Messages privés:</div>
-        <div class="grille-2">{%if app.user.prefmp ==1 %}
-            <input type="radio" name="mp" value="1" checked> Oui     
-            <input type="radio" name="mp" value="0"> Non<br>
-          {%else%}
-            <input type="radio" name="mp" value="1" > Oui     
-            <input type="radio" name="mp" value="0" checked> Non<br>
-        {%endif%}</div>
-    </div>
-
-    <div class="row  ">
-        <div class="grille-1">Communauté:</div>
-        <div class="grille-2">
-                    {%if app.user.prefcomm ==1 %}
-            <input type="radio" name="comm" value="1" checked> Oui     
-            <input type="radio" name="comm" value="0"> Non<br>
-          {%else%}
-            <input type="radio" name="comm" value="1" > Oui     
-            <input type="radio" name="comm" value="0" checked> Non<br>
-        {%endif%}
-        </div>
-    </div>
-
-    <div class="row  ">
-        <div class="grille-1">Smart Café:</div>
-        <div class="grille-2">
-                    {%if app.user.prefsmartcafe ==1 %}
-            <input type="radio" name="smartcafe" value="1" checked> Oui     
-            <input type="radio" name="smartcafe" value="0"> Non<br>
-          {%else%}
-            <input type="radio" name="smartcafe" value="1" > Oui     
-            <input type="radio" name="smartcafe" value="0" checked> Non<br>
-        {%endif%}
-        </div>
-    </div>
-
-    <div class="row  ">
-        <div class="grille-1">Reponse:</div>
-        <div class="grille-2">
-                    {%if app.user.prefrep ==1 %}
-            <input type="radio" name="rep" value="1" checked> Oui     
-            <input type="radio" name="rep" value="0"> Non<br>
-          {%else%}
-            <input type="radio" name="rep" value="1" > Oui     
-            <input type="radio" name="rep" value="0" checked> Non<br>
-        {%endif%}
-        </div>
-    </div>
-
-    <div class="row  ">
-        <div class="grille-1">Reponses Validées:</div>
-        <div class="grille-2">
-                     {%if app.user.prefrepValidee ==1 %}
-            <input type="radio" name="repval" value="1" checked> Oui     
-            <input type="radio" name="repval" value="0"> Non<br>
-          {%else%}
-            <input type="radio" name="repval" value="1" > Oui     
-            <input type="radio" name="repval" value="0" checked> Non<br>
-        {%endif%}
-        </div>
-    </div>
-
-    <div class="row  ">
-        <div class="grille-1">Reponses Certifiées:</div>
-        <div class="grille-2">
-                    {%if app.user.prefrepCertifiee ==1 %}
-            <input type="radio" name="repcert" value="1" checked> Oui     
-            <input type="radio" name="repcert" value="0"> Non<br>
-          {%else%}
-            <input type="radio" name="repcert" value="1" > Oui     
-            <input type="radio" name="repcert" value="0" checked> Non<br>
-        {%endif%}
-        </div>
-    </div>
-    <p><input class="btn" type="submit" value="Modifier mes préférences"></p>
-</form>     
-
+{{form_end(form)}}   
+</form> 
 
 {% endblock %}

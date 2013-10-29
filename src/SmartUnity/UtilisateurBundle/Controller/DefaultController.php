@@ -2,33 +2,34 @@
 
 namespace SmartUnity\UtilisateurBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig');
+        $user = $this->container->get('security.context')->getToken()->getUser();
+       
+        $form=$this->createForm('smartunity_user_preference', $user);
+
+        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array('form'=> $form->createView()));
     }
 
     public function setPrefAction(){
 
-        	$request = $this->get('request');
-/*        	$user=$this->container->get('security.context')->getToken()->getUser();*/
+            $em=$this->getDoctrine()->getManager();
+            $user = $this->container->get('security.context')->getToken()->getUser();
+            $form=$this->createForm('smartunity_user_preference', $user);
+            $form->bind($this->getRequest());
 
-        if ($request->getMethod() =="POST") {
+           if($form->isValid()){
 
-            $em=$this->getDoctrine()->getManager();            
-            $membre=$em->getRepository('SmartUnityAppBundle:Membre')->find($request->request->get('id'));
-            $membre->setprefmp($request->request->get('mp'));
-            $membre->setprefsmartcafe($request->request->get('smartcafe'));
-            $membre->setprefcomm($request->request->get('comm'));
-            $membre->setprefrep($request->request->get('rep'));
-            $membre->setprefrepValidee($request->request->get('repval'));
-            $membre->setprefrepCertifiee($request->request->get('repcert'));
-            $em->flush();
-        }
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush(); 
+            }
         
-        return $this->indexAction();
+        return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
 
     }
 }
