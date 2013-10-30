@@ -3,21 +3,20 @@
 
 {% block edition %}
 
-{#<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-    {{ form_widget(form) }}
-    <div>
-        <input class="btn" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-    </div>
-</form> #}
+<div class="edit">
+    <a class="btn btn-primary btn-xs" type="button" onclick="javascript:history.back()">Annuler
+    </a>
+</div>  
+    
 
 <form action="{{ path('smart_unity_utilisateur_setinfos') }}" {{ form_enctype(form_infos) }} method="POST">
 
 {#{{form_start(form_infos)}}#}
     {{form_errors(form_infos)}}
 
-    <div class="row  ">
+    <div class="row premiere-ligne ">
         <div class="grille-1">
-        {{form_label(form_infos.username)}}
+        Nom d'utilisateur
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.username)}}
@@ -26,16 +25,25 @@
 
     <div class="row  ">
         <div class="grille-1">
-        {{form_label(form_infos.nom)}}
+        Nom :
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.nom)}}
         </div>
     </div>
-
+    
     <div class="row  ">
         <div class="grille-1">
-        {{form_label(form_infos.email)}}
+        Prénom :
+        </div>
+        <div class="grille-2">
+        {{form_widget(form_infos.prenom)}}
+        </div>
+    </div>
+    
+    <div class="row  ">
+        <div class="grille-1">
+        Email :
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.email)}}
@@ -44,7 +52,7 @@
 
     <div class="row  ">
         <div class="grille-1">
-        {{form_label(form_infos.sexe)}}
+        Genre :
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.sexe)}}
@@ -53,7 +61,7 @@
 
     <div class="row  ">
         <div class="grille-1">
-        {{form_label(form_infos.date_naissance)}}
+        Date de naissance :
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.date_naissance)}}
@@ -69,13 +77,13 @@
         <div class="grille-2"></div>
     </div>
 
-    <div>
-        <input type="submit" value="Modifier mes infos" />
+    <div class="cent-h">
+        <button type="submit" class="btn btn-primary btn-sm">Valider mes infos</button>
     </div>   
     {{form_end(form_infos)}}  
+
 </form>
-    <input class="btn" type="button" value="retour" onclick="javascript:history.back()">
-    <a class="active" href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
+
 {% endblock %}   
 
 {% block preferences %}  

@@ -71,10 +71,10 @@ class modele
     /**
      * Set marque
      *
-     * @param \DmartUnity\AppBundle\Entity\marque $marque
+     * @param \SmartUnity\AppBundle\Entity\marque $marque
      * @return modele
      */
-    public function setMarque(\DmartUnity\AppBundle\Entity\marque $marque)
+    public function setMarque(\SmartUnity\AppBundle\Entity\marque $marque)
     {
         $this->marque = $marque;
     
@@ -84,7 +84,7 @@ class modele
     /**
      * Get marque
      *
-     * @return \DmartUnity\AppBundle\Entity\marque 
+     * @return \SmartUnity\AppBundle\Entity\marque 
      */
     public function getMarque()
     {

@@ -11,6 +11,9 @@ class InformationsFormType extends AbstractType {
 
         $builder
         ->add('nom')
+        ->add('prenom', 'text', array(
+            'required' => false, 
+        ))                
         ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
         ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
         ->add('sexe', 'choice', array(
@@ -19,7 +22,12 @@ class InformationsFormType extends AbstractType {
         'expanded' => true,
 //        'data' => ""
         ))
-        ->add('date_naissance', 'date');
+        ->add('date_naissance', 'date', array(
+        'empty_value' => '',
+        'widget' => 'choice',
+        'years' => range(date('Y') - 100, date('Y')),
+        'required' => false
+            ));
                 
     }
 

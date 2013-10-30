@@ -13,7 +13,7 @@
 {% block form_widget_simple %}
 {% spaceless %}
     {% set type = type|default('text') %}
-    <input class="form-control" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    <input class="form-control forminfo" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
 {% endspaceless %}
 {% endblock form_widget_simple %}
 
@@ -45,13 +45,13 @@
 {% endblock textarea_widget %}
 
 {% block choice_widget %}
-{#{% spaceless %}#}
+{% spaceless %}
     {% if expanded %}
         {{ block('choice_widget_expanded') }}
     {% else %}
         {{ block('choice_widget_collapsed') }}
     {% endif %}
-{#{% endspaceless %}#}
+{% endspaceless %}
 {% endblock choice_widget %}
 
 {% block choice_widget_expanded %}
@@ -59,7 +59,7 @@
     <div {{ block('widget_container_attributes') }}>
     {% for child in form %}
         {{ form_widget(child) }}
-        {{ form_label(child) }}
+         {{ form_label(child) }}
     {% endfor %}
     </div>
 {#{% endspaceless %}#}
@@ -70,7 +70,7 @@
     {% if required and empty_value is none and not empty_value_in_choices %}
         {% set required = false %}
     {% endif %}
-    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+    <select class="infos-date" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none %}
             <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
         {% endif %}
@@ -255,7 +255,7 @@
             {% set label_attr = label_attr|merge({'for': id}) %}
         {% endif %}
         {% if required %}
-            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required' ~ ' label-normal')|trim}) %}
         {% endif %}
         {% if label is empty %}
             {% set label = name|humanize %}

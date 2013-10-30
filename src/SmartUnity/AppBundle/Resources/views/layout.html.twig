@@ -25,7 +25,6 @@
 <!-- Additional Javascript src -->
 {% block initJS %}{% endblock %}
 
-
 </head>
 
  
@@ -38,10 +37,27 @@
   <div class="col-md-12">
     <div class="row">
       <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h"/></div>
-      <div class="col-md-5 cent-h"><div class="cent-h logo2"><a href="#" class=" pos-re valign-col-all"><img src="{{ asset('assets/img/logo-iphon.png') }}"/><p class="red-dot">1</p></a><a href="#" class="valign-col-all pad-l"><p >trol_du_31</p></a></div></div>
+      <div class="col-md-5 cent-h">
+          <div class="cent-h logo2">
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+              <a href="#" class=" pos-re valign-col-all">
+                  <img src="{{ asset('assets/img/logo-iphon.png') }}"/>
+                  <p class="red-dot">1</p>
+              </a>
+              <a href="{{ path('fos_user_profile_show') }}" class="valign-col-all pad-l">
+                  <p>{{ app.user.username }}</p>
+              </a>
+              <a href="{{ path('fos_user_security_logout') }}"  class="valign-col-all pad-l" ><p>Déconnexion</p></a>
+              {% else %}
+              <a href="{{ path('fos_user_security_login') }}" class="valign-col-all pad-l">
+                  <p>Connexion</p>
+              </a>
+              {% endif %}
+          </div>
+      </div>
 
       
-<ul class="nav navbar-nav navbar-right">
+{#<ul class="nav navbar-nav navbar-right">
   <li><a href="{{ path('fos_user_registration_register') }}">Créer un compte</a></li>
       {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
   <li class="dropdown">
@@ -54,16 +70,7 @@
       {% else %}
       <li><a href="{{ path('fos_user_security_login') }}">Connexion</a> </li>
       {% endif %}
-    </ul>      
-      
-{#      <ul class="nav navbar-nav ">
-  <li><a href="{{ path('fos_user_registration_register') }}">Créer un compte</a></li>
-  <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-Bonjour <a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a> <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-{% else %}
-<a href="{{ path('fos_user_security_login') }}">Connexion</a>
-
-{% endif %}</li></ul>#}
+    </ul> #}     
     </div>
   </div>
   </div>

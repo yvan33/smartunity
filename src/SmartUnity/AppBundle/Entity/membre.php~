@@ -30,6 +30,13 @@ class membre extends BaseUser
     protected $nom;
     
     /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255)
+     */
+    protected $prenom;
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="cagnotte", type="integer")

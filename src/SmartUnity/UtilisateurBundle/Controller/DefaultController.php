@@ -17,10 +17,10 @@ class DefaultController extends Controller
         return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array('form_pref'=> $form_pref->createView() ));
     }
 
-    public function indexWithEditInfosAction(Request $request)
+    public function indexWithEditInfosAction()
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
-       
+
         $form_pref=$this->createForm('smartunity_user_preference', $user);
         $form_infos=$this->createForm('smartunity_user_informations', $user);
 
@@ -62,5 +62,10 @@ class DefaultController extends Controller
         
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
 
-    }    
+    }
+    
+    public function changePasswordAction(){
+ 
+            
+}
 }

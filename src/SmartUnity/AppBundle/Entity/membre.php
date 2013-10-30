@@ -25,9 +25,16 @@ class membre extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     protected $nom;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
+     */
+    protected $prenom;
     
     /**
      * @var integer
@@ -53,7 +60,7 @@ class membre extends BaseUser
     /**
      * @var date
      *
-     * @ORM\Column(name="date_naissance", type="datetime")
+     * @ORM\Column(name="date_naissance", type="datetime", nullable=true)
      */
     protected $date_naissance; 
     
@@ -360,5 +367,28 @@ class membre extends BaseUser
     public function getPrefRepCertifiee()
     {
         return $this->pref_repCertifiee;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     * @return membre
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+    
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string 
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
     }
 }

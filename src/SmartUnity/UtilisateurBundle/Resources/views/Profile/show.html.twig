@@ -1,7 +1,12 @@
 {% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
 
 {% block infos %}  
-<div class="row  ">
+
+<div class="edit"> <a href="{{ path('smart_unity_utilisateur_editinfos') }}" class="btn btn-primary btn-xs">
+        <span class="glyphicon glyphicon-pencil"></span>
+    </a>
+</div>  
+<div class="row premiere-ligne ">
     <div class="grille-1">Pseudo:</div>
     <div class="grille-2">{{app.user.username}}</div>
 </div>
@@ -15,8 +20,17 @@
     <div class="grille-2">{{app.user.nom}}</div>
 </div>
 <div class="row  ">
-    <div class="grille-1">Age:</div>
-    <div class="grille-2">{{ app.user.datenaissance | date('D-M-Y') }}</div>
+    <div class="grille-1">Prénom:</div>
+    <div class="grille-2">{{app.user.prenom}}</div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Date de naissance:</div>
+    <div class="grille-2">
+{%if app.user.datenaissance !=null %}
+{{ app.user.datenaissance|date("d/m/Y")  }}
+    {%else%}
+    {%endif%}
+    </div>
 </div>
 <div class="row  ">
     <div class="grille-1">Sexe:</div>
@@ -36,23 +50,50 @@
     <div class="grille-1">Un peu plus sur moi:</div>
     <div class="grille-2"></div>
 </div>
+<div class="cent-h bouton-bas-block">
+    <a href="{{ path('fos_user_change_password') }}" class="btn btn-sm btn-default">
+        <span class="glyphicon glyphicon-credit-card"></span> Changer mot de passe
+    </a>
+</div>
 
 {% endblock %}
 
 {% block preferences %}  
 
- <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
+<form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
     {{form_errors(form_pref)}}
-    
-    {{form_row(form_pref.pref_mp)}}
-    {{form_row(form_pref.pref_comm)}}
-    {{form_row(form_pref.pref_smartcafe)}}
-    {{form_row(form_pref.pref_rep)}}
-    {{form_row(form_pref.pref_repValidee)}}
-    {{form_row(form_pref.pref_repCertifiee)}}
-    <div>
-        <input type="submit" value="Modifier mes preferences" />
-    </div> 
+
+    <div class="premiere-ligne ">Je souhaite recevoir des notifications par Email pour:
+    </div>
+    <div class="row premiere-ligne ">
+        <div class="grille-1 pref">Un message privé:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_mp)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Un commentaire:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_comm)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Le message sur le Smart'Café:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_smartcafe)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Une réponse à une question:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_rep)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Une de mes réponses à été validée:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repValidee)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Smart'Solution:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repCertifiee)}}</div>
+    </div>
+
+    <div class="cent-h bouton-bas-block">
+        <button type="submit" class="btn btn-sm btn-default">Valider mes préférences
+
+    </div>
 
 {{form_end(form_pref)}}   
 </form> 
