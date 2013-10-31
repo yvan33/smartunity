@@ -8,6 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
+
         $user = $this->container->get('security.context')->getToken()->getUser();
        
         $form_pref=$this->createForm('smartunity_user_preference', $user);
@@ -64,8 +65,4 @@ class DefaultController extends Controller
 
     }
     
-    public function changePasswordAction(){
- 
-            
-}
 }

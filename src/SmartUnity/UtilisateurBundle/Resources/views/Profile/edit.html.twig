@@ -1,5 +1,6 @@
 {% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
-{#{% form_theme form 'SmartUnityUtilisateurBundle:Form:form_div_layout.html.twig' %}#}
+{% form_theme form_infos 'SmartUnityUtilisateurBundle:Form:form_div_layout.html.twig' %}
+{% form_theme form_pref 'SmartUnityUtilisateurBundle:Form:form_div_layout.html.twig' %}
 
 {% block edition %}
 
@@ -77,7 +78,7 @@
         <div class="grille-2"></div>
     </div>
 
-    <div class="cent-h">
+    <div class="cent-h bouton-bas-block">
         <button type="submit" class="btn btn-primary btn-sm">Valider mes infos</button>
     </div>   
     {{form_end(form_infos)}}  
@@ -88,18 +89,40 @@
 
 {% block preferences %}  
 
- <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
+<form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
     {{form_errors(form_pref)}}
-    
-    {{form_row(form_pref.pref_mp)}}
-    {{form_row(form_pref.pref_comm)}}
-    {{form_row(form_pref.pref_smartcafe)}}
-    {{form_row(form_pref.pref_rep)}}
-    {{form_row(form_pref.pref_repValidee)}}
-    {{form_row(form_pref.pref_repCertifiee)}}
-    <div>
-        <input type="submit" value="Modifier mes preferences" />
-    </div> 
+
+    <div class="premiere-ligne ">Je souhaite recevoir des notifications par Email pour:
+    </div>
+    <div class="row premiere-ligne ">
+        <div class="grille-1 pref">Un message privé:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_mp)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Un commentaire:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_comm)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Le message sur le Smart'Café:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_smartcafe)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Une réponse à une question:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_rep)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Une de mes réponses à été validée:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repValidee)}}</div>
+    </div>
+    <div class="row  ">
+        <div class="grille-1 pref">Smart'Solution:</div>
+        <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repCertifiee)}}</div>
+    </div>
+
+    <div class="cent-h bouton-bas-block">
+        <button type="submit" class="btn btn-sm btn-default">Valider mes préférences
+
+    </div>
 
 {{form_end(form_pref)}}   
 </form> 

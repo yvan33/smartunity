@@ -255,7 +255,7 @@
             {% set label_attr = label_attr|merge({'for': id}) %}
         {% endif %}
         {% if required %}
-            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required' ~ ' label-normal')|trim}) %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required' ~ ' label-radio')|trim}) %}
         {% endif %}
         {% if label is empty %}
             {% set label = name|humanize %}
@@ -281,11 +281,15 @@
 
 {% block form_row %}
 {% spaceless %}
-    <div>
-        {{ form_label(form) }}
+<div class="row">
+    <div class="grille-1">
+                    {{ form_label(form) }}
+    </div>
+    <div class="grille-2">
         {{ form_errors(form) }}
         {{ form_widget(form) }}
     </div>
+</div>
 {% endspaceless %}
 {% endblock form_row %}
 
