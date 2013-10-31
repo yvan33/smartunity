@@ -1,0 +1,96 @@
+.grille-1
+{
+	width:42.5%;
+	margin: 3px 2.5% 3px 5%;
+	/*background-color:#00C;*/
+	height:20px;
+	float:left;
+}
+.grille-2
+{
+	width:42.5%;
+	margin: 3px 5% 3px 2.5%;
+	/*background-color:#3C9;*/
+	height:20px;
+	float:right;
+}
+.grille-1.pref
+{
+	width:55%;
+	margin: 3px 2.5% 3px 5%;
+	/*background-color:#00C;*/
+	height:20px;
+	float:left;
+}
+.grille-2.pref
+{
+	width:30%;
+	margin: 3px 5% 3px 2.5%;
+	/*background-color:#3C9;*/
+	height:20px;
+	float:right;
+}
+
+.grille-2.radio-pref
+{
+text-align: center;	
+        
+        
+}
+
+.grille-content
+{
+	padding:15px;
+	background-color: #f8f8ef;
+	margin-top:30px;
+	margin-bottom:30px;
+	border-radius:7px;
+	-webkit-box-shadow: 0 0 20px  #CCCCCC;
+       -moz-box-shadow: 0 0 20px  #CCCCCC;
+            box-shadow: 0 0 20px  #CCCCCC;
+}
+
+.forminfo
+{
+    height: 100%;
+}
+
+.label-radio
+{
+    font-weight: normal;
+    margin-left: 0.4em;
+    margin-right: 1.5em;
+}
+
+.edit{
+
+    position: absolute;
+    top:1em;
+    right:1em;
+}
+
+.posRelative
+{
+    position:relative;
+}
+
+/*.validationInfos
+{
+    position: relative;
+    top: 10em;
+}*/
+
+.bouton-bas-block
+{
+    margin-top: 2em;
+}
+
+.premiere-ligne
+{
+    margin-top: 2em;
+}
+
+.infos-date
+{
+   margin-right: 0.3em; 
+}
