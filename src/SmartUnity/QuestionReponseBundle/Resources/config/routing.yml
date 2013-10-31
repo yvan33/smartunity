@@ -1,9 +1,9 @@
 smart_unity_question_reponse_homepage:
     pattern:  /
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:index }
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:index  }
 
 smart_unity_question_reponse_list_of_question:
-    pattern:  /liste/
+    pattern:  /listeQuestion/
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestion }
 
 smart_unity_question_reponse_display_question:
