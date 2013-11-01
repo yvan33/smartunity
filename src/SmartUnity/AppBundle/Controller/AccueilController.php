@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 
 class AccueilController extends Controller
 {
+    
     public function indexAction(Request $request)
 
 //Le code de la function indexAction Permet de récupérer la session et de préremplir le formulaire de login.    

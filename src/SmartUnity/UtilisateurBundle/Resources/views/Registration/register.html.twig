@@ -3,29 +3,61 @@
 {#{% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}#}
 {% form_theme form 'SmartUnityUtilisateurBundle:Form:form_register.html.twig' %}
 
+{% block stylesheets %} 
+<link href="{{ asset('assets/css/register.css') }}" rel="stylesheet" type="text/css">
+{%endblock%}
 
 {% block register %}
 <div class="row">
-    <div class="col-md-offset-2 col-md-8" style="margin-top:20px">
-        <div class="grille-content posRelative">  
-            <div class="row text-center ">
-                Créer un compte
+
+    <div class="col-md-offset-2 col-md-8"">
+        <div class="grille-content"> 
+            <div class="title text-center cookie-title">
+                Pourquoi?
+            </div>
+            <div>
+                <p> Pourquoi rejoindre la communauté Smart’Unity.fr ? En tant que membre, 
+                    vous pourrez accéder à tous les contenus et ressources apportés par les 
+                    autres membres de la communauté.
+                </p>
+                <p>Pour s’incrire, il vous suffit de remplir le formulaire suivant. Les champs 
+                    marqués d’un * sont obligatoires. L’adresse e-mail doit être valide pour que
+                    le compte soit créé. Un mail de confirmation vous sera envoyé à la fin de l’inscription.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <div class="grille-content panneau-bas">  
+            <div class="row text-center cookie-title">
+                Inscription rapide
             </div>
 
             <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
     {{form_errors(form)}}
 
-                <fieldset>
+                <fieldset class="fieldset-etroit">
                     <legend>Compte</legend>
-    {{form_row(form.username)}}
+ 
+{{form_row(form.username)}}
     {{form_row(form.email)}}
     {{form_row(form.plainPassword)}}
                 </fieldset>
 
 
-                <fieldset>
+                <fieldset class="fieldset-etroit">
                     <legend>Informations personnelles</legend>
-    {{form_row(form.nom)}}
+                    
+                    <div class="row premiere-ligne ">
+                        <div class="grille-1">{{form_label(form.nom)}}</div>
+                        <div class="grille-2">{{form_widget(form.nom)}}</div>
+                    </div>   
+{#    {{form_widget(form.nom)}}#}
+
 {#    {{form_row(form.prenom)}}             #}
     {{form_row(form.sexe)}}
     {{form_row(form.date_naissance)}}
@@ -43,7 +75,7 @@
                         <div class="grille-2 pref radio-pref">{{form_widget(form.pref_comm)}}</div>
                     </div>
                     <div class="row  ">
-                        <div class="grille-1 pref">{{form_label(form.pref_smartcafe)}}</div>
+                        <div class="grille-1 pref no-right-margin">{{form_label(form.pref_smartcafe)}}</div>
                         <div class="grille-2 pref radio-pref">{{form_widget(form.pref_smartcafe)}}</div>
                     </div>
                     <div class="row  ">
@@ -58,7 +90,7 @@
                         <div class="grille-1 pref">{{form_label(form.pref_repCertifiee)}}</div>
                         <div class="grille-2 pref radio-pref">{{form_widget(form.pref_repCertifiee)}}</div>
                     </div>
-            
+
 {#    {{form_row(form.pref_mp)}}
     {{form_row(form.pref_comm)}}
     {{form_row(form.pref_smartcafe)}}
@@ -80,3 +112,4 @@
     </div>
 </div>    
 {% endblock register %}
+

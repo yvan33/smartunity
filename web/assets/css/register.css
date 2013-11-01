@@ -1,53 +1,53 @@
 .grille-1
 {
-	width:42.5%;
-	margin: 3px 2.5% 3px 5%;
-	/*background-color:#00C;*/
-	height:20px;
-	float:left;
+    width:30%;
+    margin: 3px 2.5% 3px 5%;
+    /*background-color:#00C;*/
+    height:20px;
+    float:left;
 }
 .grille-2
 {
-	width:42.5%;
-	margin: 3px 5% 3px 2.5%;
-	/*background-color:#3C9;*/
-	height:20px;
-	float:right;
+    width:45%;
+    margin: 3px 15% 3px 2.5%;
+    /*background-color:#3C9;*/
+    height:20px;
+    float:right;
 }
 .grille-1.pref
 {
-	width:55%;
-	margin: 3px 2.5% 3px 5%;
-	/*background-color:#00C;*/
-	height:20px;
-	float:left;
+    width:60%;
+    margin: 3px 2.5% 3px 5%;
+    /*background-color:#00C;*/
+    height:20px;
+    float:left;
 }
 .grille-2.pref
 {
-	width:30%;
-	margin: 3px 5% 3px 2.5%;
-	/*background-color:#3C9;*/
-	height:20px;
-	float:right;
+    width:30%;
+    margin: 3px 1% 3px 1%;
+    /*background-color:#3C9;*/
+    height:20px;
+    float:right;
 }
 
 .grille-2.radio-pref
 {
-text-align: center;	
-        
-        
+    text-align: center;	
+
+
 }
 
 .grille-content
 {
-	padding:15px;
-	background-color: #f8f8ef;
-	margin-top:30px;
-	margin-bottom:30px;
-	border-radius:7px;
-	-webkit-box-shadow: 0 0 20px  #CCCCCC;
-       -moz-box-shadow: 0 0 20px  #CCCCCC;
-            box-shadow: 0 0 20px  #CCCCCC;
+    padding:15px;
+    background-color: #f8f8ef;
+    margin-top:10px;
+    margin-bottom:5px;
+    border-radius:7px;
+    -webkit-box-shadow: 0 0 20px  #CCCCCC;
+    -moz-box-shadow: 0 0 20px  #CCCCCC;
+    box-shadow: 0 0 20px  #CCCCCC;
 }
 
 .forminfo
@@ -60,18 +60,6 @@ text-align: center;
     font-weight: normal;
     margin-left: 0.4em;
     margin-right: 1.5em;
-}
-
-.edit{
-
-    position: absolute;
-    top:1em;
-    right:1em;
-}
-
-.posRelative
-{
-    position:relative;
 }
 
 /*.validationInfos
@@ -92,5 +80,22 @@ text-align: center;
 
 .infos-date
 {
-   margin-right: 0.3em; 
+    margin-right: 0.3em; 
+}
+
+.cookie-title
+{
+    font-family: 'Cookie', cursive;
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.panneau-bas
+{
+    margin-bottom:20px; 
+}
+
+.fieldset-etroit
+{
+    padding-right: 80px;
 }

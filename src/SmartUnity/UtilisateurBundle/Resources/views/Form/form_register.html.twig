@@ -252,7 +252,7 @@
 {% spaceless %}
     {% if label is not sameas(false) %}
         {% if not compound %}
-            {% set label_attr = label_attr|merge({'for': id}) %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' label-radio')|trim} ) %}
         {% endif %}
         {% if required %}
             {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required' ~ ' label-radio')|trim}) %}
