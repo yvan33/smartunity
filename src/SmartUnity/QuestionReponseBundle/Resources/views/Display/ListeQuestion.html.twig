@@ -7,5 +7,27 @@ Bonjour {{ app.user.username}}
 {% endif %} </p> 
 
 <p>Liste des Questions</p>
+<a href="#" id="ajax_link">Test loading Ajax</a>
+<br/>
+<a href="{{ path('smart_unity_question_reponse_ajax_get_questions') }}">Lien direct</a>
+<div id="listeQuestions">
+	{{ contentTest }}
+</div>
+{% endblock %}
 
+
+{% block callJS %}
+<script language="javascript">
+
+$(document).ready(function(){
+
+	$('#ajax_link').click(function(){
+		$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}', function(donnees){
+			$('#listeQuestions').html(donnees[0].sujet);
+		});
+	});
+
+});
+
+</script>
 {% endblock %}

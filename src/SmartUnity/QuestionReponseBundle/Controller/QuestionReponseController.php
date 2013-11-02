@@ -11,16 +11,46 @@ class QuestionReponseController extends Controller
     {
         // afficher 3 onglets, avec quelques questions... de la page accueil
 
-        //return $this->render('SmartUnityQuestionReponseBundle:Default:index.html.twig');
-        return new Response('index QuestionReponses');
+        //Redirection vers la liste des questions (pour l'instant)
+        return $this->redirect( $this->generateUrl('smart_unity_question_reponse_list_of_question') );
     }
 
-    public function displayListOfQuestionAction()
+    public function displayListOfQuestionAction($type, $page)
     {
         // Capable d'afficher les 3 listes paginées dans un twig dédié à l'affichage d'une liste de questions...
     	
-        //return $this->render('SmartUnityQuestionReponseBundle:Display:listOfQuestion.html.twig');
-        return new Response('display list of questions QuestionReponses');
+        //Afficher le TWIG liste Questions
+
+        //Les données seront récupérees depuis la BDD via l'Ajax controller, appelé dans le Twig par jQuery.
+        //L'AjaxController contiendra toutes les commandes nécéssaires pour récupérer les données et les renvoyer
+        //en JSON. Il exploites les Repositery.
+
+        //Pour les user sans javascript, il faut prévoir du contenu des l'ouverture de la page
+        //Donc on le charge...
+        //Si javascript il y a, on passera pas l'AjaxController pour
+        //charger le reste
+
+        $repository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:question');
+
+        $listeQuestion = $repository->findBy(array(), 
+                                        array('date'=>'desc'),
+                                        5,
+                                        0);
+
+        $test='blabla';
+
+        foreach($listeQuestion as $Question){
+            $test.=$Question->getSlug();
+        }
+
+
+        $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
+
+        return $this->render($template, array(
+                'contentTest'=>$test
+            ));
     }
     
     public function displayQuestionAction()
