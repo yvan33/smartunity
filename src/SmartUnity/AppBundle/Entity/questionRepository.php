@@ -13,4 +13,13 @@ use Doctrine\ORM\EntityRepository;
 class questionRepository extends EntityRepository
 {
     
+    public function getNombreQuestions(){
+
+    	$qb= $this->createQueryBuilder('SmartUnityAppBundle:question')
+    				->select('COUNT(SmartUnityAppBundle:question)');
+
+		return $qb->getQuery()->getSingleScalarResult();
+
+    }
+
 }

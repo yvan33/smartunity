@@ -16,10 +16,21 @@ class AjaxController extends Controller
 
         $listeQuestion = $repository->findBy(array(), 
                                         array('date'=>'desc'),
-                                        2,
-                                        1);
+                                        $nbParPage,
+                                        ($page - 1) * $nbParPage);
+
+        $nbQuestions = $repository->getNombreQuestions();
+
 
         $returnArray=array();
+
+        array_push($returnArray, array(
+            'type' => $type,
+            'nbParPage'=>$nbParPage,
+            'page'=>$page,
+            'nbQuestions'=>$nbQuestions,
+            'slug'=>'_infos'
+        ));
 
         foreach($listeQuestion as $Question){
 
@@ -27,7 +38,8 @@ class AjaxController extends Controller
             	'id'=>$Question->getId(),
             	'sujet'=>$Question->getSujet(),
             	'description'=>$Question->getDescription(),
-            	'date'=>$Question->getDate()
+            	'date'=>$Question->getDate(),
+                'slug'=>$Question->getSlug()
             ));
 
         }

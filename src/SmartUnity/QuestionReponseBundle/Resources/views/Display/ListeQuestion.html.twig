@@ -1,5 +1,11 @@
 {% extends "SmartUnityAppBundle::layout.html.twig" %}
 
+{% block initJS %}
+	<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
+{% endblock %}
+
+
+
 {% block body %}
 
 <p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -11,9 +17,22 @@ Bonjour {{ app.user.username}}
 <br/>
 <a href="{{ path('smart_unity_question_reponse_ajax_get_questions') }}">Lien direct</a>
 <div id="listeQuestions">
-	{{ contentTest }}
+	<p>{{ nbPages }}</p>
+	{% for question in listeQuestions %}
+		<p>{{ question.slug }}</p>
+	{% endfor %}
 </div>
+<div>
+	<ul id="pages" class="pagination">
+		<li><a href="#">1</a></li>
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+	</ul>
+</div>
+
 {% endblock %}
+
+
 
 
 {% block callJS %}
@@ -21,9 +40,20 @@ Bonjour {{ app.user.username}}
 
 $(document).ready(function(){
 
+	$('#pages').bootstrapPaginator({
+		currentPage: 2,
+		totalPages: 10,
+		bootstrapMajorVersion: 3
+	});
+
+
 	$('#ajax_link').click(function(){
-		$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}', function(donnees){
-			$('#listeQuestions').html(donnees[0].sujet);
+		$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions', {'type':'last', 'page':'2', 'nbParPage':'5'}) }}', function(donnees){
+			var content;
+			donnees.forEach(function(pEntry){
+				content += '<p>' + pEntry['slug'] + '</p>';
+			});
+			$('#listeQuestions').html(content);
 		});
 	});
 

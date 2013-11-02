@@ -24,34 +24,50 @@ class QuestionReponseController extends Controller
         //Les données seront récupérees depuis la BDD via l'Ajax controller, appelé dans le Twig par jQuery.
         //L'AjaxController contiendra toutes les commandes nécéssaires pour récupérer les données et les renvoyer
         //en JSON. Il exploites les Repositery.
+        //Pour les user sans javascript, il faut prévoir du contenu dès l'ouverture de la page
+        //donc on le charge... via l'Ajax Controller! 
+        //Si javascript il y a, on passera pas l'AjaxController pour charger le reste.
 
-        //Pour les user sans javascript, il faut prévoir du contenu des l'ouverture de la page
-        //Donc on le charge...
-        //Si javascript il y a, on passera pas l'AjaxController pour
-        //charger le reste
+        //DONC :
 
-        $repository = $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('SmartUnityAppBundle:question');
+        //On récupère la réponse du controleur Ajax (pour avaoir une réponse au cas ou)
+        $nbParPage = 5;
 
-        $listeQuestion = $repository->findBy(array(), 
-                                        array('date'=>'desc'),
-                                        5,
-                                        0);
+        $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
+            'type'  => $type,
+            'page' => $page,
+            'nbParPage'=>$nbParPage
+        ));
 
-        $test='blabla';
+        //Suppression de l'en tête HTTP et décodage du JSON
+        $listeQuestions = json_decode('[' . explode('[', $response, 2)[1]);
 
-        foreach($listeQuestion as $Question){
-            $test.=$Question->getSlug();
-        }
+
+        //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
+        //la requête pour vérifier son authenticité... 
+
+        //On récupère des infos utiles pour la pagination..
+        $nbPages = $listeQuestions[0]->nbQuestions;
+
+        
+        //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
+        if($listeQuestions[0]->type==$type && $listeQuestions[0]->nbParPage==$nbParPage && $listeQuestions[0]->page==$page)
+            unset($listeQuestions[0]);
+
 
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
-
         return $this->render($template, array(
-                'contentTest'=>$test
-            ));
+            'nbPages'=>$nbPages,
+            'listeQuestions'=>$listeQuestions
+        ));
+
+
     }
+
+
+
+
     
     public function displayQuestionAction()
     {   
