@@ -44,14 +44,14 @@ class question
 
     /**
      * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="questions")
-     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
      */
     private $membre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="questions")
      */
-    private $appareil;
+    private $appareils;
 
     /**
      * @var string
@@ -61,19 +61,26 @@ class question
     private $slug;
     
     /**
-     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question", cascade={"persist", "remove", "merge"})
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question")
      */
     private $reponses;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteQuestion", mappedBy="question")
+     */
+    private $noteQuestions;
+
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->appareil = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->appareils = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reponses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->noteQuestions = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
     /**
      * Get id
      *
@@ -88,7 +95,7 @@ class question
      * Set sujet
      *
      * @param string $sujet
-     * @return Question
+     * @return question
      */
     public function setSujet($sujet)
     {
@@ -111,7 +118,7 @@ class question
      * Set date
      *
      * @param \DateTime $date
-     * @return Question
+     * @return question
      */
     public function setDate($date)
     {
@@ -134,7 +141,7 @@ class question
      * Set description
      *
      * @param string $description
-     * @return Question
+     * @return question
      */
     public function setDescription($description)
     {
@@ -151,62 +158,6 @@ class question
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set membre
-     *
-     * @param \SmartUnity\AppBundle\Entity\membre $membre
-     * @return question
-     */
-    public function setMembre(\SmartUnity\AppBundle\Entity\membre $membre)
-    {
-        $this->membre = $membre;
-    
-        return $this;
-    }
-
-    /**
-     * Get membre
-     *
-     * @return \SmartUnity\AppBundle\Entity\membre 
-     */
-    public function getMembre()
-    {
-        return $this->membre;
-    }
-
-    /**
-     * Add appareil
-     *
-     * @param \SmartUnity\AppBundle\appareil $appareil
-     * @return question
-     */
-    public function addAppareil(\SmartUnity\AppBundle\Entity\appareil $appareil)
-    {
-        $this->appareil[] = $appareil;
-    
-        return $this;
-    }
-
-    /**
-     * Remove appareil
-     *
-     * @param \SmartUnity\AppBundle\appareil $appareil
-     */
-    public function removeAppareil(\SmartUnity\AppBundle\Entity\appareil $appareil)
-    {
-        $this->appareil->removeElement($appareil);
-    }
-
-    /**
-     * Get appareil
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAppareil()
-    {
-        return $this->appareil;
     }
 
     /**
@@ -230,6 +181,62 @@ class question
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set membre
+     *
+     * @param \SmartUnity\AppBundle\Entity\membre $membre
+     * @return question
+     */
+    public function setMembre(\SmartUnity\AppBundle\Entity\membre $membre = null)
+    {
+        $this->membre = $membre;
+    
+        return $this;
+    }
+
+    /**
+     * Get membre
+     *
+     * @return \SmartUnity\AppBundle\Entity\membre 
+     */
+    public function getMembre()
+    {
+        return $this->membre;
+    }
+
+    /**
+     * Add appareils
+     *
+     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     * @return question
+     */
+    public function addAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    {
+        $this->appareils[] = $appareils;
+    
+        return $this;
+    }
+
+    /**
+     * Remove appareils
+     *
+     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     */
+    public function removeAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    {
+        $this->appareils->removeElement($appareils);
+    }
+
+    /**
+     * Get appareils
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAppareils()
+    {
+        return $this->appareils;
     }
 
     /**
@@ -263,5 +270,38 @@ class question
     public function getReponses()
     {
         return $this->reponses;
+    }
+
+    /**
+     * Add noteQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions
+     * @return question
+     */
+    public function addNoteQuestion(\SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions)
+    {
+        $this->noteQuestions[] = $noteQuestions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove noteQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions
+     */
+    public function removeNoteQuestion(\SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions)
+    {
+        $this->noteQuestions->removeElement($noteQuestions);
+    }
+
+    /**
+     * Get noteQuestions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNoteQuestions()
+    {
+        return $this->noteQuestions;
     }
 }

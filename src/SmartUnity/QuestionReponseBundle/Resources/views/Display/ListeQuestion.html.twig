@@ -48,7 +48,7 @@ $(document).ready(function(){
 			if(donnees[0]['page']==pPage){
 				donnees.shift();
 				donnees.forEach(function(pEntry){
-					content += '<p>' + pEntry['membre_nom'] + '</p>';
+					content += '<p>' + pEntry['slug'] + '</p>';
 				});
 				$('#listeQuestions').html(content);
 			}else{

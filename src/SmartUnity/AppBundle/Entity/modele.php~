@@ -29,65 +29,15 @@ class modele
     private $nom;
 
     /**
-   * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\marque")
-   * @ORM\JoinColumn(nullable=false)
-   */
+    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\marque", inversedBy="modeles")
+    * @ORM\JoinColumn(name="marque_id", referencedColumnName="id", nullable=false)
+    */
     private $marque;
-
-
     /**
-     * Get id
+     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="modele")
      *
-     * @return integer 
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $appareils;
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return modele
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    
-        return $this;
-    }
 
-    /**
-     * Get nom
-     *
-     * @return string 
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * Set marque
-     *
-     * @param \SmartUnity\AppBundle\Entity\marque $marque
-     * @return modele
-     */
-    public function setMarque(\SmartUnity\AppBundle\Entity\marque $marque)
-    {
-        $this->marque = $marque;
-    
-        return $this;
-    }
-
-    /**
-     * Get marque
-     *
-     * @return \SmartUnity\AppBundle\Entity\marque 
-     */
-    public function getMarque()
-    {
-        return $this->marque;
-    }
 }

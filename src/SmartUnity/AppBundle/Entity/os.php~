@@ -28,37 +28,10 @@ class os
      */
     private $nom;
 
-
     /**
-     * Get id
+     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="os")
      *
-     * @return integer 
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $appareils;
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return os
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string 
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
 }

@@ -35,6 +35,12 @@ class typeQuestion
      */
     private $description;
 
+    /**
+     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="typeQuestion")
+     *
+     */
+    private $questions;
+
 
     /**
      * Get id

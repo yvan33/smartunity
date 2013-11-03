@@ -28,37 +28,10 @@ class marque
      */
     private $nom;
 
-
     /**
-     * Get id
+     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\modele", mappedBy="marque")
      *
-     * @return integer 
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $modeles;
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return marque
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string 
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
 }

@@ -14,13 +14,13 @@ class noteReponse
 {
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre")
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="noteReponses")
      */
     private $membre;
 
      /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\reponse")
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\reponse", inversedBy="noteReponses")
      */
     private $reponse;
 
@@ -32,15 +32,6 @@ class noteReponse
     private $note;
 
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set note

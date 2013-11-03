@@ -108,17 +108,45 @@ class membre extends BaseUser
 
 
     /**
-     * @var ArrayCollection $questions
-     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="membre", cascade={"persist", "remove", "merge"})
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="membre")
      */
     protected $questions;
 
     /**
-     * @var ArrayCollection $reponses
-     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="membre", cascade={"persist", "remove", "merge"})
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="membre")
      */
     protected $reponses;
 
+        /**
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteQuestion", mappedBy="membre")
+     */
+    protected $noteQuestions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteReponse", mappedBy="membre")
+     */
+    protected $noteReponses;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", inversedBy="membres")
+     *
+     */
+    private $appareils;
+    
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reponses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->noteQuestions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->noteReponses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->appareils = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -133,7 +161,7 @@ class membre extends BaseUser
      * Set nom
      *
      * @param string $nom
-     * @return Membre
+     * @return membre
      */
     public function setNom($nom)
     {
@@ -150,6 +178,29 @@ class membre extends BaseUser
     public function getNom()
     {
         return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     * @return membre
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+    
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string 
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
     }
 
     /**
@@ -201,7 +252,7 @@ class membre extends BaseUser
     /**
      * Set sexe
      *
-     * @param boolean $sexe
+     * @param string $sexe
      * @return membre
      */
     public function setSexe($sexe)
@@ -214,7 +265,7 @@ class membre extends BaseUser
     /**
      * Get sexe
      *
-     * @return boolean 
+     * @return string 
      */
     public function getSexe()
     {
@@ -383,36 +434,6 @@ class membre extends BaseUser
     }
 
     /**
-     * Set prenom
-     *
-     * @param string $prenom
-     * @return membre
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-    
-        return $this;
-    }
-
-    /**
-     * Get prenom
-     *
-     * @return string 
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
      * Add questions
      *
      * @param \SmartUnity\AppBundle\Entity\question $questions
@@ -476,5 +497,104 @@ class membre extends BaseUser
     public function getReponses()
     {
         return $this->reponses;
+    }
+
+    /**
+     * Add noteQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions
+     * @return membre
+     */
+    public function addNoteQuestion(\SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions)
+    {
+        $this->noteQuestions[] = $noteQuestions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove noteQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions
+     */
+    public function removeNoteQuestion(\SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions)
+    {
+        $this->noteQuestions->removeElement($noteQuestions);
+    }
+
+    /**
+     * Get noteQuestions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNoteQuestions()
+    {
+        return $this->noteQuestions;
+    }
+
+    /**
+     * Add noteReponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\noteReponse $noteReponses
+     * @return membre
+     */
+    public function addNoteReponse(\SmartUnity\AppBundle\Entity\noteReponse $noteReponses)
+    {
+        $this->noteReponses[] = $noteReponses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove noteReponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\noteReponse $noteReponses
+     */
+    public function removeNoteReponse(\SmartUnity\AppBundle\Entity\noteReponse $noteReponses)
+    {
+        $this->noteReponses->removeElement($noteReponses);
+    }
+
+    /**
+     * Get noteReponses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNoteReponses()
+    {
+        return $this->noteReponses;
+    }
+
+    /**
+     * Add appareils
+     *
+     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     * @return membre
+     */
+    public function addAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    {
+        $this->appareils[] = $appareils;
+    
+        return $this;
+    }
+
+    /**
+     * Remove appareils
+     *
+     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     */
+    public function removeAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    {
+        $this->appareils->removeElement($appareils);
+    }
+
+    /**
+     * Get appareils
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAppareils()
+    {
+        return $this->appareils;
     }
 }

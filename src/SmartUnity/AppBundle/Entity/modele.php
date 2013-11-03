@@ -29,10 +29,16 @@ class modele
     private $nom;
 
     /**
-   * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\marque")
-   * @ORM\JoinColumn(nullable=false)
-   */
+    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\marque", inversedBy="modeles")
+    * @ORM\JoinColumn(name="marque_id", referencedColumnName="id", nullable=false)
+    */
     private $marque;
+    /**
+     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="modele")
+     *
+     */
+    private $appareils;
+
 
 
     /**

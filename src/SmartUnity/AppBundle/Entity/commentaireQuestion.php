@@ -36,16 +36,18 @@ class commentaireQuestion
     private $date;
 
     /**
-    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\question")
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\question", inversedBy="commentaireQuestions")
+    * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
     */
     private $question;
 
     /**
-    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre")
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="commentaireQuestions")
+    * @ORM\JoinColumn(name="membre_id", referencedColumnName="id", nullable=false)
     */
     private $membre;
+
+
 
     /**
      * Get id

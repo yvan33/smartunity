@@ -28,6 +28,12 @@ class os
      */
     private $nom;
 
+    /**
+     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="os")
+     *
+     */
+    private $appareils;
+
 
     /**
      * Get id

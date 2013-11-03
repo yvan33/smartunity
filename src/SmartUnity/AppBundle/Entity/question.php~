@@ -43,15 +43,15 @@ class question
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre")
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="questions")
      * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
      */
     private $membre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="questions")
      */
-    private $appareil;
+    private $appareils;
 
     /**
      * @var string
@@ -61,206 +61,14 @@ class question
     private $slug;
     
     /**
-     * @var ArrayCollection $reponses
-     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="reponse", cascade={"persist", "remove", "merge"})
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question")
      */
     private $reponses;
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteQuestion", mappedBy="question")
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $noteQuestions;
 
-    /**
-     * Set sujet
-     *
-     * @param string $sujet
-     * @return Question
-     */
-    public function setSujet($sujet)
-    {
-        $this->sujet = $sujet;
-    
-        return $this;
-    }
 
-    /**
-     * Get sujet
-     *
-     * @return string 
-     */
-    public function getSujet()
-    {
-        return $this->sujet;
-    }
-
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     * @return Question
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime 
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Question
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set membre
-     *
-     * @param \SmartUnity\AppBundle\Entity\membre $membre
-     * @return question
-     */
-    public function setMembre(\SmartUnity\AppBundle\Entity\membre $membre)
-    {
-        $this->membre = $membre;
-    
-        return $this;
-    }
-
-    /**
-     * Get membre
-     *
-     * @return \SmartUnity\AppBundle\Entity\membre 
-     */
-    public function getMembre()
-    {
-        return $this->membre;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->appareil = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Add appareil
-     *
-     * @param \SmartUnity\AppBundle\appareil $appareil
-     * @return question
-     */
-    public function addAppareil(\SmartUnity\AppBundle\Entity\appareil $appareil)
-    {
-        $this->appareil[] = $appareil;
-    
-        return $this;
-    }
-
-    /**
-     * Remove appareil
-     *
-     * @param \SmartUnity\AppBundle\appareil $appareil
-     */
-    public function removeAppareil(\SmartUnity\AppBundle\Entity\appareil $appareil)
-    {
-        $this->appareil->removeElement($appareil);
-    }
-
-    /**
-     * Get appareil
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAppareil()
-    {
-        return $this->appareil;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return question
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-    
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Add reponses
-     *
-     * @param \SmartUnity\AppBundle\Entity\reponse $reponses
-     * @return question
-     */
-    public function addReponse(\SmartUnity\AppBundle\Entity\reponse $reponses)
-    {
-        $this->reponses[] = $reponses;
-    
-        return $this;
-    }
-
-    /**
-     * Remove reponses
-     *
-     * @param \SmartUnity\AppBundle\Entity\reponse $reponses
-     */
-    public function removeReponse(\SmartUnity\AppBundle\Entity\reponse $reponses)
-    {
-        $this->reponses->removeElement($reponses);
-    }
-
-    /**
-     * Get reponses
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getReponses()
-    {
-        return $this->reponses;
-    }
 }

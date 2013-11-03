@@ -28,6 +28,12 @@ class marque
      */
     private $nom;
 
+    /**
+     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\modele", mappedBy="marque")
+     *
+     */
+    private $modeles;
+
 
     /**
      * Get id

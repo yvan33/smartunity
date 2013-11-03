@@ -48,6 +48,19 @@ class reponse
     protected $membre;
 
     /**
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteReponse", mappedBy="reponse")
+     */
+    private $noteReponses;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->noteReponses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -61,7 +74,7 @@ class reponse
      * Set description
      *
      * @param string $description
-     * @return Reponse
+     * @return reponse
      */
     public function setDescription($description)
     {
@@ -84,7 +97,7 @@ class reponse
      * Set date
      *
      * @param \DateTime $date
-     * @return Reponse
+     * @return reponse
      */
     public function setDate($date)
     {
@@ -106,10 +119,10 @@ class reponse
     /**
      * Set question
      *
-     * @param \SmartUnity\AppBundle\Entity\Question $question
-     * @return Reponse
+     * @param \SmartUnity\AppBundle\Entity\question $question
+     * @return reponse
      */
-    public function setQuestion(\SmartUnity\AppBundle\Entity\Question $question)
+    public function setQuestion(\SmartUnity\AppBundle\Entity\question $question = null)
     {
         $this->question = $question;
     
@@ -119,7 +132,7 @@ class reponse
     /**
      * Get question
      *
-     * @return \SmartUnity\AppBundle\Entity\Question 
+     * @return \SmartUnity\AppBundle\Entity\question 
      */
     public function getQuestion()
     {
@@ -132,7 +145,7 @@ class reponse
      * @param \SmartUnity\AppBundle\Entity\membre $membre
      * @return reponse
      */
-    public function setMembre(\SmartUnity\AppBundle\Entity\membre $membre)
+    public function setMembre(\SmartUnity\AppBundle\Entity\membre $membre = null)
     {
         $this->membre = $membre;
     
@@ -147,5 +160,38 @@ class reponse
     public function getMembre()
     {
         return $this->membre;
+    }
+
+    /**
+     * Add noteReponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\noteReponse $noteReponses
+     * @return reponse
+     */
+    public function addNoteReponse(\SmartUnity\AppBundle\Entity\noteReponse $noteReponses)
+    {
+        $this->noteReponses[] = $noteReponses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove noteReponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\noteReponse $noteReponses
+     */
+    public function removeNoteReponse(\SmartUnity\AppBundle\Entity\noteReponse $noteReponses)
+    {
+        $this->noteReponses->removeElement($noteReponses);
+    }
+
+    /**
+     * Get noteReponses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNoteReponses()
+    {
+        return $this->noteReponses;
     }
 }

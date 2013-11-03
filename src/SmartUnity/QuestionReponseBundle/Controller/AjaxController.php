@@ -22,7 +22,6 @@ class AjaxController extends Controller
 
         $nbQuestions = $repository->getNombreQuestions();
 
-
         $returnArray=array();
 
         array_push($returnArray, array(
@@ -40,13 +39,13 @@ class AjaxController extends Controller
             	'sujet'=>$Question->getSujet(),
             	'description'=>$Question->getDescription(),
             	'date'=>$Question->getDate(),
-                'membre'=>$Question->getMembre(),
+                //'membre'=>$Question->getMembre(),
                 'slug'=>$Question->getSlug()
             ));
 
-            //echo $Question->getMembre()->getNom();
-            echo utf8_decode($Question->getReponses()->get(1)->getDescription());
-            exit();
+            //echo $Question->getMembre()->getEmail();
+            //echo utf8_decode($Question->getReponses()->get(1)->getDescription());
+            //exit();
 
         }
 

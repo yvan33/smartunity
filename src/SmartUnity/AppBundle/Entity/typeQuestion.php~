@@ -35,60 +35,10 @@ class typeQuestion
      */
     private $description;
 
-
     /**
-     * Get id
+     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="typeQuestion")
      *
-     * @return integer 
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $questions;
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return typeQuestion
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string 
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return typeQuestion
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 }
