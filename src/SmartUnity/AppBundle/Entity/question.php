@@ -44,7 +44,7 @@ class question
 
     /**
      * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
      */
     private $membre;
 
@@ -60,6 +60,11 @@ class question
      */
     private $slug;
     
+    /**
+     * @var ArrayCollection $reponses
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question", cascade={"persist", "remove", "merge"})
+     */
+    private $reponses;
 
     /**
      * Get id
@@ -224,5 +229,38 @@ class question
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add reponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\reponse $reponses
+     * @return question
+     */
+    public function addReponse(\SmartUnity\AppBundle\Entity\reponse $reponses)
+    {
+        $this->reponses[] = $reponses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove reponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\reponse $reponses
+     */
+    public function removeReponse(\SmartUnity\AppBundle\Entity\reponse $reponses)
+    {
+        $this->reponses->removeElement($reponses);
+    }
+
+    /**
+     * Get reponses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReponses()
+    {
+        return $this->reponses;
     }
 }

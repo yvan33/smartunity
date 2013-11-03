@@ -106,6 +106,19 @@ class membre extends BaseUser
      */
     protected $pref_repCertifiee;    
 
+
+    /**
+     * @var ArrayCollection $questions
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="membre", cascade={"persist", "remove", "merge"})
+     */
+    protected $questions;
+
+    /**
+     * @var ArrayCollection $reponses
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="membre", cascade={"persist", "remove", "merge"})
+     */
+    protected $reponses;
+
     /**
      * Get id
      *
@@ -390,5 +403,78 @@ class membre extends BaseUser
     public function getPrenom()
     {
         return $this->prenom;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add questions
+     *
+     * @param \SmartUnity\AppBundle\Entity\question $questions
+     * @return membre
+     */
+    public function addQuestion(\SmartUnity\AppBundle\Entity\question $questions)
+    {
+        $this->questions[] = $questions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove questions
+     *
+     * @param \SmartUnity\AppBundle\Entity\question $questions
+     */
+    public function removeQuestion(\SmartUnity\AppBundle\Entity\question $questions)
+    {
+        $this->questions->removeElement($questions);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * Add reponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\reponse $reponses
+     * @return membre
+     */
+    public function addReponse(\SmartUnity\AppBundle\Entity\reponse $reponses)
+    {
+        $this->reponses[] = $reponses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove reponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\reponse $reponses
+     */
+    public function removeReponse(\SmartUnity\AppBundle\Entity\reponse $reponses)
+    {
+        $this->reponses->removeElement($reponses);
+    }
+
+    /**
+     * Get reponses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReponses()
+    {
+        return $this->reponses;
     }
 }

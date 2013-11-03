@@ -55,12 +55,23 @@
               </a>
               <a href="{{ path('fos_user_security_logout') }}"  class="valign-col-all pad-l" ><p>Déconnexion</p></a>
               {% else %}
-              <a href="{{ path('fos_user_security_login') }}" class="valign-col-all pad-l">
+<!--               <a href="{{ path('fos_user_security_login') }}" class="valign-col-all pad-l">
                   <p>Connexion</p>
-              </a>
+              </a> -->
+
+              <div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Connexion">
+        Connexion
+      </a>
+    </div>
+    
+  
               <a href="{{ path('fos_user_registration_register') }}" class="valign-col-all pad-l">
                   <p>S'inscrire</p>
               </a>
+              </div>
               {% endif %}
           </div>
       </div>
@@ -100,10 +111,11 @@
 
 
 <!-- BODY -->
-<div class="row">
-<div class="col-md-12" style="height:900px">
 
-{% block body %}{% endblock %}
+{% block body %}
+
+
+{% endblock %}
 
 </div>
 </div>

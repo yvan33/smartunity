@@ -36,16 +36,16 @@ class reponse
     private $date;
 
     /**
-    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\question")
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\question", inversedBy="reponses")
+    * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
     */
-    private $question;
+    protected $question;
 
     /**
-    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre")
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="reponses")
+    * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
     */
-    private $membre;
+    protected $membre;
 
     /**
      * Get id

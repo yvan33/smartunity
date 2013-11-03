@@ -13,9 +13,12 @@ class DefaultController extends Controller
        
         $form_pref=$this->createForm('smartunity_user_preference', $user);
 //        $form_infos=$this->createForm('smartunity_user_informations', $user);
-
-
-        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array('form_pref'=> $form_pref->createView() ));
+/*        $em = $this->getDoctrine()->getEntityManager();
+        $q = $em->getRepository('SmartUnityAppBundle:question')->find(1);
+         $question=count($q);
+        $r=$q->getreponses();
+        // $question=count($r);*/
+        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array('form_pref'=> $form_pref->createView()));
     }
 
     public function indexWithEditInfosAction()
