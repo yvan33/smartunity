@@ -47,19 +47,24 @@ class QuestionReponseController extends Controller
         //la requête pour vérifier son authenticité... 
 
         //On récupère des infos utiles pour la pagination..
-        $nbPages = $listeQuestions[0]->nbQuestions;
+        $nbPages = ceil(($listeQuestions[0]->nbQuestions) / $nbParPage);
 
         
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
         if($listeQuestions[0]->type==$type && $listeQuestions[0]->nbParPage==$nbParPage && $listeQuestions[0]->page==$page)
             unset($listeQuestions[0]);
+        else
+            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
 
 
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
         return $this->render($template, array(
+            'page'=>$page,
+            'type'=>$type,
             'nbPages'=>$nbPages,
-            'listeQuestions'=>$listeQuestions
+            'listeQuestions'=>$listeQuestions, 
+            'nbParPage'=>$nbParPage
         ));
 
 

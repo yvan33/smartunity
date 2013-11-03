@@ -6,18 +6,16 @@
 
 
 
-{% block body %}
 
+
+{% block body %}
 <p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 Bonjour {{ app.user.username}} 
 {% endif %} </p> 
 
 <p>Liste des Questions</p>
-<a href="#" id="ajax_link">Test loading Ajax</a>
 <br/>
-<a href="{{ path('smart_unity_question_reponse_ajax_get_questions') }}">Lien direct</a>
 <div id="listeQuestions">
-	<p>{{ nbPages }}</p>
 	{% for question in listeQuestions %}
 		<p>{{ question.slug }}</p>
 	{% endfor %}
@@ -29,8 +27,8 @@ Bonjour {{ app.user.username}}
 		<li><a href="#">3</a></li>
 	</ul>
 </div>
-
 {% endblock %}
+
 
 
 
@@ -41,20 +39,23 @@ Bonjour {{ app.user.username}}
 $(document).ready(function(){
 
 	$('#pages').bootstrapPaginator({
-		currentPage: 2,
-		totalPages: 10,
-		bootstrapMajorVersion: 3
-	});
-
-
-	$('#ajax_link').click(function(){
-		$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions', {'type':'last', 'page':'2', 'nbParPage':'5'}) }}', function(donnees){
-			var content;
-			donnees.forEach(function(pEntry){
-				content += '<p>' + pEntry['slug'] + '</p>';
-			});
-			$('#listeQuestions').html(content);
-		});
+		currentPage: {{ page }},
+		totalPages: {{ nbPages }},
+		bootstrapMajorVersion: 3,
+		onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
+			$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/{{ type }}/' + pPage + '/{{ nbParPage }}', function(donnees){
+			var content='';
+			if(donnees[0]['page']==pPage){
+				donnees.shift();
+				donnees.forEach(function(pEntry){
+					content += '<p>' + pEntry['slug'] + '</p>';
+				});
+				$('#listeQuestions').html(content);
+			}else{
+				$('#listeQuestions').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+			}
+		})
+		}
 	});
 
 });

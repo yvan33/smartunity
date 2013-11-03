@@ -10,6 +10,7 @@ class AjaxController extends Controller
 
 	public function getQuestionsAction($type, $page, $nbParPage){
 		
+
 		$repository = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('SmartUnityAppBundle:question');
