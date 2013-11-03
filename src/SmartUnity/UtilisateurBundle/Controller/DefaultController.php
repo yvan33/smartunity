@@ -3,6 +3,7 @@
 namespace SmartUnity\UtilisateurBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\QueryBuilder;
 
 class DefaultController extends Controller
 {
@@ -13,11 +14,19 @@ class DefaultController extends Controller
        
         $form_pref=$this->createForm('smartunity_user_preference', $user);
 //        $form_infos=$this->createForm('smartunity_user_informations', $user);
-/*        $em = $this->getDoctrine()->getEntityManager();
-        $q = $em->getRepository('SmartUnityAppBundle:question')->find(1);
-         $question=count($q);
-        $r=$q->getreponses();
+        $em = $this->getDoctrine()->getEntityManager();
+/*        $repo = $em->getRepository('SmartUnityAppBundle:question');
+        $query=$repo->CreateQueryBuilder('q')
+            ->join('q.reponsevalidee', 'r', 'WITH' ,'r->getMembre()->getId(); = :membre' )
+            ->addSelect('r')
+            ->setParameter('membre', $user->getId());
+            // ->getQuery();
+        $queries=$query->getQuery();
+        $a=$queries->getResult();
+        $res=count($a->getRemuneration());*/
+
         // $question=count($r);*/
+
         return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array('form_pref'=> $form_pref->createView()));
     }
 
@@ -35,7 +44,7 @@ class DefaultController extends Controller
     public function setPrefAction(){
 
             $em=$this->getDoctrine()->getManager();
-            $user = $this->container->get('security.context')->getToken()->getUser();
+            $useer = $this->container->get('security.context')->getToken()->getUser();
             $form=$this->createForm('smartunity_user_preference', $user);
             $form->bind($this->getRequest());
 
@@ -65,6 +74,10 @@ class DefaultController extends Controller
             }
         
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
+
+    }
+    public function calculParam($user){
+
 
     }
     

@@ -36,6 +36,20 @@ class reponse
     private $date;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateValidation", type="date")
+     */
+    private $dateValidation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCertification", type="date")
+     */
+    private $dateCertification;
+
+    /**
     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\question", inversedBy="reponses")
     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
     */
@@ -51,6 +65,11 @@ class reponse
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteReponse", mappedBy="reponse")
      */
     private $noteReponses;
+
+    /**
+     * @ORM\OneToOne(targetEntity="question", mappedBy="reponsevalidee")
+     */
+    private $questionreponsevalidee;
 
     /**
      * Constructor
@@ -193,5 +212,74 @@ class reponse
     public function getNoteReponses()
     {
         return $this->noteReponses;
+    }
+
+    /**
+     * Set dateValidation
+     *
+     * @param \DateTime $dateValidation
+     * @return reponse
+     */
+    public function setDateValidation($dateValidation)
+    {
+        $this->dateValidation = $dateValidation;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateValidation
+     *
+     * @return \DateTime 
+     */
+    public function getDateValidation()
+    {
+        return $this->dateValidation;
+    }
+
+    /**
+     * Set dateCertification
+     *
+     * @param \DateTime $dateCertification
+     * @return reponse
+     */
+    public function setDateCertification($dateCertification)
+    {
+        $this->dateCertification = $dateCertification;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateCertification
+     *
+     * @return \DateTime 
+     */
+    public function getDateCertification()
+    {
+        return $this->dateCertification;
+    }
+
+    /**
+     * Set questionreponsevalidee
+     *
+     * @param \SmartUnity\AppBundle\Entity\question $questionreponsevalidee
+     * @return reponse
+     */
+    public function setQuestionreponsevalidee(\SmartUnity\AppBundle\Entity\question $questionreponsevalidee = null)
+    {
+        $this->questionreponsevalidee = $questionreponsevalidee;
+    
+        return $this;
+    }
+
+    /**
+     * Get questionreponsevalidee
+     *
+     * @return \SmartUnity\AppBundle\Entity\question 
+     */
+    public function getQuestionreponsevalidee()
+    {
+        return $this->questionreponsevalidee;
     }
 }

@@ -59,6 +59,13 @@ class question
      * @ORM\Column(name="slug", type="string", unique=TRUE, length=150)
      */
     private $slug;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="remuneration", type="integer")
+     */
+    private $remuneration;
     
     /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question")
@@ -70,7 +77,11 @@ class question
      */
     private $noteQuestions;
 
-
+    /**
+     * @ORM\OneToOne(targetEntity="SmartUnity\AppBundle\Entity\reponse")
+     * JoinColumn(name="reponse_id", referencedColumnName="id")
+     */
+    private $reponsevalidee;
     /**
      * Constructor
      */
@@ -303,5 +314,51 @@ class question
     public function getNoteQuestions()
     {
         return $this->noteQuestions;
+    }
+
+    /**
+     * Set reponsevalidee
+     *
+     * @param \SmartUnity\AppBundle\Entity\reponse $reponsevalidee
+     * @return question
+     */
+    public function setReponsevalidee(\SmartUnity\AppBundle\Entity\reponse $reponsevalidee = null)
+    {
+        $this->reponsevalidee = $reponsevalidee;
+    
+        return $this;
+    }
+
+    /**
+     * Get reponsevalidee
+     *
+     * @return \SmartUnity\AppBundle\Entity\reponse 
+     */
+    public function getReponsevalidee()
+    {
+        return $this->reponsevalidee;
+    }
+
+    /**
+     * Set remuneration
+     *
+     * @param integer $remuneration
+     * @return question
+     */
+    public function setRemuneration($remuneration)
+    {
+        $this->remuneration = $remuneration;
+    
+        return $this;
+    }
+
+    /**
+     * Get remuneration
+     *
+     * @return integer 
+     */
+    public function getRemuneration()
+    {
+        return $this->remuneration;
     }
 }
