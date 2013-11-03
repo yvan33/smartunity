@@ -31,6 +31,8 @@ class QuestionReponseController extends Controller
         //DONC :
 
         //On récupère la réponse du controleur Ajax (pour avaoir une réponse au cas ou)
+
+
         $nbParPage = 5;
 
         $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
@@ -66,7 +68,7 @@ class QuestionReponseController extends Controller
             'listeQuestions'=>$listeQuestions, 
             'nbParPage'=>$nbParPage
         ));
-
+        
 
     }
 

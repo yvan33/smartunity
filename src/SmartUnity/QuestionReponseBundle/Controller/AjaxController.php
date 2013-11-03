@@ -40,8 +40,13 @@ class AjaxController extends Controller
             	'sujet'=>$Question->getSujet(),
             	'description'=>$Question->getDescription(),
             	'date'=>$Question->getDate(),
+                'membre'=>$Question->getMembre(),
                 'slug'=>$Question->getSlug()
             ));
+
+            //echo $Question->getMembre()->getNom();
+            echo utf8_decode($Question->getReponses()->get(1)->getDescription());
+            exit();
 
         }
 

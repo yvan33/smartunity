@@ -43,8 +43,8 @@ class question
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre")
-     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="questions")
+     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id", nullable=false)
      */
     private $membre;
 
@@ -61,10 +61,18 @@ class question
     private $slug;
     
     /**
-     * @var ArrayCollection $reponses
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question", cascade={"persist", "remove", "merge"})
      */
     private $reponses;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->appareil = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reponses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -167,14 +175,7 @@ class question
     {
         return $this->membre;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->appareil = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
+
     /**
      * Add appareil
      *
