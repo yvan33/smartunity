@@ -27,105 +27,119 @@ class membre extends BaseUser
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
-    protected $nom;
+    private $nom;
     
     /**
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
-    protected $prenom;
+    private $prenom;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     */
+    private $adresse;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telephone", type="string", length=12, nullable=true)
+     */
+    private $telephone;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="cagnotte", type="integer")
      */
-    protected $cagnotte=0;
+    private $cagnotte=0;
     
     /**
      * @var integer
      *
      * @ORM\Column(name="reputation", type="integer")
      */
-    protected $reputation=0;
+    private $reputation=0;
  
     /**
      * @var string
      *
      * @ORM\Column(name="sexe", type="string", length=2)
      */
-    protected $sexe;    
+    private $sexe;    
     
     /**
      * @var date
      *
      * @ORM\Column(name="date_naissance", type="datetime", nullable=true)
      */
-    protected $date_naissance; 
+    private $date_naissance; 
     
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_mp", type="boolean")
      */
-    protected $pref_mp;
+    private $pref_mp;
     
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_smartcafe", type="boolean")
      */
-    protected $pref_smartcafe;
+    private $pref_smartcafe;
     
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_comm", type="boolean")
      */
-    protected $pref_comm;
+    private $pref_comm;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_rep", type="boolean")
      */
-    protected $pref_rep;
+    private $pref_rep;
     
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_repValidee", type="boolean")
      */
-    protected $pref_repValidee;    
+    private $pref_repValidee;    
     
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_repCertifiee", type="boolean")
      */
-    protected $pref_repCertifiee;    
+    private $pref_repCertifiee;    
 
 
     /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="membre")
      */
-    protected $questions;
+    private $questions;
 
     /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="membre")
      */
-    protected $reponses;
+    private $reponses;
 
         /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteQuestion", mappedBy="membre")
      */
-    protected $noteQuestions;
+    private $noteQuestions;
 
     /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteReponse", mappedBy="membre")
      */
-    protected $noteReponses;
+    private $noteReponses;
 
     /**
      *
@@ -140,6 +154,15 @@ class membre extends BaseUser
      *
      */
     private $reponsesCertifiees;    
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\ville", inversedBy="ville")
+     * @ORM\JoinColumn(name="ville_id", referencedColumnName="id")
+     */
+    private $ville; 
+
+
 
     /**
      * Constructor
@@ -636,5 +659,74 @@ class membre extends BaseUser
     public function getReponsesCertifiees()
     {
         return $this->reponsesCertifiees;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     * @return membre
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string 
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Set telephone
+     *
+     * @param string $telephone
+     * @return membre
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+    
+        return $this;
+    }
+
+    /**
+     * Get telephone
+     *
+     * @return string 
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param \SmartUnity\AppBundle\Entity\ville $ville
+     * @return membre
+     */
+    public function setVille(\SmartUnity\AppBundle\Entity\ville $ville = null)
+    {
+        $this->ville = $ville;
+    
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return \SmartUnity\AppBundle\Entity\ville 
+     */
+    public function getVille()
+    {
+        return $this->ville;
     }
 }

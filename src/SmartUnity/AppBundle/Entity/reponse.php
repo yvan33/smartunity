@@ -72,11 +72,10 @@ class reponse
     */
     private $membreCertif;
 
-
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct()   
     {
         $this->noteReponses = new \Doctrine\Common\Collections\ArrayCollection();
     }
