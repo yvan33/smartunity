@@ -67,12 +67,23 @@ class reponse
     private $noteReponses;
 
     /**
+    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="reponsesCertifiees")
+    * 
+    */
+    private $membreCertif;
+
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->noteReponses = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+    
+    
+
     
     /**
      * Get id
@@ -276,5 +287,28 @@ class reponse
     public function getQuestionreponsevalidee()
     {
         return $this->questionreponsevalidee;
+    }
+
+    /**
+     * Set membreCertif
+     *
+     * @param \SmartUnity\AppBundle\Entity\membre $membreCertif
+     * @return reponse
+     */
+    public function setMembreCertif(\SmartUnity\AppBundle\Entity\membre $membreCertif = null)
+    {
+        $this->membreCertif = $membreCertif;
+    
+        return $this;
+    }
+
+    /**
+     * Get membreCertif
+     *
+     * @return \SmartUnity\AppBundle\Entity\membre 
+     */
+    public function getMembreCertif()
+    {
+        return $this->membreCertif;
     }
 }

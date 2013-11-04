@@ -133,7 +133,13 @@ class membre extends BaseUser
      *
      */
     private $appareils;
-    
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="membreCertif")
+     *
+     */
+    private $reponsesCertifiees;    
 
     /**
      * Constructor
@@ -145,6 +151,7 @@ class membre extends BaseUser
         $this->noteQuestions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->noteReponses = new \Doctrine\Common\Collections\ArrayCollection();
         $this->appareils = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reponsesCertifiees = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -596,5 +603,38 @@ class membre extends BaseUser
     public function getAppareils()
     {
         return $this->appareils;
+    }
+
+    /**
+     * Add reponsesCertifiees
+     *
+     * @param \SmartUnity\AppBundle\Entity\reponse $reponsesCertifiees
+     * @return membre
+     */
+    public function addReponsesCertifiee(\SmartUnity\AppBundle\Entity\reponse $reponsesCertifiees)
+    {
+        $this->reponsesCertifiees[] = $reponsesCertifiees;
+    
+        return $this;
+    }
+
+    /**
+     * Remove reponsesCertifiees
+     *
+     * @param \SmartUnity\AppBundle\Entity\reponse $reponsesCertifiees
+     */
+    public function removeReponsesCertifiee(\SmartUnity\AppBundle\Entity\reponse $reponsesCertifiees)
+    {
+        $this->reponsesCertifiees->removeElement($reponsesCertifiees);
+    }
+
+    /**
+     * Get reponsesCertifiees
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReponsesCertifiees()
+    {
+        return $this->reponsesCertifiees;
     }
 }
