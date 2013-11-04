@@ -38,14 +38,14 @@ class reponse
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateValidation", type="date")
+     * @ORM\Column(name="dateValidation", type="date", nullable=true)
      */
     private $dateValidation;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCertification", type="date")
+     * @ORM\Column(name="dateCertification", type="date", nullable=true)
      */
     private $dateCertification;
 
@@ -53,23 +53,18 @@ class reponse
     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\question", inversedBy="reponses")
     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
     */
-    protected $question;
+    private $question;
 
     /**
     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="reponses")
     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
     */
-    protected $membre;
+    private $membre;
 
     /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteReponse", mappedBy="reponse")
      */
     private $noteReponses;
-
-    /**
-     * @ORM\OneToOne(targetEntity="question", mappedBy="reponsevalidee")
-     */
-    private $questionreponsevalidee;
 
     /**
      * Constructor
