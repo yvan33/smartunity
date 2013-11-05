@@ -316,28 +316,6 @@ class question
         return $this->noteQuestions;
     }
 
-    /**
-     * Set reponsevalidee
-     *
-     * @param \SmartUnity\AppBundle\Entity\reponse $reponsevalidee
-     * @return question
-     */
-    public function setReponsevalidee(\SmartUnity\AppBundle\Entity\reponse $reponsevalidee = null)
-    {
-        $this->reponsevalidee = $reponsevalidee;
-    
-        return $this;
-    }
-
-    /**
-     * Get reponsevalidee
-     *
-     * @return \SmartUnity\AppBundle\Entity\reponse 
-     */
-    public function getReponsevalidee()
-    {
-        return $this->reponsevalidee;
-    }
 
     /**
      * Set remuneration

@@ -2,8 +2,12 @@
 
 {% block stylesheets %}
     <link href="{{ asset('assets/css/mon-compte.css') }}" rel="stylesheet" type="text/css">
+
+
  {% endblock %}
     
+
+
 {% block profil %}
 
 <div class="row">
@@ -20,7 +24,6 @@
                 
             </div>
 
-
 {% block infos %} 
 
 {% endblock %}
@@ -35,7 +38,7 @@
             <div class="row  ">
                 <div class="text-center"><img src="{{asset('assets/img/mes-pref.png')}}"/></div>
             </div>
-            {% block preferences %}  
+{% block preferences %}  
 
 <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
     {{form_errors(form_pref)}}
@@ -76,10 +79,12 @@
 </form> 
 
 {% endblock %}
+
         </div>
 
     </div>
-    
+ 
+   
     <div class="col-md-5" style="margin-top:20px">
         <div class="grille-content">
             <div class="row  ">
@@ -108,6 +113,8 @@
         </div>
         <div class="grille-content">
         {%block activite%}
+
+
             <div class="row  ">
                 <div class="text-center"><img src="{{asset('assets/img/mon-a.png')}}"/></div>
             </div>
