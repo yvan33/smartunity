@@ -3,7 +3,7 @@
     width:30%;
     margin: 3px 2.5% 3px 5%;
     /*background-color:#00C;*/
-    height:20px;
+    /*height:20px;*/
     float:left;
 }
 .grille-2
@@ -17,9 +17,9 @@
 .grille-1.pref
 {
     width:60%;
-    margin: 3px 2.5% 3px 5%;
+    margin: 3px 3% 3px 5%;
     /*background-color:#00C;*/
-    height:20px;
+    /*height:20px;*/
     float:left;
 }
 .grille-2.pref
@@ -58,8 +58,12 @@
 .label-radio
 {
     font-weight: normal;
-    margin-left: 0.4em;
-    margin-right: 1.5em;
+    margin-right: 1.2em;
+}
+
+.label-normal
+{
+    font-weight: normal;
 }
 
 /*.validationInfos
@@ -95,7 +99,21 @@
     margin-bottom:20px; 
 }
 
+/*.fieldset-etroit
+{
+    padding-right: 0px;
+}*/
+
+/*@media screen and (max-width: 768px)
+{
 .fieldset-etroit
 {
-    padding-right: 80px;
+    padding-right: 0px;
+}
+}*/
+
+.erreur{
+    
+    color:red;
+    
 }

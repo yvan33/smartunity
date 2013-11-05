@@ -58,8 +58,7 @@
 {#{% spaceless %}#}
     <div {{ block('widget_container_attributes') }}>
     {% for child in form %}
-        {{ form_widget(child) }}
-         {{ form_label(child) }}
+        {{ form_widget(child) }}&nbsp;<span class="label-radio">{{ form_label(child) }}</span>
     {% endfor %}
     </div>
 {#{% endspaceless %}#}
@@ -260,6 +259,7 @@
         {% if label is empty %}
             {% set label = name|humanize %}
         {% endif %}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' label-normal')|trim}) %}
         <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
     {% endif %}
 {% endspaceless %}

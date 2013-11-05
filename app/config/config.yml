@@ -76,3 +76,5 @@ fos_user:
     registration:
         form:
             type: smartunity_user_registration
+        confirmation:
+            enabled:    true

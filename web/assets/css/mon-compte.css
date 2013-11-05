@@ -1,9 +1,11 @@
+
+
 .grille-1
 {
 	width:42.5%;
 	margin: 3px 2.5% 3px 5%;
 	/*background-color:#00C;*/
-	height:20px;
+	/*height:20px;*/
 	float:left;
 }
 .grille-2
@@ -13,6 +15,7 @@
 	/*background-color:#3C9;*/
 	height:20px;
 	float:right;
+        
 }
 
 .grille-3
@@ -37,7 +40,7 @@
 	width:55%;
 	margin: 3px 2.5% 3px 5%;
 	/*background-color:#00C;*/
-	height:20px;
+	/*height:20px;*/
 	float:left;
 }
 .grille-2.pref
@@ -51,7 +54,7 @@
 
 .grille-2.radio-pref
 {
-text-align: right;	
+/*text-align: right;*/	
         
         
 }
@@ -76,8 +79,12 @@ text-align: right;
 .label-radio
 {
     font-weight: normal;
-    margin-left: 0.4em;
-    margin-right: 1.5em;
+    margin-right: 0.5em;
+}
+
+.label-normal
+{
+    font-weight: normal;
 }
 
 .edit{

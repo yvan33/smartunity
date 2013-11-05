@@ -38,30 +38,50 @@
             </div>
 
             <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-    {{form_errors(form)}}
 
-                <fieldset class="fieldset-etroit">
+
+                <div class="erreur">
+                    <p>{{form_errors(form.username)}}</p>
+                    <p>{{form_errors(form.email)}}</p>
+                    <p>{{form_errors(form.plainPassword)}}</p> 
+                </div>
+
+                <fieldset>
                     <legend>Compte</legend>
- 
-{{form_row(form.username)}}
-    {{form_row(form.email)}}
-    {{form_row(form.plainPassword)}}
+                    <div class="row premiere-ligne ">
+                        <div class="grille-1">{{form_label(form.username)}}</div>
+                        <div class="grille-2">{{form_widget(form.username)}}</div>
+                    </div> 
+                    <div class="row">
+                        <div class="grille-1">{{form_label(form.email)}}</div>
+                        <div class="grille-2">{{form_widget(form.email)}}</div>
+                    </div> 
+         {{form_widget(form.plainPassword)}}           
+{#                    <div class="row">
+                        <div class="grille-1">{{form_label(form.plainPassword)}}</div>
+                        <div class="grille-2">{{form_widget(form.plainPassword)}}</div>
+                    </div> #}
+
                 </fieldset>
 
 
-                <fieldset class="fieldset-etroit">
+                <fieldset>
                     <legend>Informations personnelles</legend>
-                    
+
                     <div class="row premiere-ligne ">
                         <div class="grille-1">{{form_label(form.nom)}}</div>
                         <div class="grille-2">{{form_widget(form.nom)}}</div>
                     </div>   
-{#    {{form_widget(form.nom)}}#}
-
-{#    {{form_row(form.prenom)}}             #}
-    {{form_row(form.sexe)}}
-    {{form_row(form.date_naissance)}}
+                    <div class="row">
+                        <div class="grille-1">{{form_label(form.sexe)}}</div>
+                        <div class="grille-2">{{form_widget(form.sexe)}}</div>
+                    </div> 
+                    <div class="row ">
+                        <div class="grille-1">{{form_label(form.date_naissance)}}</div>
+                        <div class="grille-2">{{form_widget(form.date_naissance)}}</div>
+                    </div> 
                 </fieldset>
+                
                 <fieldset>
                     <legend>Préférences</legend>    
 
