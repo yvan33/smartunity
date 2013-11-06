@@ -39,13 +39,9 @@ class AjaxController extends Controller
             	'sujet'=>$Question->getSujet(),
             	'description'=>$Question->getDescription(),
             	'date'=>$Question->getDate(),
-                //'membre'=>$Question->getMembre(),
+                'membre_nom'=>$Question->getMembre()->getNom(),
                 'slug'=>$Question->getSlug()
             ));
-
-            //echo $Question->getMembre()->getEmail();
-            //echo utf8_decode($Question->getReponses()->get(1)->getDescription());
-            //exit();
 
         }
 

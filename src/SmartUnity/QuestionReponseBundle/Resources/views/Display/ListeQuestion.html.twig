@@ -1,5 +1,9 @@
 {% extends "SmartUnityAppBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+<link href="{{ asset('assets/css/question.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block initJS %}
 	<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
 {% endblock %}
@@ -9,9 +13,6 @@
 
 
 {% block body %}
-<p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-Bonjour {{ app.user.username}} 
-{% endif %} </p> 
 
 <p>Liste des Questions</p>
 <br/>
@@ -20,13 +21,160 @@ Bonjour {{ app.user.username}}
 		<p>{{ question.slug }}</p>
 	{% endfor %}
 </div>
-<div>
-	<ul id="pages" class="pagination">
+
+<!-- bouton radio -->
+     <div class="row">
+    	<div class="col-md-6 col-md-offset-3" >
+                <div class="text-center">
+                <div class="btn-group" data-toggle="buttons" style="margin-top:30px">
+                  <label class="btn bouton-radio active">
+                    <input type="radio" name="options" id="option1"><p class="cook-btn">Demander</p>
+                  </label>
+                  <label class="btn bouton-radio">
+                    <input type="radio" name="options" id="option2"><p class="cook-btn">Répondre</p>
+                  </label>
+                </div>
+                </div>
+        </div>
+    </div>
+    <!-- bouton radio fin -->
+    <!-- logo plus texte -->
+    <div class="row">
+    	<div class="col-md-6 col-md-offset-3 text-center" ><div class="cent-h mar" style="margin-top:20px"><img src="{{ asset('assets/img/logo-titre.png') }}" class="valign-col-all" style="margin-right:20px" /><p class="valign-col-all cok-recherche">Smart'Recherches</p></div>
+        </div>
+    </div>
+    <!-- logo plus texte fin -->
+    <!-- recherche -->
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 ">                
+                <div class="input-group" style="margin-top:30px">
+                  	<input type="text" class="form-control">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" ></span></button>
+                  </span>
+                </div>
+        </div>
+    </div>
+    <!-- recherche fin-->
+    <!-- nav div-->
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <div class="grille-content-2">
+                <!-- nav div menu-->
+            	<div class="collapse-menu">
+                <ul class="nav nav-tabs" id="myTab">
+                  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                  <li><a href="#profile" data-toggle="tab">Profile</a></li>
+                  <li><a href="#messages" data-toggle="tab">Messages</a></li>
+                  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                </ul>
+                </div>
+                <!-- nav div menu fin-->
+                <!-- contenue 1-->
+                <div class="tab-content">
+                  <div class="tab-pane active" id="home">
+                  				<!-- accordion general-->
+                               	<div class="panel-group" id="accordion">
+                                	<!-- accordion 1-->
+                               		<div class="panel panel-default">
+                                    	<!-- contenue visible-->
+                               			<div class="panel-heading">
+                               				<h4 class="panel-title">
+                                            	<!-- rond pts-->
+                               					<div class="grille-1"><div class="rond-point"><p class="txt-rond">400 pts</p></div></div>
+                                                <!-- rond pts fin-->
+                                                <!-- describ question-->
+                               					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                               					<div class="grille-2" ><p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. 
+                               					</p></div>
+                               					</a>
+                                                <!-- describ question fin-->
+                                                <!-- nb réponses vues-->
+                               					<div class="grille-3"><p>31 réponses</p>560 vues<p></p>
+                               					</div>
+                                                <!-- nb réponses vues fin-->
+                                                <!-- bouton rep -->
+                               					<div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                              					</div>
+                                                <!-- bouton rep fin-->
+                                                <!-- bouton +-->
+                               					<div class="grille-5"><p>31 soutients</p><button type="button" class="bouton-soutient">
+                                                                                         <p class="p-s">+</p></button>
+                               					</div>
+                                                <!-- bouton + fin-->
+                               				</h4>                           
+                               			</div>
+                                        <!-- contenue visible fin-->
+                                        <!-- contenue caché-->
+                                   		<div id="collapseOne" class="panel-collapse collapse">
+                                        	<div class="panel-body">
+                                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.						</p>
+                                           	</div>
+                                    	</div>
+                                 	</div>
+                                    <!-- contenue caché fin-->
+                                    <!-- accordion 1 fin-->
+                                    <!-- accordion 2-->
+                               		<div class="panel panel-default">
+                                    	<!-- contenue visible-->
+                               			<div class="panel-heading">
+                               				<h4 class="panel-title">
+                                            	<!-- rond pts-->
+                               					<div class="grille-1"><div class="rond-point"><p class="txt-rond">400 pts</p></div></div>
+                                                <!-- rond pts fin-->
+                                                <!-- describ question-->
+                               					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                               					<div class="grille-2" ><p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. 
+                               					</p></div>
+                               					</a>
+                                                <!-- describ question fin-->
+                                                <!-- nb réponses vues-->
+                               					<div class="grille-3"><p>31 réponses</p>560 vues<p></p>
+                               					</div>
+                                                <!-- nb réponses vues fin-->
+                                                <!-- bouton rep -->
+                               					<div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                              					</div>
+                                                <!-- bouton rep fin-->
+                                                <!-- bouton +-->
+                               					<div class="grille-5"><p>31 soutients</p><button type="button" class="bouton-soutient">
+                                                                                         <p class="p-s">+</p></button>
+                               					</div>
+                                                <!-- bouton + fin-->
+                               				</h4>                           
+                               			</div><!-- contenue visible fin-->
+                                        <!-- contenue caché-->
+                                   		<div id="collapse2" class="panel-collapse collapse">
+                                        	<div class="panel-body">
+                                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.						</p>
+                                           	</div>
+                                    	</div>  <!-- contenue caché fin-->
+                                 	</div><!-- accordion 2 fin-->
+                             </div><!-- accordion general fin-->
+                                           
+                  </div><!-- contenue 1 fin--> 
+                  <!-- contenue 2-->
+                  <div class="tab-pane" id="profile">tu clic</div>
+                  <!-- contenue 2 fin-->
+                  <!-- contenue 3-->
+                  <div class="tab-pane" id="messages">comme</div>
+                  <!-- contenue 3 fin-->
+                  <!-- contenue 4-->
+                  <div class="tab-pane" id="settings">un con</div>
+                  <!-- contenue 4 fin-->
+                </div><!-- nav div fin--> 
+		</div><!-- grille fin-->
+    </div><!-- col fin-->
+</div>  <!-- row fin-->
+
+<div style="text-align:center">
+	<ul id="pages" class="pagination-lg">
 		<li><a href="#">1</a></li>
 		<li><a href="#">2</a></li>
 		<li><a href="#">3</a></li>
 	</ul>
 </div>
+
 {% endblock %}
 
 
