@@ -22,7 +22,7 @@
 {
 	float:none;
 	display:table-cell;
-	vertical-align:central;
+	vertical-align:middle;
 }
 .foot-im
 {
@@ -31,11 +31,15 @@
 	padding-top:15px;
 	
 }
-
-
-
-
-
+.hid-home
+{
+	display:none;
+}
+.cook-foot
+{
+	font-size:42px;
+	
+}
 }
 @media (min-width: 992px)  and (max-width: 1200px) {
   
@@ -62,7 +66,7 @@
 {
 	float:none;
 	display:table-cell;
-	vertical-align:central;
+	vertical-align:middle;
 }
 .foot-im
 {
@@ -72,8 +76,14 @@
 	height:150%;
 	
 }
-
-
+.hid-home
+{
+	display:none;
+}
+.cook-foot
+{
+	font-size:32px;
+}
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
@@ -95,12 +105,20 @@
 .foot-im
 {
 	padding-bottom:10px;
-	padding-right:15px;
-	padding-top:15px;
+	padding-right:7px;
+	padding-left:7px;
+
 	
 }
 
-
+.hid-home
+{
+	display:none;
+}
+.cook-foot
+{
+	font-size:42px;
+}
 }
 
 @media screen and (max-width: 768px)
@@ -109,7 +127,7 @@
 {
 	  font-size:12px;
 	  font-weight:bold;
-	  padding-top:7px;
+	
 }
 .logo2
 {
@@ -119,20 +137,32 @@
 .foot-im
 {
 	padding-bottom:10px;
-	padding-right:15px;
-	padding-top:15px;
+	padding-right:7px;
+	padding-left:7px;
+	
 	
 }
-
+.menu-pad 
+{
+	font-size:18px;
+	font-weight:bold;
+	padding-top:5px;
 }
-
+.cook-foot
+{
+	font-size:42px;
+}
+}
 .menu-bg
 {
+	background-color:#2b3a41;
 	background-image:url(../img/background-menu.png);
+	background-repeat:no-repeat;
 	-webkit-box-shadow: 0 5px 20px  black;
        -moz-box-shadow: 0 5px 20px  black;
             box-shadow: 0 5px 20px  black;
 }
+
 	
 .bg
 {
@@ -154,19 +184,6 @@
 	background-repeat:no-repeat;
 	margin-top:12px;
 }
-.home
-{
-	background-image:url(../img/logo-index.png);
-	background-repeat:no-repeat;
-	margin-top:12px;
-}
-.home-active
-{
-	background-image:url(../img/logo-index-g.png);
-	background-repeat:no-repeat;
-	margin-top:12px;
-}
-
 .foot-sep
 {
 	background-image:url(../img/barre-footer.png);
@@ -205,11 +222,26 @@
 {
 	float:none;
 	display:table-cell;
-	vertical-align:central;
+	vertical-align:middle;
 }
 .pad-l
 {
 	padding-left:10px;
 	
 }
+.cook-foot
+{
+	font-family:Cookie;
+	color:#2a3940;
+}
+.cook-head
+{
+	float:right;
+	font-family:Cookie;
+	margin-left:10px;
+	margin-top:8px;
+	margin-bottom:2px;
+	font-size:26pt;
+}
+
 

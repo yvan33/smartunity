@@ -1,0 +1,259 @@
+@media (min-width: 1200px){
+	.bouton-radio
+{
+	width:200px;
+}
+.grille-2
+{
+	width:430px;
+}
+}
+@media (min-width: 992px)  and (max-width: 1200px) {
+	.bouton-radio
+{
+	width:200px;
+}
+.grille-2
+{
+	width:260px;
+} 
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+	.bouton-radio
+{
+	width:200px;
+}
+.grille-2
+{
+	width:320px;
+} 
+
+}
+
+@media screen and (max-width: 768px)
+{
+.bouton-radio
+{
+	width:100%;
+}
+.grille-2
+{
+	width:45%;
+} 
+}
+.grille-1
+{
+	width:80px;
+	margin:10px;
+	float:left;
+
+	
+}
+.rond-point
+{
+	background: linear-gradient( to top, #E0E0E0,#FFF);
+	border-radius:30px;
+	margin-right:auto;
+	margin-left:auto;
+	width:60px;
+	height:60px;
+	border: solid 1px #999999;
+	text-align:center;
+}
+.txt-rond
+{
+	line-height:60px;	
+}
+.grille-2
+{
+	float:left;
+	margin:10px;
+}
+.grille-3
+{
+	width:100px;
+	float:left;
+	margin:10px;
+	text-align:center;
+}
+.grille-4
+{
+	width:100px;
+	float:left;
+	margin:10px;
+	text-align:center;
+}
+.grille-5
+{
+	width:100px;
+	float:left;
+	margin:10px;
+	text-align:center;
+}
+
+.grille-content
+{   
+	padding:15px;
+	background-color: #f8f8ef;
+	margin-top:30px;
+	margin-bottom:30px;
+	border-radius:5px;
+	border:2px solid #d7d5d5;
+	-webkit-box-shadow: 0 0 20px  #CCCCCC;
+       -moz-box-shadow: 0 0 20px  #CCCCCC;
+            box-shadow: 0 0 20px  #CCCCCC;
+}
+.grille-content-2
+{
+	margin-top:30px;
+	margin-bottom:30px;
+	background-color: #f8f8ef;
+	border-radius:5px;
+	border:2px solid #d7d5d5;
+	-webkit-box-shadow: 0 0 20px  #CCCCCC;
+       -moz-box-shadow: 0 0 20px  #CCCCCC;
+            box-shadow: 0 0 20px  #CCCCCC;
+}
+.bouton-radio
+{
+	background: linear-gradient( to top, #bfbfbf,#fbfbfb);
+	border-radius:6px;
+	border-color:#333;
+	border-width:1px;
+	background-color:#898989;
+	height:50px;
+	margin-bottom:20px;
+	margin-left:10px;
+	margin-right:10px;
+     background: -webkit-linear-gradient( ... );
+     background:    -moz-linear-gradient( ... ); 
+     background:     -ms-linear-gradient( ... );
+     background:      -o-linear-gradient( ... );
+     background:         linear-gradient( ... );
+	
+}
+.bouton-repondre
+{
+	background: linear-gradient( to top, #bfbfbf,#fbfbfb);
+	border-radius:3px;
+	border-color: #999;
+	border-width:1px;
+	background-color: #CCC;
+     background: -webkit-linear-gradient( ... );
+     background:    -moz-linear-gradient( ... ); 
+     background:     -ms-linear-gradient( ... );
+     background:      -o-linear-gradient( ... );
+     background:         linear-gradient( ... );
+	
+}
+.bouton-soutient
+{
+	
+	border-radius:10px;
+	height:20px;
+	width:20px;
+	background-color: #0F0;
+	color:#FFF;
+	text-align:center;
+	display: inline-block;
+	border: 1px solid transparent;
+	
+	
+
+
+	
+}
+.p-s
+{
+	font-size:38px;
+	line-height:20px;
+	margin-left:-8px;
+	
+	
+}
+.cook-btn
+{
+	font-family:Cookie;
+	font-size:40px;
+	margin-top:-10px
+}
+.grille-info
+{
+	
+	margin-bottom:30px;
+	background-image:url(../img/bouton-2.png);
+	background-repeat:repeat-x;
+	-webkit-box-shadow: 0 0 20px  #CCCCCC;
+       -moz-box-shadow: 0 0 20px  #CCCCCC;
+            box-shadow: 0 0 20px  #CCCCCC;
+	vertical-align:middle;
+	height:47px;
+}
+.cook-btn2
+{
+	font-family:Cookie;
+	font-size:32px;
+	line-height:47px;
+	color:#FFF;
+	
+}
+.panel-default > .panel-heading {
+	color: #333333;
+	overflow: hidden;
+	background-color: #f8f8ef;
+ 
+  
+}
+.panel-default > .panel-heading:hover {
+	color: #333333;
+    background-color: #E6E6E6;
+
+  
+}
+
+.panel-default {
+	background-color: #D8F1F5;
+	border:0px;
+	border-radius:0px;
+	border-bottom: solid 2px #d3d5d6;
+	-webkit-box-shadow: 0px -10px 20px -5px  rgba(0,51,255,0.2) inset;
+          box-shadow: 0px -10px 20px -5px  rgba(0,51,255,0.2) inset;
+	
+	
+}
+.panel-heading {
+  padding: 10px 15px;
+  
+}
+.panel-group .panel + .panel {
+  margin-top: 0px;
+}
+.panel {
+
+	
+}
+.collapse-menu {
+	background-image:url(../img/tab-acc.png);
+	background-repeat:repeat-x;
+	background-color:#00557d;
+}
+.cok-recherche {
+	font-family:Cookie;
+	font-size:56px;
+}
+.panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
+.panel-title > a {
+  color: inherit;
+  
+}
+
+
+
+

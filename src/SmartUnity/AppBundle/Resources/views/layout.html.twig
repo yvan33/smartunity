@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -8,14 +9,18 @@
 
 <!-- Additional meta content -->
     {% block meta %}{% endblock %}
-    
+
+ <!-- Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
+
 <!-- Bootstrap core CSS -->
 
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script> 
     <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
+    <link href="{{ asset('assets/css/accueil.css') }}" rel="stylesheet" type="text/css">
 
-<!-- Fonts -->
-{#    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>#}
+
     
 <!-- Additional styleSheets -->
 
@@ -37,7 +42,7 @@
 <!-- bg body -->
 <body style="background-color:#334A64">
 <!-- head -->
- <div class="container" style="background-color:#edebeb;box-shadow: 0 0 30px black;">
+ <div class="container bg">
  
   <div class="row">
   <div class="col-md-12">
@@ -45,45 +50,38 @@
       <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h"/></div>
       <div class="col-md-5 cent-h">
           <div class="cent-h logo2">
-              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-              <a href="#" class=" pos-re valign-col-all">
-                  <img src="{{ asset('assets/img/logo-iphon.png') }}"/>
-                  <p class="red-dot">1</p>
-              </a>
-              <a href="{{ path('fos_user_profile_show') }}" class="valign-col-all pad-l">
-                  <p>{{ app.user.username }}</p>
-              </a>
-              <a href="{{ path('fos_user_security_logout') }}"  class="valign-col-all pad-l" ><p>Déconnexion</p></a>
-              {% else %}
-<!--               <a href="{{ path('fos_user_security_login') }}" class="valign-col-all pad-l">
-                  <p>Connexion</p>
-              </a> -->
-
-              <div class="accordion" id="accordion2">
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Connexion">
-        Connexion
-      </a>
-    </div>
-    
-  
-              <a href="{{ path('fos_user_registration_register') }}" class="valign-col-all pad-l">
-                  <p>S'inscrire</p>
-              </a>
-              </div>
-              {% endif %}
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="#" class=" pos-re valign-col-all">
+                <img src="image/logo-iphon.png"/>
+                <p class="red-dot">1</p>
+            </a>
+            <a href="{{ path('fos_user_profile_show') }}" class="valign-col-all pad-l"><p>{{ app.user.username }}}</p></a>
           </div>
       </div>
-  
+      <a href="{{ path('fos_user_security_logout') }}"  class="valign-col-all pad-l" ><p>Déconnexion</p></a>
+            {% else %}
+<!--               <a href="{{ path('fos_user_security_login') }}" class="valign-col-all pad-l">
+                  <p>Connexion</p>
+              </a>  -->
+
+            <div class="accordion" id="accordion2">
+                <div class="accordion-group">
+                  <div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Connexion">Connexion</a></div>
+                  <a href="{{ path('fos_user_registration_register') }}" class="valign-col-all pad-l"><p>S'inscrire</p></a>
+                </div>
+            {% endif %}
+            </div>
     </div>
+  
+  </div>
   </div>
   </div>
   
+
 <!-- /.navbar-collapse -->
-	<div class="row">
-		<div class="col-md-12 menu-bg">
-			<nav class="navbar navbar-inverse" role="navigation">
+  <div class="row">
+    <div class="col-md-12 menu-bg">
+      <nav class="navbar navbar-inverse" role="navigation">
          <!--navbar- mobile -->
                   <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -91,22 +89,27 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
-                  <a class="navbar-brand" href="#">Smart'Unity</a>
+                      <span class="icon-bar"></span>
                     </button>
+                   <a class="navbar-brand" href="#"><div class="hid-home"><span class="glyphicon glyphicon-home" style="font-size:24px;
+  font-weight:bold;"></span><p class="cook-head">Smart'Unity</p></div></a>
+                    
                   </div>
-		<!--navbar- standar -->
+    <!--navbar- standar -->
                   <div class="collapse navbar-collapse navbar-ex1-collapse menu-mar" >
                     <ul class="nav navbar-nav">
-                      <li class="home"><a href="{{ path('smart_unity_app_homepage') }}"></a></li>
-                      <li class="active"><a href="{{ path('smart_unity_question_reponse_homepage') }}"><p class="menu-pad">QUESTIONS & SOLUTIONS</p></a></li>
+                      <li><a href="#"><span class="glyphicon glyphicon-home" style="font-size:24px;
+  font-weight:bold;"></span></a></li>
+                      <li class="active"><a href="#"><p class="menu-pad">SMART'SOLUTION</p></a></li>
+                      <li ><a href="#"><p class="menu-pad">QUESTIONS</p></a></li>
                       <li ><a href="#"><p class="menu-pad">BOUTIQUE</p></a></li>
                       <li ><a href="#"><p class="menu-pad">SMART'CAFE</p></a></li>
                     </ul>
                   </div>
          <!--navbar- standar fin --> 
-			</nav>
-		</div>
-	</div>
+      </nav>
+    </div>
+  </div>
 <!-- end nav -->
 
 <div class="row">
@@ -125,25 +128,25 @@
 
 <!-- footer --> 
 	<!-- footer separation --> 	
-	<div class="row">
-		<div class="col-md-12 foot-sep">
-		</div>
-	</div>
-	<!-- footer separation fin --> 	
-	<div class="row valign-row"  style="padding-top:20px; padding-bottom:20px; text-align:center">
-		<div class="col-md-2 valign-col" ><img src="{{ asset('assets/img/sn.png') }}"/>
-        	</div>
-        <div class="col-md-3 valign-col col-mar"><a href="#"><img src="{{ asset('assets/img/logo-f-f.png') }}"  class="foot-im"/></a><a href="#"><img src="{{ asset('assets/img/logo-t-f.png') }}" class="foot-im"/></a><a href="#"><img src="{{ asset('assets/img/logo-g-f.png') }}" class="foot-im"/></a>
-        	</div>
+  <div class="row">
+    <div class="col-md-12 foot-sep">
+    </div>
+  </div>
+  <!-- footer separation fin -->  
+  <div class="row valign-row"  style="padding-top:20px; padding-bottom:20px; text-align:center">
+    <div class="col-md-2 valign-col" ><p class="cook-foot valign-col">Suivez nous:</p>
+          </div>
+        <div class="col-md-3 valign-col col-mar"><a href="#"><img src="image/logo-f-f.png" class="foot-im"/></a><a href="#"><img src="image/logo-t-f.png" class="foot-im"/></a><a href="#"><img src="image/logo-g-f.png" class="foot-im"/></a>
+          </div>
         <div class="col-md-2 valign-col"><a href="#"><p>A propos de smart'unity</p></a>
-        	</div>
+          </div>
         <div class="col-md-2 valign-col col-mar"><a href="#"><p>Conditions generales d'utilisation</p></a>
-        	</div>
+          </div>
         <div class="col-md-1 valign-col col-mar"><a href="#"><p>Publicité</p></a>
-        	</div>
-        <div class="col-md-2 valign-col col-mar"><a href="#"><p>Copyright Smart'Unity</p></a>
-       		</div>
-	</div>
+          </div>
+        <div class="col-md-2 valign-col col-mar"><a href="#"><p>Copy right smart'unity</p></a>
+          </div>
+  </div>
 <!-- end footer --> 
 
 </div>
