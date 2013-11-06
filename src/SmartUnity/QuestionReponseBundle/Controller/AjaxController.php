@@ -11,16 +11,24 @@ class AjaxController extends Controller
 	public function getQuestionsAction($type, $page, $nbParPage){
 		
 
-		$repository = $this->getDoctrine()
+		$questionRepository = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('SmartUnityAppBundle:question');
 
-        $listeQuestion = $repository->findBy(array(), 
+        $noteReponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:noteReponse');
+
+
+
+        $listeQuestion = $questionRepository->findBy(array(), 
                                         array('date'=>'desc'),
                                         $nbParPage,
                                         ($page - 1) * $nbParPage);
 
-        $nbQuestions = $repository->getNombreQuestions();
+
+        $nbQuestions = $questionRepository->getNombreQuestions();
+
 
         $returnArray=array();
 
@@ -33,6 +41,12 @@ class AjaxController extends Controller
         ));
 
         foreach($listeQuestion as $Question){
+
+
+            $reponse = 
+
+
+
 
             array_push($returnArray, array(
             	'id'=>$Question->getId(),

@@ -12,4 +12,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class reponseRepository extends EntityRepository
 {
+
+	public function getBestReponse($QuestionId){
+
+		/* $qb= $this->createQueryBuilder('SmartUnityAppBundle:noteReponse')
+    				->select('SUM(SmartUnityAppBundle:noteReponse.note)')
+    				->where('SmartUnityAppBundle:noteReponse.reponse = :id_reponse')
+    				->setParameter('id_reponse', $QuestionId); */
+
+        /* RECUP L'id de la réponse la mieux notée pour cette question ($QuestionId)
+
+        SELECT reponse.id AS repId, SUM( noteReponse.note ) AS somme
+        FROM reponse
+        LEFT JOIN noteReponse ON reponse.id = noteReponse.reponse_id
+        WHERE reponse.question_id = '1'
+        GROUP BY reponse.id
+        ORDER BY somme DESC
+        LIMIT 0 , 1
+        
+        */
+
+		return $qb->getQuery()->getSingleScalarResult();
+
+	}
 }

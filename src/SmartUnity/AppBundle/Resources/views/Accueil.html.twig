@@ -1,7 +1,10 @@
 {% extends "SmartUnityAppBundle::layout.html.twig" %}
 
-{% block body %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/accueil.css') }}">
+{% endblock %}
 
+{% block body %}
 <p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 Bonjour {{ app.user.username}} 
 {% endif %} </p> 
