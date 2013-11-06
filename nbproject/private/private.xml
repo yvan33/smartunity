@@ -29,6 +29,7 @@
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/AppBundle/Resources/views/Accueil.html.twig</file>
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/web/assets/css/layout.css</file>
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/AppBundle/Entity/reponse.php</file>
+            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/web/assets/css/mon-compte.css</file>
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/AppBundle/Entity/membre.php</file>
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/views/Form/form_mon_compte.html.twig</file>
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Form/Type/InformationsFormType.php</file>
@@ -38,6 +39,7 @@
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Controller/DefaultController.php</file>
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/views/layout_profil.html.twig</file>
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/views/layout.html.twig</file>
+            <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/views/Form/form_register.html.twig</file>
             <file>file:/Users/Yvan/Sites/workspace/SmartUnity_yvan_23102013/src/SmartUnity/UtilisateurBundle/Resources/views/Profile/edit.html.twig</file>
         </group>
     </open-files>
