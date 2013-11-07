@@ -67,7 +67,7 @@
                   				<!-- accordion general-->
                                	<div class="panel-group" id="accordion">
 
-
+                                  <div id="content-accordion">
 
 
                                   {% for question in listeQuestions %}
@@ -81,7 +81,7 @@
                                                 <!-- rond pts fin-->
                                                 <!-- describ question-->
                                					<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{loop.index}}">
-                               					<div class="grille-2" ><p>{{question.sujet}} </p></div>
+                               					<div class="grille-2" ><p>{{question.sujet}}</p></div>
                                					</a>
                                                 <!-- describ question fin-->
                                                 <!-- nb réponses vues-->
@@ -111,7 +111,16 @@
                                     <!-- contenue caché fin-->
                                   {% endfor %}
 
+                                </div>
 
+
+                                  <div style="text-align:center">
+                                    <ul id="pages" class="pagination-lg">
+                                      <li><a href="#">1</a></li>
+                                      <li><a href="#">2</a></li>
+                                      <li><a href="#">3</a></li>
+                                    </ul>
+                                  </div>
 
 
 
@@ -132,13 +141,7 @@
     </div><!-- col fin-->
 </div>  <!-- row fin-->
 
-<div style="text-align:center">
-	<ul id="pages" class="pagination-lg">
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-	</ul>
-</div>
+
 
 {% endblock %}
 
@@ -160,12 +163,27 @@ $(document).ready(function(){
 			var content='';
 			if(donnees[0]['page']==pPage){
 				donnees.shift();
-				donnees.forEach(function(pEntry){
-					content += '<p>' + pEntry['slug'] + '</p>';
+				donnees.forEach(function(pEntry, i){
+					content +='                                   <div class="panel panel-default"> \
+                                    <div class="panel-heading"> \
+                                      <h4 class="panel-title"> \
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">' + pEntry['remuneration'] + ' pts</p></div></div> \
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '"> \
+                                        <div class="grille-2" ><p>' + pEntry['sujet'] + '</p></div></a> \
+                                        <div class="grille-3"><p>' + pEntry['nb_reponses'] + 'réponses</p>XXX vues<p></p></div> \
+                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button> </div> \
+                                        <div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient"><p class="p-s">+</p></button></div> \
+                                      </h4> \
+                                    </div> \
+                                      <div id="collapse' + i + '" class="panel-collapse collapse"> \
+                                          <div class="panel-body"><p>' + pEntry['description'] + '</p><p>' + pEntry['best_reponse'] + '</p></div> \
+                                      </div> \
+                                  </div>';
+
 				});
-				$('#listeQuestions').html(content);
+				$('#content-accordion').html(content);
 			}else{
-				$('#listeQuestions').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+				$('#content-accordion').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
 			}
 		})
 		}
