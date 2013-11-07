@@ -54,25 +54,21 @@
                 <!-- nav div menu-->
             	<div class="collapse-menu">
                 <ul class="nav nav-tabs" id="myTab">
-                  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-                  <li><a href="#profile" data-toggle="tab">Profile</a></li>
-                  <li><a href="#messages" data-toggle="tab">Messages</a></li>
-                  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                  <li class="active"><a href="#onFire" data-toggle="tab">On Fire</a></li>
+                  <li><a href="#last" data-toggle="tab">Derni&egrave;res Questions</a></li>
+                  <li><a href="#solved" data-toggle="tab">Questions r&eacute;solues</a></li>
                 </ul>
                 </div>
                 <!-- nav div menu fin-->
                 <!-- contenue 1-->
                 <div class="tab-content">
-                  <div class="tab-pane active" id="home">
+                  <div class="tab-pane active fade in out" id="onFire">
                   				<!-- accordion general-->
                                	<div class="panel-group" id="accordion">
 
-                                  <div id="content-accordion">
-
-
                                   {% for question in listeQuestions %}
 
-                               		<div class="panel panel-default">
+                               		<div class="panel panel-default fade in out">
                                     	<!-- contenue visible-->
                                			<div class="panel-heading">
                                				<h4 class="panel-title">
@@ -105,38 +101,33 @@
                                         	<div class="panel-body">
                                             <p>{{question.description}}</p>
                                             <p>{{question.best_reponse}}</p>
-                                           	</div>
+                                          </div>
                                     	</div>
                                  	</div>
                                     <!-- contenue caché fin-->
                                   {% endfor %}
-
-                                </div>
-
-
-                                  <div style="text-align:center">
-                                    <ul id="pages" class="pagination-lg">
-                                      <li><a href="#">1</a></li>
-                                      <li><a href="#">2</a></li>
-                                      <li><a href="#">3</a></li>
-                                    </ul>
-                                  </div>
-
 
 
                              </div><!-- accordion general fin-->
                                            
                   </div><!-- contenue 1 fin--> 
                   <!-- contenue 2-->
-                  <div class="tab-pane" id="profile">tu clic</div>
+                  <div class="tab-pane fade in out" id="last">Derni&egrave;res Questions</div>
                   <!-- contenue 2 fin-->
                   <!-- contenue 3-->
-                  <div class="tab-pane" id="messages">comme</div>
+                  <div class="tab-pane fade in out" id="solved">Questions R&eacute;solues</div>
                   <!-- contenue 3 fin-->
-                  <!-- contenue 4-->
-                  <div class="tab-pane" id="settings">un con</div>
-                  <!-- contenue 4 fin-->
+
                 </div><!-- nav div fin--> 
+
+                <div style="text-align:center; cursor:pointer">
+                    <ul id="pages" class="pagination-lg">
+                      <li><a href="#">1</a></li>
+                      <li><a href="#">2</a></li>
+                      <li><a href="#">3</a></li>
+                  </ul>
+                </div>
+
 		</div><!-- grille fin-->
     </div><!-- col fin-->
 </div>  <!-- row fin-->
@@ -157,35 +148,41 @@ $(document).ready(function(){
 	$('#pages').bootstrapPaginator({
 		currentPage: {{ page }},
 		totalPages: {{ nbPages }},
+    size: 'large',
 		bootstrapMajorVersion: 3,
 		onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
-			$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/{{ type }}/' + pPage + '/{{ nbParPage }}', function(donnees){
-			var content='';
-			if(donnees[0]['page']==pPage){
-				donnees.shift();
-				donnees.forEach(function(pEntry, i){
-					content +='                                   <div class="panel panel-default"> \
-                                    <div class="panel-heading"> \
-                                      <h4 class="panel-title"> \
-                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">' + pEntry['remuneration'] + ' pts</p></div></div> \
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '"> \
-                                        <div class="grille-2" ><p>' + pEntry['sujet'] + '</p></div></a> \
-                                        <div class="grille-3"><p>' + pEntry['nb_reponses'] + 'réponses</p>XXX vues<p></p></div> \
-                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button> </div> \
-                                        <div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient"><p class="p-s">+</p></button></div> \
-                                      </h4> \
-                                    </div> \
-                                      <div id="collapse' + i + '" class="panel-collapse collapse"> \
-                                          <div class="panel-body"><p>' + pEntry['description'] + '</p><p>' + pEntry['best_reponse'] + '</p></div> \
-                                      </div> \
-                                  </div>';
 
-				});
-				$('#content-accordion').html(content);
-			}else{
-				$('#content-accordion').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
-			}
-		})
+      $('#accordion').fadeOut('fast');
+
+			$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/{{ type }}/' + pPage + '/{{ nbParPage }}', function(donnees){
+        			var content='';
+        			if(donnees[0]['page']==pPage){
+        				donnees.shift();
+        				donnees.forEach(function(pEntry, i){
+        					content +='                                   <div class="panel panel-default"> \
+                                            <div class="panel-heading"> \
+                                              <h4 class="panel-title"> \
+                                                <div class="grille-1"><div class="rond-point"><p class="txt-rond">' + pEntry['remuneration'] + ' pts</p></div></div> \
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '"> \
+                                                <div class="grille-2" ><p>' + pEntry['sujet'] + '</p></div></a> \
+                                                <div class="grille-3"><p>' + pEntry['nb_reponses'] + 'réponses</p>XXX vues<p></p></div> \
+                                                <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button> </div> \
+                                                <div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient"><p class="p-s">+</p></button></div> \
+                                              </h4> \
+                                            </div> \
+                                              <div id="collapse' + i + '" class="panel-collapse collapse"> \
+                                                  <div class="panel-body"><p>' + pEntry['description'] + '</p><p>' + pEntry['best_reponse'] + '</p></div> \
+                                              </div> \
+                                          </div>';
+
+        				});
+                $('#accordion').html(content);
+                $('#accordion').fadeIn('fast');
+
+        			}else{
+        				$('#accordion').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+        			}
+		        })
 		}
 	});
 
