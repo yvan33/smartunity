@@ -11,16 +11,7 @@
 
 
 
-
 {% block body %}
-
-<p>Liste des Questions</p>
-<br/>
-<div id="listeQuestions">
-	{% for question in listeQuestions %}
-		<p>{{ question.slug }}</p>
-	{% endfor %}
-</div>
 
 <!-- bouton radio -->
      <div class="row">
@@ -77,23 +68,24 @@
                                	<div class="panel-group" id="accordion">
 
 
-                               		
-                                	<!-- accordion 1-->
+
+
+                                  {% for question in listeQuestions %}
+
                                		<div class="panel panel-default">
                                     	<!-- contenue visible-->
                                			<div class="panel-heading">
                                				<h4 class="panel-title">
                                             	<!-- rond pts-->
-                               					<div class="grille-1"><div class="rond-point"><p class="txt-rond">400 pts</p></div></div>
+                               					<div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
                                                 <!-- rond pts fin-->
                                                 <!-- describ question-->
-                               					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                               					<div class="grille-2" ><p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. 
-                               					</p></div>
+                               					<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{loop.index}}">
+                               					<div class="grille-2" ><p>{{question.sujet}} </p></div>
                                					</a>
                                                 <!-- describ question fin-->
                                                 <!-- nb réponses vues-->
-                               					<div class="grille-3"><p>31 réponses</p>560 vues<p></p>
+                               					<div class="grille-3"><p>{{question.nb_reponses}} réponses</p>XXX vues<p></p>
                                					</div>
                                                 <!-- nb réponses vues fin-->
                                                 <!-- bouton rep -->
@@ -101,7 +93,7 @@
                               					</div>
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
-                               					<div class="grille-5"><p>31 soutients</p><button type="button" class="bouton-soutient">
+                               					<div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient">
                                                                                          <p class="p-s">+</p></button>
                                					</div>
                                                 <!-- bouton + fin-->
@@ -109,53 +101,20 @@
                                			</div>
                                         <!-- contenue visible fin-->
                                         <!-- contenue caché-->
-                                   		<div id="collapseOne" class="panel-collapse collapse">
+                                   		<div id="collapse{{loop.index}}" class="panel-collapse collapse">
                                         	<div class="panel-body">
-                                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.						</p>
+                                            <p>{{question.description}}</p>
+                                            <p>{{question.best_reponse}}</p>
                                            	</div>
                                     	</div>
                                  	</div>
                                     <!-- contenue caché fin-->
-                                    <!-- accordion 1 fin-->
+                                  {% endfor %}
 
 
 
-                                    <!-- accordion 2-->
-                               		<div class="panel panel-default">
-                                    	<!-- contenue visible-->
-                               			<div class="panel-heading">
-                               				<h4 class="panel-title">
-                                            	<!-- rond pts-->
-                               					<div class="grille-1"><div class="rond-point"><p class="txt-rond">400 pts</p></div></div>
-                                                <!-- rond pts fin-->
-                                                <!-- describ question-->
-                               					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                               					<div class="grille-2" ><p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. 
-                               					</p></div>
-                               					</a>
-                                                <!-- describ question fin-->
-                                                <!-- nb réponses vues-->
-                               					<div class="grille-3"><p>31 réponses</p>560 vues<p></p>
-                               					</div>
-                                                <!-- nb réponses vues fin-->
-                                                <!-- bouton rep -->
-                               					<div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
-                              					</div>
-                                                <!-- bouton rep fin-->
-                                                <!-- bouton +-->
-                               					<div class="grille-5"><p>31 soutients</p><button type="button" class="bouton-soutient">
-                                                                                         <p class="p-s">+</p></button>
-                               					</div>
-                                                <!-- bouton + fin-->
-                               				</h4>                           
-                               			</div><!-- contenue visible fin-->
-                                        <!-- contenue caché-->
-                                   		<div id="collapse2" class="panel-collapse collapse">
-                                        	<div class="panel-body">
-                                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.						</p>
-                                           	</div>
-                                    	</div>  <!-- contenue caché fin-->
-                                 	</div><!-- accordion 2 fin-->
+
+
                              </div><!-- accordion general fin-->
                                            
                   </div><!-- contenue 1 fin--> 

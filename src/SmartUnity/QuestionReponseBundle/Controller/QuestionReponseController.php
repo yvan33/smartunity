@@ -42,7 +42,8 @@ class QuestionReponseController extends Controller
         ));
 
         //Suppression de l'en tête HTTP et décodage du JSON
-        $listeQuestions = json_decode('[' . explode('[', $response, 2)[1]);
+        $cleanJSON = explode('[', $response, 2);
+        $listeQuestions = json_decode('[' . $cleanJSON[1]);
 
 
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de

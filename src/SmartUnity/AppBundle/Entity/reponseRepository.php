@@ -27,7 +27,12 @@ class reponseRepository extends EntityRepository
             ->setMaxResults(1)
             ->setFirstResult(0);
 
-        return $query->getResult()[0]; 
+        $result = $query->getResult();
+
+        if(count($result) != 0)
+            return $result[0];
+        else 
+            return false;
 
         /* EQUIVALENT SQL
 
@@ -38,7 +43,7 @@ class reponseRepository extends EntityRepository
         GROUP BY reponse.id
         ORDER BY somme DESC
         LIMIT 0 , 1
-        
+
         */
 	}
 }
