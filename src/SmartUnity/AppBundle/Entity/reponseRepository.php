@@ -13,29 +13,23 @@ use Doctrine\ORM\EntityRepository;
 class reponseRepository extends EntityRepository
 {
 
-	public function getBestReponse($QuestionId){
-
-		/* $qb= $this->createQueryBuilder('SmartUnityAppBundle:noteReponse')
-    				->select('SUM(SmartUnityAppBundle:noteReponse.note)')
-    				->where('SmartUnityAppBundle:noteReponse.reponse = :id_reponse')
-    				->setParameter('id_reponse', $QuestionId); */
-
+	public function getBestReponse($QuestionId){ //Récupère l'id et la note de la meilleure réponse pour une question (en paramètre)
 
         $query = $this->_em->createQuery('
-            SELECT SmartUnityAppBundle:reponse.id AS repId, SUM( SmartUnityAppBundle:noteReponse.note ) AS somme
-            FROM SmartUnityAppBundle:reponse
-            LEFT JOIN SmartUnityAppBundle:noteReponse ON SmartUnityAppBundle:reponse.id = SmartUnityAppBundle:noteReponse.reponse_id
-            WHERE SmartUnityAppBundle:question.question_id = :QuestionId
-            GROUP BY SmartUnityAppBundle:reponse.id
+            SELECT r.id repId, SUM(n.note) somme
+            FROM
+            SmartUnityAppBundle:reponse r LEFT JOIN SmartUnityAppBundle:noteReponse n WITH r.id = n.reponse
+            WHERE r.question = :QuestionId
+            GROUP BY r.id
             ORDER BY somme DESC
-            LIMIT 0 , 1
             ')
-            ->setParameter('QuestionId', $QuestionId);
+            ->setParameter('QuestionId', $QuestionId)
+            ->setMaxResults(1)
+            ->setFirstResult(0);
 
-        return $query->getResult();
+        return $query->getResult()[0]; 
 
-
-        /* RECUP L'id de la réponse la mieux notée pour cette question ($QuestionId)
+        /* EQUIVALENT SQL
 
         SELECT reponse.id AS repId, SUM( noteReponse.note ) AS somme
         FROM reponse
@@ -43,7 +37,8 @@ class reponseRepository extends EntityRepository
         WHERE reponse.question_id = '1'
         GROUP BY reponse.id
         ORDER BY somme DESC
-        LIMIT 0 , 1 */
-
+        LIMIT 0 , 1
+        
+        */
 	}
 }
