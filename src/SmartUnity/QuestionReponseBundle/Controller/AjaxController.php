@@ -21,6 +21,11 @@ class AjaxController extends Controller
 
 
         //Requête DQL -> récupération des questions
+
+
+        print_r($questionRepository->getQuestionsOnFire($nbParPage, $page));
+        exit();
+
         $listeQuestion = $questionRepository->findBy(array(), 
                                         array('date'=>'desc'),
                                         $nbParPage,
