@@ -1,5 +1,9 @@
 {% extends "SmartUnityAppBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+<link href="{{ asset('assets/css/question.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block initJS %}
 	<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
 {% endblock %}
@@ -7,26 +11,129 @@
 
 
 
-
 {% block body %}
-<p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-Bonjour {{ app.user.username}} 
-{% endif %} </p> 
 
-<p>Liste des Questions</p>
-<br/>
-<div id="listeQuestions">
-	{% for question in listeQuestions %}
-		<p>{{ question.slug }}</p>
-	{% endfor %}
-</div>
-<div>
-	<ul id="pages" class="pagination">
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-	</ul>
-</div>
+<!-- bouton radio -->
+     <div class="row">
+    	<div class="col-md-6 col-md-offset-3" >
+                <div class="text-center">
+                <div class="btn-group" data-toggle="buttons" style="margin-top:30px">
+                  <label class="btn bouton-radio active">
+                    <input type="radio" name="options" id="option1"><p class="cook-btn">Demander</p>
+                  </label>
+                  <label class="btn bouton-radio">
+                    <input type="radio" name="options" id="option2"><p class="cook-btn">Répondre</p>
+                  </label>
+                </div>
+                </div>
+        </div>
+    </div>
+    <!-- bouton radio fin -->
+    <!-- logo plus texte -->
+    <div class="row">
+    	<div class="col-md-6 col-md-offset-3 text-center" ><div class="cent-h mar" style="margin-top:20px"><img src="{{ asset('assets/img/logo-titre.png') }}" class="valign-col-all" style="margin-right:20px" /><p class="valign-col-all cok-recherche">Smart'Recherches</p></div>
+        </div>
+    </div>
+    <!-- logo plus texte fin -->
+    <!-- recherche -->
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 ">                
+                <div class="input-group" style="margin-top:30px">
+                  	<input type="text" class="form-control">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" ></span></button>
+                  </span>
+                </div>
+        </div>
+    </div>
+    <!-- recherche fin-->
+    <!-- nav div-->
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <div class="grille-content-2">
+                <!-- nav div menu-->
+            	<div class="collapse-menu">
+                <ul class="nav nav-tabs" id="myTab">
+                  <li class="active"><a href="#onFire" data-toggle="tab">On Fire</a></li>
+                  <li><a href="#last" data-toggle="tab">Derni&egrave;res Questions</a></li>
+                  <li><a href="#solved" data-toggle="tab">Questions r&eacute;solues</a></li>
+                </ul>
+                </div>
+                <!-- nav div menu fin-->
+                <!-- contenue 1-->
+                <div class="tab-content">
+                  <div class="tab-pane active fade in out" id="onFire">
+                  				<!-- accordion general-->
+                               	<div class="panel-group" id="accordion">
+
+                                  {% for question in listeQuestions %}
+
+                               		<div class="panel panel-default fade in out">
+                                    	<!-- contenue visible-->
+                               			<div class="panel-heading">
+                               				<h4 class="panel-title">
+                                            	<!-- rond pts-->
+                               					<div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
+                                                <!-- rond pts fin-->
+                                                <!-- describ question-->
+                               					<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{loop.index}}">
+                               					<div class="grille-2" ><p>{{question.sujet}}</p></div>
+                               					</a>
+                                                <!-- describ question fin-->
+                                                <!-- nb réponses vues-->
+                               					<div class="grille-3"><p>{{question.nb_reponses}} réponses</p>XXX vues<p></p>
+                               					</div>
+                                                <!-- nb réponses vues fin-->
+                                                <!-- bouton rep -->
+                               					<div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                              					</div>
+                                                <!-- bouton rep fin-->
+                                                <!-- bouton +-->
+                               					<div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient">
+                                                                                         <p class="p-s">+</p></button>
+                               					</div>
+                                                <!-- bouton + fin-->
+                               				</h4>                           
+                               			</div>
+                                        <!-- contenue visible fin-->
+                                        <!-- contenue caché-->
+                                   		<div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                        	<div class="panel-body">
+                                            <p>{{question.description}}</p>
+                                            <p>{{question.best_reponse}}</p>
+                                          </div>
+                                    	</div>
+                                 	</div>
+                                    <!-- contenue caché fin-->
+                                  {% endfor %}
+
+
+                             </div><!-- accordion general fin-->
+                                           
+                  </div><!-- contenue 1 fin--> 
+                  <!-- contenue 2-->
+                  <div class="tab-pane fade in out" id="last">Derni&egrave;res Questions</div>
+                  <!-- contenue 2 fin-->
+                  <!-- contenue 3-->
+                  <div class="tab-pane fade in out" id="solved">Questions R&eacute;solues</div>
+                  <!-- contenue 3 fin-->
+
+                </div><!-- nav div fin--> 
+
+                <div style="text-align:center; cursor:pointer">
+                    <ul id="pages" class="pagination-lg">
+                      <li><a href="#">1</a></li>
+                      <li><a href="#">2</a></li>
+                      <li><a href="#">3</a></li>
+                  </ul>
+                </div>
+
+		</div><!-- grille fin-->
+    </div><!-- col fin-->
+</div>  <!-- row fin-->
+
+
+
 {% endblock %}
 
 
@@ -41,20 +148,41 @@ $(document).ready(function(){
 	$('#pages').bootstrapPaginator({
 		currentPage: {{ page }},
 		totalPages: {{ nbPages }},
+    size: 'large',
 		bootstrapMajorVersion: 3,
 		onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
+
+      $('#accordion').fadeOut('fast');
+
 			$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/{{ type }}/' + pPage + '/{{ nbParPage }}', function(donnees){
-			var content='';
-			if(donnees[0]['page']==pPage){
-				donnees.shift();
-				donnees.forEach(function(pEntry){
-					content += '<p>' + pEntry['slug'] + '</p>';
-				});
-				$('#listeQuestions').html(content);
-			}else{
-				$('#listeQuestions').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
-			}
-		})
+        			var content='';
+        			if(donnees[0]['page']==pPage){
+        				donnees.shift();
+        				donnees.forEach(function(pEntry, i){
+        					content +='                                   <div class="panel panel-default"> \
+                                            <div class="panel-heading"> \
+                                              <h4 class="panel-title"> \
+                                                <div class="grille-1"><div class="rond-point"><p class="txt-rond">' + pEntry['remuneration'] + ' pts</p></div></div> \
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '"> \
+                                                <div class="grille-2" ><p>' + pEntry['sujet'] + '</p></div></a> \
+                                                <div class="grille-3"><p>' + pEntry['nb_reponses'] + 'réponses</p>XXX vues<p></p></div> \
+                                                <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button> </div> \
+                                                <div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient"><p class="p-s">+</p></button></div> \
+                                              </h4> \
+                                            </div> \
+                                              <div id="collapse' + i + '" class="panel-collapse collapse"> \
+                                                  <div class="panel-body"><p>' + pEntry['description'] + '</p><p>' + pEntry['best_reponse'] + '</p></div> \
+                                              </div> \
+                                          </div>';
+
+        				});
+                $('#accordion').html(content);
+                $('#accordion').fadeIn('fast');
+
+        			}else{
+        				$('#accordion').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+        			}
+		        })
 		}
 	});
 

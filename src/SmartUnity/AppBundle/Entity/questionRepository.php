@@ -22,4 +22,57 @@ class questionRepository extends EntityRepository
 
     }
 
+
+    public function getQuestionsOnFire($nbParPage, $page){
+
+    	$query = $this->_em->createQuery("
+            	SELECT q.*
+            	FROM 
+            		SELECT MAX( r.date ) maxDate, r.question question
+            		FROM SmartUnityAppBundle:reponse r
+            		GROUP BY question m
+            		, SmartUnityAppBundle:question q
+    			WHERE m.maxDate <= SUBTIME( NOW(), '0 48:00:00.000' )
+    			AND q.id = m.question
+            ")
+            ->setMaxResults($nbParPage)
+            ->setFirstResult(($page - 1) * $nbParPage);
+
+        $result = $query->getResult();
+
+        if(count($result) != 0)
+            return $result;
+        else 
+            return false;
+
+
+        /* EQUIVALENT SQL
+
+        SELECT question.*
+		FROM (
+			SELECT MAX(reponse.date) AS maxDate, reponse.question_id AS question_id
+			FROM reponse
+			GROUP BY reponse.question_id
+		    ) as maxDates, question
+		WHERE maxDate <= subtime( NOW( ) , '0 48:00:00.000' )
+		AND question.id = maxDates.question_id
+
+		------
+
+		SELECT *
+		FROM question
+			LEFT JOIN (
+			SELECT MAX( reponse.date ) AS maxDate, reponse.question_id AS question_id
+			FROM reponse
+			GROUP BY reponse.question_id
+		) AS maxDates ON maxDates.question_id = question.id
+		WHERE maxDate <= subtime( NOW( ) , '0 48:00:00.000' ) 
+
+
+		*/
+
+    }
+
+
+
 }

@@ -11,8 +11,8 @@
 .grille-2
 {
 	width:42.5%;
-	margin: 3px 5% 3px 2.5%;
-	/*background-color:#3C9;*/
+	margin: 5px 5% 5px 2.5%;
+	background-color:#3C9;
 	height:20px;
 	float:right;
         
@@ -65,7 +65,8 @@
 	background-color: #f8f8ef;
 	margin-top:30px;
 	margin-bottom:30px;
-	border-radius:7px;
+	border-radius:5px;
+	border:2px solid #d7d5d5;
 	-webkit-box-shadow: 0 0 20px  #CCCCCC;
        -moz-box-shadow: 0 0 20px  #CCCCCC;
             box-shadow: 0 0 20px  #CCCCCC;

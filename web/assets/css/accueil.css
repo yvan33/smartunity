@@ -1,0 +1,116 @@
+@media (min-width: 1200px){
+	.bouton-radio
+{
+	width:200px;
+}
+
+}
+@media (min-width: 992px)  and (max-width: 1200px) {
+	.bouton-radio
+{
+	width:200px;
+}
+  
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+	.bouton-radio
+{
+	width:200px;
+}
+  
+
+}
+
+@media screen and (max-width: 768px)
+{
+.bouton-radio
+{
+	width:100%;
+}
+}
+.grille-1
+{
+	width:42.5%;
+	margin: 5px 2.5% 5px 5%;
+	background-color:#00C;
+	height:20px;
+	float:left;
+}
+.grille-2
+{
+	width:42.5%;
+	margin: 5px 5% 5px 2.5%;
+	background-color:#3C9;
+	height:20px;
+	float:right;
+}
+
+.grille-content
+{   
+	padding:15px;
+	background-color: #f8f8ef;
+	margin-top:30px;
+	margin-bottom:30px;
+	border-radius:5px;
+	border:2px solid #d7d5d5;
+	-webkit-box-shadow: 0 0 20px  #CCCCCC;
+       -moz-box-shadow: 0 0 20px  #CCCCCC;
+            box-shadow: 0 0 20px  #CCCCCC;
+}
+.grille-content-2
+{
+	margin-top:30px;
+	margin-bottom:30px;
+	background-color: #f8f8ef;
+	border-radius:5px;
+	border:2px solid #d7d5d5;
+	-webkit-box-shadow: 0 0 20px  #CCCCCC;
+       -moz-box-shadow: 0 0 20px  #CCCCCC;
+            box-shadow: 0 0 20px  #CCCCCC;
+}
+.bouton-radio
+{
+	background: linear-gradient( to top, #bfbfbf,#fbfbfb);
+	border-radius:6px;
+	border-color:#333;
+	border-width:1px;
+	background-color:#898989;
+	height:50px;
+	margin-bottom:20px;
+	margin-left:10px;
+	margin-right:10px;
+     background: -webkit-linear-gradient( ... );
+     background:    -moz-linear-gradient( ... ); 
+     background:     -ms-linear-gradient( ... );
+     background:      -o-linear-gradient( ... );
+     background:         linear-gradient( ... );
+	
+}
+.cook-btn
+{
+	font-family:Cookie;
+	font-size:40px;
+	margin-top:-10px
+}
+.grille-info
+{
+	
+	margin-bottom:30px;
+	background-image:url(../img/bouton-2.png);
+	background-repeat:repeat-x;
+	-webkit-box-shadow: 0 0 20px  #CCCCCC;
+       -moz-box-shadow: 0 0 20px  #CCCCCC;
+            box-shadow: 0 0 20px  #CCCCCC;
+	vertical-align:middle;
+	height:47px;
+}
+.cook-btn2
+{
+	font-family:Cookie;
+	font-size:32px;
+	line-height:47px;
+	color:#FFF;
+	
+}
