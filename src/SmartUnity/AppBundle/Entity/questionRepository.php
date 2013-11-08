@@ -14,24 +14,90 @@ use Doctrine\ORM\Query\ResultSetMappingBuilder;
 class questionRepository extends EntityRepository
 {
     
-    public function getNombreQuestions(){
 
-    	$qb= $this->createQueryBuilder('SmartUnityAppBundle:question')
-    				->select('COUNT(SmartUnityAppBundle:question)');
+    /////////////////////////////
+    //////       COUNT QUESTIONS
+    /////////////////////////////
 
-		return $qb->getQuery()->getSingleScalarResult();
+    //Count les questions on Fire
+    public function getNombreQuestionsOnFire(){
 
+    	$rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
+        $rsm->addScalarResult('nb_questions', 'nb');
+
+        $sql = 'SELECT COUNT(q.id) AS nb_questions
+                FROM 
+                    (SELECT r.question_id AS question_id, r.dateValidation as date_v
+                    FROM reponse r
+                    WHERE NOT r.dateValidation <=> NULL) as c
+                RIGHT JOIN question q ON q.id = c.question_id
+                WHERE c.date_v <=> NULL
+                AND q.date < SUBTIME(NOW(), \'0 48:00:00.0000\')';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+
+        return $query->getSingleScalarResult();
     }
+
+    //Count les dernières questions
+    public function getNombreLastQuestions(){
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
+        $rsm->addScalarResult('nb_questions', 'nb');
+
+        $sql = 'SELECT COUNT(q.id) AS nb_questions
+                FROM 
+                    (SELECT r.question_id AS question_id, r.dateValidation as date_v
+                    FROM reponse r
+                    WHERE NOT r.dateValidation <=> NULL) as c
+                RIGHT JOIN question q ON q.id = c.question_id
+                WHERE c.date_v <=> NULL';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+
+        return $query->getSingleScalarResult();
+    }
+
+    //Count les dernières questions
+    public function getNombreValidatedQuestions(){
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
+        $rsm->addScalarResult('nb_questions', 'nb');
+
+        $sql = 'SELECT COUNT(q.id) AS nb_questions
+                FROM 
+                    (SELECT r.question_id AS question_id, r.dateValidation as date_v
+                    FROM reponse r
+                    WHERE NOT r.dateValidation <=> NULL) as c
+                RIGHT JOIN question q ON q.id = c.question_id
+                WHERE NOT c.date_v <=> NULL';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+
+        return $query->getSingleScalarResult();
+    }
+
+
+
+
+
+    /////////////////////////////
+    //////       LISTES QUESTIONS
+    /////////////////////////////
 
     //Liste de questions On Fire
     public function getQuestionsOnFire($nbParPage, $page){
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
         $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
     	
         $offset = ($page - 1) * $nbParPage;
 
-        $sql = 'SELECT q.*
+        $sql = 'SELECT DISTINCT q.*
                 FROM 
                     (SELECT r.question_id AS question_id, r.dateValidation as date_v
                     FROM reponse r
@@ -60,7 +126,7 @@ class questionRepository extends EntityRepository
         
         $offset = ($page - 1) * $nbParPage;
 
-        $sql = 'SELECT q.*
+        $sql = 'SELECT DISTINCT q.*
                 FROM 
                     (SELECT r.question_id AS question_id, r.dateValidation as date_v
                     FROM reponse r
@@ -88,7 +154,7 @@ class questionRepository extends EntityRepository
         
         $offset = ($page - 1) * $nbParPage;
 
-        $sql = 'SELECT q.*
+        $sql = 'SELECT DISTINCT q.*
                 FROM 
                     (SELECT r.question_id AS question_id, r.dateValidation as date_v
                     FROM reponse r

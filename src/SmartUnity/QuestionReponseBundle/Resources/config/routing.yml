@@ -4,7 +4,7 @@ smart_unity_question_reponse_homepage:
 
 smart_unity_question_reponse_list_of_question:
     pattern:  /listeQuestion/{type}/{page}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestion, type:'last', page:'1' }
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestion, type:'onFire', page:'1' }
     requirements:
         type: onFire|last|reponses|question
         page: \d
@@ -42,7 +42,7 @@ smart_unity_question_reponse_add_commentaire_reponse:
 
 smart_unity_question_reponse_ajax_get_questions:
     pattern: /getQuestions/{type}/{page}/{nbParPage}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:getQuestions, type:'last', page:'1', nbParPage:'3'}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:getQuestions, type:'onFire', page:'1', nbParPage:'3'}
     requirements:
         type: onFire|last|reponses|question
         page: \d
