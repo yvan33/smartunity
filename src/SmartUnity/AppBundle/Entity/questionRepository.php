@@ -3,6 +3,7 @@
 namespace SmartUnity\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * questionRepository
@@ -22,21 +23,26 @@ class questionRepository extends EntityRepository
 
     }
 
-
+    //Liste de questions On Fire
     public function getQuestionsOnFire($nbParPage, $page){
 
-    	$query = $this->_em->createQuery("
-            	SELECT q.*
-            	FROM 
-            		SELECT MAX( r.date ) maxDate, r.question question
-            		FROM SmartUnityAppBundle:reponse r
-            		GROUP BY question m
-            		, SmartUnityAppBundle:question q
-    			WHERE m.maxDate <= SUBTIME( NOW(), '0 48:00:00.000' )
-    			AND q.id = m.question
-            ")
-            ->setMaxResults($nbParPage)
-            ->setFirstResult(($page - 1) * $nbParPage);
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
+    	
+        $offset = ($page - 1) * $nbParPage;
+
+        $sql = 'SELECT q.*
+                FROM 
+                    (SELECT r.question_id AS question_id, r.dateValidation as date_v
+                    FROM reponse r
+                    WHERE NOT r.dateValidation <=> NULL) as c
+                RIGHT JOIN question q ON q.id = c.question_id
+                WHERE c.date_v <=> NULL
+                AND q.date < SUBTIME(NOW(), \'0 48:00:00.0000\')
+                ORDER BY q.date ASC
+                LIMIT ' . $offset . ', ' . $nbParPage;
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
 
         $result = $query->getResult();
 
@@ -44,33 +50,62 @@ class questionRepository extends EntityRepository
             return $result;
         else 
             return false;
+    }
 
+    //Liste des dernières questions sans réponses validées
+    public function getLastQuestions($nbParPage, $page){
+        
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
+        
+        $offset = ($page - 1) * $nbParPage;
 
-        /* EQUIVALENT SQL
+        $sql = 'SELECT q.*
+                FROM 
+                    (SELECT r.question_id AS question_id, r.dateValidation as date_v
+                    FROM reponse r
+                    WHERE NOT r.dateValidation <=> NULL) as c
+                RIGHT JOIN question q ON q.id = c.question_id
+                WHERE c.date_v <=> NULL
+                ORDER BY q.date DESC
+                LIMIT ' . $offset . ', ' . $nbParPage;
 
-        SELECT question.*
-		FROM (
-			SELECT MAX(reponse.date) AS maxDate, reponse.question_id AS question_id
-			FROM reponse
-			GROUP BY reponse.question_id
-		    ) as maxDates, question
-		WHERE maxDate <= subtime( NOW( ) , '0 48:00:00.000' )
-		AND question.id = maxDates.question_id
+        $query = $this->_em->createNativeQuery($sql, $rsm);
 
-		------
+        $result = $query->getResult();
 
-		SELECT *
-		FROM question
-			LEFT JOIN (
-			SELECT MAX( reponse.date ) AS maxDate, reponse.question_id AS question_id
-			FROM reponse
-			GROUP BY reponse.question_id
-		) AS maxDates ON maxDates.question_id = question.id
-		WHERE maxDate <= subtime( NOW( ) , '0 48:00:00.000' ) 
+        if(count($result) != 0)
+            return $result;
+        else 
+            return false;
+    }
 
+    //Liste des questions avec une réponse validée
+    public function getValidatedQuestions($nbParPage, $page){
+        
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
+        
+        $offset = ($page - 1) * $nbParPage;
 
-		*/
+        $sql = 'SELECT q.*
+                FROM 
+                    (SELECT r.question_id AS question_id, r.dateValidation as date_v
+                    FROM reponse r
+                    WHERE NOT r.dateValidation <=> NULL) as c
+                RIGHT JOIN question q ON q.id = c.question_id
+                WHERE NOT c.date_v <=> NULL
+                ORDER BY q.date DESC
+                LIMIT ' . $offset . ', ' . $nbParPage;
 
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+
+        $result = $query->getResult();
+
+        if(count($result) != 0)
+            return $result;
+        else 
+            return false;
     }
 
 

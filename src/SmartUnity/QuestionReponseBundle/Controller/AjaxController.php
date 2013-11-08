@@ -20,10 +20,11 @@ class AjaxController extends Controller
                             ->getRepository('SmartUnityAppBundle:reponse');
 
 
-        //Requête DQL -> récupération des questions
+        //Appel au repository
 
 
-        print_r($questionRepository->getQuestionsOnFire($nbParPage, $page));
+        echo $questionRepository->getValidatedQuestions($nbParPage, $page)[0]->getSlug();
+        echo $questionRepository->getValidatedQuestions($nbParPage, $page)[0]->getMembre()->getNom();
         exit();
 
         $listeQuestion = $questionRepository->findBy(array(), 
