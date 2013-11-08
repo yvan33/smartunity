@@ -22,15 +22,15 @@ class AjaxController extends Controller
 
         //Appel au repository
 
+        if ($type == 'onFire')
+            $listeQuestion = $questionRepository->getQuestionsOnFire($nbParPage, $page);
+        else if ($type == 'last')
+            $listeQuestion = $questionRepository->getLastQuestions($nbParPage, $page);
+        else if ($type == 'reponses')
+            $listeQuestion = $questionRepository->getValidatedQuestions($nbParPage, $page);
+        else
+            throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
 
-        echo $questionRepository->getValidatedQuestions($nbParPage, $page)[0]->getSlug();
-        echo $questionRepository->getValidatedQuestions($nbParPage, $page)[0]->getMembre()->getNom();
-        exit();
-
-        $listeQuestion = $questionRepository->findBy(array(), 
-                                        array('date'=>'desc'),
-                                        $nbParPage,
-                                        ($page - 1) * $nbParPage);
 
         $nbQuestions = $questionRepository->getNombreQuestions(); //nombre de questions (pagination)
 
