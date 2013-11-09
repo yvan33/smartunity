@@ -50,7 +50,7 @@ class QuestionReponseController extends Controller
         //la requête pour vérifier son authenticité... 
 
         //On récupère des infos utiles pour la pagination..
-        $nbPages = ceil(($listeQuestions[0]->nbQuestions) / $nbParPage);
+        $nbPages = $listeQuestions[0]->nbPages;
 
         
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!

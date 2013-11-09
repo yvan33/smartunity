@@ -227,32 +227,13 @@
 
 <script language="javascript">
 
-$(document).ready(function(){
-
-  //Si JS est activé, on change les href des tabs par les id des content (pour bootstrap auto tabs!)
-  $('#onFire-tab').attr('href', '#onFire');
-  $('#last-tab').attr('href', '#last');
-  $('#reponses-tab').attr('href', '#reponses');
+//////////////////
+////// FONCTIONS
+//////////////////
 
 
-  var type = '{{ type }}';
-  var nbParPage = '{{ nbParPage }}';
-
-	$('#pages').bootstrapPaginator({
-		currentPage: {{ page }},
-		totalPages: {{ nbPages }},
-    size: 'large',
-		bootstrapMajorVersion: 3,
-		onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
-
-      $('#accordion-' + type).fadeOut('fast');
-
-			$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/' + type + '/' + pPage + '/' + nbParPage, function(donnees){
-        			var content='';
-        			if(donnees[0]['page']==pPage && donnees[0]['type']==type && donnees[0]['nbParPage']==nbParPage){
-        				donnees.shift();
-        				donnees.forEach(function(pEntry, i){
-        					content +='                                   <div class="panel panel-default"> \
+function generateContent(pEntry, i){
+  return '                                   <div class="panel panel-default"> \
                                             <div class="panel-heading"> \
                                               <h4 class="panel-title"> \
                                                 <div class="grille-1"><div class="rond-point"><p class="txt-rond">' + pEntry['remuneration'] + ' pts</p></div></div> \
@@ -267,20 +248,151 @@ $(document).ready(function(){
                                                   <div class="panel-body"><p>' + pEntry['description'] + '</p><p>' + pEntry['best_reponse'] + '</p></div> \
                                               </div> \
                                           </div>';
+}
 
-        				});
+function MaJPagination(){
+  if( nbPages[type] == null ){ //Si le tab est vide....
+
+        $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/' + type + '/1/' + nbParPage, function(donnees){
+              var content='';
+              if(donnees[0]['page']==1 && donnees[0]['type']==type && donnees[0]['nbParPage']==nbParPage){
+
+                //Définition d'un nouveau paginator adapté...
+                nbPages[type] = donnees[0]['nbPages'];
+
+                options.currentPage=1;
+                options.totalPages=nbPages[type];
+                $('#pages').bootstrapPaginator(options);
+
+                donnees.shift(); //On supprime la ligne de check du JSON
+
+                //Puis on remplit le nouveau tab
+                donnees.forEach(function(pEntry, i){
+                  content += generateContent(pEntry, i);
+                }); //Generation du code
+
+                //Affichage du nouveau contenu dasn le tab, et fadeIn
                 $('#accordion-' + type).html(content);
-                $('#accordion-' + type).fadeIn('fast');
 
-        			}else{
-        				$('#accordion-' + type).html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
-        			}
-		        })
-		}
-	});
+              }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
+                $('#accordion-' + type).html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+              }
+            });
+
+      }else{
+
+            options.currentPage=page[type];
+            options.totalPages=nbPages[type];
+            $('#pages').bootstrapPaginator(options);
+
+      }
+}
+
+
+function clickOnPagination(pPage){
+  $('#accordion-' + type).fadeOut('fast');
+
+  //On récupère le JSON depuis le controller AjaxController
+  $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/' + type + '/' + pPage + '/' + nbParPage, function(donnees){
+      var content='';
+      if(donnees[0]['page']==pPage && donnees[0]['type']==type && donnees[0]['nbParPage']==nbParPage){
+        donnees.shift(); //On supprime la ligne de check du JSON
+
+        donnees.forEach(function(pEntry, i){
+          content += generateContent(pEntry, i);
+        }); //Generation du code
+
+        //Affichage du nouveau contenu dasn le tab, et fadeIn
+        $('#accordion-' + type).html(content);
+        $('#accordion-' + type).fadeIn('fast');
+
+      }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
+        $('#accordion-' + type).html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+      }
+  });
+}
+
+
+//////////////////
+////// VARIABLES
+//////////////////
+
+
+var type;
+var page;
+var nbPage;
+var nbParPages;
+var options;
+
+
+
+///////////////////////
+////// INITIALISATION
+///////////////////////
+
+
+
+$(document).ready(function(){
+
+  //Si JS est activé, on change les href des tabs par les id des content (pour bootstrap auto tabs!)
+  $('#onFire-tab').attr('href', '#onFire');
+  $('#last-tab').attr('href', '#last');
+  $('#reponses-tab').attr('href', '#reponses');
+
+
+  //Initialise les valeurs des pages/onglets ouverts.... 
+ type = '{{ type }}';
+ page = new Array();
+    page[type]={{ page }};
+    if(page['onFire']==null)page['onFire']=1;
+    if(page['last']==null)page['last']=1;
+    if(page['reponses']==null)page['reponses']=1;
+
+nbParPage = {{ nbParPage }};
+
+nbPages = new Array();
+    nbPages[type] = {{ nbPages }};
+
+
+  //Options du bootStrap Paginator
+options = new Object();
+  options = {
+    currentPage: {{ page }},
+    totalPages: nbPages[type],
+    size: 'large',
+    bootstrapMajorVersion: 3,
+    onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
+      clickOnPagination(pPage);
+    }
+  };
+
+
+
+//////////////
+////// EVENTS
+//////////////
+
+
+
+  //Definition du comportement du paginator
+	$('#pages').bootstrapPaginator(options);
+
+  //Gestion de la pagination pour les changement d'onglets
+  $('#onFire-tab').click(function(){
+      type = 'onFire';
+      MaJPagination();
+  });
+  $('#last-tab').click(function(){
+      type = 'last';
+      MaJPagination();
+  });
+  $('#reponses-tab').click(function(){
+      type = 'reponses';
+      MaJPagination();
+  });
+
 
 });
-
 </script>
 
 {% endblock %}

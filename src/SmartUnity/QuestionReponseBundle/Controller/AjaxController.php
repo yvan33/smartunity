@@ -47,6 +47,7 @@ class AjaxController extends Controller
             'nbParPage'=>$nbParPage,
             'page'=>$page,
             'nbQuestions'=>$nbQuestions,
+            'nbPages'=>ceil($nbQuestions / $nbParPage),
             'slug'=>'_infos'
         ));
 
