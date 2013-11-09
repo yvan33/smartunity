@@ -39,11 +39,89 @@ class AccueilController extends Controller
             ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
             : null;
 
+
+
+
+
+        //////------------ CONTENU LISTE
+
+
+        //Cf SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestionAction
+
+        $nbParPage = 5;
+
+
+
+        //Liste onFire
+        /////////////
+        $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
+            'type'  => 'onFire',
+            'page' => 1,
+            'nbParPage'=>$nbParPage
+        ));
+
+        //Suppression de l'en tête HTTP et décodage du JSON
+        $cleanJSON = explode('[', $response, 2);
+        $listeQuestionsOnFire = json_decode('[' . $cleanJSON[1]);
+        
+        //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
+        if($listeQuestionsOnFire[0]->type=='onFire' && $listeQuestionsOnFire[0]->nbParPage==$nbParPage && $listeQuestionsOnFire[0]->page==1)
+            unset($listeQuestionsOnFire[0]);
+        else
+            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
+
+
+
+
+        //Liste Last
+        ////////////
+        $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
+            'type'  => 'last',
+            'page' => 1,
+            'nbParPage'=>$nbParPage
+        ));
+
+        //Suppression de l'en tête HTTP et décodage du JSON
+        $cleanJSON = explode('[', $response, 2);
+        $listeLastQuestions = json_decode('[' . $cleanJSON[1]);
+        
+        //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
+        if($listeLastQuestions[0]->type=='last' && $listeLastQuestions[0]->nbParPage==$nbParPage && $listeLastQuestions[0]->page==1)
+            unset($listeLastQuestions[0]);
+        else
+            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
+
+
+
+        //Liste Reponses
+        ////////////
+        $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
+            'type'  => 'reponses',
+            'page' => 1,
+            'nbParPage'=>$nbParPage
+        ));
+
+        //Suppression de l'en tête HTTP et décodage du JSON
+        $cleanJSON = explode('[', $response, 2);
+        $listeSolvedQuestions = json_decode('[' . $cleanJSON[1]);
+        
+        //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
+        if($listeSolvedQuestions[0]->type=='reponses' && $listeSolvedQuestions[0]->nbParPage==$nbParPage && $listeSolvedQuestions[0]->page==1)
+            unset($listeSolvedQuestions[0]);
+        else
+            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
+
+
+
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
             'error'         => $error,
             'csrf_token' => $csrfToken,
+            'listeQuestionsOnFire' => $listeQuestionsOnFire,
+            'listeLastQuestions' => $listeLastQuestions,
+            'listeSolvedQuestions' => $listeSolvedQuestions
         ));
+
     }
 
     /**

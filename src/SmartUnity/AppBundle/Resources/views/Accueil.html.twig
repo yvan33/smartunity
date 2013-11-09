@@ -1,16 +1,19 @@
 {% extends "SmartUnityAppBundle::layout.html.twig" %}
 
+{% block title %}Smart'Unity - Accueil{% endblock %}
+
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/accueil.css') }}">
+<link href="{{ asset('assets/css/accueil.css') }}"  rel="stylesheet" type="text/css">
+<link href="{{ asset('assets/css/question.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block body %}
 <p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 Bonjour {{ app.user.username}} 
 {% endif %} </p> 
-<p>Accueil</p>
 <div class="row">
-<div class="col-md-12" style="height:900px">
+<div class="col-md-12">
+
 <div id="Connexion" class="accordion-body collapse off">
       <div class="accordion-inner">
         <div class="container">
@@ -46,4 +49,269 @@ Bonjour {{ app.user.username}}
         </div>
       </div>
     </div>
+</div>
+
+
+          <div class="row">
+                    <div class="col-md-12 ">
+
+
+                      <div id="carousel-example-generic" class="carousel slide">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                      
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                          <div class="item active">
+                            <img src="{{asset('assets/img/exemple-carou.png') }}" alt="">
+                            <div class="carousel-caption">
+                             
+                            </div>
+                          </div>
+                        
+                          <div class="item">
+                            <img src="{{asset('assets/img/exemple-carou.png') }}" alt="">
+                            <div class="carousel-caption">
+                           
+                            </div>
+                          </div>
+                       
+                          <div class="item">
+                            <img src="{{asset('assets/img/exemple-carou.png') }}" alt="">
+                            <div class="carousel-caption">
+                             
+                            </div>
+                          </div>
+                       
+                        </div>
+                      
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                          <span class="icon-prev"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                          <span class="icon-next"></span>
+                        </a>
+                      </div>
+   
+              </div>
+  </div>
+           <div class="row">
+            <div class="col-md-6 col-md-offset-3" >
+                      <div class="text-center">
+                      <div class="btn-group" data-toggle="buttons" style="margin-top:30px">
+                        <label class="btn bouton-radio active">
+                          <input type="radio" name="options" id="option1"><p class="cook-btn">Demander</p>
+                        </label>
+                        <label class="btn bouton-radio">
+                          <input type="radio" name="options" id="option2"><p class="cook-btn">Répondre</p>
+                        </label>
+                      </div>
+                      </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center" ><div class="cent-h mar" style="margin-top:20px"><img src="{{asset('assets/img/logo-titre.png') }}" class="valign-col-all" style="margin-right:20px" /><p style="font-family:Cookie; font-size:56px"class="valign-col-all">Smart'Recherches</p></div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6 col-md-offset-3 ">                
+                      <div class="input-group" style="margin-top:30px">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" ></span></button>
+                        </span>
+                      </div>
+                      
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-offset-1 col-md-5">
+                  <div class="grille-content-2">
+                    <div  style="background-image:url({{asset('assets/img/tab-acc.png')}}); background-repeat:repeat-x ; background-color:#00557d">
+                      <ul class="nav nav-tabs" id="myTab">
+                        <li class="active"><a href="#onFire" data-toggle="tab">On Fire</a></li>
+                        <li><a href="#last" data-toggle="tab">Derni&egrave;res Questions</a></li>
+                        <li><a href="#reponses" data-toggle="tab">Questions R&eacute;solues</a></li>
+                      </ul>
+                      </div>
+                      <div class="tab-content" ><!-- style="margin:15px" -->
+
+
+                        <div class="tab-pane active fade in out" id="onFire">
+                          {% for question in listeQuestionsOnFire %}
+
+                                  <div class="panel panel-default fade in out">
+                                      <!-- contenue visible-->
+                                    <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                              <!-- rond pts-->
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
+                                                <!-- rond pts fin-->
+                                                <!-- describ question-->
+                                        <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
+                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
+                                        </a>
+                                                <!-- describ question fin-->
+                                                <!-- bouton rep -->
+                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                        </div>
+                                                <!-- bouton rep fin-->
+                                      </h4>                           
+                                    </div>
+                                        <!-- contenue visible fin-->
+                                        <!-- contenue caché-->
+                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                          <div class="panel-body">
+                                            <p>{{question.description}}</p>
+                                            <p>{{question.best_reponse}}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                    <!-- contenue caché fin-->
+                                  {% endfor %}
+                        </div>
+
+                        <div class="tab-pane fade in out" id="last">
+                          {% for question in listeLastQuestions %}
+
+                                  <div class="panel panel-default fade in out">
+                                      <!-- contenue visible-->
+                                    <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                              <!-- rond pts-->
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
+                                                <!-- rond pts fin-->
+                                                <!-- describ question-->
+                                        <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
+                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
+                                        </a>
+                                                <!-- describ question fin-->
+                                                <!-- bouton rep -->
+                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                        </div>
+                                                <!-- bouton rep fin-->
+                                      </h4>                           
+                                    </div>
+                                        <!-- contenue visible fin-->
+                                        <!-- contenue caché-->
+                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                          <div class="panel-body">
+                                            <p>{{question.description}}</p>
+                                            <p>{{question.best_reponse}}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                    <!-- contenue caché fin-->
+                                  {% endfor %}
+                        </div>
+
+                        <div class="tab-pane fade in out" id="reponses">
+                          {% for question in listeSolvedQuestions %}
+
+                                  <div class="panel panel-default fade in out">
+                                      <!-- contenue visible-->
+                                    <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                              <!-- rond pts-->
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
+                                                <!-- rond pts fin-->
+                                                <!-- describ question-->
+                                        <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
+                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
+                                        </a>
+                                                <!-- describ question fin-->
+                                                <!-- bouton rep -->
+                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                        </div>
+                                                <!-- bouton rep fin-->
+                                      </h4>                           
+                                    </div>
+                                        <!-- contenue visible fin-->
+                                        <!-- contenue caché-->
+                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                          <div class="panel-body">
+                                            <p>{{question.description}}</p>
+                                            <p>{{question.best_reponse}}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                    <!-- contenue caché fin-->
+                                  {% endfor %}
+                        </div>
+
+
+                      </div>
+    </div>
+          </div>
+  <div class="col-md-5">
+              <div class="grille-content">
+                  <div class="row  ">
+                            <div class="text-center"><img src="{{asset('assets/img/mes-info.png')}}"/></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+    </div>
+              <div class="grille-content">
+                  <div class="row  ">
+                            <div class="text-center"><img src="{{asset('assets/img/mes-info.png')}}"/></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                          <div class="grille-1"></div>
+                              <div class="grille-2"></div>
+                      </div>
+                      <div class="row  ">
+                            <div class="text-center"><img src="{{asset('assets/img/mes-info.png')}}"/></div>
+                      </div>  
+              </div>
+              <div class="grille-info">
+                      <div class="row  ">
+                            <div class="text-center"><p class="cook-btn2">XXX Membres connectés</p></div>
+                      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
