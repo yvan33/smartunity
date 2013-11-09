@@ -292,6 +292,8 @@ function MaJPagination(){
 function clickOnPagination(pPage){
   $('#accordion-' + type).fadeOut('fast');
 
+  page[type] = pPage;
+
   //On récupère le JSON depuis le controller AjaxController
   $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/' + type + '/' + pPage + '/' + nbParPage, function(donnees){
       var content='';
