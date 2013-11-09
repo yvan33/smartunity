@@ -54,18 +54,18 @@
                 <!-- nav div menu-->
             	<div class="collapse-menu">
                 <ul class="nav nav-tabs" id="myTab">
-                  <li class="active"><a href="#onFire" data-toggle="tab">On Fire</a></li>
-                  <li><a href="#last" data-toggle="tab">Derni&egrave;res Questions</a></li>
-                  <li><a href="#solved" data-toggle="tab">Questions r&eacute;solues</a></li>
+                  <li {% if type=='onFire' %}class="active"{% endif %}><a href="#onFire" data-toggle="tab" id="onFire-tab">On Fire</a></li>
+                  <li {% if type=='last' %}class="active"{% endif %}><a href="#last" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
+                  <li {% if type=='reponses' %}class="active"{% endif %}><a href="#reponses" data-toggle="tab" id="reponses-tab">Questions r&eacute;solues</a></li>
                 </ul>
                 </div>
                 <!-- nav div menu fin-->
                 <!-- contenue 1-->
                 <div class="tab-content">
-                  <div class="tab-pane active fade in out" id="onFire">
+                  <div class="tab-pane fade in out{% if type=='onFire' %} active{% endif %}" id="onFire">
                   				<!-- accordion general-->
-                               	<div class="panel-group" id="accordion">
-
+                               	<div class="panel-group" id="accordion-onFire">
+                                {% if type=='onFire' %}
                                   {% for question in listeQuestions %}
 
                                		<div class="panel panel-default fade in out">
@@ -106,18 +106,103 @@
                                  	</div>
                                     <!-- contenue caché fin-->
                                   {% endfor %}
-
-
+                                {% endif %}
                              </div><!-- accordion general fin-->
                                            
                   </div><!-- contenue 1 fin--> 
                   <!-- contenue 2-->
-                  <div class="tab-pane fade in out" id="last">Derni&egrave;res Questions</div>
-                  <!-- contenue 2 fin-->
-                  <!-- contenue 3-->
-                  <div class="tab-pane fade in out" id="solved">Questions R&eacute;solues</div>
-                  <!-- contenue 3 fin-->
+                  <div class="tab-pane fade in out{% if type=='last' %} active{% endif %}" id="last">
+                            <div class="panel-group" id="accordion-last">
+                            {% if type=='last' %}
+                                  {% for question in listeQuestions %}
 
+                                  <div class="panel panel-default fade in out">
+                                      <!-- contenue visible-->
+                                    <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                              <!-- rond pts-->
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
+                                                <!-- rond pts fin-->
+                                                <!-- describ question-->
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{loop.index}}">
+                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
+                                        </a>
+                                                <!-- describ question fin-->
+                                                <!-- nb réponses vues-->
+                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p>XXX vues<p></p>
+                                        </div>
+                                                <!-- nb réponses vues fin-->
+                                                <!-- bouton rep -->
+                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                        </div>
+                                                <!-- bouton rep fin-->
+                                                <!-- bouton +-->
+                                        <div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient">
+                                                                                         <p class="p-s">+</p></button>
+                                        </div>
+                                                <!-- bouton + fin-->
+                                      </h4>                           
+                                    </div>
+                                        <!-- contenue visible fin-->
+                                        <!-- contenue caché-->
+                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                          <div class="panel-body">
+                                            <p>{{question.description}}</p>
+                                            <p>{{question.best_reponse}}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                    <!-- contenue caché fin-->
+                                  {% endfor %}
+                                {% endif %}
+                              </div>
+                          </div>
+                  <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
+                          <div class="panel-group" id="accordion-reponses">
+                          {% if type=='reponses' %}
+                                  {% for question in listeQuestions %}
+
+                                  <div class="panel panel-default fade in out">
+                                      <!-- contenue visible-->
+                                    <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                              <!-- rond pts-->
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
+                                                <!-- rond pts fin-->
+                                                <!-- describ question-->
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{loop.index}}">
+                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
+                                        </a>
+                                                <!-- describ question fin-->
+                                                <!-- nb réponses vues-->
+                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p>XXX vues<p></p>
+                                        </div>
+                                                <!-- nb réponses vues fin-->
+                                                <!-- bouton rep -->
+                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                        </div>
+                                                <!-- bouton rep fin-->
+                                                <!-- bouton +-->
+                                        <div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient">
+                                                                                         <p class="p-s">+</p></button>
+                                        </div>
+                                                <!-- bouton + fin-->
+                                      </h4>                           
+                                    </div>
+                                        <!-- contenue visible fin-->
+                                        <!-- contenue caché-->
+                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                          <div class="panel-body">
+                                            <p>{{question.description}}</p>
+                                            <p>{{question.best_reponse}}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                    <!-- contenue caché fin-->
+                                  {% endfor %}
+                                {% endif %}
+                              </div>
+                        </div>
                 </div><!-- nav div fin--> 
 
                 <div style="text-align:center; cursor:pointer">
@@ -132,8 +217,6 @@
     </div><!-- col fin-->
 </div>  <!-- row fin-->
 
-
-
 {% endblock %}
 
 
@@ -141,9 +224,13 @@
 
 
 {% block callJS %}
+
 <script language="javascript">
 
 $(document).ready(function(){
+
+  var type = '{{ type }}';
+  var nbParPage = '{{ nbParPage }}';
 
 	$('#pages').bootstrapPaginator({
 		currentPage: {{ page }},
@@ -152,11 +239,11 @@ $(document).ready(function(){
 		bootstrapMajorVersion: 3,
 		onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
 
-      $('#accordion').fadeOut('fast');
+      $('#accordion-' + type).fadeOut('fast');
 
-			$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/{{ type }}/' + pPage + '/{{ nbParPage }}', function(donnees){
+			$.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/' + type + '/' + pPage + '/' + nbParPage, function(donnees){
         			var content='';
-        			if(donnees[0]['page']==pPage){
+        			if(donnees[0]['page']==pPage && donnees[0]['type']==type && donnees[0]['nbParPage']==nbParPage){
         				donnees.shift();
         				donnees.forEach(function(pEntry, i){
         					content +='                                   <div class="panel panel-default"> \
@@ -176,11 +263,11 @@ $(document).ready(function(){
                                           </div>';
 
         				});
-                $('#accordion').html(content);
-                $('#accordion').fadeIn('fast');
+                $('#accordion-' + type).html(content);
+                $('#accordion-' + type).fadeIn('fast');
 
         			}else{
-        				$('#accordion').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+        				$('#accordion-' + type).html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
         			}
 		        })
 		}
@@ -189,4 +276,5 @@ $(document).ready(function(){
 });
 
 </script>
+
 {% endblock %}
