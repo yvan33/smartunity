@@ -206,10 +206,10 @@
                 </div><!-- nav div fin--> 
 
                 <div style="text-align:center; cursor:pointer">
-                    <ul id="pages" class="pagination-lg">
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
+                    <ul id="pages" class="pagination pagination-lg">
+                      {% for page in pagination %}
+                      <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question', {page: page[1], type: type}) }}">{{ page[0] }}</a></li>
+                      {% endfor %}
                   </ul>
                 </div>
 
@@ -361,7 +361,12 @@ options = new Object();
   options = {
     currentPage: {{ page }},
     totalPages: nbPages[type],
+    alignment: 'center',
+    numberOfPages: 5,
     size: 'large',
+    itemContainerClass: function (type, page, current) {
+                          return (page === current) ? "active" : "pointer-cursor";
+                        },
     bootstrapMajorVersion: 3,
     onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
       clickOnPagination(pPage);

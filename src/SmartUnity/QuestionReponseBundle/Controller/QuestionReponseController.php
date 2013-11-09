@@ -60,6 +60,22 @@ class QuestionReponseController extends Controller
             throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
 
 
+        //Génération de la pagination en statique (si pas de JS)
+        $pagination = array();
+        if($page!=1){
+            array_push($pagination, array('<<', '1', '-4'));
+            array_push($pagination, array('<', $page - 1, '-4'));
+        }
+        for ($i=-2; $i<3; $i++){
+            if( ($page + $i) >= 1  &&  ($page + $i) <= $nbPages )
+                array_push($pagination, array($page + $i, $page + $i, $i));
+        }
+        if($page < $nbPages){
+            array_push($pagination, array('>', $page + 1, '3'));
+            array_push($pagination, array('>>', $nbPages, '4'));
+        }
+
+        
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
         return $this->render($template, array(
@@ -67,7 +83,8 @@ class QuestionReponseController extends Controller
             'type'=>$type,
             'nbPages'=>$nbPages,
             'listeQuestions'=>$listeQuestions, 
-            'nbParPage'=>$nbParPage
+            'nbParPage'=>$nbParPage,
+            'pagination'=>$pagination
         ));
         
 
