@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new SmartUnity\UtilisateurBundle\SmartUnityUtilisateurBundle(),
             new SmartUnity\QuestionReponseBundle\SmartUnityQuestionReponseBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
