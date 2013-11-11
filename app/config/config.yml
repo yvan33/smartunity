@@ -69,6 +69,7 @@ swiftmailer:
     password:  %mailer_password%
     spool:     { type: memory }
 
+# FOSUserBundle Configuration
 fos_user:
     db_driver:     orm                        # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
     firewall_name: main                       # Le nom du firewall derrière lequel on utilisera ces utilisateurs
@@ -78,3 +79,12 @@ fos_user:
             type: smartunity_user_registration
         confirmation:
             enabled:    true
+
+# FOSElasticaBundle Configuration
+fos_elastica:
+    clients:
+        default: { host: %search_host%, port: %search_port% }
+    indexes:
+        smartunity:
+            client: default
+            index_name: smartunity
