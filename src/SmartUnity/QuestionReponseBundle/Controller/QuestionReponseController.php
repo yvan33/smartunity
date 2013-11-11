@@ -92,6 +92,27 @@ class QuestionReponseController extends Controller
 
 
 
+    public function searchQuestionAction($question, $page)
+    {
+
+        $userType = $this->container->get('fos_elastica.index.smartunity.question');
+        $resultSet = $userType->search($question);
+
+
+        $html = '';
+        $html .= '<html lang="en"><head></head><body>';
+        $html.= 'score     ------    sujet<br/><br/>';
+
+        foreach($resultSet as $result){
+            $html.= $result->getScore() . '------';
+            $html.= $result->getData()['sujet'];
+            $html.=  '<br/>';
+        }
+
+        $html.=  '</body></html>';
+        return new Response($html);
+    }
+
 
     
     public function displayQuestionAction()

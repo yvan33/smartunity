@@ -88,3 +88,13 @@ fos_elastica:
         smartunity:
             client: default
             index_name: smartunity
+            types:
+                question:
+                    mappings:
+                        date: { type: date }
+                        sujet: { type: string }
+                        description: { type: string }
+                    persistence:
+                        driver: orm # orm, mongodb, propel are available
+                        model: SmartUnity\AppBundle\Entity\question
+                        provider: ~
