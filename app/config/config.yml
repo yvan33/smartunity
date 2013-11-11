@@ -83,7 +83,7 @@ fos_user:
 # FOSElasticaBundle Configuration
 fos_elastica:
     clients:
-        default: { host: %search_host%, port: %search_port% }
+        default: { host: localhost, port: 9200 }
     indexes:
         smartunity:
             client: default
