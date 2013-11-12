@@ -79,10 +79,6 @@ class reponse
     {
         $this->noteReponses = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-    
-    
-
     
     /**
      * Get id

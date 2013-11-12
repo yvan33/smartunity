@@ -29,11 +29,18 @@ class os
     private $nom;
 
     /**
-     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="os")
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="os")
      *
      */
     private $appareils;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->appareils = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -66,5 +73,38 @@ class os
     public function getNom()
     {
         return $this->nom;
+    }
+    
+    /**
+     * Add appareils
+     *
+     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     * @return os
+     */
+    public function addAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    {
+        $this->appareils[] = $appareils;
+    
+        return $this;
+    }
+
+    /**
+     * Remove appareils
+     *
+     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     */
+    public function removeAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    {
+        $this->appareils->removeElement($appareils);
+    }
+
+    /**
+     * Get appareils
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAppareils()
+    {
+        return $this->appareils;
     }
 }

@@ -49,9 +49,9 @@ class question
     private $membre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="questions")
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\appareil", inversedBy="questions")
      */
-    private $appareils;
+    private $appareil;
 
     /**
      * @var string
@@ -73,15 +73,10 @@ class question
     private $reponses;
 
     /**
-     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteQuestion", mappedBy="question")
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\typeQuestion", inversedBy="questions")
      */
-    private $noteQuestions;
+    private $typeQuestion;
 
-    /**
-     * @ORM\OneToOne(targetEntity="SmartUnity\AppBundle\Entity\reponse")
-     * JoinColumn(name="reponse_id", referencedColumnName="id")
-     */
-    private $reponsevalidee;
     /**
      * Constructor
      */
@@ -284,40 +279,6 @@ class question
     }
 
     /**
-     * Add noteQuestions
-     *
-     * @param \SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions
-     * @return question
-     */
-    public function addNoteQuestion(\SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions)
-    {
-        $this->noteQuestions[] = $noteQuestions;
-    
-        return $this;
-    }
-
-    /**
-     * Remove noteQuestions
-     *
-     * @param \SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions
-     */
-    public function removeNoteQuestion(\SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions)
-    {
-        $this->noteQuestions->removeElement($noteQuestions);
-    }
-
-    /**
-     * Get noteQuestions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getNoteQuestions()
-    {
-        return $this->noteQuestions;
-    }
-
-
-    /**
      * Set remuneration
      *
      * @param integer $remuneration
@@ -340,26 +301,50 @@ class question
         return $this->remuneration;
     }
 
+
     /**
-     * Set reponsevalidee
+     * Set typeQuestion
      *
-     * @param \SmartUnity\AppBundle\Entity\reponse $reponsevalidee
+     * @param \SmartUnity\AppBundle\Entity\typeQuestion $typeQuestion
      * @return question
      */
-    public function setReponsevalidee(\SmartUnity\AppBundle\Entity\reponse $reponsevalidee = null)
+    public function setTypeQuestion(\SmartUnity\AppBundle\Entity\typeQuestion $typeQuestion = null)
     {
-        $this->reponsevalidee = $reponsevalidee;
+        $this->typeQuestion = $typeQuestion;
     
         return $this;
     }
 
     /**
-     * Get reponsevalidee
+     * Get typeQuestion
      *
-     * @return \SmartUnity\AppBundle\Entity\reponse 
+     * @return \SmartUnity\AppBundle\Entity\typeQuestion 
      */
-    public function getReponsevalidee()
+    public function getTypeQuestion()
     {
-        return $this->reponsevalidee;
+        return $this->typeQuestion;
+    }
+
+    /**
+     * Set appareil
+     *
+     * @param \SmartUnity\AppBundle\Entity\appareil $appareil
+     * @return question
+     */
+    public function setAppareil(\SmartUnity\AppBundle\Entity\appareil $appareil = null)
+    {
+        $this->appareil = $appareil;
+    
+        return $this;
+    }
+
+    /**
+     * Get appareil
+     *
+     * @return \SmartUnity\AppBundle\Entity\appareil 
+     */
+    public function getAppareil()
+    {
+        return $this->appareil;
     }
 }

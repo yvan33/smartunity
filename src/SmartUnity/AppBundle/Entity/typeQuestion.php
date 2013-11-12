@@ -46,6 +46,13 @@ class typeQuestion
      */
     private $questions;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->enfants = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -101,13 +108,6 @@ class typeQuestion
     public function getDescription()
     {
         return $this->description;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->enfants = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**

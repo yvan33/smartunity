@@ -33,13 +33,20 @@ class modele
     * @ORM\JoinColumn(name="marque_id", referencedColumnName="id", nullable=false)
     */
     private $marque;
+
     /**
-     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="modele")
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\appareil", mappedBy="modele")
      *
      */
     private $appareils;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->appareils = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -95,5 +102,38 @@ class modele
     public function getMarque()
     {
         return $this->marque;
+    }
+    
+    /**
+     * Add appareils
+     *
+     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     * @return modele
+     */
+    public function addAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    {
+        $this->appareils[] = $appareils;
+    
+        return $this;
+    }
+
+    /**
+     * Remove appareils
+     *
+     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     */
+    public function removeAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    {
+        $this->appareils->removeElement($appareils);
+    }
+
+    /**
+     * Get appareils
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAppareils()
+    {
+        return $this->appareils;
     }
 }

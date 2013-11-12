@@ -47,6 +47,12 @@ class commentaireReponse
     */
     private $membre;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+    }
 
 
     /**

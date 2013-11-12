@@ -131,11 +131,6 @@ class membre extends BaseUser
      */
     private $reponses;
 
-        /**
-     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteQuestion", mappedBy="membre")
-     */
-    private $noteQuestions;
-
     /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\noteReponse", mappedBy="membre")
      */
@@ -528,39 +523,6 @@ class membre extends BaseUser
     public function getReponses()
     {
         return $this->reponses;
-    }
-
-    /**
-     * Add noteQuestions
-     *
-     * @param \SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions
-     * @return membre
-     */
-    public function addNoteQuestion(\SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions)
-    {
-        $this->noteQuestions[] = $noteQuestions;
-    
-        return $this;
-    }
-
-    /**
-     * Remove noteQuestions
-     *
-     * @param \SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions
-     */
-    public function removeNoteQuestion(\SmartUnity\AppBundle\Entity\noteQuestion $noteQuestions)
-    {
-        $this->noteQuestions->removeElement($noteQuestions);
-    }
-
-    /**
-     * Get noteQuestions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getNoteQuestions()
-    {
-        return $this->noteQuestions;
     }
 
     /**

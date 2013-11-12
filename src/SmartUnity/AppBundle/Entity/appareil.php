@@ -35,7 +35,7 @@ class appareil
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="appareils")
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="appareil")
      *
      */
     private $questions;

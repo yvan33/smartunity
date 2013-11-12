@@ -31,7 +31,12 @@ class noteReponse
      */
     private $note;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+    }
 
     /**
      * Set note

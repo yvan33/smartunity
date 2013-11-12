@@ -29,11 +29,18 @@ class marque
     private $nom;
 
     /**
-     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\modele", mappedBy="marque")
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\modele", mappedBy="marque")
      *
      */
     private $modeles;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->modeles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -66,5 +73,39 @@ class marque
     public function getNom()
     {
         return $this->nom;
+    }
+    
+    
+    /**
+     * Add modeles
+     *
+     * @param \SmartUnity\AppBundle\Entity\modele $modeles
+     * @return marque
+     */
+    public function addModele(\SmartUnity\AppBundle\Entity\modele $modeles)
+    {
+        $this->modeles[] = $modeles;
+    
+        return $this;
+    }
+
+    /**
+     * Remove modeles
+     *
+     * @param \SmartUnity\AppBundle\Entity\modele $modeles
+     */
+    public function removeModele(\SmartUnity\AppBundle\Entity\modele $modeles)
+    {
+        $this->modeles->removeElement($modeles);
+    }
+
+    /**
+     * Get modeles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModeles()
+    {
+        return $this->modeles;
     }
 }

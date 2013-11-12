@@ -41,6 +41,13 @@ class ville
      */
     private $membres;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -96,13 +103,6 @@ class ville
     public function getCodepostal()
     {
         return $this->codepostal;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
