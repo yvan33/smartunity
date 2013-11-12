@@ -24,40 +24,40 @@ class reponse
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateValidation", type="date", nullable=true)
+     * @ORM\Column(name="dateValidation", type="datetime", nullable=true)
      */
     private $dateValidation;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCertification", type="date", nullable=true)
+     * @ORM\Column(name="dateCertification", type="datetime", nullable=true)
      */
     private $dateCertification;
 
     /**
     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\question", inversedBy="reponses")
-    * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+    * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
     */
     private $question;
 
     /**
     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="reponses")
-    * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
+    * @ORM\JoinColumn(name="membre_id", referencedColumnName="id", nullable=false)
     */
     private $membre;
 

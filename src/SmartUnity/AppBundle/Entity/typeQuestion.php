@@ -30,6 +30,7 @@ class typeQuestion
 
     /**
      * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\typeQuestion", inversedBy="enfants")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      *
      */
     private $parent;

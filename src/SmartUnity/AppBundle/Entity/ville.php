@@ -24,14 +24,14 @@ class ville
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 	
 	 /**
      * @var integer
      *
-     * @ORM\Column(name="codepostal", type="string", length=5)
+     * @ORM\Column(name="codepostal", type="string", length=5, nullable=false)
      */
     private $codepostal;
 

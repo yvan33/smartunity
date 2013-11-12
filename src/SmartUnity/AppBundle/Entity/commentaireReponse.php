@@ -24,14 +24,14 @@ class commentaireReponse
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 

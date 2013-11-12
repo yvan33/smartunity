@@ -27,7 +27,7 @@ class noteReponse
     /**
      * @var integer
      *
-     * @ORM\Column(name="note", type="integer")
+     * @ORM\Column(name="note", type="integer", nullable=false)
      */
     private $note;
 

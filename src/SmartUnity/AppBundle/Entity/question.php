@@ -24,46 +24,47 @@ class question
     /**
      * @var string
      *
-     * @ORM\Column(name="sujet", type="string", length=255)
+     * @ORM\Column(name="sujet", type="string", length=255, nullable=false)
      */
     private $sujet;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="questions")
-     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id", nullable=false)
      */
     private $membre;
 
     /**
      * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\appareil", inversedBy="questions")
+     * @ORM\JoinColumn(name="appareil_id", referencedColumnName="id", nullable=false)
      */
     private $appareil;
 
     /**
      * @var string
      * 
-     * @ORM\Column(name="slug", type="string", unique=TRUE, length=150)
+     * @ORM\Column(name="slug", type="string", unique=TRUE, length=150, nullable=false)
      */
     private $slug;
 
     /**
      * @var integer
      * 
-     * @ORM\Column(name="remuneration", type="integer")
+     * @ORM\Column(name="remuneration", type="integer", nullable=false)
      */
     private $remuneration;
     
@@ -74,6 +75,7 @@ class question
 
     /**
      * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\typeQuestion", inversedBy="questions")
+     * @ORM\JoinColumn(name="typeQuestion_id", referencedColumnName="id", nullable=false)
      */
     private $typeQuestion;
 
