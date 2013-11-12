@@ -264,30 +264,7 @@ class reponse
     {
         return $this->dateCertification;
     }
-
-    /**
-     * Set questionreponsevalidee
-     *
-     * @param \SmartUnity\AppBundle\Entity\question $questionreponsevalidee
-     * @return reponse
-     */
-    public function setQuestionreponsevalidee(\SmartUnity\AppBundle\Entity\question $questionreponsevalidee = null)
-    {
-        $this->questionreponsevalidee = $questionreponsevalidee;
-    
-        return $this;
-    }
-
-    /**
-     * Get questionreponsevalidee
-     *
-     * @return \SmartUnity\AppBundle\Entity\question 
-     */
-    public function getQuestionreponsevalidee()
-    {
-        return $this->questionreponsevalidee;
-    }
-
+   
     /**
      * Set membreCertif
      *

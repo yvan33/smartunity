@@ -157,7 +157,7 @@ class membre extends BaseUser
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\ville", inversedBy="ville")
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\ville", inversedBy="membres")
      * @ORM\JoinColumn(name="ville_id", referencedColumnName="id")
      */
     private $ville; 

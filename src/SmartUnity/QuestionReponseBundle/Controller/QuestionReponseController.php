@@ -105,7 +105,8 @@ class QuestionReponseController extends Controller
 
         foreach($resultSet as $result){
             $html.= $result->getScore() . '------';
-            $html.= $result->getData()['sujet'];
+            $data = $result->getData();
+            $html.= $data['sujet'];
             $html.=  '<br/>';
         }
 

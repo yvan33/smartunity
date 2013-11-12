@@ -157,7 +157,7 @@ class membre extends BaseUser
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\ville", inversedBy="ville")
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\ville", inversedBy="membres")
      * @ORM\JoinColumn(name="ville_id", referencedColumnName="id")
      */
     private $ville; 
@@ -169,6 +169,7 @@ class membre extends BaseUser
      */
     public function __construct()
     {
+        parent::__construct();
         $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reponses = new \Doctrine\Common\Collections\ArrayCollection();
         $this->noteQuestions = new \Doctrine\Common\Collections\ArrayCollection();

@@ -29,14 +29,19 @@ class typeQuestion
     private $nom;
 
     /**
-     * @var string
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\typeQuestion", inversedBy="enfants")
      *
-     * @ORM\Column(name="description", type="text")
      */
-    private $description;
+    private $parent;
 
     /**
-     * OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="typeQuestion")
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\typeQuestion", mappedBy="parent")
+     *
+     */
+    private $enfants;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="typeQuestion")
      *
      */
     private $questions;
@@ -96,5 +101,68 @@ class typeQuestion
     public function getDescription()
     {
         return $this->description;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->enfants = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set parent
+     *
+     * @param \SmartUnity\AppBundle\Entity\typeQuestion $parent
+     * @return typeQuestion
+     */
+    public function setParent(\SmartUnity\AppBundle\Entity\typeQuestion $parent = null)
+    {
+        $this->parent = $parent;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \SmartUnity\AppBundle\Entity\typeQuestion 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Add enfants
+     *
+     * @param \SmartUnity\AppBundle\Entity\typeQuestion $enfants
+     * @return typeQuestion
+     */
+    public function addEnfant(\SmartUnity\AppBundle\Entity\typeQuestion $enfants)
+    {
+        $this->enfants[] = $enfants;
+    
+        return $this;
+    }
+
+    /**
+     * Remove enfants
+     *
+     * @param \SmartUnity\AppBundle\Entity\typeQuestion $enfants
+     */
+    public function removeEnfant(\SmartUnity\AppBundle\Entity\typeQuestion $enfants)
+    {
+        $this->enfants->removeElement($enfants);
+    }
+
+    /**
+     * Get enfants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEnfants()
+    {
+        return $this->enfants;
     }
 }
