@@ -78,6 +78,12 @@ class question
     private $typeQuestion;
 
     /**
+     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="soutienQuestions")
+     * @ORM\JoinTable(name="soutien")
+     */
+    private $soutienMembres;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -346,5 +352,38 @@ class question
     public function getAppareil()
     {
         return $this->appareil;
+    }
+
+    /**
+     * Add soutienMembres
+     *
+     * @param \SmartUnity\AppBundle\Entity\membre $soutienMembres
+     * @return question
+     */
+    public function addSoutienMembre(\SmartUnity\AppBundle\Entity\membre $soutienMembres)
+    {
+        $this->soutienMembres[] = $soutienMembres;
+    
+        return $this;
+    }
+
+    /**
+     * Remove soutienMembres
+     *
+     * @param \SmartUnity\AppBundle\Entity\membre $soutienMembres
+     */
+    public function removeSoutienMembre(\SmartUnity\AppBundle\Entity\membre $soutienMembres)
+    {
+        $this->soutienMembres->removeElement($soutienMembres);
+    }
+
+    /**
+     * Get soutienMembres
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSoutienMembres()
+    {
+        return $this->soutienMembres;
     }
 }

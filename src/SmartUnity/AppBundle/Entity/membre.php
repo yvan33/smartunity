@@ -148,7 +148,14 @@ class membre extends BaseUser
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="membreCertif")
      *
      */
-    private $reponsesCertifiees;    
+    private $reponsesCertifiees;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="soutienMembres")
+     * @ORM\JoinTable(name="soutien")
+     */
+    private $soutienQuestions;
 
     /**
      *
@@ -691,5 +698,39 @@ class membre extends BaseUser
     public function getVille()
     {
         return $this->ville;
+    }
+
+
+    /**
+     * Add soutienQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\question $soutienQuestions
+     * @return membre
+     */
+    public function addSoutienQuestion(\SmartUnity\AppBundle\Entity\question $soutienQuestions)
+    {
+        $this->soutienQuestions[] = $soutienQuestions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove soutienQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\question $soutienQuestions
+     */
+    public function removeSoutienQuestion(\SmartUnity\AppBundle\Entity\question $soutienQuestions)
+    {
+        $this->soutienQuestions->removeElement($soutienQuestions);
+    }
+
+    /**
+     * Get soutienQuestions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSoutienQuestions()
+    {
+        return $this->soutienQuestions;
     }
 }
