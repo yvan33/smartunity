@@ -1,6 +1,6 @@
 {% extends "SmartUnityAppBundle::layout.html.twig" %}
 
-{% block title %}Smart'Unity - Liste des Questions {% endblock %}
+{% block title %}Smart'Unity - Resultats de la recherche{% endblock %}
 
 {% block stylesheets %}
 <link href="{{ asset('assets/css/question.css') }}" rel="stylesheet" type="text/css">
@@ -31,20 +31,17 @@
         </div>
     </div>
     <!-- bouton radio fin -->
-    
-    {% include "SmartUnityAppBundle::BarreRecherche.html.twig" %}
-    
+ 
+  {% include "SmartUnityAppBundle::BarreRecherche.html.twig" %}
+
     <!-- nav div-->
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
             <div class="grille-content-2">
                 <!-- nav div menu-->
-            	<div class="collapse-menu">
+            	<div class="collapse-menu ">
                 <ul class="nav nav-tabs" id="myTab">
-                  <li {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'onFire', page: '1'}) }}" data-toggle="tab" id="onFire-tab">On Fire</a></li>
-                  <li {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'last', page: '1'}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
-                  <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'reponses', page: '1'}) }}" data-toggle="tab" id="reponses-tab">Questions r&eacute;solues</a></li>
-                </ul>
+                  <li class="active"><a href="#">Resultats de la Recherche</a></li>
                 </div>
                 <!-- nav div menu fin-->
                 <!-- contenue 1-->
@@ -97,99 +94,7 @@
                              </div><!-- accordion general fin-->
                                            
                   </div><!-- contenue 1 fin--> 
-                  <!-- contenue 2-->
-                  <div class="tab-pane fade in out{% if type=='last' %} active{% endif %}" id="last">
-                            <div class="panel-group" id="accordion-last">
-                            {% if type=='last' %}
-                                  {% for question in listeQuestions %}
-
-                                  <div class="panel panel-default fade in out">
-                                      <!-- contenue visible-->
-                                    <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                              <!-- rond pts-->
-                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
-                                                <!-- rond pts fin-->
-                                                <!-- describ question-->
-                                        <a data-toggle="collapse" data-parent="#accordion-last" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
-                                        </a>
-                                                <!-- describ question fin-->
-                                                <!-- nb réponses vues-->
-                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p>XXX vues<p></p>
-                                        </div>
-                                                <!-- nb réponses vues fin-->
-                                                <!-- bouton rep -->
-                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
-                                        </div>
-                                                <!-- bouton rep fin-->
-                                                <!-- bouton +-->
-                                        <div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient">
-                                                                                         <p class="p-s">+</p></button>
-                                        </div>
-                                                <!-- bouton + fin-->
-                                      </h4>                           
-                                    </div>
-                                        <!-- contenue visible fin-->
-                                        <!-- contenue caché-->
-                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
-                                          <div class="panel-body">
-                                            <p>{{question.description}}</p>
-                                            <p>{{question.best_reponse}}</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                                    <!-- contenue caché fin-->
-                                  {% endfor %}
-                                {% endif %}
-                              </div>
-                          </div>
-                  <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
-                          <div class="panel-group" id="accordion-reponses">
-                          {% if type=='reponses' %}
-                                  {% for question in listeQuestions %}
-
-                                  <div class="panel panel-default fade in out">
-                                      <!-- contenue visible-->
-                                    <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                              <!-- rond pts-->
-                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
-                                                <!-- rond pts fin-->
-                                                <!-- describ question-->
-                                        <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
-                                        </a>
-                                                <!-- describ question fin-->
-                                                <!-- nb réponses vues-->
-                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p>XXX vues<p></p>
-                                        </div>
-                                                <!-- nb réponses vues fin-->
-                                                <!-- bouton rep -->
-                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
-                                        </div>
-                                                <!-- bouton rep fin-->
-                                                <!-- bouton +-->
-                                        <div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient">
-                                                                                         <p class="p-s">+</p></button>
-                                        </div>
-                                                <!-- bouton + fin-->
-                                      </h4>                           
-                                    </div>
-                                        <!-- contenue visible fin-->
-                                        <!-- contenue caché-->
-                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
-                                          <div class="panel-body">
-                                            <p>{{question.description}}</p>
-                                            <p>{{question.best_reponse}}</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                                    <!-- contenue caché fin-->
-                                  {% endfor %}
-                                {% endif %}
-                              </div>
-                        </div>
+                 
                 </div><!-- nav div fin--> 
 
                 <div style="text-align:center; cursor:pointer">

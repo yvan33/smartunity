@@ -114,21 +114,9 @@ Bonjour {{ app.user.username}}
                       </div>
               </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center" ><div class="cent-h mar" style="margin-top:20px"><img src="{{asset('assets/img/logo-titre.png') }}" class="valign-col-all" style="margin-right:20px" /><p style="font-family:Cookie; font-size:56px"class="valign-col-all">Smart'Recherches</p></div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-md-6 col-md-offset-3 ">                
-                      <div class="input-group" style="margin-top:30px">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" ></span></button>
-                        </span>
-                      </div>
-                      
-              </div>
-          </div>
+          
+          {% include "SmartUnityAppBundle::BarreRecherche.html.twig" %}
+          
           <div class="row">
               <div class="col-md-offset-1 col-md-5">
                   <div class="grille-content-2">
