@@ -98,18 +98,17 @@ class QuestionReponseController extends Controller
         $question =  $this->getRequest()->query->get('q');
 
 
-        $elastica = $this->container->get('fos_elastica.index.smartunity.question');
-        $resultSet = $elastica->search($question);
-
+        $finder = $this->container->get('fos_elastica.finder.smartunity.question');
+        $resultSet = $finder->findHybrid(urldecode($question));
 
         $html = '';
         $html .= '<html lang="en"><head></head><body>';
         $html.= 'score     ------    sujet<br/><br/>';
 
         foreach($resultSet as $result){
-            $html.= $result->getScore() . '------';
-            $data = $result->getData();
-            $html.= $data['sujet'];
+            $html.= $result->getResult()->getScore() . ' ------ ';
+            $html.= $result->getTransformed()->getSujet() . ' ------ ';
+            $html.= $result->getTransformed()->getMembre()->getNom();
             $html.=  '<br/>';
         }
 

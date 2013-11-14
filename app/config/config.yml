@@ -98,3 +98,5 @@ fos_elastica:
                         driver: orm # orm, mongodb, propel are available
                         model: SmartUnity\AppBundle\Entity\question
                         provider: ~
+                        finder: ~
+                        listener: ~
