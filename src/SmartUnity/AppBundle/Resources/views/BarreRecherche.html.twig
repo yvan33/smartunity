@@ -7,13 +7,15 @@
     <!-- logo plus texte fin -->
     <!-- recherche -->
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 ">                
+        <div class="col-md-6 col-md-offset-3 "> 
+            <form action="{{path('smart_unity_question_reponse_search_questions')}}" method="GET">              
                 <div class="input-group" style="margin-top:30px">
-                  	<input type="text" class="form-control">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" ></span></button>
+                  	<input type="text" name="q" id="q" class="form-control">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                   </span>
                 </div>
+            </form>
         </div>
     </div>
     <!-- recherche fin-->

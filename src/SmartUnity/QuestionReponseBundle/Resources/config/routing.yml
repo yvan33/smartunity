@@ -10,8 +10,8 @@ smart_unity_question_reponse_list_of_question:
         page: \d
 
 smart_unity_question_reponse_search_questions:
-    pattern: /recherche/{question}/{page}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchQuestion, page:'1' }
+    pattern: /recherche/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchQuestion }
     requirements:
         page: \d
 
