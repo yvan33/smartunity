@@ -66,19 +66,23 @@ class AjaxController extends Controller
                     if($reponse->getId() == $idBestReponse['repId']){
                         $bestReponse = $reponse->getDescription();
                         $auteurBestreponse = $reponse->getMembre()->getPrenom() . ' ' . $reponse->getMembre()->getNom();
-                        $dateBestReponse = $reponse->getDate();
+                        $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
                         break;
                     }
                 }
 
             }
 
+            //echo $this->container->get('security.context')->getToken()->getUser();
+            //echo $Question->getSoutienMembres()->contains($this->getUser());
+            //exit();
+
 
             array_push($returnArray, array(
             	'id'=>$Question->getId(),
             	'sujet'=>$Question->getSujet(),
             	'description'=>$Question->getDescription(),
-            	'date'=>$Question->getDate(),
+            	'date'=>$Question->getDate()->format('d-m-Y à H:i'),
                 'membre_nom'=>$Question->getMembre()->getNom(),
                 'membre_prenom'=>$Question->getMembre()->getPrenom(),
                 'remuneration'=>$Question->getRemuneration(),
@@ -86,7 +90,9 @@ class AjaxController extends Controller
                 'best_reponse'=>$bestReponse,
                 'auteur_best_reponse'=>$auteurBestreponse,
                 'date_best_reponse'=>$dateBestReponse,
-                'slug'=>$Question->getSlug()
+                'slug'=>$Question->getSlug(),
+                'count_soutien'=>$Question->getSoutienMembres()->count(),
+                'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
             ));
 
         }

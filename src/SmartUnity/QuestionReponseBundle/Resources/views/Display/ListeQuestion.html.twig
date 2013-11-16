@@ -1,4 +1,4 @@
-{% extends "SmartUnityAppBundle::layout.html.twig" %}
+{% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
 
 {% block title %}Smart'Unity - Liste des Questions {% endblock %}
 
@@ -60,11 +60,12 @@
                                			<div class="panel-heading">
                                				<h4 class="panel-title">
                                             	<!-- rond pts-->
-                               					<div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
+                               					<div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                                 <!-- rond pts fin-->
                                                 <!-- describ question-->
                                					<a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
-                               					<div class="grille-2" ><p>{{question.sujet}}</p></div>
+                               					<div class="grille-2" ><p>{{question.sujet}}</p>
+                                          <p style="font-weight:200; font-style:italic">{{ question.membre_prenom }} le {{ question.date }}</p></div>
                                					</a>
                                                 <!-- describ question fin-->
                                                 <!-- nb réponses vues-->
@@ -76,7 +77,10 @@
                               					</div>
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
-                               					<div class="grille-5"><p style="color:#75c731;">?? soutiens</p><button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                               					<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900;{% else %}400{% endif %}">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                          {% if not question.soutenue %}
+                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                          {% endif %}
                                					</div>
                                                 <!-- bouton + fin-->
                                				</h4>                           
@@ -85,8 +89,19 @@
                                         <!-- contenue caché-->
                                    		<div id="collapse{{loop.index}}" class="panel-collapse collapse">
                                         	<div class="panel-body">
-                                            <p>{{question.description}}</p>
-                                            <p>{{question.best_reponse}}</p>
+                                            <div class="row">
+                                              <div style="float:left; width:10%; text-align:center; font-weight:bold"></div>
+                                              <div style="float:left; width:85%; margin-left:5%">
+                                                <p>{{question.description}}</p>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div style="float:left; width:10%; text-align:center; font-weight:bold"></div>
+                                              <div style="float:left; width:10%; text-align:center; font-weight:bold">date</div>
+                                              <div style="float:left; width:75%; margin-left:5%">
+                                                <p>{{question.best_reponse}}</p>
+                                              </div>
+                                            </div>
                                           </div>
                                     	</div>
                                  	</div>

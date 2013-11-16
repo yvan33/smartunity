@@ -1,4 +1,4 @@
-{% extends "SmartUnityAppBundle::layout.html.twig" %}
+{% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
 
 {% block title %}Smart'Unity - Accueil{% endblock %}
 
@@ -8,48 +8,10 @@
 {% endblock %}
 
 {% block body %}
-<p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+<!-- <p> {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 Bonjour {{ app.user.username}} 
-{% endif %} </p> 
-<div class="row">
-<div class="col-md-12">
+{% endif %} </p>  -->
 
-<div id="Connexion" class="accordion-body collapse off">
-      <div class="accordion-inner">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Please sign in</h3>
-                </div>
-                <div class="panel-body">
-                  <form action="{{ path("fos_user_security_check") }}" method="post">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                      <fieldset>
-                        <div class="form-group">
-                          <input class="form-control" placeholder="pseudo" type="text" id="username" name="_username" value="{{ last_username }}" required="required">
-                        </div>
-                        <div class="form-group">
-                          <input class="form-control" placeholder="Password" type="password" id="password" name="_password" required="required">
-                        </div>
-                        <div class="checkbox">
-                          <label>
-                            <input id="remember_me" type="checkbox"  name="_remember_me" value="on"> Remember Me
-                          </label>
-                        </div>
-                        <input class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" type="submit" value="Login">
-                      </fieldset>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
 
 
           <div class="row">

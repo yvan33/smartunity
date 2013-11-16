@@ -4,6 +4,9 @@ namespace SmartUnity\QuestionReponseBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class QuestionReponseController extends Controller
 {
@@ -15,8 +18,35 @@ class QuestionReponseController extends Controller
         return $this->redirect( $this->generateUrl('smart_unity_question_reponse_list_of_question') );
     }
 
-    public function displayListOfQuestionAction($type, $page)
+    public function displayListOfQuestionAction($type, $page, Request $request)
     {
+
+
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $request->getSession();
+
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = '';
+        }
+
+        if ($error) {
+            // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
+            $error = $error->getMessage();
+        }
+        // last username entered by the user
+        $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
+
+        $csrfToken = $this->container->has('form.csrf_provider')
+            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
+            : null;
+
+
         // Capable d'afficher les 3 listes paginées dans un twig dédié à l'affichage d'une liste de questions...
     	
         //Afficher le TWIG liste Questions
@@ -79,6 +109,9 @@ class QuestionReponseController extends Controller
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
         return $this->render($template, array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+            'csrf_token' => $csrfToken,
             'page'=>$page,
             'type'=>$type,
             'nbPages'=>$nbPages,
