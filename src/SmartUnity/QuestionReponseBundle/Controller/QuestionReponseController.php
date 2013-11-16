@@ -155,7 +155,20 @@ class QuestionReponseController extends Controller
     {   
         //Affichage de LA question avec liste réponses
     	
-        //return $this->render('SmartUnityQuestionReponseBundle:Display:question.html.twig');
+        /*
+        $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+        $listeReponse = $reponseRepository->getReponsesWithVotes(20);
+
+        foreach($listeReponse as $reponse){
+            echo $reponse['upVote'];
+            echo $reponse[0]->getDescription();
+        }
+        exit();
+        */
+
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array());
     }

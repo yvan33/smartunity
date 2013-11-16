@@ -3,6 +3,7 @@
 namespace SmartUnity\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * reponseRepository
@@ -13,8 +14,8 @@ use Doctrine\ORM\EntityRepository;
 class reponseRepository extends EntityRepository
 {
 
-	public function getBestReponse($QuestionId){ //Récupère l'id et la note de la meilleure réponse pour une question (en paramètre)
-
+	public function getBestReponse($QuestionId) //Récupère l'id et la note de la meilleure réponse pour une question (en paramètre)
+    { 
         $query = $this->_em->createQuery('
             SELECT r.id repId, SUM(n.note) somme
             FROM
@@ -46,4 +47,57 @@ class reponseRepository extends EntityRepository
 
         */
 	}
+
+
+    public function getReponsesWithVotes($QuestionId, $offset = 0, $limit = 5)
+    {
+
+        /*
+        ----- Retourne un tableau à deux dimmensions. (si vide, false)
+        ----- Pour chaque ligne, on a:
+        ----- array(0 => Entité, 'upVote' => upVote, 'downVote' => downVote, 'note' => note)
+        */
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addScalarResult('upVote', 'upVote');
+        $rsm->addScalarResult('downVote', 'downVote');
+        $rsm->addScalarResult('note', 'note');
+        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:reponse', 'r');
+        
+        $sql = 'SELECT R.*, IFNULL(N.upVote,0) as upVote, IFNULL(N.downVote,0) as downVote, IFNULL(N.note,0) as note
+                FROM reponse R
+                LEFT OUTER JOIN
+                    (SELECT d.downVote as downVote, u.upVote as upVote, IFNULL(u.upVote,0) + IFNULL(d.downVote,0) as note, d.reponse_id as dreponse_id, u.reponse_id as ureponse_id
+                    FROM
+                        (SELECT SUM(n.note) as downVote, r.id as reponse_id
+                        FROM reponse r, noteReponse n
+                        WHERE n.reponse_id = r.id
+                        AND r.question_id = 20
+                        AND n.note = -1
+                        GROUP BY n.reponse_id) as d 
+                        
+                        RIGHT OUTER JOIN
+                        
+                        (SELECT SUM(n.note) as upVote, r.id as reponse_id
+                        FROM reponse r, noteReponse n
+                        WHERE n.reponse_id = r.id
+                        AND r.question_id = 20
+                        AND n.note = 1
+                        GROUP BY n.reponse_id) as u
+                    ON u.reponse_id = d.reponse_id) as N
+                ON (N.ureponse_id = R.id OR N.dreponse_id = R.id)
+                WHERE R.question_id = 20
+                ORDER BY r.dateCertification DESC, r.dateValidation DESC, note DESC';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+
+        $result = $query->getResult();
+
+        if(count($result) != 0)
+            return $result;
+        else 
+            return false;
+
+    }
+
 }
