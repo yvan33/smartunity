@@ -14,8 +14,8 @@ smart_unity_question_reponse_search_questions:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchQuestion }
 
 smart_unity_question_reponse_display_reponse:
-    pattern:  /reponse/
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse }
+    pattern:  /reponse/{slug}/{page}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'' }
 
 smart_unity_question_reponse_add_question:
     pattern:  /ajouter-question/

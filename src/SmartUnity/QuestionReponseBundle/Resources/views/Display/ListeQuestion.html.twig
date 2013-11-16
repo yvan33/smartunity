@@ -73,11 +73,11 @@
                                					</div>
                                                 <!-- nb réponses vues fin-->
                                                 <!-- bouton rep -->
-                               					<div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                               					<div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
                               					</div>
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
-                               					<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900;{% else %}400{% endif %}">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                               					<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
                                           {% if not question.soutenue %}
                                           <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                                           {% endif %}
@@ -122,11 +122,12 @@
                                     <div class="panel-heading">
                                       <h4 class="panel-title">
                                               <!-- rond pts-->
-                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                                 <!-- rond pts fin-->
                                                 <!-- describ question-->
                                         <a data-toggle="collapse" data-parent="#accordion-last" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
+                                        <div class="grille-2" ><p>{{question.sujet}}</p>
+                                        <p style="font-weight:200; font-style:italic">{{ question.membre_prenom }} le {{ question.date }}</p></div>
                                         </a>
                                                 <!-- describ question fin-->
                                                 <!-- nb réponses vues-->
@@ -134,11 +135,14 @@
                                         </div>
                                                 <!-- nb réponses vues fin-->
                                                 <!-- bouton rep -->
-                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                        <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
                                         </div>
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
-                                        <div class="grille-5"><p style="color:#75c731;">?? soutiens</p><button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                        <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                          {% if not question.soutenue %}
+                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                          {% endif %}
                                         </div>
                                                 <!-- bouton + fin-->
                                       </h4>                           
@@ -167,11 +171,12 @@
                                     <div class="panel-heading">
                                       <h4 class="panel-title">
                                               <!-- rond pts-->
-                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                                 <!-- rond pts fin-->
                                                 <!-- describ question-->
                                         <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
+                                        <div class="grille-2" ><p>{{question.sujet}}</p>
+                                        <p style="font-weight:200; font-style:italic">{{ question.membre_prenom }} le {{ question.date }}</p></div>
                                         </a>
                                                 <!-- describ question fin-->
                                                 <!-- nb réponses vues-->
@@ -179,11 +184,14 @@
                                         </div>
                                                 <!-- nb réponses vues fin-->
                                                 <!-- bouton rep -->
-                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                        <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
                                         </div>
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
-                                        <div class="grille-5"><p style="color:#75c731;">?? soutiens</p><button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                       <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                          {% if not question.soutenue %}
+                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                          {% endif %}
                                         </div>
                                                 <!-- bouton + fin-->
                                       </h4>                           
@@ -232,21 +240,37 @@
 
 
 function generateContent(pEntry, i){
-  return '                                   <div class="panel panel-default"> \
+  var entity = '                               <div class="panel panel-default"> \
                                             <div class="panel-heading"> \
                                               <h4 class="panel-title"> \
-                                                <div class="grille-1"><div class="rond-point"><p class="txt-rond">' + pEntry['remuneration'] + ' pts</p></div></div> \
+                                                <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">' + pEntry['remuneration'] + ' pts</p></div></div> \
                                                 <a data-toggle="collapse" data-parent="#accordion-' + type + '" href="#collapse' + i + '"> \
-                                                <div class="grille-2" ><p>' + pEntry['sujet'] + '</p></div></a> \
+                                                <div class="grille-2" ><p>' + pEntry['sujet'] + '</p> \
+                                                <p style="font-weight:200; font-style:italic">' + pEntry['membre_prenom'] + ' le ' + pEntry['date'] + '</p> </div></a> \
                                                 <div class="grille-3"><p>' + pEntry['nb_reponses'] + 'réponses</p>XXX vues<p></p></div> \
-                                                <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button> </div> \
-                                                <div class="grille-5"><p>?? soutiens</p><button type="button" class="bouton-soutient"><p class="p-s">+</p></button></div> \
-                                              </h4> \
+                                                <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
+                                                <button type="button" class="btn bouton-repondre">Répondre</button></a></div> \
+                                                <div class="grille-5"><p style="color:#75c731; font-weight:';
+
+                                                if (pEntry['soutenue']) entity += '900';
+                                                else entity += '400';
+
+                                                entity += ';">' + pEntry['count_soutien'] + ' soutien';
+
+                                                if(pEntry['count_soutien'] >1 ) entity += 's';
+
+                                                entity += '</p>';
+
+                                                if(pEntry['soutenue'] == false) entity += '<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>';
+
+                                                entity +='</h4> \
                                             </div> \
                                               <div id="collapse' + i + '" class="panel-collapse collapse"> \
                                                   <div class="panel-body"><p>' + pEntry['description'] + '</p><p>' + pEntry['best_reponse'] + '</p></div> \
                                               </div> \
                                           </div>';
+
+  return entity;
 }
 
 function MaJPagination(){
