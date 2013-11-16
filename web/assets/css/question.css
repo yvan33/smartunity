@@ -111,10 +111,11 @@
 	margin-bottom:30px;
 	background-color: #f8f8ef;
 	border-radius:5px;
-	border:2px solid #d7d5d5;
-	-webkit-box-shadow: 0 0 20px  #CCCCCC;
-       -moz-box-shadow: 0 0 20px  #CCCCCC;
-            box-shadow: 0 0 20px  #CCCCCC;
+	border:2px solid #CCC;
+	-webkit-box-shadow: 0 0 20px  rgba(0,0,0,0.2);
+       -moz-box-shadow: 0 0 20px  rgba(0,0,0,0.2);
+            box-shadow: 0 0 20px  rgba(0,0,0,0.2);
+	overflow:hidden;
 }
 .bouton-radio
 {
@@ -134,6 +135,10 @@
      background:         linear-gradient( ... );
 	
 }
+.bouton-radio.active
+{
+	text-shadow: 2px 1px  #FFFFFF;
+}
 .bouton-repondre
 {
 	background: linear-gradient( to top, #bfbfbf,#fbfbfb);
@@ -150,20 +155,9 @@
 }
 .bouton-soutient
 {
-	
-	border-radius:10px;
-	height:20px;
-	width:20px;
-	background-color: #0F0;
-	color:#FFF;
-	text-align:center;
-	display: inline-block;
-	border: 1px solid transparent;
-	
-	
-
-
-	
+	background-color:transparent;
+	border-color:transparent;
+	color:#75c731;
 }
 .p-s
 {
@@ -216,6 +210,7 @@
 .panel-default {
 	background-color: #D8F1F5;
 	border:0px;
+	overflow:hidden;
 	border-radius:0px;
 	border-bottom: solid 2px #d3d5d6;
 	-webkit-box-shadow: 0px -10px 20px -5px  rgba(0,51,255,0.2) inset;

@@ -118,12 +118,13 @@ class QuestionReponseController extends Controller
 
 
     
-    public function displayQuestionAction()
+    public function displayReponseAction()
     {   
         //Affichage de LA question avec liste réponses
     	
         //return $this->render('SmartUnityQuestionReponseBundle:Display:question.html.twig');
-        return new Response('display question QuestionReponses');
+        $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
+        return $this->render($template, array());
     }
 
     public function addQuestionAction()

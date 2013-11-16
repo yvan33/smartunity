@@ -12,12 +12,10 @@ smart_unity_question_reponse_list_of_question:
 smart_unity_question_reponse_search_questions:
     pattern: /recherche/
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchQuestion }
-    requirements:
-        page: \d
 
-smart_unity_question_reponse_display_question:
-    pattern:  /question/
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayQuestion }
+smart_unity_question_reponse_display_reponse:
+    pattern:  /reponse/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse }
 
 smart_unity_question_reponse_add_question:
     pattern:  /ajouter-question/
