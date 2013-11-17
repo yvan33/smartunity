@@ -36,13 +36,13 @@ class commentaireReponse
     private $date;
 
     /**
-    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\reponse", inversedBy="commentaireQuestions")
+    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\reponse", inversedBy="commentaireReponses")
     * @ORM\JoinColumn(name="reponse_id", referencedColumnName="id", nullable=false)
     */
     private $reponse;
 
     /**
-    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="commentaireQuestions")
+    * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="commentaireReponses")
     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id", nullable=false)
     */
     private $membre;

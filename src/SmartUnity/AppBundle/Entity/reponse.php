@@ -73,6 +73,11 @@ class reponse
     private $membreCertif;
 
     /**
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\commentaireReponse", mappedBy="reponse")
+     */
+    private $commentaireReponses;
+
+    /**
      * Constructor
      */
     public function __construct()   

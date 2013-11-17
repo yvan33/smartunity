@@ -156,6 +156,16 @@ class AjaxController extends Controller
             if ($reponse[0]->getDateValidation() != null)
                 $isValid = true;
 
+            $getNoteReponses = $reponse[0]->getNoteReponses();
+            $isVoted = false;
+
+            foreach($getNoteReponses as $noteReponse){
+                if($noteReponse->getMembre() == $this->getUser()){
+                    $isVoted = true;
+                    break;
+                }
+            }
+
             //Ajour d'une réponse dans le tableau de sortie
             array_push($returnArray, array(
                 'id'=>$reponse[0]->getId(),
@@ -168,7 +178,7 @@ class AjaxController extends Controller
                 'commentaires'=>$commentairesReturn,
                 'is_certif'=>$isCertif,
                 'is_validated'=>$isValid,
-                'is_voted'=>$reponse[0]->getNoteReponses()->contains($this->getUser())
+                'is_voted'=>$isVoted
             ));
         }
 

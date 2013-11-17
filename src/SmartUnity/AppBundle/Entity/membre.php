@@ -164,6 +164,13 @@ class membre extends BaseUser
      */
     private $ville; 
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\commentaireReponse", mappedBy="membre")
+     *
+     */
+    private $commentaireReponses;
+
 
 
     /**
