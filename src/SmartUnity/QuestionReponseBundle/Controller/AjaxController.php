@@ -19,9 +19,6 @@ class AjaxController extends Controller
                             ->getManager()
                             ->getRepository('SmartUnityAppBundle:reponse');
 
-
-
-
         //Appel au repository
 
         if ($type == 'onFire'){
@@ -73,10 +70,6 @@ class AjaxController extends Controller
 
             }
 
-            //echo $this->container->get('security.context')->getToken()->getUser();
-            //echo $Question->getSoutienMembres()->contains($this->getUser());
-            //exit();
-
 
             array_push($returnArray, array(
             	'id'=>$Question->getId(),
@@ -101,6 +94,89 @@ class AjaxController extends Controller
         return new Response(json_encode($returnArray));
 	}
 
+
+
+    public function getReponsesAction($slug, $tri, $page, $nbParPage)
+    {
+
+        $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+        $questionRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:question');
+
+        $commentaireReponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:commentaireReponse');
+
+
+        //Récupération de l'id de la question à partir du Slug
+        //Utilisatioin des meta-fonctions du repository
+        $QuestionId = $questionRepository->findOneBySlug($slug)->getId();
+
+        //Récupération de la liste des réponses
+        $listeReponse = $reponseRepository->getReponsesWithVotes($QuestionId, $page, $nbParPage, $tri);
+
+        $nbReponses = $reponseRepository->getNbReponses($QuestionId);
+
+        $returnArray=array();
+        array_push($returnArray, array( //Première ligne du tableau contient des infos sur la requête
+            'nbParPage'=>$nbParPage,
+            'page'=>$page,
+            'nbReponses'=>$nbReponses,
+            'nbPages'=>ceil($nbReponses / $nbParPage),
+            'slug'=>$slug
+        ));
+
+
+        //On parcourt les réponses
+        foreach($listeReponse as $reponse){
+
+            //Récupération des commentaires
+            $commentairesReturn = array();
+            $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse),
+                                                                    array('date' => 'asc'));
+
+            //Remplissage du tableau de sortie commentaires
+            foreach($commentaires as $commentaire){
+                array_push($commentairesReturn, array(
+                    'description'=>$commentaire->getDescription(),
+                    'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
+                    'membre_nom'=>$commentaire->getMembre()->getNom()
+                ));
+            }
+
+            $isCertif=false;
+            if ($reponse[0]->getDateCertification() != null)
+                $isCertif = true;
+
+            $isValid=false;
+            if ($reponse[0]->getDateValidation() != null)
+                $isValid = true;
+
+            //Ajour d'une réponse dans le tableau de sortie
+            array_push($returnArray, array(
+                'id'=>$reponse[0]->getId(),
+                'description'=>$reponse[0]->getDescription(),
+                'date'=>$reponse[0]->getDate()->format('d-m-Y à H:i'),
+                'upVote'=>$reponse['upVote'],
+                'downVote'=>$reponse['downVote'],
+                'membre_nom'=>$reponse[0]->getMembre()->getNom(),
+                'membre_reputation'=>$reponse[0]->getMembre()->getReputation(),
+                'commentaires'=>$commentairesReturn,
+                'is_Certif'=>$isCertif,
+                'is_Validated'=>$isValid
+            ));
+        }
+
+        $return = '<html><head></head><body>';
+        $return .= json_encode($returnArray);
+        $return .= '</body></html>';
+        return new Response($return);
+
+    }
 
 
 }

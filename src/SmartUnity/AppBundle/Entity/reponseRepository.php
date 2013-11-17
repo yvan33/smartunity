@@ -48,8 +48,18 @@ class reponseRepository extends EntityRepository
         */
 	}
 
+    public function getNbReponses($QuestionId){
+         $query = $this->_em->createQuery('
+            SELECT COUNT(r.id)
+            FROM SmartUnityAppBundle:reponse r
+            WHERE r.question = :QuestionId')
+            ->setParameter('QuestionId', $QuestionId);
 
-    public function getReponsesWithVotes($QuestionId, $offset = 0, $limit = 5)
+        return $query->getScalarResult()[0][1];
+    }
+
+
+    public function getReponsesWithVotes($QuestionId, $page = 1, $nbParPage = 5, $tri = 'vote')
     {
 
         /*
@@ -57,6 +67,8 @@ class reponseRepository extends EntityRepository
         ----- Pour chaque ligne, on a:
         ----- array(0 => Entité, 'upVote' => upVote, 'downVote' => downVote, 'note' => note)
         */
+
+        $offset = ($page - 1) * $nbParPage;
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addScalarResult('upVote', 'upVote');
@@ -72,7 +84,7 @@ class reponseRepository extends EntityRepository
                         (SELECT SUM(n.note) as downVote, r.id as reponse_id
                         FROM reponse r, noteReponse n
                         WHERE n.reponse_id = r.id
-                        AND r.question_id = 20
+                        AND r.question_id = :QuestionId
                         AND n.note = -1
                         GROUP BY n.reponse_id) as d 
                         
@@ -81,15 +93,26 @@ class reponseRepository extends EntityRepository
                         (SELECT SUM(n.note) as upVote, r.id as reponse_id
                         FROM reponse r, noteReponse n
                         WHERE n.reponse_id = r.id
-                        AND r.question_id = 20
+                        AND r.question_id = :QuestionId
                         AND n.note = 1
                         GROUP BY n.reponse_id) as u
                     ON u.reponse_id = d.reponse_id) as N
                 ON (N.ureponse_id = R.id OR N.dreponse_id = R.id)
-                WHERE R.question_id = 20
-                ORDER BY r.dateCertification DESC, r.dateValidation DESC, note DESC';
+                WHERE R.question_id = :QuestionId
+                ';
+
+        if($tri == 'vote')
+            $sql .= 'ORDER BY r.dateCertification DESC, r.dateValidation DESC, note DESC';
+        elseif($tri == 'date')
+            $sql .= 'ORDER BY r.date ASC';
+
+        $sql .= '
+                LIMIT :offset, :nbParPage';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('QuestionId', (int) $QuestionId);
+        $query->setParameter('offset', (int) $offset);
+        $query->setParameter('nbParPage', (int) $nbParPage);
 
         $result = $query->getResult();
 

@@ -14,8 +14,11 @@ smart_unity_question_reponse_search_questions:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchQuestion }
 
 smart_unity_question_reponse_display_reponse:
-    pattern:  /reponse/{slug}/{page}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'' }
+    pattern:  /reponse/{slug}/{page}/{tri}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'', tri:'vote'}
+    requirements:
+        tri: vote|date
+        page: \d
 
 smart_unity_question_reponse_add_question:
     pattern:  /ajouter-question/
@@ -43,6 +46,9 @@ smart_unity_question_reponse_add_commentaire_reponse:
 
 
 
+######################
+#### AJAX ROUTING ####
+######################
 
 smart_unity_question_reponse_ajax_get_questions:
     pattern: /getQuestions/{type}/{page}/{nbParPage}
@@ -51,3 +57,11 @@ smart_unity_question_reponse_ajax_get_questions:
         type: onFire|last|reponses|question
         page: \d
         nbParPage: \d
+
+smart_unity_question_reponse_ajax_get_reponses:
+    pattern: /getReponses/{slug}/{tri}/{page}/{nbParPage}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:getReponses, tri:'vote', page:'1', nbParPage:'5'}
+    requirements:
+        page: \d
+        nbParPage: \d
+        tri: vote|date

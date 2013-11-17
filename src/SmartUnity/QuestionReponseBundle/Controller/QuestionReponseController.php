@@ -151,26 +151,47 @@ class QuestionReponseController extends Controller
 
 
     
-    public function displayReponseAction()
+    public function displayReponseAction($slug, $page, $tri, Request $request)
     {   
-        //Affichage de LA question avec liste réponses
-    	
-        /*
-        $reponseRepository = $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('SmartUnityAppBundle:reponse');
 
-        $listeReponse = $reponseRepository->getReponsesWithVotes(20);
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $request->getSession();
 
-        foreach($listeReponse as $reponse){
-            echo $reponse['upVote'];
-            echo $reponse[0]->getDescription();
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = '';
         }
-        exit();
-        */
+
+        if ($error) {
+            // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
+            $error = $error->getMessage();
+        }
+        // last username entered by the user
+        $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
+
+        $csrfToken = $this->container->has('form.csrf_provider')
+            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
+            : null;
+
+
+
+
+        //Affichage de LA question avec liste réponses
+        //Fonctionne de la même manière que displayListOfQuestionAction()
+
+
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
-        return $this->render($template, array());
+        return $this->render($template, array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+            'csrf_token' => $csrfToken
+        ));
     }
 
     public function addQuestionAction()
