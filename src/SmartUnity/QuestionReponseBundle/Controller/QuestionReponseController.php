@@ -204,10 +204,10 @@ class QuestionReponseController extends Controller
                             ->add('description','textarea')
                             ->add('marque', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:marque',
-                                'property'=> 'name')),
+                                'property'=> 'name'))
                             ->add('modele', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:modele',
-                                'property'=> 'name')),
+                                'property'=> 'name'))
                             ->add('os', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:os',
                                 'property'=> 'name'))
