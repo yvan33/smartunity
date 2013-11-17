@@ -202,9 +202,6 @@ class QuestionReponseController extends Controller
         $formQuestion = $this->createFormBuilder($newQuestion)
                             ->add('sujet','text')
                             ->add('description','textarea')
-                            ->add('marque', 'entity', array(
-                                'class'=> 'SmartUnityAppBundle:marque',
-                                'property'=> 'name'))
                             ->add('modele', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:modele',
                                 'property'=> 'name'))
