@@ -196,11 +196,53 @@ class QuestionReponseController extends Controller
 
     public function addQuestionAction()
     {
-    	
-        //return $this->render('SmartUnityQuestionReponseBundle:Question:Add.html.twig');
-        return new Response('add question QuestionReponses');
+        $newQuestion = new \SmartUnity\AppBundle\Entity\Question();
+        
+
+        $formQuestion = $this->createFormBuilder($newQuestion)
+                            ->add('sujet','text')
+                            ->add('description','textarea')
+                            ->add('marque', 'entity', array(
+                                'class'=> 'SmartUnityAppBundle:marque',
+                                'property'=> 'name')),
+                            ->add('modele', 'entity', array(
+                                'class'=> 'SmartUnityAppBundle:modele',
+                                'property'=> 'name')),
+                            ->add('os', 'entity', array(
+                                'class'=> 'SmartUnityAppBundle:os',
+                                'property'=> 'name'))
+                            ->add('remuneration','integer')
+                            ->getForm();
+
+        if ($this->getRequest->getMethod() == 'POST')
+        {
+            $formQuestion->bind($this->getRequest());//à tester sans
+
+            if ($formQuestion->isValid()) {
+                $user = $this->container->get('security.context')->getToken()->getUser();
+                $newQuestion->setMembre(); //Récupèrer l'utilisateur
+                $newQuestion->setDate(date("Y-m-d H:i:s"));//date locale
+                $newQuestion->setSlug("");
+                $newQuestion->addSoutien($user);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newQuestion);
+                $em->flush();
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
+            'formQuestion'=>$formQuestion));
     }
 
+    function slugify($str) {
+    $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+    $replace = array('s', 't', 's', 't', 's', 't', 's', 't', 'i', 'a', 'a', 'i', 'a', 'a', 'e', 'E');
+    $str = str_ireplace($search, $replace, strtolower(trim($str)));
+    $str = preg_replace('/[^\w\d\-\ ]/', '', $str);
+    $str = str_replace(' ', '-', $str);
+    return preg_replace('/\-{2,}', '-', $str);
+}
+    
     public function addReponseAction()
     {
         //lancé depuis une iFrame fancybox
