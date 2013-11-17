@@ -161,13 +161,14 @@ class AjaxController extends Controller
                 'id'=>$reponse[0]->getId(),
                 'description'=>$reponse[0]->getDescription(),
                 'date'=>$reponse[0]->getDate()->format('d-m-Y à H:i'),
-                'upVote'=>$reponse['upVote'],
-                'downVote'=>$reponse['downVote'],
+                'up_vote'=>$reponse['upVote'],
+                'down_vote'=>$reponse['downVote'],
                 'membre_nom'=>$reponse[0]->getMembre()->getNom(),
                 'membre_reputation'=>$reponse[0]->getMembre()->getReputation(),
                 'commentaires'=>$commentairesReturn,
-                'is_Certif'=>$isCertif,
-                'is_Validated'=>$isValid
+                'is_certif'=>$isCertif,
+                'is_validated'=>$isValid,
+                'is_voted'=>$reponse[0]->getNoteReponses()->contains($this->getUser())
             ));
         }
 
