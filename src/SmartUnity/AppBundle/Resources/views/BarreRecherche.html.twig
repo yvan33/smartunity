@@ -8,6 +8,11 @@
       width:100%;
     }
 
+    .bouton-radio.active
+    {
+      text-shadow: 2px 1px  #FFFFFF;
+    }
+
     .container{
       overflow:hidden;
     }
@@ -37,12 +42,14 @@
                                </div>
                         </div>
                         <div style="position:absolute; top:140px; left:20%;width:60%">
+                            <form action="{{ path('smart_unity_question_reponse_search_questions') }}" method="GET">
                             <div class="input-group" style="margin-top:30px">
                               <input type="text" class="form-control">
                               <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" ></span></button>
+                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                               </span>
                             </div>
+                            </form>
                         </div>
                     </div>
                     <div style="clear:both;">
@@ -59,14 +66,14 @@
                   $( "#sli-de" ).click(function() {
                     $( "#sli1" ).animate({  
                       marginLeft: "0%",
-                    }, 700,"linear", function() {
+                    }, 600,"swing", function() {
                       // Animation complete.
                     });
                   });
                   $( "#sli-re" ).click(function() {
                     $( "#sli1" ).animate({  
                       marginLeft: "-100%",
-                    }, 700,"linear" , function() {
+                    }, 600,"swing" , function() {
                       // Animation complete.
                     });
                   });

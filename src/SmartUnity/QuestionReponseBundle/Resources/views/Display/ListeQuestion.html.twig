@@ -76,15 +76,18 @@
                                                 <div class="grille-det">
                                                         <p>{{question.description}}</p>
                                                 </div>
+
+                                                {% if question.date_best_reponse != '' %}
                                                 <div class="grille-det-content">
                                                     <div class="grille-det1">
-                                                            <p>Woofywoofdu39</p>
-                                                            <p>date</p>
+                                                            <p>{{ question.auteur_best_reponse }}</p>
+                                                            <p>{{ question.date_best_reponse }}</p>
                                                       </div>
                                                         <div class="grille-det2">
                                                         <p>{{question.best_reponse}}</p>
                                                       </div>
                                                 </div>
+                                                {% endif %}
 
                                           </div>
                                     	</div>
@@ -135,8 +138,22 @@
                                         <!-- contenue caché-->
                                       <div id="collapse{{loop.index}}" class="panel-collapse collapse">
                                           <div class="panel-body">
-                                            <p>{{question.description}}</p>
-                                            <p>{{question.best_reponse}}</p>
+
+                                                <div class="grille-det">
+                                                        <p>{{question.description}}</p>
+                                                </div>
+                                                {% if question.date_best_reponse != '' %}
+                                                <div class="grille-det-content">
+                                                    <div class="grille-det1">
+                                                            <p>{{ question.auteur_best_reponse }}</p>
+                                                            <p>{{ question.date_best_reponse }}</p>
+                                                      </div>
+                                                        <div class="grille-det2">
+                                                        <p>{{question.best_reponse}}</p>
+                                                      </div>
+                                                </div>
+                                                {% endif %}
+
                                           </div>
                                       </div>
                                   </div>
@@ -184,8 +201,22 @@
                                         <!-- contenue caché-->
                                       <div id="collapse{{loop.index}}" class="panel-collapse collapse">
                                           <div class="panel-body">
-                                            <p>{{question.description}}</p>
-                                            <p>{{question.best_reponse}}</p>
+
+                                                <div class="grille-det">
+                                                        <p>{{question.description}}</p>
+                                                </div>
+                                                {% if question.date_best_reponse != '' %}
+                                                <div class="grille-det-content">
+                                                    <div class="grille-det1">
+                                                            <p>{{ question.auteur_best_reponse }}</p>
+                                                            <p>{{ question.date_best_reponse }}</p>
+                                                      </div>
+                                                        <div class="grille-det2">
+                                                        <p>{{question.best_reponse}}</p>
+                                                      </div>
+                                                </div>
+                                                {% endif %}
+
                                           </div>
                                       </div>
                                   </div>
@@ -231,7 +262,11 @@ function generateContent(pEntry, i){
                                                 <a data-toggle="collapse" data-parent="#accordion-' + type + '" href="#collapse' + type + i + '"> \
                                                 <div class="grille-2" ><p>' + pEntry['sujet'] + '</p> \
                                                 <p style="font-weight:200; font-style:italic">' + pEntry['membre_prenom'] + ' le ' + pEntry['date'] + '</p> </div></a> \
-                                                <div class="grille-3"><p>' + pEntry['nb_reponses'] + 'réponses</p>XXX vues<p></p></div> \
+                                                <div class="grille-3"><p>' + pEntry['nb_reponses'] + ' réponse';
+
+                                                if(pEntry['nb_reponses']>1) entity+='s';
+
+                                                entity += '</p>XXX vues<p></p></div> \
                                                 <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
                                                 <button type="button" class="btn bouton-repondre">Répondre</button></a></div> \
                                                 <div class="grille-5"><p style="color:#75c731; font-weight:';
@@ -250,7 +285,23 @@ function generateContent(pEntry, i){
                                                 entity +='</h4> \
                                             </div> \
                                               <div id="collapse' + type + i + '" class="panel-collapse collapse"> \
-                                                  <div class="panel-body"><p>' + pEntry['description'] + '</p><p>' + pEntry['best_reponse'] + '</p></div> \
+                                                  <div class="panel-body"> \
+                                                  <div class="grille-det"> \
+                                                        <p>' + pEntry['description'] + '</p> \
+                                                </div>';
+
+                                                if(pEntry['date_best_reponse']!='')
+                                                  entity += '<div class="grille-det-content"> \
+                                                    <div class="grille-det1"> \
+                                                            <p>' + pEntry['auteur_best_reponse'] + '</p> \
+                                                            <p>' + pEntry['date_best_reponse'] + '</p> \
+                                                      </div> \
+                                                        <div class="grille-det2"> \
+                                                        <p>' + pEntry['best_reponse'] + '</p> \
+                                                      </div> \
+                                                </div>';
+
+                                                entity += '</div> \
                                               </div> \
                                           </div>';
 

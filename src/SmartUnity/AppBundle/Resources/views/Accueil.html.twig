@@ -90,7 +90,7 @@ Bonjour {{ app.user.username}}
                                         <p>{{ question.sujet }}</p>
                                     </div>
                                     <div class="grille-question-det">
-                                      <button type="button" class="btn bouton-repondre">Détails</button>
+                                      <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                     </div>
                                 </div>
                                     <!-- contenue caché fin-->
@@ -110,7 +110,7 @@ Bonjour {{ app.user.username}}
                                         <p>{{ question.sujet }}</p>
                                     </div>
                                     <div class="grille-question-det">
-                                      <button type="button" class="btn bouton-repondre">Détails</button>
+                                      <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                     </div>
                                 </div>
                                     <!-- contenue caché fin-->
@@ -130,7 +130,7 @@ Bonjour {{ app.user.username}}
                                         <p>{{ question.sujet }}</p>
                                     </div>
                                     <div class="grille-question-det">
-                                      <button type="button" class="btn bouton-repondre">Détails</button>
+                                      <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                     </div>
                                 </div>
                                     <!-- contenue caché fin-->
