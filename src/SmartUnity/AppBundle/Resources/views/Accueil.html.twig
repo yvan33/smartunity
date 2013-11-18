@@ -4,7 +4,6 @@
 
 {% block stylesheets %}
 <link href="{{ asset('assets/css/accueil.css') }}"  rel="stylesheet" type="text/css">
-<link href="{{ asset('assets/css/question.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block body %}
@@ -62,20 +61,6 @@ Bonjour {{ app.user.username}}
    
               </div>
   </div>
-           <div class="row">
-            <div class="col-md-6 col-md-offset-3" >
-                      <div class="text-center">
-                      <div class="btn-group" data-toggle="buttons" style="margin-top:30px">
-                        <label class="btn bouton-radio active">
-                          <input type="radio" name="options" id="option1"><p class="cook-btn">Demander</p>
-                        </label>
-                        <label class="btn bouton-radio">
-                          <input type="radio" name="options" id="option2"><p class="cook-btn">Répondre</p>
-                        </label>
-                      </div>
-                      </div>
-              </div>
-          </div>
           
           {% include "SmartUnityAppBundle::BarreRecherche.html.twig" %}
           
@@ -89,39 +74,25 @@ Bonjour {{ app.user.username}}
                         <li><a href="#reponses" data-toggle="tab">Questions R&eacute;solues</a></li>
                       </ul>
                       </div>
-                      <div class="tab-content" ><!-- style="margin:15px" -->
+                      <div class="tab-content" style="margin:0px 15px"><!-- style="margin:15px" -->
 
 
                         <div class="tab-pane active fade in out" id="onFire">
                           {% for question in listeQuestionsOnFire %}
 
-                                  <div class="panel panel-default fade in out">
-                                      <!-- contenue visible-->
-                                    <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                              <!-- rond pts-->
-                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
-                                                <!-- rond pts fin-->
-                                                <!-- describ question-->
-                                        <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
-                                        </a>
-                                                <!-- describ question fin-->
-                                                <!-- bouton rep -->
-                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                  <div class="grille-question-centent">
+                                  <div class="grille-question-rond">
+                                      <div class="rond-point">
+                                        {{ question.remuneration }} pts
                                         </div>
-                                                <!-- bouton rep fin-->
-                                      </h4>                           
                                     </div>
-                                        <!-- contenue visible fin-->
-                                        <!-- contenue caché-->
-                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
-                                          <div class="panel-body">
-                                            <p>{{question.description}}</p>
-                                            <p>{{question.best_reponse}}</p>
-                                          </div>
-                                      </div>
-                                  </div>
+                                    <div class="grille-question-txt">
+                                        <p>{{ question.sujet }}</p>
+                                    </div>
+                                    <div class="grille-question-det">
+                                      <button type="button" class="btn bouton-repondre">Détails</button>
+                                    </div>
+                                </div>
                                     <!-- contenue caché fin-->
                                   {% endfor %}
                         </div>
@@ -129,33 +100,19 @@ Bonjour {{ app.user.username}}
                         <div class="tab-pane fade in out" id="last">
                           {% for question in listeLastQuestions %}
 
-                                  <div class="panel panel-default fade in out">
-                                      <!-- contenue visible-->
-                                    <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                              <!-- rond pts-->
-                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
-                                                <!-- rond pts fin-->
-                                                <!-- describ question-->
-                                        <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
-                                        </a>
-                                                <!-- describ question fin-->
-                                                <!-- bouton rep -->
-                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                  <div class="grille-question-centent">
+                                  <div class="grille-question-rond">
+                                      <div class="rond-point">
+                                        {{ question.remuneration }} pts
                                         </div>
-                                                <!-- bouton rep fin-->
-                                      </h4>                           
                                     </div>
-                                        <!-- contenue visible fin-->
-                                        <!-- contenue caché-->
-                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
-                                          <div class="panel-body">
-                                            <p>{{question.description}}</p>
-                                            <p>{{question.best_reponse}}</p>
-                                          </div>
-                                      </div>
-                                  </div>
+                                    <div class="grille-question-txt">
+                                        <p>{{ question.sujet }}</p>
+                                    </div>
+                                    <div class="grille-question-det">
+                                      <button type="button" class="btn bouton-repondre">Détails</button>
+                                    </div>
+                                </div>
                                     <!-- contenue caché fin-->
                                   {% endfor %}
                         </div>
@@ -163,33 +120,19 @@ Bonjour {{ app.user.username}}
                         <div class="tab-pane fade in out" id="reponses">
                           {% for question in listeSolvedQuestions %}
 
-                                  <div class="panel panel-default fade in out">
-                                      <!-- contenue visible-->
-                                    <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                              <!-- rond pts-->
-                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond">{{question.remuneration}} pts</p></div></div>
-                                                <!-- rond pts fin-->
-                                                <!-- describ question-->
-                                        <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p></div>
-                                        </a>
-                                                <!-- describ question fin-->
-                                                <!-- bouton rep -->
-                                        <div class="grille-4"><button type="button" class="btn bouton-repondre">Répondre</button>
+                                  <div class="grille-question-centent">
+                                  <div class="grille-question-rond">
+                                      <div class="rond-point">
+                                        {{ question.remuneration }} pts
                                         </div>
-                                                <!-- bouton rep fin-->
-                                      </h4>                           
                                     </div>
-                                        <!-- contenue visible fin-->
-                                        <!-- contenue caché-->
-                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
-                                          <div class="panel-body">
-                                            <p>{{question.description}}</p>
-                                            <p>{{question.best_reponse}}</p>
-                                          </div>
-                                      </div>
-                                  </div>
+                                    <div class="grille-question-txt">
+                                        <p>{{ question.sujet }}</p>
+                                    </div>
+                                    <div class="grille-question-det">
+                                      <button type="button" class="btn bouton-repondre">Détails</button>
+                                    </div>
+                                </div>
                                     <!-- contenue caché fin-->
                                   {% endfor %}
                         </div>
@@ -265,3 +208,4 @@ Bonjour {{ app.user.username}}
 </div>
 
 {% endblock %}
+

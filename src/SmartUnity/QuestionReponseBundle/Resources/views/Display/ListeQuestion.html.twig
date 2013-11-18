@@ -14,23 +14,6 @@
 
 
 {% block body %}
-
-<!-- bouton radio -->
-     <div class="row">
-    	<div class="col-md-6 col-md-offset-3" >
-                <div class="text-center">
-                <div class="btn-group" data-toggle="buttons" style="margin-top:30px">
-                  <label class="btn bouton-radio active">
-                    <input type="radio" name="options" id="option1"><p class="cook-btn">Demander</p>
-                  </label>
-                  <label class="btn bouton-radio">
-                    <input type="radio" name="options" id="option2"><p class="cook-btn">Répondre</p>
-                  </label>
-                </div>
-                </div>
-        </div>
-    </div>
-    <!-- bouton radio fin -->
     
     {% include "SmartUnityAppBundle::BarreRecherche.html.twig" %}
     
@@ -89,19 +72,20 @@
                                         <!-- contenue caché-->
                                    		<div id="collapse{{loop.index}}" class="panel-collapse collapse">
                                         	<div class="panel-body">
-                                            <div class="row">
-                                              <div style="float:left; width:10%; text-align:center; font-weight:bold"></div>
-                                              <div style="float:left; width:85%; margin-left:5%">
-                                                <p>{{question.description}}</p>
-                                              </div>
-                                            </div>
-                                            <div class="row">
-                                              <div style="float:left; width:10%; text-align:center; font-weight:bold"></div>
-                                              <div style="float:left; width:10%; text-align:center; font-weight:bold">date</div>
-                                              <div style="float:left; width:75%; margin-left:5%">
-                                                <p>{{question.best_reponse}}</p>
-                                              </div>
-                                            </div>
+
+                                                <div class="grille-det">
+                                                        <p>{{question.description}}</p>
+                                                </div>
+                                                <div class="grille-det-content">
+                                                    <div class="grille-det1">
+                                                            <p>Woofywoofdu39</p>
+                                                            <p>date</p>
+                                                      </div>
+                                                        <div class="grille-det2">
+                                                        <p>{{question.best_reponse}}</p>
+                                                      </div>
+                                                </div>
+
                                           </div>
                                     	</div>
                                  	</div>

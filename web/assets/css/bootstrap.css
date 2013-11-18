@@ -912,6 +912,14 @@ pre code {
 .col-xs-12 {
   width: 100%;
 }
+@media (max-width: 768px) {
+	.container
+	{
+		min-width:600px;
+		
+	}
+
+}
 
 @media (min-width: 768px) {
   .container {

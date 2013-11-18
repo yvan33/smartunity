@@ -7,6 +7,7 @@
 {
 	width:430px;
 }
+
 }
 @media (min-width: 992px)  and (max-width: 1200px) {
 	.bouton-radio
@@ -16,7 +17,7 @@
 .grille-2
 {
 	width:260px;
-} 
+}
 
 }
 
@@ -30,6 +31,7 @@
 	width:320px;
 } 
 
+
 }
 
 @media screen and (max-width: 768px)
@@ -42,15 +44,47 @@
 {
 	width:45%;
 } 
+
 }
 .grille-1
 {
 	width:80px;
 	margin:10px;
 	float:left;
-
+}
+.grille-det
+{
+	margin-left:110px;
 	
 }
+.grille-det-content
+{
+	margin-left:140px;
+	border-top: solid 1px #CCCCCC;
+	clear:both;
+	
+}
+.grille-det1
+{
+	float:left;
+	margin-top:10px;
+	margin-right:-150px;
+	font-weight:bold;
+  	width:130px;
+
+} 
+.grille-det2
+{
+	
+  	float:left;
+	margin-top:10px;
+	margin-left:150px;
+	width:auto;
+	
+	
+
+	
+} 
 .rond-point
 {
 	background: linear-gradient( to top, #E0E0E0,#FFF);
@@ -61,11 +95,9 @@
 	height:60px;
 	border: solid 1px #999999;
 	text-align:center;
-}
-.txt-rond
-{
 	line-height:60px;	
 }
+
 .grille-2
 {
 	float:left;
@@ -139,6 +171,15 @@
 {
 	text-shadow: 2px 1px  #FFFFFF;
 }
+.slider
+{
+
+	position:relative;
+	height:200px;
+	width:100%;
+	
+}
+
 .bouton-repondre
 {
 	background: linear-gradient( to top, #bfbfbf,#fbfbfb);
@@ -248,6 +289,7 @@
   color: inherit;
   
 }
+
 
 
 

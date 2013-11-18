@@ -1,22 +1,74 @@
 {% block recherche %}
-    <!-- logo plus texte -->
+
+    <style>
+    .slider
+    {
+      position:relative;
+      height:200px;
+      width:100%;
+    }
+
+    .container{
+      overflow:hidden;
+    }
+    </style>
+
     <div class="row">
-    	<div class="col-md-6 col-md-offset-3 text-center" ><div class="cent-h mar" style="margin-top:20px"><img src="{{ asset('assets/img/logo-titre.png') }}" class="valign-col-all" style="margin-right:20px" /><p class="valign-col-all cok-recherche">Smart'Recherche</p></div>
-        </div>
-    </div>
-    <!-- logo plus texte fin -->
-    <!-- recherche -->
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3 "> 
-            <form action="{{path('smart_unity_question_reponse_search_questions')}}" method="GET">              
-                <div class="input-group" style="margin-top:30px">
-                  	<input type="text" name="q" id="q" class="form-control">
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
-                  </span>
+            <div class="col-md-6 col-md-offset-3" >
+                      <div class="text-center">
+                      <div class="btn-group" data-toggle="buttons" style="margin-top:30px">
+                        <label class="btn bouton-radio active" id="sli-de"> <!-- id a jouter -->
+                          <input type="radio" name="options" id="option1"><p class="cook-btn">Demander</p>
+                        </label>
+                        <label class="btn bouton-radio" id="sli-re"><!-- id a jouter -->
+                          <input type="radio" name="options" id="option2"><p class="cook-btn">Répondre</p>
+                        </label>
+                      </div>
+                      </div>
+              </div>
+          </div>
+
+    <div class="slider" id="sli1">
+                    <div style="clear:both;">
+                        <div style="position:absolute; top:20px; left:20%;width:60%">
+                               <div class="cent-h">
+                               <img src="{{ asset('assets/img/logo-titre.png') }}" class="valign-col-all" style="margin-right:20px" />
+                               <p style="font-family:Cookie; font-size:56px" class="valign-col-all">Smart'Recherche</p>
+                               </div>
+                        </div>
+                        <div style="position:absolute; top:140px; left:20%;width:60%">
+                            <div class="input-group" style="margin-top:30px">
+                              <input type="text" class="form-control">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" ></span></button>
+                              </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear:both;">
+                        <div style="position:absolute; top:20px; left:103%; width:94%" >
+                           <div class="cent-h">
+                               <img src="{{ asset('assets/img/logo-titre.png') }}" class="valign-col-all" style="margin-right:20px" />
+                               <p style="font-family:Cookie; font-size:56px" class="valign-col-all">Apporte ton soutien à la communautée</p>
+                               </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-    </div>
-    <!-- recherche fin-->
+
+                <script>
+                  $( "#sli-de" ).click(function() {
+                    $( "#sli1" ).animate({  
+                      marginLeft: "0%",
+                    }, 700,"linear", function() {
+                      // Animation complete.
+                    });
+                  });
+                  $( "#sli-re" ).click(function() {
+                    $( "#sli1" ).animate({  
+                      marginLeft: "-100%",
+                    }, 700,"linear" , function() {
+                      // Animation complete.
+                    });
+                  });
+                </script>
 {% endblock %}
