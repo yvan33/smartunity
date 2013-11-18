@@ -78,6 +78,13 @@ class reponse
     private $commentaireReponses;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="signaler", type="boolean")
+     */
+    private $signaler;
+
+    /**
      * Constructor
      */
     public function __construct()   
@@ -287,5 +294,61 @@ class reponse
     public function getMembreCertif()
     {
         return $this->membreCertif;
+    }
+
+    /**
+     * Set signaler
+     *
+     * @param boolean $signaler
+     * @return reponse
+     */
+    public function setSignaler($signaler)
+    {
+        $this->signaler = $signaler;
+    
+        return $this;
+    }
+
+    /**
+     * Get signaler
+     *
+     * @return boolean 
+     */
+    public function getSignaler()
+    {
+        return $this->signaler;
+    }
+
+    /**
+     * Add commentaireReponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\commentaireReponse $commentaireReponses
+     * @return reponse
+     */
+    public function addCommentaireReponse(\SmartUnity\AppBundle\Entity\commentaireReponse $commentaireReponses)
+    {
+        $this->commentaireReponses[] = $commentaireReponses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove commentaireReponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\commentaireReponse $commentaireReponses
+     */
+    public function removeCommentaireReponse(\SmartUnity\AppBundle\Entity\commentaireReponse $commentaireReponses)
+    {
+        $this->commentaireReponses->removeElement($commentaireReponses);
+    }
+
+    /**
+     * Get commentaireReponses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCommentaireReponses()
+    {
+        return $this->commentaireReponses;
     }
 }

@@ -740,4 +740,37 @@ class membre extends BaseUser
     {
         return $this->soutienQuestions;
     }
+
+    /**
+     * Add commentaireReponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\commentaireReponse $commentaireReponses
+     * @return membre
+     */
+    public function addCommentaireReponse(\SmartUnity\AppBundle\Entity\commentaireReponse $commentaireReponses)
+    {
+        $this->commentaireReponses[] = $commentaireReponses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove commentaireReponses
+     *
+     * @param \SmartUnity\AppBundle\Entity\commentaireReponse $commentaireReponses
+     */
+    public function removeCommentaireReponse(\SmartUnity\AppBundle\Entity\commentaireReponse $commentaireReponses)
+    {
+        $this->commentaireReponses->removeElement($commentaireReponses);
+    }
+
+    /**
+     * Get commentaireReponses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCommentaireReponses()
+    {
+        return $this->commentaireReponses;
+    }
 }

@@ -86,6 +86,13 @@ class question
     private $soutienMembres;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="signaler", type="boolean")
+     */
+    private $signaler;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -387,5 +394,28 @@ class question
     public function getSoutienMembres()
     {
         return $this->soutienMembres;
+    }
+
+    /**
+     * Set signaler
+     *
+     * @param boolean $signaler
+     * @return question
+     */
+    public function setSignaler($signaler)
+    {
+        $this->signaler = $signaler;
+    
+        return $this;
+    }
+
+    /**
+     * Get signaler
+     *
+     * @return boolean 
+     */
+    public function getSignaler()
+    {
+        return $this->signaler;
     }
 }

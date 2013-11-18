@@ -48,6 +48,13 @@ class commentaireReponse
     private $membre;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="signaler", type="boolean")
+     */
+    private $signaler;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -155,5 +162,28 @@ class commentaireReponse
     public function getMembre()
     {
         return $this->membre;
+    }
+
+    /**
+     * Set signaler
+     *
+     * @param boolean $signaler
+     * @return commentaireReponse
+     */
+    public function setSignaler($signaler)
+    {
+        $this->signaler = $signaler;
+    
+        return $this;
+    }
+
+    /**
+     * Get signaler
+     *
+     * @return boolean 
+     */
+    public function getSignaler()
+    {
+        return $this->signaler;
     }
 }
