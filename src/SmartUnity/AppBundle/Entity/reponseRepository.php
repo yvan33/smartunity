@@ -55,7 +55,9 @@ class reponseRepository extends EntityRepository
             WHERE r.question = :QuestionId')
             ->setParameter('QuestionId', $QuestionId);
 
-        return $query->getScalarResult()[0][1];
+        $return = $query->getScalarResult();
+
+        return $return[0][1];
     }
 
 
