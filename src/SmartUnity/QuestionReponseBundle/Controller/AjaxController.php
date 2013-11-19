@@ -124,21 +124,24 @@ class AjaxController extends Controller
         $returnArray=array();
         array_push($returnArray, array( //Première ligne du tableau contient des infos sur la requête
             'nbParPage'=>$nbParPage,
-            'page'=>$page,
-            'nbReponses'=>$nbReponses,
+            'page'=> (int) $page,
+            'nbReponses'=> (int) $nbReponses,
             'nbPages'=>ceil($nbReponses / $nbParPage),
-            'slug'=>$slug
+            'slug'=>$slug,
+            'tri'=>$tri
         ));
 
 
         //On parcourt les réponses
         foreach($listeReponse as $reponse){
 
-            //Récupération des commentaires
+
             $commentairesReturn = array();
+            //Récupération des commentaires
             $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse),
                                                                     array('date' => 'asc'));
-
+            
+           
             //Remplissage du tableau de sortie commentaires
             foreach($commentaires as $commentaire){
                 array_push($commentairesReturn, array(
@@ -171,8 +174,8 @@ class AjaxController extends Controller
                 'id'=>$reponse[0]->getId(),
                 'description'=>$reponse[0]->getDescription(),
                 'date'=>$reponse[0]->getDate()->format('d-m-Y à H:i'),
-                'up_vote'=>$reponse['upVote'],
-                'down_vote'=>$reponse['downVote'],
+                'up_vote'=> (int) $reponse['upVote'],
+                'down_vote'=> (int) $reponse['downVote'],
                 'membre_nom'=>$reponse[0]->getMembre()->getNom(),
                 'membre_reputation'=>$reponse[0]->getMembre()->getReputation(),
                 'commentaires'=>$commentairesReturn,
@@ -182,10 +185,7 @@ class AjaxController extends Controller
             ));
         }
 
-        $return = '<html><head></head><body>';
-        $return .= json_encode($returnArray);
-        $return .= '</body></html>';
-        return new Response($return);
+        return new Response(json_encode($returnArray));
 
     }
 

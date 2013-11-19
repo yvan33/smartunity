@@ -82,6 +82,7 @@ class QuestionReponseController extends Controller
         //On récupère des infos utiles pour la pagination..
         $nbPages = $listeQuestions[0]->nbPages;
 
+        if ($page > $nbPages) $page = 1;
         
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
         if($listeQuestions[0]->type==$type && $listeQuestions[0]->nbParPage==$nbParPage && $listeQuestions[0]->page==$page)
@@ -180,17 +181,72 @@ class QuestionReponseController extends Controller
 
 
 
-
         //Affichage de LA question avec liste réponses
         //Fonctionne de la même manière que displayListOfQuestionAction()
+        $nbParPage = 5;
 
+        $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getReponses', array(
+            'slug'  => $slug,
+            'page' => $page,
+            'nbParPage'=>$nbParPage,
+            'tri'=>$tri
+        ));
+
+        
+        //Suppression de l'en tête HTTP et décodage du JSON
+        $cleanJSON = array();
+        $listeReponses = array();
+        $rebuildJSON = '';
+
+        
+        $cleanJSON = explode('[', $response, 2);
+        $listeReponses = json_decode('[' . $cleanJSON[1]);
+        
+
+        //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
+        //la requête pour vérifier son authenticité... 
+
+        //On récupère des infos utiles pour la pagination..
+        $nbPages = $listeReponses[0]->nbPages;
+        $nbReponses = $listeReponses[0]->nbReponses;
+
+        if ($page > $nbPages) $page = 1;
+        
+        //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
+        if($listeReponses[0]->slug==$slug && $listeReponses[0]->nbParPage==$nbParPage && $listeReponses[0]->page==$page && $listeReponses[0]->tri == $tri)
+            unset($listeReponses[0]);
+        else
+            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
+
+
+        //Génération de la pagination en statique (si pas de JS)
+        $pagination = array();
+        if($page!=1){
+            array_push($pagination, array('<<', '1', '-4'));
+            array_push($pagination, array('<', $page - 1, '-4'));
+        }
+        for ($i=-2; $i<3; $i++){
+            if( ($page + $i) >= 1  &&  ($page + $i) <= $nbPages )
+                array_push($pagination, array($page + $i, $page + $i, $i));
+        }
+        if($page < $nbPages){
+            array_push($pagination, array('>', $page + 1, '3'));
+            array_push($pagination, array('>>', $nbPages, '4'));
+        }
 
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
             'last_username' => $lastUsername,
             'error'         => $error,
-            'csrf_token' => $csrfToken
+            'csrf_token' => $csrfToken,
+            'nbReponses'=>$nbReponses,
+            'nbPages'=>$nbPages,
+            'tri'=>$tri,
+            'listeReponses'=>$listeReponses,
+            'pagination'=>$pagination,
+            'nbParPage'=>$nbParPage
+
         ));
     }
 
