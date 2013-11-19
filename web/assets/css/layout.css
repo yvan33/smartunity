@@ -172,6 +172,7 @@
 	-webkit-box-shadow: 0 0 30px  black;
        -moz-box-shadow: 0 0 30px  black;
             box-shadow: 0 0 30px  black;
+        min-height: 100%;    
 }
 .logo
 {

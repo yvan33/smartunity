@@ -1,10 +1,10 @@
 smart_unity_utilisateur_setinfos:
     pattern:  /modify_infos
-    defaults: { _controller: SmartUnityUtilisateurBundle:Default:setInfos }
+    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:setInfos }
 
 smart_unity_utilisateur_editinfos:
     pattern:  /edit_infos
-    defaults: { _controller: SmartUnityUtilisateurBundle:Default:indexWithEditInfos }
+    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:indexWithEditInfos }
 
 smart_unity_utilisateur_changepassword:
     pattern:  /change_password
@@ -12,11 +12,11 @@ smart_unity_utilisateur_changepassword:
     
 smart_unity_utilisateur_setpref:
     pattern:  /modify_pref
-    defaults: { _controller: SmartUnityUtilisateurBundle:Default:setPref }
+    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:setPref }
 
 smart_unity_utilisateur_homepage:
     pattern:  /
-    defaults: { _controller: SmartUnityUtilisateurBundle:Default:index }
+    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:index }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

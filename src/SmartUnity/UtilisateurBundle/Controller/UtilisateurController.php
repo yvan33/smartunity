@@ -5,7 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\QueryBuilder;
 
-class DefaultController extends Controller
+class UtilisateurController extends Controller
 {
     public function indexAction(Request $request)
     {
@@ -14,9 +14,9 @@ class DefaultController extends Controller
        
         $form_pref=$this->createForm('smartunity_user_preference', $user);
         $em = $this->getDoctrine()->getEntityManager();
+        
 
-
-        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array('form_pref'=> $form_pref->createView()));
+        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array('form_pref'=> $form_pref->createView(),));
     }
 
     public function indexWithEditInfosAction()
@@ -33,7 +33,7 @@ class DefaultController extends Controller
     public function setPrefAction(){
 
             $em=$this->getDoctrine()->getManager();
-            $useer = $this->container->get('security.context')->getToken()->getUser();
+            $user = $this->container->get('security.context')->getToken()->getUser();
             $form=$this->createForm('smartunity_user_preference', $user);
             $form->bind($this->getRequest());
 
