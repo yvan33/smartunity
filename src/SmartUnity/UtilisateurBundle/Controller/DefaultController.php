@@ -27,7 +27,7 @@ class DefaultController extends Controller
         $form_infos=$this->createForm('smartunity_user_informations', $user);
 
 
-        return $this->render('SmartUnityUtilisateurBundle:Profile:edit.html.twig', array('form_infos'=> $form_infos->createView() ));
+        return $this->render('SmartUnityUtilisateurBundle:Profile:edit.html.twig', array('form_infos'=> $form_infos->createView(),'form_pref'=> $form_pref->createView()));
     }    
 
     public function setPrefAction(){

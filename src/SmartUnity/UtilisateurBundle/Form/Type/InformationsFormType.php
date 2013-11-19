@@ -19,7 +19,7 @@ class InformationsFormType extends AbstractType {
         ->add('sexe', 'choice', array(
         'choices' => array(
             'm' => 'Masculin', 'f' => 'Féminin'),
-        'expanded' => true,
+        'required' => false,
 //        'data' => ""
         ))
         ->add('date_naissance', 'date', array(

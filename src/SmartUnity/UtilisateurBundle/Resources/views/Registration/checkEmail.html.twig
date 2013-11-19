@@ -1,0 +1,17 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+<link href="{{ asset('assets/css/register.css') }}" rel="stylesheet" type="text/css">
+{%endblock%}
+
+{% block register %}
+
+<div class="row contenu">
+
+    <div class="col-md-offset-2 col-md-8"">
+
+            <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    </div>
+</div>
+{% endblock%}
