@@ -17,10 +17,16 @@
 <div class="row">
                     <div class="col-md-offset-1 col-md-10" style="padding:0px">
                       <div class="grille-content-2">
-                        <div class="head-blue"><p style="float:left">Rootage galaxy s4 sous jelly bean 4.3</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">06 octombre 2013 11h gmt</p>
+                        <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ date }}</p>
                             </div>
+
+
+
+
+
+
                              <div class="grille-1">
-                              <div class="rond-point"><p>400 pts</p></div><div class="grille-soutient"><p style="margin:0px">31 soutients</p><button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button></div>
+                              <div class="rond-point"><p>{{ remuneration }} pts</p></div><div class="grille-soutient"><p style="margin:0px">{{ nb_soutiens }} soutien {% if nb_soutiens > 1 %}s{% endif %}</p><button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button></div>
                             </div>
                             
                             <div class="grille-2" >
@@ -33,14 +39,14 @@
                                               <img src="{{ asset('assets/img/logo-compte.png') }}"/>
                                         </div>
                                         <div class=" grille-3-txt">
-                                          <p style="margin:0px; font-weight:600">Yvan_du_33</p>
-                                            <p style="margin:0px">lol mais</p>
-                                            <p style="margin:0px">42 troll</p>
-                                            <p style="margin:0px">j'écris1</p>
+                                          <p style="margin:0px; font-weight:600">{{ membre_nom }}</p>
+                                            <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
+                                            <p style="margin:0px">{{nb_questions_membre}} Questions</p>
+                                            <p style="margin:0px">{{points_membre}} Smart'Points</p>
                                         </div>
                                         <div class="grille-3-rond">
                                           <div class="square-blue">
-                                            100
+                                            {{ membre_reputation }}
                                             </div>
                                         </div>
                                     </div>
@@ -48,8 +54,7 @@
       
                             </div>
                             </div>
-                            <p >Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moont, enim eiusmod high life enim eiusmod high life enim eiusmod high life enim eiusmod high life enim eiusmod high life enim eiusmod high life enim eiusmod high life enim eiusmod high life enim eiusmod high life enim eiusmod high life enim eiusmod high life 
-                            </p>
+                            <p>{{ question.description }}</p>
                               
                                 
                                 <div style="float:right">
@@ -59,143 +64,33 @@
                                 </div>
                                 </div>
                             </div>
-                        </div>
+
+
+                            {% for reponse in listeReponses %}
+                              {% if loop.index == 1 %}
+
+                                {% if reponse.is_validated or reponse.is_certif %}
+                                    {% include "SmartUnityQuestionReponseBundle:Include:ReponseBlock.html.twig" %}
+                                    {% if nbReponses > 1 %}{% include "SmartUnityQuestionReponseBundle:Include:ReponseDivider.html.twig" %}{% endif %}
+                                {% else %}
+                                    {% include "SmartUnityQuestionReponseBundle:Include:ReponseDivider.html.twig" %}
+                                    {% include "SmartUnityQuestionReponseBundle:Include:ReponseBlock.html.twig" %}
+                                {% endif %}
+
+                              {% else %}
+
+                                {% include "SmartUnityQuestionReponseBundle:Include:ReponseBlock.html.twig" %}
+
+                              {% endif %}
+                          {% endfor %}
+
+
                     </div>
                 </div>
-        <div class="row">
-                    <div class="col-md-offset-1 col-md-10" style="padding:0px">
-                      <div class="grille-content-2">
-                        <div class="head-blue"><p style="float:left">4 réponses</p><p style="float:right">06 octombre 2013 11h gmt</p>                            </div>
-                                    <div class="grille-reponse">
-                             <div class="grille-4">
-                                <div class="roww" style="display:inline-block">
-                                  <div class="fleche">
-                                      <a href=""><img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">4</p></a>
-                                    </div>
-                                    <div class="fleche">
-                                      <a href=""><img src="{{ asset('assets/img/fléche-rouge.png') }}"/><p style="color:#F00">5</p></a>
-                                    </div>
-                                </div>
-                                <div class="roww">
-                                  <p style="font-size:11px">03 octobre 2013.15.45</p>
-                                </div>
-                                <div class="roww" style="display:none">
-                                  <img src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/>
-                                </div>
-                            </div>
-                            
-                            <div class="grille-5" >
-                     
-                              <div class="grille-3-over">
-                                <div class="grille-3">
-                         
-                                    <div class="grille-3-grey">
-                                        <div class="grille-3-im">
-                                              <img src="{{ asset('assets/img/logo-compte.png') }}"/>
-                                        </div>
-                                        <div class=" grille-3-txt">
-                                          <p style="margin:0px; font-weight:600">Yvan_du_33</p>
-                                            <p style="margin:0px">lol mais</p>
-                                            <p style="margin:0px">42 troll</p>
-                                            <p style="margin:0px">j'écris1</p>
-                                        </div>
-                                        <div class="grille-3-rond">
-                                          <div class="square-blue">
-                                            100
-                                            </div>
-                                        </div>
-                                    </div>
-                               
-                              
-                            </div>
-                            </div>
-                            <p >Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. 
-                            </p>
-                                <div class="commentaire">
-                                <p style="float:left">troll je ne comprend pas le russe</p><p style="float:right"> lol le 3 octobre</p>
-                                </div>
-                                <div class="commentaire">
-                                <p style="float:left">troll je ne comprend pas le russe</p><p style="float:right"> lol le 3 octobre</p>
-                                </div>
-                                <div class="commentaire">
-                                <p style="float:left">troll je ne comprend pas le russe</p><p style="float:right"> lol le 3 octobre</p>
-                                </div>
-                                <div style="float:right">
-                                <div class="grille-3-btn">
-                                   <a href="#"><div class="bouton-com-rep">Commenter</div></a>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-              <div class="grille-reponse-smart">
-                             <div class="grille-4">
-                                <div class="roww" style="display:inline-block">
-                                  <div class="fleche">
-                                      <a href=""><img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">4</p></a>
-                                    </div>
-                                    <div class="fleche">
-                                      <a href=""><img src="{{ asset('assets/img/fléche-rouge.png') }}"/><p style="color:#F00">5</p></a>
-                                    </div>
-                                </div>
-                                <div class="roww">
-                                  <p style="font-size:11px">03 octobre 2013.15.45</p>
-                                </div>
-                                <div class="roww">
-                                  <img src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/>
-                                </div>
-                            </div>
-                            
-                            <div class="grille-5" >
-                     
-                              <div class="grille-3-over">
-                                <div class="grille-3">
-                         
-                                    <div class="grille-3-grey">
-                                        <div class="grille-3-im">
-                                              <img src="{{ asset('assets/img/logo-compte.png') }}"/>
-                                        </div>
-                                        <div class=" grille-3-txt">
-                                          <p style="margin:0px; font-weight:600">Yvan_du_33</p>
-                                            <p style="margin:0px">lol mais</p>
-                                            <p style="margin:0px">42 troll</p>
-                                            <p style="margin:0px">j'écris1</p>
-                                        </div>
-                                        <div class="grille-3-rond">
-                                          <div class="square-blue">
-                                            100
-                                            </div>
-                                        </div>
-                                    </div>
-                               
-                              
-                            </div>
-                            </div>
-                            <p >Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. 
-                            </p>
-                                <div class="commentaire">
-                                <p style="float:left">troll je ne comprend pas le russe</p><p style="float:right"> lol le 3 octobre</p>
-                                </div>
-                                <div class="commentaire">
-                                <p style="float:left">troll je ne comprend pas le russe</p><p style="float:right"> lol le 3 octobre</p>
-                                </div>
-                                <div class="commentaire">
-                                <p style="float:left">troll je ne comprend pas le russe</p><p style="float:right"> lol le 3 octobre</p>
-                                </div>
-                                <div style="float:right">
-                                <div class="grille-3-btn">
-                                   <a href="#"><div class="bouton-com-rep">Commenter</div></a>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
 
 
 {% endblock %}
-
-
 
 
 

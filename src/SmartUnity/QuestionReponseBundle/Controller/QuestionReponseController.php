@@ -235,6 +235,22 @@ class QuestionReponseController extends Controller
         }
 
 
+
+        $questionRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:question');
+        $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+        $question = $questionRepository->findOneBySlug($slug);
+
+        $membre = $question->getMembre();
+
+        $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
+        $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
+
+
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
             'last_username' => $lastUsername,
@@ -245,8 +261,16 @@ class QuestionReponseController extends Controller
             'tri'=>$tri,
             'listeReponses'=>$listeReponses,
             'pagination'=>$pagination,
-            'nbParPage'=>$nbParPage
-
+            'nbParPage'=>$nbParPage,
+            'question'=>$question,
+            'membre_nom'=>$membre->getNom(),
+            'membre_reputation'=>$membre->getReputation(),
+            'date'=>$question->getDate()->format('d-m-Y à H:i'),
+            'nb_soutiens'=>$question->getSoutienMembres()->count(),
+            'remuneration'=>$question->getRemuneration(),
+            'points_membre'=> (int) $membre->getCagnotte(),
+            'smart_reponses'=> (int) $smartReponses,
+            'nb_questions_membre'=> (int) $nb_questions_membre
         ));
     }
 

@@ -81,6 +81,21 @@ class questionRepository extends EntityRepository
     }
 
 
+    public function getNbQuestionsForUser($membreId)
+    {
+        $query = $this->_em->createQuery('
+            SELECT COUNT(q.id)
+            FROM
+            SmartUnityAppBundle:question q
+            WHERE q.membre = :membreId
+            ')
+            ->setParameter('membreId', $membreId);
+
+        $result = $query->getScalarResult();
+
+        return $result[0][1];
+    }
+
 
 
 

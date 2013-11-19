@@ -22,7 +22,7 @@ class reponseRepository extends EntityRepository
             SmartUnityAppBundle:reponse r LEFT JOIN SmartUnityAppBundle:noteReponse n WITH r.id = n.reponse
             WHERE r.question = :QuestionId
             GROUP BY r.id
-            ORDER BY somme DESC
+            ORDER BY r.dateCertification DESC, r.dateValidation DESC, somme DESC
             ')
             ->setParameter('QuestionId', $QuestionId)
             ->setMaxResults(1)
@@ -47,6 +47,22 @@ class reponseRepository extends EntityRepository
 
         */
 	}
+
+    public function getNbCertifForUser($membreId)
+    {
+        $query = $this->_em->createQuery('
+            SELECT COUNT(r.id)
+            FROM
+            SmartUnityAppBundle:reponse r
+            WHERE r.membre = :membreId
+            AND r.dateCertification IS NOT NULL
+            ')
+            ->setParameter('membreId', $membreId);
+
+        $result = $query->getScalarResult();
+
+        return $result[0][1];
+    }
 
     public function getNbReponses($QuestionId){
          $query = $this->_em->createQuery('
