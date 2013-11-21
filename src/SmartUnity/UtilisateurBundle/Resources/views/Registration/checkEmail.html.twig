@@ -1,5 +1,6 @@
-{% trans_default_domain 'FOSUserBundle' %}
 {% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
+{#{% extends "FOSUserBundle::layout.html.twig" %}#}
+{% trans_default_domain 'FOSUserBundle' %}
 
 {% block stylesheets %} 
 <link href="{{ asset('assets/css/register.css') }}" rel="stylesheet" type="text/css">
@@ -14,4 +15,4 @@
             <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
     </div>
 </div>
-{% endblock%}
+{% endblock %}

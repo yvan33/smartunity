@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\Response;
 
 class AccueilController extends Controller
 {
@@ -35,15 +36,7 @@ class AccueilController extends Controller
         // last username entered by the user
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
 
-        $csrfToken = $this->container->has('form.csrf_provider')
-            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
-            : null;
-
-
-
-
-
-        //////------------ CONTENU LISTE
+       //////------------ CONTENU LISTE
 
 
         //Cf SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestionAction
@@ -116,7 +109,6 @@ class AccueilController extends Controller
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
             'error'         => $error,
-            'csrf_token' => $csrfToken,
             'listeQuestionsOnFire' => $listeQuestionsOnFire,
             'listeLastQuestions' => $listeLastQuestions,
             'listeSolvedQuestions' => $listeSolvedQuestions
@@ -139,6 +131,4 @@ class AccueilController extends Controller
         return $this->container->get('templating')->renderResponse($template, $data);
     }
 //        return $this->render('SmartUnityAppBundle:Default:index.html.twig');
-
-    
-    }
+}    

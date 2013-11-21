@@ -42,10 +42,6 @@ class QuestionReponseController extends Controller
         // last username entered by the user
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
 
-        $csrfToken = $this->container->has('form.csrf_provider')
-            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
-            : null;
-
 
         // Capable d'afficher les 3 listes paginées dans un twig dédié à l'affichage d'une liste de questions...
     	
@@ -112,7 +108,6 @@ class QuestionReponseController extends Controller
         return $this->render($template, array(
             'last_username' => $lastUsername,
             'error'         => $error,
-            'csrf_token' => $csrfToken,
             'page'=>$page,
             'type'=>$type,
             'nbPages'=>$nbPages,
@@ -174,10 +169,6 @@ class QuestionReponseController extends Controller
         }
         // last username entered by the user
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
-
-        $csrfToken = $this->container->has('form.csrf_provider')
-            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
-            : null;
 
 
 
@@ -255,7 +246,6 @@ class QuestionReponseController extends Controller
         return $this->render($template, array(
             'last_username' => $lastUsername,
             'error'         => $error,
-            'csrf_token' => $csrfToken,
             'nbReponses'=>$nbReponses,
             'nbPages'=>$nbPages,
             'tri'=>$tri,
