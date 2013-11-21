@@ -15,10 +15,11 @@ class AccueilController extends Controller
 //Le code de la function indexAction Permet de récupérer la session et de préremplir le formulaire de login.    
             {
         
-        
+
+         
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
-
+ 
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
