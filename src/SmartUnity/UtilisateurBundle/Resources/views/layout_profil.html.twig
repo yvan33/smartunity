@@ -127,22 +127,9 @@
                 <div class="grille-4">réponses apportées</div>
             </div>
             <div class="row  ">
-            {% set smartrep= 0 %}
-            {%for r in app.user.reponses %}
-                {% if r.dateCertification is not null  %}
-
-                    {% set smartrep= smartrep + 1 %} 
-                {% endif %}           
-            {% endfor%}
             <div class="grille-3">{{ smartrep}}</div>  
             <div class="grille-4">Smart'Réponses</div>  
             </div>
-            {% set remuneration= 0 %}
-            {%for r in app.user.reponses %}
-                {% if r.dateValidation is not null %}
-                    {% set remuneration= remuneration + r.question.remuneration %}
-                {% endif %}             
-            {% endfor%}
             <div class="row  ">
                 <div class="grille-3">{{ remuneration }}</div>
                 <div class="grille-4">Points gagnés</div>

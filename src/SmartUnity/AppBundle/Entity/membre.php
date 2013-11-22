@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Membre
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\membreRepository")
  */
 class membre extends BaseUser
 {

@@ -3,6 +3,7 @@
 namespace SmartUnity\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * MembreRepository
@@ -12,4 +13,43 @@ use Doctrine\ORM\EntityRepository;
  */
 class MembreRepository extends EntityRepository
 {
+
+    public function getSmartReponses($membreId)
+    {
+        $query = $this->_em->createQuery('
+            SELECT COUNT(r.id)
+            FROM
+            SmartUnityAppBundle:reponse r
+            WHERE r.membre = :membreId
+            AND r.dateCertification IS NOT NULL
+            ')
+            ->setParameter('membreId', $membreId);
+
+        $result = $query->getScalarResult();
+
+        return $result[0][1];
+
+    }
+
+    public function getRemuneration($membreId)
+    {
+        $query = $this->_em->createQuery('
+			SELECT SUM(q.remuneration)	
+            FROM
+            SmartUnityAppBundle:reponse r, SmartUnityAppBundle:question q
+            WHERE r.membre = :membreId
+            AND r.dateValidation IS NOT NULL AND r.question=q.id
+            ')
+            ->setParameter('membreId', $membreId);
+
+
+        $result = $query->getScalarResult();
+
+        return $result[0][1] ;
+    }
+
+
+    
+    
+
 }

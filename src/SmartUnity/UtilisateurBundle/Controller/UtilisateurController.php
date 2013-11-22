@@ -15,8 +15,14 @@ class UtilisateurController extends Controller
         $form_pref=$this->createForm('smartunity_user_preference', $user);
         $em = $this->getDoctrine()->getEntityManager();
         
+        $membreRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:membre');
 
-        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array('form_pref'=> $form_pref->createView(),));
+        $userid=$user->getId();
+        $smartreponse = $membreRepository->getSmartReponses($userid);  
+        $remuneration= $membreRepository->getRemuneration($userid);
+        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array('form_pref'=> $form_pref->createView(),'smartrep'=> $smartreponse,'remuneration'=> $remuneration, ));
     }
 
     public function indexWithEditInfosAction()
@@ -26,8 +32,14 @@ class UtilisateurController extends Controller
         $form_pref=$this->createForm('smartunity_user_preference', $user);
         $form_infos=$this->createForm('smartunity_user_informations', $user);
 
+        $membreRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:membre');
 
-        return $this->render('SmartUnityUtilisateurBundle:Profile:edit.html.twig', array('form_infos'=> $form_infos->createView(),'form_pref'=> $form_pref->createView()));
+        $userid=$user->getId();
+        $smartreponse = $membreRepository->getSmartReponses($userid); 
+        $remuneration = $membreRepository->getRemuneration($userid); 
+        return $this->render('SmartUnityUtilisateurBundle:Profile:edit.html.twig', array('form_infos'=> $form_infos->createView(),'form_pref'=> $form_pref->createView(), 'smartrep'=> $smartreponse, 'remuneration'=> $remuneration,));
     }    
 
     public function setPrefAction(){
