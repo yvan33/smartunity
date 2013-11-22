@@ -27,7 +27,8 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     globals:
-        fos_csrf_provider: "@form.csrf_provider"    
+        fos_csrf_provider: "@form.csrf_provider" 
+    cache: false    
 #    form:
 #        resources:
 #            - 'SmartUnityUtilisateurBundle:Form:form_div_layout.html.twig'
@@ -65,14 +66,14 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-#    transport: %mailer_transport%
-#    host:      %mailer_host%
-#    username:  %mailer_user%
-#    password:  %mailer_password%
-#    spool:     { type: memory }
-    transport: gmail
-    username:  yvan.gadeau@gmail.com
-    password:  H@nd8@ll
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+#    transport: gmail
+#    username:  yvan.gadeau@gmail.com
+#    password:  
 
 
 # FOSUserBundle Configuration

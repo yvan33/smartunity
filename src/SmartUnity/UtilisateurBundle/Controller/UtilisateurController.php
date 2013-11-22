@@ -32,6 +32,7 @@ class UtilisateurController extends Controller
         $form_pref=$this->createForm('smartunity_user_preference', $user);
         $form_infos=$this->createForm('smartunity_user_informations', $user);
 
+
         $membreRepository = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('SmartUnityAppBundle:membre');
@@ -55,8 +56,9 @@ class UtilisateurController extends Controller
             $em->persist($user);
             $em->flush(); 
             }
+
         
-        return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
+            return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
 
     }
     
@@ -73,7 +75,8 @@ class UtilisateurController extends Controller
             $em->persist($user);
             $em->flush(); 
             }
-        
+               
+            
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
 
     }

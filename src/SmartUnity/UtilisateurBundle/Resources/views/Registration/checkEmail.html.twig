@@ -8,11 +8,17 @@
 
 {% block register %}
 
-<div class="row contenu">
+<div class="row">
 
     <div class="col-md-offset-2 col-md-8"">
-
-            <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+        <div class="grille-content"> 
+            <div class="title text-center cookie-title">
+                Formulaire envoyé!
+            </div>
+            <div>
+                <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,19 +1,48 @@
 {% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block stylesheets %} 
+<link href="{{ asset('assets/css/register.css') }}" rel="stylesheet" type="text/css">
+{%endblock%}
+
 {% block fos_user_content %}
 
-<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-    <div>
-        {% if invalid_username is defined %}
-            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
-        {% endif %}
-        <label for="username">{{ 'resetting.request.username'|trans }}</label>
-        <input type="text" id="username" name="username" required="required" />
-    </div>
-    <div>
-        <input type="submit" value="boum" />
-    </div>
-</form>
 
+{#<div class="row">
+
+    <div class="col-md-offset-2 col-md-8"">
+        <div class="grille-content"> 
+            <div class="title text-center cookie-title">
+                Réinitialisation de votre mot de passe
+            </div>
+        </div>
+    </div>
+</div>#}
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <div class="grille-content panneau-bas">  
+            <div class="row text-center cookie-title">
+                Réinitialisation de votre mot de passe
+            </div>
+
+            <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+                    <div class="erreur">
+        {% if invalid_username is defined %}
+                        <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+        {% endif %}
+                    </div>
+                    <div class="grille-1-reinitialisation">
+                         <label class="label-normal" for="username">{{ 'resetting.request.username'|trans }}</label>
+                    </div>
+                    <div class="grille-2-reinitialisation">
+                        <input class="form-control forminfo" type="text" id="username" name="username" required="required" />
+                    </div>
+                <div class="cent-h bouton-bas-block cleared">
+                    <button type="submit" class="btn btn-primary btn-lg">Valider</button>
+                </div> 
+            </form>
+        </div>
+    </div>
+</div>   
 {% endblock fos_user_content %}
