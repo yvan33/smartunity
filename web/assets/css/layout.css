@@ -45,10 +45,9 @@
 }
 .connection
 {
-	height: 100px;
 	width: 250px;
 	margin-left: -75px;
-	margin-top: 20px;
+	
 }
 }
 @media (min-width: 992px)  and (max-width: 1200px) {
@@ -95,10 +94,8 @@
 }
 .connection
 {
-	height: 100px;
 	width: 300px;
 	margin-left: -100px;
-	margin-top: 20px;
 }
 }
 
@@ -136,10 +133,8 @@
 }
 .connection
 {
-	height: 100px;
 	width: 300px;
-	margin-left: -120px;
-	margin-top: 20px;
+	margin-left: -100px;
 }
 }
 
@@ -174,10 +169,8 @@
 }
 .connection
 {
-	height: 100px;
 	width: 500px;
-	margin-left: -220px;
-	margin-top: 20px;
+	margin-left: -175px;
 }
 }
 .cook-foot
@@ -293,6 +286,7 @@
 	z-index: 10000;
 	float: left;
 	display: none;
+	margin-top: 5px;
 	
 	
 }
@@ -331,9 +325,8 @@
 }
 .connection-triangle-content
 {
-	margin-left: auto;
-	margin-right: auto;
 	width: 100%;
 }
+
 
 

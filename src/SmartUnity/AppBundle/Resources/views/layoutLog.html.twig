@@ -66,12 +66,56 @@
                   <p>Connexion</p>
               </a>  -->
 
-            <div class="accordion" id="accordion2">
-                <div class="accordion-group">
-                  <div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Connexion">Connexion</a></div>
-                  <a href="{{ path('fos_user_registration_register') }}" class="valign-col-all pad-l"><p>S'inscrire</p></a>
+            
+            <div class="col-md-5 cent-h">
+              <div class="cent-h logo2">
+                <div>
+                  <a href="#" class="valign-col-all pad-l" id="clic-pop">
+                    <p>Connection</p>
+                  </a>
+                  <a href="{{ path('fos_user_registration_register') }}" class="valign-col-all pad-l">
+                    <p>S'inscrire</p>
+                  </a>
+                  <div class="connection" id="pop">
+                    <div class="connection-triangle-content">
+                      <div class="connection-triangle" ></div>
+                      <div class="connection-triangle-border"></div>
+                      <div class="panel-body">
+                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                          <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
+                            <fieldset>
+                            <div class="form-group">
+                              <input class="form-control" style="background-color: #FFF; color:#666" placeholder="pseudo" type="text" id="username" name="_username" value="{{ last_username }}" required="required">        
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Password" type="password" id="password" name="_password" required="required">
+                            </div>
+                            <div class="checkbox">
+                              <label>
+                                <input id="remember_me" type="checkbox"  name="_remember_me" value="on"> Se souvenir de moi
+                                    <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a>
+                              </label>
+                            </div>
+                              <input class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" type="submit" value="Login" style="line-height:14px">
+                          </fieldset>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+            <script>
+       $( "#clic-pop,#pop" ).click(function(event) {
+        $( "#pop" ).fadeIn();
+             event.stopPropagation();
+                                        });
+       $( document).click(function(event) {
+        $( "#pop" ).hide();
+       
+      
+                                        });
+        </script>
 
 
             {% endif %}
@@ -120,47 +164,6 @@
 <div class="row">
 <div class="col-md-12">
 
-<div class="row">
-<div class="col-md-12">
-{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-<div id="Connexion" class="accordion-body collapse off">
-      <div class="accordion-inner">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Connexion</h3>
-                </div>
-                <div class="panel-body">
-                  <form action="{{ path("fos_user_security_check") }}" method="post">
-                    <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
-                      <fieldset>
-                        <div class="form-group">
-                          <input class="form-control" placeholder="pseudo" type="text" id="username" name="_username" value="{{ last_username }}" required="required">        
-                        </div>
-                        <div class="form-group">
-                          <input class="form-control" placeholder="Password" type="password" id="password" name="_password" required="required">
-                        </div>
-                        <div class="checkbox">
-                          <label>
-                            <input id="remember_me" type="checkbox"  name="_remember_me" value="on"> Se souvenir de moi
-                                <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a>
-                          </label>
-                        </div>
-                        <input class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" type="submit" value="Login">
-                      </fieldset>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-{% endif %}
 
 <!-- BODY -->
 
