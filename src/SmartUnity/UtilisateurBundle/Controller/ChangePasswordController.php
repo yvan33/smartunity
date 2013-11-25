@@ -77,14 +77,11 @@ class ChangePasswordController extends BaseController {
             }
         }
 
-// last username entered by the user
-        $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
 
         return $this->container->get('templating')->renderResponse(
                         'FOSUserBundle:ChangePassword:changePassword.html.' . $this->container->getParameter('fos_user.template.engine'), array('form_pref' => $form_pref->createView(),
                     'form_password' => $form_password->createView(),
-                    'last_username' => $lastUsername,)
-        );
+        ));
     }
 
 }

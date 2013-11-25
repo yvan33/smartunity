@@ -39,8 +39,6 @@ class QuestionReponseController extends Controller
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
         }
-        // last username entered by the user
-        $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
 
 
         // Capable d'afficher les 3 listes paginées dans un twig dédié à l'affichage d'une liste de questions...
@@ -106,7 +104,6 @@ class QuestionReponseController extends Controller
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
         return $this->render($template, array(
-            'last_username' => $lastUsername,
             'error'         => $error,
             'page'=>$page,
             'type'=>$type,
@@ -167,8 +164,7 @@ class QuestionReponseController extends Controller
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
         }
-        // last username entered by the user
-        $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
+
 
 
 
@@ -244,7 +240,6 @@ class QuestionReponseController extends Controller
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
-            'last_username' => $lastUsername,
             'error'         => $error,
             'nbReponses'=>$nbReponses,
             'nbPages'=>$nbPages,

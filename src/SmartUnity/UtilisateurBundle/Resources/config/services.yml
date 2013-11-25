@@ -19,3 +19,8 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: smartunity_user_informations }    
+            
+   utilisateur.twig.utilisateur_extension:
+        class: SmartUnity\UtilisateurBundle\Twig\utilisateurExtension
+        tags:
+            - { name: twig.extension }            
