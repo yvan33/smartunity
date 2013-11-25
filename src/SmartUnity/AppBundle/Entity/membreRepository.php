@@ -44,8 +44,12 @@ class MembreRepository extends EntityRepository
 
 
         $result = $query->getScalarResult();
-
-        return $result[0][1] ;
+        
+        if( isset($result[0][1]) )
+            return $result[0][1];
+        else
+            return 0;
+        
     }
 
 
