@@ -183,10 +183,11 @@
 {
 	background-color:#2b3a41;
 	background-image:url(../img/background-menu.png);
-	background-repeat:no-repeat;
+	background-repeat: repeat-x;
 	-webkit-box-shadow: 0 5px 20px  black;
        -moz-box-shadow: 0 5px 20px  black;
             box-shadow: 0 5px 20px  black;
+   
 	width:100%;
 }
 
@@ -194,10 +195,7 @@
 .bg
 {
 	background-color:#edebeb;
-	box-shadow: 0 0 30px black;
-	-webkit-box-shadow: 0 0 30px  black;
-       -moz-box-shadow: 0 0 30px  black;
-            box-shadow: 0 0 30px  black;
+
 }
 .logo
 {
@@ -283,16 +281,15 @@
 	background-color: #c8cbce;
 	border-radius: 5px;
 	border: solid 2px #d6dce1;
-	z-index: 10000;
-	float: left;
-	display: none;
+	z-index: 10000000;
 	margin-top: 5px;
+	display: none;
 	
 	
 }
 .connection-triangle-border
 {	position: relative;
-    z-index: 10001;
+    z-index: 1000001;
 	width: 0; 
 	height: 0; 
 	border-left: 20px solid transparent;
@@ -309,7 +306,7 @@
 .connection-triangle
 {
 	position: relative;
-	z-index: 10002;
+	z-index: 1000002;
 	width: 0; 
 	height: 0; 
 	border-left: 18px solid transparent;

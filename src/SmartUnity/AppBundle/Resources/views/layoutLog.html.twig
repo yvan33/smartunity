@@ -35,10 +35,10 @@
 
  
 <!-- bg body -->
-<body style="background-color:#334A64">
+<body class="bg">
 <!-- head -->
-
- <div class="container bg">
+<div class="" style="position:fixed !important;z-index: 1000000;width: 100%;">
+ <div class="container bg" >
  
   <div class="row">
   <div class="col-md-12">
@@ -60,19 +60,13 @@
 
 
             {% else %}
-
-
-<!--               <a href="{{ path('fos_user_security_login') }}" class="valign-col-all pad-l">
-                  <p>Connexion</p>
-              </a>  -->
-
             
             <div class="col-md-5 cent-h">
               <div class="cent-h logo2">
                 <div>
-                  <a href="#" class="valign-col-all pad-l" id="clic-pop">
-                    <p>Connection</p>
-                  </a>
+                  <div class="valign-col-all pad-l" id="clic-pop" >
+                    <p style="cursor:  pointer;">Connection</p>
+                  </div>
                   <a href="{{ path('fos_user_registration_register') }}" class="valign-col-all pad-l">
                     <p>S'inscrire</p>
                   </a>
@@ -105,17 +99,21 @@
                 </div>
               </div>
             </div>
+
             <script>
        $( "#clic-pop,#pop" ).click(function(event) {
         $( "#pop" ).fadeIn();
              event.stopPropagation();
+
+            
                                         });
        $( document).click(function(event) {
         $( "#pop" ).hide();
+        
        
       
                                         });
-        </script>
+        </script> 
 
 
             {% endif %}
@@ -126,11 +124,11 @@
   </div>
   </div>
   </div>
-  
+</div>  
 
 <!-- /.navbar-collapse -->
   <div class="row">
-    <div class="col-md-12 menu-bg">
+    <div class="col-md-12 menu-bg" style="position: relative">
       <nav class="navbar navbar-inverse" role="navigation">
          <!--navbar- mobile -->
                   <div class="navbar-header">
@@ -159,9 +157,13 @@
       </nav>
     </div>
   </div>
+   
+</div>
+</div>
 <!-- end nav -->
-
+ <div class="container" >
 <div class="row">
+   <div style="height: 250px"></div>
 <div class="col-md-12">
 
 
@@ -178,12 +180,14 @@
 <!-- end BODY-->   
 
 <!-- footer --> 
+</div>
 	<!-- footer separation --> 	
   <div class="row">
     <div class="col-md-12 foot-sep">
     </div>
   </div>
-  <!-- footer separation fin -->  
+  <!-- footer separation fin --> 
+ <div class="container"> 
   <div class="row valign-row footer"  style="padding-top:20px; padding-bottom:20px; text-align:center">
     <div class="col-md-5 valign-col col-mar"><p class="cook-foot valign-col">Suivez nous:</p><a href="#"><img src="{{ asset('assets/img/logo-f-f.png') }}" class="foot-im"/></a><a href="#"><img src="{{ asset('assets/img/logo-t-f.png') }}" class="foot-im"/></a><a href="#"><img src="{{ asset('assets/img/logo-g-f.png') }}" class="foot-im"/></a>
           </div>
