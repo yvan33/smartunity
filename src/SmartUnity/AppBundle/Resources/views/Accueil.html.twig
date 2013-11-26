@@ -78,63 +78,81 @@ Bonjour {{ app.user.username}}
 
 
                         <div class="tab-pane active fade in out" id="onFire">
-                          {% for question in listeQuestionsOnFire %}
+                          {% if countOnFire == 0 %}
+                            <br/>
+                            <p align="center">Il n'y a aucune question On Fire</p>
+                            <br/>
+                          {% else %}
+                              {% for question in listeQuestionsOnFire %}
 
-                                  <div class="grille-question-centent">
-                                  <div class="grille-question-rond">
-                                      <div class="rond-point">
-                                        {{ question.remuneration }} pts
+                                      <div class="grille-question-centent">
+                                      <div class="grille-question-rond">
+                                          <div class="rond-point">
+                                            {{ question.remuneration }} pts
+                                            </div>
+                                        </div>
+                                        <div class="grille-question-txt">
+                                            <p>{{ question.sujet }}</p>
+                                        </div>
+                                        <div class="grille-question-det">
+                                          <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                         </div>
                                     </div>
-                                    <div class="grille-question-txt">
-                                        <p>{{ question.sujet }}</p>
-                                    </div>
-                                    <div class="grille-question-det">
-                                      <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
-                                    </div>
-                                </div>
-                                    <!-- contenue caché fin-->
-                                  {% endfor %}
+                                        <!-- contenue caché fin-->
+                              {% endfor %}
+                          {% endif %}
                         </div>
 
                         <div class="tab-pane fade in out" id="last">
-                          {% for question in listeLastQuestions %}
+                          {% if countLast == 0 %}
+                            <br/>
+                            <p align="center">Il n'y a aucune question r&eacute;cente</p>
+                            <br/>
+                          {% else %}
+                              {% for question in listeLastQuestions %}
 
-                                  <div class="grille-question-centent">
-                                  <div class="grille-question-rond">
-                                      <div class="rond-point">
-                                        {{ question.remuneration }} pts
+                                      <div class="grille-question-centent">
+                                      <div class="grille-question-rond">
+                                          <div class="rond-point">
+                                            {{ question.remuneration }} pts
+                                            </div>
+                                        </div>
+                                        <div class="grille-question-txt">
+                                            <p>{{ question.sujet }}</p>
+                                        </div>
+                                        <div class="grille-question-det">
+                                          <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                         </div>
                                     </div>
-                                    <div class="grille-question-txt">
-                                        <p>{{ question.sujet }}</p>
-                                    </div>
-                                    <div class="grille-question-det">
-                                      <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
-                                    </div>
-                                </div>
-                                    <!-- contenue caché fin-->
-                                  {% endfor %}
+                                        <!-- contenue caché fin-->
+                              {% endfor %}
+                          {% endif %}
                         </div>
 
                         <div class="tab-pane fade in out" id="reponses">
-                          {% for question in listeSolvedQuestions %}
+                          {% if countSolved == 0 %}
+                            <br/>
+                            <p align="center">Il n'y a aucune question r&eacute;solue</p>
+                            <br/>
+                          {% else %}
+                            {% for question in listeSolvedQuestions %}
 
-                                  <div class="grille-question-centent">
-                                  <div class="grille-question-rond">
-                                      <div class="rond-point">
-                                        {{ question.remuneration }} pts
-                                        </div>
-                                    </div>
-                                    <div class="grille-question-txt">
-                                        <p>{{ question.sujet }}</p>
-                                    </div>
-                                    <div class="grille-question-det">
-                                      <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
-                                    </div>
-                                </div>
-                                    <!-- contenue caché fin-->
-                                  {% endfor %}
+                                    <div class="grille-question-centent">
+                                    <div class="grille-question-rond">
+                                        <div class="rond-point">
+                                          {{ question.remuneration }} pts
+                                          </div>
+                                      </div>
+                                      <div class="grille-question-txt">
+                                          <p>{{ question.sujet }}</p>
+                                      </div>
+                                      <div class="grille-question-det">
+                                        <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
+                                      </div>
+                                  </div>
+                                      <!-- contenue caché fin-->
+                            {% endfor %}
+                          {% endif %}
                         </div>
 
 

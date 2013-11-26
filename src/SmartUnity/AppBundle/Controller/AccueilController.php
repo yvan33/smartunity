@@ -109,8 +109,11 @@ class AccueilController extends Controller
         return $this->renderLogin(array(
             'error'         => $error,
             'listeQuestionsOnFire' => $listeQuestionsOnFire,
+            'countOnFire'=> count($listeQuestionsOnFire),
             'listeLastQuestions' => $listeLastQuestions,
-            'listeSolvedQuestions' => $listeSolvedQuestions
+            'countLast' => count($listeLastQuestions),
+            'listeSolvedQuestions' => $listeSolvedQuestions,
+            'countSolved' => count($listeSolvedQuestions),
         ));
 
     }

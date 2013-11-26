@@ -49,46 +49,48 @@ class AjaxController extends Controller
             'slug'=>'_infos'
         ));
 
-        foreach($listeQuestion as $Question){ //On parcourt toutes les questions, on les liste dans le tableau de sortie
+        if($listeQuestion[0] != null){
+            foreach($listeQuestion as $Question){ //On parcourt toutes les questions, on les liste dans le tableau de sortie
 
-            $reponse = '';
-            $bestReponse = '';
-            $idBestReponse = '';
-            $auteurBestreponse= '';
-            $dateBestReponse = '';
+                $reponse = '';
+                $bestReponse = '';
+                $idBestReponse = '';
+                $auteurBestreponse= '';
+                $dateBestReponse = '';
 
-            $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
-            if ($idBestReponse['repId'] !== false){
+                $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
+                if ($idBestReponse['repId'] !== false){
 
-                foreach($Question->getReponses() as $reponse){
-                    if($reponse->getId() == $idBestReponse['repId']){
-                        $bestReponse = $reponse->getDescription();
-                        $auteurBestreponse = $reponse->getMembre()->getPrenom() . ' ' . $reponse->getMembre()->getNom();
-                        $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
-                        break;
+                    foreach($Question->getReponses() as $reponse){
+                        if($reponse->getId() == $idBestReponse['repId']){
+                            $bestReponse = $reponse->getDescription();
+                            $auteurBestreponse = $reponse->getMembre()->getPrenom() . ' ' . $reponse->getMembre()->getNom();
+                            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+                            break;
+                        }
                     }
+
                 }
 
+
+                array_push($returnArray, array(
+                	'id'=>$Question->getId(),
+                	'sujet'=>$Question->getSujet(),
+                	'description'=>$Question->getDescription(),
+                	'date'=>$Question->getDate()->format('d-m-Y à H:i'),
+                    'membre_nom'=>$Question->getMembre()->getNom(),
+                    'membre_prenom'=>$Question->getMembre()->getPrenom(),
+                    'remuneration'=>$Question->getRemuneration(),
+                    'nb_reponses'=>$Question->getReponses()->count(),
+                    'best_reponse'=>$bestReponse,
+                    'auteur_best_reponse'=>$auteurBestreponse,
+                    'date_best_reponse'=>$dateBestReponse,
+                    'slug'=>$Question->getSlug(),
+                    'count_soutien'=>$Question->getSoutienMembres()->count(),
+                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
+                ));
+
             }
-
-
-            array_push($returnArray, array(
-            	'id'=>$Question->getId(),
-            	'sujet'=>$Question->getSujet(),
-            	'description'=>$Question->getDescription(),
-            	'date'=>$Question->getDate()->format('d-m-Y à H:i'),
-                'membre_nom'=>$Question->getMembre()->getNom(),
-                'membre_prenom'=>$Question->getMembre()->getPrenom(),
-                'remuneration'=>$Question->getRemuneration(),
-                'nb_reponses'=>$Question->getReponses()->count(),
-                'best_reponse'=>$bestReponse,
-                'auteur_best_reponse'=>$auteurBestreponse,
-                'date_best_reponse'=>$dateBestReponse,
-                'slug'=>$Question->getSlug(),
-                'count_soutien'=>$Question->getSoutienMembres()->count(),
-                'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
-            ));
-
         }
 
         //SORTIE: JSON du tableau de sortie
