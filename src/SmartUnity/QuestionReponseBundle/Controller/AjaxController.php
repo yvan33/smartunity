@@ -4,6 +4,7 @@ namespace SmartUnity\QuestionReponseBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AjaxController extends Controller
 {
@@ -114,7 +115,14 @@ class AjaxController extends Controller
 
         //Récupération de l'id de la question à partir du Slug
         //Utilisatioin des meta-fonctions du repository
-        $QuestionId = $questionRepository->findOneBySlug($slug)->getId();
+        $Question = $questionRepository->findOneBySlug($slug);
+
+        if($Question == null){
+            throw new NotFoundHttpException("Cette question n'a pas encore été posée!");
+            exit();
+        }else{
+            $QuestionId = $Question->getId();
+        }
 
         //Récupération de la liste des réponses
         $listeReponse = $reponseRepository->getReponsesWithVotes($QuestionId, $page, $nbParPage, $tri);
@@ -133,56 +141,59 @@ class AjaxController extends Controller
 
 
         //On parcourt les réponses
-        foreach($listeReponse as $reponse){
+        if($listeReponse[0] != null){
+            foreach($listeReponse as $reponse){
 
 
-            $commentairesReturn = array();
-            //Récupération des commentaires
-            $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse),
-                                                                    array('date' => 'asc'));
-            
-           
-            //Remplissage du tableau de sortie commentaires
-            foreach($commentaires as $commentaire){
-                array_push($commentairesReturn, array(
-                    'description'=>$commentaire->getDescription(),
-                    'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
-                    'membre_nom'=>$commentaire->getMembre()->getNom()
+                $commentairesReturn = array();
+
+                //Récupération des commentaires
+                $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse),
+                                                                        array('date' => 'asc'));
+                
+               
+                //Remplissage du tableau de sortie commentaires
+                foreach($commentaires as $commentaire){
+                    array_push($commentairesReturn, array(
+                        'description'=>$commentaire->getDescription(),
+                        'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
+                        'membre_nom'=>$commentaire->getMembre()->getNom()
+                    ));
+                }
+
+                $isCertif=false;
+                if ($reponse[0]->getDateCertification() != null)
+                    $isCertif = true;
+
+                $isValid=false;
+                if ($reponse[0]->getDateValidation() != null)
+                    $isValid = true;
+
+                $getNoteReponses = $reponse[0]->getNoteReponses();
+                $isVoted = false;
+
+                foreach($getNoteReponses as $noteReponse){
+                    if($noteReponse->getMembre() == $this->getUser()){
+                        $isVoted = true;
+                        break;
+                    }
+                }
+
+                //Ajour d'une réponse dans le tableau de sortie
+                array_push($returnArray, array(
+                    'id'=>$reponse[0]->getId(),
+                    'description'=>$reponse[0]->getDescription(),
+                    'date'=>$reponse[0]->getDate()->format('d-m-Y à H:i'),
+                    'up_vote'=> (int) $reponse['upVote'],
+                    'down_vote'=> (int) $reponse['downVote'],
+                    'membre_nom'=>$reponse[0]->getMembre()->getNom(),
+                    'membre_reputation'=>$reponse[0]->getMembre()->getReputation(),
+                    'commentaires'=>$commentairesReturn,
+                    'is_certif'=>$isCertif,
+                    'is_validated'=>$isValid,
+                    'is_voted'=>$isVoted
                 ));
             }
-
-            $isCertif=false;
-            if ($reponse[0]->getDateCertification() != null)
-                $isCertif = true;
-
-            $isValid=false;
-            if ($reponse[0]->getDateValidation() != null)
-                $isValid = true;
-
-            $getNoteReponses = $reponse[0]->getNoteReponses();
-            $isVoted = false;
-
-            foreach($getNoteReponses as $noteReponse){
-                if($noteReponse->getMembre() == $this->getUser()){
-                    $isVoted = true;
-                    break;
-                }
-            }
-
-            //Ajour d'une réponse dans le tableau de sortie
-            array_push($returnArray, array(
-                'id'=>$reponse[0]->getId(),
-                'description'=>$reponse[0]->getDescription(),
-                'date'=>$reponse[0]->getDate()->format('d-m-Y à H:i'),
-                'up_vote'=> (int) $reponse['upVote'],
-                'down_vote'=> (int) $reponse['downVote'],
-                'membre_nom'=>$reponse[0]->getMembre()->getNom(),
-                'membre_reputation'=>$reponse[0]->getMembre()->getReputation(),
-                'commentaires'=>$commentairesReturn,
-                'is_certif'=>$isCertif,
-                'is_validated'=>$isValid,
-                'is_voted'=>$isVoted
-            ));
         }
 
         return new Response(json_encode($returnArray));

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class QuestionReponseController extends Controller
 {
@@ -179,6 +180,9 @@ class QuestionReponseController extends Controller
             'tri'=>$tri
         ));
 
+        if (strpos($response, '404 Not Found') !== false)
+            throw new NotFoundHttpException("Cette question n'a pas encore été posée!");
+
         
         //Suppression de l'en tête HTTP et décodage du JSON
         $cleanJSON = array();
@@ -188,7 +192,6 @@ class QuestionReponseController extends Controller
         
         $cleanJSON = explode('[', $response, 2);
         $listeReponses = json_decode('[' . $cleanJSON[1]);
-        
 
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
         //la requête pour vérifier son authenticité... 
@@ -244,6 +247,7 @@ class QuestionReponseController extends Controller
             'nbReponses'=>$nbReponses,
             'nbPages'=>$nbPages,
             'tri'=>$tri,
+            'slug'=>$slug,
             'listeReponses'=>$listeReponses,
             'pagination'=>$pagination,
             'nbParPage'=>$nbParPage,

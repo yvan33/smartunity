@@ -89,6 +89,16 @@
                 </div>
               </div>
 
+              <div class="row">
+                <div style="text-align:center; cursor:pointer">
+                    <ul id="pages" class="pagination pagination-lg">
+                      {% for page in pagination %}
+                      <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_display_reponse', {page: page[1], slug: slug, tri: tri}) }}">{{ page[0] }}</a></li>
+                      {% endfor %}
+                  </ul>
+                </div>
+              </div>
+
 
 {% endblock %}
 
