@@ -110,6 +110,7 @@ class QuestionReponseController extends Controller
             'type'=>$type,
             'nbPages'=>$nbPages,
             'listeQuestions'=>$listeQuestions, 
+            'countListe' => count($listeQuestions),
             'nbParPage'=>$nbParPage,
             'pagination'=>$pagination
         ));

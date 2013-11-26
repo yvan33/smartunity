@@ -36,38 +36,43 @@
                   				<!-- accordion general-->
                                	<div class="panel-group" id="accordion-onFire">
                                 {% if type=='onFire' %}
-                                  {% for question in listeQuestions %}
+                                  {% if countListe == 0 %}
+                                    <br/>
+                                    <p align="center">Il n'y a aucune question On Fire</p>
+                                    <br/>
+                                  {% else %}
+                                    {% for question in listeQuestions %}
 
-                               		<div class="panel panel-default fade in out">
-                                    	<!-- contenue visible-->
-                               			<div class="panel-heading">
-                               				<h4 class="panel-title">
-                                            	<!-- rond pts-->
-                               					<div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
-                                                <!-- rond pts fin-->
-                                                <!-- describ question-->
-                               					<a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
-                               					<div class="grille-2" ><p>{{question.sujet}}</p>
-                                          <p style="font-weight:200; font-style:italic">{{ question.membre_prenom }} le {{ question.date }}</p></div>
-                               					</a>
-                                                <!-- describ question fin-->
-                                                <!-- nb réponses vues-->
-                               					<div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
-                               					</div>
-                                                <!-- nb réponses vues fin-->
-                                                <!-- bouton rep -->
-                               					<div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
-                              					</div>
-                                                <!-- bouton rep fin-->
-                                                <!-- bouton +-->
-                               					<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                          {% if not question.soutenue %}
-                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
-                                          {% endif %}
-                               					</div>
-                                                <!-- bouton + fin-->
-                               				</h4>                           
-                               			</div>
+                                 		<div class="panel panel-default fade in out">
+                                      	<!-- contenue visible-->
+                                 			<div class="panel-heading">
+                                 				<h4 class="panel-title">
+                                              	<!-- rond pts-->
+                                 					<div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
+                                                  <!-- rond pts fin-->
+                                                  <!-- describ question-->
+                                 					<a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
+                                 					<div class="grille-2" ><p>{{question.sujet}}</p>
+                                            <p style="font-weight:200; font-style:italic">{{ question.membre_prenom }} le {{ question.date }}</p></div>
+                                 					</a>
+                                                  <!-- describ question fin-->
+                                                  <!-- nb réponses vues-->
+                                 					<div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
+                                 					</div>
+                                                  <!-- nb réponses vues fin-->
+                                                  <!-- bouton rep -->
+                                 					<div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
+                                					</div>
+                                                  <!-- bouton rep fin-->
+                                                  <!-- bouton +-->
+                                 					<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                            {% if not question.soutenue %}
+                                            <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                            {% endif %}
+                                 					</div>
+                                                  <!-- bouton + fin-->
+                                 				</h4>                           
+                                 			</div>
                                         <!-- contenue visible fin-->
                                         <!-- contenue caché-->
                                    		<div id="collapse{{loop.index}}" class="panel-collapse collapse">
@@ -89,11 +94,12 @@
                                                 </div>
                                                 {% endif %}
 
-                                          </div>
-                                    	</div>
-                                 	</div>
+                                                </div>
+                                          	</div>
+                                       	</div>
                                     <!-- contenue caché fin-->
-                                  {% endfor %}
+                                    {% endfor %}
+                                  {% endif %}
                                 {% endif %}
                              </div><!-- accordion general fin-->
                                            
@@ -102,6 +108,13 @@
                   <div class="tab-pane fade in out{% if type=='last' %} active{% endif %}" id="last">
                             <div class="panel-group" id="accordion-last">
                             {% if type=='last' %}
+
+                              {% if countListe == 0 %}
+                                <br/>
+                                <p align="center">Il n'y a aucune question r&eacute;cente</p>
+                                <br/>
+                              {% else %}
+
                                   {% for question in listeQuestions %}
 
                                   <div class="panel panel-default fade in out">
@@ -154,17 +167,24 @@
                                                 </div>
                                                 {% endif %}
 
-                                          </div>
-                                      </div>
-                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <!-- contenue caché fin-->
-                                  {% endfor %}
+                                    {% endfor %}
+                                  {% endif %}
                                 {% endif %}
                               </div>
                           </div>
                   <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
                           <div class="panel-group" id="accordion-reponses">
                           {% if type=='reponses' %}
+
+                              {% if countListe == 0 %}
+                                <br/>
+                                <p align="center">Il n'y a aucune question r&eacute;solue</p>
+                                <br/>
+                              {% else %}
                                   {% for question in listeQuestions %}
 
                                   <div class="panel panel-default fade in out">
@@ -217,11 +237,14 @@
                                                 </div>
                                                 {% endif %}
 
+                                              </div>
                                           </div>
                                       </div>
-                                  </div>
                                     <!-- contenue caché fin-->
-                                  {% endfor %}
+                                    {% endfor %}
+
+                                  {% endif %}
+                                  
                                 {% endif %}
                               </div>
                         </div>
@@ -318,16 +341,24 @@ function MaJPagination(){
                 //Définition d'un nouveau paginator adapté...
                 nbPages[type] = donnees[0]['nbPages'];
 
-                options.currentPage=1;
-                options.totalPages=nbPages[type];
-                $('#pages').bootstrapPaginator(options);
+                if(nbPages[type] != 0){
+                  options.currentPage=1;
+                  options.totalPages=nbPages[type];
+                  $('#pages').bootstrapPaginator(options);
+                }
 
                 donnees.shift(); //On supprime la ligne de check du JSON
 
                 //Puis on remplit le nouveau tab
-                donnees.forEach(function(pEntry, i){
-                  content += generateContent(pEntry, i);
-                }); //Generation du code
+                if(donnees.length == 0){
+                  content += '<br/><p align="center">Il n\'y a aucune question à afficher dans cette catégorie</p><br/>';
+                  $('#pages').hide();
+                }else{
+                  donnees.forEach(function(pEntry, i){
+                    content += generateContent(pEntry, i);
+                  }); //Generation du code
+                  $('#pages').show();
+                }
 
                 //Affichage du nouveau contenu dasn le tab, et fadeIn
                 $('#accordion-' + type).html(content);
@@ -338,10 +369,14 @@ function MaJPagination(){
             });
 
       }else{
-
+          if(nbPages[type] != 0){
             options.currentPage=page[type];
             options.totalPages=nbPages[type];
             $('#pages').bootstrapPaginator(options);
+            $('#pages').show();
+          }else{
+            $('#pages').hide();
+          }
 
       }
 }
