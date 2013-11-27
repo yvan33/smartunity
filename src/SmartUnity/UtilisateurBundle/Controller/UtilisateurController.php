@@ -8,7 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 
 class UtilisateurController extends Controller {
 
-    public function indexAction(Request $request, $formPassword = null) {
+    public function indexAction(Request $request, $formPassword = null, $formInfos = null) {
 
         $user = $this->container->get('security.context')->getToken()->getUser();
 
@@ -32,6 +32,13 @@ class UtilisateurController extends Controller {
                         'remuneration' => $remuneration,
                         'form_password' => $formPassword
             ));
+        } else if (isset($formInfos)) {
+            return $this->render('SmartUnityUtilisateurBundle:Profile:edit.html.twig', array(
+                        'form_pref' => $form_pref->createView(),
+                        'smartrep' => $smartreponse,
+                        'remuneration' => $remuneration,
+                        'form_infos' => $formInfos,
+            ));
         } else {
             return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
                         'form_pref' => $form_pref->createView(),
@@ -41,21 +48,15 @@ class UtilisateurController extends Controller {
         }
     }
 
-    public function indexWithEditInfosAction() {
+    public function editInfosAction() {
+
         $user = $this->container->get('security.context')->getToken()->getUser();
+        $formInfos = $this->createForm('smartunity_user_informations', $user);
 
-        $form_pref = $this->createForm('smartunity_user_preference', $user);
-        $form_infos = $this->createForm('smartunity_user_informations', $user);
-
-
-        $membreRepository = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('SmartUnityAppBundle:membre');
-
-        $userid = $user->getId();
-        $smartreponse = $membreRepository->getSmartReponses($userid);
-        $remuneration = $membreRepository->getRemuneration($userid);
-        return $this->render('SmartUnityUtilisateurBundle:Profile:edit.html.twig', array('form_infos' => $form_infos->createView(), 'form_pref' => $form_pref->createView(), 'smartrep' => $smartreponse, 'remuneration' => $remuneration));
+        return $this->forward(
+                        'SmartUnityUtilisateurBundle:Utilisateur:index', array(
+                    'formInfos' => $formInfos->createView(),
+        ));
     }
 
     public function setPrefAction() {
