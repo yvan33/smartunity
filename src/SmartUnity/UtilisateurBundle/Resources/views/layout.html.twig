@@ -1,6 +1,9 @@
 {% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
 
 
+{% block initJS %}
+    <script src="{{ asset('assets/chosen/chosen.jquery.min.js') }}"></script>
+{% endblock %}    
     
 {% block body %}
     {% block stylesheets %}

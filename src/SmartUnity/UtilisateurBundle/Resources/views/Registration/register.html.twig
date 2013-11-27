@@ -78,9 +78,22 @@
                     <div class="row ">
                         <div class="grille-1">{{form_label(form.date_naissance)}}</div>
                         <div class="grille-2">{{form_widget(form.date_naissance)}}</div>
-                    </div> 
+                    </div>
+                    <div class="row ">
+                        <div class="grille-1">Ville</div>
+                        <div class="grille-2">
+                            {#<select data-placeholder="Choisissez une ville" class="chosen-select" style="width:350px;" tabindex="2">
+                                <option value=""></option>
+                                <option value="United States">United States</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="Afghanistan">Afghanistan</option>
+                            </select>#}
+                            {{form_widget(form.ville)}}
+                            
+                        </div>
+                    </div>  
                 </fieldset>
-                
+
                 <fieldset>
                     <legend>Préférences</legend>    
 
@@ -129,6 +142,20 @@
 
         </div>
     </div>
-</div>    
+</div>   
+
+<script type="text/javascript">
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': {allow_single_deselect: true},
+        '.chosen-select-no-single': {disable_search_threshold: 10},
+        '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+        '.chosen-select-width': {width: "95%"}
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+</script>
+
 {% endblock register %}
 

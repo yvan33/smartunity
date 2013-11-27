@@ -32,6 +32,19 @@ class RegistrationFormType extends BaseType {
                     'years' => range(date('Y') - 100, date('Y')),
                     'required' => false
                 ))
+                ->add('ville', 'choice', array(
+                    'label' => 'Ville',
+                    'choices' => array(
+                        'na' => 'France',
+                        'm' => 'Espagne',
+                        'f' => 'Canada'),
+                    'expanded' => false,
+                    'attr' => array(
+                        'class' => 'chosen-select',
+                        'data-placeholder' => 'Choisissez une ville',
+                        'style' => 'width:350px;',
+                        'tabindex' => '2')
+                ))
                 ->add('pref_mp', 'choice', array(
                     'label' => 'Recevoir les notifications des messages privés',
                     'choices' => array(

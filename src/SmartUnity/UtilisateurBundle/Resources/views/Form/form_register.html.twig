@@ -1,5 +1,6 @@
 {# Widgets #}
 
+
 {% block form_widget %}
 {% spaceless %}
     {% if compound %}
@@ -398,3 +399,24 @@
     {% for attrname, attrvalue in attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
 {% endspaceless %}
 {% endblock button_attributes %}
+
+{#Custom widgets#}    
+    {% block _fos_user_registration_form_ville_widget %}
+        {% if required and empty_value is none and not empty_value_in_choices %}
+        {% set required = false %}
+    {% endif %}
+    <select data-placeholder="Choisissez une ville" class="chosen-select" style="width:350px;" tabindex="2" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {% if empty_value is not none %}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+        {% endif %}
+        {% if preferred_choices|length > 0 %}
+            {% set options = preferred_choices %}
+            {{ block('choice_widget_options') }}
+            {% if choices|length > 0 and separator is not none %}
+                <option disabled="disabled">{{ separator }}</option>
+            {% endif %}
+        {% endif %}
+        {% set options = choices %}
+        {{ block('choice_widget_options') }}
+    </select>
+{% endblock %}
