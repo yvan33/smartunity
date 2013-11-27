@@ -267,47 +267,81 @@ class QuestionReponseController extends Controller
     public function addQuestionAction()
     {
         $newQuestion = new \SmartUnity\AppBundle\Entity\Question();
-        
-
         $formQuestion = $this->createFormBuilder($newQuestion)
                             ->add('sujet','text')
                             ->add('description','textarea')
+                            ->add('marque', 'entity', array(
+                                'class'=> 'SmartUnityAppBundle:marque',
+                                'property'=> 'nom'))
                             ->add('modele', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:modele',
-                                'property'=> 'name'))
+                                'property'=> 'nom'))
+                            // ->addEventListener(
+                            //     FormEvents::PRE_SET_DATA,
+                            //         function(FormEvent $event) {
+                            //             $form = $event->getForm();
+                            //             // this would be your entity, i.e. SportMeetup
+                            //             $data = $event->getData();
+
+                            //             $modeleCat = $data->getMarque()->getAvailablePositions();
+
+                            //             $form->add('position', 'entity', array('choices' => $positions));
+                            //         }
+                            //     )
                             ->add('os', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:os',
-                                'property'=> 'name'))
+                                'property'=> 'nom'))
+                            ->add('typeQuestion', 'entity', array(
+                                'class'=> 'SmartUnityAppBundle:typeQuestion',
+                                'property'=> 'nom'))
                             ->add('remuneration','integer')
+                            ->add('save', 'submit')
+                            
                             ->getForm();
 
-        if ($this->getRequest->getMethod() == 'POST')
+        if ($this->getRequest()->getMethod() == 'POST')
         {
-            $formQuestion->bind($this->getRequest());//à tester sans
+            $formQuestion->bind($this->getRequest());
 
             if ($formQuestion->isValid()) {
-                $user = $this->container->get('security.context')->getToken()->getUser();
-                $newQuestion->setMembre(); //Récupèrer l'utilisateur
-                $newQuestion->setDate(date("Y-m-d H:i:s"));//date locale
-                $newQuestion->setSlug("");
-                $newQuestion->addSoutien($user);
+                $user = $this->getUser();
+                $newQuestion->setMembre($user);
+                $newQuestion->setSignaler(false);
+
+                $newQuestion->setDate(new \DateTime(date("Y-m-d H:i:s")));//date locale
+
+                    // $str = $formQuestion->get('sujet')->getData();
+                    // $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+                    // $replace = array('s', 't', 's', 't', 's', 't', 's', 't', 'i', 'a', 'a', 'i', 'a', 'a', 'e', 'E');
+                    // $str = str_ireplace($search, $replace, strtolower(trim($str)));
+                    // $str = preg_replace('/[^\w\d\-\ ]/', '', $str);
+                    // $str = str_replace(' ', '-', $str);
+                    // $slug= preg_replace('/\-{2,}', '-', $str);
+
+                $newQuestion->setSlug($this->slugify($formQuestion->get('sujet')->getData()));
+
+                // $newQuestion->addSoutien($user);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newQuestion);
                 $em->flush();
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse',array(
+                    "slug"  => $newQuestion->getSlug()
+                    )));
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
-            'formQuestion'=>$formQuestion));
+            'formQuestion'=>$formQuestion->createView()));
     }
 
-    function slugify($str) {
+    public function slugify($str) {
         $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
         $replace = array('s', 't', 's', 't', 's', 't', 's', 't', 'i', 'a', 'a', 'i', 'a', 'a', 'e', 'E');
         $str = str_ireplace($search, $replace, strtolower(trim($str)));
         $str = preg_replace('/[^\w\d\-\ ]/', '', $str);
         $str = str_replace(' ', '-', $str);
-        return preg_replace('/\-{2,}', '-', $str);
+        return preg_replace('/\-{2,}/', '-', $str);
     }
     
     public function addReponseAction()

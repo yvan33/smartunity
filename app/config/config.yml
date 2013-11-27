@@ -106,5 +106,4 @@ fos_elastica:
                         model: SmartUnity\AppBundle\Entity\question
                         provider: ~
                         finder: ~
-                        listener: ~
-                        
+
