@@ -35,24 +35,17 @@ class appareil
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="appareil")
-     *
-     */
-    private $questions;
-
-    /**
-     *
      * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\membre", mappedBy="appareils")
      *
      */
     private $membres;
     
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
@@ -110,39 +103,6 @@ class appareil
     public function getOs()
     {
         return $this->os;
-    }
-
-    /**
-     * Add questions
-     *
-     * @param \SmartUnity\AppBundle\Entity\question $questions
-     * @return appareil
-     */
-    public function addQuestion(\SmartUnity\AppBundle\Entity\question $questions)
-    {
-        $this->questions[] = $questions;
-    
-        return $this;
-    }
-
-    /**
-     * Remove questions
-     *
-     * @param \SmartUnity\AppBundle\Entity\question $questions
-     */
-    public function removeQuestion(\SmartUnity\AppBundle\Entity\question $questions)
-    {
-        $this->questions->removeElement($questions);
-    }
-
-    /**
-     * Get questions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getQuestions()
-    {
-        return $this->questions;
     }
 
     /**

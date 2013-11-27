@@ -49,10 +49,20 @@ class question
     private $membre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\appareil", inversedBy="questions")
-     * @ORM\JoinColumn(name="appareil_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\os", inversedBy="questions")
+     * @ORM\JoinColumn(name="os_id", referencedColumnName="id", nullable=true)
      */
-    private $appareil;
+    private $os;
+    /**
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\modele", inversedBy="questions")
+     * @ORM\JoinColumn(name="modele_id", referencedColumnName="id", nullable=true)
+     */
+    private $modele;
+    /**
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\marque", inversedBy="questions")
+     * @ORM\JoinColumn(name="marque_id", referencedColumnName="id", nullable=true)
+     */
+    private $marque;
 
     /**
      * @var string
@@ -92,14 +102,14 @@ class question
      */
     private $signaler;
 
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->appareils = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reponses = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->noteQuestions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->soutienMembres = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -205,12 +215,58 @@ class question
     }
 
     /**
+     * Set remuneration
+     *
+     * @param integer $remuneration
+     * @return question
+     */
+    public function setRemuneration($remuneration)
+    {
+        $this->remuneration = $remuneration;
+    
+        return $this;
+    }
+
+    /**
+     * Get remuneration
+     *
+     * @return integer 
+     */
+    public function getRemuneration()
+    {
+        return $this->remuneration;
+    }
+
+    /**
+     * Set signaler
+     *
+     * @param boolean $signaler
+     * @return question
+     */
+    public function setSignaler($signaler)
+    {
+        $this->signaler = $signaler;
+    
+        return $this;
+    }
+
+    /**
+     * Get signaler
+     *
+     * @return boolean 
+     */
+    public function getSignaler()
+    {
+        return $this->signaler;
+    }
+
+    /**
      * Set membre
      *
      * @param \SmartUnity\AppBundle\Entity\membre $membre
      * @return question
      */
-    public function setMembre(\SmartUnity\AppBundle\Entity\membre $membre = null)
+    public function setMembre(\SmartUnity\AppBundle\Entity\membre $membre)
     {
         $this->membre = $membre;
     
@@ -228,36 +284,72 @@ class question
     }
 
     /**
-     * Add appareils
+     * Set os
      *
-     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     * @param \SmartUnity\AppBundle\Entity\os $os
      * @return question
      */
-    public function addAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    public function setOs(\SmartUnity\AppBundle\Entity\os $os = null)
     {
-        $this->appareils[] = $appareils;
+        $this->os = $os;
     
         return $this;
     }
 
     /**
-     * Remove appareils
+     * Get os
      *
-     * @param \SmartUnity\AppBundle\Entity\appareil $appareils
+     * @return \SmartUnity\AppBundle\Entity\os 
      */
-    public function removeAppareil(\SmartUnity\AppBundle\Entity\appareil $appareils)
+    public function getOs()
     {
-        $this->appareils->removeElement($appareils);
+        return $this->os;
     }
 
     /**
-     * Get appareils
+     * Set modele
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param \SmartUnity\AppBundle\Entity\modele $modele
+     * @return question
      */
-    public function getAppareils()
+    public function setModele(\SmartUnity\AppBundle\Entity\modele $modele = null)
     {
-        return $this->appareils;
+        $this->modele = $modele;
+    
+        return $this;
+    }
+
+    /**
+     * Get modele
+     *
+     * @return \SmartUnity\AppBundle\Entity\modele 
+     */
+    public function getModele()
+    {
+        return $this->modele;
+    }
+
+    /**
+     * Set marque
+     *
+     * @param \SmartUnity\AppBundle\Entity\marque $marque
+     * @return question
+     */
+    public function setMarque(\SmartUnity\AppBundle\Entity\marque $marque = null)
+    {
+        $this->marque = $marque;
+    
+        return $this;
+    }
+
+    /**
+     * Get marque
+     *
+     * @return \SmartUnity\AppBundle\Entity\marque 
+     */
+    public function getMarque()
+    {
+        return $this->marque;
     }
 
     /**
@@ -294,36 +386,12 @@ class question
     }
 
     /**
-     * Set remuneration
-     *
-     * @param integer $remuneration
-     * @return question
-     */
-    public function setRemuneration($remuneration)
-    {
-        $this->remuneration = $remuneration;
-    
-        return $this;
-    }
-
-    /**
-     * Get remuneration
-     *
-     * @return integer 
-     */
-    public function getRemuneration()
-    {
-        return $this->remuneration;
-    }
-
-
-    /**
      * Set typeQuestion
      *
      * @param \SmartUnity\AppBundle\Entity\typeQuestion $typeQuestion
      * @return question
      */
-    public function setTypeQuestion(\SmartUnity\AppBundle\Entity\typeQuestion $typeQuestion = null)
+    public function setTypeQuestion(\SmartUnity\AppBundle\Entity\typeQuestion $typeQuestion)
     {
         $this->typeQuestion = $typeQuestion;
     
@@ -338,29 +406,6 @@ class question
     public function getTypeQuestion()
     {
         return $this->typeQuestion;
-    }
-
-    /**
-     * Set appareil
-     *
-     * @param \SmartUnity\AppBundle\Entity\appareil $appareil
-     * @return question
-     */
-    public function setAppareil(\SmartUnity\AppBundle\Entity\appareil $appareil = null)
-    {
-        $this->appareil = $appareil;
-    
-        return $this;
-    }
-
-    /**
-     * Get appareil
-     *
-     * @return \SmartUnity\AppBundle\Entity\appareil 
-     */
-    public function getAppareil()
-    {
-        return $this->appareil;
     }
 
     /**
@@ -394,28 +439,5 @@ class question
     public function getSoutienMembres()
     {
         return $this->soutienMembres;
-    }
-
-    /**
-     * Set signaler
-     *
-     * @param boolean $signaler
-     * @return question
-     */
-    public function setSignaler($signaler)
-    {
-        $this->signaler = $signaler;
-    
-        return $this;
-    }
-
-    /**
-     * Get signaler
-     *
-     * @return boolean 
-     */
-    public function getSignaler()
-    {
-        return $this->signaler;
     }
 }

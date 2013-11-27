@@ -41,13 +41,22 @@ class modele
     private $appareils;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="modele")
+     *
+     */
+    private $questions;
+
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->appareils = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
     /**
      * Get id
      *
@@ -103,7 +112,7 @@ class modele
     {
         return $this->marque;
     }
-    
+
     /**
      * Add appareils
      *
@@ -135,5 +144,38 @@ class modele
     public function getAppareils()
     {
         return $this->appareils;
+    }
+
+    /**
+     * Add questions
+     *
+     * @param \SmartUnity\AppBundle\Entity\question $questions
+     * @return modele
+     */
+    public function addQuestion(\SmartUnity\AppBundle\Entity\question $questions)
+    {
+        $this->questions[] = $questions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove questions
+     *
+     * @param \SmartUnity\AppBundle\Entity\question $questions
+     */
+    public function removeQuestion(\SmartUnity\AppBundle\Entity\question $questions)
+    {
+        $this->questions->removeElement($questions);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
     }
 }

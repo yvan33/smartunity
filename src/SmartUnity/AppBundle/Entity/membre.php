@@ -173,18 +173,19 @@ class membre extends BaseUser
 
 
 
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        parent::__construct();
         $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reponses = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->noteQuestions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->noteReponses = new \Doctrine\Common\Collections\ArrayCollection();
         $this->appareils = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reponsesCertifiees = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->soutienQuestions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commentaireReponses = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -241,6 +242,52 @@ class membre extends BaseUser
     public function getPrenom()
     {
         return $this->prenom;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     * @return membre
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string 
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Set telephone
+     *
+     * @param string $telephone
+     * @return membre
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+    
+        return $this;
+    }
+
+    /**
+     * Get telephone
+     *
+     * @return string 
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
     }
 
     /**
@@ -639,76 +686,6 @@ class membre extends BaseUser
     }
 
     /**
-     * Set adresse
-     *
-     * @param string $adresse
-     * @return membre
-     */
-    public function setAdresse($adresse)
-    {
-        $this->adresse = $adresse;
-    
-        return $this;
-    }
-
-    /**
-     * Get adresse
-     *
-     * @return string 
-     */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    /**
-     * Set telephone
-     *
-     * @param string $telephone
-     * @return membre
-     */
-    public function setTelephone($telephone)
-    {
-        $this->telephone = $telephone;
-    
-        return $this;
-    }
-
-    /**
-     * Get telephone
-     *
-     * @return string 
-     */
-    public function getTelephone()
-    {
-        return $this->telephone;
-    }
-
-    /**
-     * Set ville
-     *
-     * @param \SmartUnity\AppBundle\Entity\ville $ville
-     * @return membre
-     */
-    public function setVille(\SmartUnity\AppBundle\Entity\ville $ville = null)
-    {
-        $this->ville = $ville;
-    
-        return $this;
-    }
-
-    /**
-     * Get ville
-     *
-     * @return \SmartUnity\AppBundle\Entity\ville 
-     */
-    public function getVille()
-    {
-        return $this->ville;
-    }
-
-
-    /**
      * Add soutienQuestions
      *
      * @param \SmartUnity\AppBundle\Entity\question $soutienQuestions
@@ -739,6 +716,29 @@ class membre extends BaseUser
     public function getSoutienQuestions()
     {
         return $this->soutienQuestions;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param \SmartUnity\AppBundle\Entity\ville $ville
+     * @return membre
+     */
+    public function setVille(\SmartUnity\AppBundle\Entity\ville $ville = null)
+    {
+        $this->ville = $ville;
+    
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return \SmartUnity\AppBundle\Entity\ville 
+     */
+    public function getVille()
+    {
+        return $this->ville;
     }
 
     /**
