@@ -32,18 +32,14 @@ class RegistrationFormType extends BaseType {
                     'years' => range(date('Y') - 100, date('Y')),
                     'required' => false
                 ))
-                ->add('ville', 'choice', array(
+                ->add('ville', 'entity', array(
                     'label' => 'Ville',
-                    'choices' => array(
-                        'na' => 'France',
-                        'm' => 'Espagne',
-                        'f' => 'Canada'),
-                    'expanded' => false,
-                    'attr' => array(
-                        'class' => 'chosen-select',
-                        'data-placeholder' => 'Choisissez une ville',
-                        'style' => 'width:350px;',
-                        'tabindex' => '2')
+                    'class' => 'SmartUnityAppBundle:ville',
+                    'property' => 'nom',
+                    'query_builder' => function(\Doctrine\ORM\EntityRepository $er) {
+                                       return $er->createQueryBuilder('u')
+                                       ->orderBy('u.nom', 'ASC');},
+
                 ))
                 ->add('pref_mp', 'choice', array(
                     'label' => 'Recevoir les notifications des messages privés',
