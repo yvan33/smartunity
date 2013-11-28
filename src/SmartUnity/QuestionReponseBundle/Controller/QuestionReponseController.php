@@ -344,13 +344,43 @@ class QuestionReponseController extends Controller
         return preg_replace('/\-{2,}/', '-', $str);
     }
     
-    public function addReponseAction()
+    public function addReponseAction($slug)
     {
-        //lancé depuis une iFrame fancybox
-        // --> créer un dossier iFrame dans les vues du QuestionReponseBundle
-    	
-        //return $this->render('SmartUnityQuestionReponseBundle:Question:Add.html.twig');
-        return new Response('add reponse QuestionReponses');
+        $newReponse = new \SmartUnity\AppBundle\Entity\Reponse();
+        $formQuestion = $this->createFormBuilder($newReponse)
+                            ->add('description','textarea')
+                            ->add('save', 'submit')
+                            ->getForm();
+
+        if ($this->getRequest()->getMethod() == 'POST')
+        {
+            $formQuestion->bind($this->getRequest());
+
+            if ($formQuestion->isValid()) {
+                $user = $this->getUser();
+                $newReponse->setMembre($user);
+
+                $newReponse->setDate(new \DateTime(date("Y-m-d H:i:s")));//date locale
+
+                $newReponse->setDateValidation(NULL);
+                $newReponse->setDateCertification(NULL);
+
+                $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
+                $newReponse->SetQuestion($question);
+                $newReponse->setSignaler(false);
+
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newReponse);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse',array(
+                    "slug"  => $slug
+                    )));
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
+            'formQuestion'=>$formQuestion->createView()));
     }
 
     public function validationReponseAction()

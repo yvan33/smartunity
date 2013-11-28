@@ -25,8 +25,8 @@ smart_unity_question_reponse_add_question:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addQuestion }
 
 smart_unity_question_reponse_add_reponse:
-    pattern:  /ajouter-reponse/
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addReponse }
+    pattern:  /ajouter-reponse/{slug}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addReponse, slug:''}
 
 smart_unity_question_reponse_validation_reponse:
     pattern:  /validation/
