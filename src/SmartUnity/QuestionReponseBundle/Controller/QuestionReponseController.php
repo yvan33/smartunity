@@ -347,16 +347,16 @@ class QuestionReponseController extends Controller
     public function addReponseAction($slug)
     {
         $newReponse = new \SmartUnity\AppBundle\Entity\Reponse();
-        $formQuestion = $this->createFormBuilder($newReponse)
+        $formReponse = $this->createFormBuilder($newReponse)
                             ->add('description','textarea')
                             ->add('save', 'submit')
                             ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST')
         {
-            $formQuestion->bind($this->getRequest());
+            $formReponse->bind($this->getRequest());
 
-            if ($formQuestion->isValid()) {
+            if ($formReponse->isValid()) {
                 $user = $this->getUser();
                 $newReponse->setMembre($user);
 
@@ -380,7 +380,7 @@ class QuestionReponseController extends Controller
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
-            'formQuestion'=>$formQuestion->createView()));
+            'formReponse'=>$formReponse->createView()));
     }
 
     public function validationReponseAction()
