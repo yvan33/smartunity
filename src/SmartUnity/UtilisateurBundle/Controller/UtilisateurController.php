@@ -5,6 +5,7 @@ namespace SmartUnity\UtilisateurBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\QueryBuilder;
+use SmartUnity\AppBundle\Entity\avatar;
 
 class UtilisateurController extends Controller {
 
@@ -94,5 +95,30 @@ class UtilisateurController extends Controller {
 
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
     }
+    
+    public function uploadAction(Request $request)
+{
+    $avatar = new avatar();
+    $form = $this->createFormBuilder($avatar)
+        ->add('name')
+        ->add('file')
+        ->getForm();
+
+    $form->handleRequest($request);
+
+    if ($form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($avatar);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
+
+    }
+
+    return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
+        'form' => $form->createView()
+            ));
+}
 
 }
