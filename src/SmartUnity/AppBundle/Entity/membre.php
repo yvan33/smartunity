@@ -179,6 +179,7 @@ class membre extends BaseUser
      */
     public function __construct()
     {
+        parent::__construct();
         $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reponses = new \Doctrine\Common\Collections\ArrayCollection();
         $this->noteReponses = new \Doctrine\Common\Collections\ArrayCollection();

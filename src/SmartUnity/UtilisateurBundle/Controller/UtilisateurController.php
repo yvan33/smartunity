@@ -109,7 +109,6 @@ class UtilisateurController extends Controller {
     if ($form->isValid()) {
         $em = $this->getDoctrine()->getManager();
         
-        $avatar->upload();
         $em->persist($avatar);
         $em->flush();
 
