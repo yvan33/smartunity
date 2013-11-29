@@ -267,6 +267,8 @@ class QuestionReponseController extends Controller
     public function addQuestionAction()
     {
         $newQuestion = new \SmartUnity\AppBundle\Entity\Question();
+
+        $newQuestion->setRemuneration(10);
         $formQuestion = $this->createFormBuilder($newQuestion)
                             ->add('sujet','text')
                             ->add('description','textarea')
@@ -294,7 +296,7 @@ class QuestionReponseController extends Controller
                             ->add('typeQuestion', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:typeQuestion',
                                 'property'=> 'nom'))
-                            ->add('remuneration','integer')
+                            ->add('remuneration','integer',array('attr' => array('min' => 10)))
                             ->add('save', 'submit')
                             
                             ->getForm();
@@ -321,6 +323,10 @@ class QuestionReponseController extends Controller
                 $newQuestion->setSlug($this->slugify($formQuestion->get('sujet')->getData()));
 
                 // $newQuestion->addSoutien($user);
+                $cagnotte =  $user->getCagnotte() - $formQuestion->get('remuneration')->getData();
+                if($cagnotte>=0)
+                {
+                $user->setCagnotte($cagnotte);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newQuestion);
@@ -328,7 +334,9 @@ class QuestionReponseController extends Controller
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse',array(
                     "slug"  => $newQuestion->getSlug()
-                    )));
+                    ))); 
+                }
+
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
