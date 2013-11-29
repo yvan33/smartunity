@@ -19,12 +19,6 @@ class avatar {
     public $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     */
-    public $name;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $path;
@@ -33,8 +27,6 @@ class avatar {
      * @Assert\File(maxSize="6000000")
      */
     private $file;
-   
-    
     private $temp;
 
     /**
@@ -123,11 +115,15 @@ class avatar {
         return $this->id;
     }
 
+    public function setId($userid) {
+        $this->id = $userid;
+    }
+
     public function getWebPath() {
 //        return null === $this->path
 //            ? null
 //            : $this->getUploadDir().'/'.$this->id.'.'.$this->path;
-        return null === $this->path ? null : $this->id . '.' . $this->path;
+        return null === $this->path ? null : $this->getUploadDir().'/'.$this->id . '.' . $this->path;
     }
 
     protected function getUploadRootDir() {
