@@ -1,4 +1,4 @@
-Acme\DemoBundle\Entity\Document:
+SmartUnity\AppBundle\Entity\avatar:
     properties:
         file:
             - File:
