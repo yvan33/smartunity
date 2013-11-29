@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\QueryBuilder;
 use SmartUnity\AppBundle\Entity\avatar;
+use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
+use Imagine\Image\Point;
 
 class UtilisateurController extends Controller {
 
@@ -113,19 +116,20 @@ class UtilisateurController extends Controller {
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
 
 
-            if (!isset($avatar)) {
-                    $avatar = new avatar();
-            }
-            
+        if (!isset($avatar)) {
+            $avatar = new avatar();
+        }
+
         $form = $this->createFormBuilder($avatar)
                 ->add('id', 'hidden', array(
                     'data' => $userid,
                 ))
-                ->add('name')
                 ->add('file')
+                ->add('save', 'submit')
                 ->getForm();
 
         $form->handleRequest($request);
+
 
         if ($form->isValid()) {
 
@@ -133,9 +137,16 @@ class UtilisateurController extends Controller {
 
             $em->persist($avatar);
             $em->flush();
+            
+            $this->resizeAvatarAction($avatar);
 
+
+
+            
+            
             return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
         }
+
 
         return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
                     'form' => $form->createView()
@@ -148,6 +159,22 @@ class UtilisateurController extends Controller {
 
         $em->remove($avatar);
         $em->flush();
+    }
+    
+    public function resizeAvatarAction($avatar) {
+
+                    $imagine = new Imagine();
+                    
+                    $webPath=realpath(__DIR__ .'/../../../../web/');
+                    $newPath=realpath(__DIR__ .'/../../../../web/uploads/avatars');
+                    $avatarPath= $webPath.'/'.$avatar->getWebPath();
+//                    die($avatarPath);
+            $image = $imagine->open($avatarPath);
+            die ($new = realpath($avatarPath.'/../'));
+            $image->resize(new Box(15, 25))
+                    ->rotate(45)
+                    ->crop(new Point(0, 0), new Box(45, 45))
+                    ->save($newPath.);
     }
 
 }
