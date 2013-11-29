@@ -44,8 +44,8 @@ class UtilisateurController extends Controller {
         } else {
 
             $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
-            if (isset($avatar)) {      
-             $avatar =$avatar->getWebPath();
+            if (isset($avatar)) {
+                $avatar = $avatar->getWebPath();
             }
 
             return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
@@ -112,11 +112,11 @@ class UtilisateurController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
 
-        if (isset($avatar)) {
-            $this->removeAvatarAction($avatar);
-        }
 
-        $avatar = new avatar();
+            if (!isset($avatar)) {
+                    $avatar = new avatar();
+            }
+            
         $form = $this->createFormBuilder($avatar)
                 ->add('id', 'hidden', array(
                     'data' => $userid,
@@ -128,6 +128,7 @@ class UtilisateurController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($avatar);
@@ -142,12 +143,11 @@ class UtilisateurController extends Controller {
     }
 
     public function removeAvatarAction($avatar) {
-        
+
         $em = $this->getDoctrine()->getManager();
-        
+
         $em->remove($avatar);
         $em->flush();
-        
     }
 
 }

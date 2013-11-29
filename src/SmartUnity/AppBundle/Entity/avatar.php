@@ -33,6 +33,8 @@ class avatar {
      * @Assert\File(maxSize="6000000")
      */
     private $file;
+   
+    
     private $temp;
 
     /**
