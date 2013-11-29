@@ -174,7 +174,7 @@ class UtilisateurController extends Controller {
             $image->resize(new Box(15, 25))
                     ->rotate(45)
                     ->crop(new Point(0, 0), new Box(45, 45))
-                    ->save($newPath.);
+                    ->save($newPath);
     }
 
 }

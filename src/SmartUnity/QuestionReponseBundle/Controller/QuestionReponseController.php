@@ -379,7 +379,7 @@ class QuestionReponseController extends Controller
                     )));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddReponse.html.twig',array(
             'formReponse'=>$formReponse->createView()));
     }
 
