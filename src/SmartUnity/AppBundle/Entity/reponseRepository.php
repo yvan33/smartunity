@@ -120,9 +120,9 @@ class reponseRepository extends EntityRepository
                 ';
 
         if($tri == 'vote')
-            $sql .= 'ORDER BY r.dateCertification DESC, r.dateValidation DESC, note DESC';
+            $sql .= 'ORDER BY R.dateCertification DESC, R.dateValidation DESC, note DESC';
         elseif($tri == 'date')
-            $sql .= 'ORDER BY r.date ASC';
+            $sql .= 'ORDER BY R.date ASC';
 
         $sql .= '
                 LIMIT :offset, :nbParPage';
