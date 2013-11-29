@@ -6,8 +6,11 @@
 <div class="edit"> <a href="{{ path('smart_unity_utilisateur_editinfos') }}" class="btn btn-primary btn-xs">
         <span class="glyphicon glyphicon-pencil"></span>
     </a>
-</div>  
-<div class="row premiere-ligne ">
+</div>
+<div class="row " style="text-align: center;">
+     <img src="{{ asset( 'uploads/documents/') }}{{ avatar }}" alt="avatar" height="64" width="64">
+</div>
+<div class="row premiere-ligne">
     <div class="grille-1">Pseudo:</div>
     <div class="grille-2">{{app.user.username}}</div>
 </div>

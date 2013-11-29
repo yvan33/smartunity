@@ -21,6 +21,7 @@ class UtilisateurController extends Controller {
                 ->getRepository('SmartUnityAppBundle:membre');
 
         $userid = $user->getId();
+
         $smartreponse = $membreRepository->getSmartReponses($userid);
         $remuneration = 0;
         $remuneration = $membreRepository->getRemuneration($userid);
@@ -41,10 +42,15 @@ class UtilisateurController extends Controller {
                         'form_infos' => $formInfos,
             ));
         } else {
+
+            $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid)->getWebPath();
+
+
             return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
                         'form_pref' => $form_pref->createView(),
                         'smartrep' => $smartreponse,
                         'remuneration' => $remuneration,
+                        'avatar' => $avatar,
             ));
         }
     }
@@ -95,30 +101,34 @@ class UtilisateurController extends Controller {
 
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
     }
-    
-    public function uploadAction(Request $request)
-{
-    $avatar = new avatar();
-    $form = $this->createFormBuilder($avatar)
-        ->add('name')
-        ->add('file')
-        ->getForm();
 
-    $form->handleRequest($request);
+    public function uploadAction(Request $request) {
 
-    if ($form->isValid()) {
-        $em = $this->getDoctrine()->getManager();
-        
-        $em->persist($avatar);
-        $em->flush();
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $userid = $user->getId();
+        $avatar = new avatar();
+        $form = $this->createFormBuilder($avatar)
+                ->add('id', 'hidden', array(
+                    'data' => $userid,
+                ))
+                ->add('name')
+                ->add('file')
+                ->getForm();
 
-        return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
+        $form->handleRequest($request);
 
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($avatar);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
+        }
+
+        return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
+                    'form' => $form->createView()
+        ));
     }
-
-    return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
-        'form' => $form->createView()
-            ));
-}
 
 }
