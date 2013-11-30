@@ -60,7 +60,7 @@
                                 <div style="float:right">
                                 <div class="grille-3-btn">
                                    <a href="#"><div class="bouton-com-rep" style="margin-left:10px">Commenter</div></a>
-                                   <a href="{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}"><div class="bouton-com-rep">Repondre</div></a>
+                                   <a class="reponse" href="{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}"><div class="bouton-com-rep">Repondre</div></a>
                                 </div>
                                 </div>
                             </div>
@@ -100,9 +100,34 @@
               </div>
 
 
+              <div id="addReponseHolder" style="display:none; position:fixed; bottom:0px; background-color:#EEE; z-index:1000;">
+                <div class="bouton-com-rep" style="float:right; cursor:pointer" id="closeFrame"><span class="glyphicon glyphicon-remove-circle"</span></div>
+                <div><iframe id="addReponse" src="about:blank"></iframe></div>
+              </div>
+
+
 {% endblock %}
 
 
 
 {% block callJS %}
+
+<script>
+
+$(document).ready(function(){
+
+  $('a.reponse').click(function(e){
+    $('#addReponse').attr('src', $(this).attr('href'));
+    $('#addReponseHolder').show('fast');
+    $('#closeFrame').click(function(){
+      $('#addReponseHolder').hide('fast');
+      $('#addReponse').attr('src', 'about:blank');
+    })
+    e.preventDefault();
+  });
+
+})
+
+</script>
+
 {% endblock %}
