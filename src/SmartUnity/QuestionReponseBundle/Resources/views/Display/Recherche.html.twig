@@ -122,7 +122,13 @@
 
 		</div><!-- grille fin-->
 
-        <a id="popupQuestion" href="{{ path('smart_unity_question_reponse_add_question')}}"><div class="bouton-com-rep" style="margin-left:10px">Posez votre question!</div></a>
+        <div class="tooltip">
+            <div class="tooltip-inner">
+              Tooltip!
+            </div>
+        <div class="tooltip-arrow"></div>
+        </div>
+        <a id="popupQuestion"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour poser une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_question')}}{% else %}#{% endif %}"><div class="bouton-com-rep" style="margin-left:10px">Posez votre question!</div></a>
 
     </div><!-- col fin-->
 </div>  <!-- row fin-->
@@ -140,7 +146,7 @@
 /////////////
 ////// POPUP
 /////////////
-
+{% if is_granted('ROLE_USER') %}
 $('#popupQuestion').magnificPopup({
   type: 'iframe',
   callbacks: {
@@ -160,7 +166,14 @@ $('#popupQuestion').magnificPopup({
   },
 
 });
-
+{% else %}
+$(document).ready(function(){
+  $('#popupQuestion').tooltip();
+  $('#popupQuestion').click(function(e){
+    e.preventDefault();
+  })
+});
+{% endif %}
 
 </script>
 
