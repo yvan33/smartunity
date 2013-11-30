@@ -82,7 +82,8 @@
                         <div class="find-slider">
                             <form action="{{ path('smart_unity_question_reponse_search_questions') }}" method="GET">
                             <div class="input-group" style="margin-top:30px">
-                              <input type="text" class="form-control">
+                              <input type="text" name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">
+                              <input type="hidden" name="p" id="p" value="1" class="form-control">
                               <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                               </span>

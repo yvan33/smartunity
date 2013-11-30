@@ -203,4 +203,30 @@ class AjaxController extends Controller
     }
 
 
+    public function getSearchAction(){
+
+        $question =  $this->getRequest()->query->get('q');
+
+
+        $finder = $this->container->get('fos_elastica.finder.smartunity.question');
+        $resultSet = $finder->findHybrid(urldecode($question));
+
+        $html = '';
+        $html .= '<html lang="en"><head></head><body>';
+        $html.= 'score     ------    sujet<br/><br/>';
+
+        foreach($resultSet as $result){
+            $html.= $result->getResult()->getScore() . ' ------ ';
+            $html.= $result->getTransformed()->getSujet() . ' ------ ';
+            $html.= $result->getTransformed()->getMembre()->getNom();
+            $html.=  '<br/>';
+        }
+
+        $html.=  '</body></html>';
+        
+        return new Response($html);
+    }
+
+
+
 }

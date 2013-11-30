@@ -3,11 +3,13 @@
 {% block title %}Smart'Unity - Liste des Questions {% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/question.css') }}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/css/question.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block initJS %}
-	<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
+	<script src="{{asset('assets/js/bootstrap-paginator.js')}}"></script>
+  <script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
 {% endblock %}
 
 
@@ -261,7 +263,7 @@
 		</div><!-- grille fin-->
 
       <div>
-        <a href="{{ path('smart_unity_question_reponse_add_question')}}">Nouvelle Question</a>
+        <a id="popupQuestion" href="{{ path('smart_unity_question_reponse_add_question')}}">Nouvelle Question</a>
       </div>
     </div><!-- col fin-->
 </div>  <!-- row fin-->
@@ -275,6 +277,32 @@
 {% block callJS %}
 
 <script language="javascript">
+
+/////////////
+////// POPUP
+/////////////
+
+$('#popupQuestion').magnificPopup({
+  type: 'iframe',
+  callbacks: {
+    open: function(){
+      $('#header').css('z-index', '1000');
+      this.content.css('background-color', '#FFFFFF');
+    },
+    close: function(){
+      $('#header').css('z-index', '1000000');
+    }
+  },
+  disableOn: function() {
+    if( $(window).width() < 768 ) {
+      return false;
+    } 
+    return true;
+  },
+
+});
+
+
 
 //////////////////
 ////// FONCTIONS

@@ -120,28 +120,66 @@ class QuestionReponseController extends Controller
 
 
 
-    public function searchQuestionAction()
+    public function searchQuestionAction(Request $request)
     {
 
-        $question =  $this->getRequest()->query->get('q');
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $request->getSession();
+
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = '';
+        }
+
+        if ($error) {
+            // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
+            $error = $error->getMessage();
+        }
+
+
+
+        $question = $this->getRequest()->query->get('q');
+        $page = $this->getRequest()->query->get('p');
+        $nbParPage = 5;
 
 
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
         $resultSet = $finder->findHybrid(urldecode($question));
 
-        $html = '';
-        $html .= '<html lang="en"><head></head><body>';
-        $html.= 'score     ------    sujet<br/><br/>';
+        $listeQuestions = array();
 
         foreach($resultSet as $result){
+
+
+
+
+            /*
             $html.= $result->getResult()->getScore() . ' ------ ';
             $html.= $result->getTransformed()->getSujet() . ' ------ ';
             $html.= $result->getTransformed()->getMembre()->getNom();
             $html.=  '<br/>';
+            */
         }
 
-        $html.=  '</body></html>';
-        return new Response($html);
+
+
+        $template = sprintf('SmartUnityQuestionReponseBundle:Display:Recherche.html.twig');
+        return $this->render($template, array(
+            'error'=>$error,
+            'requete'=>$question,
+            'page'=>$page,
+            'nbPages'=>$nbParPage,
+            'listeQuestions'=>$listeQuestions, 
+            'countListe' => count($listeQuestions),
+            'nbParPage'=>$nbParPage,
+            'pagination'=>array()
+        ));
+
     }
 
 
