@@ -34,7 +34,7 @@
                 <div class="tab-content">
                   <div class="tab-pane fade in out active">
                   				<!-- accordion general-->
-                          <div class="panel-group">
+                          <div class="panel-group" id="liste">
 
 
 
@@ -53,7 +53,7 @@
                                         <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                                 <!-- rond pts fin-->
                                                 <!-- describ question-->
-                                        <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
+                                        <a data-toggle="collapse" data-parent="#liste" href="#collapse{{loop.index}}">
                                         <div class="grille-2" ><p>{{question.sujet}}</p>
                                         <p style="font-weight:200; font-style:italic">{{ question.membre_prenom }} le {{ question.date }}</p></div>
                                         </a>
@@ -114,9 +114,8 @@
 
                 <div style="text-align:center; cursor:pointer">
                     <ul id="pages" class="pagination pagination-lg">
-                      blablab
                       {% for page in pagination %}
-                      <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question', {page: page[1], type: type}) }}">{{ page[0] }}</a></li>
+                      <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_search_questions') }}?q={{requete}}&p={{page[1]}}">{{ page[0] }}</a></li>
                       {% endfor %}
                   </ul>
                 </div>

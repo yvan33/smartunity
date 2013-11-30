@@ -52,7 +52,6 @@ class AjaxController extends Controller
         if($listeQuestion[0] != null){
             foreach($listeQuestion as $Question){ //On parcourt toutes les questions, on les liste dans le tableau de sortie
 
-                $reponse = '';
                 $bestReponse = '';
                 $idBestReponse = '';
                 $auteurBestreponse= '';
@@ -69,7 +68,6 @@ class AjaxController extends Controller
                             break;
                         }
                     }
-
                 }
 
 

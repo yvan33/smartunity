@@ -21,8 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/elastica-bundle": "3.0.*@dev",
-        "imagine/imagine": "~0.5.0"
-
+        "imagine/imagine": "~0.5.0",
+        "knplabs/knp-paginator-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

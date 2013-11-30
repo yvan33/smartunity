@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Elastica\Query;
+use Elastica;
 
 class QuestionReponseController extends Controller
 {
@@ -141,7 +143,11 @@ class QuestionReponseController extends Controller
             $error = $error->getMessage();
         }
 
+        
 
+        $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
 
         $question = $this->getRequest()->query->get('q');
         $page = $this->getRequest()->query->get('p');
@@ -149,21 +155,91 @@ class QuestionReponseController extends Controller
 
 
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
-        $resultSet = $finder->findHybrid(urldecode($question));
+
+        $queryString='{
+                "query" : {';
+
+        if ($question == ''){
+            $queryString .= '"match_all": {}';
+        }else{
+             $queryString .= '"query_string" : {
+                        "query" : "' . urldecode($question) .'"
+                    }';
+        }
+                   
+        $queryString .= '},
+                "from" : "' . $nbParPage*($page - 1) .'",
+                "size" : "' . $nbParPage . '"
+                }';
+
+        $query = new Elastica\Query\Builder($queryString);
+
+        $nbQuestions = count($finder->find(urldecode($question)));
+        $nbPages = ceil($nbQuestions / $nbParPage);
+
+        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
 
         $listeQuestions = array();
 
         foreach($resultSet as $result){
 
 
+            $Question = $result->getTransformed();
 
+
+            $bestReponse = '';
+            $idBestReponse = '';
+            $auteurBestreponse= '';
+            $dateBestReponse = '';
+
+            $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
+            if ($idBestReponse['repId'] !== false){
+
+                foreach($Question->getReponses() as $reponse){
+                    if($reponse->getId() == $idBestReponse['repId']){
+                        $bestReponse = $reponse->getDescription();
+                        $auteurBestreponse = $reponse->getMembre()->getPrenom() . ' ' . $reponse->getMembre()->getNom();
+                        $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+                        break;
+                    }
+                }
+            }
+
+            array_push($listeQuestions, array(
+                'id'=>$Question->getId(),
+                'sujet'=>$Question->getSujet(),
+                'description'=>$Question->getDescription(),
+                'date'=>$Question->getDate()->format('d-m-Y à H:i'),
+                'membre_nom'=>$Question->getMembre()->getNom(),
+                'membre_prenom'=>$Question->getMembre()->getPrenom(),
+                'remuneration'=>$Question->getRemuneration(),
+                'nb_reponses'=>$Question->getReponses()->count(),
+                'best_reponse'=>$bestReponse,
+                'auteur_best_reponse'=>$auteurBestreponse,
+                'date_best_reponse'=>$dateBestReponse,
+                'slug'=>$Question->getSlug(),
+                'count_soutien'=>$Question->getSoutienMembres()->count(),
+                'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
+            ));
 
             /*
-            $html.= $result->getResult()->getScore() . ' ------ ';
-            $html.= $result->getTransformed()->getSujet() . ' ------ ';
-            $html.= $result->getTransformed()->getMembre()->getNom();
-            $html.=  '<br/>';
+            $html.= $result->getResult()->getScore();
             */
+        }
+
+        //Génération de la pagination en statique (si pas de JS)
+        $pagination = array();
+        if($page!=1){
+            array_push($pagination, array('<<', '1', '-4'));
+            array_push($pagination, array('<', $page - 1, '-3'));
+        }
+        for ($i=-2; $i<3; $i++){
+            if( ($page + $i) >= 1  &&  ($page + $i) <= $nbPages )
+                array_push($pagination, array($page + $i, $page + $i, $i));
+        }
+        if($page < $nbPages){
+            array_push($pagination, array('>', $page + 1, '3'));
+            array_push($pagination, array('>>', $nbPages, '4'));
         }
 
 
@@ -173,11 +249,11 @@ class QuestionReponseController extends Controller
             'error'=>$error,
             'requete'=>$question,
             'page'=>$page,
-            'nbPages'=>$nbParPage,
+            'nbPages'=>$nbPages,
             'listeQuestions'=>$listeQuestions, 
-            'countListe' => count($listeQuestions),
+            'countListe' => $nbQuestions,
             'nbParPage'=>$nbParPage,
-            'pagination'=>array()
+            'pagination'=>$pagination
         ));
 
     }
