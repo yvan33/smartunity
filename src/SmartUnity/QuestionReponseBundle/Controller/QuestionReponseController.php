@@ -362,6 +362,7 @@ class QuestionReponseController extends Controller
             'nbReponses'=>$nbReponses,
             'nbPages'=>$nbPages,
             'tri'=>$tri,
+            'page'=>$page,
             'slug'=>$slug,
             'listeReponses'=>$listeReponses,
             'pagination'=>$pagination,
