@@ -1,0 +1,139 @@
+.grille-1
+{
+    width:30%;
+    margin: 3px 2.5% 3px 5%;
+    /*background-color:#00C;*/
+    /*height:20px;*/
+    float:left;
+}
+.grille-2
+{
+    width:45%;
+    margin: 3px 15% 3px 2.5%;
+    /*background-color:#3C9;*/
+    height:20px;
+    float:right;
+}
+.grille-1.pref
+{
+    width:60%;
+    margin: 3px 3% 3px 5%;
+    /*background-color:#00C;*/
+    /*height:20px;*/
+    float:left;
+}
+.grille-2.pref
+{
+    width:30%;
+    margin: 3px 1% 3px 1%;
+    /*background-color:#3C9;*/
+    height:20px;
+    float:right;
+}
+
+.grille-1-reinitialisation{
+    width:35%;
+    margin: 3px 2.5% 3px 12.5%;
+    /*background-color:#00C;*/
+    /*height:20px;*/
+    float:left;}
+
+.grille-2-reinitialisation
+{
+    width:35%;
+    margin: 3px 12.5% 3px 2.5%;
+    /*background-color:#3C9;*/
+    height:20px;
+    float:right;
+}
+
+.grille-2.radio-pref
+{
+    text-align: center;	
+
+
+}
+
+.grille-content
+{
+    padding:15px;
+    background-color: #f8f8ef;
+    margin-top:10px;
+    margin-bottom:5px;
+    border-radius:7px;
+    -webkit-box-shadow: 0 0 20px  #CCCCCC;
+    -moz-box-shadow: 0 0 20px  #CCCCCC;
+    box-shadow: 0 0 20px  #CCCCCC;
+}
+
+.forminfo
+{
+    height: 100%;
+}
+
+.label-radio
+{
+    font-weight: normal;
+    margin-right: 1.2em;
+}
+
+.label-normal
+{
+    font-weight: normal;
+}
+
+/*.validationInfos
+{
+    position: relative;
+    top: 10em;
+}*/
+
+.bouton-bas-block
+{
+    margin-top: 2em;
+}
+
+.premiere-ligne
+{
+    margin-top: 2em;
+}
+
+.infos-date
+{
+    margin-right: 0.3em; 
+}
+
+.cookie-title
+{
+    font-family: 'Cookie', cursive;
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.panneau-bas
+{
+    margin-bottom:20px; 
+}
+
+/*.fieldset-etroit
+{
+    padding-right: 0px;
+}*/
+
+/*@media screen and (max-width: 768px)
+{
+.fieldset-etroit
+{
+    padding-right: 0px;
+}
+}*/
+
+.erreur{
+    
+    color:red;
+    
+}
+
+.cleared{
+    clear:both;
+}
