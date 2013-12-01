@@ -384,14 +384,22 @@ class QuestionReponseController extends Controller
 
         $newQuestion->setRemuneration(10);
         $formQuestion = $this->createFormBuilder($newQuestion)
-                            ->add('sujet','text')
-                            ->add('description','textarea')
+                            ->add('sujet','text', array(
+                                'required' => true))
+                            ->add('description','textarea', array(
+                                'required' => true))
                             ->add('marque', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:marque',
-                                'property'=> 'nom'))
+                                'property'=> 'nom',
+                                'required'    => false,
+                                'empty_value' => 'Choisissez',
+                                'empty_data'  => NULL))
                             ->add('modele', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:modele',
-                                'property'=> 'nom'))
+                                'property'=> 'nom',
+                                'required'    => false,
+                                'empty_value' => 'Choisissez',
+                                'empty_data'  => NULL))
                             // ->addEventListener(
                             //     FormEvents::PRE_SET_DATA,
                             //         function(FormEvent $event) {
@@ -406,10 +414,15 @@ class QuestionReponseController extends Controller
                             //     )
                             ->add('os', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:os',
-                                'property'=> 'nom'))
+                                'property'=> 'nom',
+                                'required'    => false,
+                                'empty_value' => 'Choisissez',
+                                'empty_data'  => NULL))
                             ->add('typeQuestion', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:typeQuestion',
-                                'property'=> 'nom'))
+                                'property'=> 'nom',
+                                'empty_value' => 'Choisissez une option',
+                                'required' => true))
                             ->add('remuneration','integer',array('attr' => array('min' => 10)))
                             ->add('save', 'submit')
                             
@@ -437,7 +450,7 @@ class QuestionReponseController extends Controller
                 $newQuestion->setSlug($this->slugify($formQuestion->get('sujet')->getData()));
 
                 // $newQuestion->addSoutien($user);
-                $cagnotte =  $user->getCagnotte() - $formQuestion->get('remuneration')->getData();
+                $cagnotte =  $user->getCagnotte() - $formQuestion->get('remuneration')->getData() +10;
                 if($cagnotte>=0)
                 {
                 $user->setCagnotte($cagnotte);
