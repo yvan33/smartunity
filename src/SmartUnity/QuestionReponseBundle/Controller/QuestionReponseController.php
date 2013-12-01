@@ -362,7 +362,6 @@ class QuestionReponseController extends Controller
             'nbReponses'=>$nbReponses,
             'nbPages'=>$nbPages,
             'tri'=>$tri,
-            'page'=>$page,
             'slug'=>$slug,
             'listeReponses'=>$listeReponses,
             'pagination'=>$pagination,
@@ -468,8 +467,7 @@ class QuestionReponseController extends Controller
 
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
-            'formQuestion'=>$formQuestion->createView()));
+        return new Response('Votre question a bien été ajoutée');
     }
 
     public function slugify($str) {
@@ -511,9 +509,7 @@ class QuestionReponseController extends Controller
                 $em->persist($newReponse);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse',array(
-                    "slug"  => $slug
-                    )));
+                return new Response('Votre réponse a bien été ajoutée');
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddReponse.html.twig',array(
