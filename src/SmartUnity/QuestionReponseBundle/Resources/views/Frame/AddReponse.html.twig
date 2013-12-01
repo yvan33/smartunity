@@ -6,8 +6,8 @@
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css') }}">
 
     <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
 
@@ -17,19 +17,19 @@
 </head>
 <body>
 
-	<div style="width:100%;padding:0 15px;">
+	<div class="grille-content">
 	    <legend>Nouvelle Reponse</legend>
-		
+
 		{{ form_start(formReponse)}}
 		<div class="erreur">
             {{ form_errors(formReponse) }}
 	    </div>
-
 	    <div class="row">
-	        <div class="grille-1" style="overflow:hidden;text-align:center;margin:5px auto;"><div style="display:inline-block;margin-right:10px; vertical-align:top">{{ form_label(formReponse.description) }}</div><div style="display:inline-block; vertical-align:top; width:50%">{{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'style': 'width:100%;'}}) }}</div></div>
+	        <div class="grille-1">{{ form_label(formReponse.description) }}</div>
+	        <div class="grille-2">{{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'style': 'width:100%;'}}) }}</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1" style="overflow:hidden;text-align:center;margin:5px auto;">{{form_widget(formReponse.save,{'attr': {'class': 'btn btn-primary'}})}}</div>
+	        <div class="grille-1">{{form_widget(formReponse.save,{'attr': {'class': 'btn btn-primary'}})}}</div>
 	    </div>
 	    {{form_end(formReponse)}}
 	</div>

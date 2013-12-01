@@ -6,8 +6,8 @@
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css') }}">
 
     <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
 
@@ -17,7 +17,7 @@
 </head>
 <body>
 
-	<div style="width:100%;padding:0 15px;">
+	<div class="grille-content">
 	    <legend>Nouvelle Reponse</legend>
 		
 		{{ form_start(formQuestion)}}
@@ -29,25 +29,31 @@
 	        <div class="grille-2">{{ form_errors(formQuestion.sujet) }}{{ form_widget(formQuestion.sujet,{'attr': {'style': 'width:100%;'}}) }}</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1" style="overflow:hidden;text-align:center;margin:5px auto;"><div style="display:inline-block;margin-right:10px; vertical-align:top">{{ form_label(formQuestion.description) }}</div><div style="display:inline-block; vertical-align:top; width:50%">{{ form_errors(formQuestion.description) }}{{ form_widget(formQuestion.description,{'attr': {'style': 'width:100%;'}}) }}</div></div>
+	        <div class="grille-1">{{ form_label(formQuestion.description) }}</div>
+	        <div class="grille-2">{{ form_errors(formQuestion.description) }}{{ form_widget(formQuestion.description,{'attr': {'style': 'width:100%;height:""'}}) }}</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1" style="overflow:hidden;text-align:center;margin:5px auto;"><div style="display:inline-block;margin-right:10px; vertical-align:top">{{ form_label(formQuestion.marque) }}</div><div style="display:inline-block; vertical-align:top; width:50%">{{ form_errors(formQuestion.marque) }}{{ form_widget(formQuestion.marque,{'attr': {'style': 'width:100%;'}}) }}</div></div>
+	        <div class="grille-1">{{ form_label(formQuestion.marque) }}</div>
+	        <div class="grille-2">{{ form_errors(formQuestion.marque) }}{{ form_widget(formQuestion.marque,{'attr': {'style': 'width:100%;'}}) }}</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1" style="overflow:hidden;text-align:center;margin:5px auto;"><div style="display:inline-block;margin-right:10px; vertical-align:top">{{ form_label(formQuestion.modele) }}</div><div style="display:inline-block; vertical-align:top; width:50%">{{ form_errors(formQuestion.modele) }}{{ form_widget(formQuestion.modele,{'attr': {'style': 'width:100%;'}}) }}</div></div>
+	        <div class="grille-1">{{ form_label(formQuestion.modele) }}</div>
+	        <div class="grille-2">{{ form_errors(formQuestion.modele) }}{{ form_widget(formQuestion.modele,{'attr': {'style': 'width:100%;'}}) }}</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1" style="overflow:hidden;text-align:center;margin:5px auto;"><div style="display:inline-block;margin-right:10px; vertical-align:top">{{ form_label(formQuestion.os) }}</div><div style="display:inline-block; vertical-align:top; width:50%">{{ form_errors(formQuestion.os) }}{{ form_widget(formQuestion.os,{'attr': {'style': 'width:100%;'}}) }}</div></div>
+	        <div class="grille-1">{{ form_label(formQuestion.os) }}</div>
+	        <div class="grille-2">{{ form_errors(formQuestion.os) }}{{ form_widget(formQuestion.os,{'attr': {'style': 'width:100%;'}}) }}</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1" style="overflow:hidden;text-align:center;margin:5px auto;"><div style="display:inline-block;margin-right:10px; vertical-align:top">{{ form_label(formQuestion.typeQuestion) }}</div><div style="display:inline-block; vertical-align:top; width:50%">{{ form_errors(formQuestion.typeQuestion) }}{{ form_widget(formQuestion.typeQuestion,{'attr': {'style': 'width:100%;'}}) }}</div></div>
+	        <div class="grille-1">{{ form_label(formQuestion.typeQuestion) }}</div>
+	        <div class="grille-2">{{ form_errors(formQuestion.typeQuestion) }}{{ form_widget(formQuestion.typeQuestion,{'attr': {'style': 'width:100%;'}}) }}</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1" style="overflow:hidden;text-align:center;margin:5px auto;"><div style="display:inline-block;margin-right:10px; vertical-align:top">{{ form_label(formQuestion.remuneration) }}</div><div style="display:inline-block; vertical-align:top; width:50%">{{ form_errors(formQuestion.remuneration) }}{{ form_widget(formQuestion.remuneration,{'attr': {'style': 'width:100%;'}}) }}</div></div>
+	        <div class="grille-1">{{ form_label(formQuestion.remuneration) }}</div>
+	        <div class="grille-2">{{ form_errors(formQuestion.remuneration) }}{{ form_widget(formQuestion.remuneration,{'attr': {'style': 'width:100%;'}}) }}</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1" style="overflow:hidden;text-align:center;margin:5px auto;">{{form_widget(formQuestion.save,{'attr': {'class': 'btn btn-primary'}})}}</div>
+	        <div class="grille-1">{{form_widget(formQuestion.save,{'attr': {'class': 'btn btn-primary'}})}}</div>
 	    </div>
 	    {{form_end(formQuestion)}}
 	</div>
