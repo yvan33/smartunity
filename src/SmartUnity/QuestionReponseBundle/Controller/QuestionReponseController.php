@@ -340,6 +340,18 @@ class QuestionReponseController extends Controller
         }
 
 
+        $isValidated = false;
+        $isCertif = false;
+
+        if(count($listeReponses) > 0){
+            foreach($listeReponses as $reponse){
+                if($reponse->is_certif)
+                    $isCertif = true;
+                if($reponse->is_validated)
+                    $isValidated = true;
+            }
+        }
+
 
         $questionRepository = $this->getDoctrine()
                             ->getManager()
@@ -364,6 +376,8 @@ class QuestionReponseController extends Controller
             'tri'=>$tri,
             'page'=>$page,
             'slug'=>$slug,
+            'is_certif'=>$isCertif,
+            'is_validated'=>$isValidated,
             'listeReponses'=>$listeReponses,
             'pagination'=>$pagination,
             'nbParPage'=>$nbParPage,

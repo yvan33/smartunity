@@ -63,7 +63,8 @@
                                         <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                       </div>
                                    <a href="#"><div class="bouton-com-rep" style="margin-left:10px">Commenter</div></a>
-                                   <a class="reponse"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}"><div class="bouton-com-rep">Repondre</div></a>
+                                   {% if not is_validated or not is_certif %}
+                                   <a class="reponse"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}"><div class="bouton-com-rep">Repondre</div></a>{% endif %}
                                 </div>
                                 </div>
                             </div>
@@ -92,7 +93,7 @@
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row" style="margin-bottom:40px">
                 <div style="text-align:center; cursor:pointer">
                     <ul id="pages" class="pagination pagination-lg">
                       {% for page in pagination %}
@@ -108,7 +109,7 @@
 
 
 {% block modal %}
-{% if is_granted('ROLE_USER') %}
+{% if is_granted('ROLE_USER') and not is_certif and not is_validated %}
   <div id="addReponseHolder" style="width:100%; display:none; position:fixed; background-color:#CCC; border-top: solid 1px #333; bottom:0px; z-index:1000;">
     <div><iframe id="addReponse" style="border:0px; float:left; width:80%; margin-left:10%;" src="about:blank"></iframe></div>
     <div class="btn btn-default" style="float:left; left:-25px; cursor:pointer; width:40px;" id="closeFrame"><span class="glyphicon glyphicon-remove-circle"</span></div>
@@ -215,7 +216,7 @@ function clickOnPagination(pPage){
         donnees.shift(); //On supprime la ligne de check du JSON
 
         donnees.forEach(function(pEntry, i){
-          content += generateContent(pEntry, i);
+          if ( !pEntry['is_validated'] || !pEntry['is_certif'] ) content += generateContent(pEntry, i);
         }); //Generation du code
 
         //Affichage du nouveau contenu dasn le tab, et fadeIn
@@ -292,6 +293,15 @@ function generateContent(pEntry, i){
                                 </div> \
                                 </div> \
                                 <p style="min-height: 100px">' + pEntry['description'] + '</p>';
+
+                                
+                                  pEntry['commentaires'].forEach(function(pCom, i){
+
+                                    entity += '<div class="commentaire"> \
+                                    <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_nom'] + ' le ' + pCom['date'] + '</p> \
+                                    </div>';
+
+                                  });
 
                                 
                                 entity +=' \
