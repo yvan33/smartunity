@@ -16,8 +16,9 @@
 
 </head>
 <body>
-{{ form_start(formReponse) }}
+
 	<div class="" style="width:100%;padding:0 15px;">
+		{{ form_start(formReponse)}}
 		<div class="erreur">
             {{ form_errors(formReponse) }}
 	    </div>
@@ -30,6 +31,7 @@
 	    <div class="row">
 	        <div class="grille-1">{{form_widget(formReponse.save)}}</div>
 	    </div>
+	     {{form_end(formReponse)}}
 	</div>
     
 

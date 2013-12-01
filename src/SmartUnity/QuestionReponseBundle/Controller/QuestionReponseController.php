@@ -383,6 +383,8 @@ class QuestionReponseController extends Controller
         $newQuestion = new \SmartUnity\AppBundle\Entity\Question();
 
         $newQuestion->setRemuneration(10);
+        $user = $this->getUser();
+
         $formQuestion = $this->createFormBuilder($newQuestion)
                             ->add('sujet','text', array(
                                 'required' => true))
@@ -423,7 +425,7 @@ class QuestionReponseController extends Controller
                                 'property'=> 'nom',
                                 'empty_value' => 'Choisissez une option',
                                 'required' => true))
-                            ->add('remuneration','integer',array('attr' => array('min' => 10)))
+                            ->add('remuneration','integer',array('attr' => array('min' => 10,'max' => ($user->getCagnotte()+10))))
                             ->add('save', 'submit')
                             
                             ->getForm();
@@ -433,7 +435,6 @@ class QuestionReponseController extends Controller
             $formQuestion->bind($this->getRequest());
 
             if ($formQuestion->isValid()) {
-                $user = $this->getUser();
                 $newQuestion->setMembre($user);
                 $newQuestion->setSignaler(false);
 
