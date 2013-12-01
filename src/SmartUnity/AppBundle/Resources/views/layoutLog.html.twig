@@ -37,9 +37,9 @@
 
  
 <!-- bg body -->
-<body class="bg">
+<body class="bg" style="overflow-x: hidden">
 <!-- head -->
-<div id="header" style="position:fixed !important;z-index: 1000000;width: 100%;">
+
  <div class="container bg" >
  
   <div class="row">
@@ -129,8 +129,9 @@
 </div>  
 
 <!-- /.navbar-collapse -->
-  <div class="row">
-    <div class="col-md-12 menu-bg" style="position: relative">
+<div class="nav-fixe ">
+  <div class="row nav-fixe ">
+    <div class="col-md-12 menu-bg">
       <nav class="navbar navbar-inverse" role="navigation">
          <!--navbar- mobile -->
                   <div class="navbar-header">
@@ -163,13 +164,28 @@
       </nav>
     </div>
   </div>
-   
 </div>
-</div>
+<script>
+    var positionElementInPage = $('.nav-fixe').offset().top;
+        $(window).scroll(
+            function() {
+                if ($(window).scrollTop() >= positionElementInPage) {
+                    // fixed
+                    $('.nav-fixe').addClass("fixee");
+                    $('#cont').addClass("fixe-cont");
+                } else {
+                    // relative
+                    $('.nav-fixe').removeClass("fixee");
+                    $('#cont').removeClass("fixe-cont");
+                }
+            }
+        );
+</script>
+
 <!-- end nav -->
- <div class="container" >
+<div id="cont"></div>
+ <div class="container">
 <div class="row">
-   <div style="height: 250px"></div>
 <div class="col-md-12">
 
 

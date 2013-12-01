@@ -324,6 +324,24 @@
 {
 	width: 100%;
 }
+.nav-fixe
+{
+	z-index: 1000000;
+	width: 100%;
+	overflow: hidden;
+	margin: 0px;
 
+}
+.fixee
+{	
+	position:fixed;
+ 	top:0px;
+
+
+}
+.fixe-cont
+{
+	height: 80px;
+}
 
 
