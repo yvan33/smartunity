@@ -218,6 +218,12 @@
        -moz-box-shadow: 0 5px 20px  black;
             box-shadow: 0 5px 20px  black;
 }
+.footer
+{
+	text-align: center;
+	margin-top: 5px;
+}
+
 .footer a
 {
 	display: inline-block;
@@ -342,7 +348,7 @@
 }
 .fixe-cont
 {
-	height: 80px;
+	height: 65px;
 }
 
 

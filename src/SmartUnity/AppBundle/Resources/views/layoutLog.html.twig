@@ -45,7 +45,7 @@
   <div class="row">
   <div class="col-md-12">
     <div class="row">
-      <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h"/></div>
+      <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h" style="max-height: 90px;"/></div>
       <div class="col-md-5 cent-h">
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -57,8 +57,9 @@
                 <p class="red-dot">1</p>
             </a>
             <a href="{{ path('fos_user_profile_show') }}" class="valign-col-all pad-l"><p>{{ app.user.username }}</p></a>
+            <a href="{{ path('fos_user_security_logout') }}"class="valign-col-all pad-l" ><p>Déconnexion</p></a>
           </div>
-           <a href="{{ path('fos_user_security_logout') }}"  class="valign-col-all pad-l" ><p>Déconnexion</p></a>
+           
 
 
             {% else %}
