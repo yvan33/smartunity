@@ -150,7 +150,6 @@ class AjaxController extends Controller
                 //Récupération des commentaires
                 $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse),
                                                                         array('date' => 'asc'));
-                
                
                 //Remplissage du tableau de sortie commentaires
                 foreach($commentaires as $commentaire){
@@ -179,6 +178,12 @@ class AjaxController extends Controller
                     }
                 }
 
+                
+                $membre = $reponse[0]->getMembre();
+
+                $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
+                $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
+
                 //Ajour d'une réponse dans le tableau de sortie
                 array_push($returnArray, array(
                     'id'=>$reponse[0]->getId(),
@@ -186,12 +191,15 @@ class AjaxController extends Controller
                     'date'=>$reponse[0]->getDate()->format('d-m-Y à H:i'),
                     'up_vote'=> (int) $reponse['upVote'],
                     'down_vote'=> (int) $reponse['downVote'],
-                    'membre_nom'=>$reponse[0]->getMembre()->getNom(),
-                    'membre_reputation'=>$reponse[0]->getMembre()->getReputation(),
+                    'membre_nom'=>$membre->getNom(),
+                    'membre_reputation'=>$membre->getReputation(),
                     'commentaires'=>$commentairesReturn,
                     'is_certif'=>$isCertif,
                     'is_validated'=>$isValid,
-                    'is_voted'=>$isVoted
+                    'is_voted'=>$isVoted,
+                    'smart_reponses'=> (int) $smartReponses,
+                    'nb_questions_membre'=> (int) $nb_questions_membre,
+                    'points_membre'=> (int) $membre->getCagnotte()
                 ));
             }
         }
