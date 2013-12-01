@@ -149,15 +149,15 @@
     <!--navbar- standar -->
                   <div class="collapse navbar-collapse navbar-ex1-collapse menu-mar" >
                     <ul class="nav navbar-nav">
-                      <li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage' %}class="active"{% endif %}><a href="{{ path('smart_unity_app_homepage') }}"><span class="glyphicon glyphicon-home" style="font-size:24px;
-  font-weight:bold;"></span></a></li>
+                      <li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage' %}class="active"{% endif %}><a href="{{ path('smart_unity_app_homepage') }}" class="menu-pad"><span class="glyphicon glyphicon-home"style="font-size:24px;
+  font-weight:bold;margin-top: -8px"></span></a></li>
                       <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_search_questions'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
-                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}"><p class="menu-pad">SMART'SOLUTION</p></a></li>
-                      <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href="#"><p class="menu-pad">BOUTIQUE</p></a></li>
-                      <li {% if app.request.attributes.get('_route') == 'smart_unity_forum_homepage' %}class="active"{% endif %}><a href="#"><p class="menu-pad">SMART'CAFE</p></a></li>
+                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}" class="menu-pad">SMART'SOLUTION</a></li>
+                      <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href="#" class="menu-pad">BOUTIQUE</a></li>
+                      <li {% if app.request.attributes.get('_route') == 'smart_unity_forum_homepage' %}class="active"{% endif %}><a href="#"class="menu-pad">SMART'CAFE</a></li>
                     </ul>
                   </div>
          <!--navbar- standar fin --> 
