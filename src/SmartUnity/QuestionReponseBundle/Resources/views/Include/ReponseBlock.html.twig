@@ -1,11 +1,11 @@
                           <div class="grille-reponse{% if reponse.is_certif or reponse.is_validated %}-smart{% endif %}">
                                  <div class="grille-4">
-                                    <div class="roww" style="display:inline-block">
-                                      <div class="fleche">
-                                          <a href=""><img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">{{reponse.up_vote}}</p></a>
+                                    <div class="roww" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% elseif reponse.is_voted %}Vous avez déjà noté cette question.{% endif %}">
+                                      <div class="fleche" {% if is_granted('ROLE_USER') and not reponse.is_voted %}onClick="javascript:upVote({{reponse.id}})"{% endif %}>
+                                          <img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">{{reponse.up_vote}}</p>
                                         </div>
-                                        <div class="fleche">
-                                          <a href=""><img src="{{ asset('assets/img/fléche-rouge.png') }}"/><p style="color:#F00">{{reponse.down_vote}}</p></a>
+                                        <div class="fleche" {% if is_granted('ROLE_USER') and not reponse.is_voted %}onClick="javascript:downVote({{reponse.id}})"{% endif %}>
+                                          <img src="{{ asset('assets/img/fléche-rouge.png') }}"/><p style="color:#F00">{{reponse.down_vote}}</p>
                                         </div>
                                     </div>
                                     <div class="roww">

@@ -65,3 +65,15 @@ smart_unity_question_reponse_ajax_get_reponses:
         page: \d
         nbParPage: \d
         tri: vote|date
+
+smart_unity_question_reponse_ajax_upvote:
+    pattern: /setUpVote/{reponse}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:setUpVote, reponse:'0'}
+    requirements:
+        reponse: \d
+
+smart_unity_question_reponse_ajax_downvote:
+    pattern: /setDownVote/{reponse}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:setDownVote, reponse:'0'}
+    requirements:
+        reponse: \d

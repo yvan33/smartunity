@@ -116,6 +116,18 @@
 
 <script>
 
+function upVote(pId){
+  $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees){
+
+  });
+}
+
+function downVote(pId){
+  $.getJSON('{{ path('smart_unity_question_reponse_ajax_downvote') }}/' + pId, function(donnees){
+    
+  });
+}
+
 $(document).ready(function(){
 
   $('a.reponse').click(function(e){
@@ -135,6 +147,10 @@ $(document).ready(function(){
     'placement' : 'left'
   });
   {% endif %}
+
+  $('.roww').tooltip({
+    'placement' : 'right'
+  });
 
 })
 

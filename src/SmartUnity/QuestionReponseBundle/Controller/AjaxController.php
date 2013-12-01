@@ -178,7 +178,7 @@ class AjaxController extends Controller
                     }
                 }
 
-                
+
                 $membre = $reponse[0]->getMembre();
 
                 $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
@@ -233,6 +233,32 @@ class AjaxController extends Controller
         return new Response($html);
     }
 
+
+    public function setUpVoteAction($reponse){
+        
+        //Check si le user est loggé ou pas
+        $securityContext = $this->container->get('security.context');
+        if( !$securityContext->isGranted('IS_AUTHENTICATED_ANONYMOUSLY') ){
+
+            $noteReponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:noteReponse');
+
+            $notes = $noteReponseRepository->findBy(array(
+                'membre'=>$securityContext->getToken()->getUser(),
+                'reponse'=>$reponse
+            ));
+
+            return new Response(count($notes));
+
+        }else{//User pas loggé
+            return new Response('Pas loggé');
+        }
+    }
+
+    public function setDownVoteAction($reponse){
+        
+    }
 
 
 }

@@ -150,6 +150,11 @@
 	font-size:36px;
 	font-weight:600;
 	margin: 10px 5px;
+	cursor:pointer;
+}
+.fleche:hover{
+	font-style:none;
+	cursor:pointer;
 }
 .roww
 {
