@@ -17,13 +17,9 @@
 <div class="row">
                     <div class="col-md-offset-1 col-md-10" style="padding:0px">
                       <div class="grille-content-2">
+                        <div class="grille-reponse">
                         <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ date }}</p>
                             </div>
-
-
-
-
-
 
                              <div class="grille-1">
                               <div class="rond-point"><p>{{ remuneration }} pts</p></div><div class="grille-soutient"><p style="margin:0px">{{ nb_soutiens }} soutien {% if nb_soutiens > 1 %}s{% endif %}</p><button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button></div>
@@ -68,6 +64,7 @@
                                 </div>
                                 </div>
                             </div>
+                          </div>
 
 
                             {% for reponse in listeReponses %}
