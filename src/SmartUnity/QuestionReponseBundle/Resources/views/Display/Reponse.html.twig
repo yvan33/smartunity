@@ -102,16 +102,20 @@
                 </div>
               </div>
 
-              {% if is_granted('ROLE_USER') %}
-                <div id="addReponseHolder" style="display:none; position:fixed; bottom:0px; background-color:#EEE; z-index:1000;">
-                  <div class="bouton-com-rep" style="float:right; cursor:pointer" id="closeFrame"><span class="glyphicon glyphicon-remove-circle"</span></div>
-                  <div><iframe id="addReponse" src="about:blank"></iframe></div>
-                </div>
-              {% endif %}
-
-
 {% endblock %}
 
+
+
+
+
+{% block modal %}
+{% if is_granted('ROLE_USER') %}
+  <div id="addReponseHolder" style="width:100%; display:none; position:fixed; background-color:#CCC; border-top: solid 1px #333; bottom:0px; z-index:1000;">
+    <div><iframe id="addReponse" style="border:0px; float:left; width:80%; margin-left:10%;" src="about:blank"></iframe></div>
+    <div class="btn btn-default" style="float:left; left:-25px; cursor:pointer; width:40px;" id="closeFrame"><span class="glyphicon glyphicon-remove-circle"</span></div>
+  </div>
+{% endif %}
+{% endblock %}
 
 
 {% block callJS %}
