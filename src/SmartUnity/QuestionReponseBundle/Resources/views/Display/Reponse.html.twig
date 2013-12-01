@@ -295,7 +295,8 @@ function generateContent(pEntry, i){
                                   pEntry['commentaires'].forEach(function(pCom, i){
 
                                     entity += '<div class="commentaire"> \
-                                    <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_nom'] + ' le ' + pCom['date'] + '</p> \
+                                    <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_nom'] + ' le ' + pCom['date'] + ' \
+                                    <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
                                     </div>';
 
                                   });
