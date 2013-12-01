@@ -43,7 +43,7 @@
                                   
                                 </div>
                                 </div>
-                                <p >{{reponse.description}}</p>
+                                <p style="min-height: 100px">{{reponse.description}}</p>
 
                                     {% for commentaire in reponse.commentaires %}
                                     <div class="commentaire">
@@ -53,6 +53,9 @@
 
                                     <div style="float:right">
                                     <div class="grille-3-btn">
+                                      <div style="float: left;margin-right: 5px;">
+                                        <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                                      </div>
                                        <a href="#"><div class="bouton-com-rep">Commenter</div></a>
                                     </div>
                                     </div>

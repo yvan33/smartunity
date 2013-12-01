@@ -47,16 +47,18 @@
 
                                  		<div class="panel panel-default fade in out">
                                       	<!-- contenue visible-->
+                                  
                                  			<div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
                                  				<h4 class="panel-title">
                                               	<!-- rond pts-->
                                  					<div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                                   <!-- rond pts fin-->
                                                   <!-- describ question-->
-                                 					<a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
+                                 	
                                  					<div class="grille-2" ><p>{{question.sujet}}</p>
                                             <p style="font-weight:200; font-style:italic">{{ question.membre_prenom }} le {{ question.date }}</p></div>
-                                 					</a>
+                                 				
                                                   <!-- describ question fin-->
                                                   <!-- nb réponses vues-->
                                  					<div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
@@ -73,8 +75,10 @@
                                             {% endif %}
                                  					</div>
                                                   <!-- bouton + fin-->
-                                 				</h4>                           
+                                 				</h4>
+                                         </a>                           
                                  			</div>
+                                     
                                         <!-- contenue visible fin-->
                                         <!-- contenue caché-->
                                    		<div id="collapse{{loop.index}}" class="panel-collapse collapse">
