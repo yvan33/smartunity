@@ -87,7 +87,7 @@
                               {% endif %}
                           {% endfor %}
 
-
+                        </div>
                     </div>
                 </div>
               </div>
@@ -107,7 +107,6 @@
 
 
 
-
 {% block modal %}
 {% if is_granted('ROLE_USER') %}
   <div id="addReponseHolder" style="width:100%; display:none; position:fixed; background-color:#CCC; border-top: solid 1px #333; bottom:0px; z-index:1000;">
@@ -118,10 +117,17 @@
 {% endblock %}
 
 
+
+
+
 {% block callJS %}
 
 
 <script>
+
+////////////
+/// VOTES
+////////////
 
 function upVote(pId){
   $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees){
@@ -134,6 +140,14 @@ function downVote(pId){
     
   });
 }
+
+
+
+
+
+//////////
+/// TOOLTIPS
+//////////
 
 $(document).ready(function(){
 
@@ -158,8 +172,143 @@ $(document).ready(function(){
   $('.roww').tooltip({
     'placement' : 'right'
   });
-
 })
+
+
+
+
+
+////////////////////////////
+////////// PAGINATION & AJAX
+////////////////////////////
+
+//Options du bootStrap Paginator
+options = new Object();
+  options = {
+    currentPage: {{ page }},
+    totalPages: {{ nbPages }},
+    alignment: 'center',
+    numberOfPages: 5,
+    size: 'large',
+    itemContainerClass: function (type, page, current) {
+                          return (page === current) ? "active" : "pointer-cursor";
+                        },
+    bootstrapMajorVersion: 3,
+    onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
+      clickOnPagination(pPage);
+    }
+  };
+
+
+$(document).ready(function(){
+  $('#pages').bootstrapPaginator(options);
+});
+
+
+function clickOnPagination(pPage){
+  $('#reponses-container').fadeOut('fast');
+
+  //On récupère le JSON depuis le controller AjaxController
+  $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/{{tri}}/' + pPage + '/{{nbParPage}}', function(donnees){
+      var content='';
+      if(donnees[0]['page']==pPage && donnees[0]['slug']== '{{slug}}' && donnees[0]['nbParPage']== {{nbParPage}} && donnees[0]['tri'] == '{{tri}}'){
+        donnees.shift(); //On supprime la ligne de check du JSON
+
+        donnees.forEach(function(pEntry, i){
+          content += generateContent(pEntry, i);
+        }); //Generation du code
+
+        //Affichage du nouveau contenu dasn le tab, et fadeIn
+        $('#reponses-container').html(content);
+        $('#reponses-container').fadeIn('fast');
+
+      }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
+        $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+      }
+      $('.roww').tooltip({
+        'placement' : 'right'
+      });
+  });
+}
+
+function generateContent(pEntry, i){
+  var entity = '<div class="grille-reponse"> \
+                                 <div class="grille-4"> \
+                                    <div class="roww" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
+                                    if( pEntry['is_voted'] ){
+                                      entity += 'Vous avez déjà noté cette question.';
+                                    }
+
+                                entity += '"> \
+                                      <div class="fleche" {% if is_granted('ROLE_USER') %}';
+
+                                      if( !pEntry['is_voted'] ) entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
+
+
+                                      entity +=' {% endif %}> \
+                                          <img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">' + pEntry['up_vote'] + '</p> \
+                                        </div> \
+                                        <div class="fleche" {% if is_granted('ROLE_USER') %}';
+
+                                      if( !pEntry['is_voted'] ) entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
+
+                                        entity += '{% endif %}> \
+                                          <img src="{{ asset('assets/img/fléche-rouge.png') }}"/><p style="color:#F00">' + pEntry['down_vote'] + '</p> \
+                                        </div> \
+                                    </div> \
+                                    <div class="roww"> \
+                                      <p style="font-size:11px">' + pEntry['date'] + '</p> \
+                                    </div>';
+                                    
+                                    if(pEntry['is_validated'] || pEntry['is_certif']) entity +=' \
+                                    <div class="roww"> \
+                                      <img src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/> \
+                                    </div>';
+                                    
+                                    entity +=' \
+                                </div> \
+                                 \
+                                <div class="grille-5" > \
+                          \
+                                  <div class="grille-3-over"> \
+                                    <div class="grille-3"> \
+                              \
+                                        <div class="grille-3-grey"> \
+                                            <div class="grille-3-im"> \
+                                                  <img src="{{ asset('assets/img/logo-compte.png') }}"/> \
+                                            </div> \
+                                            <div class=" grille-3-txt"> \
+                                              <p style="margin:0px; font-weight:600">' + pEntry['membre_nom'] + '</p> \
+                                            <p style="margin:0px">' + pEntry['smart_reponses'] + ' Smart\'Reponses</p> \
+                                            <p style="margin:0px">' + pEntry['nb_questions_membre'] + ' Questions</p> \
+                                            <p style="margin:0px">' + pEntry['points_membre'] + ' Smart\'Points</p> \
+                                            </div> \
+                                            <div class="grille-3-rond"> \
+                                              <div class="square-blue"> \
+                                                ' + pEntry['membre_reputation'] + ' \
+                                                </div> \
+                                            </div> \
+                                        </div> \
+                                </div> \
+                                </div> \
+                                <p style="min-height: 100px">' + pEntry['description'] + '</p>';
+
+                                
+                                entity +=' \
+                                    <div style="float:right"> \
+                                    <div class="grille-3-btn"> \
+                                      <div style="float: left;margin-right: 5px;"> \
+                                        <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a> \
+                                      </div> \
+                                       <a href="#"><div class="bouton-com-rep">Commenter</div></a> \
+                                    </div> \
+                                    </div> \
+                                </div> \
+                                </div>';
+
+  return entity;
+}
+
 
 </script>
 
