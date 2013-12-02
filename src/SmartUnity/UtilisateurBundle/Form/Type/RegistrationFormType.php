@@ -83,7 +83,6 @@ class RegistrationFormType extends BaseType {
                     'expanded' => true,
                     'data' => 1
                 ))
-
         ;
     }
 

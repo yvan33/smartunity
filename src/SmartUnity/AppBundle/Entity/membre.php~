@@ -179,12 +179,7 @@ class membre extends BaseUser
     private $commentaireReponses;
 
 
-    /**
-     *
-     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\parrainage", mappedBy="membre")
-     *
-     */
-    private $parrainages;
+
 
     /**
      * Constructor
@@ -199,8 +194,6 @@ class membre extends BaseUser
         $this->reponsesCertifiees = new \Doctrine\Common\Collections\ArrayCollection();
         $this->soutienQuestions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->commentaireReponses = new \Doctrine\Common\Collections\ArrayCollection();
-        $date = new \DateTime('now');
-        $this->setDateInscription($date);
     }
     
     /**
@@ -787,28 +780,5 @@ class membre extends BaseUser
     public function getCommentaireReponses()
     {
         return $this->commentaireReponses;
-    }
-
-    /**
-     * Set date_inscription
-     *
-     * @param \DateTime $dateInscription
-     * @return membre
-     */
-    public function setDateInscription($dateInscription)
-    {
-        $this->date_inscription = $dateInscription;
-    
-        return $this;
-    }
-
-    /**
-     * Get date_inscription
-     *
-     * @return \DateTime 
-     */
-    public function getDateInscription()
-    {
-        return $this->date_inscription;
     }
 }

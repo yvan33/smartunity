@@ -18,7 +18,12 @@ services:
         class:  SmartUnity\UtilisateurBundle\Form\Type\InformationsFormType
         arguments: [%fos_user.model.user.class%]
         tags:
-            - { name: form.type, alias: smartunity_user_informations }    
+            - { name: form.type, alias: smartunity_user_informations }  
+
+   smart_unity_app.parrainage.form.type:
+        class:  SmartUnity\UtilisateurBundle\Form\Type\ParrainageFormType
+        tags:
+            - { name: form.type, alias: smartunity_user_parrainage }   
             
    utilisateur.twig.utilisateur_extension:
         class: SmartUnity\UtilisateurBundle\Twig\utilisateurExtension

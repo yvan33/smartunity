@@ -22,12 +22,17 @@ smart_unity_utilisateur_homepage:
     pattern:  /
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:index }
 
+smart_unity_utilisateur_envoiparrainage:
+    pattern:  /parrainage
+    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:envoiParrainage }
+
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-#    prefix: /Utilisateur
+    prefix: /Utilisateur
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"

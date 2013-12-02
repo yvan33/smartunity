@@ -85,7 +85,7 @@ fos_user:
         form:
             type: smartunity_user_registration
         confirmation:
-            enabled:    true
+            enabled:    false
 
 # FOSElasticaBundle Configuration
 fos_elastica:
