@@ -32,13 +32,13 @@ class RegistrationFormType extends BaseType {
                     'years' => range(date('Y') - 100, date('Y')),
                     'required' => false
                 ))
-                ->add('ville', 'entity', array(
+                ->add('ville', 'text', array(
                     'label' => 'Ville',
-                    'class' => 'SmartUnityAppBundle:ville',
-                    'property' => 'nom',
-                    'query_builder' => function(\Doctrine\ORM\EntityRepository $er) {
-                                       return $er->createQueryBuilder('u')
-                                       ->orderBy('u.nom', 'ASC');},
+//                    'class' => 'SmartUnityAppBundle:ville',
+//                    'property' => 'nom',
+//                    'query_builder' => function(\Doctrine\ORM\EntityRepository $er) {
+//                                       return $er->createQueryBuilder('u')
+//                                       ->orderBy('u.nom', 'ASC');},
 
                 ))
                 ->add('pref_mp', 'choice', array(

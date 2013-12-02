@@ -16,17 +16,18 @@ class avatar {
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
-    public $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $path;
+    private $path;
 
     /**
      * @Assert\File(maxSize="6000000")
      */
     private $file;
+    
     private $temp;
 
     /**
@@ -137,5 +138,57 @@ class avatar {
         // when displaying uploaded doc/image in the view.
         return 'uploads/documents';
     }
+    
+     protected function getAvatarDir() {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/avatars';
+    }
+    
+        public function getAvatarPath() {
+//        return null === $this->path
+//            ? null
+//            : $this->getUploadDir().'/'.$this->id.'.'.$this->path;
+        return null === $this->path ? null : $this->getAvatarDir().'/'.$this->id . '.' . $this->path;
+    }
 
+//    public function resizeAvatarAction($file) {
+//
+//                    $imagine = new Imagine();
+//                    
+//                    $webPath=realpath(__DIR__ .'/../../../../web/');
+//                    $avatarPath= $webPath.'/'.$avatar->getWebPath();
+//                    $newAvatarPath = $webPath.'/'.$avatar->getAvatarPath();
+////                    die($avatarPath);
+//            $image = $imagine->read($file);
+////            die ($new = realpath($avatarPath.'/../'));
+//            $image->thumbnail()
+//                    resize(new Box(15, 25))
+//                    ->rotate(45)
+//                    ->crop(new Point(0, 0), new Box(45, 45))
+//                    ->save($newAvatarPath);
+//    }    
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return avatar
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
 }

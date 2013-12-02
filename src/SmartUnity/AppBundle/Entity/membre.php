@@ -170,6 +170,13 @@ class membre extends BaseUser
      *
      */
     private $commentaireReponses;
+    
+     /**
+     *
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\commentaireQuestion", mappedBy="membre")
+     *
+     */
+    private $commentaireQuestions;
 
 
 
@@ -773,5 +780,38 @@ class membre extends BaseUser
     public function getCommentaireReponses()
     {
         return $this->commentaireReponses;
+    }
+
+    /**
+     * Add commentaireQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions
+     * @return membre
+     */
+    public function addCommentaireQuestion(\SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions)
+    {
+        $this->commentaireQuestions[] = $commentaireQuestions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove commentaireQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions
+     */
+    public function removeCommentaireQuestion(\SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions)
+    {
+        $this->commentaireQuestions->removeElement($commentaireQuestions);
+    }
+
+    /**
+     * Get commentaireQuestions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCommentaireQuestions()
+    {
+        return $this->commentaireQuestions;
     }
 }

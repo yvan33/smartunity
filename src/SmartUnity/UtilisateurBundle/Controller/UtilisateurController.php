@@ -48,7 +48,7 @@ class UtilisateurController extends Controller {
 
             $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
             if (isset($avatar)) {
-                $avatar = $avatar->getWebPath();
+                $avatar = $avatar->getAvatarPath();
             }
 
             return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
@@ -134,16 +134,12 @@ class UtilisateurController extends Controller {
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-
+            $this->resizeAvatarAction($avatar);
             $em->persist($avatar);
             $em->flush();
             
-            $this->resizeAvatarAction($avatar);
 
 
-
-            
-            
             return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
         }
 
@@ -156,25 +152,7 @@ class UtilisateurController extends Controller {
     public function removeAvatarAction($avatar) {
 
         $em = $this->getDoctrine()->getManager();
-
         $em->remove($avatar);
         $em->flush();
-    }
-    
-    public function resizeAvatarAction($avatar) {
-
-                    $imagine = new Imagine();
-                    
-                    $webPath=realpath(__DIR__ .'/../../../../web/');
-                    $newPath=realpath(__DIR__ .'/../../../../web/uploads/avatars');
-                    $avatarPath= $webPath.'/'.$avatar->getWebPath();
-//                    die($avatarPath);
-            $image = $imagine->open($avatarPath);
-            die ($new = realpath($avatarPath.'/../'));
-            $image->resize(new Box(15, 25))
-                    ->rotate(45)
-                    ->crop(new Point(0, 0), new Box(45, 45))
-                    ->save($newPath);
-    }
-
+    } 
 }

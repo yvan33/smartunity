@@ -401,7 +401,7 @@
 {% endblock button_attributes %}
 
 {#Custom widgets#}    
-    {% block _fos_user_registration_form_ville_widget %}
+{#    {% block _fos_user_registration_form_ville_widget %}
         {% if required and empty_value is none and not empty_value_in_choices %}
         {% set required = false %}
     {% endif %}
@@ -419,4 +419,4 @@
         {% set options = choices %}
         {{ block('choice_widget_options') }}
     </select>
-{% endblock %}
+{% endblock %}#}

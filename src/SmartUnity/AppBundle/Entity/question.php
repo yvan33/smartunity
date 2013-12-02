@@ -101,6 +101,11 @@ class question
      * @ORM\Column(name="signaler", type="boolean")
      */
     private $signaler;
+    
+        /**
+    * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\commentaireQuestion", mappedBy="question")
+    */
+    private $commentaireQuestions;
 
 
     /**
@@ -439,5 +444,38 @@ class question
     public function getSoutienMembres()
     {
         return $this->soutienMembres;
+    }
+
+    /**
+     * Add commentaireQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions
+     * @return question
+     */
+    public function addCommentaireQuestion(\SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions)
+    {
+        $this->commentaireQuestions[] = $commentaireQuestions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove commentaireQuestions
+     *
+     * @param \SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions
+     */
+    public function removeCommentaireQuestion(\SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions)
+    {
+        $this->commentaireQuestions->removeElement($commentaireQuestions);
+    }
+
+    /**
+     * Get commentaireQuestions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCommentaireQuestions()
+    {
+        return $this->commentaireQuestions;
     }
 }
