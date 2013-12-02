@@ -475,14 +475,13 @@ class QuestionReponseController extends Controller
                 $em->persist($newQuestion);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse',array(
-                    "slug"  => $newQuestion->getSlug()
-                    ))); 
+                return new Response('Votre question a bien été ajoutée');
                 }
 
             }
         }
-        return new Response('Votre question a bien été ajoutée');
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
+            'formQuestion'=>$formQuestion->createView()));
     }
 
     public function slugify($str) {
