@@ -339,10 +339,6 @@ class QuestionReponseController extends Controller
             array_push($pagination, array('>>', $nbPages, '4'));
         }
 
-
-        $isValidated = false;
-        $isCertif = false;
-
         if(count($listeReponses) > 0){
             foreach($listeReponses as $reponse){
                 if($reponse->is_certif)
@@ -351,6 +347,8 @@ class QuestionReponseController extends Controller
                     $isValidated = true;
             }
         }
+
+        
 
 
         $questionRepository = $this->getDoctrine()
@@ -361,6 +359,9 @@ class QuestionReponseController extends Controller
                             ->getRepository('SmartUnityAppBundle:reponse');
 
         $question = $questionRepository->findOneBySlug($slug);
+
+        $isValidated = $questionRepository->isQuestionValid($question->getId());
+        $isCertif = $questionRepository->isQuestionCertif($question->getId());
 
         $membre = $question->getMembre();
 
@@ -382,12 +383,6 @@ class QuestionReponseController extends Controller
             'pagination'=>$pagination,
             'nbParPage'=>$nbParPage,
             'question'=>$question,
-            'membre_nom'=>$membre->getNom(),
-            'membre_reputation'=>$membre->getReputation(),
-            'date'=>$question->getDate()->format('d-m-Y à H:i'),
-            'nb_soutiens'=>$question->getSoutienMembres()->count(),
-            'remuneration'=>$question->getRemuneration(),
-            'points_membre'=> (int) $membre->getCagnotte(),
             'smart_reponses'=> (int) $smartReponses,
             'nb_questions_membre'=> (int) $nb_questions_membre
         ));

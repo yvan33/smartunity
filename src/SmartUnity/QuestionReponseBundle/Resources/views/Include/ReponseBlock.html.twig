@@ -11,9 +11,13 @@
                                     <div class="roww">
                                       <p style="font-size:11px">{{reponse.date}}</p>
                                     </div>
-                                    {% if reponse.is_certif or reponse.is_validated %}
-                                    <div class="roww">
+                                    {% if reponse.is_certif %}
+                                    <div class="roww" rel="tooltip" data-original-title="Cette réponse à été certifiée Smart'Solution.">
                                       <img src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/>
+                                    </div>
+                                    {% elseif reponse.is_validated %}
+                                    <div class="roww" rel="tooltip" data-original-title="Cette réponse à été validée par le demandeur.">
+                                      <img src="{{ asset('assets/img/check.png') }}" style="margin-top:10px"/>
                                     </div>
                                     {% endif %}
                                 </div>

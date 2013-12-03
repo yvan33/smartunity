@@ -117,12 +117,12 @@ class reponseRepository extends EntityRepository
                     ON u.reponse_id = d.reponse_id) as N
                 ON (N.ureponse_id = R.id OR N.dreponse_id = R.id)
                 WHERE R.question_id = :QuestionId
-                ';
+                ORDER BY R.dateCertification DESC, R.dateValidation DESC,';
 
         if($tri == 'vote')
-            $sql .= 'ORDER BY R.dateCertification DESC, R.dateValidation DESC, note DESC';
+            $sql .= ' note DESC';
         elseif($tri == 'date')
-            $sql .= 'ORDER BY R.date ASC';
+            $sql .= ' R.date ASC';
 
         $sql .= '
                 LIMIT :offset, :nbParPage';

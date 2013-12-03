@@ -97,6 +97,46 @@ class questionRepository extends EntityRepository
     }
 
 
+    public function isQuestionValid($questionId)
+    {
+        $query = $this->_em->createQuery('
+            SELECT COUNT(q.id)
+            FROM
+            SmartUnityAppBundle:question q, SmartUnityAppBundle:reponse r
+            WHERE r.question = q.id
+            AND r.dateValidation IS NOT NULL
+            AND q.id = :questionId
+            ')
+            ->setParameter('questionId', $questionId);
+
+        $result = $query->getScalarResult();
+
+        if($result[0][1]>0)
+            return true;
+        else
+            return false;
+    }
+
+    public function isQuestionCertif($questionId)
+    {
+        $query = $this->_em->createQuery('
+            SELECT COUNT(q.id)
+            FROM
+            SmartUnityAppBundle:question q, SmartUnityAppBundle:reponse r
+            WHERE r.question = q.id
+            AND r.dateCertification IS NOT NULL
+            AND q.id = :questionId
+            ')
+            ->setParameter('questionId', $questionId);
+
+        $result = $query->getScalarResult();
+
+        if($result[0][1]>0)
+            return true;
+        else
+            return false;
+    }
+
 
 
     /////////////////////////////

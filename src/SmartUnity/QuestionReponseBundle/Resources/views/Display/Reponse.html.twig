@@ -18,13 +18,13 @@
                     <div class="col-md-offset-1 col-md-10" style="padding:0px">
                       <div class="grille-content-2">
                         <div class="grille-reponse">
-                        <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ date }}</p>
+                        <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ question.date|date('Y-m-d H:i:s') }}</p>
                             </div>
 
                              <div class="grille-1">
-                              <div class="rond-point"><p>{{ remuneration }} pts</p></div>
+                              <div class="rond-point"><p>{{ question.remuneration }} pts</p></div>
                               
-                              <div class="grille-soutient"><p style="margin:0px">{{ nb_soutiens }} soutien {% if nb_soutiens > 1 %}s{% endif %}</p>
+                              <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
                                 {% if not is_certif and not is_validated %}<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>{% endif %}
                               </div>
                               
@@ -40,14 +40,14 @@
                                               <img src="{{ asset('assets/img/logo-compte.png') }}"/>
                                         </div>
                                         <div class=" grille-3-txt">
-                                          <p style="margin:0px; font-weight:600">{{ membre_nom }}</p>
+                                          <p style="margin:0px; font-weight:600">{{ question.membre.nom }}</p>
                                             <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
                                             <p style="margin:0px">{{nb_questions_membre}} Questions</p>
-                                            <p style="margin:0px">{{points_membre}} Smart'Points</p>
+                                            <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
                                         </div>
                                         <div class="grille-3-rond">
                                           <div class="square-blue">
-                                            {{ membre_reputation }}
+                                            {{ question.membre.reputation }}
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +56,14 @@
                             </div>
                             </div>
                             <p style="min-height: 100px">{{ question.description }}</p>
-                              
+                              {% for commentaire in question.commentaireQuestions %}
+                                    <div class="commentaire">
+                                    <p style="float:left">{{commentaire.description}}</p><p style="float:right">
+                                  {{commentaire.membre.nom}} le {{commentaire.date|date('Y-m-d H:i:s')}}
+                                        <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                                </p>
+                                    </div>
+                                    {% endfor %}
                                 
                                 <div style="float:right">
                                 <div class="grille-3-btn">
@@ -64,7 +71,7 @@
                                         <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                       </div>
                                    <a href="#"><div class="bouton-com-rep" style="margin-left:10px">Commenter</div></a>
-                                   {% if not is_validated or not is_certif %}
+                                   {% if not is_validated and not is_certif %}
                                    <a class="reponse"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}"><div class="bouton-com-rep">Repondre</div></a>{% endif %}
                                 </div>
                                 </div>

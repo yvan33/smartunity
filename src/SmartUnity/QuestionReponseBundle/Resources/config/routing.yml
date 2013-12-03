@@ -14,7 +14,7 @@ smart_unity_question_reponse_search_questions:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchQuestion }
 
 smart_unity_question_reponse_display_reponse:
-    pattern:  /reponse/{slug}/{page}/{tri}
+    pattern:  /reponse/{slug}/{tri}/{page}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'', tri:'vote'}
     requirements:
         tri: vote|date
