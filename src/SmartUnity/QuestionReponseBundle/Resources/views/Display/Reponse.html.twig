@@ -56,14 +56,22 @@
                             </div>
                             </div>
                             <p style="min-height: 100px">{{ question.description }}</p>
+                            <p>
+                              {% if question.marque.nom is defined %}<span class="label label-default">{{question.marque.nom}}</span>{% endif %}
+                              {% if question.modele.nom is defined %}<span class="label label-default">{{question.modele.nom}}</span>{% endif %}
+                              {% if question.os.nom is defined %}<span class="label label-default">{{question.os.nom}}</span>{% endif %}
+                              {% if question.typeQuestion.nom is defined %}<span class="label label-default">{{question.typeQuestion.nom}}</span>{% endif %}
+                            </p>
+
+
                               {% for commentaire in question.commentaireQuestions %}
                                     <div class="commentaire">
                                     <p style="float:left">{{commentaire.description}}</p><p style="float:right">
                                   {{commentaire.membre.username}} le {{commentaire.date|date('d-m-Y H:i:s')}}
                                         <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
-                                </p>
+                                    </p>
                                     </div>
-                                    {% endfor %}
+                               {% endfor %}
                                 
                                 <div style="float:right">
                                 <div class="grille-3-btn">

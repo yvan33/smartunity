@@ -338,17 +338,6 @@ class QuestionReponseController extends Controller
             array_push($pagination, array('>>', $nbPages, '4'));
         }
 
-        if(count($listeReponses) > 0){
-            foreach($listeReponses as $reponse){
-                if($reponse->is_certif)
-                    $isCertif = true;
-                if($reponse->is_validated)
-                    $isValidated = true;
-            }
-        }
-
-        
-
 
         $questionRepository = $this->getDoctrine()
                             ->getManager()
