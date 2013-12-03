@@ -1,9 +1,32 @@
-{% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
-{% form_theme form 'SmartUnityUtilisateurBundle:Form:form_mon_compte.html.twig' %}
+{% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
+{% form_theme form_avatar 'SmartUnityUtilisateurBundle:Form:form_mon_compte.html.twig' %}
 
 {% block avatar %}
 
-{{form(form)}}
+<div class="edit">
+    <a class="btn btn-primary btn-xs" type="button" onclick="javascript:history.back()">Annuler
+    </a>
+</div> 
+
+{{form_start(form_avatar)}}
+
+      {{form_errors(form_avatar)}}
+
+<div class="row premiere-ligne ">
+        {{form_widget(form_avatar.file)}}
+
+</div>
+
+<div class="cent-h bouton-bas-block">
+    <button type="submit" class="btn btn-primary btn-sm">Valider mes infos</button>
+</div> 
+<div class="cent-h bouton-bas-block">
+    <a href="{{ path('smart_unity_utilisateur_removeavatar') }}" class="btn btn-sm btn-default">
+        Supprimer l'avatar existant
+    </a>
+</div>
+
+{{form_end(form_avatar)}}
 
 {% endblock %}   
 

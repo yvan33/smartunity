@@ -12,7 +12,7 @@ use Imagine\Image\Point;
 
 class UtilisateurController extends Controller {
 
-    public function indexAction(Request $request, $formPassword = null, $formInfos = null) {
+    public function indexAction(Request $request, $formPassword = null, $formInfos = null, $formAvatar = null) {
 
         $user = $this->container->get('security.context')->getToken()->getUser();
 
@@ -43,6 +43,13 @@ class UtilisateurController extends Controller {
                         'smartrep' => $smartreponse,
                         'remuneration' => $remuneration,
                         'form_infos' => $formInfos,
+            ));
+        } else if (isset($formAvatar)) {
+            return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
+                        'form_pref' => $form_pref->createView(),
+                        'smartrep' => $smartreponse,
+                        'remuneration' => $remuneration,
+                        'form_avatar' => $formAvatar,
             ));
         } else {
 
@@ -107,7 +114,7 @@ class UtilisateurController extends Controller {
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
     }
 
-    public function uploadAction(Request $request) {
+    public function uploadavatarAction(Request $request) {
 
         $user = $this->container->get('security.context')->getToken()->getUser();
         $userid = $user->getId();
@@ -126,7 +133,6 @@ class UtilisateurController extends Controller {
                     'data' => $userid,
                 ))
                 ->add('file')
-                ->add('save', 'submit')
                 ->getForm();
 
         $form->handleRequest($request);
@@ -142,9 +148,23 @@ class UtilisateurController extends Controller {
         }
 
 
-        return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
-                    'form' => $form->createView()
+        return $this->forward(
+                        'SmartUnityUtilisateurBundle:Utilisateur:index', array(
+                    'formAvatar' => $form->createView(),
         ));
+    }
+
+    public function removeavatarAction() {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $userid = $user->getId();
+        $em = $this->getDoctrine()->getManager();
+        $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
+        $em->remove($avatar);
+        $em->flush();
+            
+        return $this->forward(
+                        'SmartUnityUtilisateurBundle:Utilisateur:index');            
+        
     }
 
 }

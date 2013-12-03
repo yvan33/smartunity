@@ -1,4 +1,5 @@
 {% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
+{% form_theme form_pref 'SmartUnityUtilisateurBundle:Form:form_mon_compte.html.twig' %}
 
 {% block stylesheets %}
 <link href="{{ asset('assets/css/mon-compte.css') }}" rel="stylesheet" type="text/css">
@@ -15,14 +16,14 @@
     </div>
 </div>
 
-    <div class="col-md-offset-1 col-md-5" style="margin-top:20px">
+<div class="col-md-offset-1 col-md-5" style="margin-top:20px">
 
 {# Bloc  Mes Informations   #}
-        <div class="grille-content posRelative">  
-            <div class="row text-center ">
-                <img src="{{asset('assets/img/mes-info.png')}}"/> 
+    <div class="grille-content posRelative">  
+        <div class="row text-center ">
+            <img src="{{asset('assets/img/mes-info.png')}}"/> 
 
-            </div>
+        </div>
 
 {% block infos %} 
 
@@ -30,117 +31,121 @@
 {% block edition %}  
 {% endblock %}
 {% block change_password %}
-{% endblock%}
-        </div>
+{% endblock %}
+{% block avatar %}  
+{% endblock %}        
+
+
+    </div>
 
 {# Bloc  Mes Préférences   #}
-        <div class="grille-content">
-            <div class="row  ">
-                <div class="text-center"><img src="{{asset('assets/img/mes-pref.png')}}"/></div>
-            </div>
+    <div class="grille-content">
+        <div class="row  ">
+            <div class="text-center"><img src="{{asset('assets/img/mes-pref.png')}}"/></div>
+        </div>
 {% block preferences %}  
 
-            <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
+        <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
     {{form_errors(form_pref)}}
 
-                <div class="premiere-ligne ">Je souhaite recevoir des notifications par Email pour:
-                </div>
-                <div class="row premiere-ligne ">
-                    <div class="grille-1 pref">Un message privé:</div>
-                    <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_mp)}}</div>
-                </div>
-                <div class="row  ">
-                    <div class="grille-1 pref">Un commentaire:</div>
-                    <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_comm)}}</div>
-                </div>
-                <div class="row  ">
-                    <div class="grille-1 pref">Le message sur le Smart'Café:</div>
-                    <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_smartcafe)}}</div>
-                </div>
-                <div class="row  ">
-                    <div class="grille-1 pref">Une réponse à une question:</div>
-                    <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_rep)}}</div>
-                </div>
-                <div class="row  ">
-                    <div class="grille-1 pref">Une de mes réponses à été validée:</div>
-                    <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repValidee)}}</div>
-                </div>
-                <div class="row  ">
-                    <div class="grille-1 pref">Smart'Solution:</div>
-                    <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repCertifiee)}}</div>
-                </div>
+            <div class="premiere-ligne ">Je souhaite recevoir des notifications par Email pour:
+            </div>
+            <div class="row premiere-ligne ">
+                <div class="grille-1 pref">Un message privé:</div>
+                <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_mp)}}</div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1 pref">Un commentaire:</div>
+                <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_comm)}}</div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1 pref">Le message sur le Smart'Café:</div>
+                <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_smartcafe)}}</div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1 pref">Une réponse à une question:</div>
+                <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_rep)}}</div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1 pref">Une de mes réponses à été validée:</div>
+                <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repValidee)}}</div>
+            </div>
+            <div class="row  ">
+                <div class="grille-1 pref">Smart'Solution:</div>
+                <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repCertifiee)}}</div>
+            </div>
 
-                <div class="cent-h bouton-bas-block">
-                    <button type="submit" class="btn btn-sm btn-default">Valider mes préférences
+            <div class="cent-h bouton-bas-block">
+                <button type="submit" class="btn btn-sm btn-default">Valider mes préférences
 
-                </div>
+            </div>
 
 {{form_end(form_pref)}}   
-            </form> 
+        </form> 
 
 {% endblock %}
 
-        </div>
-
     </div>
 
+</div>
 
-    <div class="col-md-5" style="margin-top:20px">
-        <div class="grille-content">
-            <div class="row  ">
-                <div class="text-center"><img src="{{asset('assets/img/ma-com.png')}}"/></div>
-            </div>
-            <div class="row  ">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row  ">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row  ">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row  ">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row  ">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
+
+<div class="col-md-5" style="margin-top:20px">
+    <div class="grille-content">
+        <div class="row  ">
+            <div class="text-center"><img src="{{asset('assets/img/ma-com.png')}}"/></div>
         </div>
-        <div class="grille-content">
+        <div class="row  ">
+            <div class="grille-1"></div>
+            <div class="grille-2"></div>
+        </div>
+        <div class="row  ">
+            <div class="grille-1"></div>
+            <div class="grille-2"></div>
+        </div>
+        <div class="row  ">
+            <div class="grille-1"></div>
+            <div class="grille-2"></div>
+        </div>
+        <div class="row  ">
+            <div class="grille-1"></div>
+            <div class="grille-2"></div>
+        </div>
+        <div class="row  ">
+            <div class="grille-1"></div>
+            <div class="grille-2"></div>
+        </div>
+    </div>
+    <div class="grille-content">
         {%block activite%}
 
 
-            <div class="row  ">
-                <div class="text-center"><img src="{{asset('assets/img/mon-a.png')}}"/></div>
-            </div>
-            <div class="row  ">
-                <div class="grille-3">{{ app.user.questions.count}}</div>
-                <div class="grille-4">questions posées</div>    
-            </div>
-            <div class="row">
-                <div class="grille-3">{{ app.user.reponses.count}}</div>
-                <div class="grille-4">réponses apportées</div>
-            </div>
-            <div class="row  ">
-                <div class="grille-3">{{ smartrep}}</div>  
-                <div class="grille-4">Smart'Réponses</div>  
-            </div>
-            <div class="row  ">
-                <div class="grille-3">{{ remuneration }}</div>
-                <div class="grille-4">Points gagnés</div>
-            </div>
-            <div class="row  ">
-                <div class="grille-3">0</div>
-                <div class="grille-4">Cadeaux gaganés</div>
-            </div>
-        {%endblock%}
+        <div class="row  ">
+            <div class="text-center"><img src="{{asset('assets/img/mon-a.png')}}"/></div>
         </div>
+        <div class="row  ">
+            <div class="grille-3">{{ app.user.questions.count}}</div>
+            <div class="grille-4">questions posées</div>    
+        </div>
+        <div class="row">
+            <div class="grille-3">{{ app.user.reponses.count}}</div>
+            <div class="grille-4">réponses apportées</div>
+        </div>
+        <div class="row  ">
+            <div class="grille-3">{{ smartrep}}</div>  
+            <div class="grille-4">Smart'Réponses</div>  
+        </div>
+        <div class="row  ">
+            <div class="grille-3">{{ remuneration }}</div>
+            <div class="grille-4">Points gagnés</div>
+        </div>
+        <div class="row  ">
+            <div class="grille-3">0</div>
+            <div class="grille-4">Cadeaux gaganés</div>
+        </div>
+        {%endblock%}
     </div>
+</div>
 
-  {% endblock %}
+        {%endblock%}
 

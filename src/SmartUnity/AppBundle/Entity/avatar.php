@@ -94,13 +94,14 @@ class avatar {
         $this->resizeAvatarAction();
 
         $this->setFile(null);
+        unlink($this->getAbsolutePath());
     }
 
     /**
      * @ORM\PreRemove()
      */
     public function storeFilenameForRemove() {
-        $this->temp = $this->getAbsolutePath();
+        $this->temp = $this->getAbsolutePathPng();
     }
 
     /**
@@ -115,7 +116,10 @@ class avatar {
     public function getAbsolutePath() {
         return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->id . '.' . $this->path;
     }
-
+    
+    public function getAbsolutePathPng() {
+        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->id . '.' . 'png';
+    }
     /**
      * Get file.
      *
@@ -137,7 +141,7 @@ class avatar {
 //        return null === $this->path
 //            ? null
 //            : $this->getUploadDir().'/'.$this->id.'.'.$this->path;
-        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->id . '.' . $this->path;
+        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->id . '.' . 'png';
     }
 
     protected function getUploadRootDir() {
@@ -162,7 +166,7 @@ class avatar {
 
         $image = $image->thumbnail($size, 'inset');
         $this->pad($image, $size)
-                ->save($this->getAbsolutePath());
+                ->save($this->getAbsolutePathPng());
 
     }
 
