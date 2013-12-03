@@ -209,9 +209,37 @@ options = new Object();
     }
   };
 
+tri = '{{ tri }}';
+
 
 $(document).ready(function(){
   $('#pages').bootstrapPaginator(options);
+
+  $('#triVote').attr('href', '#');
+  $('#triDate').attr('href', '#');
+  
+  $('#triVote').click(function(e){
+    tri = 'vote';
+    options.currentPage = 1;
+    $('#pages').bootstrapPaginator(options);
+    $('#triVote').css('font-weight', 'bold');
+    $('#triVote').css('font-style', 'none');
+    $('#triDate').css('font-weight', 'normal');
+    clickOnPagination(1);
+    e.preventDefault();
+  });
+
+  $('#triDate').click(function(e){
+    tri = 'date';
+    options.currentPage = 1;
+    $('#pages').bootstrapPaginator(options);
+    $('#triVote').css('font-weight', 'normal');
+    $('#triDate').css('font-weight', 'bold');
+    $('#triDate').css('font-style', 'none');
+    clickOnPagination(1);
+    e.preventDefault();
+  });
+
 });
 
 
@@ -219,13 +247,13 @@ function clickOnPagination(pPage){
   $('#reponses-container').fadeOut('fast');
 
   //On récupère le JSON depuis le controller AjaxController
-  $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/{{tri}}/' + pPage + '/{{nbParPage}}', function(donnees){
+  $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/' + tri + '/' + pPage + '/{{nbParPage}}', function(donnees){
       var content='';
-      if(donnees[0]['page']==pPage && donnees[0]['slug']== '{{slug}}' && donnees[0]['nbParPage']== {{nbParPage}} && donnees[0]['tri'] == '{{tri}}'){
+      if(donnees[0]['page']==pPage && donnees[0]['slug']== '{{slug}}' && donnees[0]['nbParPage']== {{nbParPage}} && donnees[0]['tri'] == tri){
         donnees.shift(); //On supprime la ligne de check du JSON
 
         donnees.forEach(function(pEntry, i){
-          if ( !pEntry['is_validated'] || !pEntry['is_certif'] ) content += generateContent(pEntry, i);
+          if ( !pEntry['is_validated'] && !pEntry['is_certif'] ) content += generateContent(pEntry, i);
         }); //Generation du code
 
         //Affichage du nouveau contenu dasn le tab, et fadeIn
@@ -234,6 +262,7 @@ function clickOnPagination(pPage){
 
       }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
         $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+        $('#reponses-container').fadeIn('fast');
       }
       $('.roww').tooltip({
         'placement' : 'right'
@@ -288,7 +317,7 @@ function generateContent(pEntry, i){
                                                   <img src="{{ asset('assets/img/logo-compte.png') }}"/> \
                                             </div> \
                                             <div class=" grille-3-txt"> \
-                                              <p style="margin:0px; font-weight:600">' + pEntry['membre_nom'] + '</p> \
+                                              <p style="margin:0px; font-weight:600">' + pEntry['membre_username'] + '</p> \
                                             <p style="margin:0px">' + pEntry['smart_reponses'] + ' Smart\'Reponses</p> \
                                             <p style="margin:0px">' + pEntry['nb_questions_membre'] + ' Questions</p> \
                                             <p style="margin:0px">' + pEntry['points_membre'] + ' Smart\'Points</p> \
@@ -307,7 +336,7 @@ function generateContent(pEntry, i){
                                   pEntry['commentaires'].forEach(function(pCom, i){
 
                                     entity += '<div class="commentaire"> \
-                                    <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_nom'] + ' le ' + pCom['date'] + ' \
+                                    <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_username'] + ' le ' + pCom['date'] + ' \
                                     <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
                                     </div>';
 

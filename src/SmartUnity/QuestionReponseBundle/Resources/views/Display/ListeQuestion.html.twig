@@ -411,6 +411,7 @@ function clickOnPagination(pPage){
 
       }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
         $('#accordion-' + type).html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+        $('#accordion-' + type).fadeIn('fast');
       }
   });
 }
