@@ -117,10 +117,14 @@ class UtilisateurController extends Controller {
 
 
         if (!isset($avatar)) {
-            $avatar = new avatar($userid);
+
+            $avatar = new avatar();
         }
-            die($avatar->getId());
+
         $form = $this->createFormBuilder($avatar)
+                ->add('id', 'hidden', array(
+                    'data' => $userid,
+                ))
                 ->add('file')
                 ->add('save', 'submit')
                 ->getForm();
@@ -131,7 +135,6 @@ class UtilisateurController extends Controller {
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-//            $this->resizeAvatarAction($avatar);
             $em->persist($avatar);
             $em->flush();
 
@@ -144,10 +147,4 @@ class UtilisateurController extends Controller {
         ));
     }
 
-    public function removeAvatarAction($avatar) {
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($avatar);
-        $em->flush();
-    } 
 }

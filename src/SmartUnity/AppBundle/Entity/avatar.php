@@ -5,6 +5,11 @@ namespace SmartUnity\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Imagine\Image\ImageInterface;
+use Imagine\Gd\Imagine;
+use Imagine\Gd\Image;
+use Imagine\Image\Box;
+use Imagine\Image\Point;
 
 /**
  * @ORM\Entity
@@ -16,7 +21,9 @@ class avatar {
      * @ORM\Id
      * @ORM\Column(type="integer")
      */
+
     private $id;
+
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -27,7 +34,7 @@ class avatar {
      * @Assert\File(maxSize="6000000")
      */
     private $file;
-    
+
     private $temp;
 
     /**
@@ -83,6 +90,8 @@ class avatar {
         $ImagePath = $this->getUploadRootDir().$this->id . '.' . $this->getFile()->guessExtension();
         $this->getFile()->move($this->getUploadRootDir(), $this->id . '.' . $this->getFile()->guessExtension());
                 
+
+        $this->resizeAvatarAction();
 
         $this->setFile(null);
     }
@@ -143,60 +152,36 @@ class avatar {
         return 'uploads/documents';
     }
 
-    protected function getAvatarDir() {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads/avatars';
-    }
+    public function resizeAvatarAction() {
 
-    public function getAvatarPath() {
-//        return null === $this->path
-//            ? null
-//            : $this->getUploadDir().'/'.$this->id.'.'.$this->path;
-        return null === $this->path ? null : $this->getAvatarDir() . '/' . $this->id . '.' . $this->path;
-    }
-
-    public function resizeAvatarAction($file) {
 
         $imagine = new Imagine();
+        $size = new Box(150, 150);
 
-        $webPath = realpath(__DIR__ . '/../../../../web/');
-        $avatarPath = $webPath . '/' . $avatar->getWebPath();
-        $newAvatarPath = $webPath . '/' . $avatar->getAvatarPath();
-//                    die($avatarPath);
-        $image = $imagine->open($file);
-//            die ($new = realpath($avatarPath.'/../'));
-        $size = new Imagine\Image\Box(40, 40);
+        $image = $imagine->open($this->getAbsolutePath());
 
-        $mode = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-        $newImage= $image->thumbnail($size, $mode);
-        return $newImage;
+        $image = $image->thumbnail($size, 'inset');
+        $this->pad($image, $size)
+                ->save($this->getAbsolutePath());
+
     }
 
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return avatar
-     */
-    public function setPath($path) {
-        $this->path = $path;
+    function pad(Image $img, Box $size, $fcolor = 'fff', $ftransparency = 100) {
+        $tsize = $img->getSize();
+        $x = $y = 0;
+        if ($size->getWidth() > $tsize->getWidth()) {
+            $x = round(($size->getWidth() - $tsize->getWidth()) / 2);
+        } elseif ($size->getHeight() > $tsize->getHeight()) {
+            $y = round(($size->getHeight() - $tsize->getHeight()) / 2);
+        }
+        $pasteto = new \Imagine\Image\Point($x, $y);
+        $imagine = new \Imagine\Gd\Imagine();
+        $color = new \Imagine\Image\Color($fcolor, $ftransparency);
+        $image = $imagine->create($size, $color);
 
-        return $this;
+        $image->paste($img, $pasteto);
+
+        return $image;
     }
 
-    /**
-     * Get path
-     *
-     * @return string 
-     */
-    public function getPath() {
-        return $this->path;
-    }
-
-    
-        public function __construct($id)
-    {
-            $this->id = $id;
-    }
 }
