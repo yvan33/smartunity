@@ -48,7 +48,7 @@ class UtilisateurController extends Controller {
 
             $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
             if (isset($avatar)) {
-                $avatar = $avatar->getAvatarPath();
+                $avatar = $avatar->getWebPath();
             }
 
             return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
@@ -117,13 +117,10 @@ class UtilisateurController extends Controller {
 
 
         if (!isset($avatar)) {
-            $avatar = new avatar();
+            $avatar = new avatar($userid);
         }
-
+            die($avatar->getId());
         $form = $this->createFormBuilder($avatar)
-                ->add('id', 'hidden', array(
-                    'data' => $userid,
-                ))
                 ->add('file')
                 ->add('save', 'submit')
                 ->getForm();
@@ -134,11 +131,9 @@ class UtilisateurController extends Controller {
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-            $this->resizeAvatarAction($avatar);
+//            $this->resizeAvatarAction($avatar);
             $em->persist($avatar);
             $em->flush();
-            
-
 
             return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
         }

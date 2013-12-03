@@ -36,6 +36,7 @@ class avatar {
      * @param UploadedFile $file
      */
     public function setFile(UploadedFile $file = null) {
+//        die($this->temp);
         $this->file = $file;
         // check if we have an old image path
         if (is_file($this->getAbsolutePath())) {
@@ -64,21 +65,24 @@ class avatar {
         if (null === $this->getFile()) {
             return;
         }
-
+        
         // check if we have an old image
         if (isset($this->temp)) {
             // delete the old image
+            
             unlink($this->temp);
+
             // clear the temp image path
             $this->temp = null;
+            
         }
 
         // you must throw an exception here if the file cannot be moved
         // so that the entity is not persisted to the database
         // which the UploadedFile move() method does
-        $this->getFile()->move(
-                $this->getUploadRootDir(), $this->id . '.' . $this->getFile()->guessExtension()
-        );
+        $ImagePath = $this->getUploadRootDir().$this->id . '.' . $this->getFile()->guessExtension();
+        $this->getFile()->move($this->getUploadRootDir(), $this->id . '.' . $this->getFile()->guessExtension());
+                
 
         $this->setFile(null);
     }
@@ -124,7 +128,7 @@ class avatar {
 //        return null === $this->path
 //            ? null
 //            : $this->getUploadDir().'/'.$this->id.'.'.$this->path;
-        return null === $this->path ? null : $this->getUploadDir().'/'.$this->id . '.' . $this->path;
+        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->id . '.' . $this->path;
     }
 
     protected function getUploadRootDir() {
@@ -138,36 +142,36 @@ class avatar {
         // when displaying uploaded doc/image in the view.
         return 'uploads/documents';
     }
-    
-     protected function getAvatarDir() {
+
+    protected function getAvatarDir() {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
         return 'uploads/avatars';
     }
-    
-        public function getAvatarPath() {
+
+    public function getAvatarPath() {
 //        return null === $this->path
 //            ? null
 //            : $this->getUploadDir().'/'.$this->id.'.'.$this->path;
-        return null === $this->path ? null : $this->getAvatarDir().'/'.$this->id . '.' . $this->path;
+        return null === $this->path ? null : $this->getAvatarDir() . '/' . $this->id . '.' . $this->path;
     }
 
-//    public function resizeAvatarAction($file) {
-//
-//                    $imagine = new Imagine();
-//                    
-//                    $webPath=realpath(__DIR__ .'/../../../../web/');
-//                    $avatarPath= $webPath.'/'.$avatar->getWebPath();
-//                    $newAvatarPath = $webPath.'/'.$avatar->getAvatarPath();
-////                    die($avatarPath);
-//            $image = $imagine->read($file);
-////            die ($new = realpath($avatarPath.'/../'));
-//            $image->thumbnail()
-//                    resize(new Box(15, 25))
-//                    ->rotate(45)
-//                    ->crop(new Point(0, 0), new Box(45, 45))
-//                    ->save($newAvatarPath);
-//    }    
+    public function resizeAvatarAction($file) {
+
+        $imagine = new Imagine();
+
+        $webPath = realpath(__DIR__ . '/../../../../web/');
+        $avatarPath = $webPath . '/' . $avatar->getWebPath();
+        $newAvatarPath = $webPath . '/' . $avatar->getAvatarPath();
+//                    die($avatarPath);
+        $image = $imagine->open($file);
+//            die ($new = realpath($avatarPath.'/../'));
+        $size = new Imagine\Image\Box(40, 40);
+
+        $mode = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+        $newImage= $image->thumbnail($size, $mode);
+        return $newImage;
+    }
 
     /**
      * Set path
@@ -175,10 +179,9 @@ class avatar {
      * @param string $path
      * @return avatar
      */
-    public function setPath($path)
-    {
+    public function setPath($path) {
         $this->path = $path;
-    
+
         return $this;
     }
 
@@ -187,8 +190,13 @@ class avatar {
      *
      * @return string 
      */
-    public function getPath()
-    {
+    public function getPath() {
         return $this->path;
+    }
+
+    
+        public function __construct($id)
+    {
+            $this->id = $id;
     }
 }
