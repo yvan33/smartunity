@@ -22,7 +22,12 @@
                             </div>
 
                              <div class="grille-1">
-                              <div class="rond-point"><p>{{ remuneration }} pts</p></div><div class="grille-soutient"><p style="margin:0px">{{ nb_soutiens }} soutien {% if nb_soutiens > 1 %}s{% endif %}</p><button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button></div>
+                              <div class="rond-point"><p>{{ remuneration }} pts</p></div>
+                              
+                              <div class="grille-soutient"><p style="margin:0px">{{ nb_soutiens }} soutien {% if nb_soutiens > 1 %}s{% endif %}</p>
+                                {% if not is_certif and not is_validated %}<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>{% endif %}
+                              </div>
+                              
                             </div>
                             
                             <div class="grille-2" >

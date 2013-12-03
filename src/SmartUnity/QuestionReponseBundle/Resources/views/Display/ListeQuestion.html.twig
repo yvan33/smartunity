@@ -68,9 +68,6 @@
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
                                        <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                          {% if not question.soutenue %}
-                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
-                                          {% endif %}
                                         </div>
                                                 <!-- bouton + fin-->
                                       </h4>                           
@@ -142,9 +139,7 @@
                                                   <!-- bouton rep fin-->
                                                   <!-- bouton +-->
                                  					<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                            {% if not question.soutenue %}
                                             <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
-                                            {% endif %}
                                  					</div>
                                                   <!-- bouton + fin-->
                                  				</h4>
@@ -218,9 +213,7 @@
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
                                         <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                          {% if not question.soutenue %}
                                           <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
-                                          {% endif %}
                                         </div>
                                                 <!-- bouton + fin-->
                                       </h4>                           
@@ -318,7 +311,7 @@ function generateContent(pEntry, i){
 
                                                 entity += '</p>';
 
-                                                if(pEntry['soutenue'] == false) entity += '<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>';
+                                                if(type != 'reponses') entity += '<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>';
 
                                                 entity +='</h4> \
                                             </div> \
