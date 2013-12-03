@@ -8,6 +8,7 @@
 
 {% block initJS %}
 	<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
 {% endblock %}
 
 
@@ -105,6 +106,7 @@
                               {% endif %}
                           {% endfor %}
 
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -252,6 +254,9 @@ $(document).ready(function(){
 
 
 function clickOnPagination(pPage){
+  $('#reponses-frame').height(function(i, h){
+      return h;
+  });
   $('#reponses-container').fadeOut('fast');
 
   //On récupère le JSON depuis le controller AjaxController
@@ -267,6 +272,7 @@ function clickOnPagination(pPage){
         //Affichage du nouveau contenu dasn le tab, et fadeIn
         $('#reponses-container').html(content);
         $('#reponses-container').fadeIn('fast');
+        $('#reponses-frame').animateAuto('height', 'fast');
 
       }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
         $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');

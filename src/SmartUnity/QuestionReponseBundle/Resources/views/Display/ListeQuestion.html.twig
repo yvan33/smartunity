@@ -10,6 +10,7 @@
 {% block initJS %}
 	<script src="{{asset('assets/js/bootstrap-paginator.js')}}"></script>
   <script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
+  <script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
 {% endblock %}
 
 
@@ -33,7 +34,7 @@
                 </div>
                 <!-- nav div menu fin-->
                 <!-- contenue 1-->
-                <div class="tab-content">
+                <div class="tab-content" id="content-frame">
                   <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
                           <div class="panel-group" id="accordion-reponses">
                           {% if type=='reponses' %}
@@ -342,6 +343,9 @@ function generateContent(pEntry, i){
 function MaJPagination(){
   if( nbPages[type] == null ){ //Si le tab est vide....
 
+        fixHeight();
+        $('#accordion-' + type).fadeOut('fast');
+
         $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_questions') }}/' + type + '/1/' + nbParPage, function(donnees){
               var content='';
               if(donnees[0]['page']==1 && donnees[0]['type']==type && donnees[0]['nbParPage']==nbParPage){
@@ -360,12 +364,12 @@ function MaJPagination(){
                 //Puis on remplit le nouveau tab
                 if(donnees.length == 0){
                   content += '<br/><p align="center">Il n\'y a aucune question à afficher dans cette catégorie</p><br/>';
-                  $('#pages').hide();
+                  $('#pages').fadeOut();
                 }else{
                   donnees.forEach(function(pEntry, i){
                     content += generateContent(pEntry, i);
                   }); //Generation du code
-                  $('#pages').show();
+                  $('#pages').fadeIn();
                 }
 
                 //Affichage du nouveau contenu dasn le tab, et fadeIn
@@ -374,23 +378,31 @@ function MaJPagination(){
               }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
                 $('#accordion-' + type).html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
               }
+
+              $('#accordion-' + type).fadeIn('fast');
+              $('#content-frame').animateAuto('height', 'fast', function(){
+                $('#content-frame').height('auto');
+              });
+
             });
 
+  }else{
+      fixHeight();
+      if(nbPages[type] != 0){
+        options.currentPage=page[type];
+        options.totalPages=nbPages[type];
+        $('#pages').bootstrapPaginator(options);
+        $('#pages').fadeIn();
       }else{
-          if(nbPages[type] != 0){
-            options.currentPage=page[type];
-            options.totalPages=nbPages[type];
-            $('#pages').bootstrapPaginator(options);
-            $('#pages').show();
-          }else{
-            $('#pages').hide();
-          }
-
+        $('#pages').fadeOut();
       }
+
+  }
 }
 
 
 function clickOnPagination(pPage){
+  fixHeight();
   $('#accordion-' + type).fadeOut('fast');
 
   page[type] = pPage;
@@ -408,12 +420,21 @@ function clickOnPagination(pPage){
         //Affichage du nouveau contenu dasn le tab, et fadeIn
         $('#accordion-' + type).html(content);
         $('#accordion-' + type).fadeIn('fast');
+        $('#content-frame').animateAuto('height', 'fast', function(){
+          $('#content-frame').css('height', 'auto');
+        });
+        
 
       }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
         $('#accordion-' + type).html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
         $('#accordion-' + type).fadeIn('fast');
       }
   });
+}
+
+
+function fixHeight(){
+  $('#content-frame').height($('#content-frame').height());
 }
 
 
@@ -499,6 +520,15 @@ options = new Object();
       type = 'reponses';
       MaJPagination();
   });
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        if(nbPages[type]!=null){
+          $('#content-frame').animateAuto('height', 'fast', function(){
+            $('#content-frame').css('height', 'auto');
+          });
+        }
+  });
+
 
 
 });
