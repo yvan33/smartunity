@@ -4,5 +4,11 @@
         <div class="row">
                     <div class="col-md-offset-1 col-md-10" style="padding:0px">
                       <div class="grille-content-2">
-                        <div class="head-blue"><p style="float:left">{{ nbReponses }} {% if reponse.is_certif or reponse.is_validated %}autre{% if nbReponses > 1 %}s{% endif %} {% endif %}r&eacute;ponse{% if nbReponses > 1 %}s{% endif %}</p><p style="float:right">Trier les r&eacute;ponses par : <b>Nombre de votes</b> &#124 Date</p></div>
-        					<div id="reponses-container">
+                        <div class="head-blue">
+                        	<p style="float:left">{% if reponse.is_certif or reponse.is_validated %}{{ nbReponses - 1 }} autre{% if nbReponses > 1 %}s{% endif %} {% else %}{{ nbReponses }}{% endif %} r&eacute;ponse{% if nbReponses > 1 %}s{% endif %}</p>
+                        	<p style="float:right">Trier les r&eacute;ponses par : 
+                        		<a {% if tri == "date" %}href="{{path('smart_unity_question_reponse_display_reponse', {slug:slug, tri:'vote'})}}"{% endif %} style="padding-left:0px{% if tri == "vote" %}; font-weight:bold{% endif %}">Nombre de votes</a> &#124; 
+                        		<a {% if tri == "vote" %}href="{{path('smart_unity_question_reponse_display_reponse', {slug:slug, tri:'date'})}}"{% endif %} style="padding-left:0px{% if tri == "date" %}; font-weight:bold{% endif %}">Date</a>
+                        	</p>
+                        </div>
+        				<div id="reponses-container">

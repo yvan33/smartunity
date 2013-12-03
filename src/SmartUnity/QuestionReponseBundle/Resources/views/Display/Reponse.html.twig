@@ -18,7 +18,7 @@
                     <div class="col-md-offset-1 col-md-10" style="padding:0px">
                       <div class="grille-content-2">
                         <div class="grille-reponse">
-                        <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ question.date|date('Y-m-d H:i:s') }}</p>
+                        <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                             </div>
 
                              <div class="grille-1">
@@ -59,7 +59,7 @@
                               {% for commentaire in question.commentaireQuestions %}
                                     <div class="commentaire">
                                     <p style="float:left">{{commentaire.description}}</p><p style="float:right">
-                                  {{commentaire.membre.username}} le {{commentaire.date|date('Y-m-d H:i:s')}}
+                                  {{commentaire.membre.username}} le {{commentaire.date|date('d-m-Y H:i:s')}}
                                         <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                 </p>
                                     </div>
