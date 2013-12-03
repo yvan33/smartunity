@@ -6,9 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\QueryBuilder;
 use SmartUnity\AppBundle\Entity\avatar;
-use Imagine\Gd\Imagine;
-use Imagine\Image\Box;
-use Imagine\Image\Point;
+
 
 class UtilisateurController extends Controller {
 
@@ -138,7 +136,7 @@ class UtilisateurController extends Controller {
             $em->persist($avatar);
             $em->flush();
             
-            $this->resizeAvatarAction($avatar);
+//            $this->resizeAvatarAction($avatar);
 
 
 
@@ -153,28 +151,14 @@ class UtilisateurController extends Controller {
         ));
     }
 
-    public function removeAvatarAction($avatar) {
+//    public function removeAvatarAction($avatar) {
+//
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $em->remove($avatar);
+//        $em->flush();
+//    }
+//    
 
-        $em = $this->getDoctrine()->getManager();
-
-        $em->remove($avatar);
-        $em->flush();
-    }
-    
-    public function resizeAvatarAction($avatar) {
-
-                    $imagine = new Imagine();
-                    
-                    $webPath=realpath(__DIR__ .'/../../../../web/');
-                    $newPath=realpath(__DIR__ .'/../../../../web/uploads/avatars');
-                    $avatarPath= $webPath.'/'.$avatar->getWebPath();
-//                    die($avatarPath);
-            $image = $imagine->open($avatarPath);
-            die ($new = realpath($avatarPath.'/../'));
-            $image->resize(new Box(15, 25))
-                    ->rotate(45)
-                    ->crop(new Point(0, 0), new Box(45, 45))
-                    ->save($newPath.);
-    }
 
 }

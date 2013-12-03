@@ -5,6 +5,11 @@ namespace SmartUnity\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Imagine\Image\ImageInterface;
+use Imagine\Gd\Imagine;
+use Imagine\Gd\Image;
+use Imagine\Image\Box;
+use Imagine\Image\Point;
 
 /**
  * @ORM\Entity
@@ -79,6 +84,8 @@ class avatar {
                 $this->getUploadRootDir(), $this->id . '.' . $this->getFile()->guessExtension()
         );
 
+        $this->resizeAvatarAction();
+
         $this->setFile(null);
     }
 
@@ -123,7 +130,7 @@ class avatar {
 //        return null === $this->path
 //            ? null
 //            : $this->getUploadDir().'/'.$this->id.'.'.$this->path;
-        return null === $this->path ? null : $this->getUploadDir().'/'.$this->id . '.' . $this->path;
+        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->id . '.' . $this->path;
     }
 
     protected function getUploadRootDir() {
@@ -136,6 +143,38 @@ class avatar {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
         return 'uploads/documents';
+    }
+
+    public function resizeAvatarAction() {
+
+
+        $imagine = new Imagine();
+        $size = new Box(150, 150);
+
+        $image = $imagine->open($this->getAbsolutePath());
+
+        $image = $image->thumbnail($size, 'inset');
+        $this->pad($image, $size)
+                ->save($this->getAbsolutePath());
+
+    }
+
+    function pad(Image $img, Box $size, $fcolor = 'fff', $ftransparency = 100) {
+        $tsize = $img->getSize();
+        $x = $y = 0;
+        if ($size->getWidth() > $tsize->getWidth()) {
+            $x = round(($size->getWidth() - $tsize->getWidth()) / 2);
+        } elseif ($size->getHeight() > $tsize->getHeight()) {
+            $y = round(($size->getHeight() - $tsize->getHeight()) / 2);
+        }
+        $pasteto = new \Imagine\Image\Point($x, $y);
+        $imagine = new \Imagine\Gd\Imagine();
+        $color = new \Imagine\Image\Color($fcolor, $ftransparency);
+        $image = $imagine->create($size, $color);
+
+        $image->paste($img, $pasteto);
+
+        return $image;
     }
 
 }
