@@ -26,14 +26,86 @@
                 <!-- nav div menu-->
             	<div class="collapse-menu">
                 <ul class="nav nav-tabs" id="myTab">
+                  <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'reponses', page: '1'}) }}" data-toggle="tab" id="reponses-tab">Questions r&eacute;solues</a></li>
                   <li {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'onFire', page: '1'}) }}" data-toggle="tab" id="onFire-tab">On Fire</a></li>
                   <li {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'last', page: '1'}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
-                  <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'reponses', page: '1'}) }}" data-toggle="tab" id="reponses-tab">Questions r&eacute;solues</a></li>
                 </ul>
                 </div>
                 <!-- nav div menu fin-->
                 <!-- contenue 1-->
                 <div class="tab-content">
+                  <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
+                          <div class="panel-group" id="accordion-reponses">
+                          {% if type=='reponses' %}
+
+                              {% if countListe == 0 %}
+                                <br/>
+                                <p align="center">Il n'y a aucune question r&eacute;solue</p>
+                                <br/>
+                              {% else %}
+                                  {% for question in listeQuestions %}
+
+                                  <div class="panel panel-default fade in out">
+                                      <!-- contenue visible-->
+                                    <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                              <!-- rond pts-->
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
+                                                <!-- rond pts fin-->
+                                                <!-- describ question-->
+                                        <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
+                                        <div class="grille-2" ><p>{{question.sujet}}</p>
+                                        <p style="font-weight:200; font-style:italic">{{ question.membre_prenom }} le {{ question.date }}</p></div>
+                                        </a>
+                                                <!-- describ question fin-->
+                                                <!-- nb réponses vues-->
+                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
+                                        </div>
+                                                <!-- nb réponses vues fin-->
+                                                <!-- bouton rep -->
+                                        <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
+                                        </div>
+                                                <!-- bouton rep fin-->
+                                                <!-- bouton +-->
+                                       <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                          {% if not question.soutenue %}
+                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                          {% endif %}
+                                        </div>
+                                                <!-- bouton + fin-->
+                                      </h4>                           
+                                    </div>
+                                        <!-- contenue visible fin-->
+                                        <!-- contenue caché-->
+                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                          <div class="panel-body">
+
+                                                <div class="grille-det">
+                                                        <p>{{question.description}}</p>
+                                                </div>
+                                                {% if question.date_best_reponse != '' %}
+                                                <div class="grille-det-content">
+                                                    <div class="grille-det1">
+                                                            <p>{{ question.auteur_best_reponse }}</p>
+                                                            <p>{{ question.date_best_reponse }}</p>
+                                                      </div>
+                                                        <div class="grille-det2">
+                                                        <p>{{question.best_reponse}}</p>
+                                                      </div>
+                                                </div>
+                                                {% endif %}
+
+                                              </div>
+                                          </div>
+                                      </div>
+                                    <!-- contenue caché fin-->
+                                    {% endfor %}
+
+                                  {% endif %}
+                                  
+                                {% endif %}
+                              </div>
+                        </div>
                   <div class="tab-pane fade in out{% if type=='onFire' %} active{% endif %}" id="onFire">
                   				<!-- accordion general-->
                                	<div class="panel-group" id="accordion-onFire">
@@ -182,78 +254,6 @@
                                 {% endif %}
                               </div>
                           </div>
-                  <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
-                          <div class="panel-group" id="accordion-reponses">
-                          {% if type=='reponses' %}
-
-                              {% if countListe == 0 %}
-                                <br/>
-                                <p align="center">Il n'y a aucune question r&eacute;solue</p>
-                                <br/>
-                              {% else %}
-                                  {% for question in listeQuestions %}
-
-                                  <div class="panel panel-default fade in out">
-                                      <!-- contenue visible-->
-                                    <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                              <!-- rond pts-->
-                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
-                                                <!-- rond pts fin-->
-                                                <!-- describ question-->
-                                        <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p>
-                                        <p style="font-weight:200; font-style:italic">{{ question.membre_prenom }} le {{ question.date }}</p></div>
-                                        </a>
-                                                <!-- describ question fin-->
-                                                <!-- nb réponses vues-->
-                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
-                                        </div>
-                                                <!-- nb réponses vues fin-->
-                                                <!-- bouton rep -->
-                                        <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
-                                        </div>
-                                                <!-- bouton rep fin-->
-                                                <!-- bouton +-->
-                                       <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                          {% if not question.soutenue %}
-                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
-                                          {% endif %}
-                                        </div>
-                                                <!-- bouton + fin-->
-                                      </h4>                           
-                                    </div>
-                                        <!-- contenue visible fin-->
-                                        <!-- contenue caché-->
-                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse">
-                                          <div class="panel-body">
-
-                                                <div class="grille-det">
-                                                        <p>{{question.description}}</p>
-                                                </div>
-                                                {% if question.date_best_reponse != '' %}
-                                                <div class="grille-det-content">
-                                                    <div class="grille-det1">
-                                                            <p>{{ question.auteur_best_reponse }}</p>
-                                                            <p>{{ question.date_best_reponse }}</p>
-                                                      </div>
-                                                        <div class="grille-det2">
-                                                        <p>{{question.best_reponse}}</p>
-                                                      </div>
-                                                </div>
-                                                {% endif %}
-
-                                              </div>
-                                          </div>
-                                      </div>
-                                    <!-- contenue caché fin-->
-                                    {% endfor %}
-
-                                  {% endif %}
-                                  
-                                {% endif %}
-                              </div>
-                        </div>
                 </div><!-- nav div fin--> 
 
                 <div style="text-align:center; cursor:pointer">
@@ -300,11 +300,17 @@ function generateContent(pEntry, i){
 
                                                 entity += '</p></div> \
                                                 <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
-                                                <button type="button" class="btn bouton-repondre">Répondre</button></a></div> \
+                                                <button type="button" class="btn bouton-repondre">';
+
+
+                                                if (type == 'reponses') entity += 'Détails';
+                                                  else entity += 'Répondre';
+
+                                                entity += '</button></a></div> \
                                                 <div class="grille-5"><p style="color:#75c731; font-weight:';
 
                                                 if (pEntry['soutenue']) entity += '900';
-                                                else entity += '400';
+                                                  else entity += '400';
 
                                                 entity += ';">' + pEntry['count_soutien'] + ' soutien';
 
