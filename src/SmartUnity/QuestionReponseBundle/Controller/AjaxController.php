@@ -63,7 +63,7 @@ class AjaxController extends Controller
                     foreach($Question->getReponses() as $reponse){
                         if($reponse->getId() == $idBestReponse['repId']){
                             $bestReponse = $reponse->getDescription();
-                            $auteurBestreponse = $reponse->getMembre()->getPrenom() . ' ' . $reponse->getMembre()->getNom();
+                            $auteurBestreponse = $reponse->getMembre()->getUsername();
                             $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
                             break;
                         }
@@ -76,8 +76,7 @@ class AjaxController extends Controller
                 	'sujet'=>$Question->getSujet(),
                 	'description'=>$Question->getDescription(),
                 	'date'=>$Question->getDate()->format('d-m-Y à H:i'),
-                    'membre_nom'=>$Question->getMembre()->getNom(),
-                    'membre_prenom'=>$Question->getMembre()->getPrenom(),
+                    'membre_username'=>$Question->getMembre()->getUsername(),
                     'remuneration'=>$Question->getRemuneration(),
                     'nb_reponses'=>$Question->getReponses()->count(),
                     'best_reponse'=>$bestReponse,
@@ -156,7 +155,7 @@ class AjaxController extends Controller
                     array_push($commentairesReturn, array(
                         'description'=>$commentaire->getDescription(),
                         'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
-                        'membre_nom'=>$commentaire->getMembre()->getNom()
+                        'membre_username'=>$commentaire->getMembre()->getUsername()
                     ));
                 }
 
@@ -191,7 +190,7 @@ class AjaxController extends Controller
                     'date'=>$reponse[0]->getDate()->format('d-m-Y à H:i'),
                     'up_vote'=> (int) $reponse['upVote'],
                     'down_vote'=> (int) $reponse['downVote'],
-                    'membre_nom'=>$membre->getNom(),
+                    'membre_username'=>$membre->getUsername(),
                     'membre_reputation'=>$membre->getReputation(),
                     'commentaires'=>$commentairesReturn,
                     'is_certif'=>$isCertif,

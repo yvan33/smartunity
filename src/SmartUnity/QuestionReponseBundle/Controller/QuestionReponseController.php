@@ -198,7 +198,7 @@ class QuestionReponseController extends Controller
                 foreach($Question->getReponses() as $reponse){
                     if($reponse->getId() == $idBestReponse['repId']){
                         $bestReponse = $reponse->getDescription();
-                        $auteurBestreponse = $reponse->getMembre()->getPrenom() . ' ' . $reponse->getMembre()->getNom();
+                        $auteurBestreponse = $reponse->getMembre()->getUsername();
                         $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
                         break;
                     }
@@ -210,8 +210,7 @@ class QuestionReponseController extends Controller
                 'sujet'=>$Question->getSujet(),
                 'description'=>$Question->getDescription(),
                 'date'=>$Question->getDate()->format('d-m-Y à H:i'),
-                'membre_nom'=>$Question->getMembre()->getNom(),
-                'membre_prenom'=>$Question->getMembre()->getPrenom(),
+                'membre_username'=>$Question->getMembre()->getUsername(),
                 'remuneration'=>$Question->getRemuneration(),
                 'nb_reponses'=>$Question->getReponses()->count(),
                 'best_reponse'=>$bestReponse,
