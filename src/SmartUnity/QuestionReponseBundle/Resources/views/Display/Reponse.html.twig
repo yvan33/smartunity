@@ -4,10 +4,12 @@
 
 {% block stylesheets %}
 <link href="{{ asset('assets/css/reponse.css') }}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block initJS %}
 	<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
+  <script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
   <script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
 {% endblock %}
 
@@ -150,14 +152,56 @@
 ////////////
 
 function upVote(pId){
-  $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees){
 
+  $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees){
+      if(donnees['status']=='ok'){
+          score = parseInt($('#vote' + pId + ' .upVote p').html());
+          $('#vote' + pId + ' .upVote p').html( score + 1 );
+
+          $('#vote' + pId).attr('rel' , "tooltip");
+          $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+          $('#vote' + pId).attr('onclick', '');
+          $('.roww').tooltip({
+            'placement' : 'right'
+          });
+      }else if(donnees['status']=='error'){
+
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
+              type:'inline',
+              mainClass: 'mfp-fade'
+            }
+          });
+
+      }
   });
 }
 
 function downVote(pId){
+
   $.getJSON('{{ path('smart_unity_question_reponse_ajax_downvote') }}/' + pId, function(donnees){
-    
+      if(donnees['status']=='ok'){
+          score = parseInt($('#vote' + pId + ' .downVote p').html());
+          $('#vote' + pId + ' .downVote p').html( score - 1 );
+
+          $('#vote' + pId).attr('rel' , "tooltip");
+          $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+          $('#vote' + pId).attr('onclick', '');
+          $('.roww').tooltip({
+            'placement' : 'right'
+          });
+      }else if(donnees['status']=='error'){
+
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
+              type:'inline',
+              mainClass: 'mfp-fade'
+            }
+          });
+
+      }
   });
 }
 
