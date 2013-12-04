@@ -5,6 +5,9 @@ namespace SmartUnity\QuestionReponseBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Model\UserInterface;
 
 class AjaxController extends Controller
 {
@@ -233,30 +236,133 @@ class AjaxController extends Controller
     }
 
 
-    public function setUpVoteAction($reponse){
+    public function setUpVoteAction($reponse, Request $request){
         
         //Check si le user est loggé ou pas
-        $securityContext = $this->container->get('security.context');
-        if( !$securityContext->isGranted('IS_AUTHENTICATED_ANONYMOUSLY') ){
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        if (!is_object($user) || !$user instanceof UserInterface) {
+
+            return new Response(json_encode(array(
+                'status'=>'error',
+                'error'=>'NOT_LOGGED',
+                'error_msg'=>'Vous devez être connécté pour pouvoir voter.'
+            )));
+
+        }else{//User pas loggé
 
             $noteReponseRepository = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('SmartUnityAppBundle:noteReponse');
+            $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
 
             $notes = $noteReponseRepository->findBy(array(
-                'membre'=>$securityContext->getToken()->getUser(),
+                'membre'=>$user,
                 'reponse'=>$reponse
             ));
 
-            return new Response(count($notes));
+            if(count($notes)>0){
+                return new Response(json_encode(array(
+                    'status'=>'error',
+                    'error'=>'ALREADY_VOTED',
+                    'error_msg'=>'Vous avez déjà voté!'
+                )));
+            }else{
 
-        }else{//User pas loggé
-            return new Response('Pas loggé');
+                $reponseEntity=$reponseRepository->findById($reponse);
+
+                if(count($reponseEntity)<1){
+                    return new Response(json_encode(array(
+                        'status'=>'error',
+                        'error'=>'REPONSE_NOT_EXISTS',
+                        'error_msg'=>'Cette réponse n\'éxiste pas!'
+                    )));
+                }
+
+                $newNoteReponse = new \SmartUnity\AppBundle\Entity\noteReponse();
+                $newNoteReponse->setNote(1);
+                $newNoteReponse->setMembre($user);
+                $newNoteReponse->setReponse($reponseEntity[0]);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newNoteReponse);
+                $em->flush();
+
+                return new Response(json_encode(array(
+                    'status'=>'ok',
+                    'msg'=>'Votre vote à été pris en compte!'
+                )));
+
+            }
+
+
         }
     }
 
     public function setDownVoteAction($reponse){
-        
+        //Check si le user est loggé ou pas
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        if (!is_object($user) || !$user instanceof UserInterface) {
+
+            return new Response(json_encode(array(
+                'status'=>'error',
+                'error'=>'NOT_LOGGED',
+                'error_msg'=>'Vous devez être connécté pour pouvoir voter.'
+            )));
+
+        }else{//User pas loggé
+
+            $noteReponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:noteReponse');
+            $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+            $notes = $noteReponseRepository->findBy(array(
+                'membre'=>$user,
+                'reponse'=>$reponse
+            ));
+
+            if(count($notes)>0){
+                return new Response(json_encode(array(
+                    'status'=>'error',
+                    'error'=>'ALREADY_VOTED',
+                    'error_msg'=>'Vous avez déjà voté!'
+                )));
+            }else{
+
+                $reponseEntity=$reponseRepository->findById($reponse);
+
+                if(count($reponseEntity)<1){
+                    return new Response(json_encode(array(
+                        'status'=>'error',
+                        'error'=>'REPONSE_NOT_EXISTS',
+                        'error_msg'=>'Cette réponse n\'éxiste pas!'
+                    )));
+                }
+
+                $newNoteReponse = new \SmartUnity\AppBundle\Entity\noteReponse();
+                $newNoteReponse->setNote(-1);
+                $newNoteReponse->setMembre($user);
+                $newNoteReponse->setReponse($reponseEntity[0]);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newNoteReponse);
+                $em->flush();
+
+                return new Response(json_encode(array(
+                    'status'=>'ok',
+                    'msg'=>'Votre vote à été pris en compte!'
+                )));
+
+            }
+
+
+        }
     }
 
 
