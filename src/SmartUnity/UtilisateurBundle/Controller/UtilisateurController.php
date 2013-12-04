@@ -9,13 +9,13 @@ use SmartUnity\AppBundle\Entity\avatar;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
+include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 class UtilisateurController extends Controller {
 
     public function indexAction(Request $request, $formPassword = null, $formInfos = null, $formAvatar = null) {
 
         $user = $this->container->get('security.context')->getToken()->getUser();
-
         $form_pref = $this->createForm('smartunity_user_preference', $user);
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -24,7 +24,7 @@ class UtilisateurController extends Controller {
                 ->getRepository('SmartUnityAppBundle:membre');
 
         $userid = $user->getId();
-
+p($userid);
         $smartreponse = $membreRepository->getSmartReponses($userid);
         $remuneration = 0;
         $remuneration = $membreRepository->getRemuneration($userid);
