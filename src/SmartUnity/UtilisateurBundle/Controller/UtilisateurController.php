@@ -9,7 +9,8 @@ use SmartUnity\AppBundle\Entity\avatar;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
-include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
+
+//include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 class UtilisateurController extends Controller {
 
@@ -24,10 +25,13 @@ class UtilisateurController extends Controller {
                 ->getRepository('SmartUnityAppBundle:membre');
 
         $userid = $user->getId();
-p($userid);
         $smartreponse = $membreRepository->getSmartReponses($userid);
         $remuneration = 0;
         $remuneration = $membreRepository->getRemuneration($userid);
+        $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
+        if (isset($avatar)) {
+            $avatar = $avatar->getWebPath();
+        }
 
         if (isset($formPassword)) {
 
@@ -50,13 +54,9 @@ p($userid);
                         'smartrep' => $smartreponse,
                         'remuneration' => $remuneration,
                         'form_avatar' => $formAvatar,
+                        'avatar' => $avatar,
             ));
         } else {
-
-            $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
-            if (isset($avatar)) {
-                $avatar = $avatar->getWebPath();
-            }
 
             return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
                         'form_pref' => $form_pref->createView(),
@@ -161,10 +161,9 @@ p($userid);
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
         $em->remove($avatar);
         $em->flush();
-            
+
         return $this->forward(
-                        'SmartUnityUtilisateurBundle:Utilisateur:index');            
-        
+                        'SmartUnityUtilisateurBundle:Utilisateur:index');
     }
 
 }

@@ -8,6 +8,21 @@
     </a>
 </div> 
 
+{% if avatar %}
+<a href="{{ path('smart_unity_utilisateur_removeavatar') }}" class="wrapper-avatar">
+    <span class="text-avatar">
+        Supprimer
+    </span>
+    <img class="img-avatar" src="{{ asset( '') }}{{ avatar }}" alt="avatar">
+</a>
+
+{%else%}
+<div class="row " style="text-align: center;">    
+    <img class="img-avatar" src="{{ asset( '') }}uploads/documents/logo.png" alt="avatar">
+</div>
+{%endif%}
+
+
 {{form_start(form_avatar)}}
 
       {{form_errors(form_avatar)}}
@@ -21,13 +36,9 @@
 <div class="cent-h bouton-bas-block">
     <button type="submit" class="btn btn-primary btn-sm">Valider modification</button>
 </div> 
-<div class="cent-h bouton-bas-block">
-    <a href="{{ path('smart_unity_utilisateur_removeavatar') }}" class="btn btn-sm btn-default">
-        Supprimer l'avatar existant
-    </a>
-</div>
 
 {{form_end(form_avatar)}}
+
 
 {% endblock %}   
 
