@@ -5,11 +5,9 @@ namespace SmartUnity\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Imagine\Image\ImageInterface;
 use Imagine\Gd\Imagine;
 use Imagine\Gd\Image;
 use Imagine\Image\Box;
-use Imagine\Image\Point;
 
 /**
  * @ORM\Entity
@@ -87,7 +85,6 @@ class avatar {
         // you must throw an exception here if the file cannot be moved
         // so that the entity is not persisted to the database
         // which the UploadedFile move() method does
-        $ImagePath = $this->getUploadRootDir().$this->id . '.' . $this->getFile()->guessExtension();
         $this->getFile()->move($this->getUploadRootDir(), $this->id . '.' . $this->getFile()->guessExtension());
                 
 
@@ -138,9 +135,6 @@ class avatar {
     }
 
     public function getWebPath() {
-//        return null === $this->path
-//            ? null
-//            : $this->getUploadDir().'/'.$this->id.'.'.$this->path;
         return null === $this->path ? null : $this->getUploadDir() . '/' . $this->id . '.' . 'png';
     }
 
