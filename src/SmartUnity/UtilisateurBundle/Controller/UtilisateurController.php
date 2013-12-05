@@ -4,13 +4,9 @@ namespace SmartUnity\UtilisateurBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\QueryBuilder;
 use SmartUnity\AppBundle\Entity\avatar;
-use Imagine\Gd\Imagine;
-use Imagine\Image\Box;
-use Imagine\Image\Point;
 
-//include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
+include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 class UtilisateurController extends Controller {
 
@@ -139,7 +135,6 @@ class UtilisateurController extends Controller {
 
 
         if ($form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($avatar);
             $em->flush();
