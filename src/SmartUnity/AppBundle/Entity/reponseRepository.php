@@ -94,7 +94,40 @@ class reponseRepository extends EntityRepository
         $rsm->addScalarResult('note', 'note');
         $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:reponse', 'r');
         
-        $sql = 'SELECT R.*, IFNULL(N.upVote,0) as upVote, IFNULL(N.downVote,0) as downVote, IFNULL(N.note,0) as note
+        $sql = 'SELECT b.*, IFNULL(d.downVote,0) as downVote, IFNULL(u.upVote,0) as upVote, IFNULL(d.downVote,0) + IFNULL(u.upVote,0) as note
+                    FROM
+                        (SELECT r.*
+                        FROM reponse r
+                        WHERE 
+                        r.question_id = 20
+                        GROUP BY r.id) as b
+                    
+                    LEFT JOIN
+                    
+                        (SELECT SUM(n.note) as downVote, r.id as reponse_id
+                        FROM reponse r, noteReponse n
+                        WHERE n.reponse_id = r.id
+                        AND r.question_id = 20
+                        AND n.note = -1
+                        GROUP BY n.reponse_id) as d 
+                    ON d.reponse_id = b.id
+                        
+                    LEFT JOIN
+                        
+                        (SELECT SUM(n.note) as upVote, r.id as reponse_id
+                        FROM reponse r, noteReponse n
+                        WHERE n.reponse_id = r.id
+                        AND r.question_id = 20
+                        AND n.note = 1
+                        GROUP BY n.reponse_id) as u
+                     ON b.id = u.reponse_id
+
+                ORDER BY b.dateCertification DESC, b.dateValidation DESC,';
+
+
+        /* OLD REQUEST
+
+        SELECT R.*, IFNULL(N.upVote,0) as upVote, IFNULL(N.downVote,0) as downVote, IFNULL(N.note,0) as note
                 FROM reponse R
                 LEFT OUTER JOIN
                     (SELECT d.downVote as downVote, u.upVote as upVote, IFNULL(u.upVote,0) + IFNULL(d.downVote,0) as note, d.reponse_id as dreponse_id, u.reponse_id as ureponse_id
@@ -117,12 +150,12 @@ class reponseRepository extends EntityRepository
                     ON u.reponse_id = d.reponse_id) as N
                 ON (N.ureponse_id = R.id OR N.dreponse_id = R.id)
                 WHERE R.question_id = :QuestionId
-                ORDER BY R.dateCertification DESC, R.dateValidation DESC,';
+            */
 
         if($tri == 'vote')
-            $sql .= ' note DESC';
+            $sql .= ' note DESC, b.date DESC';
         elseif($tri == 'date')
-            $sql .= ' R.date ASC';
+            $sql .= ' b.date ASC';
 
         $sql .= '
                 LIMIT :offset, :nbParPage';
