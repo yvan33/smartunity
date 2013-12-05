@@ -333,13 +333,13 @@ function clickOnPagination(pPage){
 function generateContent(pEntry, i){
   var entity = '<div class="grille-reponse"> \
                                  <div class="grille-4"> \
-                                    <div class="roww" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
+                                    <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
                                     if( pEntry['is_voted'] ){
                                       entity += 'Vous avez déjà noté cette question.';
                                     }
 
                                 entity += '"> \
-                                      <div class="fleche" {% if is_granted('ROLE_USER') %}';
+                                      <div class="fleche upVote" {% if is_granted('ROLE_USER') %}';
 
                                       if( !pEntry['is_voted'] ) entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
 
@@ -347,7 +347,7 @@ function generateContent(pEntry, i){
                                       entity +=' {% endif %}> \
                                           <img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">' + pEntry['up_vote'] + '</p> \
                                         </div> \
-                                        <div class="fleche" {% if is_granted('ROLE_USER') %}';
+                                        <div class="fleche downVote" {% if is_granted('ROLE_USER') %}';
 
                                       if( !pEntry['is_voted'] ) entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
 
