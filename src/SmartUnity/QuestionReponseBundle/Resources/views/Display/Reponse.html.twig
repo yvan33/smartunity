@@ -160,7 +160,8 @@ function upVote(pId){
 
           $('#vote' + pId).attr('rel' , "tooltip");
           $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
-          $('#vote' + pId).attr('onclick', '');
+          $('#vote' + pId + ' .upVote').attr('onclick', '');
+          $('#vote' + pId + ' .downVote').attr('onclick', '');
           $('.roww').tooltip({
             'placement' : 'right'
           });
@@ -187,7 +188,8 @@ function downVote(pId){
 
           $('#vote' + pId).attr('rel' , "tooltip");
           $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
-          $('#vote' + pId).attr('onclick', '');
+          $('#vote' + pId + ' .upVote').attr('onclick', '');
+          $('#vote' + pId + ' .downVote').attr('onclick', '');
           $('.roww').tooltip({
             'placement' : 'right'
           });
