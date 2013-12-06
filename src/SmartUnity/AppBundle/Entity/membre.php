@@ -808,7 +808,7 @@ class membre extends BaseUser
         return $this;
     }
 
-     * Add commentaireQuestions
+     /* Add commentaireQuestions
      *
      * @param \SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions
      * @return membre
@@ -830,7 +830,7 @@ class membre extends BaseUser
         return $this->date_inscription;
     }
 
-     * Remove commentaireQuestions
+     /* Remove commentaireQuestions
      *
      * @param \SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions
      */
