@@ -151,17 +151,6 @@ class avatar {
     }
 
     
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * Set name
      *
@@ -207,7 +196,7 @@ class avatar {
     {
         return $this->path;
     }
-}
+
 
 
     public function resizeAvatarAction() {
@@ -224,7 +213,7 @@ class avatar {
 
     }
 
-    function pad(Image $img, Box $size, $fcolor = 'fff', $ftransparency = 100) {
+    public function pad(Image $img, Box $size, $fcolor = 'fff', $ftransparency = 100) {
         $tsize = $img->getSize();
         $x = $y = 0;
         if ($size->getWidth() > $tsize->getWidth()) {

@@ -43,79 +43,9 @@
         <div class="row  ">
             <div class="text-center"><img src="{{asset('assets/img/mes-pref.png')}}"/></div>
         </div>
-{% block preferences %}  
+{% block preferences %} 
 
-<<<<<<< HEAD
-    <div class="col-md-5" style="margin-top:20px">
-        <div class="grille-content">
-
-
-            <div class="row  ">
-                <div class="text-center"><img src="{{asset('assets/img/ma-com.png')}}"/></div>
-            </div>
-            {% block parrainage %}
-
-            <div class="row">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>          
-            <form action="{{ path('smart_unity_utilisateur_envoiparrainage') }}" {{ form_enctype(form_parrainage) }} method="POST">
-            {#{{form_start(form_parrainage)}}#}
-            {{form_errors(form_parrainage)}}
-            <div class="row">
-                <div class="grille-1">Envoyer une demande de parrainage</div>
-                <div class="grille-2">{{form_widget(form_parrainage.email)}} </div>
-            </div>
-            <div class="cent-h bouton-bas-block">
-                    <button type="submit" class="btn btn-sm btn-default">Envoyer 
-
-                </div>
-            {{form_end(form_parrainage)}}
-        {% endblock %}
-        </div>
-        <div class="grille-content">
-
-        {% block activite%}
-            <div class="row  ">
-                <div class="text-center"><img src="{{asset('assets/img/mon-a.png')}}"/></div>
-            </div>
-
-
-            <div class="row  ">
-                <div class="grille-3">{{ app.user.questions.count}}</div>
-                <div class="grille-4">questions posées</div>    
-            </div>
-            <div class="row">
-                <div class="grille-3">{{ app.user.reponses.count}}</div>
-                <div class="grille-4">réponses apportées</div>
-            </div>
-            <div class="row  ">
-                <div class="grille-3">{{ smartrep}}</div>  
-                <div class="grille-4">Smart'Réponses</div>  
-            </div>
-            <div class="row  ">
-                <div class="grille-3">{{ remuneration }}</div>
-                <div class="grille-4">Points gagnés</div>
-            </div>
-            <div class="row  ">
-                <div class="grille-3">0</div>
-                <div class="grille-4">Cadeaux gaganés</div>
-            </div>
-        {% endblock %}
-=======
-        <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
+<form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
     {{form_errors(form_pref)}}
 
             <div class="premiere-ligne ">Je souhaite recevoir des notifications par Email pour:
@@ -156,47 +86,52 @@
 {% endblock %}
 
     </div>
+</div>    
 
-</div>
+    <div class="col-md-5" style="margin-top:20px">
+        <div class="grille-content">
+            <div class="row  ">
+                <div class="text-center"><img src="{{asset('assets/img/ma-com.png')}}"/></div>
+            </div>
+            {% block parrainage %}
 
-
-<div class="col-md-5" style="margin-top:20px">
-    <div class="grille-content">
-        <div class="row  ">
-            <div class="text-center"><img src="{{asset('assets/img/ma-com.png')}}"/></div>
+            <div class="row">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>
+            <div class="row">
+                <div class="grille-1"></div>
+                <div class="grille-2"></div>
+            </div>          
+            <form action="{{ path('smart_unity_utilisateur_envoiparrainage') }}" {{ form_enctype(form_parrainage) }} method="POST">
+            {#{{form_start(form_parrainage)}}#}
+            {{form_errors(form_parrainage)}}
+            <div class="row">
+                <div class="grille-1">Envoyer une demande de parrainage</div>
+                <div class="grille-2">{{form_widget(form_parrainage.email)}} </div>
+            </div>
+            <div class="cent-h bouton-bas-block">
+                    <button type="submit" class="btn btn-sm btn-default">Envoyer 
+            </div>
+            {{form_end(form_parrainage)}}
+        {% endblock %}
         </div>
-        <div class="row  ">
-            <div class="grille-1"></div>
-            <div class="grille-2"></div>
-        </div>
-        <div class="row  ">
-            <div class="grille-1"></div>
-            <div class="grille-2"></div>
-        </div>
-        <div class="row  ">
-            <div class="grille-1"></div>
-            <div class="grille-2"></div>
-        </div>
-        <div class="row  ">
-            <div class="grille-1"></div>
-            <div class="grille-2"></div>
-        </div>
-        <div class="row  ">
-            <div class="grille-1"></div>
-            <div class="grille-2"></div>
-        </div>
-    </div>
     <div class="grille-content">
         {%block activite%}
-
-
         <div class="row  ">
             <div class="text-center"><img src="{{asset('assets/img/mon-a.png')}}"/></div>
         </div>
         <div class="row  ">
             <div class="grille-3">{{ app.user.questions.count}}</div>
             <div class="grille-4">questions posées</div>    
->>>>>>> baaccd087afec55b8edb4928154de7447907c081
         </div>
         <div class="row">
             <div class="grille-3">{{ app.user.reponses.count}}</div>

@@ -21,7 +21,7 @@ class UtilisateurController extends Controller {
 
         $user = $this->container->get('security.context')->getToken()->getUser();
 
-        //$parrainage = new parrainage($user);
+        $parrainage = new parrainage($user);
 
         $form_pref = $this->createForm('smartunity_user_preference', $user);
         $form_parrainage =$this->createForm('smartunity_user_parrainage', $parrainage);
