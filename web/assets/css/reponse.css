@@ -150,6 +150,11 @@
 	font-size:36px;
 	font-weight:600;
 	margin: 10px 5px;
+	cursor:pointer;
+}
+.fleche:hover{
+	font-style:none;
+	cursor:pointer;
 }
 .roww
 {
@@ -346,7 +351,61 @@
 	margin-bottom:15px;
 }
 
+span.label-default{
+	background-color:#CCCCCC;
+	color:#333333;
+	font-weight:normal;
+	font-style:italic;
+}
 
 
+/**
+*
+* Magnific Popup
+*
+**/
 
+.white-popup {
+  position: relative;
+  top: 25px;
+  left: 25px;
+  background: #FFF;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+  text-align: center;
+}
 
+.mfp-fade.mfp-bg {
+  opacity: 0;
+
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+}
+/* overlay animate in */
+.mfp-fade.mfp-bg.mfp-ready {
+  opacity: 0.8;
+}
+/* overlay animate out */
+.mfp-fade.mfp-bg.mfp-removing {
+  opacity: 0;
+}
+
+/* content at start */
+.mfp-fade.mfp-wrap .mfp-content {
+  opacity: 0;
+
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+}
+/* content animate it */
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+}
+/* content animate out */
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+}

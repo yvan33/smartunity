@@ -6,8 +6,18 @@
 <div class="edit"> <a href="{{ path('smart_unity_utilisateur_editinfos') }}" class="btn btn-primary btn-xs">
         <span class="glyphicon glyphicon-pencil"></span>
     </a>
-</div>  
-<div class="row premiere-ligne ">
+</div>
+{% if avatar %}
+<div class="row " style="text-align: center;">
+    <img src="{{ asset( '') }}{{ avatar }}" alt="avatar">
+</div>
+{%else%}
+<div class="row " style="text-align: center;">    
+    <img class="img-avatar" src="{{ asset( '') }}uploads/documents/logo.png" alt="avatar">
+</div>
+{%endif%}
+
+<div class="row premiere-ligne">
     <div class="grille-1">Pseudo:</div>
     <div class="grille-2">{{app.user.username}}</div>
 </div>
@@ -55,10 +65,10 @@
     <a href="{{ path('smart_unity_utilisateur_changepassword') }}" class="btn btn-sm btn-default">
         <span class="glyphicon glyphicon-credit-card"></span> Changer mot de passe
     </a>
-</div>
-<div class="cent-h bouton-bas-block">
+
+
     <a href="{{ path('smart_unity_utilisateur_editavatar') }}" class="btn btn-sm btn-default">
-        Changer mon avatar
+        <span class="glyphicon glyphicon-user"></span> Changer mon avatar
     </a>
 </div>
 

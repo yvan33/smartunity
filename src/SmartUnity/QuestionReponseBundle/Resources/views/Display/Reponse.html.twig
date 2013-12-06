@@ -4,10 +4,13 @@
 
 {% block stylesheets %}
 <link href="{{ asset('assets/css/reponse.css') }}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block initJS %}
 	<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
+  <script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
+  <script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
 {% endblock %}
 
 
@@ -17,16 +20,17 @@
 <div class="row">
                     <div class="col-md-offset-1 col-md-10" style="padding:0px">
                       <div class="grille-content-2">
-                        <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ date }}</p>
+                        <div class="grille-reponse">
+                        <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                             </div>
 
-
-
-
-
-
                              <div class="grille-1">
-                              <div class="rond-point"><p>{{ remuneration }} pts</p></div><div class="grille-soutient"><p style="margin:0px">{{ nb_soutiens }} soutien {% if nb_soutiens > 1 %}s{% endif %}</p><button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button></div>
+                              <div class="rond-point"><p>{{ question.remuneration }} pts</p></div>
+                              
+                              <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
+                                {% if not is_certif and not is_validated %}<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>{% endif %}
+                              </div>
+                              
                             </div>
                             
                             <div class="grille-2" >
@@ -39,14 +43,14 @@
                                               <img src="{{ asset('assets/img/logo-compte.png') }}"/>
                                         </div>
                                         <div class=" grille-3-txt">
-                                          <p style="margin:0px; font-weight:600">{{ membre_nom }}</p>
+                                          <p style="margin:0px; font-weight:600">{{ question.membre.username }}</p>
                                             <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
                                             <p style="margin:0px">{{nb_questions_membre}} Questions</p>
-                                            <p style="margin:0px">{{points_membre}} Smart'Points</p>
+                                            <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
                                         </div>
                                         <div class="grille-3-rond">
                                           <div class="square-blue">
-                                            {{ membre_reputation }}
+                                            {{ question.membre.reputation }}
                                             </div>
                                         </div>
                                     </div>
@@ -54,16 +58,36 @@
       
                             </div>
                             </div>
-                            <p>{{ question.description }}</p>
-                              
+                            <p style="min-height: 100px">{{ question.description }}</p>
+                            <p>
+                              {% if question.marque.nom is defined %}<span class="label label-default">{{question.marque.nom}}</span>{% endif %}
+                              {% if question.modele.nom is defined %}<span class="label label-default">{{question.modele.nom}}</span>{% endif %}
+                              {% if question.os.nom is defined %}<span class="label label-default">{{question.os.nom}}</span>{% endif %}
+                              {% if question.typeQuestion.nom is defined %}<span class="label label-default">{{question.typeQuestion.nom}}</span>{% endif %}
+                            </p>
+
+
+                              {% for commentaire in question.commentaireQuestions %}
+                                    <div class="commentaire">
+                                    <p style="float:left">{{commentaire.description}}</p><p style="float:right">
+                                  {{commentaire.membre.username}} le {{commentaire.date|date('d-m-Y H:i:s')}}
+                                        <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                                    </p>
+                                    </div>
+                               {% endfor %}
                                 
                                 <div style="float:right">
                                 <div class="grille-3-btn">
+                                  <div style="float: left;margin-right: 5px;">
+                                        <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                                      </div>
                                    <a href="#"><div class="bouton-com-rep" style="margin-left:10px">Commenter</div></a>
-                                   <a href="{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}"><div class="bouton-com-rep">Repondre</div></a>
+                                   {% if not is_validated and not is_certif %}
+                                   <a class="reponse"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}"><div class="bouton-com-rep">Repondre</div></a>{% endif %}
                                 </div>
                                 </div>
                             </div>
+                          </div>
 
 
                             {% for reponse in listeReponses %}
@@ -84,12 +108,13 @@
                               {% endif %}
                           {% endfor %}
 
-
+                        </div>
+                        </div>
                     </div>
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row" style="margin-bottom:40px">
                 <div style="text-align:center; cursor:pointer">
                     <ul id="pages" class="pagination pagination-lg">
                       {% for page in pagination %}
@@ -99,10 +124,301 @@
                 </div>
               </div>
 
-
 {% endblock %}
 
 
 
+
+{% block modal %}
+{% if is_granted('ROLE_USER') and not is_certif and not is_validated %}
+  <div id="addReponseHolder" style="width:100%; display:none; position:fixed; background-color:#CCC; border-top: solid 1px #333; bottom:0px; z-index:1000;">
+    <div><iframe id="addReponse" style="border:0px; float:left; width:80%; margin-left:10%;" src="about:blank"></iframe></div>
+    <div class="btn btn-default" style="float:left; left:-25px; cursor:pointer; width:40px;" id="closeFrame"><span class="glyphicon glyphicon-remove-circle"</span></div>
+  </div>
+{% endif %}
+{% endblock %}
+
+
+
+
+
 {% block callJS %}
+
+
+<script>
+
+////////////
+/// VOTES
+////////////
+
+function upVote(pId){
+
+  $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees){
+      if(donnees['status']=='ok'){
+          score = parseInt($('#vote' + pId + ' .upVote p').html());
+          $('#vote' + pId + ' .upVote p').html( score + 1 );
+
+          $('#vote' + pId).attr('rel' , "tooltip");
+          $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+          $('#vote' + pId + ' .upVote').attr('onclick', '');
+          $('#vote' + pId + ' .downVote').attr('onclick', '');
+          $('.roww').tooltip({
+            'placement' : 'right'
+          });
+      }else if(donnees['status']=='error'){
+
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
+              type:'inline',
+              mainClass: 'mfp-fade'
+            }
+          });
+
+      }
+  });
+}
+
+function downVote(pId){
+
+  $.getJSON('{{ path('smart_unity_question_reponse_ajax_downvote') }}/' + pId, function(donnees){
+      if(donnees['status']=='ok'){
+          score = parseInt($('#vote' + pId + ' .downVote p').html());
+          $('#vote' + pId + ' .downVote p').html( score - 1 );
+
+          $('#vote' + pId).attr('rel' , "tooltip");
+          $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+          $('#vote' + pId + ' .upVote').attr('onclick', '');
+          $('#vote' + pId + ' .downVote').attr('onclick', '');
+          $('.roww').tooltip({
+            'placement' : 'right'
+          });
+      }else if(donnees['status']=='error'){
+
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
+              type:'inline',
+              mainClass: 'mfp-fade'
+            }
+          });
+
+      }
+  });
+}
+
+
+
+
+
+//////////
+/// TOOLTIPS
+//////////
+
+$(document).ready(function(){
+
+  $('a.reponse').click(function(e){
+    {% if is_granted('ROLE_USER') %}
+      $('#addReponse').attr('src', $(this).attr('href'));
+      $('#addReponseHolder').show('fast');
+      $('#closeFrame').click(function(){
+        $('#addReponseHolder').hide('fast');
+        $('#addReponse').attr('src', 'about:blank');
+      })
+    {% endif %}
+    e.preventDefault();
+  });
+
+  {% if not is_granted('ROLE_USER') %}
+  $('.reponse').tooltip({
+    'placement' : 'left'
+  });
+  {% endif %}
+
+  $('.roww').tooltip({
+    'placement' : 'right'
+  });
+})
+
+
+
+
+
+////////////////////////////
+////////// PAGINATION & AJAX
+////////////////////////////
+
+//Options du bootStrap Paginator
+options = new Object();
+  options = {
+    currentPage: {{ page }},
+    totalPages: {{ nbPages }},
+    alignment: 'center',
+    numberOfPages: 5,
+    size: 'large',
+    itemContainerClass: function (type, page, current) {
+                          return (page === current) ? "active" : "pointer-cursor";
+                        },
+    bootstrapMajorVersion: 3,
+    onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
+      clickOnPagination(pPage);
+    }
+  };
+
+tri = '{{ tri }}';
+
+
+$(document).ready(function(){
+  $('#pages').bootstrapPaginator(options);
+
+  $('#triVote').attr('href', '#');
+  $('#triDate').attr('href', '#');
+  
+  $('#triVote').click(function(e){
+    tri = 'vote';
+    options.currentPage = 1;
+    $('#pages').bootstrapPaginator(options);
+    $('#triVote').css('font-weight', 'bold');
+    $('#triVote').css('font-style', 'none');
+    $('#triDate').css('font-weight', 'normal');
+    clickOnPagination(1);
+    e.preventDefault();
+  });
+
+  $('#triDate').click(function(e){
+    tri = 'date';
+    options.currentPage = 1;
+    $('#pages').bootstrapPaginator(options);
+    $('#triVote').css('font-weight', 'normal');
+    $('#triDate').css('font-weight', 'bold');
+    $('#triDate').css('font-style', 'none');
+    clickOnPagination(1);
+    e.preventDefault();
+  });
+
+});
+
+
+function clickOnPagination(pPage){
+  $('#reponses-frame').height(function(i, h){
+      return h;
+  });
+  $('#reponses-container').fadeOut('fast');
+
+  //On récupère le JSON depuis le controller AjaxController
+  $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/' + tri + '/' + pPage + '/{{nbParPage}}', function(donnees){
+      var content='';
+      if(donnees[0]['page']==pPage && donnees[0]['slug']== '{{slug}}' && donnees[0]['nbParPage']== {{nbParPage}} && donnees[0]['tri'] == tri){
+        donnees.shift(); //On supprime la ligne de check du JSON
+
+        donnees.forEach(function(pEntry, i){
+          if ( !pEntry['is_validated'] && !pEntry['is_certif'] ) content += generateContent(pEntry, i);
+        }); //Generation du code
+
+        //Affichage du nouveau contenu dasn le tab, et fadeIn
+        $('#reponses-container').html(content);
+        $('#reponses-container').fadeIn('fast');
+        $('#reponses-frame').animateAuto('height', 'fast');
+
+      }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
+        $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+        $('#reponses-container').fadeIn('fast');
+      }
+      $('.roww').tooltip({
+        'placement' : 'right'
+      });
+  });
+}
+
+function generateContent(pEntry, i){
+  var entity = '<div class="grille-reponse"> \
+                                 <div class="grille-4"> \
+                                    <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
+                                    if( pEntry['is_voted'] ){
+                                      entity += 'Vous avez déjà noté cette question.';
+                                    }
+
+                                entity += '"> \
+                                      <div class="fleche upVote" {% if is_granted('ROLE_USER') %}';
+
+                                      if( !pEntry['is_voted'] ) entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
+
+
+                                      entity +=' {% endif %}> \
+                                          <img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">' + pEntry['up_vote'] + '</p> \
+                                        </div> \
+                                        <div class="fleche downVote" {% if is_granted('ROLE_USER') %}';
+
+                                      if( !pEntry['is_voted'] ) entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
+
+                                        entity += '{% endif %}> \
+                                          <img src="{{ asset('assets/img/fléche-rouge.png') }}"/><p style="color:#F00">' + pEntry['down_vote'] + '</p> \
+                                        </div> \
+                                    </div> \
+                                    <div class="roww"> \
+                                      <p style="font-size:11px">' + pEntry['date'] + '</p> \
+                                    </div>';
+                                    
+                                    if(pEntry['is_validated'] || pEntry['is_certif']) entity +=' \
+                                    <div class="roww"> \
+                                      <img src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/> \
+                                    </div>';
+                                    
+                                    entity +=' \
+                                </div> \
+                                 \
+                                <div class="grille-5" > \
+                          \
+                                  <div class="grille-3-over"> \
+                                    <div class="grille-3"> \
+                              \
+                                        <div class="grille-3-grey"> \
+                                            <div class="grille-3-im"> \
+                                                  <img src="{{ asset('assets/img/logo-compte.png') }}"/> \
+                                            </div> \
+                                            <div class=" grille-3-txt"> \
+                                              <p style="margin:0px; font-weight:600">' + pEntry['membre_username'] + '</p> \
+                                            <p style="margin:0px">' + pEntry['smart_reponses'] + ' Smart\'Reponses</p> \
+                                            <p style="margin:0px">' + pEntry['nb_questions_membre'] + ' Questions</p> \
+                                            <p style="margin:0px">' + pEntry['points_membre'] + ' Smart\'Points</p> \
+                                            </div> \
+                                            <div class="grille-3-rond"> \
+                                              <div class="square-blue"> \
+                                                ' + pEntry['membre_reputation'] + ' \
+                                                </div> \
+                                            </div> \
+                                        </div> \
+                                </div> \
+                                </div> \
+                                <p style="min-height: 100px">' + pEntry['description'] + '</p>';
+
+                                
+                                  pEntry['commentaires'].forEach(function(pCom, i){
+
+                                    entity += '<div class="commentaire"> \
+                                    <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_username'] + ' le ' + pCom['date'] + ' \
+                                    <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
+                                    </div>';
+
+                                  });
+
+                                
+                                entity +=' \
+                                    <div style="float:right"> \
+                                    <div class="grille-3-btn"> \
+                                      <div style="float: left;margin-right: 5px;"> \
+                                        <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a> \
+                                      </div> \
+                                       <a href="#"><div class="bouton-com-rep">Commenter</div></a> \
+                                    </div> \
+                                    </div> \
+                                </div> \
+                                </div>';
+
+  return entity;
+}
+
+
+</script>
+
 {% endblock %}

@@ -1,14 +1,15 @@
 @media (min-width: 1200px){
-.menu-mar
+.menu-bg
 {
-	margin-bottom:-7px;
+	background-image:url(../img/background-menu.png);
 }
 .menu-pad 
 {
 	font-size:16px;
 	font-weight:bold;
-	padding-top:7px;
-	padding-left:20px;
+	height:43px;
+	line-height: 43px;
+	margin: 0px 20px;
 }
 .logo2
 {
@@ -52,16 +53,16 @@
 }
 @media (min-width: 992px)  and (max-width: 1200px) {
   
-.menu-mar
+.menu-bg
 {
-	margin-bottom:-7px;
+	background-image:url(../img/background-menu.png);
 }
 .menu-pad 
 {
 	font-size:16px;
 	font-weight:bold;
-	padding-top:7px;
-	padding-left:20px;
+	line-height: 43px;
+	margin: 0px 20px -7px 20px;
 }
 .logo2
 {
@@ -101,15 +102,16 @@
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
   
-.menu-mar
+.menu-bg
 {
-	margin-bottom:-5px; 	
+	background-image:url(../img/background-menu.png);
 }
 .menu-pad 
 {
-	font-size:14px;
+	font-size:15px;
 	font-weight:bold;
-	padding-top:5px;
+	line-height: 43px;
+	margin: 0px 20px -7px 20px;
 }
 .logo2
 {
@@ -182,7 +184,6 @@
 .menu-bg
 {
 	background-color:#2b3a41;
-	background-image:url(../img/background-menu.png);
 	background-repeat: repeat-x;
 	-webkit-box-shadow: 0 5px 20px  black;
        -moz-box-shadow: 0 5px 20px  black;
@@ -217,6 +218,12 @@
        -moz-box-shadow: 0 5px 20px  black;
             box-shadow: 0 5px 20px  black;
 }
+.footer
+{
+	text-align: center;
+	margin-top: 5px;
+}
+
 .footer a
 {
 	display: inline-block;
@@ -324,6 +331,24 @@
 {
 	width: 100%;
 }
+.nav-fixe
+{
+	z-index: 1000000;
+	width: 100%;
+	overflow: hidden;
+	margin: 0px;
 
+}
+.fixee
+{	
+	position:fixed;
+ 	top:0px;
+
+
+}
+.fixe-cont
+{
+	height: 65px;
+}
 
 

@@ -4,21 +4,21 @@ smart_unity_question_reponse_homepage:
 
 smart_unity_question_reponse_list_of_question:
     pattern:  /listeQuestion/{type}/{page}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestion, type:'onFire', page:'1' }
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestion, type:'reponses', page:'1' }
     requirements:
         type: onFire|last|reponses|question
-        page: \d
+        page: \d+
 
 smart_unity_question_reponse_search_questions:
     pattern: /recherche/
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchQuestion }
 
 smart_unity_question_reponse_display_reponse:
-    pattern:  /reponse/{slug}/{page}/{tri}
+    pattern:  /reponse/{slug}/{tri}/{page}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'', tri:'vote'}
     requirements:
         tri: vote|date
-        page: \d
+        page: \d+
 
 smart_unity_question_reponse_add_question:
     pattern:  /ajouter-question/
@@ -52,16 +52,28 @@ smart_unity_question_reponse_add_commentaire_reponse:
 
 smart_unity_question_reponse_ajax_get_questions:
     pattern: /getQuestions/{type}/{page}/{nbParPage}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:getQuestions, type:'onFire', page:'1', nbParPage:'3'}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:getQuestions, type:'reponses', page:'1', nbParPage:'3'}
     requirements:
         type: onFire|last|reponses|question
-        page: \d
-        nbParPage: \d
+        page: \d+
+        nbParPage: \d+
 
 smart_unity_question_reponse_ajax_get_reponses:
     pattern: /getReponses/{slug}/{tri}/{page}/{nbParPage}
     defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:getReponses, tri:'vote', page:'1', nbParPage:'5'}
     requirements:
-        page: \d
-        nbParPage: \d
+        page: \d+
+        nbParPage: \d+
         tri: vote|date
+
+smart_unity_question_reponse_ajax_upvote:
+    pattern: /setUpVote/{reponse}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:setUpVote, reponse:'0'}
+    requirements:
+        reponse: \d+
+
+smart_unity_question_reponse_ajax_downvote:
+    pattern: /setDownVote/{reponse}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:setDownVote, reponse:'0'}
+    requirements:
+        reponse: \d+

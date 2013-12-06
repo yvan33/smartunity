@@ -9,6 +9,20 @@ class RegistrationFormType extends BaseType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
 //        parent::buildForm($builder, $options);
+//        
+//Liste des modèles de smartphones provisoire
+        $appareil_choices = array(
+        'Samsung' => array(
+            '1' => array(
+                '1' => 'Galaxy S3',
+                '2' => 'Galaxy S4',
+                        )),
+         'Apple' => array(
+            '5' => array(
+                '3' => 'iphone5',
+                '12' => 'iphone5S',
+            ))
+        );
 
         $builder
                 ->add('nom')
@@ -32,15 +46,25 @@ class RegistrationFormType extends BaseType {
                     'years' => range(date('Y') - 100, date('Y')),
                     'required' => false
                 ))
-                ->add('ville', 'entity', array(
+                ->add('ville', 'text', array(
                     'label' => 'Ville',
-                    'class' => 'SmartUnityAppBundle:ville',
-                    'property' => 'nom',
-                    'query_builder' => function(\Doctrine\ORM\EntityRepository $er) {
-                                       return $er->createQueryBuilder('u')
-                                       ->orderBy('u.nom', 'ASC');},
-
+                    'required' => false
+//                    'class' => 'SmartUnityAppBundle:ville',
+//                    'property' => 'nom',
+//                    'query_builder' => function(\Doctrine\ORM\EntityRepository $er) {
+//                                       return $er->createQueryBuilder('u')
+//                                       ->orderBy('u.nom', 'ASC');},
                 ))
+//                ->add('appareils', 'text', array(
+//                    'type' => 'choice',
+//                    'required' => false,
+//                    'label' => 'Smartphone(s) en possession',
+//                    'options' => array(
+//                        'choices' => $appareil_choices,
+//                    ),
+//                    'allow_add' => true,
+//                    'prototype' => true
+//                ))
                 ->add('pref_mp', 'choice', array(
                     'label' => 'Recevoir les notifications des messages privés',
                     'choices' => array(

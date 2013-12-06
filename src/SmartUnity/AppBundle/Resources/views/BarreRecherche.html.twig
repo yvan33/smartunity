@@ -14,47 +14,51 @@
     }
 
     
-    @media (min-width: 1200px){
+@media (min-width: 1200px){
     .find-slider
     {
-      position:absolute;
-      top:100px;
-      left:20%;
-      width:60%;
+        width: 700px;
 
     }
   }
  @media (min-width: 992px)  and (max-width: 1200px) {
     .find-slider
     {
-      position:absolute;
-      top:100px;
-      left:15%;
-      width:70%;
-
+      
+        width: 600px;
     }
   }
 @media screen and (min-width: 768px) and (max-width: 992px) {
     .find-slider
     {
-      position:absolute;
-      top:100px;
-      left:5%;
-      width:90%;
+        width: 500px;
 
     }
   }
 @media screen and (max-width: 768px) {
     .find-slider
     {
-      position:absolute;
-      top:100px;
-      left:5%;
-      width:90%;
-
+      
+        width: 100%;
     }
   }
+  .find-slider
+    {
+       margin-top: 10px;
+      padding-right: 30px;
+
+    }
+  .find-content
+  {
+      position:absolute;
+      top:100px;
+      left:1%;
+      width:98%;
+  }
     </style>
+</div >
+</div >
+</div >
 
     <div class="row">
             <div class="col-md-6 col-md-offset-3" >
@@ -79,10 +83,11 @@
                                <p style="font-family:Cookie; font-size:56px" class="valign-col-all">Smart'Recherche</p>
                                </div>
                         </div>
-                        <div class="find-slider">
+                        <div class="find-content">
                             <form action="{{ path('smart_unity_question_reponse_search_questions') }}" method="GET">
-                            <div class="input-group" style="margin-top:30px">
-                              <input type="text" class="form-control">
+                            <div class="input-group cent-h find-slider">
+                              <input type="text" name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">
+                              <input type="hidden" name="p" id="p" value="1" class="form-control">
                               <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                               </span>
@@ -116,4 +121,8 @@
                     });
                   });
                 </script>
+<div class="container" >
+<div class="row">
+<div class="col-md-12">
+
 {% endblock %}

@@ -69,15 +69,41 @@ Bonjour {{ app.user.username}}
                   <div class="grille-content-2">
                     <div  style="background-image:url({{asset('assets/img/tab-acc.png')}}); background-repeat:repeat-x ; background-color:#00557d">
                       <ul class="nav nav-tabs" id="myTab">
-                        <li class="active"><a href="#onFire" data-toggle="tab">On Fire</a></li>
+                        <li class="active"><a href="#reponses" data-toggle="tab">Questions R&eacute;solues</a></li>
+                        <li><a href="#onFire" data-toggle="tab">On Fire</a></li>
                         <li><a href="#last" data-toggle="tab">Derni&egrave;res Questions</a></li>
-                        <li><a href="#reponses" data-toggle="tab">Questions R&eacute;solues</a></li>
                       </ul>
                       </div>
                       <div class="tab-content" style="margin:0px 15px"><!-- style="margin:15px" -->
 
 
-                        <div class="tab-pane active fade in out" id="onFire">
+                        <div class="tab-pane active fade in out" id="reponses">
+                          {% if countSolved == 0 %}
+                            <br/>
+                            <p align="center">Il n'y a aucune question r&eacute;solue</p>
+                            <br/>
+                          {% else %}
+                            {% for question in listeSolvedQuestions %}
+
+                                    <div class="grille-question-centent">
+                                    <div class="grille-question-rond">
+                                        <div class="rond-point">
+                                          {{ question.remuneration }} pts
+                                          </div>
+                                      </div>
+                                      <div class="grille-question-txt">
+                                          <p>{{ question.sujet }}</p>
+                                      </div>
+                                      <div class="grille-question-det">
+                                        <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
+                                      </div>
+                                  </div>
+                                      <!-- contenue caché fin-->
+                            {% endfor %}
+                          {% endif %}
+                        </div>
+
+                        <div class="tab-pane fade in out" id="onFire">
                           {% if countOnFire == 0 %}
                             <br/>
                             <p align="center">Il n'y a aucune question On Fire</p>
@@ -128,33 +154,6 @@ Bonjour {{ app.user.username}}
                               {% endfor %}
                           {% endif %}
                         </div>
-
-                        <div class="tab-pane fade in out" id="reponses">
-                          {% if countSolved == 0 %}
-                            <br/>
-                            <p align="center">Il n'y a aucune question r&eacute;solue</p>
-                            <br/>
-                          {% else %}
-                            {% for question in listeSolvedQuestions %}
-
-                                    <div class="grille-question-centent">
-                                    <div class="grille-question-rond">
-                                        <div class="rond-point">
-                                          {{ question.remuneration }} pts
-                                          </div>
-                                      </div>
-                                      <div class="grille-question-txt">
-                                          <p>{{ question.sujet }}</p>
-                                      </div>
-                                      <div class="grille-question-det">
-                                        <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
-                                      </div>
-                                  </div>
-                                      <!-- contenue caché fin-->
-                            {% endfor %}
-                          {% endif %}
-                        </div>
-
 
                       </div>
     </div>

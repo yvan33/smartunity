@@ -5,6 +5,9 @@ namespace SmartUnity\QuestionReponseBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Model\UserInterface;
 
 class AjaxController extends Controller
 {
@@ -52,7 +55,6 @@ class AjaxController extends Controller
         if($listeQuestion[0] != null){
             foreach($listeQuestion as $Question){ //On parcourt toutes les questions, on les liste dans le tableau de sortie
 
-                $reponse = '';
                 $bestReponse = '';
                 $idBestReponse = '';
                 $auteurBestreponse= '';
@@ -64,12 +66,11 @@ class AjaxController extends Controller
                     foreach($Question->getReponses() as $reponse){
                         if($reponse->getId() == $idBestReponse['repId']){
                             $bestReponse = $reponse->getDescription();
-                            $auteurBestreponse = $reponse->getMembre()->getPrenom() . ' ' . $reponse->getMembre()->getNom();
+                            $auteurBestreponse = $reponse->getMembre()->getUsername();
                             $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
                             break;
                         }
                     }
-
                 }
 
 
@@ -78,8 +79,7 @@ class AjaxController extends Controller
                 	'sujet'=>$Question->getSujet(),
                 	'description'=>$Question->getDescription(),
                 	'date'=>$Question->getDate()->format('d-m-Y à H:i'),
-                    'membre_nom'=>$Question->getMembre()->getNom(),
-                    'membre_prenom'=>$Question->getMembre()->getPrenom(),
+                    'membre_username'=>$Question->getMembre()->getUsername(),
                     'remuneration'=>$Question->getRemuneration(),
                     'nb_reponses'=>$Question->getReponses()->count(),
                     'best_reponse'=>$bestReponse,
@@ -152,14 +152,13 @@ class AjaxController extends Controller
                 //Récupération des commentaires
                 $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse),
                                                                         array('date' => 'asc'));
-                
                
                 //Remplissage du tableau de sortie commentaires
                 foreach($commentaires as $commentaire){
                     array_push($commentairesReturn, array(
                         'description'=>$commentaire->getDescription(),
                         'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
-                        'membre_nom'=>$commentaire->getMembre()->getNom()
+                        'membre_username'=>$commentaire->getMembre()->getUsername()
                     ));
                 }
 
@@ -181,6 +180,12 @@ class AjaxController extends Controller
                     }
                 }
 
+
+                $membre = $reponse[0]->getMembre();
+
+                $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
+                $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
+
                 //Ajour d'une réponse dans le tableau de sortie
                 array_push($returnArray, array(
                     'id'=>$reponse[0]->getId(),
@@ -188,18 +193,176 @@ class AjaxController extends Controller
                     'date'=>$reponse[0]->getDate()->format('d-m-Y à H:i'),
                     'up_vote'=> (int) $reponse['upVote'],
                     'down_vote'=> (int) $reponse['downVote'],
-                    'membre_nom'=>$reponse[0]->getMembre()->getNom(),
-                    'membre_reputation'=>$reponse[0]->getMembre()->getReputation(),
+                    'membre_username'=>$membre->getUsername(),
+                    'membre_reputation'=>$membre->getReputation(),
                     'commentaires'=>$commentairesReturn,
                     'is_certif'=>$isCertif,
                     'is_validated'=>$isValid,
-                    'is_voted'=>$isVoted
+                    'is_voted'=>$isVoted,
+                    'smart_reponses'=> (int) $smartReponses,
+                    'nb_questions_membre'=> (int) $nb_questions_membre,
+                    'points_membre'=> (int) $membre->getCagnotte()
                 ));
             }
         }
 
         return new Response(json_encode($returnArray));
 
+    }
+
+
+    public function getSearchAction(){
+
+        $question =  $this->getRequest()->query->get('q');
+
+
+        $finder = $this->container->get('fos_elastica.finder.smartunity.question');
+        $resultSet = $finder->findHybrid(urldecode($question));
+
+        $html = '';
+        $html .= '<html lang="en"><head></head><body>';
+        $html.= 'score     ------    sujet<br/><br/>';
+
+        foreach($resultSet as $result){
+            $html.= $result->getResult()->getScore() . ' ------ ';
+            $html.= $result->getTransformed()->getSujet() . ' ------ ';
+            $html.= $result->getTransformed()->getMembre()->getNom();
+            $html.=  '<br/>';
+        }
+
+        $html.=  '</body></html>';
+        
+        return new Response($html);
+    }
+
+
+    public function setUpVoteAction($reponse, Request $request){
+        
+        //Check si le user est loggé ou pas
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        if (!is_object($user) || !$user instanceof UserInterface) {
+
+            return new Response(json_encode(array(
+                'status'=>'error',
+                'error'=>'NOT_LOGGED',
+                'error_msg'=>'Vous devez être connécté pour pouvoir voter.'
+            )));
+
+        }else{//User pas loggé
+
+            $noteReponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:noteReponse');
+            $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+            $notes = $noteReponseRepository->findBy(array(
+                'membre'=>$user,
+                'reponse'=>$reponse
+            ));
+
+            if(count($notes)>0){
+                return new Response(json_encode(array(
+                    'status'=>'error',
+                    'error'=>'ALREADY_VOTED',
+                    'error_msg'=>'Vous avez déjà voté!'
+                )));
+            }else{
+
+                $reponseEntity=$reponseRepository->findById($reponse);
+
+                if(count($reponseEntity)<1){
+                    return new Response(json_encode(array(
+                        'status'=>'error',
+                        'error'=>'REPONSE_NOT_EXISTS',
+                        'error_msg'=>'Cette réponse n\'éxiste pas!'
+                    )));
+                }
+
+                $newNoteReponse = new \SmartUnity\AppBundle\Entity\noteReponse();
+                $newNoteReponse->setNote(1);
+                $newNoteReponse->setMembre($user);
+                $newNoteReponse->setReponse($reponseEntity[0]);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newNoteReponse);
+                $em->flush();
+
+                return new Response(json_encode(array(
+                    'status'=>'ok',
+                    'msg'=>'Votre vote à été pris en compte!'
+                )));
+
+            }
+
+
+        }
+    }
+
+    public function setDownVoteAction($reponse){
+        //Check si le user est loggé ou pas
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        if (!is_object($user) || !$user instanceof UserInterface) {
+
+            return new Response(json_encode(array(
+                'status'=>'error',
+                'error'=>'NOT_LOGGED',
+                'error_msg'=>'Vous devez être connécté pour pouvoir voter.'
+            )));
+
+        }else{//User pas loggé
+
+            $noteReponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:noteReponse');
+            $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+            $notes = $noteReponseRepository->findBy(array(
+                'membre'=>$user,
+                'reponse'=>$reponse
+            ));
+
+            if(count($notes)>0){
+                return new Response(json_encode(array(
+                    'status'=>'error',
+                    'error'=>'ALREADY_VOTED',
+                    'error_msg'=>'Vous avez déjà voté!'
+                )));
+            }else{
+
+                $reponseEntity=$reponseRepository->findById($reponse);
+
+                if(count($reponseEntity)<1){
+                    return new Response(json_encode(array(
+                        'status'=>'error',
+                        'error'=>'REPONSE_NOT_EXISTS',
+                        'error_msg'=>'Cette réponse n\'éxiste pas!'
+                    )));
+                }
+
+                $newNoteReponse = new \SmartUnity\AppBundle\Entity\noteReponse();
+                $newNoteReponse->setNote(-1);
+                $newNoteReponse->setMembre($user);
+                $newNoteReponse->setReponse($reponseEntity[0]);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newNoteReponse);
+                $em->flush();
+
+                return new Response(json_encode(array(
+                    'status'=>'ok',
+                    'msg'=>'Votre vote à été pris en compte!'
+                )));
+
+            }
+
+
+        }
     }
 
 

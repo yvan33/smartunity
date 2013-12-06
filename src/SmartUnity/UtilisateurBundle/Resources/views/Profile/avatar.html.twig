@@ -1,9 +1,44 @@
-{% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
-{% form_theme form 'SmartUnityUtilisateurBundle:Form:form_mon_compte.html.twig' %}
+{% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
+{% form_theme form_avatar 'SmartUnityUtilisateurBundle:Form:form_mon_compte.html.twig' %}
 
 {% block avatar %}
 
-{{form(form)}}
+<div class="edit">
+    <a class="btn btn-primary btn-xs" type="button" onclick="javascript:history.back()">Annuler
+    </a>
+</div> 
+
+{% if avatar %}
+<a href="{{ path('smart_unity_utilisateur_removeavatar') }}" class="wrapper-avatar">
+    <span class="text-avatar">
+        Supprimer
+    </span>
+    <img class="img-avatar" src="{{ asset( '') }}{{ avatar }}" alt="avatar">
+</a>
+
+{%else%}
+<div class="row " style="text-align: center;">    
+    <img class="img-avatar" src="{{ asset( '') }}uploads/documents/logo.png" alt="avatar">
+</div>
+{%endif%}
+
+
+{{form_start(form_avatar)}}
+
+      {{form_errors(form_avatar)}}
+
+<div class="row premiere-ligne ">
+    <div class="cent-h">   
+        {{form_widget(form_avatar.file)}}
+    </div>
+</div>
+
+<div class="cent-h bouton-bas-block">
+    <button type="submit" class="btn btn-primary btn-sm">Valider modification</button>
+</div> 
+
+{{form_end(form_avatar)}}
+
 
 {% endblock %}   
 

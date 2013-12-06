@@ -4,18 +4,27 @@ namespace SmartUnity\UtilisateurBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\QueryBuilder;
 use SmartUnity\AppBundle\Entity\avatar;
+use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
+use Imagine\Image\Point;
 use SmartUnity\AppBundle\Entity\parrainage;
+use SmartUnity\AppBundle\Entity\membre;
+
+
+include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
+
 
 class UtilisateurController extends Controller {
 
-    public function indexAction(Request $request, $formPassword = null, $formInfos = null) {
+    public function indexAction(Request $request, $formPassword = null, $formInfos = null, $formAvatar = null) {
 
         $user = $this->container->get('security.context')->getToken()->getUser();
 
+        //$parrainage = new parrainage($user);
+
         $form_pref = $this->createForm('smartunity_user_preference', $user);
-        $form_parrainage =$this->createForm('smartunity_user_parrainage');
+        $form_parrainage =$this->createForm('smartunity_user_parrainage', $parrainage);
         $em = $this->getDoctrine()->getEntityManager();
 
         $membreRepository = $this->getDoctrine()
@@ -26,6 +35,10 @@ class UtilisateurController extends Controller {
         $smartreponse = $membreRepository->getSmartReponses($userid);
         $remuneration = 0;
         $remuneration = $membreRepository->getRemuneration($userid);
+        $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
+        if (isset($avatar)) {
+            $avatar = $avatar->getWebPath();
+        }
 
         if (isset($formPassword)) {
 
@@ -44,12 +57,23 @@ class UtilisateurController extends Controller {
                         'form_infos' => $formInfos,
                         'form_parrainage' => $form_parrainage->createView()                       
             ));
+        } else if (isset($formAvatar)) {
+            return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
+                        'form_pref' => $form_pref->createView(),
+                        'smartrep' => $smartreponse,
+                        'remuneration' => $remuneration,
+                        'form_avatar' => $formAvatar,
+                        'avatar' => $avatar,
+            ));
         } else {
+
             return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
                         'form_pref' => $form_pref->createView(),
                         'smartrep' => $smartreponse,
                         'remuneration' => $remuneration,
+                        'avatar' => $avatar,
                         'form_parrainage' => $form_parrainage->createView()                        
+
             ));
         }
     }
@@ -100,66 +124,113 @@ class UtilisateurController extends Controller {
 
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
     }
-    
-    public function uploadAction(Request $request)
-    {
-    $avatar = new avatar();
-    $form = $this->createFormBuilder($avatar)
-        ->add('name')
-        ->add('file')
-        ->getForm();
 
-    $form->handleRequest($request);
 
-    if ($form->isValid()) {
+    public function uploadavatarAction(Request $request) {
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $userid = $user->getId();
+
         $em = $this->getDoctrine()->getManager();
-        
-        $em->persist($avatar);
-        $em->flush();
+        $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
 
-        return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
+        if (!isset($avatar)) {
 
+            $avatar = new avatar();
+        }
+
+        $form = $this->createFormBuilder($avatar)
+                ->add('id', 'hidden', array(
+                    'data' => $userid,
+                ))
+                ->add('file')
+                ->getForm();
+
+        $form->handleRequest($request);
+
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($avatar);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
+        }
+
+
+        return $this->forward(
+                        'SmartUnityUtilisateurBundle:Utilisateur:index', array(
+                    'formAvatar' => $form->createView(),
+        ));
     }
 
-    return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
-        'form_pref' => $form->createView()
-            ));
-    }
 
     public function envoiParrainageAction(Request $request) {
 
 
-        $parrainage = new parrainage();
-        $form = $this->createFormBuilder($parrainage)
-            ->add('email')
-            ->getForm();
 
-        echo "Test";
-        // $form->handleRequest($request);
+        if (!isset($parrainage)) {
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $parrainage = new parrainage($user);
+
+        }
+               
+        if ($request->getMethod() == 'POST')
+        {
+            $form = $this->createForm('smartunity_user_parrainage', $parrainage);
+            $form->handleRequest($request);
+            
+            if ($form->isValid()) {
+                $mail=$form->get('email')->getData();
+                $userid=$parrainage->getId();
+                $concat=$mail.$userid;
+                $code=hash('sha256', $concat);
+                $parrainage->setCode($code);
+                $em = $this->getDoctrine()->getManager();        
+                $em->persist($parrainage);
+                $em->flush();
+                $url="http://smartunity.fr/parrainage/".$code;
+                // $message = \Swift_Message::newInstance()
+                //     ->setContentType('text/html')
+                //     ->setSubject("Test")
+                //     ->setFrom("florent@yopmail.com")
+                //     ->setTo($mail)
+                //     ->setBody($url);
+                 
+                // $this->get('mailer')->send($message);
+
+            }
+            return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
+        }
 
 
-        // // Check the method
-        // if ($request->getMethod() == 'POST')
-        // {
-        //     echo "Test IF";
-        //     $em = $this->getDoctrine()->getManager();        
-        //     $em->persist($parrainage);
-        //     $em->flush();
-
-        // //     // $message = \Swift_Message::newInstance()
-        // //     //     ->setContentType('text/html')
-        // //     //     ->setSubject($data['subject'])
-        // //     //     ->setFrom($data['email'])
-        // //     //     ->setTo($request->getEmail)
-        // //     //     ->setBody($data['content']);
-
-        // //     // $this->get('mailer')->send($message);
-        // }
-
-      return $this->forward(
-                    'SmartUnityUtilisateurBundle:Utilisateur:index', array(
-                    'form_parrainage' => $form->createView(),
+        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
+                    'form_parrainage' => $form->createView()
         ));
+    } 
+
+    public function ConfirmParrainageAction($code) {
+
+        $parrainrepository= $this->getDoctrine()->getManager()->getRepository('SmartUnityAppBundle:parrainage');
+        $parrains=$parrainrepository->getParrain($code);
+        
+        return $this->forward('FOS\UserBundle\Controller\RegistrationController::registerAction');
+
+        // return $this->redirect($this->generateUrl('fos_user_registration_register'));
+    } 
+    
+
+    public function removeavatarAction() {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $userid = $user->getId();
+        $em = $this->getDoctrine()->getManager();
+        $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
+        $em->remove($avatar);
+        $em->flush();
+
+        return $this->forward(
+                        'SmartUnityUtilisateurBundle:Utilisateur:index');
     }
 
 }

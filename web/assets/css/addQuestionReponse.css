@@ -1,0 +1,25 @@
+.grille-1
+{
+    width:20%;
+
+    margin: 3px 2.5% 3px 5%;
+    /*background-color:#00C;*/
+    float:left;
+}
+.grille-2
+{
+    width:65%;
+    margin: 3px 5% 3px 2.5%;
+    /*background-color:#3C9;*/
+    float:right;
+}
+
+.grille-content
+{
+    min-width: 500px;
+}
+
+legend
+{
+    margin-left: 15px;
+}

@@ -118,3 +118,37 @@
 {
    margin-right: 0.3em; 
 }
+
+.wrapper-avatar {
+    position: relative;
+    padding: 0;
+    width:150px;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-avatar {
+    position: absolute;
+    top: 0;
+    color:#f00;
+    background-color:rgba(255,255,255,0.8);
+    width: 150px;
+    height: 150px;
+    line-height:150px;
+    text-align: center;
+    z-index: 10;
+    opacity: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.text-avatar:hover {
+    opacity:1;
+}
+
+.img-avatar {
+    z-index:1;
+}

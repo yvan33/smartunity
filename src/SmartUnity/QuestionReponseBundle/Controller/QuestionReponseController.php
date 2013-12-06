@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Elastica\Query;
+use Elastica;
 
 class QuestionReponseController extends Controller
 {
@@ -120,28 +122,139 @@ class QuestionReponseController extends Controller
 
 
 
-    public function searchQuestionAction()
+    public function searchQuestionAction(Request $request)
     {
 
-        $question =  $this->getRequest()->query->get('q');
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $request->getSession();
+
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = '';
+        }
+
+        if ($error) {
+            // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
+            $error = $error->getMessage();
+        }
+
+        
+
+        $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+        $question = $this->getRequest()->query->get('q');
+        $page = $this->getRequest()->query->get('p');
+        $nbParPage = 5;
 
 
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
-        $resultSet = $finder->findHybrid(urldecode($question));
 
-        $html = '';
-        $html .= '<html lang="en"><head></head><body>';
-        $html.= 'score     ------    sujet<br/><br/>';
+        $queryString='{
+                "query" : {';
+
+        if ($question == ''){
+            $queryString .= '"match_all": {}';
+        }else{
+             $queryString .= '"query_string" : {
+                        "query" : "' . urldecode($question) .'"
+                    }';
+        }
+                   
+        $queryString .= '},
+                "from" : "' . $nbParPage*($page - 1) .'",
+                "size" : "' . $nbParPage . '"
+                }';
+
+        $query = new Elastica\Query\Builder($queryString);
+
+        $nbQuestions = count($finder->find(urldecode($question)));
+        $nbPages = ceil($nbQuestions / $nbParPage);
+
+        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
+
+        $listeQuestions = array();
 
         foreach($resultSet as $result){
-            $html.= $result->getResult()->getScore() . ' ------ ';
-            $html.= $result->getTransformed()->getSujet() . ' ------ ';
-            $html.= $result->getTransformed()->getMembre()->getNom();
-            $html.=  '<br/>';
+
+
+            $Question = $result->getTransformed();
+
+
+            $bestReponse = '';
+            $idBestReponse = '';
+            $auteurBestreponse= '';
+            $dateBestReponse = '';
+
+            $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
+            if ($idBestReponse['repId'] !== false){
+
+                foreach($Question->getReponses() as $reponse){
+                    if($reponse->getId() == $idBestReponse['repId']){
+                        $bestReponse = $reponse->getDescription();
+                        $auteurBestreponse = $reponse->getMembre()->getUsername();
+                        $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+                        break;
+                    }
+                }
+            }
+
+            array_push($listeQuestions, array(
+                'id'=>$Question->getId(),
+                'sujet'=>$Question->getSujet(),
+                'description'=>$Question->getDescription(),
+                'date'=>$Question->getDate()->format('d-m-Y à H:i'),
+                'membre_username'=>$Question->getMembre()->getUsername(),
+                'remuneration'=>$Question->getRemuneration(),
+                'nb_reponses'=>$Question->getReponses()->count(),
+                'best_reponse'=>$bestReponse,
+                'auteur_best_reponse'=>$auteurBestreponse,
+                'date_best_reponse'=>$dateBestReponse,
+                'slug'=>$Question->getSlug(),
+                'count_soutien'=>$Question->getSoutienMembres()->count(),
+                'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
+            ));
+
+            /*
+            $html.= $result->getResult()->getScore();
+            */
         }
 
-        $html.=  '</body></html>';
-        return new Response($html);
+        //Génération de la pagination en statique (si pas de JS)
+        $pagination = array();
+        if($page!=1){
+            array_push($pagination, array('<<', '1', '-4'));
+            array_push($pagination, array('<', $page - 1, '-3'));
+        }
+        for ($i=-2; $i<3; $i++){
+            if( ($page + $i) >= 1  &&  ($page + $i) <= $nbPages )
+                array_push($pagination, array($page + $i, $page + $i, $i));
+        }
+        if($page < $nbPages){
+            array_push($pagination, array('>', $page + 1, '3'));
+            array_push($pagination, array('>>', $nbPages, '4'));
+        }
+
+
+
+        $template = sprintf('SmartUnityQuestionReponseBundle:Display:Recherche.html.twig');
+        return $this->render($template, array(
+            'error'=>$error,
+            'requete'=>$question,
+            'page'=>$page,
+            'nbPages'=>$nbPages,
+            'listeQuestions'=>$listeQuestions, 
+            'countListe' => $nbQuestions,
+            'nbParPage'=>$nbParPage,
+            'pagination'=>$pagination
+        ));
+
     }
 
 
@@ -226,7 +339,6 @@ class QuestionReponseController extends Controller
         }
 
 
-
         $questionRepository = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('SmartUnityAppBundle:question');
@@ -235,6 +347,9 @@ class QuestionReponseController extends Controller
                             ->getRepository('SmartUnityAppBundle:reponse');
 
         $question = $questionRepository->findOneBySlug($slug);
+
+        $isValidated = $questionRepository->isQuestionValid($question->getId());
+        $isCertif = $questionRepository->isQuestionCertif($question->getId());
 
         $membre = $question->getMembre();
 
@@ -248,17 +363,14 @@ class QuestionReponseController extends Controller
             'nbReponses'=>$nbReponses,
             'nbPages'=>$nbPages,
             'tri'=>$tri,
+            'page'=>$page,
             'slug'=>$slug,
+            'is_certif'=>$isCertif,
+            'is_validated'=>$isValidated,
             'listeReponses'=>$listeReponses,
             'pagination'=>$pagination,
             'nbParPage'=>$nbParPage,
             'question'=>$question,
-            'membre_nom'=>$membre->getNom(),
-            'membre_reputation'=>$membre->getReputation(),
-            'date'=>$question->getDate()->format('d-m-Y à H:i'),
-            'nb_soutiens'=>$question->getSoutienMembres()->count(),
-            'remuneration'=>$question->getRemuneration(),
-            'points_membre'=> (int) $membre->getCagnotte(),
             'smart_reponses'=> (int) $smartReponses,
             'nb_questions_membre'=> (int) $nb_questions_membre
         ));
@@ -267,15 +379,27 @@ class QuestionReponseController extends Controller
     public function addQuestionAction()
     {
         $newQuestion = new \SmartUnity\AppBundle\Entity\Question();
+
+        $newQuestion->setRemuneration(10);
+        $user = $this->getUser();
+
         $formQuestion = $this->createFormBuilder($newQuestion)
-                            ->add('sujet','text')
-                            ->add('description','textarea')
+                            ->add('sujet','text', array(
+                                'required' => true))
+                            ->add('description','textarea', array(
+                                'required' => true))
                             ->add('marque', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:marque',
-                                'property'=> 'nom'))
+                                'property'=> 'nom',
+                                'required'    => false,
+                                'empty_value' => 'Choisissez',
+                                'empty_data'  => NULL))
                             ->add('modele', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:modele',
-                                'property'=> 'nom'))
+                                'property'=> 'nom',
+                                'required'    => false,
+                                'empty_value' => 'Choisissez',
+                                'empty_data'  => NULL))
                             // ->addEventListener(
                             //     FormEvents::PRE_SET_DATA,
                             //         function(FormEvent $event) {
@@ -290,11 +414,16 @@ class QuestionReponseController extends Controller
                             //     )
                             ->add('os', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:os',
-                                'property'=> 'nom'))
+                                'property'=> 'nom',
+                                'required'    => false,
+                                'empty_value' => 'Choisissez',
+                                'empty_data'  => NULL))
                             ->add('typeQuestion', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:typeQuestion',
-                                'property'=> 'nom'))
-                            ->add('remuneration','integer')
+                                'property'=> 'nom',
+                                'empty_value' => 'Choisissez une option',
+                                'required' => true))
+                            ->add('remuneration','integer',array('attr' => array('min' => 10,'max' => ($user->getCagnotte()+10))))
                             ->add('save', 'submit')
                             
                             ->getForm();
@@ -304,7 +433,6 @@ class QuestionReponseController extends Controller
             $formQuestion->bind($this->getRequest());
 
             if ($formQuestion->isValid()) {
-                $user = $this->getUser();
                 $newQuestion->setMembre($user);
                 $newQuestion->setSignaler(false);
 
@@ -321,14 +449,18 @@ class QuestionReponseController extends Controller
                 $newQuestion->setSlug($this->slugify($formQuestion->get('sujet')->getData()));
 
                 // $newQuestion->addSoutien($user);
+                $cagnotte =  $user->getCagnotte() - $formQuestion->get('remuneration')->getData() +10;
+                if($cagnotte>=0)
+                {
+                $user->setCagnotte($cagnotte);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newQuestion);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse',array(
-                    "slug"  => $newQuestion->getSlug()
-                    )));
+                return new Response('Votre question a bien été ajoutée');
+                }
+
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
@@ -347,16 +479,16 @@ class QuestionReponseController extends Controller
     public function addReponseAction($slug)
     {
         $newReponse = new \SmartUnity\AppBundle\Entity\Reponse();
-        $formQuestion = $this->createFormBuilder($newReponse)
+        $formReponse = $this->createFormBuilder($newReponse)
                             ->add('description','textarea')
                             ->add('save', 'submit')
                             ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST')
         {
-            $formQuestion->bind($this->getRequest());
+            $formReponse->bind($this->getRequest());
 
-            if ($formQuestion->isValid()) {
+            if ($formReponse->isValid()) {
                 $user = $this->getUser();
                 $newReponse->setMembre($user);
 
@@ -374,13 +506,11 @@ class QuestionReponseController extends Controller
                 $em->persist($newReponse);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse',array(
-                    "slug"  => $slug
-                    )));
+                return new Response('Votre réponse a bien été ajoutée');
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
-            'formQuestion'=>$formQuestion->createView()));
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddReponse.html.twig',array(
+            'formReponse'=>$formReponse->createView()));
     }
 
     public function validationReponseAction()
