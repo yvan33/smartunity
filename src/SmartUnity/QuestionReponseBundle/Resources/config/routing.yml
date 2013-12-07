@@ -37,12 +37,18 @@ smart_unity_question_reponse_certification:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:certificationReponse }
 
 smart_unity_question_reponse_add_commentaire_question:
-    pattern:  /ajouter-comm-question/
+    pattern:  /ajouter-comm-question/{slug}/
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addCommentaireQuestion }
 
 smart_unity_question_reponse_add_commentaire_reponse:
-    pattern:  /ajouter-comm-reponse/
+    pattern:  /ajouter-comm-reponse/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addCommentaireReponse }
+    requirements:
+        idReponse: \d+
+
+smart_unity_question_reponse_add_soutien_question:
+    pattern:  /ajouter-soutien/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addSoutienQuestion }
 
 
 

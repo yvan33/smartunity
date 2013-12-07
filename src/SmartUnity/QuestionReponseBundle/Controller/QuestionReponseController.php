@@ -525,15 +525,72 @@ class QuestionReponseController extends Controller
         return new Response('certification QuestionReponses');
     }
 
-    public function addCommentaireQuestionAction()
+    public function addCommentaireQuestionAction($slug)
     {
-        //IDEM add réponse
-        return new Response('add com question QuestionReponses');
+        $newCommentaireQuestion = new \SmartUnity\AppBundle\Entity\CommentaireQuestion();
+        $formCommentaire = $this->createFormBuilder($newCommentaireQuestion)
+                            ->add('description','textarea')
+                            ->add('save', 'submit')
+                            ->getForm();
+
+        if ($this->getRequest()->getMethod() == 'POST')
+        {
+            $formCommentaire->bind($this->getRequest());
+
+            if ($formCommentaire->isValid()) {
+                $user = $this->getUser();
+                $newCommentaireQuestion->setMembre($user);
+
+                $newCommentaireQuestion->setDate(new \DateTime(date("Y-m-d H:i:s")));//date locale
+                $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
+                $newCommentaireQuestion->SetQuestion($question);
+                $newCommentaireQuestion->setSignaler(false);
+
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newCommentaireQuestion);
+                $em->flush();
+
+                return new Response('Votre commentaire a bien été ajouté');
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddCommentaire.html.twig',array(
+            'formCommentaire'=>$formCommentaire->createView()));
     }
 
-    public function addCommentaireReponseAction()
+    public function addCommentaireReponseAction($idReponse)
     {
-        //IDEM add réponse
-        return new Response('add com reponse QuestionReponses');
+        {
+        $newCommentaireReponse = new \SmartUnity\AppBundle\Entity\CommentaireReponse();
+        $formCommentaire = $this->createFormBuilder($newCommentaireReponse)
+                            ->add('description','textarea')
+                            ->add('save', 'submit')
+                            ->getForm();
+
+        if ($this->getRequest()->getMethod() == 'POST')
+        {
+            $formCommentaire->bind($this->getRequest());
+
+            if ($formCommentaire->isValid()) {
+                $user = $this->getUser();
+                $newCommentaireReponse->setMembre($user);
+
+                $newCommentaireReponse->setDate(new \DateTime(date("Y-m-d H:i:s")));//date locale
+                $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($idReponse);
+                $newCommentaireReponse->setReponse($reponse);
+
+                $newCommentaireReponse->setSignaler(false);
+
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newCommentaireReponse);
+                $em->flush();
+
+                return new Response('Votre commentaire a bien été ajouté');
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddCommentaire.html.twig',array(
+            'formCommentaire'=>$formCommentaire->createView()));
+    }
     }
 }
