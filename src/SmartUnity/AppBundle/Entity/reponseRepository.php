@@ -99,7 +99,7 @@ class reponseRepository extends EntityRepository
                         (SELECT r.*
                         FROM reponse r
                         WHERE 
-                        r.question_id = 20
+                        r.question_id = :QuestionId
                         GROUP BY r.id) as b
                     
                     LEFT JOIN
@@ -107,7 +107,7 @@ class reponseRepository extends EntityRepository
                         (SELECT SUM(n.note) as downVote, r.id as reponse_id
                         FROM reponse r, noteReponse n
                         WHERE n.reponse_id = r.id
-                        AND r.question_id = 20
+                        AND r.question_id = :QuestionId
                         AND n.note = -1
                         GROUP BY n.reponse_id) as d 
                     ON d.reponse_id = b.id
@@ -117,7 +117,7 @@ class reponseRepository extends EntityRepository
                         (SELECT SUM(n.note) as upVote, r.id as reponse_id
                         FROM reponse r, noteReponse n
                         WHERE n.reponse_id = r.id
-                        AND r.question_id = 20
+                        AND r.question_id = :QuestionId
                         AND n.note = 1
                         GROUP BY n.reponse_id) as u
                      ON b.id = u.reponse_id
