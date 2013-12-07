@@ -555,7 +555,8 @@ class QuestionReponseController extends Controller
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddCommentaire.html.twig',array(
-            'formCommentaire'=>$formCommentaire->createView()));
+            'formCommentaire'=>$formCommentaire->createView(),
+            'type'=>'Question'));
     }
 
     public function addCommentaireReponseAction($idReponse)
@@ -590,7 +591,8 @@ class QuestionReponseController extends Controller
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddCommentaire.html.twig',array(
-            'formCommentaire'=>$formCommentaire->createView()));
+            'formCommentaire'=>$formCommentaire->createView(),
+            'type'=>'Reponse'));
     }
     }
 }
