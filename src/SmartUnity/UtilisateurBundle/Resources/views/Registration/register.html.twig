@@ -52,13 +52,20 @@
                         <div class="grille-2">{{form_widget(form.username)}}</div>
                     </div> 
                     <div class="row">
-                        <div class="grille-1">{{form_label(form.email)}}</div>
+                        <div class="grille-1">{{form_label(form.email)}}<span style="color: red;">*</span></div>
                         <div class="grille-2">{{form_widget(form.email)}}</div>
                     </div> 
-         {{form_widget(form.plainPassword)}}           
+                    <div class="row">
+                        <div class="grille-1">{{form_label(form.plainPassword.first)}}<span style="color: red;">*</span></div>
+                        <div class="grille-2">{{form_widget(form.plainPassword.first)}}</div>
+                    </div> 
+                    <div class="row">
+                        <div class="grille-1">{{form_label(form.plainPassword.second)}}<span style="color: red;">*</span></div>
+                        <div class="grille-2">{{form_widget(form.plainPassword.second)}}</div>
+                    </div>                                  
 
                     <div class="cent-h bouton-bas-block">
-                        <button type="submit" class="btn btn-primary btn-lg">Inscription express</button>
+                        <button type="submit" class="btn btn-primary btn-lg bouton-valider">Inscription express</button>
                     </div> 
                 </fieldset>
 
@@ -78,19 +85,19 @@
                         <div class="grille-1">{{form_label(form.date_naissance)}}</div>
                         <div class="grille-2">{{form_widget(form.date_naissance)}}</div>
                     </div>
-                    <div class="row ">
+{#                    <div class="row ">
                         <div class="grille-1">Ville</div>
                         <div class="grille-2">
-                            {#<select data-placeholder="Choisissez une ville" class="chosen-select" style="width:350px;" tabindex="2">
+                            <select data-placeholder="Choisissez une ville" class="chosen-select" style="width:350px;" tabindex="2">
                                 <option value=""></option>
                                 <option value="United States">United States</option>
                                 <option value="United Kingdom">United Kingdom</option>
                                 <option value="Afghanistan">Afghanistan</option>
-                            </select>#}
+                            </select>
                             {{form_widget(form.ville)}}
 
                         </div>
-                    </div> 
+                    </div>#} 
                     <div class="row ">
                         <div class="grille-1"></div>
                         <div class="grille-2">{{form_widget(form.date_naissance)}}</div>
@@ -128,7 +135,7 @@
 
                 </fieldset>
                 <div class="cent-h bouton-bas-block">
-                    <button type="submit" class="btn btn-primary btn-lg">Valider</button>
+                    <button type="submit" class="btn btn-primary btn-lg bouton-valider">Valider</button>
                 </div> 
 
 {{form_end(form)}}

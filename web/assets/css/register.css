@@ -137,3 +137,8 @@
 .cleared{
     clear:both;
 }
+
+.bouton-valider {
+    
+   height: auto;
+}
