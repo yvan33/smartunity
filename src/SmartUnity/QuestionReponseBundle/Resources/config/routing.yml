@@ -47,10 +47,30 @@ smart_unity_question_reponse_add_commentaire_reponse:
         idReponse: \d+
 
 smart_unity_question_reponse_add_soutien_question:
-    pattern:  /ajouter-soutien/
+    pattern:  /ajouter-soutien/{slug}/
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addSoutienQuestion }
 
+smart_unity_question_reponse_signaler_question:
+    pattern:  /signaler-question/{slug}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerQuestion }
 
+smart_unity_question_reponse_signaler_reponse:
+    pattern:  /signaler-reponse/{idReponse}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerReponse }
+    requirements:
+        idReponse: \d+
+
+smart_unity_question_reponse_signaler_commentaire_question:
+    pattern:  /signaler-commentaireQuestion/{idCommentaireQuestion}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerCommentaireQuestion }
+    requirements:
+        idCommentaireQuestion: \d+
+
+smart_unity_question_reponse_signaler_commentaire_reponse:
+    pattern:  /signaler-commentaireReponse/{idCommentaireReponse}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerCommentaireReponse }
+    requirements:
+        idCommentaireReponse: \d+
 
 ######################
 #### AJAX ROUTING ####

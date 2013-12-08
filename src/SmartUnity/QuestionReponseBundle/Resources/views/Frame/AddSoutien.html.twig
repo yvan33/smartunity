@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css') }}">
+
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
+
+    <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+</head>
+<body>
+
+	<div class="grille-content">
+	    <legend>Nouvelle Soutien</legend>
+
+		{{ form_start(formSoutien)}}
+		<div class="erreur">
+            {{ form_errors(formSoutien) }}
+	    </div>
+	    <div class="row">
+	        <div class="grille-1">{{ form_label(formSoutien.soutien) }}</div>
+	        <div class="grille-2">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width:100%;'}}) }}</div>
+	    </div>
+	    <div class="row">
+	        <div class="grille-1">{{form_widget(formSoutien.save,{'attr': {'class': 'btn btn-primary'}})}}</div>
+	    </div>
+	    {{form_end(formSoutien)}}
+	</div>
+    
+
+
+</body>
+</html>

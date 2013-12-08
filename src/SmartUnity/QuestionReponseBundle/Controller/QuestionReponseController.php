@@ -561,7 +561,7 @@ class QuestionReponseController extends Controller
 
     public function addCommentaireReponseAction($idReponse)
     {
-        {
+        
         $newCommentaireReponse = new \SmartUnity\AppBundle\Entity\CommentaireReponse();
         $formCommentaire = $this->createFormBuilder($newCommentaireReponse)
                             ->add('description','textarea')
@@ -593,6 +593,135 @@ class QuestionReponseController extends Controller
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddCommentaire.html.twig',array(
             'formCommentaire'=>$formCommentaire->createView(),
             'type'=>'Reponse'));
+        
     }
+
+    public function addSoutienQuestionAction($slug)
+    {
+        $user = $this->getUser();
+        $formSoutien = $this->createFormBuilder()
+                            ->add('soutien','integer',array('attr' => array('min' => 0,'max' => ($user->getCagnotte()))))
+                            ->add('save', 'submit')
+                            ->getForm();
+
+        if ($this->getRequest()->getMethod() == 'POST')
+        {
+            $formSoutien->bind($this->getRequest());
+
+            if ($formSoutien->isValid()) {
+                $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
+                $question->setRemuneration($question->getRemuneration() + ($formSoutien->get('soutien')->getData()));
+                $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
+
+                //ajouté l'utilisateur à la liste de soutien
+
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+                return new Response('Votre soutien a bien été ajouté');
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddSoutien.html.twig',array(
+            'formSoutien'=>$formSoutien->createView()));
+    }
+
+    public function signalerQuestionAction($slug)
+    {
+
+        $formSignaler = $this->createFormBuilder()
+                            ->add('Signaler', 'submit')
+                            ->getForm();
+
+        if ($this->getRequest()->getMethod() == 'POST')
+        {
+            $formSignaler->bind($this->getRequest());
+
+            if ($formSignaler->isValid()) {
+                $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
+                $question->setSignaler(true);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($question);
+                $em->flush();
+
+                return new Response('Le signalement a ben été envoyé');
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+            'formSignaler'=>$formSignaler->createView()));
+    }
+
+    public function signalerReponseAction($idReponse)
+    {
+        $formSignaler = $this->createFormBuilder()
+                            ->add('Signaler', 'submit')
+                            ->getForm();
+
+        if ($this->getRequest()->getMethod() == 'POST')
+        {
+            $formSignaler->bind($this->getRequest());
+
+            if ($formSignaler->isValid()) {
+            $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($idReponse);
+            $reponse->setSignaler(true);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($reponse);
+            $em->flush();
+
+            return new Response('Le signalement a ben été envoyé');
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+            'formSignaler'=>$formSignaler->createView()));
+    }
+
+    public function signalerCommentaireQuestionAction($idCommentaireQuestion)
+    {
+        $formSignaler = $this->createFormBuilder()
+                            ->add('Signaler', 'submit')
+                            ->getForm();
+
+        if ($this->getRequest()->getMethod() == 'POST')
+        {
+            $formSignaler->bind($this->getRequest());
+
+            if ($formSignaler->isValid()) {
+            $commentaireQuestion = $this->getDoctrine()->getRepository('SmartUnityAppBundle:commentaireQuestion')->find($idCommentaireQuestion);
+            $commentaireQuestion->setSignaler(true);
+                
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commentaireQuestion);
+            $em->flush();
+
+            return new Response('Le signalement a ben été envoyé');
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+            'formSignaler'=>$formSignaler->createView()));
+    }
+    public function signalerCommentaireReponseAction($idCommentaireReponse)
+    {
+        $formSignaler = $this->createFormBuilder()
+                            ->add('Signaler', 'submit')
+                            ->getForm();
+
+        if ($this->getRequest()->getMethod() == 'POST')
+        {
+            $formSignaler->bind($this->getRequest());
+
+            if ($formSignaler->isValid()) {
+            $commentaireReponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:commentaireReponse')->find($idCommentaireReponse);
+            $commentaireReponse->setSignaler(true);
+                
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commentaireReponse);
+            $em->flush();
+
+            return new Response('Le signalement a ben été envoyé');
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+            'formSignaler'=>$formSignaler->createView()));
     }
 }
