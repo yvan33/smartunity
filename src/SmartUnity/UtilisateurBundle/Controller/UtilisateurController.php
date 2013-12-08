@@ -36,6 +36,8 @@ class UtilisateurController extends Controller {
         $remuneration = 0;
         $remuneration = $membreRepository->getRemuneration($userid);
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
+//        p( 'formpassword :');
+//        p($formPassword);
         if (isset($avatar)) {
             $avatar = $avatar->getWebPath();
         }
