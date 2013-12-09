@@ -261,6 +261,15 @@ $(document).ready(function(){
   $('.roww').tooltip({
     'placement' : 'right'
   });
+
+{% if is_granted('ROLE_USER') %}
+  $('.bouton-soutient').popover({
+    'html': true,
+    'content': '<iframe style:"width:300px" src="{{path('smart_unity_question_reponse_add_soutien_question', {slug: question.slug})}}"></iframe>',
+    'placement': 'right',
+    'animation': true
+  })
+{% endif %}
 })
 
 
