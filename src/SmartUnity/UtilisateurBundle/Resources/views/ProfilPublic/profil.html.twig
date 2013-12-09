@@ -1,0 +1,25 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %} 
+<link href="{{ asset('assets/css/register.css') }}" rel="stylesheet" type="text/css">
+{%endblock%}
+
+{% block fos_user_content %}
+<div class="row">
+
+    <div class="col-md-offset-2 col-md-8">
+        <div class="grille-content"> 
+            <div class="title text-center cookie-title">
+                Inscription validée!
+            </div>
+            <div>
+                <p>Prenom: {{prenom}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock fos_user_content %}
