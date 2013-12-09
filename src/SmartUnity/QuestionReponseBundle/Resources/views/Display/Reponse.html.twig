@@ -68,13 +68,15 @@
 
 
                               {% for commentaire in question.commentaireQuestions %}
+                                {% if commentaire.signaler == 0 %}
                                     <div class="commentaire">
                                     <p style="float:left">{{commentaire.description}}</p><p style="float:right">
                                   {{commentaire.membre.username}} le {{commentaire.date|date('d-m-Y H:i:s')}}
-                                        <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                                        <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_question', {idCommentaireQuestion: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                     </p>
                                     </div>
-                               {% endfor %}
+                                {% endif %}
+                              {% endfor %}
                                 
                                 <div style="float:right">
                                 <div class="grille-3-btn">
