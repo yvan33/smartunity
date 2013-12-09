@@ -26,23 +26,19 @@ class AjaxController extends Controller
                             ->getRepository('SmartUnityAppBundle:reponse');
 
         //Appel au repository
-
         if ($type == 'onFire'){
-            p($membreId);
+
             $listeQuestion = $questionRepository->getQuestionsOnFireForUser($nbParPage, $page, $membreId);
 
             $nbQuestions = $questionRepository->getNombreQuestionsOnFire();
         }else if ($type == 'last'){
             
-            $listeQuestion = $questionRepository->getLastQuestions($nbParPage, $page);
+            $listeQuestion = $questionRepository->getLastQuestionsForUser($nbParPage, $page);
             
-            //p($listeQuestion);
             $nbQuestions = $questionRepository->getNombreLastQuestions();
         }else if ($type == 'reponses'){
-            $listeQuestion = $questionRepository->getValidatedQuestions($nbParPage, $page);
-           //             p("3");
+            $listeQuestion = $questionRepository->getValidatedQuestionsForUser($nbParPage, $page);
          
-            //p($listeQuestion);
             $nbQuestions = $questionRepository->getNombreValidatedQuestions();
         }else{
             throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');

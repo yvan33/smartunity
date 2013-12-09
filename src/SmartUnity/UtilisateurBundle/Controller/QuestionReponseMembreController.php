@@ -13,8 +13,6 @@ include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 class QuestionReponseMembreController extends Controller {
 
     public function displayListOfQuestionAction($type, $page, Request $request, $id) {
-
-
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -26,7 +24,7 @@ class QuestionReponseMembreController extends Controller {
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         } else {
             $error = '';
-        }
+        }   
 
         if ($error) {
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
@@ -101,7 +99,8 @@ class QuestionReponseMembreController extends Controller {
                     'listeQuestions' => $listeQuestions,
                     'countListe' => count($listeQuestions),
                     'nbParPage' => $nbParPage,
-                    'pagination' => $pagination
+                    'pagination' => $pagination,
+                    'membreId' => $id
         ));
     }
 

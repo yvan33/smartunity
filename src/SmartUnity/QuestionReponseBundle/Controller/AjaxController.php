@@ -29,6 +29,7 @@ class AjaxController extends Controller
             $listeQuestion = $questionRepository->getQuestionsOnFire($nbParPage, $page);
             $nbQuestions = $questionRepository->getNombreQuestionsOnFire();
         }else if ($type == 'last'){
+            
             $listeQuestion = $questionRepository->getLastQuestions($nbParPage, $page);
             $nbQuestions = $questionRepository->getNombreLastQuestions();
         }else if ($type == 'reponses'){
