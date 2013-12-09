@@ -324,6 +324,14 @@ span.label-default{
 	font-style:italic;
 }
 
+a.commentaire-btn{
+	color:#FFF;
+}
+
+a.commentaire-btn:hover{
+	font-style: normal;
+}
+
 
 /**
 *

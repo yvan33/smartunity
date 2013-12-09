@@ -62,7 +62,6 @@
                                                 <!-- nb réponses vues-->
                                         <div style="overflow:hidden;min-width:100px" >
                                         <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                                         </div>
                                                 <!-- nb réponses vues fin-->
                                                 <!-- bouton rep -->
@@ -136,7 +135,7 @@
                                                   <!-- nb réponses vues-->
                                           <div style="overflow:hidden;min-width:100px" >
                                  					<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                            <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                            <!--<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>-->
                                           </div>
                                                   <!-- nb réponses vues fin-->
                                                   <!-- bouton rep -->
@@ -212,7 +211,7 @@
                                                 <!-- nb réponses vues-->
                                          <div style="overflow:hidden;min-width:100px" >
                                         <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                          <!--<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>-->
                                         </div>
                                                 <!-- nb réponses vues fin-->
                                                 <!-- bouton rep -->
@@ -308,7 +307,7 @@ function generateContent(pEntry, i){
 
                                                 entity += '</p>';
 
-                                                if(type != 'reponses') entity += '<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>';
+                                                //if(type != 'reponses') entity += '<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>';
 
                                                 entity +='</div> \
                                                 <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \

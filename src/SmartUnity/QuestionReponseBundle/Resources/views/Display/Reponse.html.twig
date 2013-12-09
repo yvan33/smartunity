@@ -71,7 +71,7 @@
                                 {% if commentaire.signaler == 0 %}
                                     <div class="commentaire">
                                     <p style="float:left">{{commentaire.description}}</p><p style="float:right">
-                                  {{commentaire.membre.username}} le {{commentaire.date|date('d-m-Y H:i:s')}}
+                                  {{commentaire.membre.username}} le {{commentaire.date|date('d-m-Y H:i')}}
                                         <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_question', {idCommentaireQuestion: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                     </p>
                                     </div>
@@ -83,7 +83,7 @@
                                   <div style="float: left;margin-right: 5px;">
                                         <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                       </div>
-                                   <a href="#"><div class="bouton-com-rep" style="margin-left:10px">Commenter</div></a>
+                                   <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" href="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}">Commenter</a></div>
                                    {% if not is_validated and not is_certif %}
                                    <a class="reponse"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}"><div class="bouton-com-rep">Repondre</div></a>{% endif %}
                                 </div>
@@ -133,7 +133,7 @@
 
 
 {% block modal %}
-{% if is_granted('ROLE_USER') and not is_certif and not is_validated %}
+{% if is_granted('ROLE_USER') %}
   <div id="addReponseHolder" style="position:fixed;display:none; width:100%;bottom:0px; z-index:1000;left:0">
     <div class="container">
       <div class="row">
@@ -229,6 +229,18 @@ function downVote(pId){
 $(document).ready(function(){
 
   $('a.reponse').click(function(e){
+    {% if is_granted('ROLE_USER') %}
+      $('#addReponse').attr('src', $(this).attr('href'));
+      $('#addReponseHolder').show('fast');
+      $('#closeFrame').click(function(){
+        $('#addReponseHolder').hide('fast');
+        $('#addReponse').attr('src', 'about:blank');
+      })
+    {% endif %}
+    e.preventDefault();
+  });
+
+  $('a.commentaire-btn').click(function(e){
     {% if is_granted('ROLE_USER') %}
       $('#addReponse').attr('src', $(this).attr('href'));
       $('#addReponseHolder').show('fast');
