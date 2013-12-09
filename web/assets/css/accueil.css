@@ -103,11 +103,10 @@
 	padding-right:10px;
 	margin-top:15px;
 	margin-bottom:15px;
-	margin-right:-80px;
+	
 }
 .grille-question-txt
 {
-	float:left;
 	margin-top:15px;
 	margin-bottom:15px;
 	margin-left:80px;
@@ -121,7 +120,6 @@
 	padding-left:10px;
 	float:right;
 	width:100px;
-	margin-left:-100px;
 }
 .rond-point
 {
@@ -153,32 +151,7 @@
 	
 }
 
-.bouton-radio
-{
-	background: linear-gradient( to top, #bfbfbf,#fbfbfb);
-	border-radius:6px;
-	border-color:#333;
-	border-width:1px;
-	background-color:#898989;
-	height:50px;
-	margin-bottom:20px;
-	margin-left:10px;
-	margin-right:10px;
-     background: -webkit-linear-gradient( ... );
-     background:    -moz-linear-gradient( ... ); 
-     background:     -ms-linear-gradient( ... );
-     background:      -o-linear-gradient( ... );
-     background:         linear-gradient( ... );
-	
-}
 
-
-.cook-btn
-{
-	font-family:Cookie;
-	font-size:40px;
-	margin-top:-10px
-}
 .grille-info
 {
 	

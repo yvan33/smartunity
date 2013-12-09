@@ -1,6 +1,6 @@
                           <div class="grille-reponse{% if reponse.is_certif or reponse.is_validated %}-smart{% endif %}">
-                                 <div class="grille-4">
-                                    <div class="roww" id="vote{{reponse.id}}" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% elseif reponse.is_voted %}Vous avez déjà noté cette question.{% endif %}">
+                                 <div class="grille-1" style="text-align:center">
+                                    <div class="roww" id="vote{{reponse.id}}" style="display:inline-block;text-align:center" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% elseif reponse.is_voted %}Vous avez déjà noté cette question.{% endif %}">
                                       <div class="fleche upVote" {% if is_granted('ROLE_USER') and not reponse.is_voted %}onClick="javascript:upVote({{reponse.id}})"{% endif %}>
                                           <img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">{{reponse.up_vote}}</p>
                                         </div>
@@ -22,7 +22,7 @@
                                     {% endif %}
                                 </div>
                                 
-                                <div class="grille-5" >
+                                <div class="grille-2" >
                          
                                   <div class="grille-3-over">
                                     <div class="grille-3">

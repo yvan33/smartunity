@@ -37,40 +37,38 @@
 
  
 <!-- bg body -->
-<body class="bg" style="overflow-x: hidden">
+<body class="bg" >
 <!-- head -->
 
- <div class="container bg" >
+ <div class="container bg">
  
-  <div class="row">
-  <div class="col-md-12">
     <div class="row">
-      <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h" style="max-height: 90px;"/></div>
-      <div class="col-md-5 cent-h">
+      <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h"/></div>
+      <div class="col-md-5">
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
 
-          <div class="cent-h logo2">
-            <a href="#" class=" pos-re valign-col-all">
+          <div class="logo2">
+            <a href="#" class="pos-re">
                 <img src="{{ asset('assets/img/logo-iphon.png') }}"/>
                 <p class="red-dot">1</p>
             </a>
-            <a href="{{ path('smart_unity_utilisateur_homepage') }}" class="valign-col-all pad-l"><p>{{ app.user.username }}</p></a>
-            <a href="{{ path('fos_user_security_logout') }}"class="valign-col-all pad-l" ><p>Déconnexion</p></a>
+            <a href="{{ path('smart_unity_utilisateur_homepage') }}" class="pad-l">{{ app.user.username }}</a>
+            <a href="{{ path('fos_user_security_logout') }}"class="pad-l" >Déconnexion</a>
           </div>
            
 
 
             {% else %}
             
-            <div class="col-md-5 cent-h">
-              <div class="cent-h logo2">
+            
+              <div class="logo2">
                 <div>
-                  <div class="valign-col-all pad-l" id="clic-pop" >
-                    <p style="cursor:  pointer;">Connexion</p>
+                  <div class="pad-l" id="clic-pop" >
+                    <p style="cursor:  pointer;">Connection</p>
                   </div>
-                  <a href="{{ path('fos_user_registration_register') }}" class="valign-col-all pad-l">
+                  <a href="{{ path('fos_user_registration_register') }}" class="pad-l">
                     <p>S'inscrire</p>
                   </a>
                   <div class="connection" id="pop">
@@ -101,7 +99,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            
 
             <script>
        $( "#clic-pop,#pop" ).click(function(event) {
@@ -125,13 +123,11 @@
     </div>
   
   </div>
-  </div>
-  </div>
 </div>  
 
 <!-- /.navbar-collapse -->
 <div class="nav-fixe ">
-  <div class="row nav-fixe ">
+  <div class="row">
     <div class="col-md-12 menu-bg">
       <nav class="navbar navbar-inverse" role="navigation">
          <!--navbar- mobile -->
@@ -207,21 +203,26 @@
 </div>
 </div>
 	<!-- footer separation --> 	
-  <div class="row">
-    <div class="col-md-12 foot-sep">
-    </div>
-  </div>
+  
   <!-- footer separation fin --> 
+<div class="foot-sep">
  <div class="container"> 
-  <div class="row valign-row footer" >
-    <div class="col-md-5 valign-col col-mar"><p class="cook-foot valign-col">Suivez nous:</p><a href="#"><img src="{{ asset('assets/img/logo-f-f.png') }}" class="foot-im"/></a><a href="#"><img src="{{ asset('assets/img/logo-t-f.png') }}" class="foot-im"/></a><a href="#"><img src="{{ asset('assets/img/logo-g-f.png') }}" class="foot-im"/></a>
-          </div>
-         <div class="col-md-7 valign-col"><a href="#"><p>A propos de Smart'Unity</p></a><a href="#"><p>Conditions generales d'utilisation</p></a><a href="#"><p>Publicité</p></a><a href="#"><p>Copyright Smart'Unity</p></a>
-          </div>
+  <div class="row footer" >
+    <div  style="display:inline-block;">
+      <span class="cook-foot">Suivez nous:</span>
+      <a href="#"><img src="{{ asset('assets/img/logo-f-f.png') }}" class="foot-im"/></a>
+      <a href="#"><img src="{{ asset('assets/img/logo-t-f.png') }}" class="foot-im"/></a>
+      <a href="#"><img src="{{ asset('assets/img/logo-g-f.png') }}" class="foot-im"/></a>
+    </div>
+    <div  style="display:inline-block;">
+      <a href="#">A propos de Smart'Unity</a>
+      <a href="#">Conditions generales d'utilisation</a>
+      <a href="#">Publicité</a>
+      <a href="#">Copyright Smart'Unity</a>
+    </div>
         
-  </div>
-<!-- end footer --> 
-
+  </div> 
+</div>
 </div>
 
 {% block modal %}{% endblock %}

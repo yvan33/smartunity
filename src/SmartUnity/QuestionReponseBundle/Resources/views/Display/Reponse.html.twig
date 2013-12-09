@@ -58,13 +58,13 @@
       
                             </div>
                             </div>
-                            <p style="min-height: 100px">{{ question.description }}</p>
-                            <p>
+                            <p class="min">{{ question.description }}</p>
+                            <div style="float:left;margin-bottom:10px;" >
                               {% if question.marque.nom is defined %}<span class="label label-default">{{question.marque.nom}}</span>{% endif %}
                               {% if question.modele.nom is defined %}<span class="label label-default">{{question.modele.nom}}</span>{% endif %}
                               {% if question.os.nom is defined %}<span class="label label-default">{{question.os.nom}}</span>{% endif %}
                               {% if question.typeQuestion.nom is defined %}<span class="label label-default">{{question.typeQuestion.nom}}</span>{% endif %}
-                            </p>
+                            </div>
 
 
                               {% for commentaire in question.commentaireQuestions %}
@@ -81,7 +81,7 @@
                                   <div style="float: left;margin-right: 5px;">
                                         <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                       </div>
-                                   <a href="{{ path('smart_unity_question_reponse_add_commentaire_question',{ 'slug': slug })}}"><div class="bouton-com-rep" style="margin-left:10px">Commenter</div></a>
+                                   <a href="#"><div class="bouton-com-rep" style="margin-left:10px">Commenter</div></a>
                                    {% if not is_validated and not is_certif %}
                                    <a class="reponse"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}"><div class="bouton-com-rep">Repondre</div></a>{% endif %}
                                 </div>
@@ -124,6 +124,7 @@
                 </div>
               </div>
 
+
 {% endblock %}
 
 
@@ -131,10 +132,18 @@
 
 {% block modal %}
 {% if is_granted('ROLE_USER') and not is_certif and not is_validated %}
-  <div id="addReponseHolder" style="width:100%; display:none; position:fixed; background-color:#CCC; border-top: solid 1px #333; bottom:0px; z-index:1000;">
-    <div><iframe id="addReponse" style="border:0px; float:left; width:80%; margin-left:10%;" src="about:blank"></iframe></div>
-    <div class="btn btn-default" style="float:left; left:-25px; cursor:pointer; width:40px;" id="closeFrame"><span class="glyphicon glyphicon-remove-circle"</span></div>
+  <div id="addReponseHolder" style="position:fixed;display:none; width:100%;bottom:0px; z-index:1000;left:0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-10" style="padding:0px;position:relative">
+          <div  style="position:absolute;cursor:pointer;right:20px;top:5px;color:#FFF;font-size:24px" id="closeFrame">
+      <span class="glyphicon glyphicon-remove-circle"></span>
+          </div>
+    <iframe id="addReponse" style="border:0px;width:100%;background:none;height:184px;" src="about:blank"></iframe>
+      </div>
   </div>
+</div>
+</div>
 {% endif %}
 {% endblock %}
 
@@ -332,7 +341,7 @@ function clickOnPagination(pPage){
 
 function generateContent(pEntry, i){
   var entity = '<div class="grille-reponse"> \
-                                 <div class="grille-4"> \
+                                 <div class="grille-1" style="text-align:center"> \
                                     <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
                                     if( pEntry['is_voted'] ){
                                       entity += 'Vous avez déjà noté cette question.';
@@ -367,7 +376,7 @@ function generateContent(pEntry, i){
                                     entity +=' \
                                 </div> \
                                  \
-                                <div class="grille-5" > \
+                                <div class="grille-2" > \
                           \
                                   <div class="grille-3-over"> \
                                     <div class="grille-3"> \

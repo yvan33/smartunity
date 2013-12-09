@@ -1,25 +1,42 @@
 .grille-1
 {
-    width:20%;
+    width:150px;
 
-    margin: 3px 2.5% 3px 5%;
-    /*background-color:#00C;*/
-    float:left;
+    margin: 3px -150px 3px 0px;
+    float: left;
 }
 .grille-2
 {
-    width:65%;
-    margin: 3px 5% 3px 2.5%;
-    /*background-color:#3C9;*/
-    float:right;
+    margin: 3px 0px 3px 150px;
+    width: auto;
+    background-color:#3C9;
+
 }
 
 .grille-content
 {
-    min-width: 500px;
+    padding: 0px 30px;
+    background-color: #f8f8ef;
+    border:2px solid #d7d5d5;
+    -webkit-box-shadow: 0 0 20px  #CCCCCC;
+       -moz-box-shadow: 0 0 20px  #CCCCCC;
+            box-shadow: 0 0 20px  #CCCCCC;
+
 }
 
-legend
+.head-blue
 {
-    margin-left: 15px;
+    background: linear-gradient( to top, #015884, #0088c7);
+    background: -webkit-linear-gradient( ... );
+    background:    -moz-linear-gradient( ... ); 
+    background:     -ms-linear-gradient( ... );
+    background:      -o-linear-gradient( ... );
+    background:         linear-gradient( ... );
+    overflow:hidden;
+    color:#FFF;
+    padding-left:15px;
+    height:35px;
+    line-height:35px;
+    margin: 0px -15px;
+
 }
