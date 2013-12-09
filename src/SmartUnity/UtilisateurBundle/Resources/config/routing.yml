@@ -31,9 +31,12 @@ smart_unity_utilisateur_envoiparrainage:
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:envoiParrainage }
     
 smart_unity_membre_profil:
-    pattern:  /{id}
-    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:profil } 
-
+    pattern:  /{id}/{type}/{page}
+    defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'onFire', page:'1'  } 
+    requirements:
+        type: onFire|last|reponses|question
+        page: \d+
+        
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
