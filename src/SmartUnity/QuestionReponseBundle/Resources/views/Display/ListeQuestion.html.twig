@@ -61,7 +61,8 @@
                                                 <!-- describ question fin-->
                                                 <!-- nb réponses vues-->
                                         <div style="overflow:hidden;min-width:100px" >
-                                        <div class="grille-3"><div>{{question.nb_reponses}} réponses</div>
+                                        <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                                         </div>
                                                 <!-- nb réponses vues fin-->
                                                 <!-- bouton rep -->
@@ -69,7 +70,7 @@
                                         </div>
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
-                                       <div class="grille-5"><span style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</span>
+                                       <div class="grille-3"><div>{{question.nb_reponses}} réponses</div>
                                         </div>
                                       </div>
                                                 <!-- bouton + fin-->
@@ -134,17 +135,17 @@
                                                   <!-- describ question fin-->
                                                   <!-- nb réponses vues-->
                                           <div style="overflow:hidden;min-width:100px" >
-                                 					<div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
-                                 					</div>
+                                 					<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                            <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                          </div>
                                                   <!-- nb réponses vues fin-->
                                                   <!-- bouton rep -->
                                  					<div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
                                 					</div>
                                                   <!-- bouton rep fin-->
                                                   <!-- bouton +-->
-                                 					<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                            <a class="bouton-soutient" href="#"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></a>
-                                 					</div>
+                                 					<div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
+                                          </div>
                                         </div>
                                                   <!-- bouton + fin-->
                                  				</h4>
@@ -210,7 +211,8 @@
                                                 <!-- describ question fin-->
                                                 <!-- nb réponses vues-->
                                          <div style="overflow:hidden;min-width:100px" >
-                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
+                                        <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                                         </div>
                                                 <!-- nb réponses vues fin-->
                                                 <!-- bouton rep -->
@@ -218,8 +220,7 @@
                                         </div>
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
-                                        <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
                                         </div>
                                       </div>
                                                 <!-- bouton + fin-->
@@ -486,7 +487,7 @@ $(document).ready(function(){
 nbParPage = {{ nbParPage }};
 
 nbPages = new Array();
-    nbPages[type] = {{ nbPages }};
+    nbPages[type] = {% if nbPages == 0 %}1{% else %}{{ nbPages }}{% endif %};
 
 
   //Options du bootStrap Paginator

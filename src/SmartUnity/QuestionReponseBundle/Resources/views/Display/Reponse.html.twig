@@ -79,7 +79,7 @@
                                 <div style="float:right">
                                 <div class="grille-3-btn">
                                   <div style="float: left;margin-right: 5px;">
-                                        <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                                        <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                       </div>
                                    <a href="#"><div class="bouton-com-rep" style="margin-left:10px">Commenter</div></a>
                                    {% if not is_validated and not is_certif %}

@@ -644,10 +644,10 @@ class QuestionReponseController extends Controller
                 $em->persist($question);
                 $em->flush();
 
-                return new Response('Le signalement a ben été envoyé');
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_list_of_question'));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+        return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig',array(
             'formSignaler'=>$formSignaler->createView()));
     }
 
@@ -664,15 +664,16 @@ class QuestionReponseController extends Controller
             if ($formSignaler->isValid()) {
             $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($idReponse);
             $reponse->setSignaler(true);
+            $questionSlug = $reponse->getQuestion()->getSlug();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($reponse);
             $em->flush();
 
-            return new Response('Le signalement a ben été envoyé');
+            return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$questionSlug)));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+        return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig',array(
             'formSignaler'=>$formSignaler->createView()));
     }
 
@@ -689,15 +690,16 @@ class QuestionReponseController extends Controller
             if ($formSignaler->isValid()) {
             $commentaireQuestion = $this->getDoctrine()->getRepository('SmartUnityAppBundle:commentaireQuestion')->find($idCommentaireQuestion);
             $commentaireQuestion->setSignaler(true);
+            $questionSlug = $commentaireQuestion->getQuestion()->getSlug();
                 
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentaireQuestion);
             $em->flush();
 
-            return new Response('Le signalement a ben été envoyé');
+            return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $questionSlug)));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+        return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig',array(
             'formSignaler'=>$formSignaler->createView()));
     }
     public function signalerCommentaireReponseAction($idCommentaireReponse)
@@ -713,15 +715,16 @@ class QuestionReponseController extends Controller
             if ($formSignaler->isValid()) {
             $commentaireReponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:commentaireReponse')->find($idCommentaireReponse);
             $commentaireReponse->setSignaler(true);
+            $questionSlug = $commentaireReponse->getReponse()->getQuestion()->getSlug();
                 
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentaireReponse);
             $em->flush();
 
-            return new Response('Le signalement a ben été envoyé');
+            return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$questionSlug)));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+        return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig',array(
             'formSignaler'=>$formSignaler->createView()));
     }
 }

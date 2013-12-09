@@ -33,7 +33,8 @@ class questionRepository extends EntityRepository
                     WHERE NOT r.dateValidation <=> NULL) as c
                 RIGHT JOIN question q ON q.id = c.question_id
                 WHERE c.date_v <=> NULL
-                AND q.date < SUBTIME(NOW(), \'0 48:00:00.0000\')';
+                AND q.date < SUBTIME(NOW(), \'0 48:00:00.0000\')
+                AND q.signaler = 0';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
 
@@ -53,7 +54,8 @@ class questionRepository extends EntityRepository
                     FROM reponse r
                     WHERE NOT r.dateValidation <=> NULL) as c
                 RIGHT JOIN question q ON q.id = c.question_id
-                WHERE c.date_v <=> NULL';
+                WHERE c.date_v <=> NULL
+                AND q.signaler = 0';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
 
@@ -73,7 +75,8 @@ class questionRepository extends EntityRepository
                     FROM reponse r
                     WHERE NOT r.dateValidation <=> NULL) as c
                 RIGHT JOIN question q ON q.id = c.question_id
-                WHERE NOT c.date_v <=> NULL';
+                WHERE NOT c.date_v <=> NULL
+                AND q.signaler = 0';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
 
@@ -88,6 +91,7 @@ class questionRepository extends EntityRepository
             FROM
             SmartUnityAppBundle:question q
             WHERE q.membre = :membreId
+            AND q.signaler = 0
             ')
             ->setParameter('membreId', $membreId);
 
@@ -106,6 +110,7 @@ class questionRepository extends EntityRepository
             WHERE r.question = q.id
             AND r.dateValidation IS NOT NULL
             AND q.id = :questionId
+            AND q.signaler = 0
             ')
             ->setParameter('questionId', $questionId);
 
@@ -126,6 +131,7 @@ class questionRepository extends EntityRepository
             WHERE r.question = q.id
             AND r.dateCertification IS NOT NULL
             AND q.id = :questionId
+            AND q.signaler = 0
             ')
             ->setParameter('questionId', $questionId);
 
@@ -160,6 +166,7 @@ class questionRepository extends EntityRepository
                 RIGHT JOIN question q ON q.id = c.question_id
                 WHERE c.date_v <=> NULL
                 AND q.date < SUBTIME(NOW(), \'0 48:00:00.0000\')
+                AND q.signaler = 0
                 ORDER BY q.date ASC
                 LIMIT :offset, :nbParPage';
 
@@ -190,6 +197,7 @@ class questionRepository extends EntityRepository
                     WHERE NOT r.dateValidation <=> NULL) as c
                 RIGHT JOIN question q ON q.id = c.question_id
                 WHERE c.date_v <=> NULL
+                AND q.signaler = 0
                 ORDER BY q.date DESC
                 LIMIT :offset, :nbParPage';
 
@@ -220,6 +228,7 @@ class questionRepository extends EntityRepository
                     WHERE NOT r.dateValidation <=> NULL) as c
                 RIGHT JOIN question q ON q.id = c.question_id
                 WHERE NOT c.date_v <=> NULL
+                AND q.signaler = 0
                 ORDER BY q.date DESC
                 LIMIT :offset, :nbParPage';
 
