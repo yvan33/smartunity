@@ -24,7 +24,7 @@ smart_unity_utilisateur_setpref:
 
 smart_unity_utilisateur_homepage:
     pattern:  /
-    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:index }
+    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:index }    
 
 smart_unity_utilisateur_envoiparrainage:
     pattern:  /parrainage

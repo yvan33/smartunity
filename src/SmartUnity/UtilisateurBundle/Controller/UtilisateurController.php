@@ -64,6 +64,7 @@ class UtilisateurController extends Controller {
                         'form_pref' => $form_pref->createView(),
                         'smartrep' => $smartreponse,
                         'remuneration' => $remuneration,
+                        'form_parrainage' => $form_parrainage->createView(),
                         'form_avatar' => $formAvatar,
                         'avatar' => $avatar,
             ));
