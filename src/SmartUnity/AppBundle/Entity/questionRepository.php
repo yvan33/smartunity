@@ -270,7 +270,7 @@ class questionRepository extends EntityRepository
             return false;
     }    
     
-    public function getValidatedQuestionsForUser($nbParPage, $page){
+    public function getValidatedQuestionsForUser($nbParPage, $page,$membreId){
         
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
@@ -284,12 +284,14 @@ class questionRepository extends EntityRepository
                     WHERE NOT r.dateValidation <=> NULL) as c
                 RIGHT JOIN question q ON q.id = c.question_id
                 WHERE NOT c.date_v <=> NULL
+                AND q.membre_id = :membreId
                 ORDER BY q.date DESC
                 LIMIT :offset, :nbParPage';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
         $query->setParameter('offset', (int) $offset);
         $query->setParameter('nbParPage', (int) $nbParPage);
+        $query->setParameter('membreId', $membreId);
 
         $result = $query->getResult();
 
@@ -299,4 +301,35 @@ class questionRepository extends EntityRepository
             return false;
     }
 
+    //Liste des dernières questions sans réponses validées
+    public function getLastQuestionsForUser($nbParPage, $page, $membreId){
+        
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
+        
+        $offset = ($page - 1) * $nbParPage;
+
+        $sql = 'SELECT DISTINCT q.*
+                FROM 
+                    (SELECT r.question_id AS question_id, r.dateValidation as date_v
+                    FROM reponse r
+                    WHERE NOT r.dateValidation <=> NULL) as c
+                RIGHT JOIN question q ON q.id = c.question_id
+                WHERE c.date_v <=> NULL
+                AND q.membre_id = :membreId                
+                ORDER BY q.date DESC
+                LIMIT :offset, :nbParPage';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('offset', (int) $offset);
+        $query->setParameter('nbParPage', (int) $nbParPage);
+        $query->setParameter('membreId', $membreId);
+
+        $result = $query->getResult();
+
+        if(count($result) != 0)
+            return $result;
+        else 
+            return false;
+    }    
 }

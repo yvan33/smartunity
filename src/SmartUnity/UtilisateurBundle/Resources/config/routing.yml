@@ -32,7 +32,7 @@ smart_unity_utilisateur_envoiparrainage:
     
 smart_unity_membre_profil:
     pattern:  /{id}/{type}/{page}
-    defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'onFire', page:'1'  } 
+    defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'last', page:'1'  } 
     requirements:
         type: onFire|last|reponses|question
         page: \d+
@@ -56,3 +56,14 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profil   
 
+######################
+#### AJAX ROUTING ####
+######################
+
+smart_unity_utilisateur_ajaxmembre_get_questions:
+    pattern: /getQuestions/{membreId}/{type}/{page}/{nbParPage}
+    defaults: { _controller: SmartUnityUtilisateurBundle:AjaxMembre:getQuestions, membreId:null, type:'reponses', page:'1', nbParPage:'3'}
+    requirements:
+        type: onFire|last|reponses|question
+        page: \d+
+        nbParPage: \d+

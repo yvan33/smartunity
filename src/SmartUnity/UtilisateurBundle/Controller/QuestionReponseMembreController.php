@@ -46,7 +46,7 @@ class QuestionReponseMembreController extends Controller {
 
         $nbParPage = 5;
 
-        $response = $this->forward('SmartUnityUtilisateurBundle:Ajax:getQuestions', array(
+        $response = $this->forward('SmartUnityUtilisateurBundle:AjaxMembre:getQuestions', array(
             'type' => $type,
             'page' => $page,
             'nbParPage' => $nbParPage,
@@ -70,7 +70,7 @@ class QuestionReponseMembreController extends Controller {
         if ($listeQuestions[0]->type == $type && $listeQuestions[0]->nbParPage == $nbParPage && $listeQuestions[0]->page == $page)
             unset($listeQuestions[0]);
         else
-            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
+            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityUtilisateurBundle:AjaxMembreController');
 
 
         //Génération de la pagination en statique (si pas de JS)
@@ -131,7 +131,7 @@ class QuestionReponseMembreController extends Controller {
         //Fonctionne de la même manière que displayListOfQuestionAction()
         $nbParPage = 5;
 
-        $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getReponses', array(
+        $response = $this->forward('SmartUnityQuestionReponseBundle:AjaxMembre:getReponses', array(
             'slug' => $slug,
             'page' => $page,
             'nbParPage' => $nbParPage,
@@ -164,7 +164,7 @@ class QuestionReponseMembreController extends Controller {
         if ($listeReponses[0]->slug == $slug && $listeReponses[0]->nbParPage == $nbParPage && $listeReponses[0]->page == $page && $listeReponses[0]->tri == $tri)
             unset($listeReponses[0]);
         else
-            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
+            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityUtilisateurBundle:AjaxMembreController');
 
 
         //Génération de la pagination en statique (si pas de JS)
