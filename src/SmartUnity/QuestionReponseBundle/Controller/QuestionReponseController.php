@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Elastica\Query;
 use Elastica;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class QuestionReponseController extends Controller
 {
@@ -519,10 +520,37 @@ class QuestionReponseController extends Controller
         return new Response('validation QuestionReponses');
     }
 
-    public function certificationReponseAction()
+    public function certificationReponseAction($idReponse)
     {
-		// return $this->;//pointer vers l'affichage de la question
-        return new Response('certification QuestionReponses');
+        $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+        $reponse = $reponseRepository->findById($idReponse);
+
+        if(count($reponse)>0){ //S'il y a des réponses
+
+            if(false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }else if($reponse[0]->getDateValidation() == null){ //Si la question n'a pas été validée
+                throw new \Exception('Cette réponse n\'est pas encore validée!');
+            }else{ //Si tout va bien
+                $questionSlug = $reponse[0]->getQuestion()->getSlug();
+
+                $reponse[0]->setDateCertification(new \DateTime(date("Y-m-d H:i:s")));
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($reponse[0]);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$questionSlug)));
+            }
+
+        }else{
+            throw new \Exception('La reponse passée en paramètre n\'éxiste pas!');
+        }
+        
+
     }
 
     public function addCommentaireQuestionAction($slug)
