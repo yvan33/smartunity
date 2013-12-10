@@ -33,7 +33,7 @@ smart_unity_question_reponse_validation_reponse:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:validationReponse }
 
 smart_unity_question_reponse_certification:
-    pattern:  /certification/
+    pattern:  /certification/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:certificationReponse }
 
 smart_unity_question_reponse_add_commentaire_question:

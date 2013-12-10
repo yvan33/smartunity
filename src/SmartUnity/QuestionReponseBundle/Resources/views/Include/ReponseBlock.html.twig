@@ -60,6 +60,11 @@
 
                                     <div style="float:right">
                                     <div class="grille-3-btn">
+                                      {% if not reponse.is_certif and reponse.is_validated and is_granted('ROLE_ADMIN') %}
+                                      <div style="float:left; margin-right:5px;">
+                                        <a href="{{path('smart_unity_question_reponse_certification', {idReponse: reponse.id})}}"><img src="{{ asset('assets/img/certif-btn.png') }}"/></a>
+                                      </div>
+                                      {% endif %}
                                       <div style="float: left;margin-right: 5px;">
                                         <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                       </div>
