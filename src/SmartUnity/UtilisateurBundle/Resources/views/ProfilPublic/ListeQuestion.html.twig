@@ -413,7 +413,7 @@ console.log('Testing console');
         page[type] = pPage;
 
         //On récupère le JSON depuis le controller AjaxController
-        $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + type + '/' + pPage + '/' + nbParPage, function(donnees) {
+        $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId +'/' +type + '/' + pPage + '/' + nbParPage, function(donnees) {
             var content = '';
             if (donnees[0]['page'] == pPage && donnees[0]['type'] == type && donnees[0]['nbParPage'] == nbParPage) {
                 donnees.shift(); //On supprime la ligne de check du JSON

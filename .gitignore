@@ -9,4 +9,3 @@
 /src/SmartUnity/AppBundle/old-Entity
 /test
 /nbproject
-src/SmartUnity/UtilisateurBundle/Controller/AjaxController.php -> src/SmartUnity/UtilisateurBundle/Controller/AjaxMembreController.php
