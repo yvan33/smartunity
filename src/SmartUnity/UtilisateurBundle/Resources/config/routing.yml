@@ -31,7 +31,7 @@ smart_unity_utilisateur_envoiparrainage:
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:envoiParrainage }
     
 smart_unity_membre_profil:
-    pattern:  /{id}/{type}/{page}
+    pattern:  /membre/{id}/{type}/{page}
     defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'last', page:'1'  } 
     requirements:
         type: onFire|last|reponses|question
