@@ -11,11 +11,11 @@ use FOS\UserBundle\Model\UserInterface;
 include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 
-class AjaxController extends Controller
+class AjaxMembreController extends Controller
 {
 
 	public function getQuestionsAction($type, $page, $nbParPage, $membreId){
-		
+
         //Récupération des repositories pour les réponses (meilleure réponse) et questions
 		$questionRepository = $this->getDoctrine()
                             ->getManager()
@@ -33,11 +33,11 @@ class AjaxController extends Controller
             $nbQuestions = $questionRepository->getNombreQuestionsOnFire();
         }else if ($type == 'last'){
             
-            $listeQuestion = $questionRepository->getLastQuestionsForUser($nbParPage, $page);
+            $listeQuestion = $questionRepository->getLastQuestionsForUser($nbParPage, $page, $membreId);
             
             $nbQuestions = $questionRepository->getNombreLastQuestions();
         }else if ($type == 'reponses'){
-            $listeQuestion = $questionRepository->getValidatedQuestionsForUser($nbParPage, $page);
+            $listeQuestion = $questionRepository->getValidatedQuestionsForUser($nbParPage, $page, $membreId);
          
             $nbQuestions = $questionRepository->getNombreValidatedQuestions();
         }else{
@@ -93,7 +93,7 @@ class AjaxController extends Controller
                     'date_best_reponse'=>$dateBestReponse,
                     'slug'=>$Question->getSlug(),
                     'count_soutien'=>$Question->getSoutienMembres()->count(),
-                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
+                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser()),
                 ));
 
             }
