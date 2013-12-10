@@ -514,7 +514,7 @@ class QuestionReponseController extends Controller
             'formReponse'=>$formReponse->createView()));
     }
 
-    public function validationReponseAction()
+    public function validationReponseAction($idReponse)
     {
     	// return $this->;//pointer vers l'affichage de la question
         return new Response('validation QuestionReponses');
