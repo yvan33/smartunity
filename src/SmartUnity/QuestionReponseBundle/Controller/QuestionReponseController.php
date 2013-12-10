@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Elastica\Query;
 use Elastica;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\UserBundle\Model\UserInterface;
 
 class QuestionReponseController extends Controller
 {
@@ -516,8 +517,39 @@ class QuestionReponseController extends Controller
 
     public function validationReponseAction($idReponse)
     {
-    	// return $this->;//pointer vers l'affichage de la question
-        return new Response('validation QuestionReponses');
+    	$reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+        $reponse = $reponseRepository->findById($idReponse);
+
+        if(count($reponse)>0){ //S'il y a des réponses
+
+            $user = $this->container->get('security.context')->getToken()->getUser();
+
+            if(!is_object($user) || !$user instanceof UserInterface) {
+                throw new AccessDeniedException();
+            }else{ //Si tout va bien
+                $question = $reponse[0]->getQuestion();
+
+                if($question->getMembre() != $user){//TEST SI USER LOGGE A BIEN POSE LA QUESTION
+                    throw new \Exception('Vous ne pouvez valider que des réponses à vos questions.');
+                }else{
+                    $questionSlug = $reponse[0]->getQuestion()->getSlug();
+
+                    $reponse[0]->setDateValidation(new \DateTime(date("Y-m-d H:i:s")));
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($reponse[0]);
+                    $em->flush();
+
+                    return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$question->getSlug())));
+                }
+            }
+
+        }else{
+            throw new \Exception('La reponse passée en paramètre n\'éxiste pas!');
+        }
     }
 
     public function certificationReponseAction($idReponse)
