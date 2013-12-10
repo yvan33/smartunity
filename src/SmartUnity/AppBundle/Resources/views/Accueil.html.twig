@@ -91,12 +91,13 @@ Bonjour {{ app.user.username}}
                                           {{ question.remuneration }} pts
                                           </div>
                                       </div>
-                                      <div class="grille-question-txt">
-                                          <p>{{ question.sujet }}</p>
-                                      </div>
                                       <div class="grille-question-det">
                                         <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                       </div>
+                                      <div class="grille-question-txt">
+                                          <p>{{ question.sujet }}</p>
+                                      </div>
+                                      
                                   </div>
                                       <!-- contenue caché fin-->
                             {% endfor %}
@@ -117,12 +118,13 @@ Bonjour {{ app.user.username}}
                                             {{ question.remuneration }} pts
                                             </div>
                                         </div>
-                                        <div class="grille-question-txt">
-                                            <p>{{ question.sujet }}</p>
-                                        </div>
                                         <div class="grille-question-det">
                                           <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                         </div>
+                                        <div class="grille-question-txt">
+                                            <p>{{ question.sujet }}</p>
+                                        </div>
+                                        
                                     </div>
                                         <!-- contenue caché fin-->
                               {% endfor %}
@@ -143,12 +145,13 @@ Bonjour {{ app.user.username}}
                                             {{ question.remuneration }} pts
                                             </div>
                                         </div>
-                                        <div class="grille-question-txt">
-                                            <p>{{ question.sujet }}</p>
-                                        </div>
                                         <div class="grille-question-det">
                                           <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                         </div>
+                                        <div class="grille-question-txt">
+                                            <p>{{ question.sujet }}</p>
+                                        </div>
+                                       
                                     </div>
                                         <!-- contenue caché fin-->
                               {% endfor %}

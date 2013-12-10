@@ -18,15 +18,17 @@
 <body>
 
 	<div class="grille-content">
-	    <legend>Nouvelle Reponse</legend>
 
 		{{ form_start(formReponse)}}
 		<div class="erreur">
             {{ form_errors(formReponse) }}
 	    </div>
 	    <div class="row">
+	    <div class="head-blue">Nouvelle Reponse</div>
+	    </div>
+	    <div class="row">
 	        <div class="grille-1">{{ form_label(formReponse.description) }}</div>
-	        <div class="grille-2">{{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'style': 'width:100%;'}}) }}</div>
+	        <div  class="grille-2">{{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'style': 'height:98px;width:100%'}}) }}</div>
 	    </div>
 	    <div class="row">
 	        <div class="grille-1">{{form_widget(formReponse.save,{'attr': {'class': 'btn btn-primary'}})}}</div>
@@ -34,7 +36,6 @@
 	    {{form_end(formReponse)}}
 	</div>
     
-
 
 </body>
 </html>

@@ -21,6 +21,7 @@ class reponseRepository extends EntityRepository
             FROM
             SmartUnityAppBundle:reponse r LEFT JOIN SmartUnityAppBundle:noteReponse n WITH r.id = n.reponse
             WHERE r.question = :QuestionId
+            AND r.signaler = 0
             GROUP BY r.id
             ORDER BY r.dateCertification DESC, r.dateValidation DESC, somme DESC
             ')
@@ -55,6 +56,7 @@ class reponseRepository extends EntityRepository
             FROM
             SmartUnityAppBundle:reponse r
             WHERE r.membre = :membreId
+            AND r.signaler = 0
             AND r.dateCertification IS NOT NULL
             ')
             ->setParameter('membreId', $membreId);
@@ -68,7 +70,8 @@ class reponseRepository extends EntityRepository
          $query = $this->_em->createQuery('
             SELECT COUNT(r.id)
             FROM SmartUnityAppBundle:reponse r
-            WHERE r.question = :QuestionId')
+            WHERE r.question = :QuestionId
+            AND r.signaler = 0')
             ->setParameter('QuestionId', $QuestionId);
 
         $return = $query->getScalarResult();
@@ -100,6 +103,7 @@ class reponseRepository extends EntityRepository
                         FROM reponse r
                         WHERE 
                         r.question_id = :QuestionId
+                        AND r.signaler = 0
                         GROUP BY r.id) as b
                     
                     LEFT JOIN
@@ -109,6 +113,7 @@ class reponseRepository extends EntityRepository
                         WHERE n.reponse_id = r.id
                         AND r.question_id = :QuestionId
                         AND n.note = -1
+                        AND r.signaler = 0
                         GROUP BY n.reponse_id) as d 
                     ON d.reponse_id = b.id
                         
@@ -119,6 +124,7 @@ class reponseRepository extends EntityRepository
                         WHERE n.reponse_id = r.id
                         AND r.question_id = :QuestionId
                         AND n.note = 1
+                        AND r.signaler = 0
                         GROUP BY n.reponse_id) as u
                      ON b.id = u.reponse_id
 

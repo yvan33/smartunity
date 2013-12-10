@@ -151,12 +151,14 @@ class AjaxController extends Controller
                 $commentairesReturn = array();
 
                 //Récupération des commentaires
-                $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse),
+                $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse,
+                                                                            'signaler' => 0),
                                                                         array('date' => 'asc'));
                
                 //Remplissage du tableau de sortie commentaires
                 foreach($commentaires as $commentaire){
                     array_push($commentairesReturn, array(
+                        'id'=>$commentaire->getId(),
                         'description'=>$commentaire->getDescription(),
                         'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
                         'membre_username'=>$commentaire->getMembre()->getUsername()

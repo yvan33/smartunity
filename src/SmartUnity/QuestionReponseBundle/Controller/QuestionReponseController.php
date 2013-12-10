@@ -10,6 +10,8 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Elastica\Query;
 use Elastica;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\UserBundle\Model\UserInterface;
 
 class QuestionReponseController extends Controller
 {
@@ -513,16 +515,74 @@ class QuestionReponseController extends Controller
             'formReponse'=>$formReponse->createView()));
     }
 
-    public function validationReponseAction()
+    public function validationReponseAction($idReponse)
     {
-    	// return $this->;//pointer vers l'affichage de la question
-        return new Response('validation QuestionReponses');
+    	$reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+        $reponse = $reponseRepository->findById($idReponse);
+
+        if(count($reponse)>0){ //S'il y a des réponses
+
+            $user = $this->container->get('security.context')->getToken()->getUser();
+
+            if(!is_object($user) || !$user instanceof UserInterface) {
+                throw new AccessDeniedException();
+            }else{ //Si tout va bien
+                $question = $reponse[0]->getQuestion();
+
+                if($question->getMembre() != $user){//TEST SI USER LOGGE A BIEN POSE LA QUESTION
+                    throw new \Exception('Vous ne pouvez valider que des réponses à vos questions.');
+                }else{
+                    $questionSlug = $reponse[0]->getQuestion()->getSlug();
+
+                    $reponse[0]->setDateValidation(new \DateTime(date("Y-m-d H:i:s")));
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($reponse[0]);
+                    $em->flush();
+
+                    return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$question->getSlug())));
+                }
+            }
+
+        }else{
+            throw new \Exception('La reponse passée en paramètre n\'éxiste pas!');
+        }
     }
 
-    public function certificationReponseAction()
+    public function certificationReponseAction($idReponse)
     {
-		// return $this->;//pointer vers l'affichage de la question
-        return new Response('certification QuestionReponses');
+        $reponseRepository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
+
+        $reponse = $reponseRepository->findById($idReponse);
+
+        if(count($reponse)>0){ //S'il y a des réponses
+
+            if(false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }else if($reponse[0]->getDateValidation() == null){ //Si la question n'a pas été validée
+                throw new \Exception('Cette réponse n\'est pas encore validée!');
+            }else{ //Si tout va bien
+                $questionSlug = $reponse[0]->getQuestion()->getSlug();
+
+                $reponse[0]->setDateCertification(new \DateTime(date("Y-m-d H:i:s")));
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($reponse[0]);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$questionSlug)));
+            }
+
+        }else{
+            throw new \Exception('La reponse passée en paramètre n\'éxiste pas!');
+        }
+        
+
     }
 
     public function addCommentaireQuestionAction($slug)
@@ -644,10 +704,10 @@ class QuestionReponseController extends Controller
                 $em->persist($question);
                 $em->flush();
 
-                return new Response('Le signalement a ben été envoyé');
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_list_of_question'));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+        return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig',array(
             'formSignaler'=>$formSignaler->createView()));
     }
 
@@ -664,15 +724,16 @@ class QuestionReponseController extends Controller
             if ($formSignaler->isValid()) {
             $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($idReponse);
             $reponse->setSignaler(true);
+            $questionSlug = $reponse->getQuestion()->getSlug();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($reponse);
             $em->flush();
 
-            return new Response('Le signalement a ben été envoyé');
+            return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$questionSlug)));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+        return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig',array(
             'formSignaler'=>$formSignaler->createView()));
     }
 
@@ -689,15 +750,16 @@ class QuestionReponseController extends Controller
             if ($formSignaler->isValid()) {
             $commentaireQuestion = $this->getDoctrine()->getRepository('SmartUnityAppBundle:commentaireQuestion')->find($idCommentaireQuestion);
             $commentaireQuestion->setSignaler(true);
+            $questionSlug = $commentaireQuestion->getQuestion()->getSlug();
                 
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentaireQuestion);
             $em->flush();
 
-            return new Response('Le signalement a ben été envoyé');
+            return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $questionSlug)));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+        return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig',array(
             'formSignaler'=>$formSignaler->createView()));
     }
     public function signalerCommentaireReponseAction($idCommentaireReponse)
@@ -713,15 +775,16 @@ class QuestionReponseController extends Controller
             if ($formSignaler->isValid()) {
             $commentaireReponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:commentaireReponse')->find($idCommentaireReponse);
             $commentaireReponse->setSignaler(true);
+            $questionSlug = $commentaireReponse->getReponse()->getQuestion()->getSlug();
                 
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentaireReponse);
             $em->flush();
 
-            return new Response('Le signalement a ben été envoyé');
+            return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$questionSlug)));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:Signaler.html.twig',array(
+        return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig',array(
             'formSignaler'=>$formSignaler->createView()));
     }
 }

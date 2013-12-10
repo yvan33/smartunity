@@ -11,10 +11,7 @@
 	line-height: 43px;
 	margin: 0px 20px;
 }
-.logo2
-{
-	padding-top:25px;
-}
+
 .valign-row
 {
 	display:table;
@@ -26,28 +23,17 @@
 	display:table-cell;
 	vertical-align:middle;
 }
-.foot-im
-{
-	padding-bottom:10px;
-	padding-top:15px;
-	
-}
+
 
 .hid-home
 {
 	display:none;
 }
-.cook-foot
-{
-	font-size:42px;
-	display: inline-block;
-	margin-right: 10px;
-	
-}
+
 .connection
 {
 	width: 250px;
-	margin-left: -75px;
+	margin-left: 75px;
 	
 }
 }
@@ -66,7 +52,7 @@
 }
 .logo2
 {
-	padding-top:25px;
+	
 }
 .valign-row
 {
@@ -78,25 +64,16 @@
 	display:table-cell;
 	vertical-align:middle;
 }
-.foot-im
-{
-	padding-bottom:10px;
-	padding-top:15px;
-	height:150%;
-	
-}
+
 .hid-home
 {
 	display:none;
 }
-.cook-foot
-{
-	font-size:36px;
-}
+
 .connection
 {
 	width: 300px;
-	margin-left: -100px;
+	margin-left: 15px;
 }
 }
 
@@ -115,28 +92,17 @@
 }
 .logo2
 {
-	padding-bottom:20px;
-}
-.foot-im
-{
-	padding-bottom:10px;
-	
 
-	
 }
 
 .hid-home
 {
 	display:none;
 }
-.cook-foot
-{
-	font-size:42px;
-}
 .connection
 {
 	width: 300px;
-	margin-left: -100px;
+	margin-left: 185px;
 }
 }
 
@@ -149,15 +115,8 @@
 }
 .logo2
 {
-	padding-bottom:15px;
+	
 	z-index:101; 
-}
-.foot-im
-{
-	padding-bottom:10px;
-	
-	
-	
 }
 .menu-pad 
 {
@@ -165,22 +124,22 @@
 	font-weight:bold;
 	padding-top:5px;
 }
-.cook-foot
-{
-	font-size:42px;
-}
 .connection
 {
 	width: 500px;
-	margin-left: -175px;
+	margin-left: 20px;
 }
 }
-.cook-foot
+.foot-im
 {
-	display: inline-block;
-	margin-right: 10px;
+	
+	background-color: #fff;
+	padding-bottom:5px;
+	padding-top:5px;
+	height: 50px;
 	
 }
+
 .menu-bg
 {
 	background-color:#2b3a41;
@@ -200,8 +159,15 @@
 }
 .logo
 {
-	padding-top:15px;
-	padding-bottom:15px;
+	padding-top:5px;
+	padding-bottom:5px;
+	height: 60px;
+}
+.logo2
+{
+
+	text-align: center;
+
 }
 
 .home:hover
@@ -212,23 +178,21 @@
 }
 .foot-sep
 {
-	background-image:url(../img/barre-footer.png);
-	height:31px;
-	-webkit-box-shadow: 0 5px 20px  black;
-       -moz-box-shadow: 0 5px 20px  black;
-            box-shadow: 0 5px 20px  black;
+	background-color:#2a3940;
+	overflow: hidden;
+	margin-top: 10px;
+
 }
 .footer
 {
 	text-align: center;
-	margin-top: 5px;
 }
 
 .footer a
 {
 	display: inline-block;
-	color: #666;
-	font-size: 14px;
+	color: #FFF;
+	vertical-align: middle;
 	margin: 0px 5px;
 }
 
@@ -256,6 +220,8 @@
 .pos-re
 {
 	position:relative;
+	display: inline-block;
+	vertical-align: middle;
 }
 .valign-col-all
 {
@@ -266,12 +232,23 @@
 .pad-l
 {
 	padding-left:10px;
+	display: inline-block;
+	vertical-align: middle;
+	height: 60px;
+	line-height: 60px;
+
 	
 }
 .cook-foot
 {
 	font-family:Cookie;
-	color:#2a3940;
+	color:#FFF;
+	font-size:36px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
 }
 .cook-head
 {
