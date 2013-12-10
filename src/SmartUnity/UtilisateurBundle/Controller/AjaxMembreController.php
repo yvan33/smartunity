@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartUnity\QuestionReponseBundle\Controller;
+namespace SmartUnity\UtilisateurBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -8,12 +8,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Model\UserInterface;
+include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
-class AjaxController extends Controller
+
+class AjaxMembreController extends Controller
 {
 
-	public function getQuestionsAction($type, $page, $nbParPage){
-		
+	public function getQuestionsAction($type, $page, $nbParPage, $membreId){
+
         //Récupération des repositories pour les réponses (meilleure réponse) et questions
 		$questionRepository = $this->getDoctrine()
                             ->getManager()
@@ -24,16 +26,19 @@ class AjaxController extends Controller
                             ->getRepository('SmartUnityAppBundle:reponse');
 
         //Appel au repository
-
         if ($type == 'onFire'){
-            $listeQuestion = $questionRepository->getQuestionsOnFire($nbParPage, $page);
+
+            $listeQuestion = $questionRepository->getQuestionsOnFireForUser($nbParPage, $page, $membreId);
+
             $nbQuestions = $questionRepository->getNombreQuestionsOnFire();
         }else if ($type == 'last'){
             
-            $listeQuestion = $questionRepository->getLastQuestions($nbParPage, $page);
+            $listeQuestion = $questionRepository->getLastQuestionsForUser($nbParPage, $page, $membreId);
+            
             $nbQuestions = $questionRepository->getNombreLastQuestions();
         }else if ($type == 'reponses'){
-            $listeQuestion = $questionRepository->getValidatedQuestions($nbParPage, $page);
+            $listeQuestion = $questionRepository->getValidatedQuestionsForUser($nbParPage, $page, $membreId);
+         
             $nbQuestions = $questionRepository->getNombreValidatedQuestions();
         }else{
             throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
@@ -88,7 +93,7 @@ class AjaxController extends Controller
                     'date_best_reponse'=>$dateBestReponse,
                     'slug'=>$Question->getSlug(),
                     'count_soutien'=>$Question->getSoutienMembres()->count(),
-                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
+                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser()),
                 ));
 
             }

@@ -1,0 +1,546 @@
+{% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
+
+{% block title %}Smart'Unity - Activité du membre {% endblock %}
+
+{% block stylesheets %}
+<link href="{{asset('assets/css/question.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block initJS %}
+<script src="{{asset('assets/js/bootstrap-paginator.js')}}"></script>
+<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
+<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
+{% endblock %}
+
+
+
+
+{% block body %}
+
+<!-- nav div-->
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        <div class="grille-content-2">
+            <!-- nav div menu-->
+            <div class="collapse-menu">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_profil', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Questions r&eacute;solues</a></li>
+                    <li {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_profil', {'type': 'onFire', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="onFire-tab">On Fire</a></li>
+                    <li {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_profil', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
+                </ul>
+            </div>
+            <!-- nav div menu fin-->
+            <!-- contenue 1-->
+            <div class="tab-content" id="content-frame">
+                <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
+                    <div class="panel-group" id="accordion-reponses">
+                          {% if type=='reponses' %}
+
+                              {% if countListe == 0 %}
+                        <br/>
+                        <p align="center">Il n'y a aucune question r&eacute;solue</p>
+                        <br/>
+                              {% else %}
+                                  {% for question in listeQuestions %}
+
+                        <div class="panel panel-default fade in out">
+                            <!-- contenue visible-->
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <!-- rond pts-->
+                                    <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
+                                    <!-- rond pts fin-->
+                                    <!-- describ question-->
+                                    <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
+                                        <div class="grille-2" ><p>{{question.sujet}}</p>
+                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                    </a>
+                                    <!-- describ question fin-->
+                                    <!-- nb réponses vues-->
+                                    <div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
+                                    </div>
+                                    <!-- nb réponses vues fin-->
+                                    <!-- bouton rep -->
+                                    <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
+                                    </div>
+                                    <!-- bouton rep fin-->
+                                    <!-- bouton +-->
+                                    <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                    </div>
+                                    <!-- bouton + fin-->
+                                </h4>                           
+                            </div>
+                            <!-- contenue visible fin-->
+                            <!-- contenue caché-->
+                            <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+                                    <div class="grille-det">
+                                        <p>{{question.description}}</p>
+                                    </div>
+                                                {% if question.date_best_reponse != '' %}
+                                    <div class="grille-det-content">
+                                        <div class="grille-det1">
+                                            <p>{{ question.auteur_best_reponse }}</p>
+                                            <p>{{ question.date_best_reponse }}</p>
+                                        </div>
+                                        <div class="grille-det2">
+                                            <p>{{question.best_reponse}}</p>
+                                        </div>
+                                    </div>
+                                                {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- contenue caché fin-->
+                                    {% endfor %}
+
+                                  {% endif %}
+
+                                {% endif %}
+                    </div>
+                </div>
+                <div class="tab-pane fade in out{% if type=='onFire' %} active{% endif %}" id="onFire">
+                    <!-- accordion general-->
+                    <div class="panel-group" id="accordion-onFire">
+                                {% if type=='onFire' %}
+                                  {% if countListe == 0 %}
+                        <br/>
+                        <p align="center">Il n'y a aucune question On Fire</p>
+                        <br/>
+                                  {% else %}
+                                    {% for question in listeQuestions %}
+
+                        <div class="panel panel-default fade in out">
+                            <!-- contenue visible-->
+
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
+                                    <h4 class="panel-title">
+                                        <!-- rond pts-->
+                                        <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
+                                        <!-- rond pts fin-->
+                                        <!-- describ question-->
+
+                                        <div class="grille-2" ><p>{{question.sujet}}</p>
+                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+
+                                        <!-- describ question fin-->
+                                        <!-- nb réponses vues-->
+                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
+                                        </div>
+                                        <!-- nb réponses vues fin-->
+                                        <!-- bouton rep -->
+                                        <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
+                                        </div>
+                                        <!-- bouton rep fin-->
+                                        <!-- bouton +-->
+                                        <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                            <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                        </div>
+                                        <!-- bouton + fin-->
+                                    </h4>
+                                </a>                           
+                            </div>
+
+                            <!-- contenue visible fin-->
+                            <!-- contenue caché-->
+                            <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+                                    <div class="grille-det">
+                                        <p>{{question.description}}</p>
+                                    </div>
+
+                                                {% if question.date_best_reponse != '' %}
+                                    <div class="grille-det-content">
+                                        <div class="grille-det1">
+                                            <p>{{ question.auteur_best_reponse }}</p>
+                                            <p>{{ question.date_best_reponse }}</p>
+                                        </div>
+                                        <div class="grille-det2">
+                                            <p>{{question.best_reponse}}</p>
+                                        </div>
+                                    </div>
+                                                {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- contenue caché fin-->
+                                    {% endfor %}
+                                  {% endif %}
+                                {% endif %}
+                    </div><!-- accordion general fin-->
+
+                </div><!-- contenue 1 fin--> 
+                <!-- contenue 2-->
+                <div class="tab-pane fade in out{% if type=='last' %} active{% endif %}" id="last">
+                    <div class="panel-group" id="accordion-last">
+                            {% if type=='last' %}
+
+                              {% if countListe == 0 %}
+                        <br/>
+                        <p align="center">Il n'y a aucune question r&eacute;cente</p>
+                        <br/>
+                              {% else %}
+
+                                  {% for question in listeQuestions %}
+
+                        <div class="panel panel-default fade in out">
+                            <!-- contenue visible-->
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <!-- rond pts-->
+                                    <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
+                                    <!-- rond pts fin-->
+                                    <!-- describ question-->
+                                    <a data-toggle="collapse" data-parent="#accordion-last" href="#collapse{{loop.index}}">
+                                        <div class="grille-2" ><p>{{question.sujet}}</p>
+                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                    </a>
+                                    <!-- describ question fin-->
+                                    <!-- nb réponses vues-->
+                                    <div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
+                                    </div>
+                                    <!-- nb réponses vues fin-->
+                                    <!-- bouton rep -->
+                                    <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
+                                    </div>
+                                    <!-- bouton rep fin-->
+                                    <!-- bouton +-->
+                                    <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
+                                        <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                    </div>
+                                    <!-- bouton + fin-->
+                                </h4>                           
+                            </div>
+                            <!-- contenue visible fin-->
+                            <!-- contenue caché-->
+                            <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+                                    <div class="grille-det">
+                                        <p>{{question.description}}</p>
+                                    </div>
+                                                {% if question.date_best_reponse != '' %}
+                                    <div class="grille-det-content">
+                                        <div class="grille-det1">
+                                            <p>{{ question.auteur_best_reponse }}</p>
+                                            <p>{{ question.date_best_reponse }}</p>
+                                        </div>
+                                        <div class="grille-det2">
+                                            <p>{{question.best_reponse}}</p>
+                                        </div>
+                                    </div>
+                                                {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- contenue caché fin-->
+                                    {% endfor %}
+                                  {% endif %}
+                                {% endif %}
+                    </div>
+                </div>
+            </div><!-- nav div fin--> 
+
+            <div style="text-align:center; cursor:pointer">
+                <ul id="pages" class="pagination pagination-lg">
+                      {% for page in pagination %}
+                    <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_profil', {page: page[1], type: type, id: membreId}) }}">{{ page[0] }}</a></li>
+                      {% endfor %}
+                </ul>
+            </div>
+
+        </div><!-- grille fin-->
+
+    </div><!-- col fin-->
+</div>  <!-- row fin-->
+
+{% endblock %}
+
+
+
+
+
+{% block callJS %}
+
+<script language="javascript">
+
+
+
+//////////////////
+////// FONCTIONS
+//////////////////
+
+
+    function generateContent(pEntry, i) {
+        var entity = '                               <div class="panel panel-default"> \
+                                            <div class="panel-heading"> \
+                                              <h4 class="panel-title"> \
+                                                <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">' + pEntry['remuneration'] + ' pts</p></div></div> \
+                                                <a data-toggle="collapse" data-parent="#accordion-' + type + '" href="#collapse' + type + i + '"> \
+                                                <div class="grille-2" ><p>' + pEntry['sujet'] + '</p> \
+                                                <p style="font-weight:200; font-style:italic">' + pEntry['membre_username'] + ' le ' + pEntry['date'] + '</p> </div></a> \
+                                                <div class="grille-3"><p>' + pEntry['nb_reponses'] + ' réponse';
+
+        if (pEntry['nb_reponses'] > 1)
+            entity += 's';
+
+        entity += '</p></div> \
+                                                <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
+                                                <button type="button" class="btn bouton-repondre">';
+
+
+        if (type == 'reponses')
+            entity += 'Détails';
+        else
+            entity += 'Répondre';
+
+        entity += '</button></a></div> \
+                                                <div class="grille-5"><p style="color:#75c731; font-weight:';
+
+        if (pEntry['soutenue'])
+            entity += '900';
+        else
+            entity += '400';
+
+        entity += ';">' + pEntry['count_soutien'] + ' soutien';
+
+        if (pEntry['count_soutien'] > 1)
+            entity += 's';
+
+        entity += '</p>';
+
+        if (type != 'reponses')
+            entity += '<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>';
+
+        entity += '</h4> \
+                                            </div> \
+                                              <div id="collapse' + type + i + '" class="panel-collapse collapse"> \
+                                                  <div class="panel-body"> \
+                                                  <div class="grille-det"> \
+                                                        <p>' + pEntry['description'] + '</p> \
+                                                </div>';
+
+        if (pEntry['date_best_reponse'] != '')
+            entity += '<div class="grille-det-content"> \
+                                                    <div class="grille-det1"> \
+                                                            <p>' + pEntry['auteur_best_reponse'] + '</p> \
+                                                            <p>' + pEntry['date_best_reponse'] + '</p> \
+                                                      </div> \
+                                                        <div class="grille-det2"> \
+                                                        <p>' + pEntry['best_reponse'] + '</p> \
+                                                      </div> \
+                                                </div>';
+
+        entity += '</div> \
+                                              </div> \
+                                          </div>';
+
+        return entity;
+    }
+
+    function MaJPagination() {
+        if (nbPages[type] == null) { //Si le tab est vide....
+
+            fixHeight();
+            $('#accordion-' + type).fadeOut('fast');
+console.log('Testing console');
+            $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId +'/' + type + '/1/' + nbParPage, function(donnees) {
+                var content = '';
+                if (donnees[0]['page'] == 1 && donnees[0]['type'] == type && donnees[0]['nbParPage'] == nbParPage) {
+
+                    //Définition d'un nouveau paginator adapté...
+                    nbPages[type] = donnees[0]['nbPages'];
+
+                    if (nbPages[type] != 0) {
+                        options.currentPage = 1;
+                        options.totalPages = nbPages[type];
+                        $('#pages').bootstrapPaginator(options);
+                    }
+
+                    donnees.shift(); //On supprime la ligne de check du JSON
+
+                    //Puis on remplit le nouveau tab
+                    if (donnees.length == 0) {
+                        content += '<br/><p align="center">Il n\'y a aucune question à afficher dans cette catégorie</p><br/>';
+                        $('#pages').fadeOut();
+                    } else {
+                        donnees.forEach(function(pEntry, i) {
+                            content += generateContent(pEntry, i);
+                        }); //Generation du code
+                        $('#pages').fadeIn();
+                    }
+
+                    //Affichage du nouveau contenu dasn le tab, et fadeIn
+                    $('#accordion-' + type).html(content);
+
+                } else { //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
+                    $('#accordion-' + type).html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+                }
+
+                $('#accordion-' + type).fadeIn('fast');
+                $('#content-frame').animateAuto('height', 'fast', function() {
+                    $('#content-frame').height('auto');
+                });
+
+            });
+
+        } else {
+            fixHeight();
+            if (nbPages[type] != 0) {
+                options.currentPage = page[type];
+                options.totalPages = nbPages[type];
+                $('#pages').bootstrapPaginator(options);
+                $('#pages').fadeIn();
+            } else {
+                $('#pages').fadeOut();
+            }
+
+        }
+    }
+
+
+    function clickOnPagination(pPage) {
+        fixHeight();
+        $('#accordion-' + type).fadeOut('fast');
+
+        page[type] = pPage;
+
+        //On récupère le JSON depuis le controller AjaxController
+        $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId +'/' +type + '/' + pPage + '/' + nbParPage, function(donnees) {
+            var content = '';
+            if (donnees[0]['page'] == pPage && donnees[0]['type'] == type && donnees[0]['nbParPage'] == nbParPage) {
+                donnees.shift(); //On supprime la ligne de check du JSON
+
+                donnees.forEach(function(pEntry, i) {
+                    content += generateContent(pEntry, i);
+                }); //Generation du code
+
+                //Affichage du nouveau contenu dasn le tab, et fadeIn
+                $('#accordion-' + type).html(content);
+                $('#accordion-' + type).fadeIn('fast');
+                $('#content-frame').animateAuto('height', 'fast', function() {
+                    $('#content-frame').css('height', 'auto');
+                });
+
+
+            } else { //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
+                $('#accordion-' + type).html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+                $('#accordion-' + type).fadeIn('fast');
+            }
+        });
+    }
+
+
+    function fixHeight() {
+        $('#content-frame').height($('#content-frame').height());
+    }
+
+
+//////////////////
+////// VARIABLES
+//////////////////
+
+
+    var type;
+    var page;
+    var nbPage;
+    var nbParPages;
+    var options;
+
+
+
+///////////////////////
+////// INITIALISATION
+///////////////////////
+
+
+
+    $(document).ready(function() {
+
+        //Si JS est activé, on change les href des tabs par les id des content (pour bootstrap auto tabs!)
+        $('#onFire-tab').attr('href', '#onFire');
+        $('#last-tab').attr('href', '#last');
+        $('#reponses-tab').attr('href', '#reponses');
+
+
+        //Initialise les valeurs des pages/onglets ouverts.... 
+        membreId = '{{membreId}}';
+        type = '{{ type }}';
+        page = new Array();
+        page[type] ={{ page }};
+        if (page['onFire'] == null)
+            page['onFire'] = 1;
+        if (page['last'] == null)
+            page['last'] = 1;
+        if (page['reponses'] == null)
+            page['reponses'] = 1;
+
+        nbParPage = {{ nbParPage }};
+
+        nbPages = new Array();
+        nbPages[type] = {{ nbPages }};
+
+
+        //Options du bootStrap Paginator
+        options = new Object();
+        options = {
+            currentPage: {{ page }},
+            totalPages: nbPages[type],
+            alignment: 'center',
+            numberOfPages: 5,
+            size: 'large',
+            itemContainerClass: function(type, page, current) {
+                return (page === current) ? "active" : "pointer-cursor";
+            },
+            bootstrapMajorVersion: 3,
+            onPageClicked: function(pEvent, pOriginalEvent, pType, pPage) {
+                clickOnPagination(pPage);
+            }
+        };
+
+
+
+//////////////
+////// EVENTS
+//////////////
+
+
+
+        //Definition du comportement du paginator
+        $('#pages').bootstrapPaginator(options);
+
+        //Gestion de la pagination pour les changement d'onglets
+        $('#onFire-tab').click(function() {
+            type = 'onFire';
+            MaJPagination();
+        });
+        $('#last-tab').click(function() {
+            type = 'last';
+            MaJPagination();
+        });
+        $('#reponses-tab').click(function() {
+            type = 'reponses';
+            MaJPagination();
+        });
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+            if (nbPages[type] != null) {
+                $('#content-frame').animateAuto('height', 'fast', function() {
+                    $('#content-frame').css('height', 'auto');
+                });
+            }
+        });
+
+
+
+    });
+</script>
+
+{% endblock %}
