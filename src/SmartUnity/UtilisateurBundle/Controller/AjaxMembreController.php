@@ -25,7 +25,6 @@ class AjaxMembreController extends Controller
                             ->getRepository('SmartUnityAppBundle:reponse');
 
         //Appel au repository
-        // ta mere
         if ($type == 'onFire'){
 
             $listeQuestion = $questionRepository->getQuestionsOnFireForUser($nbParPage, $page, $membreId);
