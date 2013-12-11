@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
+//include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 class QuestionReponseMembreController extends Controller {
 
@@ -57,7 +57,7 @@ class QuestionReponseMembreController extends Controller {
         $cleanJSON = explode('[', $response, 2);
         $listeQuestions = json_decode('[' . $cleanJSON[1]);
 
-
+p($listeQuestions);
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
         //la requête pour vérifier son authenticité... 
         //On récupère des infos utiles pour la pagination..

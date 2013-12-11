@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Model\UserInterface;
-include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 
 class AjaxMembreController extends Controller

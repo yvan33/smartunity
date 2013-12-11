@@ -23,7 +23,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 //use FOS\UserBundle\Controller\ChangePasswordController as BaseController;
-include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 class ChangePasswordController extends Controller {
 

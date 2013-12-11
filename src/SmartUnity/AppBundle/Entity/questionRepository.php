@@ -4,7 +4,6 @@ namespace SmartUnity\AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
-include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 /**
  * questionRepository

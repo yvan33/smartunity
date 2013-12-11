@@ -11,7 +11,6 @@ use Imagine\Image\Point;
 use SmartUnity\AppBundle\Entity\parrainage;
 use SmartUnity\AppBundle\Entity\membre;
 
-include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 class UtilisateurController extends Controller {
 

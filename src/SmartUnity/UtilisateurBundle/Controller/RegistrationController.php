@@ -24,7 +24,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 
-include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
 
 /**
  * Controller managing the registration
