@@ -14,6 +14,13 @@ class QuestionReponseMembreController extends Controller {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
+        $nbParPage = 5;
+
+
+        $request = $this->get('request');
+        $routeName = $request->get('_route');
+
+
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -42,20 +49,21 @@ class QuestionReponseMembreController extends Controller {
         //On récupère la réponse du controleur Ajax (pour avaoir une réponse au cas ou)
 
 
-        $nbParPage = 5;
+
+
 
         $response = $this->forward('SmartUnityUtilisateurBundle:AjaxMembre:getQuestions', array(
             'type' => $type,
             'page' => $page,
             'nbParPage' => $nbParPage,
-            'membreId' => $id
+            'membreId' => $id,
+            'routeName' => $routeName,
         ));
 
         //Suppression de l'en tête HTTP et décodage du JSON
         $cleanJSON = explode('[', $response, 2);
         $listeQuestions = json_decode('[' . $cleanJSON[1]);
 
-        p($listeQuestions);
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
         //la requête pour vérifier son authenticité... 
         //On récupère des infos utiles pour la pagination..
@@ -85,7 +93,7 @@ class QuestionReponseMembreController extends Controller {
             array_push($pagination, array('>', $page + 1, '3'));
             array_push($pagination, array('>>', $nbPages, '4'));
         }
-        
+
         $em = $this->getDoctrine()->getManager();
         $username = $em->getRepository('SmartUnityAppBundle:membre')->find($id)->getUsername();
 

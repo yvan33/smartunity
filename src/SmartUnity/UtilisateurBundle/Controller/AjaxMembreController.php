@@ -13,7 +13,7 @@ use FOS\UserBundle\Model\UserInterface;
 class AjaxMembreController extends Controller
 {
 
-	public function getQuestionsAction($type, $page, $nbParPage, $membreId){
+	public function getQuestionsAction($type, $page, $nbParPage, $membreId, $routeName){
 
         //Récupération des repositories pour les réponses (meilleure réponse) et questions
 		$questionRepository = $this->getDoctrine()
