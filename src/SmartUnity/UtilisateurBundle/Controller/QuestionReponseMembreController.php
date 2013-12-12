@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-//include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
-
 class QuestionReponseMembreController extends Controller {
 
     public function displayListOfQuestionAction($type, $page, Request $request, $id) {
@@ -24,7 +22,7 @@ class QuestionReponseMembreController extends Controller {
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         } else {
             $error = '';
-        }   
+        }
 
         if ($error) {
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
@@ -57,7 +55,7 @@ class QuestionReponseMembreController extends Controller {
         $cleanJSON = explode('[', $response, 2);
         $listeQuestions = json_decode('[' . $cleanJSON[1]);
 
-p($listeQuestions);
+        p($listeQuestions);
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
         //la requête pour vérifier son authenticité... 
         //On récupère des infos utiles pour la pagination..
@@ -87,8 +85,9 @@ p($listeQuestions);
             array_push($pagination, array('>', $page + 1, '3'));
             array_push($pagination, array('>>', $nbPages, '4'));
         }
-
-
+        
+        $em = $this->getDoctrine()->getManager();
+        $username = $em->getRepository('SmartUnityAppBundle:membre')->find($id)->getUsername();
 
         $template = sprintf('SmartUnityUtilisateurBundle:ProfilPublic:ListeQuestion.html.twig');
         return $this->render($template, array(
@@ -100,7 +99,8 @@ p($listeQuestions);
                     'countListe' => count($listeQuestions),
                     'nbParPage' => $nbParPage,
                     'pagination' => $pagination,
-                    'membreId' => $id
+                    'membreId' => $id,
+                    'username' => $username,
         ));
     }
 

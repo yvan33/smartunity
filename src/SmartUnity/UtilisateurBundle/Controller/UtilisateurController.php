@@ -227,17 +227,20 @@ class UtilisateurController extends Controller {
 
     public function profilAction($id) {
         
-        $membre = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('SmartUnityAppBundle:membre')
-                ->find($id);
-        if (isset($membre)){
-        $prenom = $membre->getPrenom();
+        $em = $this->getDoctrine()->getManager();
         
+        $membre = $em->getRepository('SmartUnityAppBundle:membre')->find($id);
+        
+        $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($membre->getId());
+       
+        if (isset($avatar)) {
+            $avatar = $avatar->getWebPath();
         }
         
         return $this->render('SmartUnityUtilisateurBundle:ProfilPublic:profil.html.twig', array(
-                    'prenom' => $prenom,
+                    'membre' => $membre,
+                    'membreId'=> $id,
+                    'avatar'=> $avatar,
         ));
     }
 

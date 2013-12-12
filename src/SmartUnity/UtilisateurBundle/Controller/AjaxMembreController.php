@@ -29,16 +29,16 @@ class AjaxMembreController extends Controller
 
             $listeQuestion = $questionRepository->getQuestionsOnFireForUser($nbParPage, $page, $membreId);
 
-            $nbQuestions = $questionRepository->getNombreQuestionsOnFire();
+            $nbQuestions = $questionRepository->getNombreQuestionsOnFireForUser($membreId);
         }else if ($type == 'last'){
             
             $listeQuestion = $questionRepository->getLastQuestionsForUser($nbParPage, $page, $membreId);
             
-            $nbQuestions = $questionRepository->getNombreLastQuestions();
+            $nbQuestions = $questionRepository->getNombreLastQuestionsForUser($membreId);
         }else if ($type == 'reponses'){
             $listeQuestion = $questionRepository->getValidatedQuestionsForUser($nbParPage, $page, $membreId);
          
-            $nbQuestions = $questionRepository->getNombreValidatedQuestions();
+            $nbQuestions = $questionRepository->getNombreValidatedQuestionsForUser($membreId);
         }else{
             throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
         }
