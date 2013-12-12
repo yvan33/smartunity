@@ -138,7 +138,6 @@
     clear:both;
 }
 
-.bouton-valider {
-    
-   height: auto;
+.btn-marge{
+    margin:10px;
 }

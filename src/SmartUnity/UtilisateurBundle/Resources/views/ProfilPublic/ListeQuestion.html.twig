@@ -1,6 +1,6 @@
 {% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
 
-{% block title %}Smart'Unity - Questions du membre {% endblock %}
+{% block title %}Smart'Unity - Questions de {{username}} {% endblock %}
 
 {% block stylesheets %}
 <link href="{{asset('assets/css/question.css')}}" rel="stylesheet" type="text/css">
@@ -14,20 +14,16 @@
 <script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
 {% endblock %}
 
-
-
 {% block body %}
 
 <!-- nav div-->
 <div class="row">
     <div class="col-md-offset-1 col-md-10">
-{#         <div class="grille-content">#}
-            <!-- nav div menu-->
 
+            <!-- nav div menu-->
             <div class="title text-center cookie-title">
                 Questions posées par {{username}}
             </div>
-{#         </div>#}
         <div class="grille-content-2">
             <!-- nav div menu-->
 
