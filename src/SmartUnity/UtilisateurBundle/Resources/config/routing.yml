@@ -34,8 +34,8 @@ smart_unity_membre_profil:
     pattern:  /membre/{id}
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:profil }   
 
-smart_unity_membre_activite:
-    pattern:  /membre/activite/{id}/{type}/{page}
+smart_unity_membre_questions:
+    pattern:  /membre/questions/{id}/{type}/{page}
     defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'last', page:'1'  } 
     requirements:
         type: onFire|last|reponses|question

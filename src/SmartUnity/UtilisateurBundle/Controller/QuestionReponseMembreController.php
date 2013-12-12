@@ -89,7 +89,7 @@ class QuestionReponseMembreController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $username = $em->getRepository('SmartUnityAppBundle:membre')->find($id)->getUsername();
 
-        $template = sprintf('SmartUnityUtilisateurBundle:ProfilPublic:ListeQuestion.html.twig');
+        $template = sprintf('SmartUnityUtilisateurBundle:ProfilPublic:QuestionsMembre.html.twig');
         return $this->render($template, array(
                     'error' => $error,
                     'page' => $page,
