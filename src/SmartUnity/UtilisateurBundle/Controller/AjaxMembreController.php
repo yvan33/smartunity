@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartUnity\QuestionReponseBundle\Controller;
+namespace SmartUnity\UtilisateurBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,11 +9,12 @@ use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Model\UserInterface;
 
-class AjaxController extends Controller
+
+class AjaxMembreController extends Controller
 {
 
-	public function getQuestionsAction($type, $page, $nbParPage){
-		
+	public function getQuestionsAction($type, $page, $nbParPage, $membreId, $routeName){
+
         //Récupération des repositories pour les réponses (meilleure réponse) et questions
 		$questionRepository = $this->getDoctrine()
                             ->getManager()
@@ -24,17 +25,20 @@ class AjaxController extends Controller
                             ->getRepository('SmartUnityAppBundle:reponse');
 
         //Appel au repository
-
         if ($type == 'onFire'){
-            $listeQuestion = $questionRepository->getQuestionsOnFire($nbParPage, $page);
-            $nbQuestions = $questionRepository->getNombreQuestionsOnFire();
+
+            $listeQuestion = $questionRepository->getQuestionsOnFireForUser($nbParPage, $page, $membreId);
+
+            $nbQuestions = $questionRepository->getNombreQuestionsOnFireForUser($membreId);
         }else if ($type == 'last'){
             
-            $listeQuestion = $questionRepository->getLastQuestions($nbParPage, $page);
-            $nbQuestions = $questionRepository->getNombreLastQuestions();
+            $listeQuestion = $questionRepository->getLastQuestionsForUser($nbParPage, $page, $membreId);
+            
+            $nbQuestions = $questionRepository->getNombreLastQuestionsForUser($membreId);
         }else if ($type == 'reponses'){
-            $listeQuestion = $questionRepository->getValidatedQuestions($nbParPage, $page);
-            $nbQuestions = $questionRepository->getNombreValidatedQuestions();
+            $listeQuestion = $questionRepository->getValidatedQuestionsForUser($nbParPage, $page, $membreId);
+         
+            $nbQuestions = $questionRepository->getNombreValidatedQuestionsForUser($membreId);
         }else{
             throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
         }
@@ -88,7 +92,7 @@ class AjaxController extends Controller
                     'date_best_reponse'=>$dateBestReponse,
                     'slug'=>$Question->getSlug(),
                     'count_soutien'=>$Question->getSoutienMembres()->count(),
-                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
+                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser()),
                 ));
 
             }
@@ -151,14 +155,12 @@ class AjaxController extends Controller
                 $commentairesReturn = array();
 
                 //Récupération des commentaires
-                $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse,
-                                                                            'signaler' => 0),
+                $commentaires = $commentaireReponseRepository->findBy(array('reponse' => $reponse),
                                                                         array('date' => 'asc'));
                
                 //Remplissage du tableau de sortie commentaires
                 foreach($commentaires as $commentaire){
                     array_push($commentairesReturn, array(
-                        'id'=>$commentaire->getId(),
                         'description'=>$commentaire->getDescription(),
                         'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
                         'membre_username'=>$commentaire->getMembre()->getUsername()

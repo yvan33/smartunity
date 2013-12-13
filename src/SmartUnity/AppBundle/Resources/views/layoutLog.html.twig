@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -232,3 +233,240 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+<!-- Additional meta content -->
+    {% block meta %}{% endblock %}
+
+
+
+<!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
+
+
+<!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
+
+<!-- Additional styleSheets -->
+{% block stylesheets %}{% endblock %}
+
+
+
+<!-- Bootstrap core JavaScript  -->
+    <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+<!-- Additional Javascript src -->
+{% block initJS %}{% endblock %}
+
+
+</head>
+
+ 
+<!-- bg body -->
+<body class="bg" >
+<!-- head -->
+
+ <div class="container bg">
+ 
+    <div class="row">
+      <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h"/></div>
+      <div class="col-md-5">
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+
+          <div class="logo2">
+            <a href="#" class="pos-re">
+                <img src="{{ asset('assets/img/logo-iphon.png') }}"/>
+                <p class="red-dot">1</p>
+            </a>
+            <a href="{{ path('smart_unity_utilisateur_homepage') }}" class="pad-l">{{ app.user.username }}</a>
+            <a href="{{ path('fos_user_security_logout') }}"class="pad-l" >Déconnexion</a>
+          </div>
+           
+
+
+            {% else %}
+            
+            
+              <div class="logo2">
+                <div>
+                  <div class="pad-l" id="clic-pop" >
+                    <p style="cursor:  pointer;">Connection</p>
+                  </div>
+                  <a href="{{ path('fos_user_registration_register') }}" class="pad-l">
+                    <p>S'inscrire</p>
+                  </a>
+                  <div class="connection" id="pop">
+                    <div class="connection-triangle-content">
+                      <div class="connection-triangle" ></div>
+                      <div class="connection-triangle-border"></div>
+                      <div class="panel-body">
+                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                          <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
+                            <fieldset>
+                            <div class="form-group">
+                              <input class="form-control" style="background-color: #FFF; color:#666" placeholder="pseudo" type="text" id="username" name="_username" value="{{ last_username }}" required="required">        
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Password" type="password" id="password" name="_password" required="required">
+                            </div>
+                            <div class="checkbox">
+                              <label>
+                                <input id="remember_me" type="checkbox"  name="_remember_me" value="on"> Se souvenir de moi
+                                    <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a>
+                              </label>
+                            </div>
+                              <input class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" type="submit" value="Login" style="line-height:14px">
+                          </fieldset>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+
+            <script>
+       $( "#clic-pop,#pop" ).click(function(event) {
+        $( "#pop" ).fadeIn();
+             event.stopPropagation();
+
+            
+                                        });
+       $( document).click(function(event) {
+        $( "#pop" ).hide();
+        
+       
+      
+                                        });
+        </script> 
+
+
+            {% endif %}
+            
+
+    </div>
+  
+  </div>
+</div>  
+
+<!-- /.navbar-collapse -->
+<div class="nav-fixe ">
+  <div class="row">
+    <div class="col-md-12 menu-bg">
+      <nav class="navbar navbar-inverse" role="navigation">
+         <!--navbar- mobile -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                   <a class="navbar-brand" href="#"><div class="hid-home"><span class="glyphicon glyphicon-home" style="font-size:24px;
+  font-weight:bold;"></span><p class="cook-head">Smart'Unity</p></div></a>
+                    
+                  </div>
+    <!--navbar- standar -->
+                  <div class="collapse navbar-collapse navbar-ex1-collapse menu-mar" >
+                    <ul class="nav navbar-nav">
+                      <li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage' %}class="active"{% endif %}><a href="{{ path('smart_unity_app_homepage') }}" class="menu-pad"><span class="glyphicon glyphicon-home" style="font-size:24px;
+  font-weight:bold;margin-top: -8px"></span></a></li>
+                      <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
+                             or app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
+                             or app.request.attributes.get('_route') == 'smart_unity_question_reponse_search_questions'
+                             or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
+                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}" class="menu-pad">SMART'SOLUTION</a></li>
+                      <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href="#" class="menu-pad">BOUTIQUE</a></li>
+                      <li {% if app.request.attributes.get('_route') == 'smart_unity_forum_homepage' %}class="active"{% endif %}><a href="#" class="menu-pad">SMART'CAFE</a></li>
+                    </ul>
+                  </div>
+         <!--navbar- standar fin --> 
+      </nav>
+    </div>
+  </div>
+</div>
+<script>
+    var positionElementInPage = $('.nav-fixe').offset().top;
+        $(window).scroll(
+            function() {
+                if ($(window).scrollTop() >= positionElementInPage) {
+                    // fixed
+                    $('.nav-fixe').addClass("fixee");
+                    $('#cont').addClass("fixe-cont");
+                } else {
+                    // relative
+                    $('.nav-fixe').removeClass("fixee");
+                    $('#cont').removeClass("fixe-cont");
+                }
+            }
+        );
+</script>
+
+<!-- end nav -->
+<div id="cont"></div>
+<div style="min-height: 680px">
+ <div class="container">
+<div class="row">
+<div class="col-md-12">
+
+
+<!-- BODY -->
+
+{% block body %}
+
+
+{% endblock %}
+
+</div>
+</div>
+
+<!-- end BODY-->   
+
+<!-- footer --> 
+</div>
+</div>
+	<!-- footer separation --> 	
+  
+  <!-- footer separation fin --> 
+<div class="foot-sep">
+ <div class="container"> 
+  <div class="row footer" >
+    <div  style="display:inline-block;">
+      <span class="cook-foot">Suivez nous :</span>
+      <a href="http://facebook.com/smartunityy"><img src="{{ asset('assets/img/logo-f-f.png') }}" class="foot-im"/></a>
+      <a href="http://twitter.com/Smart_unity"><img src="{{ asset('assets/img/logo-t-f.png') }}" class="foot-im"/></a>
+      <a href="http://plus.google.com/103420400147208470743"><img src="{{ asset('assets/img/logo-g-f.png') }}" class="foot-im"/></a>
+    </div>
+    <div  style="display:inline-block;">
+      <a href="#">A propos de Smart'Unity</a>
+      <a href="#">Conditions generales d'utilisation</a>
+      <a href="#">Publicité</a>
+      <a href="#">Copyright Smart'Unity</a>
+    </div>
+        
+  </div> 
+</div>
+</div>
+
+{% block modal %}{% endblock %}
+
+<!-- call Javascript & scripts -->
+{% block callJS %}{% endblock %}
+
+
+</body>
+</html>
+>>>>>>> 73faee45f6548ec61b6dfbafe95cffb32367cf24

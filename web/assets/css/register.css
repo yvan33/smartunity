@@ -137,3 +137,7 @@
 .cleared{
     clear:both;
 }
+
+.btn-marge{
+    margin:10px;
+}

@@ -1,6 +1,6 @@
                           <div class="grille-reponse{% if reponse.is_certif or reponse.is_validated %}-smart{% endif %}">
-                                 <div class="grille-4">
-                                    <div class="roww" id="vote{{reponse.id}}" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% elseif reponse.is_voted %}Vous avez déjà noté cette question.{% endif %}">
+                                 <div class="grille-1" style="text-align:center">
+                                    <div class="roww" id="vote{{reponse.id}}" style="display:inline-block;text-align:center" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% elseif reponse.is_voted %}Vous avez déjà noté cette question.{% endif %}">
                                       <div class="fleche upVote" {% if is_granted('ROLE_USER') and not reponse.is_voted %}onClick="javascript:upVote({{reponse.id}})"{% endif %}>
                                           <img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">{{reponse.up_vote}}</p>
                                         </div>
@@ -22,7 +22,7 @@
                                     {% endif %}
                                 </div>
                                 
-                                <div class="grille-5" >
+                                <div class="grille-2" >
                          
                                   <div class="grille-3-over">
                                     <div class="grille-3">
@@ -50,20 +50,30 @@
                                 <p style="min-height: 100px">{{reponse.description}}</p>
 
                                     {% for commentaire in reponse.commentaires %}
-                                    <div class="commentaire">
-                                    <p style="float:left">{{commentaire.description}}</p><p style="float:right">
-                                  {{commentaire.membre_username}} le {{commentaire.date}}
-                                        <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
-                                </p>
-                                    </div>
+                                        <div class="commentaire">
+                                        <p style="float:left">{{commentaire.description}}</p><p style="float:right">
+                                            {{commentaire.membre_username}} le {{commentaire.date}}
+                                            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_reponse', {idCommentaireReponse: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                                        </p>
+                                        </div>
                                     {% endfor %}
 
                                     <div style="float:right">
                                     <div class="grille-3-btn">
-                                      <div style="float: left;margin-right: 5px;">
-                                        <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                                      {% if not reponse.is_certif and reponse.is_validated and is_granted('ROLE_ADMIN') %}
+                                      <div style="float:left; margin-right:5px;">
+                                        <a href="{{path('smart_unity_question_reponse_certification', {idReponse: reponse.id})}}"><img src="{{ asset('assets/img/certif-btn.png') }}"/></a>
                                       </div>
-                                       <a href="#"><div class="bouton-com-rep">Commenter</div></a>
+                                      {% endif %}
+                                      {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
+                                      <div style="float:left; margin-right:5px;">
+                                        <a href="{{path('smart_unity_question_reponse_validation_reponse', {idReponse: reponse.id})}}"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a>
+                                      </div>
+                                      {% endif %}
+                                      <div style="float: left;margin-right: 5px;">
+                                        <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                                      </div>
+                                       <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" href="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}">Commenter</a></div>
                                     </div>
                                     </div>
 

@@ -45,7 +45,7 @@
   .find-slider
     {
        margin-top: 10px;
-      padding-right: 30px;
+      padding-right: 35px;
 
     }
   .find-content
@@ -55,15 +55,74 @@
       left:1%;
       width:98%;
   }
+  .bouton-radio
+{
+  background: linear-gradient( to top, #bfbfbf,#fbfbfb);
+  border-radius:6px;
+  border-color:#333;
+  border-width:1px;
+  background-color:#898989;
+  margin-left:10px;
+  margin-right:10px;
+  width: 180px;
+     background: -webkit-linear-gradient( ... );
+     background:    -moz-linear-gradient( ... ); 
+     background:     -ms-linear-gradient( ... );
+     background:      -o-linear-gradient( ... );
+     background:         linear-gradient( ... );
+
+  padding:0px;
+height: 40px;
+line-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+}
+.search-btn {
+  display: inline-block;
+  background-color: #7b7a7a;
+  border:solid 1px #7b7a7a;
+    height: 32px;
+    color: #FFF;
+    width: 40px;
+    outline: none;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    line-height: 32px;
+    text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+}
+
+.cook-btn
+{
+  font-family:Cookie;
+  font-size:32px;
+}
+.form-control
+{
+  background-color: #7b7a7a;
+  border-radius: 10px;
+}
     </style>
 </div >
 </div >
 </div >
-
+<div style="overflow:hidden">
     <div class="row">
             <div class="col-md-6 col-md-offset-3" >
                       <div class="text-center">
-                      <div class="btn-group" data-toggle="buttons" style="margin-top:30px">
+                      <div class="btn-group" data-toggle="buttons" style="margin-top:25px">
                         <label class="btn bouton-radio active" id="sli-de"> <!-- id a jouter -->
                           <input type="radio" name="options" id="option1"><p class="cook-btn">Demander</p>
                         </label>
@@ -89,7 +148,7 @@
                               <input type="text" name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">
                               <input type="hidden" name="p" id="p" value="1" class="form-control">
                               <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
+                                <button class="search-btn" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                               </span>
                             </div>
                             </form>
@@ -121,6 +180,7 @@
                     });
                   });
                 </script>
+</div>
 <div class="container" >
 <div class="row">
 <div class="col-md-12">

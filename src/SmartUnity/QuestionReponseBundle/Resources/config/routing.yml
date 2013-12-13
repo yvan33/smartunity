@@ -29,22 +29,48 @@ smart_unity_question_reponse_add_reponse:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addReponse, slug:''}
 
 smart_unity_question_reponse_validation_reponse:
-    pattern:  /validation/
+    pattern:  /validation/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:validationReponse }
 
 smart_unity_question_reponse_certification:
-    pattern:  /certification/
+    pattern:  /certification/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:certificationReponse }
 
 smart_unity_question_reponse_add_commentaire_question:
-    pattern:  /ajouter-comm-question/
+    pattern:  /ajouter-comm-question/{slug}/
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addCommentaireQuestion }
 
 smart_unity_question_reponse_add_commentaire_reponse:
-    pattern:  /ajouter-comm-reponse/
+    pattern:  /ajouter-comm-reponse/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addCommentaireReponse }
+    requirements:
+        idReponse: \d+
 
+smart_unity_question_reponse_add_soutien_question:
+    pattern:  /ajouter-soutien/{slug}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addSoutienQuestion }
 
+smart_unity_question_reponse_signaler_question:
+    pattern:  /signaler-question/{slug}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerQuestion }
+
+smart_unity_question_reponse_signaler_reponse:
+    pattern:  /signaler-reponse/{idReponse}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerReponse }
+    requirements:
+        idReponse: \d+
+
+smart_unity_question_reponse_signaler_commentaire_question:
+    pattern:  /signaler-commentaireQuestion/{idCommentaireQuestion}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerCommentaireQuestion }
+    requirements:
+        idCommentaireQuestion: \d+
+
+smart_unity_question_reponse_signaler_commentaire_reponse:
+    pattern:  /signaler-commentaireReponse/{idCommentaireReponse}/
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerCommentaireReponse }
+    requirements:
+        idCommentaireReponse: \d+
 
 ######################
 #### AJAX ROUTING ####

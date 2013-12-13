@@ -1,49 +1,19 @@
+
 @media (min-width: 1200px){
-	.bouton-radio
-{
-	width:200px;
-}
-.grille-2
-{
-	width:430px;
-}
+
 
 }
 @media (min-width: 992px)  and (max-width: 1200px) {
-	.bouton-radio
-{
-	width:200px;
-}
-.grille-2
-{
-	width:260px;
-}
+
 
 }
-
 @media screen and (min-width: 768px) and (max-width: 992px) {
-	.bouton-radio
-{
-	width:200px;
-}
-.grille-2
-{
-	width:320px;
-} 
 
 
 }
+@media screen and (max-width: 768px){
 
-@media screen and (max-width: 768px)
-{
-.bouton-radio
-{
-	width:100%;
-}
-.grille-2
-{
-	width:45%;
-} 
+
 
 }
 .grille-1
@@ -101,27 +71,38 @@
 .grille-2
 {
 	float:left;
-	margin:10px;
+	margin-top:10px;
+	max-width:440px ;
+	min-width:380px ;
+
+
 }
 .grille-3
 {
+	height: 35px;
+	padding-top: 8px;
 	width:100px;
-	float:left;
-	margin:10px;
+	float:right;
+	margin:10px 0px;
 	text-align:center;
+
+	
 }
 .grille-4
 {
 	width:100px;
-	float:left;
-	margin:10px;
+	height: 35px;
+	float:right;
+	margin:10px 0px;
 	text-align:center;
 }
 .grille-5
-{
+{	
+	min-height: 35px;
+	padding-top: 8px;
 	width:100px;
-	float:left;
-	margin:10px;
+	float:right;
+	margin:10px 0px;
 	text-align:center;
 }
 
@@ -139,8 +120,6 @@
 }
 .grille-content-2
 {
-	margin-top:30px;
-	margin-bottom:30px;
 	background-color: #f8f8ef;
 	border-radius:5px;
 	border:2px solid #CCC;
@@ -148,25 +127,9 @@
        -moz-box-shadow: 0 0 20px  rgba(0,0,0,0.2);
             box-shadow: 0 0 20px  rgba(0,0,0,0.2);
 	overflow:hidden;
+	margin-bottom:35px;
 }
-.bouton-radio
-{
-	background: linear-gradient( to top, #bfbfbf,#fbfbfb);
-	border-radius:6px;
-	border-color:#333;
-	border-width:1px;
-	background-color:#898989;
-	height:50px;
-	margin-bottom:20px;
-	margin-left:10px;
-	margin-right:10px;
-     background: -webkit-linear-gradient( ... );
-     background:    -moz-linear-gradient( ... ); 
-     background:     -ms-linear-gradient( ... );
-     background:      -o-linear-gradient( ... );
-     background:         linear-gradient( ... );
-	
-}
+
 
 .slider
 {
@@ -205,12 +168,7 @@
 	
 	
 }
-.cook-btn
-{
-	font-family:Cookie;
-	font-size:40px;
-	margin-top:-10px
-}
+
 .grille-info
 {
 	
@@ -257,7 +215,7 @@
 	
 }
 .panel-heading {
-  padding: 10px 15px;
+  padding: 10px 10px;
 }
 .panel-group .panel + .panel {
   margin-top: 0px;
@@ -321,4 +279,11 @@
 	-webkit-box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
        -moz-box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
             box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
+}
+
+.cookie-title
+{
+    font-family: 'Cookie', cursive;
+    font-size: 3em;
+    margin-bottom: 10px;
 }

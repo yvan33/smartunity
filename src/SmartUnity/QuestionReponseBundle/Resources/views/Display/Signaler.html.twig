@@ -1,0 +1,27 @@
+{% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
+
+{% block title %}Smart'Unity - Resultats de la recherche{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css') }}">
+{% endblock %}
+
+
+
+{% block body %}
+
+	<div class="grille-content">
+	    <legend>Signaler</legend>
+
+		{{ form_start(formSignaler)}}
+		<div class="erreur">
+            {{ form_errors(formSignaler) }}
+	    </div>
+	    <div class="row">
+	        <div class="grille-1">{{form_widget(formSignaler.Signaler,{'attr': {'class': 'btn btn-primary'}})}}</div>
+	    </div>
+	    {{form_end(formSignaler)}}
+	</div>
+    
+{% endblock %}

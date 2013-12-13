@@ -1,0 +1,82 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %} 
+<link href="{{ asset('assets/css/register.css') }}" rel="stylesheet" type="text/css">
+{%endblock%}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        <div class="grille-content"> 
+            <div class="title text-center cookie-title">
+                Profil de {{membre.username}}
+            </div>
+
+            {% if avatar %}
+<div class="row " style="text-align: center;">
+    <img src="{{ asset('') }}{{ avatar }}" alt="avatar">
+</div>
+{% else %}
+<div class="row " style="text-align: center;">    
+    <img class="img-avatar" src="{{ asset( '') }}uploads/documents/logo.png" alt="avatar">
+</div>
+{% endif %}
+<div class="row premiere-ligne ">
+    <div class="grille-1">E-mail:</div>
+    <div class="grille-2"></div>
+</div>
+<div class="row ">
+    <div class="grille-1">Nom:</div>
+    <div class="grille-2">{{membre.nom}}</div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Prénom:</div>
+    <div class="grille-2">{{membre.prenom}}</div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Date de naissance:</div>
+    <div class="grille-2">
+{%if membre.datenaissance !=null %}
+{{ membre.datenaissance|date("d/m/Y")  }}
+    {%else%}
+    {%endif%}
+    </div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Sexe:</div>
+    <div class="grille-2">{%if membre.sexe =="m" %}
+        Masculin
+         {%elseif membre.sexe =="f" %}
+        Féminin
+          {%else%}
+        Non renseigné
+        {%endif%}</div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Appareil:</div>
+    <div class="grille-2">{{membre.telephone}}</div>
+</div>
+<div class="row  ">
+    <div class="grille-1">Un peu plus sur moi:</div>
+    <div class="grille-2"></div>
+</div>
+            <div class="cent-h bouton-bas-block">
+    <a href="{{ path('smart_unity_membre_questions', {'type': 'onFire', 'page': '1', 'id': membreId}) }}" class="btn btn-sm btn-primary">
+       Voir ses questions
+    </a>
+
+
+    <a href="#" class="btn btn-sm btn-primary btn-marge">
+        Voir ses réponses
+    </a>
+</div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}
