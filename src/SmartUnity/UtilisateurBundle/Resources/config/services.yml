@@ -28,4 +28,10 @@ services:
    utilisateur.twig.utilisateur_extension:
         class: SmartUnity\UtilisateurBundle\Twig\utilisateurExtension
         tags:
-            - { name: twig.extension }            
+            - { name: twig.extension }
+
+   smart_unity_app.type.hidden_entity:
+        class: SmartUnity\UtilisateurBundle\Form\Type\HiddenEntityType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: hidden_entity }

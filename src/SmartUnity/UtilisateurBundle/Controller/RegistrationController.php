@@ -34,9 +34,9 @@ include_once(__DIR__ . '/../../../../web/phpconsole/install.php');
  */
 class RegistrationController extends BaseController
 {
-    public function registerAction(Request $request)
+    public function registerAction(Request $request, $parrain = null)
     {
-        p($request);
+
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -47,6 +47,8 @@ class RegistrationController extends BaseController
         $user = $userManager->createUser();
         $user->setEnabled(true);
 
+
+
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
 
@@ -54,15 +56,34 @@ class RegistrationController extends BaseController
             return $event->getResponse();
         }
 
-        $form = $formFactory->createForm();
-        $form->setData($user);
+        if (isset($parrain))
+        {
+            $form = $formFactory->createForm();
+            $form->setData($user);
+            $form['parrain']->setData($parrain);
+        }
+        else {
+
+            $form = $formFactory->createForm();
+            $form->setData($user);
+        }
 
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
 
+            
+
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+                $test_parrain=$form->getData()->getParrain();
+                if($test_parrain  != null){
+                    $user->setCagnotte(10);
+                    $test_parrain=$form->getData()->getParrain();
+                    $parrain_cagnotte=$test_parrain->getCagnotte() + 10 ;
+                    $test_parrain->setCagnotte($parrain_cagnotte);
+                    $userManager->updateUser($test_parrain);                  
+                }
 
                 $userManager->updateUser($user);
 

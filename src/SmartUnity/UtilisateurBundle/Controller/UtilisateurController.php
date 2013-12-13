@@ -211,13 +211,11 @@ class UtilisateurController extends Controller {
     } 
 
     public function ConfirmParrainageAction($code) {
-
+       
         $parrainrepository= $this->getDoctrine()->getManager()->getRepository('SmartUnityAppBundle:parrainage');
         $parrains=$parrainrepository->getParrain($code);
-        
-        return $this->forward('FOS\UserBundle\Controller\RegistrationController::registerAction');
-
-        // return $this->redirect($this->generateUrl('fos_user_registration_register'));
+        $parrain=$parrains->getMembre();
+        return $this->forward('SmartUnityUtilisateurBundle:Registration:register', array( 'parrain' => $parrain));
     } 
     
 
@@ -228,9 +226,8 @@ class UtilisateurController extends Controller {
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
         $em->remove($avatar);
         $em->flush();
+        return $this->forward('SmartUnityUtilisateurBundle:Utilisateur:index');
 
-        return $this->forward(
-                        'SmartUnityUtilisateurBundle:Utilisateur:index');
     }
 
 }

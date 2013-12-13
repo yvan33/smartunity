@@ -194,6 +194,21 @@ class membre extends BaseUser
     private $parrainages;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\membre", mappedBy="parrain")
+     *
+     **/
+    private $filleuls;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", inversedBy="filleuls")
+     * @ORM\JoinColumn(name="parrain_id", referencedColumnName="id")
+     *
+     **/
+    private $parrain;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -206,6 +221,7 @@ class membre extends BaseUser
         $this->reponsesCertifiees = new \Doctrine\Common\Collections\ArrayCollection();
         $this->soutienQuestions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->commentaireReponses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->filleuls = new \Doctrine\Common\Collections\ArrayCollection();
         $date = new \DateTime('now');
         $this->setDateInscription($date);
     }
@@ -848,5 +864,94 @@ class membre extends BaseUser
     {
         return $this->commentaireQuestions;
 
+    }
+
+    /**
+     * Add parrainages
+     *
+     * @param \SmartUnity\AppBundle\Entity\parrainage $parrainages
+     * @return membre
+     */
+    public function addParrainage(\SmartUnity\AppBundle\Entity\parrainage $parrainages)
+    {
+        $this->parrainages[] = $parrainages;
+    
+        return $this;
+    }
+
+    /**
+     * Remove parrainages
+     *
+     * @param \SmartUnity\AppBundle\Entity\parrainage $parrainages
+     */
+    public function removeParrainage(\SmartUnity\AppBundle\Entity\parrainage $parrainages)
+    {
+        $this->parrainages->removeElement($parrainages);
+    }
+
+    /**
+     * Get parrainages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getParrainages()
+    {
+        return $this->parrainages;
+    }
+
+    /**
+     * Add filleuls
+     *
+     * @param \SmartUnity\AppBundle\Entity\membre $filleuls
+     * @return membre
+     */
+    public function addFilleul(\SmartUnity\AppBundle\Entity\membre $filleuls)
+    {
+        $this->filleuls[] = $filleuls;
+    
+        return $this;
+    }
+
+    /**
+     * Remove filleuls
+     *
+     * @param \SmartUnity\AppBundle\Entity\membre $filleuls
+     */
+    public function removeFilleul(\SmartUnity\AppBundle\Entity\membre $filleuls)
+    {
+        $this->filleuls->removeElement($filleuls);
+    }
+
+    /**
+     * Get filleuls
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFilleuls()
+    {
+        return $this->filleuls;
+    }
+
+    /**
+     * Set parrain
+     *
+     * @param \SmartUnity\AppBundle\Entity\membre $parrain
+     * @return membre
+     */
+    public function setParrain(\SmartUnity\AppBundle\Entity\membre $parrain = null)
+    {
+        $this->parrain = $parrain;
+    
+        return $this;
+    }
+
+    /**
+     * Get parrain
+     *
+     * @return \SmartUnity\AppBundle\Entity\menbre 
+     */
+    public function getParrain()
+    {
+        return $this->parrain;
     }
 }

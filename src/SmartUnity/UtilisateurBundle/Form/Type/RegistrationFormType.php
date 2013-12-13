@@ -4,6 +4,7 @@ namespace SmartUnity\UtilisateurBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use SmartUnity\UtilisateurBundle\Form\Type\HiddenEntity;
 
 class RegistrationFormType extends BaseType {
 
@@ -91,7 +92,7 @@ class RegistrationFormType extends BaseType {
                     'choices' => array(
                         '1' => 'Oui', '0' => 'Non'),
                     'expanded' => true,
-                    'data' => 1
+                  'data' => 1
                 ))
                 ->add('pref_repValidee', 'choice', array(
                     'label' => 'Recevoir une notification lorsque mes réponses sont validées',
@@ -106,6 +107,9 @@ class RegistrationFormType extends BaseType {
                         '1' => 'Oui', '0' => 'Non'),
                     'expanded' => true,
                     'data' => 1
+                ))
+                ->add('parrain', 'hidden_entity', array(
+                    'entity' => 'SmartUnityAppBundle:membre',
                 ))
         ;
     }

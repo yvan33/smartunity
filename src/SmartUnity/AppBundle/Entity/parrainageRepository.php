@@ -12,4 +12,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class parrainageRepository extends EntityRepository
 {
+
+	public function getParrain($code){
+
+
+      	$query = $this->_em->createQuery('
+      		SELECT p
+      		FROM SmartUnityAppBundle:parrainage p
+      		WHERE p.code = :code')
+            ->setParameter('code', $code);
+
+            $result = $query->getResult();
+
+
+            if(count($result) != 0)
+                  return $result[0];
+            else 
+                  return false;
+
+ 
+
+	}
+
+
 }

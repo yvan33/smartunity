@@ -42,13 +42,6 @@ class parrainage
     private $code;
 
     /**
-     * @var date
-     *
-     * @ORM\Column(name="dateEnvoi", type="datetime")
-     */
-    private $dateEnvoi;
-
-    /**
      * Get id
      *
      * @return integer 
@@ -132,5 +125,51 @@ class parrainage
     public function removeMembre(\SmartUnity\AppBundle\Entity\membre $membre)
     {
         $this->membre->removeElement($membre);
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     * @return parrainage
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set dateEnvoi
+     *
+     * @param \DateTime $dateEnvoi
+     * @return parrainage
+     */
+    public function setDateEnvoi($dateEnvoi)
+    {
+        $this->dateEnvoi = $dateEnvoi;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateEnvoi
+     *
+     * @return \DateTime 
+     */
+    public function getDateEnvoi()
+    {
+        return $this->dateEnvoi;
     }
 }
