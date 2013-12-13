@@ -423,5 +423,20 @@ class questionRepository extends EntityRepository {
         }
         
     }
+    public function getNombreQuestionsAnsweredByUser($membreId) {
 
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
+        $rsm->addScalarResult('nb_questions', 'nb');
+
+        $sql = 'Select count(q.id) as nb_questions 
+            FROM
+        (Select r.id, question_id From reponse r  where r.membre_id = :membreId )as p , question q 
+        Where p.question_id=q.id';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('membreId', $membreId);
+
+        return $query->getSingleScalarResult();
+    }
 }

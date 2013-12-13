@@ -42,7 +42,7 @@ class AjaxMembreController extends Controller {
         } elseif ($route == 'smart_unity_membre_reponses') {
            
             $listeQuestion = $questionRepository->getQuestionsAnsweredByUser($nbParPage, $page, $membreId);
-            $nbQuestions = $questionRepository->getNombreQuestionsOnFireForUser($membreId);
+            $nbQuestions = $questionRepository->getNombreQuestionsAnsweredByUser($membreId);
         }
 
 
