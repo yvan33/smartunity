@@ -29,9 +29,9 @@
 
             <div class="collapse-menu">
                 <ul class="nav nav-tabs" id="myTab">
-                    <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Questions r&eacute;solues</a></li>
-                    <li {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'onFire', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="onFire-tab">On Fire</a></li>
-                    <li {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
+                    <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Toutes ses réponses</a></li>
+                    <li {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'onFire', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="onFire-tab">Ses réponses validées</a></li>
+                    <li {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Ses réponses certifiées</a></li>
                 </ul>
             </div>
             <!-- nav div menu fin-->

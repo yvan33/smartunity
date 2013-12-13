@@ -66,6 +66,10 @@ class RegistrationFormType extends BaseType {
 //                    'allow_add' => true,
 //                    'prototype' => true
 //                ))
+                ->add('telephone','text',array(
+                    'required'=> false,
+                ))
+        
                 ->add('pref_mp', 'choice', array(
                     'label' => 'Recevoir les notifications des messages privés',
                     'choices' => array(

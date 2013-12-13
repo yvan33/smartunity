@@ -18,7 +18,7 @@ class QuestionReponseMembreController extends Controller {
 
 
         $request = $this->get('request');
-        $routeName = $request->get('_route');
+        $route = $request->get('_route');
 
 
         // get the error if any (works with forward and redirect -- see below)
@@ -57,7 +57,7 @@ class QuestionReponseMembreController extends Controller {
             'page' => $page,
             'nbParPage' => $nbParPage,
             'membreId' => $id,
-            'routeName' => $routeName,
+            'route' => $route,
         ));
 
         //Suppression de l'en tête HTTP et décodage du JSON
@@ -97,6 +97,7 @@ class QuestionReponseMembreController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $username = $em->getRepository('SmartUnityAppBundle:membre')->find($id)->getUsername();
 
+if ($route == 'smart_unity_membre_questions'){        
         $template = sprintf('SmartUnityUtilisateurBundle:ProfilPublic:QuestionsMembre.html.twig');
         return $this->render($template, array(
                     'error' => $error,
@@ -109,7 +110,26 @@ class QuestionReponseMembreController extends Controller {
                     'pagination' => $pagination,
                     'membreId' => $id,
                     'username' => $username,
+                    'route' => $route,
         ));
+}
+
+if ($route == 'smart_unity_membre_reponses'){        
+        $template = sprintf('SmartUnityUtilisateurBundle:ProfilPublic:ReponsesMembre.html.twig');
+        return $this->render($template, array(
+                    'error' => $error,
+                    'page' => $page,
+                    'type' => $type,
+                    'nbPages' => $nbPages,
+                    'listeQuestions' => $listeQuestions,
+                    'countListe' => count($listeQuestions),
+                    'nbParPage' => $nbParPage,
+                    'pagination' => $pagination,
+                    'membreId' => $id,
+                    'username' => $username,
+                    'route' => $route,
+        ));
+}
     }
 
     public function displayReponseAction($slug, $page, $tri, Request $request) {

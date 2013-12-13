@@ -49,19 +49,19 @@
                 <fieldset>
                     <legend>Compte</legend>
                     <div class="row premiere-ligne ">
-                        <div class="grille-1">{{form_label(form.username)}}<span style="color: red;">*</span></div>
+                        <div class="grille-1">{{form_label(form.username)}}<span style="color: red;"> *</span></div>
                         <div class="grille-2">{{form_widget(form.username)}}</div>
                     </div> 
                     <div class="row">
-                        <div class="grille-1">{{form_label(form.email)}}<span style="color: red;">*</span></div>
+                        <div class="grille-1">{{form_label(form.email)}}<span style="color: red;"> *</span></div>
                         <div class="grille-2">{{form_widget(form.email)}}</div>
                     </div> 
                     <div class="row">
-                        <div class="grille-1">{{form_label(form.plainPassword.first)}}<span style="color: red;">*</span></div>
+                        <div class="grille-1">{{form_label(form.plainPassword.first)}}<span style="color: red;"> *</span></div>
                         <div class="grille-2">{{form_widget(form.plainPassword.first)}}</div>
                     </div> 
                     <div class="row">
-                        <div class="grille-1">{{form_label(form.plainPassword.second)}}<span style="color: red;">*</span></div>
+                        <div class="grille-1">{{form_label(form.plainPassword.second)}}<span style="color: red;"> *</span></div>
                         <div class="grille-2">{{form_widget(form.plainPassword.second)}}</div>
                     </div>                                  
 
@@ -86,6 +86,10 @@
                         <div class="grille-1">{{form_label(form.date_naissance)}}</div>
                         <div class="grille-2">{{form_widget(form.date_naissance)}}</div>
                     </div>
+                    <div class="row ">
+                        <div class="grille-1">Smartphone possédé :</div>
+                        <div class="grille-2">{{form_widget(form.telephone)}}</div>
+                    </div>                    
 {#                    <div class="row ">
                         <div class="grille-1">Ville</div>
                         <div class="grille-2">
@@ -99,10 +103,7 @@
 
                         </div>
                     </div>#} 
-                    <div class="row ">
-                        <div class="grille-1"></div>
-                        <div class="grille-2">{{form_widget(form.date_naissance)}}</div>
-                    </div>                    
+                   
                 </fieldset>
 
                 <fieldset>

@@ -46,7 +46,7 @@ class membre extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=12, nullable=true)
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
      */
     private $telephone;
 

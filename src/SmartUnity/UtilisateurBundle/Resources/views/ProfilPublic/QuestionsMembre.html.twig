@@ -355,7 +355,7 @@
             fixHeight();
             $('#accordion-' + type).fadeOut('fast');
             console.log('Testing console');
-            $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId + '/' + type + '/1/' + nbParPage, function(donnees) {
+            $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId + '/' + type + '/1/' + nbParPage + '/' + route, function(donnees) {
                 var content = '';
                 if (donnees[0]['page'] == 1 && donnees[0]['type'] == type && donnees[0]['nbParPage'] == nbParPage) {
 
@@ -417,7 +417,7 @@
         page[type] = pPage;
 
         //On récupère le JSON depuis le controller AjaxController
-        $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId + '/' + type + '/' + pPage + '/' + nbParPage, function(donnees) {
+        $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId + '/' + type + '/' + pPage + '/' + nbParPage + '/' + route, function(donnees) {
             var content = '';
             if (donnees[0]['page'] == pPage && donnees[0]['type'] == type && donnees[0]['nbParPage'] == nbParPage) {
                 donnees.shift(); //On supprime la ligne de check du JSON
@@ -475,7 +475,8 @@
 
 
         //Initialise les valeurs des pages/onglets ouverts.... 
-        membreId = '{{membreId}}';
+        membreId = '{{ membreId }}';
+        route = '{{ route }}';
         type = '{{ type }}';
         page = new Array();
         page[type] ={{ page }};

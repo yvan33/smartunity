@@ -396,4 +396,32 @@ class questionRepository extends EntityRepository {
         return $query->getSingleScalarResult();
     }
 
+    public function getQuestionsAnsweredByUser($nbParPage, $page, $membreId) {
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
+        $offset = ($page - 1) * $nbParPage;
+
+        $sql = 'Select q.* from
+        (Select r.id, question_id From reponse r  where r.membre_id = :membreId )as p , question q 
+        Where p.question_id=q.id
+        ORDER BY q.date DESC
+        LIMIT :offset, :nbParPage';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('membreId', $membreId);
+        $query->setParameter('offset', (int) $offset);
+        $query->setParameter('nbParPage', (int) $nbParPage);
+
+        $result = $query->getResult();
+        if (count($result) != 0) {
+            return $result;
+            
+        } else {
+            return false;
+
+        }
+        
+    }
+
 }
