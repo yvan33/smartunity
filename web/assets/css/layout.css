@@ -255,6 +255,7 @@
 }
 
 }
+
 .cook-head
 {
 	float:right;
@@ -264,6 +265,7 @@
 	margin-bottom:2px;
 	font-size:26pt;
 }
+
 .connection
 {
 	position: absolute;
@@ -273,9 +275,8 @@
 	z-index: 10000000;
 	margin-top: 5px;
 	display: none;
-	
-	
 }
+
 .connection-triangle-border
 {	position: relative;
     z-index: 1000001;
@@ -287,11 +288,8 @@
 	margin-top:-17px;
 	margin-left: auto;
 	margin-right: auto;
-
-
-
-
 }
+
 .connection-triangle
 {
 	position: relative;
