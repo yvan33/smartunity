@@ -2015,9 +2015,7 @@ textarea.input-lg {
 }
 
 .btn:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
+  outline: none;
 }
 
 .btn:hover,
