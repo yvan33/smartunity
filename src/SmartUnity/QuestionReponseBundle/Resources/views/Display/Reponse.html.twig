@@ -43,7 +43,7 @@
                                               <img src="{{ asset('assets/img/logo-compte.png') }}"/>
                                         </div>
                                         <div class=" grille-3-txt">
-                                          <p style="margin:0px; font-weight:600">{{ question.membre.username }}</p>
+                                            <p style="margin:0px; font-weight:600"><a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}">{{ question.membre.username }}</a></p>
                                             <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
                                             <p style="margin:0px">{{nb_questions_membre}} Questions</p>
                                             <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
@@ -71,7 +71,7 @@
                                 {% if commentaire.signaler == 0 %}
                                     <div class="commentaire">
                                     <p style="float:left">{{commentaire.description}}</p><p style="float:right">
-                                  {{commentaire.membre.username}} le {{commentaire.date|date('d-m-Y H:i')}}
+                                  <a href="{{ path('smart_unity_membre_profil', {id: commentaire.membre.id}) }}">{{commentaire.membre.username}}</a> le {{commentaire.date|date('d-m-Y H:i')}}
                                         <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_question', {idCommentaireQuestion: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                     </p>
                                     </div>

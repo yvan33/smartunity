@@ -81,7 +81,6 @@ class AjaxController extends Controller
                 	'description'=>$Question->getDescription(),
                 	'date'=>$Question->getDate()->format('d-m-Y à H:i'),
                     'membre_username'=>$Question->getMembre()->getUsername(),
-                    'membre_id' => $Question->getMembre()->getId(),
                     'remuneration'=>$Question->getRemuneration(),
                     'nb_reponses'=>$Question->getReponses()->count(),
                     'best_reponse'=>$bestReponse,
@@ -162,7 +161,8 @@ class AjaxController extends Controller
                         'id'=>$commentaire->getId(),
                         'description'=>$commentaire->getDescription(),
                         'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
-                        'membre_username'=>$commentaire->getMembre()->getUsername()
+                        'membre_username'=>$commentaire->getMembre()->getUsername(),
+                        'membre_id' => $commentaire->getMembre()->getId(),
                     ));
                 }
 
@@ -198,6 +198,7 @@ class AjaxController extends Controller
                     'up_vote'=> (int) $reponse['upVote'],
                     'down_vote'=> (int) $reponse['downVote'],
                     'membre_username'=>$membre->getUsername(),
+                    'membre_id' => $membre->getId(),
                     'membre_reputation'=>$membre->getReputation(),
                     'commentaires'=>$commentairesReturn,
                     'is_certif'=>$isCertif,

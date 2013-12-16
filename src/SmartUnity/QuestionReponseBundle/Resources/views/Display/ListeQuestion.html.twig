@@ -56,7 +56,7 @@
                                                 <!-- describ question-->
                                         <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
                                         <div class="grille-2" ><p>{{question.sujet}}</p>
-                                            <p style="font-weight:200; font-style:italic"><a href="{{ path('smart_unity_membre_profil', {id: question.membre_id}) }}">{{ question.membre_username }}</a> le {{ question.date }}</p></div>
+                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
                                         </a>
                                                 <!-- describ question fin-->
                                                 <!-- nb réponses vues-->

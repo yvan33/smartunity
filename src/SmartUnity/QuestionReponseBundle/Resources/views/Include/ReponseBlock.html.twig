@@ -32,7 +32,7 @@
                                                   <img src="{{ asset('assets/img/logo-compte.png') }}"/>
                                             </div>
                                             <div class=" grille-3-txt">
-                                              <p style="margin:0px; font-weight:600">{{reponse.membre_username}}</p>
+                                                <p style="margin:0px; font-weight:600"><a href="{{ path('smart_unity_membre_profil', {id: reponse.membre_id}) }}">{{reponse.membre_username}}</a></p>
                                             <p style="margin:0px">{{reponse.smart_reponses}} Smart'Reponses</p>
                                             <p style="margin:0px">{{reponse.nb_questions_membre}} Questions</p>
                                             <p style="margin:0px">{{reponse.points_membre}} Smart'Points</p>

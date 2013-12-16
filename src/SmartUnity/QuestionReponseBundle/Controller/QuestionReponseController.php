@@ -213,6 +213,7 @@ class QuestionReponseController extends Controller
                 'description'=>$Question->getDescription(),
                 'date'=>$Question->getDate()->format('d-m-Y à H:i'),
                 'membre_username'=>$Question->getMembre()->getUsername(),
+                'membre_id' => $Question->getMembre()->getId(),                
                 'remuneration'=>$Question->getRemuneration(),
                 'nb_reponses'=>$Question->getReponses()->count(),
                 'best_reponse'=>$bestReponse,
@@ -374,7 +375,8 @@ class QuestionReponseController extends Controller
             'nbParPage'=>$nbParPage,
             'question'=>$question,
             'smart_reponses'=> (int) $smartReponses,
-            'nb_questions_membre'=> (int) $nb_questions_membre
+            'nb_questions_membre'=> (int) $nb_questions_membre,
+            'membre_id' => $membre->getId(),
         ));
     }
 
