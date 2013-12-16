@@ -148,7 +148,8 @@
 	
 .bg
 {
-	background-color:#edebeb;
+	background-color: #dddcdc;
+	background: url(../img/pattern-2.png);
 
 }
 .logo
