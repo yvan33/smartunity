@@ -1,9 +1,15 @@
+@font-face{
+    font-family : "centrale";
+    src : url(../fonts/Centrale.ttf);
+}
+
 @media (min-width: 1201px){
 
 .menu-pad 
 {
-	font-size:14px;
-	height:43px;
+	font-family: centrale;
+	font-size: 15px;
+	height: 43px;
 	line-height: 43px;
 	margin: 0px 20px;
 }
@@ -15,9 +21,9 @@
 }
 .valign-col
 {
-	float:none;
-	display:table-cell;
-	vertical-align:middle;
+	float: none;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 
@@ -42,7 +48,8 @@
   
 .menu-pad 
 {
-	font-size:14px;
+	font-family: centrale;
+	font-size: 15px;
 	line-height: 43px;
 	margin: 0px 20px -7px 20px;
 }
@@ -80,7 +87,8 @@
   
 .menu-pad 
 {
-	font-size:14px;
+	font-family: centrale;
+	font-size: 15px;
 	line-height: 43px;
 	margin: 0px 20px -7px 20px;
 }
@@ -103,20 +111,15 @@
 
 @media screen and (max-width: 768px) {
 
-.menu-pad 
-{
-	  font-size:12px;	
-}
-
 .logo2
 {
-	
 	z-index:101; 
 }
 
 .menu-pad 
 {
-	font-size:14px;
+	font-family: centrale;
+	font-size:12px;
 	padding-top:5px;
 }
 
@@ -289,11 +292,8 @@
 	margin-top:-13px;
 	margin-left: auto;
 	margin-right: auto;
-
-	
-
-
 }
+
 .connection-triangle-content
 {
 	width: 100%;
@@ -307,12 +307,14 @@
 	margin: 0px;
 
 }
+
 .fixee
 {	
 	position:fixed;
  	top:0px;
 
 }
+
 .fixe-cont
 {
 	height: 65px;
