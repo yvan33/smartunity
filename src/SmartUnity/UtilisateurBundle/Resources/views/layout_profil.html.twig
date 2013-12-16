@@ -99,15 +99,16 @@
             <div class="row">
                 <div class="grille-1"></div>
                 <div class="grille-2"></div>
-            </div>
-            <div class="row">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
-            <div class="row">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>
+            </div> 
+
+            {% if parrain is not empty %}
+                <div class="row">
+                    <div class="grille-1">Votre parrain est:</div>
+                    <div class="grille-2">{{ parrain }} </div>
+                </div>
+            {% endif %}
+
+
             <div class="row">
                 <div class="grille-1"></div>
                 <div class="grille-2"></div>
@@ -119,6 +120,7 @@
                 <div class="grille-1">Envoyer une demande de parrainage</div>
                 <div class="grille-2">{{form_widget(form_parrainage.email)}} </div>
             </div>
+
             <div class="cent-h bouton-bas-block">
                     <button type="submit" class="btn btn-sm btn-default">Envoyer 
             </div>

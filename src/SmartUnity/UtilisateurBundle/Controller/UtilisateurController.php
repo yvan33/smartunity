@@ -32,9 +32,16 @@ class UtilisateurController extends Controller {
         $smartreponse = $membreRepository->getSmartReponses($userid);
         $remuneration = 0;
         $remuneration = $membreRepository->getRemuneration($userid);
+        $parrainmembre = $user->getParrain();
+        if (isset($parrainmembre)){
+        $parrain=$membreRepository->find($parrainmembre)->getUsername();            
+        }
+        else{
+            $parrain="";
+        }
+
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
-//        p( 'formpassword :');
-//        p($formPassword);
+
         if (isset($avatar)) {
             $avatar = $avatar->getWebPath();
         }
@@ -46,7 +53,8 @@ class UtilisateurController extends Controller {
                         'smartrep' => $smartreponse,
                         'remuneration' => $remuneration,
                         'form_password' => $formPassword,
-                        'form_parrainage' => $form_parrainage->createView()
+                        'form_parrainage' => $form_parrainage->createView(),
+                        'parrain'=> $parrain
             ));
         } else if (isset($formInfos)) {
             return $this->render('SmartUnityUtilisateurBundle:Profile:edit.html.twig', array(
@@ -54,7 +62,8 @@ class UtilisateurController extends Controller {
                         'smartrep' => $smartreponse,
                         'remuneration' => $remuneration,
                         'form_infos' => $formInfos,
-                        'form_parrainage' => $form_parrainage->createView()
+                        'form_parrainage' => $form_parrainage->createView(),
+                        'parrain'=> $parrain
             ));
         } else if (isset($formAvatar)) {
             return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
@@ -62,6 +71,7 @@ class UtilisateurController extends Controller {
                         'smartrep' => $smartreponse,
                         'remuneration' => $remuneration,
                         'form_parrainage' => $form_parrainage->createView(),
+                        'parrain'=> $parrain,
                         'form_avatar' => $formAvatar,
                         'avatar' => $avatar,
             ));
@@ -72,7 +82,8 @@ class UtilisateurController extends Controller {
                         'smartrep' => $smartreponse,
                         'remuneration' => $remuneration,
                         'avatar' => $avatar,
-                        'form_parrainage' => $form_parrainage->createView()
+                        'form_parrainage' => $form_parrainage->createView(),
+                        'parrain'=> $parrain
             ));
         }
     }
@@ -207,7 +218,7 @@ class UtilisateurController extends Controller {
 
        
         $parrainrepository= $this->getDoctrine()->getManager()->getRepository('SmartUnityAppBundle:parrainage');
-        $parrains=$parrainrepository->getParrain($code);
+        $parrains=$parrainrepository->getParrainByCode($code);
         $parrain=$parrains->getMembre();
         return $this->forward('SmartUnityUtilisateurBundle:Registration:register', array( 'parrain' => $parrain));
     } 

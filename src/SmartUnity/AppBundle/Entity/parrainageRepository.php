@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class parrainageRepository extends EntityRepository
 {
 
-	public function getParrain($code){
+	public function getParrainByCode($code){
 
 
       	$query = $this->_em->createQuery('
