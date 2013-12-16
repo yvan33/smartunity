@@ -49,15 +49,13 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                   <a class="navbar-brand" href="#"><div class="hid-home"><span class="glyphicon glyphicon-home" style="font-size:24px;
-  font-weight:bold;"></span><p class="cook-head">Smart'Unity</p></div></a>
+                   <a class="navbar-brand" href="#"><div class="hid-home"><img src="{{ asset('assets/img/logo-su-nb-grey.png') }}"/><p class="cook-head">Smart'Unity</p></div></a>
                     
                   </div>
     <!--navbar- standar -->
                   <div class="collapse navbar-collapse navbar-ex1-collapse menu-mar" >
                     <ul class="nav navbar-nav">
-                      <li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage' %}class="active"{% endif %}><a href="{{ path('smart_unity_app_homepage') }}" class="menu-pad"><span class="glyphicon glyphicon-home" style="font-size:24px;
-  font-weight:bold;margin-top: -8px"></span></a></li>
+                      <li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage' %}class="active"{% endif %}><a href="{{ path('smart_unity_app_homepage') }}" class="menu-pad"><img src="{{ asset('assets/img/logo-su-nb.png') }}"/></a></li>
                       <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_search_questions'
@@ -104,7 +102,7 @@
  <div class="container ">
  
     <div class="row">
-      <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su.png') }}"  class="img-responsive logo cent-h"/></div>
+      <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su1.png') }}"  class="img-responsive logo cent-h"/></div>
       <div class="col-md-5">
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
