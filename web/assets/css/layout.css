@@ -1,4 +1,4 @@
-@media (min-width: 1200px){
+@media (min-width: 1201px){
 .menu-bg
 {
 	background-image:url(../img/background-menu.png);
@@ -33,29 +33,33 @@
 {
 	width: 250px;
 	margin-left: 75px;
-	
+}
+
+.nav img {
+	margin-top: -7px;
+	width: 90%;
 }
 }
-@media (min-width: 992px)  and (max-width: 1200px) {
+
+@media (min-width: 993px) and (max-width: 1200px) {
   
 .menu-bg
 {
 	background-image:url(../img/background-menu.png);
 }
+
 .menu-pad 
 {
 	font-size:14px;
 	line-height: 43px;
 	margin: 0px 20px -7px 20px;
 }
-.logo2
-{
-	
-}
+
 .valign-row
 {
 	display:table;
 }
+
 .valign-col
 {
 	float:none;
@@ -73,6 +77,11 @@
 	width: 300px;
 	margin-left: 15px;
 }
+
+.nav img {
+	margin-top: -7px;
+	width: 90%;
+}
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
@@ -81,15 +90,12 @@
 {
 	background-image:url(../img/background-menu.png);
 }
+
 .menu-pad 
 {
 	font-size:14px;
 	line-height: 43px;
 	margin: 0px 20px -7px 20px;
-}
-.logo2
-{
-
 }
 
 .hid-home
@@ -100,6 +106,11 @@
 {
 	width: 300px;
 	margin-left: 185px;
+}
+
+.nav img {
+	margin-top: -7px;
+	width: 90%;
 }
 }
 
