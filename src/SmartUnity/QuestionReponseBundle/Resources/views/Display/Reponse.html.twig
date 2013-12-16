@@ -377,14 +377,14 @@ function generateContent(pEntry, i){
 
 
                                       entity +=' {% endif %}> \
-                                          <img src="{{ asset('assets/img/fléche-verte.png') }}" /><p style="color:#7fc236">' + pEntry['up_vote'] + '</p> \
+                                          <img src="{{ asset('assets/img/fleche_plus.png') }}" /><p style="color:#7fc236">' + pEntry['up_vote'] + '</p> \
                                         </div> \
                                         <div class="fleche downVote" {% if is_granted('ROLE_USER') %}';
 
                                       if( !pEntry['is_voted'] ) entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
 
                                         entity += '{% endif %}> \
-                                          <img src="{{ asset('assets/img/fléche-rouge.png') }}"/><p style="color:#F00">' + pEntry['down_vote'] + '</p> \
+                                          <img src="{{ asset('assets/img/fleche_moins.png') }}"/><p style="color:#F00">' + pEntry['down_vote'] + '</p> \
                                         </div> \
                                     </div> \
                                     <div class="roww"> \
