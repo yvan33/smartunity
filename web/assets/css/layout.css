@@ -254,10 +254,11 @@
 	margin-right: 10px;
 }
 
-}
+
 
 .cook-head
 {
+	color: white;
 	float:right;
 	font-family:Cookie;
 	margin-left:10px;
@@ -330,5 +331,5 @@
 {
 	height: 65px;
 }
-
+}
 
