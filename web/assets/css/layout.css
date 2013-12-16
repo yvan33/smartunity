@@ -1,8 +1,5 @@
 @media (min-width: 1201px){
-.menu-bg
-{
-	background-image:url(../img/background-menu.png);
-}
+
 .menu-pad 
 {
 	font-size:14px;
@@ -43,11 +40,6 @@
 
 @media (min-width: 993px) and (max-width: 1200px) {
   
-.menu-bg
-{
-	background-image:url(../img/background-menu.png);
-}
-
 .menu-pad 
 {
 	font-size:14px;
@@ -86,11 +78,6 @@
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
   
-.menu-bg
-{
-	background-image:url(../img/background-menu.png);
-}
-
 .menu-pad 
 {
 	font-size:14px;
@@ -115,6 +102,7 @@
 }
 
 @media screen and (max-width: 768px) {
+
 .menu-pad 
 {
 	  font-size:12px;	
@@ -251,20 +239,18 @@
 	font-size:36px;
 	display: inline-block;
 	vertical-align: middle;
-	margin-right: 10px;
+	margin-right: 0px;
 }
-
-
 
 .cook-head
 {
 	color: white;
 	float: right;
 	font-family:Cookie;
-	margin-left:10px;
-	margin-top:5px;
+	margin-left:0px;
+	margin-top:0px;
 	margin-bottom:0px;
-	font-size:20pt;
+	font-size: 20pt;
 }
 
 .connection
@@ -312,6 +298,7 @@
 {
 	width: 100%;
 }
+
 .nav-fixe
 {
 	z-index: 1000000;
@@ -324,7 +311,6 @@
 {	
 	position:fixed;
  	top:0px;
-
 
 }
 .fixe-cont
