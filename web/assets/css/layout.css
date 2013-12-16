@@ -1,6 +1,9 @@
 @font-face{
     font-family : "centrale";
+    src : url(../fonts/Centrale.ttf) format ('truetype');
+    /* pour IE */
     src : url(../fonts/Centrale.ttf);
+
 }
 
 @media (min-width: 1201px){
