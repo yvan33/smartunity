@@ -5,8 +5,7 @@
 }
 .menu-pad 
 {
-	font-size:16px;
-	font-weight:bold;
+	font-size:14px;
 	height:43px;
 	line-height: 43px;
 	margin: 0px 20px;
@@ -45,8 +44,7 @@
 }
 .menu-pad 
 {
-	font-size:16px;
-	font-weight:bold;
+	font-size:14px;
 	line-height: 43px;
 	margin: 0px 20px -7px 20px;
 }
@@ -85,8 +83,7 @@
 }
 .menu-pad 
 {
-	font-size:15px;
-	font-weight:bold;
+	font-size:14px;
 	line-height: 43px;
 	margin: 0px 20px -7px 20px;
 }
@@ -109,27 +106,28 @@
 @media screen and (max-width: 768px) {
 .menu-pad 
 {
-	  font-size:12px;
-	  font-weight:bold;
-	
+	  font-size:12px;	
 }
+
 .logo2
 {
 	
 	z-index:101; 
 }
+
 .menu-pad 
 {
-	font-size:18px;
-	font-weight:bold;
+	font-size:14px;
 	padding-top:5px;
 }
+
 .connection
 {
 	width: 500px;
 	margin-left: 20px;
 }
 }
+
 .foot-im
 {
 	padding-bottom:5px;
@@ -149,9 +147,10 @@
 .bg
 {
 	background-color: #dddcdc;
-	background: url(../img/pattern-2.png);
+	background: url(../img/pattern-3.png);
 
 }
+
 .logo
 {
 	padding-top:5px;
