@@ -18,8 +18,7 @@ class InformationsFormType extends AbstractType {
         ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
         ->add('sexe', 'choice', array(
         'choices' => array(
-            'm' => 'Masculin', 'f' => 'Féminin'),
-        'required' => false,
+            'na' =>'Non renseigné', 'm' => 'Masculin', 'f' => 'Féminin'),
 //        'data' => ""
         ))
         ->add('date_naissance', 'date', array(

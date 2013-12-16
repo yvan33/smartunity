@@ -39,12 +39,40 @@ class UtilisateurController extends Controller {
         else{
             $parrain="";
         }
-
+        $avancement=25;
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
 
         if (isset($avatar)) {
             $avatar = $avatar->getWebPath();
+            $avancement +=25;
+
         }
+
+        if ( (null !== $user->getNom()) && (null !== $user->getPrenom())) {
+            $avancement +=10;
+        }
+        if ( (null !== $user->getAdresse()) ) {
+            $avancement +=10;
+        }
+
+        if (("na" !== $user->getSexe()) ) {
+            $avancement +=5;
+            
+        }
+
+        if ((null !== $user->getDateNaissance())) {
+            $avancement +=5;
+        }
+        if ( (null !== $user->getAppareils()) ) {
+            $avancement +=10;
+        }
+
+
+
+
+        // if ( (null !== $user->getVille())) {
+        //     $avancement +=10;
+        // }
 
         if (isset($formPassword)) {
 
@@ -83,7 +111,8 @@ class UtilisateurController extends Controller {
                         'remuneration' => $remuneration,
                         'avatar' => $avatar,
                         'form_parrainage' => $form_parrainage->createView(),
-                        'parrain'=> $parrain
+                        'parrain'=> $parrain,
+                        'avancement'=>$avancement
             ));
         }
     }
