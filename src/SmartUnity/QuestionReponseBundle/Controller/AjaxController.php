@@ -81,6 +81,7 @@ class AjaxController extends Controller
                 	'description'=>$Question->getDescription(),
                 	'date'=>$Question->getDate()->format('d-m-Y à H:i'),
                     'membre_username'=>$Question->getMembre()->getUsername(),
+                    'membre_id' => $Question->getMembre()->getId(),
                     'remuneration'=>$Question->getRemuneration(),
                     'nb_reponses'=>$Question->getReponses()->count(),
                     'best_reponse'=>$bestReponse,
