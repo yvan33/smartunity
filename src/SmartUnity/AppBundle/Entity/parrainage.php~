@@ -29,7 +29,7 @@ class parrainage
     private $email;
 
     /**	
-     * @ORM\OneToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", mappedBy="parrain")
+     * @ORM\OneToOne(targetEntity="SmartUnity\AppBundle\Entity\membre", mappedBy="parrainage")
      * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
      */
     private $membre;
