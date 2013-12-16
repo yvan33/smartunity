@@ -24,11 +24,11 @@
             {{ form_errors(formCommentaire) }}
 	    </div>
 	    <div class="row">
-	    <div class="head-blue">Nouvelle Commentaire {{type}}</div>
+	    <div class="head-blue"> Nouveau commentaire</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1">{{ form_label(formCommentaire.description) }}</div>
-	        <div class="grille-2">{{ form_errors(formCommentaire.description) }}{{ form_widget(formCommentaire.description,{'attr': {'style': 'width:100%;'}}) }}</div>
+{#	        <div class="grille-1">{{ form_label(formCommentaire.description) }}</div>#}
+	        <div class="grille-2">{{ form_errors(formCommentaire.description) }}{{ form_widget(formCommentaire.description,{'attr': {'style': 'width:90%;', 'placeholder': 'Entrez votre commentaire ici...'}}) }}</div>
 	    </div>
 	    <div class="row">
 	        <div class="grille-1">{{form_widget(formCommentaire.save,{'attr': {'class': 'btn btn-primary'}})}}</div>

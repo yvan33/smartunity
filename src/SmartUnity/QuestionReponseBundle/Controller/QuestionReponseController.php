@@ -592,7 +592,7 @@ class QuestionReponseController extends Controller
         $newCommentaireQuestion = new \SmartUnity\AppBundle\Entity\CommentaireQuestion();
         $formCommentaire = $this->createFormBuilder($newCommentaireQuestion)
                             ->add('description','textarea')
-                            ->add('save', 'submit')
+                            ->add('save', 'submit', array('label' => 'Envoyer'))
                             ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST')

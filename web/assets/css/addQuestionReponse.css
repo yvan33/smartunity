@@ -1,7 +1,6 @@
 .grille-1
 {
     width:150px;
-
     margin: 3px -150px 3px 0px;
     float: left;
 }
@@ -9,7 +8,6 @@
 {
     margin: 3px 0px 3px 150px;
     width: auto;
-    background-color:#3C9;
 
 }
 
