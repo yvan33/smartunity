@@ -20,6 +20,9 @@
 .commentaire
 {
 	margin-left:120px;
+        color:#A4A4A4;
+        font-style: italic;
+        font-size: 90%;
 }
 .min{
 	min-height: 100px
