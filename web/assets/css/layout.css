@@ -36,7 +36,7 @@
 }
 
 .nav img {
-	margin-top: -7px;
+	margin-top: -4px;
 	width: 90%;
 }
 }
@@ -79,7 +79,7 @@
 }
 
 .nav img {
-	margin-top: -7px;
+	margin-top: -4px;
 	width: 90%;
 }
 }
@@ -109,7 +109,7 @@
 }
 
 .nav img {
-	margin-top: -7px;
+	margin-top: -4px;
 	width: 90%;
 }
 }
@@ -259,12 +259,12 @@
 .cook-head
 {
 	color: white;
-	float:right;
+	float: right;
 	font-family:Cookie;
 	margin-left:10px;
-	margin-top:8px;
-	margin-bottom:2px;
-	font-size:26pt;
+	margin-top:5px;
+	margin-bottom:0px;
+	font-size:20pt;
 }
 
 .connection
