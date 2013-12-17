@@ -69,9 +69,12 @@
                                         </div>
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
-                                       <div class="grille-3"><div>{{question.nb_reponses}} réponses</div>
-                                        </div>
-                                      </div>
+                                           
+                                           <div class="grille-3"><div>{{question.nb_reponses}} réponse{% if  question.nb_reponses > 1%}s{% endif%}</div>
+                                            </div>
+                                          </div>
+
+                                        
                                                 <!-- bouton + fin-->
                                       </h4>                           
                                     </div>
@@ -143,9 +146,9 @@
                                 					</div>
                                                   <!-- bouton rep fin-->
                                                   <!-- bouton +-->
-                                 					<div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
+                                           <div class="grille-3"><div>{{question.nb_reponses}} réponse{% if  question.nb_reponses > 1%}s{% endif%}</div>
+                                            </div>
                                           </div>
-                                        </div>
                                                   <!-- bouton + fin-->
                                  				</h4>
                                          </a>                           
@@ -219,9 +222,9 @@
                                         </div>
                                                 <!-- bouton rep fin-->
                                                 <!-- bouton +-->
-                                        <div class="grille-3"><p>{{question.nb_reponses}} réponses</p><p></p>
-                                        </div>
-                                      </div>
+                                           <div class="grille-3"><div>{{question.nb_reponses}} réponse{% if  question.nb_reponses > 1%}s{% endif%}</div>
+                                            </div>
+                                          </div>
                                                 <!-- bouton + fin-->
                                       </h4>                           
                                     </div>
