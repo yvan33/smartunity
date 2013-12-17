@@ -504,7 +504,8 @@ class QuestionReponseController extends Controller
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
                 $newReponse->SetQuestion($question);
                 $newReponse->setSignaler(false);
-                $membreQuestion=$question->getMembre()
+
+                $membreQuestion=$question->getMembre();
                 $prefRepmembre=$membreQuestion->getPrefRep();
                 $mailMembreQuestion=$membreQuestion->getEmail();
                 
@@ -564,6 +565,27 @@ class QuestionReponseController extends Controller
                     $em->persist($reponse[0]);
                     $em->flush();
 
+                    $membreReponse=$reponse[0]->getMembre();
+                    $prefRepValideemembre=$membreReponse->getPrefRepValidee();
+                    $mailMembreReponse=$membreReponse->getEmail();
+                
+                    if ($prefRepValideemembre == true ) {
+
+                    //Envoi du mail
+                        $sujetQuestion=$reponse[0]->getQuestion()->getSujet();    
+                        $sujetMail="Votre réponse à la question : ". $sujetQuestion ."sur smartunity.fr a été validée";
+                        $expediteurMail="";
+                        $contenu="";    
+                        $message = \Swift_Message::newInstance()
+                            ->setContentType('text/html')
+                            ->setSubject($sujetMail)
+                            ->setFrom($expediteurMail)
+                            ->setTo($mailMembreReponse)
+                            ->setBody($contenu);
+                        $this->get('mailer')->send($message);
+                    }
+
+
                     return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$question->getSlug())));
                 }
             }
@@ -595,6 +617,26 @@ class QuestionReponseController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse[0]);
                 $em->flush();
+
+                $membreReponse=$reponse[0]->getMembre();
+                $prefRepCertifieemembre=$membreReponse->getPrefRepCertifiee();
+                $mailMembreReponse=$membreReponse->getEmail();
+                
+                if ($prefRepValideemembre == true ) {
+
+                    //Envoi du mail
+                    $sujetQuestion=$reponse[0]->getQuestion()->getSujet();    
+                    $sujetMail="Votre réponse à la question : ". $sujetQuestion ."sur smartunity.fr a été certifiée";
+                    $expediteurMail="";
+                    $contenu="";    
+                    $message = \Swift_Message::newInstance()
+                        ->setContentType('text/html')
+                        ->setSubject($sujetMail)
+                        ->setFrom($expediteurMail)
+                        ->setTo($mailMembreReponse)
+                        ->setBody($contenu);
+                    $this->get('mailer')->send($message);
+                }
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$questionSlug)));
             }
