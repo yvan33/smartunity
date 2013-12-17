@@ -504,13 +504,32 @@ class QuestionReponseController extends Controller
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
                 $newReponse->SetQuestion($question);
                 $newReponse->setSignaler(false);
+                $membreQuestion=$question->getMembre()
+                $prefRepmembre=$membreQuestion->getPrefRep();
+                $mailMembreQuestion=$membreQuestion->getEmail();
+                
+                if ($prefRepmembre == true ) {
 
+                //Envoi du mail
+                $sujetQuestion=$question->getSujet();    
+                $sujetMail="Réponse à votre question : ". $sujetQuestion ."sur smartunity.fr";
+                $expediteurMail="";
+                $contenu="";    
+                $message = \Swift_Message::newInstance()
+                    ->setContentType('text/html')
+                    ->setSubject($sujetMail)
+                    ->setFrom($expediteurMail)
+                    ->setTo($mailMembreQuestion)
+                    ->setBody($contenu);
+                $this->get('mailer')->send($message);
+                }
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newReponse);
                 $em->flush();
 
                 return new Response('Votre réponse a bien été ajoutée');
+
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddReponse.html.twig',array(
