@@ -336,6 +336,7 @@ class QuestionReponseController extends Controller {
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:avatar');
         
+
         $question = $questionRepository->findOneBySlug($slug);
 
         $isValidated = $questionRepository->isQuestionValid($question->getId());
@@ -370,6 +371,7 @@ class QuestionReponseController extends Controller {
             'nb_questions_membre'=> (int) $nb_questions_membre,
             'membre_id' => $membre->getId(),
             'avatar' => $avatar,
+
         ));
     }
 
