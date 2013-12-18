@@ -21,3 +21,19 @@ smart_unity_admin:
 smart_unity_app:
     resource: "@SmartUnityAppBundle/Resources/config/routing.yml"
     prefix:   /
+    
+_security_check:
+    pattern:  /login_check
+    defaults: { _controller: SmartUnityAppBundle:Accueil:loginCheck }    
+
+    
+_security_logout:
+    pattern:  /logout
+    defaults: { _controller: SmartUnityAppBundle:Accueil:logout }    
+
+_facebook_secured:
+    pattern: /secured/
+    defaults: { _controller: SmartUnityAppBundle:Accueil:index }    
+    
+fos_facebook_channel:
+    resource: "@FOSFacebookBundle/Resources/config/routing.xml"    

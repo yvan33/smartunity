@@ -21,20 +21,42 @@
     <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
 
 <!-- Additional styleSheets -->
+<script>
+    function goLogIn(){
+        window.location.href = "{{ path('_security_check') }}";
+    }
+
+    function onFbInit() {
+        if (typeof(FB) != 'undefined' && FB != null ) {              
+            FB.Event.subscribe('auth.statusChange', function(response) {
+                if (response.session || response.authResponse) {
+                    setTimeout(goLogIn, 500);
+                } else {
+                    window.location.href = "{{ path('_security_logout') }}";
+                }
+            });
+        }
+    }
+</script>
 {% block stylesheets %}{% endblock %}
 
 
 
-<!-- Bootstrap core JavaScript  -->
+<!-- Bootstrap core and general JavaScript files -->
     <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 
 <!-- Additional Javascript src -->
+
 {% block initJS %}{% endblock %}
 
 
 </head>
-
+<!-- bg body -->
+<body class="bg" >
+    
+{{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
+    
 <!-- /.navbar-collapse -->
 <div class="nav-fixe ">
   <div class="row">
@@ -95,8 +117,7 @@
 <div class="col-md-12">
 
 
-<!-- bg body -->
-<body class="bg" >
+
 <!-- head -->
 
  <div class="container ">
@@ -120,8 +141,9 @@
 
 
             {% else %}
-            
-            
+{# Login facebook#}
+          {{ facebook_login_button({'autologoutlink': true}) }}
+{#Fin Login facebook #}
               <div class="logo2">
                 <div>
                   <div class="pad-l" id="clic-pop" >

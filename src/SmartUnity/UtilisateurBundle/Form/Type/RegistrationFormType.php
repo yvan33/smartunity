@@ -11,19 +11,7 @@ class RegistrationFormType extends BaseType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
 //        parent::buildForm($builder, $options);
 //        
-//Liste des modèles de smartphones provisoire
-        $appareil_choices = array(
-        'Samsung' => array(
-            '1' => array(
-                '1' => 'Galaxy S3',
-                '2' => 'Galaxy S4',
-                        )),
-         'Apple' => array(
-            '5' => array(
-                '3' => 'iphone5',
-                '12' => 'iphone5S',
-            ))
-        );
+
 
         $builder
                 ->add('nom')

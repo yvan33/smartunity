@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/elastica-bundle": "3.0.*@dev",
-        "imagine/imagine": "~0.5.0"
+        "imagine/imagine": "~0.5.0",
+        "friendsofsymfony/facebook-bundle": "1.2.*"
 
     },
     "scripts": {

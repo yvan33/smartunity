@@ -35,3 +35,10 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: hidden_entity }
+            
+   my.facebook.user:
+            class: SmartUnity\UtilisateurBundle\Security\User\Provider\FacebookProvider
+            arguments:
+                facebook: "@fos_facebook.api"
+                userManager: "@fos_user.user_manager"
+                validator: "@validator"         

@@ -107,3 +107,9 @@ fos_elastica:
                         provider: ~
                         finder: ~
 
+fos_facebook:
+    alias:  facebook
+    app_id: 195202794002832
+    secret: 8bdcd941ebde437e4adc3963f81dbef3
+    cookie: true
+    permissions: [email, user_birthday, user_location]

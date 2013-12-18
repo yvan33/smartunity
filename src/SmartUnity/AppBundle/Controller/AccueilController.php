@@ -1,4 +1,5 @@
 <?php
+
 namespace SmartUnity\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -7,19 +8,17 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 
-class AccueilController extends Controller
-{
-    
-    public function indexAction(Request $request)
+class AccueilController extends Controller {
+
+    public function indexAction(Request $request) {
 
 //Le code de la function indexAction Permet de récupérer la session et de préremplir le formulaire de login.    
-            {
-        
 
-         
+
+
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
- 
+
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -36,9 +35,7 @@ class AccueilController extends Controller
         }
 
 
-       //////------------ CONTENU LISTE
-
-
+        //////------------ CONTENU LISTE
         //Cf SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestionAction
 
         $nbParPage = 5;
@@ -48,17 +45,17 @@ class AccueilController extends Controller
         //Liste onFire
         /////////////
         $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
-            'type'  => 'onFire',
+            'type' => 'onFire',
             'page' => 1,
-            'nbParPage'=>$nbParPage
+            'nbParPage' => $nbParPage
         ));
 
         //Suppression de l'en tête HTTP et décodage du JSON
         $cleanJSON = explode('[', $response, 2);
         $listeQuestionsOnFire = json_decode('[' . $cleanJSON[1]);
-        
+
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
-        if($listeQuestionsOnFire[0]->type=='onFire' && $listeQuestionsOnFire[0]->nbParPage==$nbParPage && $listeQuestionsOnFire[0]->page==1)
+        if ($listeQuestionsOnFire[0]->type == 'onFire' && $listeQuestionsOnFire[0]->nbParPage == $nbParPage && $listeQuestionsOnFire[0]->page == 1)
             unset($listeQuestionsOnFire[0]);
         else
             throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
@@ -69,17 +66,17 @@ class AccueilController extends Controller
         //Liste Last
         ////////////
         $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
-            'type'  => 'last',
+            'type' => 'last',
             'page' => 1,
-            'nbParPage'=>$nbParPage
+            'nbParPage' => $nbParPage
         ));
 
         //Suppression de l'en tête HTTP et décodage du JSON
         $cleanJSON = explode('[', $response, 2);
         $listeLastQuestions = json_decode('[' . $cleanJSON[1]);
-        
+
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
-        if($listeLastQuestions[0]->type=='last' && $listeLastQuestions[0]->nbParPage==$nbParPage && $listeLastQuestions[0]->page==1)
+        if ($listeLastQuestions[0]->type == 'last' && $listeLastQuestions[0]->nbParPage == $nbParPage && $listeLastQuestions[0]->page == 1)
             unset($listeLastQuestions[0]);
         else
             throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
@@ -89,17 +86,17 @@ class AccueilController extends Controller
         //Liste Reponses
         ////////////
         $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
-            'type'  => 'reponses',
+            'type' => 'reponses',
             'page' => 1,
-            'nbParPage'=>$nbParPage
+            'nbParPage' => $nbParPage
         ));
 
         //Suppression de l'en tête HTTP et décodage du JSON
         $cleanJSON = explode('[', $response, 2);
         $listeSolvedQuestions = json_decode('[' . $cleanJSON[1]);
-        
+
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
-        if($listeSolvedQuestions[0]->type=='reponses' && $listeSolvedQuestions[0]->nbParPage==$nbParPage && $listeSolvedQuestions[0]->page==1)
+        if ($listeSolvedQuestions[0]->type == 'reponses' && $listeSolvedQuestions[0]->nbParPage == $nbParPage && $listeSolvedQuestions[0]->page == 1)
             unset($listeSolvedQuestions[0]);
         else
             throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
@@ -107,15 +104,14 @@ class AccueilController extends Controller
 
 
         return $this->renderLogin(array(
-            'error'         => $error,
-            'listeQuestionsOnFire' => $listeQuestionsOnFire,
-            'countOnFire'=> count($listeQuestionsOnFire),
-            'listeLastQuestions' => $listeLastQuestions,
-            'countLast' => count($listeLastQuestions),
-            'listeSolvedQuestions' => $listeSolvedQuestions,
-            'countSolved' => count($listeSolvedQuestions),
+                    'error' => $error,
+                    'listeQuestionsOnFire' => $listeQuestionsOnFire,
+                    'countOnFire' => count($listeQuestionsOnFire),
+                    'listeLastQuestions' => $listeLastQuestions,
+                    'countLast' => count($listeLastQuestions),
+                    'listeSolvedQuestions' => $listeSolvedQuestions,
+                    'countSolved' => count($listeSolvedQuestions),
         ));
-
     }
 
     /**
@@ -126,11 +122,19 @@ class AccueilController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected function renderLogin(array $data)
-    {
+    protected function renderLogin(array $data) {
         $template = sprintf('SmartUnityAppBundle::Accueil.html.twig');
 
         return $this->container->get('templating')->renderResponse($template, $data);
     }
-//        return $this->render('SmartUnityAppBundle:Default:index.html.twig');
-}    
+
+    public function loginCheckAction() {
+        // Call intercepted by the Security Component of Symfony
+        return $this->redirect($this->generateUrl('smart_unity_app_homepage'));
+    }
+
+    public function logoutAction() {
+        return $this->redirect($this->generateUrl('smart_unity_app_homepage'));
+    }
+
+}
