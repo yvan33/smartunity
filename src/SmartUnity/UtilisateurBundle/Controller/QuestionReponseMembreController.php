@@ -217,7 +217,10 @@ if ($route == 'smart_unity_membre_reponses'){
         $reponseRepository = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:reponse');
-
+        $avatarRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('SmartUnityAppBundle:avatar');
+        
         $question = $questionRepository->findOneBySlug($slug);
 
         $isValidated = $questionRepository->isQuestionValid($question->getId());
@@ -227,7 +230,11 @@ if ($route == 'smart_unity_membre_reponses'){
 
         $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
         $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
+        $avatar = $avatarRepository->find($membre->getId());
 
+        if (isset($avatar)) {
+            $avatar = $avatar->getWebPath();
+        }
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
@@ -244,6 +251,7 @@ if ($route == 'smart_unity_membre_reponses'){
                     'nbParPage' => $nbParPage,
                     'question' => $question,
                     'smart_reponses' => (int) $smartReponses,
+                    'avatar' => $avatar,
                     'nb_questions_membre' => (int) $nb_questions_membre
         ));
     }
