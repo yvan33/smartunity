@@ -249,7 +249,8 @@
 
 .bouton-com-rep
 {
-	background: linear-gradient( to top, #68ae28, #aed664);
+margin: 0 auto;	
+    background: linear-gradient( to top, #68ae28, #aed664);
 	background: -webkit-linear-gradient( ... );
     background:    -moz-linear-gradient( ... ); 
     background:     -ms-linear-gradient( ... );

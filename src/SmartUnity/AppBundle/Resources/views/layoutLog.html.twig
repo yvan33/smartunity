@@ -43,8 +43,8 @@
 {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 
         <!-- /.navbar-collapse -->
-        <div class="nav-fixe ">
-            <div class="row">
+        <div class="nav-fixe">
+            <div class="row fixe-cont">
                 <div class="col-md-12 menu-bg">
                     <nav class="navbar navbar-inverse" role="navigation">
                         <!--navbar- mobile -->
@@ -99,13 +99,12 @@
         <!-- end nav -->
         <div id="cont"></div>
         <div style="min-height: 680px">
-{#            <div class="container" > 
-                <div class ="row">#}
+
+            <div class="container" style="padding-left: 0; padding-right: 0;">
 
 {% if  app.request.attributes.get('_route')  == 'smart_unity_app_homepage' %}                   
-            <div class="container ">
 
-                <div class="row">
+                <div class="row titre-smartunity">
                     <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su1.png') }}"  class="img-responsive logo cent-h"/></div>
                     <div class="col-md-5">
 
@@ -186,13 +185,14 @@
                     </div>
 
                 </div>
+{% endif %}                
                 <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10" style="padding: 0;">
-                        <div class="container cadre-general" style="background-color: white; overflow:hidden; padding: 15px;">
+                    <div class="col-md-10 col-md-offset-1"  style="padding-left: 0; padding-right: 0;">
+
+                        <div class="container cadre-general" style="background-color: #FAFAFA; overflow:hidden; padding: 30px 30px 0px 30px;">
 
 
-{% endif %}
+
 
 
 
@@ -207,6 +207,7 @@
 
 
 {% endblock %}
+
                         </div>
                     </div>
 
@@ -215,7 +216,6 @@
             </div>
 
         </div>
-        <div class="col-md-1"></div>
 
         <!-- end BODY-->   
 

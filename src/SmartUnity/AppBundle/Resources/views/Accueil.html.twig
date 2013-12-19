@@ -68,9 +68,9 @@ Bonjour {{ app.user.username}}
                   <div class="grille-content-2">
                     <div  style="background-image:url({{asset('assets/img/tab-acc.png')}}); background-repeat:repeat-x ; background-color:#00557d">
                       <ul class="nav nav-tabs" id="myTab">
-                        <li class="active"><a href="#reponses" data-toggle="tab">Questions R&eacute;solues</a></li>
-                        <li><a href="#onFire" data-toggle="tab">On Fire</a></li>
-                        <li><a href="#last" data-toggle="tab">Derni&egrave;res Questions</a></li>
+                          <li class="active"><a href="#reponses" data-toggle="tab" >Solutions</a></li>
+                        <li style="float:right"><a href="#onFire" data-toggle="tab">Questions brûlantes</a></li>
+                        <li style="float:right"><a href="#last" data-toggle="tab">Derni&egrave;res Questions</a></li>
                       </ul>
                       </div>
                       <div class="tab-content" style="margin:0px 15px"><!-- style="margin:15px" -->
@@ -163,7 +163,7 @@ Bonjour {{ app.user.username}}
   <div class="col-md-6">
               <div class="grille-content">
                   <div class="row  ">
-                            <div class="text-center"><img src="{{asset('assets/img/mes-info.png')}}"/></div>
+                            <div class="text-center cook-btn2">Boutique cadeaux</div>
                       </div>
                       <div class="row  ">
                           <div class="grille-1"></div>
@@ -188,7 +188,7 @@ Bonjour {{ app.user.username}}
     </div>
               <div class="grille-content">
                   <div class="row  ">
-                            <div class="text-center"><img src="{{asset('assets/img/mes-info.png')}}"/></div>
+                            <div class="text-center cook-btn2">Smart'Café</div>
                       </div>
                       <div class="row  ">
                           <div class="grille-1"></div>
@@ -214,15 +214,13 @@ Bonjour {{ app.user.username}}
                           <div class="grille-1"></div>
                               <div class="grille-2"></div>
                       </div>
-                      <div class="row  ">
-                            <div class="text-center"><img src="{{asset('assets/img/mes-info.png')}}"/></div>
-                      </div>  
+
               </div>
-              <div class="grille-info">
+{#              <div class="grille-info">
                       <div class="row  ">
                             <div class="text-center"><p class="cook-btn2">XXX Membres connectés</p></div>
                       </div>
-    </div>
+    </div>#}
   </div>
 </div>
 

@@ -22,7 +22,7 @@
 
     <!-- nav div-->
     <div class="row">
-        <div class="col-md-offset-1 col-md-10">
+        <div class="col-md-12">
             <div class="grille-content-2">
                 <!-- nav div menu-->
             	<div class="collapse-menu ">
@@ -128,7 +128,9 @@
             </div>
         <div class="tooltip-arrow"></div>
         </div>
-        <a id="popupQuestion"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour poser une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_question')}}{% else %}#{% endif %}"><div class="bouton-com-rep" style="margin-left:10px">Posez votre question!</div></a>
+        <a id="popupQuestion"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour poser une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_question')}}{% else %}#{% endif %}">
+            <div class="bouton-com-rep">Posez votre question!</div>
+        </a>
 
     </div><!-- col fin-->
 </div>  <!-- row fin-->

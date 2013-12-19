@@ -141,6 +141,8 @@
 }
 }
 
+
+
 .foot-im
 {
 	padding-bottom:5px;
@@ -267,6 +269,7 @@
 	font-size: 20pt;
 }
 
+
 .connection
 {
 	position: absolute;
@@ -328,16 +331,20 @@
 
 .fixe-cont
 {
-	height: 65px;
+	height: 55px;
 }
 
 
 .cadre-general{
-    box-shadow: 1px 1px 12px #555;
+    box-shadow: 1px 1px 20px #444;
 }
 
 .footer-text 
 {
 	font-size: 12px;
 	margin-left: 30px;
+}
+
+.titre-smartunity{
+    margin-bottom: 15px;
 }

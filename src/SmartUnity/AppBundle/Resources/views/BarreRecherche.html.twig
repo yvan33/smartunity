@@ -85,6 +85,8 @@ line-height: 40px;
 }
 .search-btn {
   display: inline-block;
+  padding-bottom: 2px;
+  padding-top: 2px;
   background-color: #7b7a7a;
   border:solid 1px #7b7a7a;
     height: 32px;
@@ -93,7 +95,6 @@ line-height: 40px;
     outline: none;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    line-height: 32px;
     text-align: center;
   vertical-align: middle;
   cursor: pointer;
@@ -104,27 +105,28 @@ line-height: 40px;
           user-select: none;
 }
 
-.cook-btn
-{
-  font-family:Cookie;
-  font-size:32px;
-}
+
 .form-control
 {
   background-color: #7b7a7a;
   border-radius: 10px;
 }
+
+.cook-btn-demander-repondre
+{
+  font-family:Cookie;
+  font-size:32px;
+}
     </style>
-{#<div >#}
     <div class="row">
             <div class="col-md-6 col-md-offset-3" >
                       <div class="text-center">
                       <div class="btn-group" data-toggle="buttons" style="margin-top:25px">
                         <label class="btn bouton-radio active" id="sli-de"> <!-- id a jouter -->
-                          <input type="radio" name="options" id="option1"><p class="cook-btn">Demander</p>
+                          <input type="radio" name="options" id="option1"><p class="cook-btn-demander-repondre">Demander</p>
                         </label>
                         <label class="btn bouton-radio" id="sli-re"><!-- id a jouter -->
-                          <input type="radio" name="options" id="option2"><p class="cook-btn">Répondre</p>
+                          <input type="radio" name="options" id="option2"><p class="cook-btn-demander-repondre">Répondre</p>
                         </label>
                       </div>
                       </div>
@@ -177,6 +179,5 @@ line-height: 40px;
                     });
                   });
                 </script>
-{#</div>#}
 
 {% endblock %}
