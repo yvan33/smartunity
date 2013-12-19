@@ -151,7 +151,6 @@
 	border-color: #999;
 	border-width:1px;
 	background-color: #CCC;
-	width:80px;
 	height:25px;
 	line-height:12px;
 	background: -webkit-linear-gradient( ... );
@@ -187,3 +186,27 @@
 	font-family: centrale;
 	margin-top: 0px;
 }
+
+.grille-content img 
+{
+	width: 40%;
+	margin-right: 1em;
+	float: left;
+}
+
+.grille-content p
+{
+	font-size: 12px;
+}
+
+.cadre-cafe-boutique
+{
+	padding: 5px 20px 0 15px;
+}
+
+.bouton-decouvrir 
+{
+	text-align: center;
+	/* margin: 0 auto; */
+}
+
