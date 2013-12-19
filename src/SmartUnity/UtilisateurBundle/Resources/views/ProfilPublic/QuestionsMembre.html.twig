@@ -354,7 +354,7 @@
 
             fixHeight();
             $('#accordion-' + type).fadeOut('fast');
-            console.log('Testing console');
+
             $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId + '/' + type + '/1/' + nbParPage + '/' + route, function(donnees) {
                 var content = '';
                 if (donnees[0]['page'] == 1 && donnees[0]['type'] == type && donnees[0]['nbParPage'] == nbParPage) {
@@ -457,6 +457,7 @@
     var nbPage;
     var nbParPages;
     var options;
+    var route;
 
 
 
