@@ -1,3 +1,10 @@
+@font-face{
+    font-family : "centrale";
+    src : url(../fonts/Centrale.ttf) format ('truetype');
+    /* pour IE */
+    src : url(../fonts/Centrale.ttf);
+}
+
 @media (min-width: 1200px){
 	.bouton-radio
 {
@@ -48,15 +55,13 @@
 {
 	width:42.5%;
 	margin: 5px 2.5% 5px 5%;
-	/*background-color:#00C;*/
-	height:20px;
+	height:150px;
 	float:left;
 }
 .grille-2
 {
 	width:42.5%;
 	margin: 5px 5% 5px 2.5%;
-	/*background-color:#3C9;*/
 	height:20px;
 	float:right;
 }
@@ -64,37 +69,40 @@
 .grille-content
 {   
 	padding:15px;
-	background-color: #f8f8ef;
+	background-color: #f2f2f2;
 	margin-top:30px;
 	margin-bottom:30px;
 	border-radius:5px;
-	border:2px solid #d7d5d5;
-	-webkit-box-shadow: 0 0 20px  #E8E8E8;
-       -moz-box-shadow: 0 0 20px  #E8E8E8;
-            box-shadow: 0 0 20px  #E8E8E8;
+	border:1px solid #dbd9d9;
+	-webkit-box-shadow: 0 0 10px  #dbd9d9;
+       -moz-box-shadow: 0 0 10px  #dbd9d9;
+            box-shadow: 0 0 10px  #dbd9d9;
 }
 .grille-content-2
 {
 	margin-top:30px;
 	margin-bottom:30px;
-	background-color: #f8f8ef;
+	background-color: #f2f2f2;
 	border-radius:5px;
-	border:2px solid #d7d5d5;
-	-webkit-box-shadow: 0 0 20px  #E8E8E8;
-       -moz-box-shadow: 0 0 20px  #E8E8E8;
-            box-shadow: 0 0 20px  #E8E8E8;
+	border:1px solid #dbd9d9;
+	-webkit-box-shadow: 0 0 10px  #dbd9d9;
+       -moz-box-shadow: 0 0 10px  #dbd9d9;
+            box-shadow: 0 0 10px  #dbd9d9;
 }
+
 .grille-question-centent:last-child
 {
 	border:none;
 }
+
 .grille-question-centent
 {
 	clear:both;
 	overflow:hidden;
-	background-color:#f8f8ee;
-	border-bottom: solid 2px #CCCCCC;
+	background-color:#f2f2f2;
+	border-bottom: solid 1px #dbd9d9;
 }
+
 .grille-question-rond
 {
 	text-align:center;
@@ -103,8 +111,8 @@
 	padding-right:10px;
 	margin-top:15px;
 	margin-bottom:15px;
-	
 }
+
 .grille-question-txt
 {
 	margin-top:15px;
@@ -112,6 +120,7 @@
 	margin-left:80px;
 	margin-right:100px;
 }
+
 .grille-question-det
 {
 	text-align:center;
@@ -121,6 +130,7 @@
 	float:right;
 	width:100px;
 }
+
 .rond-point
 {
 	background: linear-gradient( to top, #E0E0E0,#FFF);
@@ -133,6 +143,7 @@
 	text-align:center;
 	line-height:60px;	
 }
+
 .bouton-repondre
 {
 	background: linear-gradient( to top, #bfbfbf,#fbfbfb);
@@ -151,7 +162,6 @@
 	
 }
 
-
 .grille-info
 {
 	
@@ -166,9 +176,14 @@
 
 .cook-btn2
 {
-	font-family:Cookie;
-	font-size:32px;
-	line-height:normal;
-	color:#578BCA;
-	
+	font-family: centrale;
+	font-size:20px;
+	line-height:47px;
+	color:#FFF;
+}
+
+.grille-content h3 
+{
+	font-family: centrale;
+	margin-top: 0px;
 }

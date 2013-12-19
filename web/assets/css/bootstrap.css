@@ -3871,7 +3871,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .nav-tabs > li > a:hover {
   
-  background-color: #f8f8ef;
+  background-color: #f2f2f2;
   color:black;
 }
 
@@ -3880,9 +3880,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a:focus {
   color: black;
   cursor: default;
-  background-color: #f8f8ef;
-  border: 1px solid #dddddd;
+  background-color: #f2f2f2;
+  border: 1px solid #dbd9d9;
   border-bottom-color: transparent;
+  border-top-color: transparent;
 }
 
 .nav-tabs.nav-justified {
