@@ -42,8 +42,9 @@
 }
 
 .nav img {
-	margin-top: -4px;
-	width: 90%;
+	margin-top: -3px;
+	width: 50%;
+	margin-right: -35px;
 }
 }
 
@@ -81,8 +82,9 @@
 }
 
 .nav img {
-	margin-top: -4px;
-	width: 90%;
+	margin-top: -3px;
+	width: 50%;
+	margin-right: -35px;
 }
 }
 
@@ -107,8 +109,9 @@
 }
 
 .nav img {
-	margin-top: -4px;
-	width: 90%;
+	margin-top: -3px;
+	width: 50%;
+	margin-right: -35px;
 }
 }
 
@@ -130,6 +133,11 @@
 {
 	width: 500px;
 	margin-left: 20px;
+}
+
+.nav img {
+	width: 30px;
+
 }
 }
 
