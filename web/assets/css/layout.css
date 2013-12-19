@@ -330,5 +330,9 @@
 {
 	height: 65px;
 }
-}
 
+.footer-text 
+{
+	font-size: 12px;
+	margin-left: 30px;
+}
