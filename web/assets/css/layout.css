@@ -331,6 +331,11 @@
 	height: 65px;
 }
 
+
+.cadre-general{
+    box-shadow: 1px 1px 12px #555;
+}
+
 .footer-text 
 {
 	font-size: 12px;

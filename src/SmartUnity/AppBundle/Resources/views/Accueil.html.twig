@@ -13,11 +13,10 @@ Bonjour {{ app.user.username}}
 
 
 
-          <div class="row">
-                    <div class="col-md-12 carousel-show">
+              <div class="col-md-12 carousel-show" style="padding: 0;">
 
 
-                      <div id="carousel-example-generic" class="carousel slide">
+                      <div id="carousel-example-generic" class="carousel slide" >
                         <!-- Indicators -->
                         <ol class="carousel-indicators">
                           <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -35,7 +34,7 @@ Bonjour {{ app.user.username}}
                           </div>
                         
                           <div class="item">
-                            <img src="{{asset('assets/img/exemple-carou.png') }}" alt="">
+                            <img src="{{asset('assets/img/exemple-carou.png') }}" alt="" >
                             <div class="carousel-caption">
                            
                             </div>
@@ -60,12 +59,12 @@ Bonjour {{ app.user.username}}
                       </div>
    
               </div>
-  </div>
+
           
           {% include "SmartUnityAppBundle::BarreRecherche.html.twig" %}
-          
+
           <div class="row">
-              <div class="col-md-offset-1 col-md-5">
+              <div class="col-md-6">
                   <div class="grille-content-2">
                     <div  style="background-image:url({{asset('assets/img/tab-acc.png')}}); background-repeat:repeat-x ; background-color:#00557d">
                       <ul class="nav nav-tabs" id="myTab">
@@ -161,7 +160,7 @@ Bonjour {{ app.user.username}}
                       </div>
     </div>
           </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
               <div class="grille-content">
                   <div class="row  ">
                             <div class="text-center"><img src="{{asset('assets/img/mes-info.png')}}"/></div>
