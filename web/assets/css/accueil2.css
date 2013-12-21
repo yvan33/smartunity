@@ -153,26 +153,18 @@
 	height:50px;
 	border: solid 1px #e8e4dc;
 	text-align:center;
-	line-height:50px;	
+	line-height:50px;
+	font-weight: 200;	
 }
 
 .bouton-repondre
 {
-	/* background: linear-gradient( to top, #bfbfbf,#fbfbfb); */
 	border-radius:2px;
 	background-color: #ff3800;
 	height:25px;
 	line-height:5px;
 	color: white;
-	font-family: centrale;
-	/*
-background: -webkit-linear-gradient( ... );
-     background:    -moz-linear-gradient( ... ); 
-     background:     -ms-linear-gradient( ... );
-     background:      -o-linear-gradient( ... );
-     background:         linear-gradient( ... );
-*/
-	
+	font-family: centrale;	
 }
 
 .grille-info
@@ -232,3 +224,12 @@ background: -webkit-linear-gradient( ... );
 	display: inline-block;
 	width: 30%;
 }
+
+/*
+.onglet
+{
+	background-image: url(assets/img/tab-acc1.png); 
+	background-repeat: repeat-x;
+	background-color: #00557d;
+}
+*/
