@@ -208,3 +208,12 @@
 {
 	text-align: center;
 }
+
+.carousel-control img 
+{
+position: absolute;
+top: 45%;
+left: 38%;
+z-index: 5;
+display: inline-block;
+}
