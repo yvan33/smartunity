@@ -156,12 +156,12 @@
 	background-repeat: repeat-x;
 	width:100%;
 }
-
 	
 .bg
 {
-	background-color: #dddcdc;
-	/*background: url(../img/noise.png);*/
+	background-color: #99bbc3;
+	background-image: url(../img/noise2.png);
+	
 
 }
 
@@ -335,9 +335,9 @@
 
 
 .cadre-general{
-    /*box-shadow: 0px 0px 20px #555;*/
+    box-shadow: 0px 0px 30px #758c92;
     margin-bottom: 15px;
-    background-color: #FFFFFF;
+    background-color: #f3f0eb;
     overflow:hidden; 
     padding: 30px 30px 0px 30px;
 }
@@ -350,4 +350,9 @@
 
 .titre-smartunity{
     margin-bottom: 15px;
+}
+
+.nav-tabs a
+{
+	font-family: centrale;
 }

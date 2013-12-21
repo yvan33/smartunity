@@ -69,25 +69,37 @@
 .grille-content
 {   
 	padding:15px;
-	background-color: #f2f2f2;
+	background-color: #ffffff;
 	margin-top:30px;
 	margin-bottom:30px;
-	border-radius:5px;
-	border:1px solid #dbd9d9;
-	-webkit-box-shadow: 0 0 10px  #dbd9d9;
+	border-radius:3px;
+	border: 1px solid #e8e4dc;
+	/* border:1px solid #afaeae; */
+	/*
+-webkit-box-shadow: 0 0 10px  #dbd9d9;
        -moz-box-shadow: 0 0 10px  #dbd9d9;
             box-shadow: 0 0 10px  #dbd9d9;
+*/
 }
+
 .grille-content-2
 {
 	margin-top:30px;
 	margin-bottom:30px;
-	background-color: #f2f2f2;
-	border-radius:5px;
-	border:1px solid #dbd9d9;
-	-webkit-box-shadow: 0 0 10px  #dbd9d9;
+	background-color: #ffffff;
+	border-radius:3px;
+	border: 1px solid #e8e4dc;
+	/* border:1px solid #999999; */
+	/*
+-webkit-box-shadow: 0 0 10px  #dbd9d9;
        -moz-box-shadow: 0 0 10px  #dbd9d9;
             box-shadow: 0 0 10px  #dbd9d9;
+*/
+}
+
+.grille-content-2 p
+{
+	font-size: 13px;
 }
 
 .grille-question-centent:last-child
@@ -99,8 +111,8 @@
 {
 	clear:both;
 	overflow:hidden;
-	background-color:#f2f2f2;
-	border-bottom: solid 1px #dbd9d9;
+	background-color:#ffffff;
+	border-bottom: solid 1px #e8e4dc;;
 }
 
 .grille-question-rond
@@ -109,8 +121,8 @@
 	float:left;
 	width:80px;
 	padding-right:10px;
-	margin-top:15px;
-	margin-bottom:15px;
+	margin-top:10px;
+	margin-bottom:10px;
 }
 
 .grille-question-txt
@@ -133,31 +145,33 @@
 
 .rond-point
 {
-	background: linear-gradient( to top, #E0E0E0,#FFF);
+	background: linear-gradient( to top, #e8e4dc,#FFF);
 	border-radius:30px;
 	margin-right:auto;
 	margin-left:auto;
-	width:60px;
-	height:60px;
-	border: solid 1px #999999;
+	width:50px;
+	height:50px;
+	border: solid 1px #e8e4dc;
 	text-align:center;
-	line-height:60px;	
+	line-height:50px;	
 }
 
 .bouton-repondre
 {
-	background: linear-gradient( to top, #bfbfbf,#fbfbfb);
-	border-radius:3px;
-	border-color: #999;
-	border-width:1px;
-	background-color: #CCC;
+	/* background: linear-gradient( to top, #bfbfbf,#fbfbfb); */
+	border-radius:2px;
+	background-color: #ff3800;
 	height:25px;
-	line-height:12px;
-	background: -webkit-linear-gradient( ... );
+	line-height:5px;
+	color: white;
+	font-family: centrale;
+	/*
+background: -webkit-linear-gradient( ... );
      background:    -moz-linear-gradient( ... ); 
      background:     -ms-linear-gradient( ... );
      background:      -o-linear-gradient( ... );
      background:         linear-gradient( ... );
+*/
 	
 }
 
@@ -185,6 +199,7 @@
 {
 	font-family: centrale;
 	margin-top: 0px;
+	color: #ff3800;
 }
 
 .grille-content img 
@@ -196,7 +211,7 @@
 
 .grille-content p
 {
-	font-size: 12px;
+	font-size: 13px;
 }
 
 .cadre-cafe-boutique
@@ -206,5 +221,14 @@
 
 .bouton-decouvrir 
 {
-	text-align: center;
+	float:right;
+}
+
+.carousel-control img
+{
+	position: absolute;
+	top: 44%;
+	left: 30%;
+	display: inline-block;
+	width: 30%;
 }
