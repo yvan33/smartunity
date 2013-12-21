@@ -127,6 +127,7 @@ class AccueilController extends Controller {
 
         return $this->container->get('templating')->renderResponse($template, $data);
     }
+    
 
     public function loginCheckAction() {
         // Call intercepted by the Security Component of Symfony
@@ -137,4 +138,28 @@ class AccueilController extends Controller {
         return $this->redirect($this->generateUrl('smart_unity_app_homepage'));
     }
 
+
+    public function affichageDescriptionAction() {
+
+        $template = 'SmartUnityAppBundle::Description.html.twig';
+
+        return $this->render($template);
+        
+    }
+
+    public function affichageAproposAction() {
+
+        $template = 'SmartUnityAppBundle::Apropos.html.twig';
+
+        return $this->render($template);
+        
+    }    
+
+    public function affichageConditionsAction() {
+
+        $template = 'SmartUnityAppBundle::Conditions.html.twig';
+
+        return $this->render($template);
+        
+    }   
 }

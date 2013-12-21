@@ -2,3 +2,15 @@ smart_unity_app_homepage:
     pattern:  /
     defaults: { _controller: SmartUnityAppBundle:Accueil:index }
 
+smart_unity_app_descriptionpage:
+    pattern:  /Comment-ca-marche
+    defaults: { _controller: SmartUnityAppBundle:Accueil:affichageDescription }
+
+smart_unity_app_aproposPage:
+    pattern: /A-propos-de-smartunity
+    defaults: { _controller: SmartUnityAppBundle:Accueil:affichageApropos}
+
+smart_unity_app_conditionsPage:
+    pattern: /Conditions-generales
+    defaults: { _controller: SmartUnityAppBundle:Accueil:affichageConditions}
+ 
