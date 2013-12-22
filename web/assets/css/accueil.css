@@ -217,3 +217,8 @@ left: 38%;
 z-index: 5;
 display: inline-block;
 }
+
+.tab-content .bouton-repondre
+{
+	margin-top: 7px;
+}
