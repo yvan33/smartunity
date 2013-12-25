@@ -22,7 +22,7 @@ class UtilisateurController extends Controller {
 
         $form_pref = $this->createForm('smartunity_user_preference', $user);
         $form_parrainage = $this->createForm('smartunity_user_parrainage', $parrainage);
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $membreRepository = $this->getDoctrine()
                 ->getManager()
@@ -39,13 +39,13 @@ class UtilisateurController extends Controller {
         else{
             $parrain="";
         }
-        
         $avancement=25;
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
 
         if (isset($avatar)) {
             $avatar = $avatar->getWebPath();
             $avancement +=25;
+
         }
 
         if ( (null !== $user->getNom()) && (null !== $user->getPrenom())) {

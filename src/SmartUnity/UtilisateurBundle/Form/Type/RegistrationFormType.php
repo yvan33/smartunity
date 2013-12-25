@@ -4,6 +4,7 @@ namespace SmartUnity\UtilisateurBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use SmartUnity\UtilisateurBundle\Form\Type\HiddenEntity;
 
 class RegistrationFormType extends BaseType {
 
