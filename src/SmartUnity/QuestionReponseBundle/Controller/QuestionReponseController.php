@@ -364,7 +364,11 @@ class QuestionReponseController extends Controller
 
         $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
         $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
-
+        
+        $avatar = $avatarRepository->find($membre->getId());
+        if (isset($avatar)) {
+            $avatar = $avatar->getWebPath();
+        }
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
