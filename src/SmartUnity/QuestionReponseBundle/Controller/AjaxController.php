@@ -114,7 +114,9 @@ class AjaxController extends Controller
         $commentaireReponseRepository = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('SmartUnityAppBundle:commentaireReponse');
-
+        $avatarRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('SmartUnityAppBundle:avatar');
 
         //Récupération de l'id de la question à partir du Slug
         //Utilisatioin des meta-fonctions du repository
@@ -189,7 +191,11 @@ class AjaxController extends Controller
 
                 $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
                 $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
-
+        $avatar = $avatarRepository->find($membre->getId());
+ 
+        if (isset($avatar)) {
+            $avatar = $avatar->getWebPath();
+        }
                 //Ajour d'une réponse dans le tableau de sortie
                 array_push($returnArray, array(
                     'id'=>$reponse[0]->getId(),
@@ -206,7 +212,8 @@ class AjaxController extends Controller
                     'is_voted'=>$isVoted,
                     'smart_reponses'=> (int) $smartReponses,
                     'nb_questions_membre'=> (int) $nb_questions_membre,
-                    'points_membre'=> (int) $membre->getCagnotte()
+                    'points_membre'=> (int) $membre->getCagnotte(),
+                    'avatar' => $avatar,
                 ));
             }
         }

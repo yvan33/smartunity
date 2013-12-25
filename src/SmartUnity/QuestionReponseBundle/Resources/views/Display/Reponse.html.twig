@@ -29,33 +29,33 @@
 
                     <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
                                 {% if not is_certif and not is_validated %}<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>{% endif %}
-                    </div>
 
-                </div>
-
-                <div class="grille-2" >
-
-                    <div class="grille-3-over">
-                        <div class="grille-3">
-
-                            <div class="grille-3-grey">
+                              </div>
+                              
+                            </div>
+                            
+                            <div class="grille-2" >
+                     
+                              <div class="grille-3-over">
+                                <div class="grille-3">
+                         
+                                    <div class="grille-3-grey">
+                                        <div class="grille-3-im">
                                             {% if avatar %}
-                                <div class="grille-3-im">
-                                    <img src="{{ asset( '') }}{{ avatar }}" alt="avatar" height="71" width="71">
-                                </div>
-{%else%}
-                                <div class="grille-3-im">
-                                    <img src="{{ asset('assets/img/logo-compte.png') }}" alt="avatar"/>
-                                </div>
-{%endif%}
-                                <div class=" grille-3-txt">
-                                    <p style="margin:0px; font-weight:600"><a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}">{{ question.membre.username }}</a></p>
-                                    <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
-                                    <p style="margin:0px">{{nb_questions_membre}} Questions</p>
-                                    <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
-                                </div>
-                                <div class="grille-3-rond">
-                                    <div class="square-blue">
+                                            <img src="{{ asset('') }}{{ avatar }}" alt="avatar" height="71" width="71" />
+                                            {% else %}
+                                              <img src="{{ asset('assets/img/logo-compte.png') }}" />
+                                            {% endif %}
+                                        </div>
+                                        <div class=" grille-3-txt">
+                                            <p style="margin:0px; font-weight:600"><a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}">{{ question.membre.username }}</a></p>
+                                            <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
+                                            <p style="margin:0px">{{nb_questions_membre}} Questions</p>
+                                            <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
+                                        </div>
+                                        <div class="grille-3-rond">
+                                          <div class="square-blue">
+
                                             {{ question.membre.reputation }}
                                     </div>
                                 </div>
@@ -386,9 +386,12 @@
                                     <div class="grille-3"> \
                               \
                                         <div class="grille-3-grey"> \
-                                            <div class="grille-3-im"> \
-                                                  <img src="{{ asset('assets/img/logo-compte.png') }}"/> \
-                                            </div> \
+                                            <div class="grille-3-im">';
+                                             if (pEntry['avatar']) entity += ' \
+ <img src="{{ asset('') }}' + pEntry['avatar'] + ' " alt="avatar" height="71" width="71" />';
+                                             else entity += '\
+                                             <img src="{{ asset('assets/img/logo-compte.png') }}"/>';
+entity += '      </div> \
                                             <div class=" grille-3-txt"> \
                                               <p style="margin:0px; font-weight:600">' + pEntry['membre_username'] + '</p> \
                                             <p style="margin:0px">' + pEntry['smart_reponses'] + ' Smart\'Reponses</p> \

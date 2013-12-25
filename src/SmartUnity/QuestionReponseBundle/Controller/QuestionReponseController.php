@@ -330,12 +330,12 @@ class QuestionReponseController extends Controller {
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:question');
         $reponseRepository = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('SmartUnityAppBundle:reponse');
+                            ->getManager()
+                            ->getRepository('SmartUnityAppBundle:reponse');
         $avatarRepository = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:avatar');
-
+        
         $question = $questionRepository->findOneBySlug($slug);
 
         $isValidated = $questionRepository->isQuestionValid($question->getId());
@@ -353,22 +353,23 @@ class QuestionReponseController extends Controller {
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
-                    'error' => $error,
-                    'nbReponses' => $nbReponses,
-                    'nbPages' => $nbPages,
-                    'tri' => $tri,
-                    'page' => $page,
-                    'slug' => $slug,
-                    'is_certif' => $isCertif,
-                    'is_validated' => $isValidated,
-                    'listeReponses' => $listeReponses,
-                    'pagination' => $pagination,
-                    'nbParPage' => $nbParPage,
-                    'question' => $question,
-                    'smart_reponses' => (int) $smartReponses,
-                    'nb_questions_membre' => (int) $nb_questions_membre,
-                    'membre_id' => $membre->getId(),
-                    'avatar' => $avatar,
+
+            'error'         => $error,
+            'nbReponses'=>$nbReponses,
+            'nbPages'=>$nbPages,
+            'tri'=>$tri,
+            'page'=>$page,
+            'slug'=>$slug,
+            'is_certif'=>$isCertif,
+            'is_validated'=>$isValidated,
+            'listeReponses'=>$listeReponses,
+            'pagination'=>$pagination,
+            'nbParPage'=>$nbParPage,
+            'question'=>$question,
+            'smart_reponses'=> (int) $smartReponses,
+            'nb_questions_membre'=> (int) $nb_questions_membre,
+            'membre_id' => $membre->getId(),
+            'avatar' => $avatar,
         ));
     }
 
