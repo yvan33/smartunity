@@ -417,18 +417,6 @@ class QuestionReponseController extends Controller
                                 'required'    => false,
                                 'empty_value' => 'Choisissez',
                                 'empty_data'  => NULL))
-                            // ->addEventListener(
-                            //     FormEvents::PRE_SET_DATA,
-                            //         function(FormEvent $event) {
-                            //             $form = $event->getForm();
-                            //             // this would be your entity, i.e. SportMeetup
-                            //             $data = $event->getData();
-
-                            //             $modeleCat = $data->getMarque()->getAvailablePositions();
-
-                            //             $form->add('position', 'entity', array('choices' => $positions));
-                            //         }
-                            //     )
                             ->add('os', 'entity', array(
                                 'class'=> 'SmartUnityAppBundle:os',
                                 'property'=> 'nom',
@@ -441,8 +429,7 @@ class QuestionReponseController extends Controller
                                 'empty_value' => 'Choisissez une option',
                                 'required' => true))
                             ->add('remuneration','integer',array('attr' => array('min' => 10,'max' => ($user->getCagnotte()+10))))
-                            ->add('save', 'submit')
-                            
+                            ->add('save', 'submit', array('label' => 'Poser ma question'))
                             ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST')

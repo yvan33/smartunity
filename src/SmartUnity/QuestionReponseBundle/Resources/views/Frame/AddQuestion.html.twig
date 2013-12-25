@@ -17,8 +17,8 @@
 </head>
 <body>
 
-	<div class="grille-content">
-	    <legend>Nouvelle Reponse</legend>
+	<div class="grille-content premiere-ligne">
+	    <legend>Nouvelle Question</legend>
 		
 		{{ form_start(formQuestion)}}
 		<div class="erreur">
@@ -53,12 +53,10 @@
 	        <div class="grille-2">{{ form_errors(formQuestion.remuneration) }}{{ form_widget(formQuestion.remuneration,{'attr': {'style': 'width:100%;'}}) }}</div>
 	    </div>
 	    <div class="row">
-	        <div class="grille-1">{{form_widget(formQuestion.save,{'attr': {'class': 'btn btn-primary'}})}}</div>
+	        <div class="grille-1">{{form_widget(formQuestion.save,{'attr': {'class': 'btn btn-primary cent-h'}})}}</div>
 	    </div>
 	    {{form_end(formQuestion)}}
 	</div>
-    
-
 
 </body>
 </html>
