@@ -95,6 +95,7 @@ Bonjour {{ app.user.username}}
                                       </div>
                                       <div class="grille-question-txt">
                                           <p>{{ question.sujet }}</p>
+                                          <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p>
                                       </div>
                                       
                                   </div>
@@ -122,6 +123,8 @@ Bonjour {{ app.user.username}}
                                         </div>
                                         <div class="grille-question-txt">
                                             <p>{{ question.sujet }}</p>
+                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p>
+                                            
                                         </div>
                                         
                                     </div>
@@ -149,6 +152,7 @@ Bonjour {{ app.user.username}}
                                         </div>
                                         <div class="grille-question-txt">
                                             <p>{{ question.sujet }}</p>
+                                          <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p>
                                         </div>
                                        
                                     </div>
@@ -181,11 +185,6 @@ Bonjour {{ app.user.username}}
                           <div class="bouton-decouvrir"><button type="button" class="btn bouton-repondre">Découvrir</button></div>
                       </div>
               </div>
-{#              <div class="grille-info">
-                      <div class="row  ">
-                            <div class="text-center"><p class="cook-btn2">XXX Membres connectés</p></div>
-                      </div>
-    </div>#}
   </div>
 </div>
 
