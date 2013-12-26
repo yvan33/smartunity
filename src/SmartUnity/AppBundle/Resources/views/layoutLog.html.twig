@@ -21,7 +21,25 @@
         <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
 
         <!-- Additional styleSheets -->
+        <script>
+                function goLogIn(){
+        window.location.href = "{{ path('_security_check') }}";
+    }
 
+    function onFbInit() {
+        if (typeof(FB) != 'undefined' && FB != null ) {              
+            FB.Event.subscribe('auth.statusChange', function(response) {
+                if (response.session || response.authResponse) {
+                    setTimeout(goLogIn, 500);
+                } else {
+                    window.location.href = "{{ path('_security_logout') }}";
+                }
+            });
+        }
+    }
+
+        </script>
+        
 {% block stylesheets %}{% endblock %}
 
 
@@ -29,7 +47,7 @@
         <!-- Bootstrap core and general JavaScript files -->
         <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('assets/js/Fb-login.js') }}"></script>
+{#        <script src="{{ asset('assets/js/Fb-login.js') }}"></script>#}
 
         <!-- Additional Javascript src -->
 
