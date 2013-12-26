@@ -168,12 +168,11 @@
 .logo
 {
 	padding-top:5px;
-	padding-bottom:5px;
 	height: 60px;
 }
+
 .logo2
 {
-
 	text-align: center;
 
 }
@@ -184,6 +183,7 @@
 	background-repeat:no-repeat;
 	margin-top:12px;
 }
+
 .foot-sep
 {
 	background-color:#2a3940;
@@ -191,6 +191,7 @@
 	margin-top: 10px;
 
 }
+
 .footer
 {
 	text-align: center;
@@ -212,6 +213,7 @@
 	display: table;
     table-layout: fixed;
 }
+
 .red-dot
 {
 	background-image:url(../img/red-dot.png);

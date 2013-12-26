@@ -212,7 +212,7 @@
 }
 .grille-reponse
 {
-	border-bottom: solid 3px #CCCCCC;
+	border-bottom: solid 1px #e8e4dc;
 	overflow:hidden;
 	clear:both;
 	
@@ -220,7 +220,6 @@
 }
 .grille-reponse-smart
 {
-	border-bottom: solid 3px #CCCCCC;
 	overflow:hidden;
 	clear:both;
 	background-color:#f5f4df;
@@ -230,24 +229,16 @@
 
 .grille-content-2
 {
-	margin-top:30px;
-	margin-bottom:30px;
+	
+	margin-bottom: 25px;
 	background-color: #f8f8ef;
 	border-radius:5px;
-	border:2px solid #CCC;
-	-webkit-box-shadow: 0 0 20px  rgba(0,0,0,0.2);
-       -moz-box-shadow: 0 0 20px  rgba(0,0,0,0.2);
-            box-shadow: 0 0 20px  rgba(0,0,0,0.2);
+	border:1px solid #e8e4dc;
 	overflow:hidden;
 }
 .head-blue
 {
-	background: linear-gradient( to top, #015884, #0088c7);
-	background: -webkit-linear-gradient( ... );
-    background:    -moz-linear-gradient( ... ); 
-    background:     -ms-linear-gradient( ... );
-    background:      -o-linear-gradient( ... );
-    background:         linear-gradient( ... );
+	background: #559aa9;
 	width:100%;
 	overflow:hidden;
 	color:#FFF;
@@ -385,4 +376,9 @@ a.commentaire-btn:hover{
 /* content animate out */
 .mfp-fade.mfp-wrap.mfp-removing .mfp-content {
   opacity: 0;
+}
+
+.cadre-general
+{
+	margin-top: 20px;
 }

@@ -121,7 +121,7 @@
 	border-radius:3px;
 	overflow:hidden;
 	margin-bottom:10px;
-    margin-top:30px;
+    margin-top: 20px;
 
 }
 
@@ -268,4 +268,21 @@
     font-family: 'Cookie', cursive;
     font-size: 3em;
     margin-bottom: 10px;
+}
+
+.cadre-general
+{
+	margin-top: 20px;
+	margin-bottom: 25px;
+	padding-top: 20px;
+}
+
+p
+{
+	font-size: 13px;
+}
+
+.txt-rond
+{
+	margin-bottom: 0px;
 }
