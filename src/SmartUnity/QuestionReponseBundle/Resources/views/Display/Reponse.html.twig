@@ -8,9 +8,9 @@
 {% endblock %}
 
 {% block initJS %}
-	<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
-  <script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
-  <script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
+<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
+<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
 {% endblock %}
 
 
@@ -33,76 +33,76 @@
                     <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
                                 {% if not is_certif and not is_validated %}<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>{% endif %}
 
-                              </div>
+                    </div>
 
 
-                              
-                            </div>
-                            
-                            <div class="grille-2" >
-                     
-                              <div class="grille-3-over">
-                                <div class="grille-3">
-                         
-                                    <div class="grille-3-grey">
-                                        <div class="grille-3-im">
+
+                </div>
+
+                <div class="grille-2" >
+
+                    <div class="grille-3-over">
+                        <div class="grille-3">
+
+                            <div class="grille-3-grey">
+                                <div class="grille-3-im">
 
                                             {% if avatar %}
-                                            <img src="{{ asset('') }}{{ avatar }}" alt="avatar" height="71" width="71" />
+                                    <img src="{{ asset('') }}{{ avatar }}" alt="avatar" height="71" width="71" />
                                             {% else %}
-                                              <img src="{{ asset('assets/img/logo-compte.png') }}" />
+                                    <img src="{{ asset('assets/img/logo-compte.png') }}" />
                                             {% endif %}
 
-                                        </div>
-                                        <div class=" grille-3-txt">
-                                            <p style="margin:0px; font-weight:600"><a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}">{{ question.membre.username }}</a></p>
-                                            <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
-                                            <p style="margin:0px">{{nb_questions_membre}} Questions</p>
-                                            <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
-                                        </div>
-                                        <div class="grille-3-rond">
-                                          <div class="square-blue">
+                                </div>
+                                <div class=" grille-3-txt">
+                                    <p style="margin:0px; font-weight:600"><a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}">{{ question.membre.username }}</a></p>
+                                    <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
+                                    <p style="margin:0px">{{nb_questions_membre}} Questions</p>
+                                    <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
+                                </div>
+                                <div class="grille-3-rond">
+                                    <div class="square-blue">
 
                                             {{ question.membre.reputation }}
-                                            </div>
-                                        </div>
                                     </div>
-                               
-      
+                                </div>
                             </div>
-                            </div>
-                            <p class="min">{{ question.description }}</p>
-                            <div style="float:left;margin-bottom:10px;" >
+
+
+                        </div>
+                    </div>
+                    <p class="min">{{ question.description }}</p>
+                    <div style="float:left;margin-bottom:10px;" >
                               {% if question.marque.nom is defined %}<span class="label label-default">{{question.marque.nom}}</span>{% endif %}
                               {% if question.modele.nom is defined %}<span class="label label-default">{{question.modele.nom}}</span>{% endif %}
                               {% if question.os.nom is defined %}<span class="label label-default">{{question.os.nom}}</span>{% endif %}
                               {% if question.typeQuestion.nom is defined %}<span class="label label-default">{{question.typeQuestion.nom}}</span>{% endif %}
-                            </div>
+                    </div>
 
 
                               {% for commentaire in question.commentaireQuestions %}
                                 {% if commentaire.signaler == 0 %}
-                                    <div class="commentaire">
-                                    <p style="float:left">{{commentaire.description}}</p><p style="float:right">
-                                  <a href="{{ path('smart_unity_membre_profil', {id: commentaire.membre.id}) }}">{{commentaire.membre.username}}</a> le {{commentaire.date|date('d-m-Y H:i')}}
-                                        <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_question', {idCommentaireQuestion: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
-                                    </p>
-                                    </div>
+                    <div class="commentaire">
+                        <p style="float:left">{{commentaire.description}}</p><p style="float:right">
+                            <a href="{{ path('smart_unity_membre_profil', {id: commentaire.membre.id}) }}">{{commentaire.membre.username}}</a> le {{commentaire.date|date('d-m-Y H:i')}}
+                            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_question', {idCommentaireQuestion: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                        </p>
+                    </div>
                                 {% endif %}
                               {% endfor %}
-                                
-                                <div style="float:right">
-                                <div class="grille-3-btn">
-                                  <div style="float: left;margin-right: 5px;">
-                                        <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
-                                      </div>
-                                   <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" href="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}">Commenter</a></div>
-                                   {% if not is_validated and not is_certif %}
-                                   <a class="reponse"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}"><div class="bouton-com-rep">Repondre</div></a>{% endif %}
-                                </div>
-                                </div>
+
+                    <div style="float:right">
+                        <div class="grille-3-btn">
+                            <div style="float: left;margin-right: 5px;">
+                                <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                             </div>
-                          </div>
+                            <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" href="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}">Commenter</a></div>
+                                   {% if not is_validated and not is_certif %}
+                            <a class="reponse"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}"><div class="bouton-com-rep">Repondre</div></a>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
                             {% for reponse in listeReponses %}
@@ -123,19 +123,19 @@
                               {% endif %}
                           {% endfor %}
 
-                        </div>
-                        </div>
-                    </div>
+        </div>
+    </div>
+</div>
 
-              <div class="row" style="margin-bottom:40px">
-                <div style="text-align:center; cursor:pointer">
-                    <ul id="pages" class="pagination pagination-lg">
+<div class="row" style="margin-bottom:40px">
+    <div style="text-align:center; cursor:pointer">
+        <ul id="pages" class="pagination pagination-lg">
                       {% for page in pagination %}
-                      <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_display_reponse', {page: page[1], slug: slug, tri: tri}) }}">{{ page[0] }}</a></li>
+            <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_display_reponse', {page: page[1], slug: slug, tri: tri}) }}">{{ page[0] }}</a></li>
                       {% endfor %}
-                  </ul>
-                </div>
-              </div>
+        </ul>
+    </div>
+</div>
 
 
 {% endblock %}
@@ -145,17 +145,17 @@
 
 {% block modal %}
 {% if is_granted('ROLE_USER') %}
-  <div id="addReponseHolder" style="position:fixed;display:none; width:100%;bottom:0px; z-index:1000;left:0">
+<div id="addReponseHolder" style="position:fixed;display:none; width:100%;bottom:0px; z-index:1000;left:0">
     <div class="container">
-      <div class="row">
-        <div class="col-md-offset-1 col-md-10" style="padding:0px;position:relative">
-          <div  style="position:absolute;cursor:pointer;right:20px;top:5px;color:#FFF;font-size:24px" id="closeFrame">
-      <span class="glyphicon glyphicon-remove-circle"></span>
-          </div>
-    <iframe id="addReponse" style="border:0px;width:100%;background:none;height:184px;" src="about:blank"></iframe>
-      </div>
-  </div>
-</div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10" style="padding:0px;position:relative">
+                <div  style="position:absolute;cursor:pointer;right:20px;top:5px;color:#FFF;font-size:24px" id="closeFrame">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                </div>
+                <iframe id="addReponse" style="border:0px;width:100%;background:none;height:184px;" src="about:blank"></iframe>
+            </div>
+        </div>
+    </div>
 </div>
 {% endif %}
 {% endblock %}
@@ -173,61 +173,57 @@
 /// VOTES
 ////////////
 
-function upVote(pId){
+            function upVote(pId){
 
-  $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees){
-      if(donnees['status']=='ok'){
-          score = parseInt($('#vote' + pId + ' .upVote p').html());
-          $('#vote' + pId + ' .upVote p').html( score + 1 );
-
-          $('#vote' + pId).attr('rel' , "tooltip");
-          $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
-          $('#vote' + pId + ' .upVote').attr('onclick', '');
-          $('#vote' + pId + ' .downVote').attr('onclick', '');
-          $('.roww').tooltip({
+            $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees){
+            if (donnees['status'] == 'ok'){
+            score = parseInt($('#vote' + pId + ' .upVote p').html());
+                    $('#vote' + pId + ' .upVote p').html(score + 1);
+                    $('#vote' + pId).attr('rel', "tooltip");
+                    $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+                    $('#vote' + pId + ' .upVote').attr('onclick', '');
+                    $('#vote' + pId + ' .downVote').attr('onclick', '');
+                    $('.roww').tooltip({
             'placement' : 'right'
-          });
-      }else if(donnees['status']=='error'){
+            });
+            } else if (donnees['status'] == 'error'){
 
-          $.magnificPopup.open({
+            $.magnificPopup.open({
             items: {
-              src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
-              type:'inline',
-              mainClass: 'mfp-fade'
+            src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
+                    type:'inline',
+                    mainClass: 'mfp-fade'
             }
-          });
-
-      }
-  });
-}
-
-function downVote(pId){
-
-  $.getJSON('{{ path('smart_unity_question_reponse_ajax_downvote') }}/' + pId, function(donnees){
-      if(donnees['status']=='ok'){
-          score = parseInt($('#vote' + pId + ' .downVote p').html());
-          $('#vote' + pId + ' .downVote p').html( score - 1 );
-
-          $('#vote' + pId).attr('rel' , "tooltip");
-          $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
-          $('#vote' + pId + ' .upVote').attr('onclick', '');
-          $('#vote' + pId + ' .downVote').attr('onclick', '');
-          $('.roww').tooltip({
-            'placement' : 'right'
-          });
-      }else if(donnees['status']=='error'){
-
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
-              type:'inline',
-              mainClass: 'mfp-fade'
+            });
             }
-          });
+            });
+                    }
 
-      }
-  });
-}
+    function downVote(pId){
+
+    $.getJSON('{{ path('smart_unity_question_reponse_ajax_downvote') }}/' + pId, function(donnees){
+    if (donnees['status'] == 'ok'){
+    score = parseInt($('#vote' + pId + ' .downVote p').html());
+            $('#vote' + pId + ' .downVote p').html(score - 1);
+            $('#vote' + pId).attr('rel', "tooltip");
+            $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+            $('#vote' + pId + ' .upVote').attr('onclick', '');
+            $('#vote' + pId + ' .downVote').attr('onclick', '');
+            $('.roww').tooltip({
+    'placement' : 'right'
+    });
+    } else if (donnees['status'] == 'error'){
+
+    $.magnificPopup.open({
+    items: {
+    src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
+            type:'inline',
+            mainClass: 'mfp-fade'
+    }
+    });
+    }
+    });
+            }
 
 
 
@@ -237,51 +233,48 @@ function downVote(pId){
 /// TOOLTIPS
 //////////
 
-$(document).ready(function(){
+    $(document).ready(function(){
 
-  $('a.reponse').click(function(e){
+    $('a.reponse').click(function(e){
     {% if is_granted('ROLE_USER') %}
-      $('#addReponse').attr('src', $(this).attr('href'));
-      $('#addReponseHolder').show('fast');
-      $('#closeFrame').click(function(){
-        $('#addReponseHolder').hide('fast');
-        $('#addReponse').attr('src', 'about:blank');
-      })
+    $('#addReponse').attr('src', $(this).attr('href'));
+            $('#addReponseHolder').show('fast');
+            $('#closeFrame').click(function(){
+    $('#addReponseHolder').hide('fast');
+            $('#addReponse').attr('src', 'about:blank');
+    })
     {% endif %}
     e.preventDefault();
-  });
-
-  $('a.commentaire-btn').click(function(e){
+    });
+            $('a.commentaire-btn').click(function(e){
     {% if is_granted('ROLE_USER') %}
-      $('#addReponse').attr('src', $(this).attr('href'));
-      $('#addReponseHolder').show('fast');
-      $('#closeFrame').click(function(){
-        $('#addReponseHolder').hide('fast');
-        $('#addReponse').attr('src', 'about:blank');
-      })
+    $('#addReponse').attr('src', $(this).attr('href'));
+            $('#addReponseHolder').show('fast');
+            $('#closeFrame').click(function(){
+    $('#addReponseHolder').hide('fast');
+            $('#addReponse').attr('src', 'about:blank');
+    })
     {% endif %}
     e.preventDefault();
-  });
-
+    });
   {% if not is_granted('ROLE_USER') %}
-  $('.reponse').tooltip({
+    $('.reponse').tooltip({
     'placement' : 'left'
-  });
+    });
   {% endif %}
 
-  $('.roww').tooltip({
+    $('.roww').tooltip({
     'placement' : 'right'
-  });
-
+    });
 {% if is_granted('ROLE_USER') %}
-  $('.bouton-soutient').popover({
+    $('.bouton-soutient').popover({
     'html': true,
-    'content': '<iframe style:"width:300px" src="{{path('smart_unity_question_reponse_add_soutien_question', {slug: question.slug})}}"></iframe>',
-    'placement': 'right',
-    'animation': true
-  })
+            'content': '<iframe style:"width:300px" src="{{path('smart_unity_question_reponse_add_soutien_question', {slug: question.slug})}}"></iframe>',
+            'placement': 'right',
+            'animation': true
+    })
 {% endif %}
-})
+    })
 
 
 
@@ -292,122 +285,106 @@ $(document).ready(function(){
 ////////////////////////////
 
 //Options du bootStrap Paginator
-options = new Object();
-  options = {
-    currentPage: {{ page }},
-    totalPages: {{ nbPages }},
-    alignment: 'center',
-    numberOfPages: 5,
-    size: 'large',
-    itemContainerClass: function (type, page, current) {
-                          return (page === current) ? "active" : "pointer-cursor";
-                        },
-    bootstrapMajorVersion: 3,
-    onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
-      clickOnPagination(pPage);
-    }
-  };
-
-tri = '{{ tri }}';
-
-
-$(document).ready(function(){
-  $('#pages').bootstrapPaginator(options);
-
-  $('#triVote').attr('href', '#');
-  $('#triDate').attr('href', '#');
-  
-  $('#triVote').click(function(e){
+            options = new Object();
+            options = {
+            currentPage: {{ page }},
+                    totalPages: {{ nbPages }},
+                    alignment: 'center',
+                    numberOfPages: 5,
+                    size: 'large',
+                    itemContainerClass: function (type, page, current) {
+                    return (page === current) ? "active" : "pointer-cursor";
+                    },
+                    bootstrapMajorVersion: 3,
+                    onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
+                    clickOnPagination(pPage);
+                    }
+            };
+            tri = '{{ tri }}';
+            $(document).ready(function(){
+    $('#pages').bootstrapPaginator(options);
+            $('#triVote').attr('href', '#');
+            $('#triDate').attr('href', '#');
+            $('#triVote').click(function(e){
     tri = 'vote';
-    options.currentPage = 1;
-    $('#pages').bootstrapPaginator(options);
-    $('#triVote').css('font-weight', 'bold');
-    $('#triVote').css('font-style', 'none');
-    $('#triDate').css('font-weight', 'normal');
-    clickOnPagination(1);
-    e.preventDefault();
-  });
-
-  $('#triDate').click(function(e){
+            options.currentPage = 1;
+            $('#pages').bootstrapPaginator(options);
+            $('#triVote').css('font-weight', 'bold');
+            $('#triVote').css('font-style', 'none');
+            $('#triDate').css('font-weight', 'normal');
+            clickOnPagination(1);
+            e.preventDefault();
+    });
+            $('#triDate').click(function(e){
     tri = 'date';
-    options.currentPage = 1;
-    $('#pages').bootstrapPaginator(options);
-    $('#triVote').css('font-weight', 'normal');
-    $('#triDate').css('font-weight', 'bold');
-    $('#triDate').css('font-style', 'none');
-    clickOnPagination(1);
-    e.preventDefault();
-  });
+            options.currentPage = 1;
+            $('#pages').bootstrapPaginator(options);
+            $('#triVote').css('font-weight', 'normal');
+            $('#triDate').css('font-weight', 'bold');
+            $('#triDate').css('font-style', 'none');
+            clickOnPagination(1);
+            e.preventDefault();
+    });
+            });
+            function clickOnPagination(pPage){
+            $('#reponses-frame').height(function(i, h){
+            return h;
+            });
+                    $('#reponses-container').fadeOut('fast');
+                    //On récupère le JSON depuis le controller AjaxController
+                    $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/' + tri + '/' + pPage + '/{{nbParPage}}', function(donnees){
+                    var content = '';
+                            if (donnees[0]['page'] == pPage && donnees[0]['slug'] == '{{slug}}' && donnees[0]['nbParPage'] == {{nbParPage}} && donnees[0]['tri'] == tri){
+                    donnees.shift(); //On supprime la ligne de check du JSON
 
-});
+                            donnees.forEach(function(pEntry, i){
+                            if (!pEntry['is_validated'] && !pEntry['is_certif']) content += generateContent(pEntry, i);
+                            }); //Generation du code
 
+                            //Affichage du nouveau contenu dasn le tab, et fadeIn
+                            $('#reponses-container').html(content);
+                            $('#reponses-container').fadeIn('fast');
+                            $('#reponses-frame').animateAuto('height', 'fast');
+                    } else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
+                    $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+                            $('#reponses-container').fadeIn('fast');
+                    }
+                    $('.roww').tooltip({
+                    'placement' : 'right'
+                    });
+                    });
+                    }
+    function generateContent(pEntry, i){
 
-function clickOnPagination(pPage){
-  $('#reponses-frame').height(function(i, h){
-      return h;
-  });
-  $('#reponses-container').fadeOut('fast');
-
-  //On récupère le JSON depuis le controller AjaxController
-  $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/' + tri + '/' + pPage + '/{{nbParPage}}', function(donnees){
-      var content='';
-      if(donnees[0]['page']==pPage && donnees[0]['slug']== '{{slug}}' && donnees[0]['nbParPage']== {{nbParPage}} && donnees[0]['tri'] == tri){
-        donnees.shift(); //On supprime la ligne de check du JSON
-
-        donnees.forEach(function(pEntry, i){
-          if ( !pEntry['is_validated'] && !pEntry['is_certif'] ) content += generateContent(pEntry, i);
-        }); //Generation du code
-
-        //Affichage du nouveau contenu dasn le tab, et fadeIn
-        $('#reponses-container').html(content);
-        $('#reponses-container').fadeIn('fast');
-        $('#reponses-frame').animateAuto('height', 'fast');
-
-      }else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
-        $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
-        $('#reponses-container').fadeIn('fast');
-      }
-      $('.roww').tooltip({
-        'placement' : 'right'
-      });
-  });
-}
-
-function generateContent(pEntry, i){
-  var entity = '<div class="grille-reponse"> \
+    var route_vers_profil = '{{ path("smart_unity_membre_profil", {'id' : 'membre_id' }) }}';
+            route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);
+            var entity = '<div class="grille-reponse"> \
                                  <div class="grille-1" style="text-align:center"> \
                                     <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
-                                    if( pEntry['is_voted'] ){
-                                      entity += 'Vous avez déjà noté cette question.';
-                                    }
+            if (pEntry['is_voted']){
+    entity += 'Vous avez déjà noté cette question.';
+    }
 
-                                entity += '"> \
+    entity += '"> \
                                       <div class="fleche upVote" {% if is_granted('ROLE_USER') %}';
-
-                                      if( !pEntry['is_voted'] ) entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
-
-
-                                      entity +=' {% endif %}> \
+            if (!pEntry['is_voted']) entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
+            entity += ' {% endif %}> \
                                           <img src="{{ asset('assets/img/fleche_plus.png') }}" /><p style="color:#7fc236">' + pEntry['up_vote'] + '</p> \
                                         </div> \
                                         <div class="fleche downVote" {% if is_granted('ROLE_USER') %}';
-
-                                      if( !pEntry['is_voted'] ) entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
-
-                                        entity += '{% endif %}> \
+            if (!pEntry['is_voted']) entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
+            entity += '{% endif %}> \
                                           <img src="{{ asset('assets/img/fleche_moins.png') }}"/><p style="color:#F00">' + pEntry['down_vote'] + '</p> \
                                         </div> \
                                     </div> \
                                     <div class="roww"> \
                                       <p style="font-size:11px">' + pEntry['date'] + '</p> \
                                     </div>';
-                                    
-                                    if(pEntry['is_validated'] || pEntry['is_certif']) entity +=' \
+            if (pEntry['is_validated'] || pEntry['is_certif']) entity += ' \
                                     <div class="roww"> \
                                       <img src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/> \
                                     </div>';
-                                    
-                                    entity +=' \
+            entity += ' \
                                 </div> \
                                  \
                                 <div class="grille-2" > \
@@ -417,13 +394,13 @@ function generateContent(pEntry, i){
                               \
                                         <div class="grille-3-grey"> \
                                             <div class="grille-3-im">';
-                                             if (pEntry['avatar']) entity += ' \
+            if (pEntry['avatar']) entity += ' \
  <img src="{{ asset('') }}' + pEntry['avatar'] + ' " alt="avatar" height="71" width="71" />';
-                                             else entity += '\
+            else entity += '\
                                              <img src="{{ asset('assets/img/logo-compte.png') }}"/>';
-entity += '      </div> \
+            entity += '      </div> \
                                             <div class=" grille-3-txt"> \
-                                              <p style="margin:0px; font-weight:600">' + pEntry['membre_username'] + '</p> \
+                                              <p style="margin:0px; font-weight:600"><a href="' + route_vers_profil + '">' + pEntry['membre_username'] + '</a></p> \
                                             <p style="margin:0px">' + pEntry['smart_reponses'] + ' Smart\'Reponses</p> \
                                             <p style="margin:0px">' + pEntry['nb_questions_membre'] + ' Questions</p> \
                                             <p style="margin:0px">' + pEntry['points_membre'] + ' Smart\'Points</p> \
@@ -437,37 +414,32 @@ entity += '      </div> \
                                 </div> \
                                 </div> \
                                 <p style="min-height: 100px">' + pEntry['description'] + '</p>';
+            pEntry['commentaires'].forEach(function(pCom, i){
 
-                                
-                                  pEntry['commentaires'].forEach(function(pCom, i){
-
-                                    entity += '<div class="commentaire"> \
+    entity += '<div class="commentaire"> \
                                     <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_username'] + ' le ' + pCom['date'] + ' \
                                     <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
                                     </div>';
-
-                                  });
-
-                                
-                                entity +=' \
+    });
+            entity += ' \
                                     <div style="float:right"> \
                                     <div class="grille-3-btn"> \
                                     {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
-                                      <div style="float:left; margin-right:5px;"> \
-                                        <a href="{{path('smart_unity_question_reponse_homepage')}}validation/' + pEntry['id'] + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a> \
-                                      </div> \
+            < div style = "float:left; margin-right:5px;" > \
+            < a href = "{{path('smart_unity_question_reponse_homepage')}}validation/' + pEntry['id'] + '" > < img src = "{{ asset('assets/img/valid-btn.png') }}" / > < /a> \
+            < /div> \
                                       {% endif %}
-                                      <div style="float: left;margin-right: 5px;"> \
-                                        <a href="#"><img src="{{ asset('assets/img/signaler.png') }}"/></a> \
-                                      </div> \
-                                       <a href="#"><div class="bouton-com-rep">Commenter</div></a> \
-                                    </div> \
-                                    </div> \
-                                </div> \
-                                </div>';
+    < div style = "float: left;margin-right: 5px;" > \
+            < a href = "#" > < img src = "{{ asset('assets/img/signaler.png') }}" / > < /a> \
+            < /div> \
+            < a href = "#" > < div class = "bouton-com-rep" > Commenter < /div></a > \
+            < /div> \
+            < /div> \
+            < /div> \
+            < /div>';
 
-  return entity;
-}
+            return entity;
+            }
 
 
 </script>
