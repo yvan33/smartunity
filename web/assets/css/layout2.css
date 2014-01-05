@@ -161,6 +161,7 @@
 {
 	background-color: #99bbc3;
 	background-image: url(../img/noise2.png);
+        padding-top: 70px;
 	
 
 }
@@ -363,4 +364,11 @@
 {
 	background-color: #559aa9;
 	border-radius: 3px 3px 0 0;
+}
+
+.fixed-right-corner
+{
+	position: absolute;
+	top:15px;
+	right:30px;
 }
