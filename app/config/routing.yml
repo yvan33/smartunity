@@ -1,3 +1,7 @@
+smart_unity_blog:
+    resource: "@SmartUnityBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+
 smart_unity_question_reponse:
     resource: "@SmartUnityQuestionReponseBundle/Resources/config/routing.yml"
     prefix:   /QuestionReponse/

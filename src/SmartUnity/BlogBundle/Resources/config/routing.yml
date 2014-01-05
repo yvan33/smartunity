@@ -1,0 +1,10 @@
+smart_unity_blog_homepage:
+    pattern:  /
+    defaults: { _controller: SmartUnityBlogBundle:Default:homepage }
+
+mv_blog_homepage:
+    resource: "@MvBlogBundle/Resources/config/routing.yml"
+
+mv_blog_secure:
+    resource: "@MvBlogBundle/Resources/config/routing_dev.yml"
+    prefix: /badp
