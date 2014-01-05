@@ -36,4 +36,12 @@ _facebook_secured:
     defaults: { _controller: SmartUnityAppBundle:Accueil:index }    
     
 fos_facebook_channel:
-    resource: "@FOSFacebookBundle/Resources/config/routing.xml"    
+    resource: "@FOSFacebookBundle/Resources/config/routing.xml" 
+
+mv_blog:
+    resource: "@MvBlogBundle/Resources/config/routing.yml"
+    prefix: /blog   
+
+mv_blog_admin:
+    resource: "@MvBlogBundle/Resources/config/routing_admin.yml"
+    prefix: /badp
