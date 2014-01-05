@@ -3,6 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
@@ -103,95 +104,96 @@
 
 {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 
-            <nav class="navbar navbar-inverse navbar-fixed-top menu-bg" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="container" style="padding-left: 0; padding-right: 0;">
-                    <a type="button" class="fixed-right-corner" ><span class="glyphicon glyphicon-search"></span></a>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1" style="padding-left: 0; padding-right: 0;">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
+        <nav class="navbar navbar-inverse navbar-fixed-top menu-bg" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="container" style="padding-left: 0; padding-right: 0;">
+                <a type="button" class="fixed-right-corner" ><span class="glyphicon glyphicon-search"></span></a>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1" style="padding-left: 0; padding-right: 0;">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle button-nav-mobile" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
 
 {#                                <a class="navbar-brand" href="#"><div class="hid-home"><p class="cook-head">Smart'Unity</p></div></a>#}
-                            </div>
+                        </div>
 
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-left: 0;">
-                                <ul class="nav navbar-nav">
-                                    <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-left: 0;">
+                            <ul class="nav navbar-nav">
+                                <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_search_questions'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
                        %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}" class="menu-pad">SMART'SOLUTIONS</a></li>
-                                    <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href="#" class="menu-pad">BOUTIQUE CADEAUX</a></li>
-                                    <li><a href="#" class="menu-pad">BLOG</a></li>
-                                </ul>
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="#">COMMENT CA MARCHE?</a></li>
+                                <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href="#" class="menu-pad">BOUTIQUE CADEAUX</a></li>
+                                <li><a href="#" class="menu-pad">BLOG</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
 
                       {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
 
-                                    <li class="logo2">
-                                        <a href="#" class="pos-re">
-                                            <img src="{{ asset('assets/img/logo-iphon.png') }}"/>
-                                            <p class="red-dot">1</p>
-                                        </a>
-                                        <a href="{{ path('smart_unity_utilisateur_homepage') }}" class="pad-l">{{ app.user.username }}</a>
-                                        <a href="{{ path('fos_user_security_logout') }}"class="pad-l" >Déconnexion</a>
-                                    </li>
-
-
+                                <li class="logo2">
+                                   <a href="#">
+{#                                        <img src="{{ asset('assets/img/logo-iphon.png') }}"/>#}
+                                        <p class="red-dot">1</p>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ path('smart_unity_utilisateur_homepage') }}">Mon compte</a></li>
+          <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+        </ul>
+                                </li>
 
             {% else %}
-
-                                    <li class="logo2">
-                                        <div>
-                                            <div class="pad-l" id="clic-pop" >
-                                                <p class="btn btn-default navbar-btn" style="cursor:  pointer;">Se connecter</p>
-                                            </div>
-
-
-                                            <div class="connection" id="pop">
-                                                <div class="connection-triangle-content">
-                                                    <div class="connection-triangle" ></div>
-                                                    <div class="connection-triangle-border"></div>
-                                                    <div class="panel-body">
-                                                        <form action="{{ path("fos_user_security_check") }}" method="post">
-                                                            <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
-                                                            <fieldset>
-                                                                <div class="form-group">
-                                                                    <input class="form-control" style="background-color: #FFF; color:#666" placeholder="pseudo" type="text" id="username" name="_username" value="{{ last_username }}" required="required">        
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Password" type="password" id="password" name="_password" required="required">
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input id="remember_me" type="checkbox"  name="_remember_me" value="on"> Se souvenir de moi
-                                                                        <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a>
-                                                                    </label>
-                                                                </div>
-                                                                <input class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" type="submit" value="Login" style="line-height:14px">
-                                               {{ facebook_login_button({'autologoutlink': false}) }}
-                                                                <a href="{{ path('fos_user_registration_register') }}" class="pad-l">
-                                                                    <p>S'inscrire</p>
-                                                                </a>
-                                                            </fieldset>
-                                                        </form>
-                                                    </div>
+                                <li><a href="#">COMMENT CA MARCHE?</a></li>
+                                <li>
+                                    <a href="#" id="clic-pop">
+                                        Se connecter
+                                    </a>            
+                                    <div>
+                                        <div class="connection" id="pop">
+                                            <div class="connection-triangle-content">
+                                                <div class="connection-triangle" ></div>
+                                                <div class="connection-triangle-border"></div>
+                                                <div class="panel-body logo2">
+                                                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                                                        <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
+                                                        <fieldset>
+                                                            <div class="form-group">
+                                                                <input class="form-control" style="background-color: #FFF; color:#666" placeholder="pseudo" type="text" id="username" name="_username" value="{{ last_username }}" required="required">        
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Password" type="password" id="password" name="_password" required="required">
+                                                            </div>
+                                                            <div style="margin-top: -14px;"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a></div>
+                                                            <div class="checkbox souvenir-de-moi" >
+                                                                <label>
+                                                                    <input id="remember_me" type="checkbox"  name="_remember_me" value="on" > Se souvenir de moi
+                                                                </label>
+                                                            </div>
+                                                            <input class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" type="submit" value="Login" style="line-height:14px">
+                                               <div class="pad-l">{{ facebook_login_button({'autologoutlink': false}) }}</div>
+                                                            <a href="{{ path('fos_user_registration_register') }} ">
+                                                                <p  style=" margin-top: 20px;">S'inscire</p>
+                                                            </a>
+                                                            
+                                                        </fieldset>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
+                                    </div>
+                                </li>
 
 
-                                    <script>
+                                <script>
             $("#clic-pop,#pop").click(function(event) {
                 $("#pop").fadeIn();
                 event.stopPropagation();
@@ -204,20 +206,15 @@
 
 
             });
-                                    </script> 
-
-
+                                </script> 
             {% endif %}
+                            </ul>
 
-
-                                </ul>
-
-
-                            </div><!-- /.navbar-collapse -->
-                        </div>
+                        </div><!-- /.navbar-collapse -->
                     </div>
                 </div>
-            </nav>
+            </div>
+        </nav>
 
         <!-- end nav -->
         <div id="cont"></div>

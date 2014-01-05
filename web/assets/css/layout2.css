@@ -28,7 +28,6 @@
 	vertical-align: middle;
 }
 
-
 .hid-home
 {
 	display:none;
@@ -37,7 +36,7 @@
 .connection
 {
 	width: 250px;
-	margin-left: 75px;
+	margin-left: -60px;
 }
 
 .nav img {
@@ -76,8 +75,8 @@
 
 .connection
 {
-	width: 300px;
-	margin-left: 15px;
+	width: 250px;
+	margin-left: -60px;
 }
 
 .nav img {
@@ -87,7 +86,7 @@
 }
 }
 
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 769px) and (max-width: 992px) {
   
 .menu-pad 
 {
@@ -103,8 +102,8 @@
 }
 .connection
 {
-	width: 300px;
-	margin-left: 185px;
+	width: 250px;
+	margin-left: -90px;
 }
 
 .nav img {
@@ -153,8 +152,8 @@
 .menu-bg
 {
 	background-color:#2b3a41;
-	background-repeat: repeat-x;
-	width:100%;
+/*	background-repeat: repeat-x;
+	width:100%;*/
 }
 	
 .bg
@@ -225,7 +224,7 @@
 	position:absolute;
 	width:18px;
 	left:17px; 
-    top:-9px;
+    top:15px;
 }
 
 .pos-re
@@ -240,15 +239,10 @@
 	display:table-cell;
 	vertical-align:middle;
 }
+
 .pad-l
 {
-	padding-left:10px;
-	display: inline-block;
-	vertical-align: middle;
-	height: 60px;
-	line-height: 60px;
-
-	
+margin: 10px;	
 }
 .cook-foot
 {
@@ -279,7 +273,7 @@
 	border-radius: 5px;
 	border: solid 2px #d6dce1;
 	z-index: 10000000;
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 	display: none;
 }
 
@@ -371,4 +365,14 @@
 	position: absolute;
 	top:15px;
 	right:30px;
+}
+
+.souvenir-de-moi{
+    
+    text-align: left;
+}
+
+.button-nav-mobile{
+    margin-right: 80px;
+    
 }
