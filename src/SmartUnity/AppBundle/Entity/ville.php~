@@ -5,7 +5,7 @@ namespace SmartUnity\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * marque
+ * ville
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\villeRepository")

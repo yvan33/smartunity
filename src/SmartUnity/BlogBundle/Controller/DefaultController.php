@@ -5,7 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Mv\BlogBundle\Entity\AdminBlog\Category;
 use Mv\BlogBundle\Entity\AdminBlog\Post;
-use SmartUnity\AppBundle\Entity\Comment;
+use Mv\BlogBundle\Entity\AdminBlog\Comment;
 use SmartUnity\BlogBundle\Form\AdminBlog\CommentType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Mv\BlogBundle\Entity\AdminBlog\PostRepository;
@@ -31,10 +31,21 @@ class DefaultController extends BaseController
             if($this->get('request')->get($key) != $value)
             return $this->redirect($this->generateUrl('blog_post_show', $post->getRoutingParams()));
         $user=$this->getUser();
-        
         $comment = new Comment();
         $comment->setIp($this->getRequest()->getClientIp());
+        if(isset($user)){
+
+            $mail=$user->getEmail();
+            $pseudo=$user->getUsername();
+            $comment->setEmail($mail);
+            $comment->setPseudo($pseudo);
+        }
+        else{
+            $comment->setEmail('');
+            $comment->setPseudo('');
+        }
         $form   = $this->createForm(new CommentType(), $comment);
+
         
         return $this->render( 'SmartUnityBlogBundle:Default:showArticle.html.twig',array(
             'entity'            => $post,
@@ -49,22 +60,21 @@ class DefaultController extends BaseController
         if($last_comment && (date('U') - $last_comment->getCreated()->format('U') < $this->container->getParameter('mv_blog.min_elapsed_time_comment')))
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(); // changer peut-être par quelque chose de plus ortodoxe...
         
+        $user = $this->getUser();
         $comment  = new Comment();
         $comment->setPost($entity);
+        $mail=$user->getEmail();
+        $pseudo=$user->getUsername();
+        $comment->setEmail($mail);
+        $comment->setPseudo($pseudo);
         $form = $this->createForm(new CommentType(), $comment);
         $form->bind($request);
         
         $comment->setToken($this->getRequest()->server->get('UNIQUE_ID') . date('U'));
 
         /** @var $t \Symfony\Bundle\FrameworkBundle\Translation\Translator */
-        $t = $this->get('translator');
-
-        $user = $this->getUser();
-        $mail=$user->getEmail();
-        $pseudo=$user->getUsername();
-        $comment->setEmail($mail);
-        $comment->setPseudo($pseudo);
-
+        $t = $this->get('translator'); 
+       
          if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();

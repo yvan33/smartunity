@@ -19,9 +19,3 @@ blog_post_show:
     id: "^\\d+$"
     category_id: "^\\d+$"
 
-blog_post_comment:
-  defaults:     { _controller: "SmartUnityBlogBundle:Default:addComment" }
-  pattern:      "/com-article/{id}"
-  requirements:
-    _method: POST
-    id: "^\\d+$"
