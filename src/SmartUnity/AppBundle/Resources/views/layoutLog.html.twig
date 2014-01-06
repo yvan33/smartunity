@@ -58,50 +58,6 @@
     </head>
     <!-- bg body -->
     <body class="bg" >
-
-{#{{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
-
-        <!-- /.navbar-collapse -->
-        <div class="nav-fixe">
-            <div class="row fixe-cont">
-                <div class="col-md-12 menu-bg">
-                    <nav class="navbar navbar-inverse" role="navigation">
-                        <!--navbar- mobile -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#"><div class="hid-home"><p class="cook-head">Smart'Unity</p></div></a>
-
-                        </div>
-                        <!--navbar- standar -->
-                        <div class="collapse navbar-collapse navbar-ex1-collapse menu-mar" >
-                            <ul class="nav navbar-nav">
-                                <li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage' %}class="active"{% endif %}><a href="{{ path('smart_unity_app_homepage') }}" class="menu-pad"><img src="{{ asset('assets/img/logo-su-nb.png') }}"/></a></li>
-                                <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
-                             or app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
-                             or app.request.attributes.get('_route') == 'smart_unity_question_reponse_search_questions'
-                             or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
-                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}" class="menu-pad">SMART'SOLUTION</a></li>
-                                <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href="#" class="menu-pad">BOUTIQUE</a></li>
-                                <li {% if app.request.attributes.get('_route') == 'smart_unity_forum_homepage' %}class="active"{% endif %}><a href="#" class="menu-pad">SMART'CAFE</a></li>
-                                <li{% if app.request.attributes.get('_internal') == 'smart_unity_app_descriptionpage' %}class="active"{% endif %}><a href="{{ path('smart_unity_app_descriptionpage') }}" class="menu-pad">COMMENT ÇA MARCHE ?</a></li>
-                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %} 
-                                {% else %}
-                                    <li><div>{{ facebook_login_button({'autologoutlink': false}) }}</div></li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                        <!--navbar- standar fin --> 
-                    </nav>
-                </div>
-            </div>
-        </div>#}
-
 {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 
         <nav class="navbar navbar-inverse navbar-fixed-top menu-bg" role="navigation">
@@ -135,7 +91,7 @@
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_search_questions'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
-                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}" class="menu-pad" style="padding-left: 0;">SMART'SOLUTIONS</a></li>
+                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}" class="menu-pad">SMART'SOLUTIONS</a></li>
                                 <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href="#" class="menu-pad">BOUTIQUE CADEAUX</a></li>
                                 <li><a href="#" class="menu-pad">BLOG</a></li>
                             </ul>

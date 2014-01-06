@@ -7,11 +7,14 @@
 
 @media (min-width: 1201px){
 
-    .menu-pad 
+    .container {
+        max-width: 1170px;
+    }
+
+    .menu-pad
     {
         font-family: centrale;
         font-size: 15px;
-        height: 43px;
         line-height: 43px;
         margin: 0px 10px;
     }
@@ -48,6 +51,10 @@
 }
 
 @media (min-width: 993px) and (max-width: 1200px) {
+
+    .container {
+        max-width: 970px;
+    }    
 
     .menu-pad 
     {
@@ -89,6 +96,10 @@
 
 @media screen and (min-width: 769px) and (max-width: 992px) {
 
+    .container {
+        max-width: 750px;
+    }
+
     .menu-pad 
     {
         font-family: centrale;
@@ -117,6 +128,12 @@
 
 @media screen and (max-width: 768px) {
 
+    .container
+    {
+        min-width:600px;
+
+    }
+
     .logo2
     {
         z-index:101; 
@@ -139,6 +156,13 @@
         width: 30px;
 
     }
+}
+
+button,
+input,
+select[multiple],
+textarea {
+    background-image: none;
 }
 
 .navbar-inverse .navbar-nav>li>a {
@@ -166,6 +190,7 @@
     background-color: #99bbc3;
     background-image: url(../img/noise2.png);
     padding-top: 70px;
+    font-size: 13px;
 
 
 }
