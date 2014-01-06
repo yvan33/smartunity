@@ -24,6 +24,25 @@ class DefaultController extends BaseController
         return $this->render('SmartUnityBlogBundle:Default:index.html.twig', array('name' => $name));
     }
 
+    public function showArticleAction(Post $post)
+    {
+        $routing_params = $post->getRoutingParams();
+        unset($routing_params['id']);
+        foreach ($routing_params AS $key => $value)
+            if($this->get('request')->get($key) != $value)
+            return $this->redirect($this->generateUrl('blog_post_show', $post->getRoutingParams()));
+        
+        $comment = new Comment();
+        $comment->setIp($this->getRequest()->getClientIp());
+        $form   = $this->createForm(new CommentType(), $comment);
+        $user=$this->getUser();
+        return $this->render( 'SmartUnityBlogBundle:Default:showArticle.html.twig',array(
+            'entity'            => $post,
+            'form'              => $form->createView(),
+            'facebook_api_id'   => $this->container->getParameter('mv_blog.facebook_api_id'),
+            'user'              => $user
+        ));
+    }
     public function addCommentAction(Post $entity, Request $request){
         // Si le précédent commentaire est trop récent, on vire le client !
         $last_comment = $this->getDoctrine()->getManager()->getRepository('MvBlogBundle:AdminBlog\Comment')->findOneByIpLast( $this->getRequest()->getClientIp() );
@@ -39,14 +58,16 @@ class DefaultController extends BaseController
 
         /** @var $t \Symfony\Bundle\FrameworkBundle\Translation\Translator */
         $t = $this->get('translator');
+        $user = $this->getUser();
+        $mail=$user->getEmail();
+        $pseudo=$user->getUsername();
+        $comment->setEmail($mail);
+        $comment->setPseudo($pseudo);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
-            $user = $this->getUser();
-            $mailtest='a@a.fr';
-            $pseudotest='essai';
-            $comment->setEmail($mailtest);
-            $comment->setPseudo($pseudotest);
+
             $em->persist($comment);
 
             $em->flush();
@@ -64,14 +85,15 @@ class DefaultController extends BaseController
 
             $this->get('session')->getFlashBag()->add('notice', $t->trans('default.comment.saved', array(), 'MvBlogBundle'));
             $this->get('session')->getFlashBag()->add('notice', $t->trans('default.comment.message_notice', array(), 'MvBlogBundle'));
-    
+
             return $this->redirect($this->generateUrl('blog_post_show', $entity->getRoutingParams()));
         }
         
-        return array(
+        return $this->render( 'SmartUnityBlogBundle:Default:showArticle.html.twig',array(
             'entity'      => $entity,
             'form'        => $form->createView(),
-            'facebook_api_id'   => $this->container->getParameter('mv_blog.facebook_api_id')
-        );
+            'facebook_api_id'   => $this->container->getParameter('mv_blog.facebook_api_id'),
+            'user' => $user
+        ));
     }
 }

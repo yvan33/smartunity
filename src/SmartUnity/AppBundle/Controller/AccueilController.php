@@ -14,8 +14,6 @@ class AccueilController extends Controller {
 
 //Le code de la function indexAction Permet de récupérer la session et de préremplir le formulaire de login.    
 
-
-
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 

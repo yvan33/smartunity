@@ -10,3 +10,5 @@
 /src/SmartUnity/AppBundle/old-Entity
 /test
 /nbproject
+
+web/phpconsole/install.php
