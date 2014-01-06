@@ -1,5 +1,6 @@
 .DS_Store
 /web/bundles/
+/web/phpconsole/
 /app/bootstrap*
 /app/cache/*
 /app/logs/*
@@ -11,4 +12,3 @@
 /test
 /nbproject
 
-web/phpconsole/install.php
