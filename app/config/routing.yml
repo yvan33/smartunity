@@ -48,4 +48,4 @@ mv_blog:
 
 mv_blog_admin:
     resource: "@MvBlogBundle/Resources/config/routing_admin.yml"
-    prefix: /badp
+    prefix: /Admin/blog
