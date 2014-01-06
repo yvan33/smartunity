@@ -1,24 +1,28 @@
-<!DOCTYPE html>
+{% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
+{% form_theme formQuestion 'SmartUnityUtilisateurBundle:Form:form_register.html.twig' %}
 
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+{% block title %}Smart'Unity - Liste des Questions {% endblock %}
 
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css') }}">
+{% block stylesheets %}
+<link href="{{asset('assets/css/formulaire.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
 
-    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
+{% endblock %}
 
-    <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+{% block initJS %}
+<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
+<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
+{% endblock %}
 
-</head>
-<body>
 
-	<div class="grille-content premiere-ligne">
-	    <legend>Nouvelle Question</legend>
+
+{% block body %}
+
+<div class="row">
+{#        <div class="grille-content panneau-bas">  #}
+            <div class="row text-center cookie-title">
+                Nouvelle question
+            </div>
 		
 		{{ form_start(formQuestion)}}
 		<div class="erreur">
@@ -52,11 +56,11 @@
 	        <div class="grille-1">{{ form_label(formQuestion.remuneration) }}</div>
 	        <div class="grille-2">{{ form_errors(formQuestion.remuneration) }}{{ form_widget(formQuestion.remuneration,{'attr': {'style': 'width:100%;'}}) }}</div>
 	    </div>
-	    <div class="row">
-	        <div class="grille-1">{{form_widget(formQuestion.save,{'attr': {'class': 'btn btn-primary cent-h'}})}}</div>
+	    <div class="cent-h bouton-bas-block">
+	        {{form_widget(formQuestion.save,{'attr': {'class': 'btn btn-primary'}})}}
 	    </div>
 	    {{form_end(formQuestion)}}
 	</div>
+{#</div>#}
+{% endblock %}
 
-</body>
-</html>

@@ -10,8 +10,6 @@
         <!-- Additional meta content -->
     {% block meta %}{% endblock %}
 
-
-
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/layout2.css') }}">
@@ -157,14 +155,11 @@
 
 
                                 <script>
-//Responsivité des rubriques de la navbar
+                                    console.log('Testing console');
+    //Responsivité des rubriques de la navbar
             window.onresize = function() {
                 initDisplay();
             };
-
-
-
-
 
 //Initialisation du document
             $(document).ready(function() {

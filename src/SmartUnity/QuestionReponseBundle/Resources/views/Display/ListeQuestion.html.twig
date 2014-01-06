@@ -564,7 +564,7 @@
 ////// POPUP
 /////////////
 {% if is_granted('ROLE_USER') %}
-$('#popupQuestion').magnificPopup({
+{#$('#popupQuestion').magnificPopup({
   type: 'iframe',
   callbacks: {
     open: function(){
@@ -582,7 +582,8 @@ $('#popupQuestion').magnificPopup({
     return true;
   },
 
-});
+}
+        );#}
 {% else %}
 $(document).ready(function(){
   $('#popupQuestion').tooltip();
