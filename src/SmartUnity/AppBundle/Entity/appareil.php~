@@ -5,12 +5,12 @@ namespace SmartUnity\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ville
+ * appareil
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\villeRepository")
+ * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\appareilRepository")
  */
-class ville
+class appareil
 {
     /**
      * @var integer
@@ -22,24 +22,24 @@ class ville
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\modele", inversedBy="appareils")
+     * @ORM\JoinColumn(name="modele_id", referencedColumnName="id", nullable=false)
      */
-    private $nom;
-	
-	 /**
-     * @var integer
-     *
-     * @ORM\Column(name="codepostal", type="string", length=5, nullable=false)
-     */
-    private $codepostal;
+    private $modele;
 
-    /**	
-     * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\membre", mappedBy="ville")
+    /**
+     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\os", inversedBy="appareils")
+     * @ORM\JoinColumn(name="os_id", referencedColumnName="id", nullable=false)
+     */
+    private $os;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\membre", mappedBy="appareils")
      *
      */
     private $membres;
+    
 
     /**
      * Constructor
@@ -48,7 +48,7 @@ class ville
     {
         $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
     /**
      * Get id
      *
@@ -60,56 +60,56 @@ class ville
     }
 
     /**
-     * Set nom
+     * Set modele
      *
-     * @param string $nom
-     * @return ville
+     * @param \SmartUnity\AppBundle\Entity\modele $modele
+     * @return appareil
      */
-    public function setNom($nom)
+    public function setModele(\SmartUnity\AppBundle\Entity\modele $modele)
     {
-        $this->nom = $nom;
+        $this->modele = $modele;
     
         return $this;
     }
 
     /**
-     * Get nom
+     * Get modele
      *
-     * @return string 
+     * @return \SmartUnity\AppBundle\Entity\modele 
      */
-    public function getNom()
+    public function getModele()
     {
-        return $this->nom;
+        return $this->modele;
     }
 
     /**
-     * Set codepostal
+     * Set os
      *
-     * @param string $codepostal
-     * @return ville
+     * @param \SmartUnity\AppBundle\Entity\os $os
+     * @return appareil
      */
-    public function setCodepostal($codepostal)
+    public function setOs(\SmartUnity\AppBundle\Entity\os $os)
     {
-        $this->codepostal = $codepostal;
+        $this->os = $os;
     
         return $this;
     }
 
     /**
-     * Get codepostal
+     * Get os
      *
-     * @return string 
+     * @return \SmartUnity\AppBundle\Entity\os 
      */
-    public function getCodepostal()
+    public function getOs()
     {
-        return $this->codepostal;
+        return $this->os;
     }
-    
+
     /**
      * Add membres
      *
      * @param \SmartUnity\AppBundle\Entity\membre $membres
-     * @return ville
+     * @return appareil
      */
     public function addMembre(\SmartUnity\AppBundle\Entity\membre $membres)
     {

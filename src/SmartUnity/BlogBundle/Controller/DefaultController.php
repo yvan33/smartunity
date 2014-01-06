@@ -5,13 +5,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Mv\BlogBundle\Entity\AdminBlog\Category;
 use Mv\BlogBundle\Entity\AdminBlog\Post;
-use Mv\BlogBundle\Entity\AdminBlog\Comment;
-use Mv\BlogBundle\Form\AdminBlog\CommentType;
+use SmartUnity\AppBundle\Entity\Comment;
+use SmartUnity\BlogBundle\Form\AdminBlog\CommentType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Mv\BlogBundle\Entity\AdminBlog\PostRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-
 use Symfony\Component\HttpFoundation\Response;
 
 use Mv\BlogBundle\Controller\DefaultController as BaseController;
@@ -31,11 +30,12 @@ class DefaultController extends BaseController
         foreach ($routing_params AS $key => $value)
             if($this->get('request')->get($key) != $value)
             return $this->redirect($this->generateUrl('blog_post_show', $post->getRoutingParams()));
+        $user=$this->getUser();
         
         $comment = new Comment();
         $comment->setIp($this->getRequest()->getClientIp());
         $form   = $this->createForm(new CommentType(), $comment);
-        $user=$this->getUser();
+        
         return $this->render( 'SmartUnityBlogBundle:Default:showArticle.html.twig',array(
             'entity'            => $post,
             'form'              => $form->createView(),
@@ -58,13 +58,14 @@ class DefaultController extends BaseController
 
         /** @var $t \Symfony\Bundle\FrameworkBundle\Translation\Translator */
         $t = $this->get('translator');
+
         $user = $this->getUser();
         $mail=$user->getEmail();
         $pseudo=$user->getUsername();
         $comment->setEmail($mail);
         $comment->setPseudo($pseudo);
 
-        if ($form->isValid()) {
+         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
 
@@ -87,7 +88,8 @@ class DefaultController extends BaseController
             $this->get('session')->getFlashBag()->add('notice', $t->trans('default.comment.message_notice', array(), 'MvBlogBundle'));
 
             return $this->redirect($this->generateUrl('blog_post_show', $entity->getRoutingParams()));
-        }
+         }
+
         
         return $this->render( 'SmartUnityBlogBundle:Default:showArticle.html.twig',array(
             'entity'      => $entity,
