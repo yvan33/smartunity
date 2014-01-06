@@ -118,11 +118,11 @@
                                 <span class="icon-bar"></span>
                             </button>
 
-{#                                <a class="navbar-brand" href="#"><div class="hid-home"><p class="cook-head">Smart'Unity</p></div></a>#}
+                            <a class="navbar-brand" href="#"><div class="hid-home"><p class="cook-head">Smart'Unity</p></div></a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-left: 0;">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-left: 20px;">
                             <ul class="nav navbar-nav">
                                 <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
@@ -138,23 +138,23 @@
 
 
                                 <li class="logo2">
-                                   <a href="#">
+                                    <a href="#">
 {#                                        <img src="{{ asset('assets/img/logo-iphon.png') }}"/>#}
                                         <p class="red-dot">1</p>
                                     </a>
                                 </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="{{ path('smart_unity_utilisateur_homepage') }}">Mon compte</a></li>
-          <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
-        </ul>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('smart_unity_utilisateur_homepage') }}">Mon compte</a></li>
+                                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                                    </ul>
                                 </li>
 
             {% else %}
-                                <li><a href="#">COMMENT CA MARCHE?</a></li>
+                                <li><a href="#" class="menu-pad">COMMENT CA MARCHE?</a></li>
                                 <li>
-                                    <a href="#" id="clic-pop">
+                                    <a href="{{ path('fos_user_security_login') }}" id="clic-pop">
                                         Se connecter
                                     </a>            
                                     <div>
@@ -179,11 +179,11 @@
                                                                 </label>
                                                             </div>
                                                             <input class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" type="submit" value="Login" style="line-height:14px">
-                                               <div class="pad-l">{{ facebook_login_button({'autologoutlink': false}) }}</div>
+                                                            <div class="pad-l">{{ facebook_login_button({'autologoutlink': false}) }}</div>
                                                             <a href="{{ path('fos_user_registration_register') }} ">
                                                                 <p  style=" margin-top: 20px;">S'inscire</p>
                                                             </a>
-                                                            
+
                                                         </fieldset>
                                                     </form>
                                                 </div>
@@ -194,17 +194,27 @@
 
 
                                 <script>
-            $("#clic-pop,#pop").click(function(event) {
-                $("#pop").fadeIn();
-                event.stopPropagation();
 
 
-            });
-            $(document).click(function(event) {
-                $("#pop").hide();
+            if ($(window).width() > 768)
+            {
+                $("#clic-pop,#pop").click(function(event) {
+                    $("#pop").fadeIn();
+                    event.stopPropagation();
 
 
+                });
+                $(document).click(function(event) {
+                    $("#pop").hide();
 
+                });
+            }
+
+            $(document).ready(function() {
+                if ($(window).width() > 768)
+                {
+                    $('#clic-pop').attr('href', '#');
+                }
             });
                                 </script> 
             {% endif %}

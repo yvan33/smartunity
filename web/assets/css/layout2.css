@@ -51,9 +51,9 @@
 .menu-pad 
 {
 	font-family: centrale;
-	font-size: 15px;
+	font-size: 14px;
 	line-height: 43px;
-	margin: 0px 10px -7px 10px;
+	margin: 0px 8px -7px 8px;
 }
 
 .valign-row
@@ -91,9 +91,9 @@
 .menu-pad 
 {
 	font-family: centrale;
-	font-size: 15px;
+	font-size: 13px;
 	line-height: 43px;
-	margin: 0px 10px -7px 10px;
+	margin: 0px 0px -7px 0px;
 }
 
 .hid-home
@@ -111,6 +111,7 @@
 	width: 50%;
 	margin-right: -35px;
 }
+
 }
 
 @media screen and (max-width: 768px) {
@@ -259,7 +260,7 @@ margin: 10px;
 	color: white;
 	float: right;
 	font-family:Cookie;
-	margin-left:0px;
+	margin-left:10px;
 	margin-top:0px;
 	margin-bottom:0px;
 	font-size: 20pt;
