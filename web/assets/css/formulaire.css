@@ -1,15 +1,16 @@
 .grille-1
 {
-    width:20%;
+    width:15%;
     margin: 3px 2.5% 3px 5%;
     /*background-color:#00C;*/
     /*height:20px;*/
     float:left;
+    text-align: right;
 }
 .grille-2
 {
     width:40%;
-    margin: 3px 15% 3px 2.5%;
+    margin: 3px 30% 3px 2.5%;
     /*background-color:#3C9;*/
     height:20px;
     float:left;
@@ -21,6 +22,8 @@
     /*background-color:#00C;*/
     /*height:20px;*/
     float:left;
+    text-align: left;
+    
 }
 .grille-2.pref
 {
@@ -134,4 +137,15 @@
 
 .btn-marge{
     margin:10px;
+}
+
+.text-area{
+    height: auto;
+    
+}
+
+.dotation{
+    height:auto;
+    width:auto;
+    
 }

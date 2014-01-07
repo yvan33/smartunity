@@ -400,8 +400,10 @@ class QuestionReponseController extends Controller
         $newQuestion->setRemuneration(10);
         $user = $this->getUser();
 
+        $dotationMax = $user->getCagnotte()+10;
+        
         $formQuestion = $this->createFormBuilder($newQuestion)
-                            ->add('sujet','text', array(
+                            ->add('sujet','textarea', array(
                                 'required' => true))
                             ->add('description','textarea', array(
                                 'required' => true))
@@ -428,7 +430,7 @@ class QuestionReponseController extends Controller
                                 'property'=> 'nom',
                                 'empty_value' => 'Choisissez une option',
                                 'required' => true))
-                            ->add('remuneration','integer',array('attr' => array('min' => 10,'max' => ($user->getCagnotte()+10))))
+                            ->add('remuneration','integer',array('attr' => array('min' => 10,'max' => ($dotationMax))))
                             ->add('save', 'submit', array('label' => 'Poser ma question'))
                             ->getForm();
 
@@ -468,7 +470,9 @@ class QuestionReponseController extends Controller
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig',array(
-            'formQuestion'=>$formQuestion->createView()));
+            'formQuestion'=>$formQuestion->createView(),
+            'dotationMax' => $dotationMax    
+                ));
     }
 
     public function slugify($str) {
