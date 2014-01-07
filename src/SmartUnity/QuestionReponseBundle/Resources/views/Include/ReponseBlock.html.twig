@@ -80,10 +80,10 @@
                                         <a href="{{path('smart_unity_question_reponse_validation_reponse', {idReponse: reponse.id})}}"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a>
                                       </div>
                                       {% endif %}
-                                      <div style="float: left;margin-right: 5px;">
+                                      <div style="float: left;margin-right: 5px; margin-top: 7px;">
                                         <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                                       </div>
-                                       <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" href="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}">Commenter</a></div>
+                                       <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une réponse."{% endif %} href="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}">Commenter</a></div>
                                     </div>
                                     </div>
 
