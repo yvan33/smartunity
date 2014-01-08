@@ -264,7 +264,6 @@ class QuestionReponseController extends Controller
     
     public function displayReponseAction($slug, $page, $tri, Request $request)
     {   
-
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -369,6 +368,12 @@ class QuestionReponseController extends Controller
         if (isset($avatar)) {
             $avatar = $avatar->getWebPath();
         }
+        
+        $newCommentaireQuestion = new \SmartUnity\AppBundle\Entity\CommentaireQuestion();
+        $formCommentaire = $this->createFormBuilder($newCommentaireQuestion)
+                            ->add('description','textarea', array('label' => false))
+                            ->getForm();        
+        
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
@@ -389,6 +394,7 @@ class QuestionReponseController extends Controller
             'nb_questions_membre'=> (int) $nb_questions_membre,
             'membre_id' => $membre->getId(),
             'avatar' => $avatar,
+            'formCommentaire' => $formCommentaire->createView(),
 
         ));
     }
@@ -656,18 +662,19 @@ class QuestionReponseController extends Controller
     {
         $newCommentaireQuestion = new \SmartUnity\AppBundle\Entity\CommentaireQuestion();
         $formCommentaire = $this->createFormBuilder($newCommentaireQuestion)
-                            ->add('description','textarea')
-                            ->add('save', 'submit', array('label' => 'Envoyer'))
+                            ->add('description','textarea', array('label' => false))
                             ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST')
         {
+
             $formCommentaire->bind($this->getRequest());
+            
+                            p($formCommentaire->getErrors());
 
             if ($formCommentaire->isValid()) {
                 $user = $this->getUser();
                 $newCommentaireQuestion->setMembre($user);
-
                 $newCommentaireQuestion->setDate(new \DateTime(date("Y-m-d H:i:s")));//date locale
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
                 $newCommentaireQuestion->SetQuestion($question);
@@ -678,13 +685,16 @@ class QuestionReponseController extends Controller
                 $em->persist($newCommentaireQuestion);
                 $em->flush();
 
-                return new Response('Votre commentaire a bien été ajouté');
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$slug)));
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddCommentaire.html.twig',array(
-            'formCommentaire'=>$formCommentaire->createView(),
-            'type'=>'Question'));
-    }
+//        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddCommentaire.html.twig',array(
+//            'formCommentaire'=>$formCommentaire->createView(),
+//            'type'=>'Question'));
+    
+                return "";
+
+            }
 
     public function addCommentaireReponseAction($idReponse)
     {

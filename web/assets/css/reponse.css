@@ -20,10 +20,15 @@
 .commentaire
 {
 	margin-left:120px;
-        color:#A4A4A4;
-        font-style: italic;
-        font-size: 90%;
+
 }
+
+
+.commentaire-input{
+    
+    width: 590px;
+}
+
 .min{
 	min-height: 100px
 }
@@ -51,6 +56,12 @@
 {
 	margin-left:100px;
 }
+
+.commentaire-input{
+    
+    width:440px;
+}
+
 .min{
 	min-height: 100px
 }
@@ -59,7 +70,7 @@
 @media screen and (min-width: 768px) and (max-width: 992px) {
 .grille-2
 {
-	width:625px;
+	width:595px;
 	margin:15px 10px;
 }
 
@@ -79,6 +90,12 @@
 {
 	margin-left:80px;
 }
+
+.commentaire-input{
+    
+    width: 360px;
+}
+
 .min{
 	min-height: 100px
 }
@@ -111,6 +128,13 @@
 {
 	margin-left:10%;
 }
+
+.commentaire-input{
+    
+    width: 260px;
+}
+
+
 }
 .grille-1
 {	
@@ -147,7 +171,7 @@
 }
 .grille-2
 {
-	float:left;
+	float:right;
 	
 }
 
@@ -308,6 +332,9 @@
 	clear:both;
 	overflow:hidden;
 	margin-bottom:15px;
+        color:#A4A4A4;
+        font-style: italic;
+        font-size: 90%;
 }
 
 span.label-default{
@@ -388,4 +415,20 @@ a.reponse:hover{
 .cadre-general
 {
 	margin-top: 20px;
+}
+
+.commentaire-input{
+    
+    display:none;
+    /*width: 77%;*/
+}
+
+.bloc-commenter-repondre{
+    width: 90%;
+    float: right;
+}
+
+#bouton-com-envoyer-question{
+    
+    display:none;
 }
