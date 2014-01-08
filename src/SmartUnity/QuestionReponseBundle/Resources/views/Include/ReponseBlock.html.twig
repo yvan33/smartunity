@@ -84,6 +84,15 @@
                     <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                 </div>
 {#                <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une réponse."{% endif %} href="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}">Commenter</a></div>#}
+
+                <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
+                    <div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaire.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
+                        <span class="croix-close" onClick="closeComment(this)"> &#10006;</span>
+                    </div>
+                    <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
+                         {{  form_rest(formCommentaire) }}
+                </form>
+
                 <a class="commentaire-btn" href="#">
                     <div id="bouton-com-rep-question" class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
                 </a>
