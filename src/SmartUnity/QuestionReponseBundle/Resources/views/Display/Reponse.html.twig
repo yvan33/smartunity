@@ -98,7 +98,9 @@
                             </div>
 
                             <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
-{{ form_widget(formCommentaire.description, {'attr': {'class': 'form-control forminfo commentaire-input'}} )}}
+<div class="commentaire-input">{{ form_widget(formCommentaire.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
+    <span class="croix-close" onClick="closeComment(this)"> &#10006;</span>
+</div>
                                 <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
                          {{  form_rest(formCommentaire) }}
                             </form>
@@ -231,7 +233,11 @@
     });
     }
 
-
+function closeComment(e) {
+    $(e).parent().hide();
+    $('#bouton-com-envoyer-question').hide();
+    $('#bouton-com-rep-question').show();
+    }
 
 
 
@@ -264,6 +270,7 @@
     {% endif %}
     e.preventDefault();
     });
+    
   {% if not is_granted('ROLE_USER') %}
     $('.reponse').tooltip({
     'placement' : 'bottom'

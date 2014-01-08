@@ -419,11 +419,19 @@ a.reponse:hover{
 
 .commentaire-input{
     
+    position:relative;
     display:none;
     float: left;
     resize: none
 }
-
+.croix-close{
+    color: #cccccc;
+    position: absolute;
+    right:3px;
+    top:0px;
+    cursor: pointer;
+    
+}
 
 .bloc-commenter-repondre{
     width: 90%;
