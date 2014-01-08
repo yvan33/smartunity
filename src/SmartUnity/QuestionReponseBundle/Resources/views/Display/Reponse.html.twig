@@ -98,10 +98,8 @@
                             </div>
 
                             <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
-                                <div class="commentaire-input" style=" float: left;">
-{{ form_widget(formCommentaire.description, {'attr': {'class': 'form-control forminfo'}} )}}
-                                </div>
-                                <div><input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/></div>
+{{ form_widget(formCommentaire.description, {'attr': {'class': 'form-control forminfo commentaire-input'}} )}}
+                                <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
                          {{  form_rest(formCommentaire) }}
                             </form>
 

@@ -420,8 +420,10 @@ a.reponse:hover{
 .commentaire-input{
     
     display:none;
-    /*width: 77%;*/
+    float: left;
+    resize: none
 }
+
 
 .bloc-commenter-repondre{
     width: 90%;
@@ -429,6 +431,6 @@ a.reponse:hover{
 }
 
 #bouton-com-envoyer-question{
-    
     display:none;
 }
+
