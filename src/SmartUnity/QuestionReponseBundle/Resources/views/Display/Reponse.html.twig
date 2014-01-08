@@ -98,17 +98,21 @@
                             </div>
 
                             <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
-<div class="commentaire-input">{{ form_widget(formCommentaire.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
+<div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaire.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
     <span class="croix-close" onClick="closeComment(this)"> &#10006;</span>
 </div>
                                 <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
                          {{  form_rest(formCommentaire) }}
                             </form>
 
-                            <div id="bouton-com-rep-question" class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %} href="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}">Commenter</a></div>
+                           <a class="commentaire-btn" href="#">
+                               <div id="bouton-com-rep-question" class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
+                           </a>
 
         {% if not is_validated and not is_certif %}
-                            <div class="bouton-com-rep"><a class="reponse"{% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}">Repondre</a></div>{% endif %}
+                            <a class="reponse"href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}">
+                                <div class="bouton-com-rep" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} >Repondre</div>
+                            </a>{% endif %}
                         </div>
                     </div>
                 </div>
@@ -167,11 +171,6 @@
 </div>
 {% endif %}
 {% endblock %}
-
-
-
-
-
 {% block callJS %}
 
 
@@ -238,14 +237,19 @@ function closeComment(e) {
     $('#bouton-com-envoyer-question').hide();
     $('#bouton-com-rep-question').show();
     }
+    
+function openCommentInput(e){
 
+}
 
 
 //////////
-/// TOOLTIPS
+/// OnClick Events
 //////////
 
-    $(document).ready(function(){
+
+
+// Bouton répondre
     $('a.reponse').click(function(e){
     {% if is_granted('ROLE_USER') %}
     $('#addReponse').attr('src', $(this).attr('href'));
@@ -257,9 +261,19 @@ function closeComment(e) {
     {% endif %}
     e.preventDefault();
     });
-            $('a.commentaire-btn').click(function(e){
+
+//////////
+/// TOOLTIPS
+//////////
+
+    $(document).ready(function(){
+        
+ //bouton commenter
+    $('#commentaire-input-question').click(function(){
+                console.log('ta mere');
+
     {% if is_granted('ROLE_USER') %}
-    $('.commentaire-input').show();
+    $(this).show();
             $('#bouton-com-rep-question').hide();
             $('#bouton-com-envoyer-question').show();
 
@@ -269,13 +283,13 @@ function closeComment(e) {
     })
     {% endif %}
     e.preventDefault();
-    });
+    });  
     
   {% if not is_granted('ROLE_USER') %}
     $('.reponse').tooltip({
     'placement' : 'bottom'
     });
-            $('.commentaire-btn').tooltip({
+            $('.bouton-com-rep').tooltip({
     'placement' : 'bottom'
     });
   {% endif %}

@@ -83,7 +83,10 @@
                 <div style="float: left;margin-right: 5px; margin-top: 7px;">
                     <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                 </div>
-                <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une réponse."{% endif %} href="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}">Commenter</a></div>
+{#                <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une réponse."{% endif %} href="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}">Commenter</a></div>#}
+                <a class="commentaire-btn" href="#">
+                    <div id="bouton-com-rep-question" class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
+                </a>
             </div>
         </div>
 
