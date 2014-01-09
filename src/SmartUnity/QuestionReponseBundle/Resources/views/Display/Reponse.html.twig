@@ -98,11 +98,11 @@
                             </div>
 
                             <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
-<div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaire.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
+<div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaireQuestion.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
     <span class="croix-close" onClick="closeComment(this)"> &#10006;</span>
 </div>
                                 <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
-                         {{  form_rest(formCommentaire) }}
+                         {{  form_rest(formCommentaireQuestion) }}
                             </form>
 
                            <a class="commentaire-btn" href="">
@@ -235,18 +235,12 @@ function closeComment(e) {
     $(e).parent().hide();
     $(e).parent().next([0]).hide();
     console.log($(e).parent().parent());
-    $(e).parent([0]).next([0]).children([0]).show();
+    $(e).parent().parent().next([0]).children([0]).show();
     }
-    
-function openCommentInput(e){
-
-}
-
 
 //////////
 /// OnClick Events
 //////////
-
 
 
 // Bouton répondre
