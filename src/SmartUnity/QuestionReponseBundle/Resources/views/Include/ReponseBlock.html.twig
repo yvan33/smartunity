@@ -81,58 +81,15 @@
                 </div>
                                       {% endif %}
                 <div style="float: left;margin-right: 5px; margin-top: 7px;">
-                    <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                    <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id, slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                 </div>
-{#                <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une réponse."{% endif %} href="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}">Commenter</a></div>#}
-                <div class="form-commenter-reponse"></div>
-{#                <form action="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}" method="POST">
-                    <div  id="commentaire-input-reponse" class="commentaire-input" >{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
-                     <textarea id="form_description" name="form[description]" required="required" class="form-control forminfo" style="resize: none"></textarea>  
-                        <span class="croix-close" onClick="closeComment(this)"> &#10006;</span>
-                    </div>
-                    <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
-                         {{  form_rest(formCommentaireReponse) }}
-                </form>#}
+                <div></div>
+                <div>   
+                    <div class="commentaire-btn-reponse commentaire-btn bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this, {{reponse.id}})" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
+                </div>
 
-                <a class="commentaire-btn-reponse commentaire-btn" href="">
-                    <div id="bouton-com-rep-reponse" class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
-                </a>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    //bouton commenter réponse
-
-    $('.commentaire-btn-reponse').click(function(e) {
-        console.log('clickOK');
-        var contentForm = generateContentForm();
-        console.log(contentForm);
-
-        $(this).prev().html(contentForm);
-        
-        $(this).children([0]).hide();
-
-        e.preventDefault();
-    });
-
-    function closeCommentReponse(e) {
-        $(e).parent().parent().parent().next().children().show();
-        console.log($(e).parent().parent().parent().next().children());
-        $(e).parent().parent().remove();
-
-    }
-
-    function generateContentForm() {
-
-        var entity = '<form action="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}" method="POST">';
-        entity += '<div  class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}} <textarea id="form_description" name="form[description]" required="required" class="form-control forminfo" style="resize: none"></textarea>';
-        entity += '<span class="croix-close" onClick="closeCommentReponse(this)"> &#10006;</span> \
-                    </div> \
-                    <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>{{  form_rest(formCommentaireReponse) }} \
-                </form>';
-        return entity;
-    }
-
-</script>

@@ -1,16 +1,26 @@
-				</div>
+</div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-12" style="padding:0px">
+        <div class="grille-content-2">
+            <div class="head-blue">
+                <p style="float:left">{% if reponse.is_certif or reponse.is_validated %}{{ nbReponses - 1 }} autre{% if nbReponses > 1 %}s{% endif %} {% else %}{{ nbReponses }}{% endif %} r&eacute;ponse{% if nbReponses > 1 %}s{% endif %}</p>
+                <p style="float:right">Trier les r&eacute;ponses par : 
+                    <a id="triVote" {% if tri == "date" %}href="{{path('smart_unity_question_reponse_display_reponse', {slug:slug, tri:'vote'})}}"{% endif %} style="padding-left:0px{% if tri == "vote" %}; font-weight:bold{% endif %}">Nombre de votes</a> &#124; 
+                    <a id="triDate" {% if tri == "vote" %}href="{{path('smart_unity_question_reponse_display_reponse', {slug:slug, tri:'date'})}}"{% endif %} style="padding-left:0px{% if tri == "date" %}; font-weight:bold{% endif %}">Date</a>
+                </p>
+            </div>
+            <div id="reponses-frame">
+                <div id="reponses-container">
+                    <!--    Fin du ReponseDivider -->
+
+                    <div id="form-commenter-reponse">
+                        <form action="{{path('smart_unity_question_reponse_add_commentaire_reponse', { slug: question.slug, idReponse: reponse.id})}}" method="POST">
+                            <div  id="commentaire-input-reponse"class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
+                                <span class="croix-close" onClick="closeCommentReponse(this)"> &#10006;</span>
+                            </div>
+                            <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
+                         {{  form_rest(formCommentaireReponse) }}
+                        </form>
                     </div>
-                </div>
-        <div class="row">
-                    <div class="col-md-12" style="padding:0px">
-                      <div class="grille-content-2">
-                        <div class="head-blue">
-                        	<p style="float:left">{% if reponse.is_certif or reponse.is_validated %}{{ nbReponses - 1 }} autre{% if nbReponses > 1 %}s{% endif %} {% else %}{{ nbReponses }}{% endif %} r&eacute;ponse{% if nbReponses > 1 %}s{% endif %}</p>
-                        	<p style="float:right">Trier les r&eacute;ponses par : 
-                        		<a id="triVote" {% if tri == "date" %}href="{{path('smart_unity_question_reponse_display_reponse', {slug:slug, tri:'vote'})}}"{% endif %} style="padding-left:0px{% if tri == "vote" %}; font-weight:bold{% endif %}">Nombre de votes</a> &#124; 
-                        		<a id="triDate" {% if tri == "vote" %}href="{{path('smart_unity_question_reponse_display_reponse', {slug:slug, tri:'date'})}}"{% endif %} style="padding-left:0px{% if tri == "date" %}; font-weight:bold{% endif %}">Date</a>
-                        	</p>
-                        </div>
-                        <div id="reponses-frame">
-        				<div id="reponses-container">
-                                       <!--    Fin du ReponseDivider -->

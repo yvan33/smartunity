@@ -425,13 +425,6 @@ a.reponse:hover{
     resize: none
 }
 
-/*.commentaire-input-reponse{
-    
-    position:relative;
-    float: left;
-    resize: none
-}*/
-
 .croix-close{
     color: #cccccc;
     position: absolute;
@@ -448,5 +441,10 @@ a.reponse:hover{
 
 #bouton-com-envoyer-question{
     display:none;
+}
+
+#form-commenter-reponse{
+        display:none;
+
 }
 

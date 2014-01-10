@@ -110,7 +110,7 @@
                            </a>
 
         {% if not is_validated and not is_certif %}
-                            <a class="reponse"href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}">
+                            <a class="reponse" href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}">
                                 <div class="bouton-com-rep" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} >Repondre</div>
                             </a>{% endif %}
                         </div>
@@ -120,7 +120,6 @@
 
                             {% for reponse in listeReponses %}
                               {% if loop.index == 1 %}
-
                                 {% if reponse.is_validated or reponse.is_certif %}
                                     {% include "SmartUnityQuestionReponseBundle:Include:ReponseBlock.html.twig" %}
                                     {% if nbReponses > 1 %}{% include "SmartUnityQuestionReponseBundle:Include:ReponseDivider.html.twig" %}{% endif %}
@@ -231,19 +230,14 @@
     });
     }
 
-function closeCommentQuestion(e) {
-    $(e).parent().hide();
-    $(e).parent().next([0]).hide();
-    $(e).parent().parent().next().children().show();
-    }
 
 //////////
 /// OnClick Events
 //////////
 
-
 // Bouton répondre
     $('a.reponse').click(function(e){
+    e.preventDefault();    
     {% if is_granted('ROLE_USER') %}
     $('#addReponse').attr('src', $(this).attr('href'));
             $('#addReponseHolder').show('fast');
@@ -252,10 +246,12 @@ function closeCommentQuestion(e) {
             $('#addReponse').attr('src', 'about:blank');
     })
     {% endif %}
-    e.preventDefault();
+
     });
-    
- //bouton commenter question
+
+////////////////////////////
+///////////Commenter question
+////////////////////////////
     $('#bouton-commenter-question').click(function(e){
 
     {% if is_granted('ROLE_USER') %}
@@ -272,6 +268,36 @@ function closeCommentQuestion(e) {
     {% endif %}
     e.preventDefault();
     });  
+    
+    
+function closeCommentQuestion(e) {
+    $(e).parent().hide();
+    $(e).parent().next([0]).hide();
+    $(e).parent().parent().next().children().show();
+    }
+
+////////////////////////////
+/////////Commenter réponse
+////////////////////////////
+
+function displayCommentFormReponse(e, reponseId){
+            
+        {% if is_granted('ROLE_USER') %} 
+
+    var actionUrl =   $('#form-commenter-reponse').children().get(0).getAttribute('action');
+    console.log(actionUrl);
+    $('#form-commenter-reponse').children().get(0).setAttribute('action', actionUrl.replace(/\d+$/, reponseId));
+    $(e).parent().prev().append($('#form-commenter-reponse'));  
+    $('#form-commenter-reponse').show();    
+{#    $(e).parent().prev().show();#}
+    $(e).parent().hide();
+    {% endif %}
+                }
+                
+    function closeCommentReponse(e) {
+        $(e).parent().parent().parent().parent().next().show();
+        $(e).parent().parent().parent().hide();
+    }
 
 
 //////////
@@ -279,9 +305,9 @@ function closeCommentQuestion(e) {
 //////////
 
     $(document).ready(function(){
-        
+  console.log('{{ form_widget(formCommentaireReponse.description) }}');
+    console.log('{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}})}}');
 
-    
   {% if not is_granted('ROLE_USER') %}
     $('.reponse').tooltip({
     'placement' : 'bottom'
@@ -303,10 +329,6 @@ function closeCommentQuestion(e) {
     })
 {% endif %}
     })
-
-
-
-
 
 ////////////////////////////
 ////////// PAGINATION & AJAX
@@ -453,18 +475,18 @@ function closeCommentQuestion(e) {
                                     <div style="float:right"> \
                                     <div class="grille-3-btn"> \
                                     {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
-            < div style = "float:left; margin-right:5px;" > \
-            < a href = "{{path('smart_unity_question_reponse_homepage')}}validation/' + pEntry['id'] + '" > < img src = "{{ asset('assets/img/valid-btn.png') }}" / > < /a> \
-            < /div> \
+            <div style = "float:left; margin-right:5px;"> \
+            <a href = "{{path('smart_unity_question_reponse_homepage')}}validation/' + pEntry['id'] + '" > < img src = "{{ asset('assets/img/valid-btn.png') }}" /> </a> \
+            </div> \
                                       {% endif %}
-    < div style = "float: left;margin-right: 5px; margin-top: 7px;" > \
-            < a href = "#" > < img src = "{{ asset('assets/img/signaler.png') }}" / > < /a> \
-            < /div> \
-            < div class = "bouton-com-rep" > < a class = "commentaire-btn" href = "#" {% if not is_granted('ROLE_USER') %} rel = "tooltip" data - original - title = "Vous devez être connecté pour commenter une réponse."{% endif %} > Commenter < /a></div > \
-            < /div> \
-            < /div> \
-            < /div> \
-            < /div>';
+    <div style = "float: left;margin-right: 5px; margin-top: 7px;"> \
+            <a href = "#"> <img src = "{{ asset('assets/img/signaler.png') }}"/> </a> \
+            </div> \
+            <div class = "bouton-com-rep"> <a class = "commentaire-btn" href = "#" {% if not is_granted('ROLE_USER') %} rel = "tooltip" data - original - title = "Vous devez être connecté pour commenter une réponse."{% endif %}> Commenter </a></div> \
+            </div> \
+            </div> \
+            </div> \
+            </div>';
 
             return entity;
     }

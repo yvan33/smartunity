@@ -662,7 +662,7 @@ class QuestionReponseController extends Controller {
         return "";
     }
 
-    public function addCommentaireReponseAction($idReponse) {
+    public function addCommentaireReponseAction($idReponse, $slug) {
 
         $newCommentaireReponse = new \SmartUnity\AppBundle\Entity\CommentaireReponse();
         $formCommentaireReponse = $this->createFormBuilder($newCommentaireReponse)
@@ -671,6 +671,7 @@ class QuestionReponseController extends Controller {
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formCommentaireReponse->bind($this->getRequest());
+
 
             if ($formCommentaireReponse->isValid()) {
                 $user = $this->getUser();
@@ -689,10 +690,10 @@ class QuestionReponseController extends Controller {
                
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
+            else {
+                            p($formCommentaireReponse->getErrors());
+                return new Response("cassé");}
         }
-//        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddCommentaire.html.twig', array(
-//                    'formCommentaire' => $formCommentaire->createView(),
-//                    'type' => 'Reponse'));
                 return "";
 
     }

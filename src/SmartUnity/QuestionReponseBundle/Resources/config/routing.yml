@@ -41,7 +41,7 @@ smart_unity_question_reponse_add_commentaire_question:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addCommentaireQuestion }
 
 smart_unity_question_reponse_add_commentaire_reponse:
-    pattern:  /ajouter-comm-reponse/{idReponse}
+    pattern:  /ajouter-comm-reponse/{slug}/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addCommentaireReponse }
     requirements:
         idReponse: \d+
