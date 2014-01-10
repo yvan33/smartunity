@@ -424,6 +424,14 @@ a.reponse:hover{
     float: left;
     resize: none
 }
+
+/*.commentaire-input-reponse{
+    
+    position:relative;
+    float: left;
+    resize: none
+}*/
+
 .croix-close{
     color: #cccccc;
     position: absolute;

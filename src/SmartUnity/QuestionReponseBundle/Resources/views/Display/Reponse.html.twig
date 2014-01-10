@@ -99,14 +99,14 @@
 
                             <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
 <div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaireQuestion.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
-    <span class="croix-close" onClick="closeComment(this)"> &#10006;</span>
+    <span class="croix-close" onClick="closeCommentQuestion(this)"> &#10006;</span>
 </div>
                                 <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
                          {{  form_rest(formCommentaireQuestion) }}
                             </form>
 
-                           <a class="commentaire-btn" href="">
-                               <div id="bouton-com-rep-question" class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
+                           <a id="bouton-commenter-question" class="commentaire-btn" href="">
+                               <div  class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
                            </a>
 
         {% if not is_validated and not is_certif %}
@@ -231,11 +231,10 @@
     });
     }
 
-function closeComment(e) {
+function closeCommentQuestion(e) {
     $(e).parent().hide();
     $(e).parent().next([0]).hide();
-    console.log($(e).parent().parent());
-    $(e).parent().parent().next([0]).children([0]).show();
+    $(e).parent().parent().next().children().show();
     }
 
 //////////
@@ -256,13 +255,15 @@ function closeComment(e) {
     e.preventDefault();
     });
     
- //bouton commenter
-    $('.commentaire-btn').click(function(e){
+ //bouton commenter question
+    $('#bouton-commenter-question').click(function(e){
 
     {% if is_granted('ROLE_USER') %}
     $(this).prev().children([0]).show();
             $(this).children([0]).hide();
             $(this).prev().children([1]).show();
+    
+    
 
     $('#closeFrame').click(function(){
     $('#addReponseHolder').hide('fast');
@@ -271,7 +272,8 @@ function closeComment(e) {
     {% endif %}
     e.preventDefault();
     });  
-    
+
+
 //////////
 /// TOOLTIPS
 //////////
