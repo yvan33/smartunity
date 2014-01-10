@@ -236,7 +236,8 @@
 }
 .grille-reponse
 {
-	border-bottom: solid 1px #e8e4dc;
+        position: relative;	
+        border-bottom: solid 1px #e8e4dc;
 	overflow:hidden;
 	clear:both;
 	
@@ -244,6 +245,7 @@
 }
 .grille-reponse-smart
 {
+        position: relative;	    
 	overflow:hidden;
 	clear:both;
 	background-color:#f5f4df;
@@ -307,7 +309,7 @@
 	-webkit-box-shadow: 0 0 5px  #E6E6E6;
        -moz-box-shadow: 0 0 5px  #E6E6E6;
             box-shadow: 0 0 5px  #E6E6E6;
-	
+	cursor:pointer;
 }
 .bouton-com-rep:active
 {
@@ -446,5 +448,12 @@ a.reponse:hover{
 #form-commenter-reponse{
         display:none;
 
+}
+
+.bouton-signaler{
+    position: absolute;
+    bottom: 2px;
+    left:4px;
+    
 }
 

@@ -14,8 +14,6 @@
 {% endblock %}
 
 
-
-
 {% block body %}
 <div class="row">
     <div class="col-md-12" style="padding:0px">
@@ -23,6 +21,9 @@
 
         <div class="grille-content-2">
             <div class="grille-reponse">
+                            <div class="bouton-signaler">
+                                <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                            </div>                
                 <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                 </div>
 
@@ -93,9 +94,6 @@
 
                     <div class="bloc-commenter-repondre">
                         <div class="grille-3-btn">
-                            <div style="float: left;margin-right: 5px; margin-top: 7px;">
-                                <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
-                            </div>
 
                             <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
 <div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaireQuestion.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
@@ -380,7 +378,11 @@ function displayCommentFormReponse(e, reponseId){
             $('#reponses-frame').height(function(i, h){
             return h;
             });
+            
+                              $('#form-commenter-reponse').hide();
+            $( '#reponses-frame' ).before($('#form-commenter-reponse'));
                     $('#reponses-container').fadeOut('fast');
+                    
                     //On récupère le JSON depuis le controller AjaxController
                     $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/' + tri + '/' + pPage + '/{{nbParPage}}', function(donnees){
                     var content = '';
@@ -409,6 +411,9 @@ function displayCommentFormReponse(e, reponseId){
     var route_vers_profil = '{{ path("smart_unity_membre_profil", {'id' : 'membre_id' }) }}';
             route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);
             var entity = '<div class="grille-reponse"> \
+                <div class = "bouton-signaler"> \
+            <a href = "#"> <img src = "{{ asset('assets/img/signaler.png') }}"/></a> \
+            </div> \
                                  <div class="grille-1" style="text-align:center"> \
                                     <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
             if (pEntry['is_voted']){
@@ -471,18 +476,16 @@ function displayCommentFormReponse(e, reponseId){
                                     <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
                                     </div>';
     });
-            entity += ' \
-                                    <div style="float:right"> \
-                                    <div class="grille-3-btn"> \
-                                    {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
+            
+                 entity += '        <div style="float:right"> \
+                                    <div class="grille-3-btn">';
+               entity += '         {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %} \
             <div style = "float:left; margin-right:5px;"> \
-            <a href = "{{path('smart_unity_question_reponse_homepage')}}validation/' + pEntry['id'] + '" > < img src = "{{ asset('assets/img/valid-btn.png') }}" /> </a> \
+            <a href = "{{path('smart_unity_question_reponse_homepage')}}validation/' + pEntry['id'] + '"> <img src = "{{ asset('assets/img/valid-btn.png') }}" /> </a> \
             </div> \
-                                      {% endif %}
-    <div style = "float: left;margin-right: 5px; margin-top: 7px;"> \
-            <a href = "#"> <img src = "{{ asset('assets/img/signaler.png') }}"/> </a> \
-            </div> \
-            <div class = "bouton-com-rep"> <a class = "commentaire-btn" href = "#" {% if not is_granted('ROLE_USER') %} rel = "tooltip" data - original - title = "Vous devez être connecté pour commenter une réponse."{% endif %}> Commenter </a></div> \
+                                      {% endif %} \
+            <div></div>';
+             entity += ' <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div> \
             </div> \
             </div> \
             </div> \
