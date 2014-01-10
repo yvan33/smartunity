@@ -68,7 +68,7 @@
         </div>
                                     {% endfor %}
 
-        <div style="float:right">
+        <div class="bloc-commenter-repondre">
             <div class="grille-3-btn">
                                       {% if not reponse.is_certif and reponse.is_validated and is_granted('ROLE_ADMIN') %}
                 <div style="float:left; margin-right:5px;">
@@ -85,12 +85,13 @@
                 </div>
 {#                <div class="bouton-com-rep" style="margin-left:10px"><a class="commentaire-btn" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une réponse."{% endif %} href="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}">Commenter</a></div>#}
 
-                <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
-                    <div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaire.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
+                <form action="{{path('smart_unity_question_reponse_add_commentaire_reponse', {idReponse: reponse.id})}}" method="POST">
+                    <div  id="commentaire-input-question" class="commentaire-input" >{#{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}#}
+                     <textarea id="form_description" name="form[description]" required="required" class="form-control forminfo" style="resize: none"></textarea>  
                         <span class="croix-close" onClick="closeComment(this)"> &#10006;</span>
                     </div>
                     <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
-                         {{  form_rest(formCommentaire) }}
+{#                         {{  form_rest(formCommentaireReponse) }}#}
                 </form>
 
                 <a class="commentaire-btn" href="#">
