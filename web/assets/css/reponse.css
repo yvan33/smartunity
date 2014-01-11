@@ -250,7 +250,6 @@
 	clear:both;
 	background-color:#f5f4df;
 	
-	
 }
 
 .grille-content-2
@@ -455,5 +454,9 @@ a.reponse:hover{
     bottom: 2px;
     left:4px;
     
+}
+
+.tooltip {
+    position: fixed;
 }
 
