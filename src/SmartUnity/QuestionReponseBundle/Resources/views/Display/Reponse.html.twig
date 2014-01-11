@@ -21,9 +21,9 @@
 
         <div class="grille-content-2">
             <div class="grille-reponse">
-                            <div class="bouton-signaler">
-                                <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
-                            </div>                
+                <div class="bouton-signaler">
+                    <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                </div>                
                 <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                 </div>
 
@@ -96,16 +96,16 @@
                         <div class="grille-3-btn">
 
                             <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
-<div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaireQuestion.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
-    <span class="croix-close" onClick="closeCommentQuestion(this)"> &#10006;</span>
-</div>
-                                <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
+                                <div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaireQuestion.description, {'attr': {'class': 'form-control forminfo' }} )}}
+                                    <span class="croix-close" onClick="closeCommentQuestion(this)"> &#10006;</span>
+                                </div>
+                                <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep" style="margin-left:10px"/>
                          {{  form_rest(formCommentaireQuestion) }}
                             </form>
 
-                           <a id="bouton-commenter-question" class="commentaire-btn" href="">
-                               <div  class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
-                           </a>
+                            <a id="bouton-commenter-question" href="">
+                                <div  class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
+                            </a>
 
         {% if not is_validated and not is_certif %}
                             <a class="reponse" href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}">
@@ -150,14 +150,36 @@
 
 {% block modal %}
 {% if is_granted('ROLE_USER') %}
-<div id="addReponseHolder" style="position:fixed;display:none; width:100%;bottom:0px; z-index:1000;left:0">
-    <div class="container">
+<div id="addReponseHolder">
+    <div class="container"  style="padding-left: 0; padding-right: 0;">
         <div class="row">
-            <div class="col-md-offset-1 col-md-10" style="padding:0px;position:relative">
-                <div  style="position:absolute;cursor:pointer;right:20px;top:5px;color:#FFF;font-size:24px" id="closeFrame">
-                    <span class="glyphicon glyphicon-remove-circle"></span>
-                </div>
-                <iframe id="addReponse" style="border:0px;width:100%;background:none;height:184px;" src="about:blank"></iframe>
+            <div class="col-md-offset-1 col-md-10" style="padding-left:0px; padding-right:0px; position:relative">
+                <div class="container cadre-form-reponse">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div  style="position:absolute;cursor:pointer;right:4px;top:5px;color:#FFF;font-size:20px" id="closeFrame">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </div>
+{#                <iframe id="addReponse" style="border:0px;width:100%;background:none;height:184px;" src="about:blank"></iframe>#}
+                            <div class="grille-content">
+
+                                <form action="{{path('smart_unity_question_reponse_add_reponse', {slug: question.slug})}}" method="POST">
+                                    <div class="erreur">
+            {{ form_errors(formReponse) }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="head-blue">Formuler une réponse</div>
+                                    </div>
+                                    <div class="row row-avec-margin">
+	        {{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'class': 'form-control forminfo reponse-input'}}) }}</div>
+                                    <div class="row">
+                                        <div class="cent-h">{{form_widget(formReponse.valider,{'attr': {'class': 'btn btn-primary'}})}}</div>
+                                    </div>
+	    {{form_end(formReponse)}}
+                            </div>
+                        </div>
+                    </div>
+                </div>     
             </div>
         </div>
     </div>
@@ -173,56 +195,56 @@
 /// VOTES
 ////////////
 
-            function upVote(pId){
+    function upVote(pId) {
 
-            $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees){
-            if (donnees['status'] == 'ok'){
-            score = parseInt($('#vote' + pId + ' .upVote p').html());
-                    $('#vote' + pId + ' .upVote p').html(score + 1);
-                    $('#vote' + pId).attr('rel', "tooltip");
-                    $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
-                    $('#vote' + pId + ' .upVote').attr('onclick', '');
-                    $('#vote' + pId + ' .downVote').attr('onclick', '');
-                    $('.roww').tooltip({
-            'placement' : 'right'
-            });
-            } else if (donnees['status'] == 'error'){
+        $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees) {
+            if (donnees['status'] == 'ok') {
+                score = parseInt($('#vote' + pId + ' .upVote p').html());
+                $('#vote' + pId + ' .upVote p').html(score + 1);
+                $('#vote' + pId).attr('rel', "tooltip");
+                $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+                $('#vote' + pId + ' .upVote').attr('onclick', '');
+                $('#vote' + pId + ' .downVote').attr('onclick', '');
+                $('.roww').tooltip({
+                    'placement': 'right'
+                });
+            } else if (donnees['status'] == 'error') {
 
-            $.magnificPopup.open({
-            items: {
-            src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
-                    type:'inline',
-                    mainClass: 'mfp-fade'
+                $.magnificPopup.open({
+                    items: {
+                        src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
+                        type: 'inline',
+                        mainClass: 'mfp-fade'
+                    }
+                });
             }
-            });
-            }
-            });
-            }
-
-    function downVote(pId){
-
-    $.getJSON('{{ path('smart_unity_question_reponse_ajax_downvote') }}/' + pId, function(donnees){
-    if (donnees['status'] == 'ok'){
-    score = parseInt($('#vote' + pId + ' .downVote p').html());
-            $('#vote' + pId + ' .downVote p').html(score - 1);
-            $('#vote' + pId).attr('rel', "tooltip");
-            $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
-            $('#vote' + pId + ' .upVote').attr('onclick', '');
-            $('#vote' + pId + ' .downVote').attr('onclick', '');
-            $('.roww').tooltip({
-    'placement' : 'right'
-    });
-    } else if (donnees['status'] == 'error'){
-
-    $.magnificPopup.open({
-    items: {
-    src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
-            type:'inline',
-            mainClass: 'mfp-fade'
+        });
     }
-    });
-    }
-    });
+
+    function downVote(pId) {
+
+        $.getJSON('{{ path('smart_unity_question_reponse_ajax_downvote') }}/' + pId, function(donnees) {
+            if (donnees['status'] == 'ok') {
+                score = parseInt($('#vote' + pId + ' .downVote p').html());
+                $('#vote' + pId + ' .downVote p').html(score - 1);
+                $('#vote' + pId).attr('rel', "tooltip");
+                $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+                $('#vote' + pId + ' .upVote').attr('onclick', '');
+                $('#vote' + pId + ' .downVote').attr('onclick', '');
+                $('.roww').tooltip({
+                    'placement': 'right'
+                });
+            } else if (donnees['status'] == 'error') {
+
+                $.magnificPopup.open({
+                    items: {
+                        src: '<div class="white-popup">' + donnees['error_msg'] + '</div>',
+                        type: 'inline',
+                        mainClass: 'mfp-fade'
+                    }
+                });
+            }
+        });
     }
 
 
@@ -231,15 +253,15 @@
 //////////
 
 // Bouton répondre
-    $('a.reponse').click(function(e){
-    e.preventDefault();    
+    $('a.reponse').click(function(e) {
+        e.preventDefault();
     {% if is_granted('ROLE_USER') %}
-    $('#addReponse').attr('src', $(this).attr('href'));
-            $('#addReponseHolder').show('fast');
-            $('#closeFrame').click(function(){
-    $('#addReponseHolder').hide('fast');
+        $('#addReponse').attr('src', $(this).attr('href'));
+        $('#addReponseHolder').show('fast');
+        $('#closeFrame').click(function() {
+            $('#addReponseHolder').hide('fast');
             $('#addReponse').attr('src', 'about:blank');
-    })
+        })
     {% endif %}
 
     });
@@ -247,48 +269,40 @@
 ////////////////////////////
 ///////////Commenter question
 ////////////////////////////
-    $('#bouton-commenter-question').click(function(e){
-
+    $('#bouton-commenter-question').click(function(e) {
+        e.preventDefault();
     {% if is_granted('ROLE_USER') %}
-    $(this).prev().children([0]).show();
-            $(this).children([0]).hide();
-            $(this).prev().children([1]).show();
-    
-    
-
-    $('#closeFrame').click(function(){
-    $('#addReponseHolder').hide('fast');
-            $('#addReponse').attr('src', 'about:blank');
-    })
+        $(this).prev().children([0]).show();
+        $(this).children([0]).hide();
+        $(this).prev().children([1]).show();
     {% endif %}
-    e.preventDefault();
-    });  
-    
-    
-function closeCommentQuestion(e) {
-    $(e).parent().hide();
-    $(e).parent().next([0]).hide();
-    $(e).parent().parent().next().children().show();
+    });
+
+
+    function closeCommentQuestion(e) {
+        $(e).parent().hide();
+        $(e).parent().next([0]).hide();
+        $(e).parent().parent().next().children().show();
     }
 
 ////////////////////////////
 /////////Commenter réponse
 ////////////////////////////
 
-function displayCommentFormReponse(e, reponseId){
-            
-        {% if is_granted('ROLE_USER') %} 
+    function displayCommentFormReponse(e, reponseId) {
 
-    var actionUrl =   $('#form-commenter-reponse').children().get(0).getAttribute('action');
-    console.log(actionUrl);
-    $('#form-commenter-reponse').children().get(0).setAttribute('action', actionUrl.replace(/\d+$/, reponseId));
-    $(e).parent().prev().append($('#form-commenter-reponse'));  
-    $('#form-commenter-reponse').show();    
+        {% if is_granted('ROLE_USER') %}
+
+        var actionUrl = $('#form-commenter-reponse').children().get(0).getAttribute('action');
+        console.log(actionUrl);
+        $('#form-commenter-reponse').children().get(0).setAttribute('action', actionUrl.replace(/\d+$/, reponseId));
+        $(e).parent().prev().append($('#form-commenter-reponse'));
+        $('#form-commenter-reponse').show();
 {#    $(e).parent().prev().show();#}
-    $(e).parent().hide();
+        $(e).parent().hide();
     {% endif %}
-                }
-                
+    }
+
     function closeCommentReponse(e) {
         $(e).parent().parent().parent().parent().next().show();
         $(e).parent().parent().parent().hide();
@@ -299,30 +313,27 @@ function displayCommentFormReponse(e, reponseId){
 /// TOOLTIPS
 //////////
 
-    $(document).ready(function(){
-  console.log('{{ form_widget(formCommentaireReponse.description) }}');
-    console.log('{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}})}}');
-
+    $(document).ready(function() {
   {% if not is_granted('ROLE_USER') %}
-    $('.reponse').tooltip({
-    'placement' : 'bottom'
-    });
-            $('.bouton-com-rep').tooltip({
-    'placement' : 'bottom'
-    });
+        $('.reponse').tooltip({
+            'placement': 'bottom'
+        });
+        $('.bouton-com-rep').tooltip({
+            'placement': 'bottom'
+        });
   {% endif %}
 
-    $('.roww').tooltip({
-    'placement' : 'right'
+        $('.roww').tooltip({
+            'placement': 'right'
 
-    });
+        });
 {% if is_granted('ROLE_USER') %}
-    $('.bouton-soutient').popover({
-    'html': true,
+        $('.bouton-soutient').popover({
+            'html': true,
             'content': '<iframe style:"width:300px" src="{{path('smart_unity_question_reponse_add_soutien_question', {slug: question.slug})}}"></iframe>',
             'placement': 'right',
             'animation': true
-    })
+        })
 {% endif %}
     })
 
@@ -331,28 +342,28 @@ function displayCommentFormReponse(e, reponseId){
 ////////////////////////////
 
 //Options du bootStrap Paginator
-            options = new Object();
-            options = {
-            currentPage: {{ page }},
-                    totalPages: {{ nbPages }},
-                    alignment: 'center',
-                    numberOfPages: 5,
-                    size: 'large',
-                    itemContainerClass: function (type, page, current) {
-                    return (page === current) ? "active" : "pointer-cursor";
-                    },
-                    bootstrapMajorVersion: 3,
-                    onPageClicked: function(pEvent, pOriginalEvent, pType, pPage){
-                    clickOnPagination(pPage);
-                    }
-            };
-            tri = '{{ tri }}';
-            $(document).ready(function(){
-    $('#pages').bootstrapPaginator(options);
-            $('#triVote').attr('href', '#');
-            $('#triDate').attr('href', '#');
-            $('#triVote').click(function(e){
-    tri = 'vote';
+    options = new Object();
+    options = {
+        currentPage: {{ page }},
+        totalPages: {{ nbPages }},
+        alignment: 'center',
+        numberOfPages: 5,
+        size: 'large',
+        itemContainerClass: function(type, page, current) {
+            return (page === current) ? "active" : "pointer-cursor";
+        },
+        bootstrapMajorVersion: 3,
+        onPageClicked: function(pEvent, pOriginalEvent, pType, pPage) {
+            clickOnPagination(pPage);
+        }
+    };
+    tri = '{{ tri }}';
+    $(document).ready(function() {
+        $('#pages').bootstrapPaginator(options);
+        $('#triVote').attr('href', '#');
+        $('#triDate').attr('href', '#');
+        $('#triVote').click(function(e) {
+            tri = 'vote';
             options.currentPage = 1;
             $('#pages').bootstrapPaginator(options);
             $('#triVote').css('font-weight', 'bold');
@@ -360,9 +371,9 @@ function displayCommentFormReponse(e, reponseId){
             $('#triDate').css('font-weight', 'normal');
             clickOnPagination(1);
             e.preventDefault();
-    });
-            $('#triDate').click(function(e){
-    tri = 'date';
+        });
+        $('#triDate').click(function(e) {
+            tri = 'date';
             options.currentPage = 1;
             $('#pages').bootstrapPaginator(options);
             $('#triVote').css('font-weight', 'normal');
@@ -370,74 +381,78 @@ function displayCommentFormReponse(e, reponseId){
             $('#triDate').css('font-style', 'none');
             clickOnPagination(1);
             e.preventDefault();
+        });
     });
-    });
-            function clickOnPagination(pPage){
-            $('#reponses-frame').height(function(i, h){
+    function clickOnPagination(pPage) {
+        $('#reponses-frame').height(function(i, h) {
             return h;
-            });
-            
-                              $('#form-commenter-reponse').hide();
-            $( '#reponses-frame' ).before($('#form-commenter-reponse'));
-                    $('#reponses-container').fadeOut('fast');
-                    
-                    //On récupère le JSON depuis le controller AjaxController
-                    $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/' + tri + '/' + pPage + '/{{nbParPage}}', function(donnees){
-                    var content = '';
-                            if (donnees[0]['page'] == pPage && donnees[0]['slug'] == '{{slug}}' && donnees[0]['nbParPage'] == {{nbParPage}} && donnees[0]['tri'] == tri){
-                    donnees.shift(); //On supprime la ligne de check du JSON
+        });
 
-                            donnees.forEach(function(pEntry, i){
-                            if (!pEntry['is_validated'] && !pEntry['is_certif']) content += generateContent(pEntry, i);
-                            }); //Generation du code
+        $('#form-commenter-reponse').hide();
+        $('#reponses-frame').before($('#form-commenter-reponse'));
+        $('#reponses-container').fadeOut('fast');
 
-                            //Affichage du nouveau contenu dasn le tab, et fadeIn
-                            $('#reponses-container').html(content);
-                            $('#reponses-container').fadeIn('fast');
-                            $('#reponses-frame').animateAuto('height', 'fast');
-                    } else{ //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
-                    $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
-                            $('#reponses-container').fadeIn('fast');
-                    }
-                    $('.roww').tooltip({
-                    'placement' : 'right'
-                    });
-                    });
+        //On récupère le JSON depuis le controller AjaxController
+        $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/' + tri + '/' + pPage + '/{{nbParPage}}', function(donnees) {
+            var content = '';
+            if (donnees[0]['page'] == pPage && donnees[0]['slug'] == '{{slug}}' && donnees[0]['nbParPage'] == {{nbParPage}} && donnees[0]['tri'] == tri) {
+                donnees.shift(); //On supprime la ligne de check du JSON
+
+                donnees.forEach(function(pEntry, i) {
+                    if (!pEntry['is_validated'] && !pEntry['is_certif'])
+                        content += generateContent(pEntry, i);
+                }); //Generation du code
+
+                //Affichage du nouveau contenu dasn le tab, et fadeIn
+                $('#reponses-container').html(content);
+                $('#reponses-container').fadeIn('fast');
+                $('#reponses-frame').animateAuto('height', 'fast');
+            } else { //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
+                $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
+                $('#reponses-container').fadeIn('fast');
             }
-    function generateContent(pEntry, i){
+            $('.roww').tooltip({
+                'placement': 'right'
+            });
+        });
+    }
+    function generateContent(pEntry, i) {
 
-    var route_vers_profil = '{{ path("smart_unity_membre_profil", {'id' : 'membre_id' }) }}';
-            route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);
-            var entity = '<div class="grille-reponse"> \
+        var route_vers_profil = '{{ path("smart_unity_membre_profil", {'id' : 'membre_id' }) }}';
+        route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);
+        var entity = '<div class="grille-reponse"> \
                 <div class = "bouton-signaler"> \
             <a href = "#"> <img src = "{{ asset('assets/img/signaler.png') }}"/></a> \
             </div> \
                                  <div class="grille-1" style="text-align:center"> \
                                     <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
-            if (pEntry['is_voted']){
-    entity += 'Vous avez déjà noté cette question.';
-    }
+        if (pEntry['is_voted']) {
+            entity += 'Vous avez déjà noté cette question.';
+        }
 
-    entity += '"> \
+        entity += '"> \
                                       <div class="fleche upVote" {% if is_granted('ROLE_USER') %}';
-            if (!pEntry['is_voted']) entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
-            entity += ' {% endif %}> \
+        if (!pEntry['is_voted'])
+            entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
+        entity += ' {% endif %}> \
                                           <img src="{{ asset('assets/img/fleche_plus.png') }}" /><p style="color:#7fc236">' + pEntry['up_vote'] + '</p> \
                                         </div> \
                                         <div class="fleche downVote" {% if is_granted('ROLE_USER') %}';
-            if (!pEntry['is_voted']) entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
-            entity += '{% endif %}> \
+        if (!pEntry['is_voted'])
+            entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
+        entity += '{% endif %}> \
                                           <img src="{{ asset('assets/img/fleche_moins.png') }}"/><p style="color:#F00">' + pEntry['down_vote'] + '</p> \
                                         </div> \
                                     </div> \
                                     <div class="roww"> \
                                       <p style="font-size:11px">' + pEntry['date'] + '</p> \
                                     </div>';
-            if (pEntry['is_validated'] || pEntry['is_certif']) entity += ' \
+        if (pEntry['is_validated'] || pEntry['is_certif'])
+            entity += ' \
                                     <div class="roww"> \
                                       <img src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/> \
                                     </div>';
-            entity += ' \
+        entity += ' \
                                 </div> \
                                  \
                                 <div class="grille-2" > \
@@ -447,11 +462,13 @@ function displayCommentFormReponse(e, reponseId){
                               \
                                         <div class="grille-3-grey"> \
                                             <div class="grille-3-im">';
-            if (pEntry['avatar']) entity += ' \
+        if (pEntry['avatar'])
+            entity += ' \
  <img src="{{ asset('') }}' + pEntry['avatar'] + ' " alt="avatar" height="71" width="71" />';
-            else entity += '\
+        else
+            entity += '\
                                              <img src="{{ asset('assets/img/logo-compte.png') }}"/>';
-            entity += '      </div> \
+        entity += '      </div> \
                                             <div class=" grille-3-txt"> \
                                               <p style="margin:0px; font-weight:600"><a href="' + route_vers_profil + '">' + pEntry['membre_username'] + '</a></p> \
                                             <p style="margin:0px">' + pEntry['smart_reponses'] + ' Smart\'Reponses</p> \
@@ -467,29 +484,29 @@ function displayCommentFormReponse(e, reponseId){
                                 </div> \
                                 </div> \
                                 <p style="min-height: 100px">' + pEntry['description'] + '</p>';
-            pEntry['commentaires'].forEach(function(pCom, i){
+        pEntry['commentaires'].forEach(function(pCom, i) {
 
-    entity += '<div class="commentaire"> \
+            entity += '<div class="commentaire"> \
                                     <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_username'] + ' le ' + pCom['date'] + ' \
                                     <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
                                     </div>';
-    });
-            
-                 entity += '        <div style="float:right"> \
+        });
+
+        entity += '        <div style="float:right"> \
                                     <div class="grille-3-btn">';
-               entity += '         {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %} \
+        entity += '         {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %} \
             <div style = "float:left; margin-right:5px;"> \
             <a href = "{{path('smart_unity_question_reponse_homepage')}}validation/' + pEntry['id'] + '"> <img src = "{{ asset('assets/img/valid-btn.png') }}" /> </a> \
             </div> \
                                       {% endif %} \
             <div></div>';
-             entity += ' <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div> \
+        entity += ' <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div> \
             </div> \
             </div> \
             </div> \
             </div>';
 
-            return entity;
+        return entity;
     }
 
 

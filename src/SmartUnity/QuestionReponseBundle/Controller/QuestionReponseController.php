@@ -361,7 +361,18 @@ class QuestionReponseController extends Controller {
         $newCommentaireReponse = new \SmartUnity\AppBundle\Entity\CommentaireReponse();
         $formCommentaireReponse = $this->createFormBuilder($newCommentaireReponse)
                 ->add('description', 'textarea', array('label' => false))
-                ->getForm();        
+                ->getForm(); 
+        
+        $newReponse = new \SmartUnity\AppBundle\Entity\Reponse();
+        $formReponse = $this->createFormBuilder($newReponse)
+                ->add('description', 'textarea', array(
+                    'label' => false,
+                    'attr' => array('placeholder' => 'Tapez votre réponse ici...')
+    ))
+                ->add('valider', 'submit'
+                    
+                )
+                ->getForm(); 
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
@@ -383,6 +394,7 @@ class QuestionReponseController extends Controller {
                     'avatar' => $avatar,
                     'formCommentaireQuestion' => $formCommentaireQuestion->createView(),
                     'formCommentaireReponse' => $formCommentaireReponse->createView(),
+                    'formReponse' => $formReponse->createView(),
         ));
     }
 
@@ -691,7 +703,7 @@ class QuestionReponseController extends Controller {
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
             else {
-                            p($formCommentaireReponse->getErrors());
+                
                 return new Response("cassé");}
         }
                 return "";

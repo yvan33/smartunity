@@ -150,7 +150,6 @@
 	cursor:pointer;
 }
 .fleche:hover{
-	font-style:none;
 	cursor:pointer;
 }
 .roww
@@ -227,7 +226,7 @@
 	background-color:#3699d0;
 	border-radius:6px;
 	width:90px;
-	height:40px
+	height:40px;
 	line-height:40px;
 	border: solid 2px #118fc7;
 	text-align:center;
@@ -345,14 +344,6 @@ span.label-default{
 	font-style:italic;
 }
 
-.commentaire-btn{
-	color:#FFF;
-}
-
-.commentaire-btn:hover{
-	font-style: normal;
-}
-
 a.reponse{
 	color:#FFF;
 }
@@ -360,7 +351,6 @@ a.reponse{
 a.reponse:hover{
 	font-style: normal;
 }
-
 
 /**
 *
@@ -458,5 +448,26 @@ a.reponse:hover{
 
 .tooltip {
     position: fixed;
+}
+
+#addReponseHolder{
+    position:fixed;
+    display:none;
+    width:100%;
+    bottom:0px;
+    z-index:1000;left:0
+}
+
+.cadre-form-reponse{
+    box-shadow: 0px 0px 30px #758c92;
+    background-color: #f3f0eb;
+    /*overflow: hidden;*/
+}
+
+.reponse-input{
+}
+
+.row-avec-margin{
+    padding: 5px;
 }
 

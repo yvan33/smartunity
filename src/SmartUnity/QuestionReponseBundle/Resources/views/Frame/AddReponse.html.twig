@@ -1,41 +1,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
+                <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css') }}">
 
-    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
+                    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
 
-    <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+                        <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
+                        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 
-</head>
-<body>
+                        </head>
+                        <body>
 
-	<div class="grille-content">
+                            <div class="grille-content">
 
 		{{ form_start(formReponse)}}
-		<div class="erreur">
+                                <div class="erreur">
             {{ form_errors(formReponse) }}
-	    </div>
-	    <div class="row">
-	    <div class="head-blue">Nouvelle Reponse</div>
-	    </div>
-	    <div class="row">
-	        <div class="grille-1">{{ form_label(formReponse.description) }}</div>
-	        <div  class="grille-2">{{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'style': 'height:98px;width:100%'}}) }}</div>
-	    </div>
-	    <div class="row">
-	        <div class="grille-1">{{form_widget(formReponse.save,{'attr': {'class': 'btn btn-primary'}})}}</div>
-	    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="head-blue">Formuler une réponse</div>
+                                </div>
+                                <div class="row">
+	        {{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'class': 'form-control forminfo reponse-input'}}) }}</div>
+                                <div class="row">
+                                    <div class="cent-h">{{form_widget(formReponse.save,{'attr': {'class': 'btn btn-primary'}})}}</div>
+                                </div>
 	    {{form_end(formReponse)}}
-	</div>
-    
+                            </div>
 
-</body>
-</html>
+
+                        </body>
+                        </html>
