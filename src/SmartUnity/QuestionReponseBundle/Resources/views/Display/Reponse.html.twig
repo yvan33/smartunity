@@ -116,7 +116,7 @@
                 </div>
             </div>
 
-                            {% for reponse in listeReponses %}
+                          {% for reponse in listeReponses %}
                               {% if loop.index == 1 %}
                                 {% if reponse.is_validated or reponse.is_certif %}
                                     {% include "SmartUnityQuestionReponseBundle:Include:ReponseBlock.html.twig" %}
@@ -125,14 +125,10 @@
                                     {% include "SmartUnityQuestionReponseBundle:Include:ReponseDivider.html.twig" %}
                                     {% include "SmartUnityQuestionReponseBundle:Include:ReponseBlock.html.twig" %}
                                 {% endif %}
-
                               {% else %}
-
                                 {% include "SmartUnityQuestionReponseBundle:Include:ReponseBlock.html.twig" %}
-
                               {% endif %}
                           {% endfor %}
-
         </div>
     </div>
 </div>
@@ -147,7 +143,8 @@
     </div>
 </div>
 
-
+</div>
+</div>
 {% endblock %}
 
 

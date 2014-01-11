@@ -17,10 +17,10 @@
 
 
         <!-- Fonts -->
-{#        <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> #}
+        <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
 
         <!-- Additional styleSheets -->
-{#        <script>
+        <script>
             function goLogIn() {
                 window.location.href = "{{ path('_security_check') }}";
             }
@@ -37,7 +37,7 @@
                 }
             }
 
-        </script>#}
+        </script>
 
 {% block stylesheets %}{% endblock %}
 
@@ -46,7 +46,6 @@
         <!-- Bootstrap core and general JavaScript files -->
         <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-{#        <script src="{{ asset('assets/js/Fb-login.js') }}"></script>#}
 
         <!-- Additional Javascript src -->
 
@@ -56,7 +55,7 @@
     </head>
     <!-- bg body -->
     <body class="bg" >
-{#{{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}#}
+{{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 
         <nav class="navbar navbar-inverse navbar-fixed-top menu-bg" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
