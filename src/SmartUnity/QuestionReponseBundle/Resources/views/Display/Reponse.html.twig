@@ -173,7 +173,7 @@
                                     <div class="row row-avec-margin">
 	        {{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'class': 'form-control forminfo reponse-input'}}) }}</div>
                                     <div class="row">
-                                        <div class="cent-h">{{form_widget(formReponse.valider,{'attr': {'class': 'btn btn-primary'}})}}</div>
+                                        <div class="cent-h">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep'}})}}</div>
                                     </div>
 	    {{form_end(formReponse)}}
                             </div>
@@ -258,13 +258,17 @@
     {% if is_granted('ROLE_USER') %}
         $('#addReponse').attr('src', $(this).attr('href'));
         $('#addReponseHolder').show('fast');
-        $('#closeFrame').click(function() {
-            $('#addReponseHolder').hide('fast');
-            $('#addReponse').attr('src', 'about:blank');
-        })
+        $('.espace-vide-pour-cadre-repondre').show();
     {% endif %}
 
     });
+    
+        $('#closeFrame').click(function() {
+            $('#addReponseHolder').hide('fast');
+            $('#addReponse').attr('src', 'about:blank');
+            $('.espace-vide-pour-cadre-repondre').hide();
+            
+        })    
 
 ////////////////////////////
 ///////////Commenter question

@@ -413,7 +413,7 @@ a.reponse:hover{
     position:relative;
     display:none;
     float: left;
-    resize: none
+    resize: none;
 }
 
 .croix-close{
@@ -465,9 +465,16 @@ a.reponse:hover{
 }
 
 .reponse-input{
+    
+    resize:vertical;
 }
 
 .row-avec-margin{
     padding: 5px;
+}
+
+.espace-vide-pour-cadre-repondre{
+    height: 150px;
+    display: none;
 }
 
