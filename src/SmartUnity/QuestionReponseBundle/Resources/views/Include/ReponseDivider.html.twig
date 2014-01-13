@@ -12,17 +12,6 @@
                 </p>
             </div>
             
-            <div id="form-commenter-reponse">
-                <form action="{{path('smart_unity_question_reponse_add_commentaire_reponse', { slug: question.slug, idReponse: reponse.id})}}" method="POST">
-                    <div  id="commentaire-input-reponse"class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
-                        <span class="croix-close" onClick="closeCommentReponse(this)"> &#10006;</span>
-                    </div>
-                    <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
-                         {{  form_rest(formCommentaireReponse) }}
-                </form>
-            </div>
-            
-            
             <div id="reponses-frame">
                 <div id="reponses-container">
                     <!--    Fin du ReponseDivider -->

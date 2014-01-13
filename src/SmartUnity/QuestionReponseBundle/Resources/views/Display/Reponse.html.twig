@@ -118,10 +118,22 @@
 
                           {% for reponse in listeReponses %}
                               {% if loop.index == 1 %}
-                                {% if reponse.is_validated or reponse.is_certif %}
+            
+            <div id="form-commenter-reponse">
+                <form action="{{path('smart_unity_question_reponse_add_commentaire_reponse', { slug: question.slug, idReponse: reponse.id})}}" method="POST">
+                    <div  id="commentaire-input-reponse"class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
+                        <span class="croix-close" onClick="closeCommentReponse(this)"> &#10006;</span>
+                    </div>
+                    <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
+                         {{  form_rest(formCommentaireReponse) }}
+                </form>
+            </div>
+                            {% if reponse.is_validated or reponse.is_certif %}
                                     {% include "SmartUnityQuestionReponseBundle:Include:ReponseBlock.html.twig" %}
-                                    {% if nbReponses > 1 %}{% include "SmartUnityQuestionReponseBundle:Include:ReponseDivider.html.twig" %}{% endif %}
-                                {% else %}
+
+                            {% if nbReponses > 1 %}{% include "SmartUnityQuestionReponseBundle:Include:ReponseDivider.html.twig" %}{% endif %}
+
+                            {% else %}
                                     {% include "SmartUnityQuestionReponseBundle:Include:ReponseDivider.html.twig" %}
                                     {% include "SmartUnityQuestionReponseBundle:Include:ReponseBlock.html.twig" %}
                                 {% endif %}
@@ -150,6 +162,10 @@
 
 {% block modal %}
 {% if is_granted('ROLE_USER') %}
+{#/////////////////////////////////////////////////#}
+{#Blocs en display : none#}
+{#///////////////////////////////////////////////////#}
+
 <div id="addReponseHolder">
     <div class="container"  style="padding-left: 0; padding-right: 0;">
         <div class="row">
@@ -185,6 +201,9 @@
         </div>
     </div>
 </div>
+
+
+
 {% endif %}
 {% endblock %}
 {% block callJS %}
@@ -263,13 +282,13 @@
     {% endif %}
 
     });
-    
-        $('#closeFrame').click(function() {
-            $('#addReponseHolder').hide('fast');
-            $('#addReponse').attr('src', 'about:blank');
-            $('.espace-vide-pour-cadre-repondre').hide();
-            
-        })    
+
+    $('#closeFrame').click(function() {
+        $('#addReponseHolder').hide('fast');
+        $('#addReponse').attr('src', 'about:blank');
+        $('.espace-vide-pour-cadre-repondre').hide();
+
+    })
 
 ////////////////////////////
 ///////////Commenter question
@@ -300,18 +319,18 @@
 
         //fermeture de l'ancien form
 {#        closeCommentReponse('#form-commenter-reponse');#}
-           $('#form-commenter-reponse').parent().next().show();    
+        $('#form-commenter-reponse').parent().next().show();
         //Efface formulaire et bouton envoyer
- 
-        
+
+
         //Modification de l'attribut 'action' du form pour faire correspondre à la réponse
         var actionUrl = $('#form-commenter-reponse').children().get(0).getAttribute('action');
         $('#form-commenter-reponse').children().get(0).setAttribute('action', actionUrl.replace(/\d+$/, reponseId));
-        
+
         //Déplacement du form pour le mettre sous la réponse correspondante.
-    $(e).parent().prev().append($('#form-commenter-reponse'));
+        $(e).parent().prev().append($('#form-commenter-reponse'));
         $('#form-commenter-reponse').show();
-    $(e).parent().prev().show();
+        $(e).parent().prev().show();
         $(e).parent().hide();
     {% endif %}
     }
@@ -319,7 +338,7 @@
     function closeCommentReponse(e) {
         //Affichage bouton commenter
         $(e).parent().parent().parent().parent().next().show();
-        
+
         //Efface formulaire et bouton envoyer
         $(e).parent().parent().parent().hide();
     }
