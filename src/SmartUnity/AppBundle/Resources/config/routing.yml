@@ -13,4 +13,3 @@ smart_unity_app_aproposPage:
 smart_unity_app_conditionsPage:
     pattern: /Conditions-generales
     defaults: { _controller: SmartUnityAppBundle:Accueil:affichageConditions}
- 
