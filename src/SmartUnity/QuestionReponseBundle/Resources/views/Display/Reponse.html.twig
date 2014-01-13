@@ -96,7 +96,7 @@
                         <div class="grille-3-btn">
 
                             <form action="{{path('smart_unity_question_reponse_add_commentaire_question', {slug: question.slug})}}" method="POST">
-                                <div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaireQuestion.description, {'attr': {'class': 'form-control forminfo' }} )}}
+                                <div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaireQuestion.description, {'attr': {'class': 'form-control forminfo','style': 'resize: none' }} )}}
                                     <span class="croix-close" onClick="closeCommentQuestion(this)"> &#10006;</span>
                                 </div>
                                 <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep" style="margin-left:10px"/>
@@ -298,18 +298,29 @@
 
         {% if is_granted('ROLE_USER') %}
 
+        //fermeture de l'ancien form
+{#        closeCommentReponse('#form-commenter-reponse');#}
+           $('#form-commenter-reponse').parent().next().show();    
+        //Efface formulaire et bouton envoyer
+ 
+        
+        //Modification de l'attribut 'action' du form pour faire correspondre à la réponse
         var actionUrl = $('#form-commenter-reponse').children().get(0).getAttribute('action');
-        console.log(actionUrl);
         $('#form-commenter-reponse').children().get(0).setAttribute('action', actionUrl.replace(/\d+$/, reponseId));
-        $(e).parent().prev().append($('#form-commenter-reponse'));
+        
+        //Déplacement du form pour le mettre sous la réponse correspondante.
+    $(e).parent().prev().append($('#form-commenter-reponse'));
         $('#form-commenter-reponse').show();
-{#    $(e).parent().prev().show();#}
+    $(e).parent().prev().show();
         $(e).parent().hide();
     {% endif %}
     }
 
     function closeCommentReponse(e) {
+        //Affichage bouton commenter
         $(e).parent().parent().parent().parent().next().show();
+        
+        //Efface formulaire et bouton envoyer
         $(e).parent().parent().parent().hide();
     }
 
