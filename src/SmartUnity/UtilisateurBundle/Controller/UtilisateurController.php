@@ -41,7 +41,6 @@ class UtilisateurController extends Controller {
         }
         $avancement=25;
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
-
         if (isset($avatar)) {
             $avatar = $avatar->getWebPath();
             $avancement +=25;

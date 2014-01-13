@@ -51,7 +51,7 @@
                                             {% if avatar %}
                                     <img src="{{ asset('') }}{{ avatar }}" alt="avatar" height="71" width="71" />
                                             {% else %}
-                                    <img src="{{ asset('assets/img/logo-compte.png') }}" />
+                                    <img src="{{ asset('uploads/documents/logo.png') }}" height="60" width="60" />
                                             {% endif %}
 
                                 </div>
@@ -502,7 +502,7 @@
  <img src="{{ asset('') }}' + pEntry['avatar'] + ' " alt="avatar" height="71" width="71" />';
         else
             entity += '\
-                                             <img src="{{ asset('assets/img/logo-compte.png') }}"/>';
+                                             <img src="{{ asset('uploads/documents/logo.png') }}" height="60" width="60" />';
         entity += '      </div> \
                                             <div class=" grille-3-txt"> \
                                               <p style="margin:0px; font-weight:600"><a href="' + route_vers_profil + '">' + pEntry['membre_username'] + '</a></p> \
