@@ -172,10 +172,11 @@
                                     </div>
                                     <div class="row row-avec-margin">
 	        {{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'class': 'form-control forminfo reponse-input'}}) }}</div>
+                                    	    {{form_widget(formReponse._token)}}
                                     <div class="row">
                                         <div class="cent-h">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep'}})}}</div>
                                     </div>
-	    {{form_end(formReponse)}}
+                                </form>
                             </div>
                         </div>
                     </div>
