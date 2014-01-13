@@ -1,27 +1,44 @@
 {% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
+{% form_theme formSignaler 'SmartUnityUtilisateurBundle:Form:form_register.html.twig' %}
 
 {% block title %}Smart'Unity - Resultats de la recherche{% endblock %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css') }}">
-{% endblock %}
-
+{% block stylesheets %} 
+<link href="{{ asset('assets/css/formulaire.css') }}" rel="stylesheet" type="text/css">
+{%endblock%}
 
 
 {% block body %}
 
-	<div class="grille-content">
-	    <legend>Signaler</legend>
+<div class="row">
 
-		{{ form_start(formSignaler)}}
-		<div class="erreur">
+    <div class="col-md-offset-1 col-md-10">
+        <div class="title text-center cookie-title">
+            Signaler une question
+        </div>
+        <div>
+            <p>"Signaler" a pour but de maintenir le respect de la loi et d’autrui pour les utilisateurs de smartunity.fr. 
+            </p>
+            <p>Vous avez identifié du contenu inapproprié, merci de nous le faire savoir. Si cela est justifié, le conteu signalé sera supprimé et l'utilisateur concerné sera sanctionné.</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+
+	{{ form_start(formSignaler)}}
+        <div class="erreur">
             {{ form_errors(formSignaler) }}
-	    </div>
-	    <div class="row">
-	        <div class="grille-1">{{form_widget(formSignaler.Signaler,{'attr': {'class': 'btn btn-primary'}})}}</div>
-	    </div>
-	    {{form_end(formSignaler)}}
-	</div>
-    
+        </div>
+        <div class="row">
+            <div class="grille-1">Motif :<span style="color: red;"> *</span></div>
+            <div class="grille-2">{{form_widget(formSignaler.motif)}}</div>
+        </div> 
+        <div class="cent-h bouton-bas-block">
+            <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
+        </div>
+    </form>
+    </div>
+</div>    
+
 {% endblock %}

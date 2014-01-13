@@ -741,6 +741,7 @@ class QuestionReponseController extends Controller {
     public function signalerQuestionAction($slug) {
 
         $formSignaler = $this->createFormBuilder()
+                ->add('motif', 'textarea', array('label' => false))
                 ->add('Signaler', 'submit')
                 ->getForm();
 
