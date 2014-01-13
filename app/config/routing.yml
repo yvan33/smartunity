@@ -1,7 +1,3 @@
-smart_unity_blog:
-    resource: "@SmartUnityBlogBundle/Resources/config/routing.yml"
-    prefix:   /
-
 smart_unity_question_reponse:
     resource: "@SmartUnityQuestionReponseBundle/Resources/config/routing.yml"
     prefix:   /QuestionReponse/
@@ -42,10 +38,7 @@ _facebook_secured:
 fos_facebook_channel:
     resource: "@FOSFacebookBundle/Resources/config/routing.xml" 
 
-mv_blog:
-    resource: "@MvBlogBundle/Resources/config/routing.yml"
-    prefix: /blog   
+smart_unity_blog:
+    resource: "@SmartUnityBlogBundle/Resources/config/routing.yml"
+    prefix: /Blog  
 
-mv_blog_admin:
-    resource: "@MvBlogBundle/Resources/config/routing_admin.yml"
-    prefix: /Admin/blog

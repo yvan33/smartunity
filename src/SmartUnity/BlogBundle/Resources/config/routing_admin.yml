@@ -1,0 +1,17 @@
+mv_blog_homepage:
+    resource: "@MvBlogBundle/Resources/config/routing.yml"
+
+mv_blog_secure:
+    resource: "@MvBlogBundle/Resources/config/routing_dev.yml"
+    prefix: /badp
+
+blog_post_show:
+  defaults:     { _controller: "SmartUnityBlogBundle:Default:showArticle" }
+  pattern:      "/{category_id}-{category}/{id}-{slug}.html"
+  requirements:
+    _method: GET
+    slug: "[a-z0-9\\-]+"
+    category: "[a-z0-9\\-]+"
+    id: "^\\d+$"
+    category_id: "^\\d+$"
+

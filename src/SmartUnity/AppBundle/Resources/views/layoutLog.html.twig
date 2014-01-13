@@ -107,12 +107,14 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('smart_unity_utilisateur_homepage') }}">Mon compte</a></li>
+                                        <li><a href="{{ path('smart_unity_app_descriptionpage') }}">Comment ça marche?</a></li>
                                         <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+
                                     </ul>
                                 </li>
 
             {% else %}
-                                <li><a href="#" class="menu-pad">COMMENT CA MARCHE?</a></li>
+                                <li><a href="{{ path('smart_unity_app_descriptionpage') }}" class="menu-pad">COMMENT ÇA MARCHE?</a></li>
                                 <li>
                                     <a href="{{ path('fos_user_security_login') }}" id="clic-pop">
                                         Se connecter
