@@ -487,7 +487,6 @@ a.reponse:hover{
     display: none;
 }
 
-<<<<<<< HEAD
 .bouton-admin {
     position:absolute;
     left:100px;
@@ -499,12 +498,9 @@ a.reponse:hover{
     right:3px;
     bottom: 2px;
 }
-=======
+
 .fleche p
 {
 	font-family: centrale;
 	color: #7e7e7e;
 }
-
->>>>>>> système vote nouvelle couleur + JS
-
