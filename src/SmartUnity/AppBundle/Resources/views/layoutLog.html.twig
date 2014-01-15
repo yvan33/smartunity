@@ -17,10 +17,10 @@
 
 
         <!-- Fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> 
+{#        <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'> #}
 
         <!-- Additional styleSheets -->
-        <script>
+{#        <script>
             function goLogIn() {
                 window.location.href = "{{ path('_security_check') }}";
             }
@@ -37,7 +37,7 @@
                 }
             }
 
-        </script>
+        </script>#}
 
 {% block stylesheets %}{% endblock %}
 
@@ -157,60 +157,7 @@
                                 </li>
 
 
-                                <script>
-                                    console.log('Testing console');
-    //Responsivité des rubriques de la navbar
-            window.onresize = function() {
-                initDisplay();
-            };
-
-//Initialisation du document
-            $(document).ready(function() {
-                initDisplay();
-            });
-
-            function initDisplay() {
-
-                if ($(window).width() > 768 && $(window).width() < 992) {
-                    $("#comment-marche-connecter").attr('class', 'nav navbar-nav');
-
-                }
-                else
-                    $("#comment-marche-connecter").attr('class', 'nav navbar-nav navbar-right');
-
-                if ($(window).width() > 768)
-                {
-
-                    //Affichage de la barre de recherche
-                    $("#loupe").show();
-                    $("#loupe, #top-barre-recherche").click(function(event) {
-                        $("#pop").hide();
-                        $("#top-barre-recherche").slideDown(200);
-                        event.stopPropagation();
-                    });
-
-                    //Affichage du panel de connexion
-                    $('#clic-pop').attr('href', '#');
-                    $("#clic-pop,#pop").click(function(event) {
-                        $("#top-barre-recherche").hide();
-                        $("#pop").slideDown();
-                        event.stopPropagation();
-
-                    });
-
-                    //Disparition des panels connexion et recherche lors d'un click à coté       
-                    $(document).click(function(event) {
-                        $("#pop").hide();
-                        $("#top-barre-recherche").hide();
-                    });
-
-                }
-                else {
-                    $("#loupe").hide();
-                }
-
-            }
-                                </script> 
+                            
             {% endif %}
                             </ul>
 
@@ -222,7 +169,7 @@
 
         <!-- end nav -->
         <div id="cont"></div>
-        <div style="min-height: 680px">
+        <div id="main-content">
 
             <div class="container" style="padding-left: 0; padding-right: 0;">
 
@@ -300,6 +247,65 @@
 
 {% block modal %}{% endblock %}
 
+     <script>
+                                    console.log('Testing console');
+    //Responsivité des rubriques de la navbar
+            window.onresize = function() {
+                initDisplay();
+            };
+
+//Initialisation du document
+            $(document).ready(function() {
+                initDisplay();
+            });
+
+            function initDisplay() {
+
+//Determination de lahauteur minimale d'une page
+var minimumHeight = $(window).height()-$('.bg').css('padding-top').replace("px", "") - $('.foot-sep').css('margin-top').replace("px", "") - $('.foot-sep').height();
+
+console.log(minimumHeight);
+$("#main-content").css('min-height', minimumHeight);
+                if ($(window).width() > 768 && $(window).width() < 992) {
+                    $("#comment-marche-connecter").attr('class', 'nav navbar-nav');
+
+                }
+                else
+                    $("#comment-marche-connecter").attr('class', 'nav navbar-nav navbar-right');
+
+                if ($(window).width() > 768)
+                {
+
+                    //Affichage de la barre de recherche
+                    $("#loupe").show();
+                    $("#loupe, #top-barre-recherche").click(function(event) {
+                        $("#pop").hide();
+                        $("#top-barre-recherche").slideDown(200);
+                        event.stopPropagation();
+                    });
+
+                    //Affichage du panel de connexion
+                    $('#clic-pop').attr('href', '#');
+                    $("#clic-pop,#pop").click(function(event) {
+                        $("#top-barre-recherche").hide();
+                        $("#pop").slideDown();
+                        event.stopPropagation();
+
+                    });
+
+                    //Disparition des panels connexion et recherche lors d'un click à coté       
+                    $(document).click(function(event) {
+                        $("#pop").hide();
+                        $("#top-barre-recherche").hide();
+                    });
+
+                }
+                else {
+                    $("#loupe").hide();
+                }
+
+            }
+                                </script>        
         <!-- call Javascript & scripts -->
 {% block callJS %}{% endblock %}
 
