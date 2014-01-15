@@ -1,7 +1,28 @@
+<div style="position:relative;">
 <div class="grille-reponse{% if reponse.is_certif or reponse.is_validated %}-smart{% endif %}">
     <div class="bouton-signaler">
-        <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id, slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+        <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id, slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>      
     </div>
+    
+{% if  is_granted('ROLE_ADMIN') %}
+
+    <div class="dropdown bouton-admin">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+    {% if not reponse.is_certif and reponse.is_validated%}
+
+            <li><a href="{{path('smart_unity_question_reponse_certification', {idReponse: reponse.id})}}" tabindex="-1">Certifier réponse</a></li>
+                                       {% endif %}
+
+            <li><a tabindex="-1" href="#">Another action</a></li>
+            <li><a tabindex="-1" href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="#">Separated link</a></li>
+        </ul>
+    </div>
+    
+    <div class="reponse-id"> Id: {{reponse.id}}</div>
+{% endif %} 
 
     <div class="grille-1" style="text-align:center">
         <div class="roww" id="vote{{reponse.id}}" style="display:inline-block;text-align:center" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% elseif reponse.is_voted %}Vous avez déjà noté cette question.{% endif %}">
@@ -21,7 +42,7 @@
         </div>
                                     {% elseif reponse.is_validated %}
         <div class="roww" rel="tooltip" data-original-title="Cette réponse à été validée par le demandeur.">
-            <img src="{{ asset('assets/img/check.png') }}" style="margin-top:10px"/>
+            <img src="{{ asset('assets/img/check.png') }}"/>
         </div>
                                     {% endif %}
 
@@ -58,11 +79,9 @@
                     </div>
                 </div>
 
-
             </div>
         </div>
         <p style="min-height: 100px">{{reponse.description}}</p>
-
                                     {% for commentaire in reponse.commentaires %}
         <div class="commentaire">
             <p style="float:left">{{commentaire.description}}</p><p style="float:right">
@@ -74,17 +93,16 @@
 
         <div class="bloc-commenter-repondre">
             <div class="grille-3-btn">
-                                      {% if not reponse.is_certif and reponse.is_validated and is_granted('ROLE_ADMIN') %}
-                <div style="float:left; margin-right:5px;">
-                    <a href="{{path('smart_unity_question_reponse_certification', {idReponse: reponse.id})}}"><img src="{{ asset('assets/img/certif-btn.png') }}"/></a>
-                </div>
-                                      {% endif %}
+
+
+
                                       {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
                 <div style="float:left; margin-right:5px;">
                     <a href="{{path('smart_unity_question_reponse_validation_reponse', {idReponse: reponse.id})}}"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a>
                 </div>
                                       {% endif %}
                 <div></div>
+
                 <div>   
                     <div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this, {{reponse.id}})" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
                 </div>
@@ -93,5 +111,5 @@
         </div>
     </div>
 </div>
-
+</div>
 

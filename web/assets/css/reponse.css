@@ -235,16 +235,12 @@
 }
 .grille-reponse
 {
-        position: relative;	
         border-bottom: solid 1px #e8e4dc;
 	overflow:hidden;
 	clear:both;
-	
-	
 }
 .grille-reponse-smart
 {
-        position: relative;	    
 	overflow:hidden;
 	clear:both;
 	background-color:#f5f4df;
@@ -254,11 +250,12 @@
 .grille-content-2
 {
 	
-	margin-bottom: 25px;
+        /*position: relative;*/	    
+        margin-bottom: 25px;
 	background-color: #f8f8ef;
 	border-radius:5px;
 	border:1px solid #e8e4dc;
-	overflow:hidden;
+	/*overflow:hidden;*/
 }
 .head-blue
 {
@@ -455,7 +452,8 @@ a.reponse:hover{
     display:none;
     width:100%;
     bottom:0px;
-    z-index:1000;left:0
+    z-index:1000;
+    left:0;
 }
 
 .cadre-form-reponse{
@@ -476,5 +474,17 @@ a.reponse:hover{
 .espace-vide-pour-cadre-repondre{
     height: 150px;
     display: none;
+}
+
+.bouton-admin {
+    position:absolute;
+    left:100px;
+    bottom: 2px;
+}
+
+.reponse-id {
+    position:absolute;
+    right:3px;
+    bottom: 2px;
 }
 

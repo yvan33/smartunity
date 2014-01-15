@@ -619,7 +619,7 @@ class QuestionReponseController extends Controller {
                 $prefRepCertifieemembre = $membreReponse->getPrefRepCertifiee();
                 $mailMembreReponse = $membreReponse->getEmail();
 
-                if ($prefRepValideemembre == true) {
+                if ($prefRepCertifieemembre == true) {
 
                     //Envoi du mail
                     $sujetQuestion = $reponse[0]->getQuestion()->getSujet();

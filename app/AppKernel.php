@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new SmartUnity\BlogBundle\SmartUnityBlogBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -36,6 +36,7 @@ class DefaultController extends BaseController
         if(isset($user)){
 
             $mail=$user->getEmail();
+            p($mail);
             $pseudo=$user->getUsername();
             $comment->setEmail($mail);
             $comment->setPseudo($pseudo);

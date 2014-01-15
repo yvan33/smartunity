@@ -16,7 +16,7 @@
 
 {% block body %}
 <div class="row">
-    <div class="col-md-12" style="padding:0px">
+    <div class="col-md-12" style="padding:0px;">
 
 
         <div class="grille-content-2">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <div class="grille-2" >
+                <div class="grille-2">
 
                     <div class="grille-3-over">
                         <div class="grille-3">
@@ -315,8 +315,7 @@
         {% if is_granted('ROLE_USER') %}
 
         //fermeture de l'ancien form
-{#        closeCommentReponse('#form-commenter-reponse');#}
-        $('#form-commenter-reponse').parent().next().show();
+{#        $('#form-commenter-reponse').parent().next().show();#}
         //Efface formulaire et bouton envoyer
 
 
@@ -452,11 +451,31 @@
 
         var route_vers_profil = '{{ path("smart_unity_membre_profil", {'id' : 'membre_id' }) }}';
         route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);
-        var entity = '<div class="grille-reponse"> \
+        var entity = '<div style="position:relative;"> \
+    <div class="grille-reponse"> \
                 <div class = "bouton-signaler"> \
             <a href = "#"> <img src = "{{ asset('assets/img/signaler.png') }}"/></a> \
-            </div> \
-                                 <div class="grille-1" style="text-align:center"> \
+            </div>';   
+      
+          {% if  is_granted('ROLE_ADMIN') %}
+           entity +='          <div class="dropdown bouton-admin"> \
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a> \
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">';
+    
+    if (!(pEntry['is_certif']) && pEntry['is_validated']) {
+      
+        entity+=' <li><a href="'+Routing.generate('smart_unity_question_reponse_certification', {idReponse : 36})+'" tabindex="-1">Certifier réponse</a></li>';
+  }
+      entity +='      <li><a tabindex="-1" href="#">Another action</a></li> \
+            <li><a tabindex="-1" href="#">Something else here</a></li> \
+            <li class="divider"></li> \
+            <li><a tabindex="-1" href="#">Separated link</a></li> \
+        </ul> \
+    </div> \
+    <div class="reponse-id"> Id: '+pEntry['id']+'</div>';
+  
+        {% endif %}          
+        entity +='                        <div class="grille-1" style="text-align:center"> \
                                     <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
         if (pEntry['is_voted']) {
             entity += 'Vous avez déjà noté cette question.';
@@ -529,10 +548,11 @@
         entity += '         {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %} \
             <div style = "float:left; margin-right:5px;"> \
             <a href = "{{path('smart_unity_question_reponse_homepage')}}validation/' + pEntry['id'] + '"> <img src = "{{ asset('assets/img/valid-btn.png') }}" /> </a> \
-            </div> \
+            </div> \    
                                       {% endif %} \
             <div></div>';
         entity += ' <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div> \
+            </div> \
             </div> \
             </div> \
             </div> \
@@ -540,8 +560,6 @@
 
         return entity;
     }
-
-
 </script>
 
 {% endblock %}

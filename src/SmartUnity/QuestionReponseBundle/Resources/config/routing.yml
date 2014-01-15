@@ -35,6 +35,8 @@ smart_unity_question_reponse_validation_reponse:
 smart_unity_question_reponse_certification:
     pattern:  /certification/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:certificationReponse }
+    options:
+        expose: true
 
 smart_unity_question_reponse_add_commentaire_question:
     pattern:  /ajouter-comm-question/{slug}/
