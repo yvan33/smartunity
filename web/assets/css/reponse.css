@@ -1,3 +1,10 @@
+@font-face{
+    font-family : "centrale";
+    src : url(../fonts/Centrale.ttf) format ('truetype');
+    /* pour IE */
+    src : url(../fonts/Centrale.ttf);
+}
+
 @media (min-width: 1200px){
 
 .grille-2
@@ -149,13 +156,16 @@
 	margin: 10px 5px;
 	cursor:pointer;
 }
+
 .fleche:hover{
 	cursor:pointer;
 }
+
 .roww
 {
 	clear:both;	
 }
+
 .rond-point
 {
 	background: linear-gradient( to top, #E0E0E0,#FFF);
@@ -168,6 +178,7 @@
 	text-align:center;
 	line-height:60px;
 }
+
 .grille-2
 {
 	float:right;
@@ -190,8 +201,8 @@
 .grille-3-grey
 {
 	
-	background-color:#cccccc;
-	border-radius:10px;
+	background-color: #e6e6e6;
+	border-radius:2px;
 	overflow:hidden;
 	padding:10px;
 	clear:both;
@@ -476,6 +487,7 @@ a.reponse:hover{
     display: none;
 }
 
+<<<<<<< HEAD
 .bouton-admin {
     position:absolute;
     left:100px;
@@ -487,4 +499,12 @@ a.reponse:hover{
     right:3px;
     bottom: 2px;
 }
+=======
+.fleche p
+{
+	font-family: centrale;
+	color: #7e7e7e;
+}
+
+>>>>>>> système vote nouvelle couleur + JS
 
