@@ -42,7 +42,7 @@
         </div>
                                     {% elseif reponse.is_validated %}
         <div class="roww" rel="tooltip" data-original-title="Cette réponse à été validée par le demandeur.">
-            <img src="{{ asset('assets/img/check.png') }}"/>
+            <img src="{{ asset('assets/img/check1.png') }}"/>
         </div>
                                     {% endif %}
 
@@ -70,12 +70,8 @@
                         <p style="margin:0px">{{reponse.smart_reponses}} Smart'Reponses</p>
                         <p style="margin:0px">{{reponse.nb_questions_membre}} Questions</p>
                         <p style="margin:0px">{{reponse.points_membre}} Smart'Points</p>
-                    </div>
-                    <div class="grille-3-rond">
-                        <div class="square-blue">
-
-                                                {{reponse.membre_reputation}}
-                        </div>
+                        <img src="{{ asset('assets/img/etoile.png') }}" width="15"/>
+                        <p class="reputation" style="margin:0px; display:inline;">{{reponse.membre_reputation}}</p>
                     </div>
                 </div>
 

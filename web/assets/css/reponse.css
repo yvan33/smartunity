@@ -504,3 +504,24 @@ a.reponse:hover{
 	font-family: centrale;
 	color: #7e7e7e;
 }
+
+.grille-3 p
+{
+	font-family: centrale;
+	color: #505050;
+}
+
+.grille-3 img
+{
+	display: inline;
+	position: relative;
+	bottom: 3px;
+	margin-right: 2px;
+}
+
+.grille-3 .reputation
+{
+	font-weight: 900;
+	font-family: tahoma;
+	font-size: 1.2em;
+}
