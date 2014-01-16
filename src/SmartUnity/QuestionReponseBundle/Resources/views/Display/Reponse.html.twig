@@ -46,9 +46,9 @@
                                 <div class="grille-3-im">
 
                                             {% if avatar %}
-                                    <img src="{{ asset('') }}{{ avatar }}" alt="avatar" height="71" width="71" />
+                                    <img src="{{ asset('') }}{{ avatar }}" alt="avatar" height="80" width="80" />
                                             {% else %}
-                                    <img src="{{ asset('uploads/documents/logo.png') }}" height="60" width="60" />
+                                    <img src="{{ asset('uploads/documents/logo.png') }}" height="80" width="80" />
                                             {% endif %}
 
                                 </div>
@@ -57,12 +57,8 @@
                                     <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
                                     <p style="margin:0px">{{nb_questions_membre}} Questions</p>
                                     <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
-                                </div>
-                                <div class="grille-3-rond">
-                                    <div class="square-blue">
-
-                                            {{ question.membre.reputation }}
-                                    </div>
+                                    <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/>
+									<p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p>
                                 </div>
                             </div>
 
@@ -544,21 +540,18 @@
                                             <div class="grille-3-im">';
         if (pEntry['avatar'])
             entity += ' \
- <img src="{{ asset('') }}' + pEntry['avatar'] + ' " alt="avatar" height="71" width="71" />';
+ <img src="{{ asset('') }}' + pEntry['avatar'] + ' " alt="avatar" height="80" width="80" />';
         else
             entity += '\
-                                             <img src="{{ asset('uploads/documents/logo.png') }}" height="60" width="60" />';
+                                             <img src="{{ asset('uploads/documents/logo.png') }}" height="80" width="80" />';
         entity += '      </div> \
                                             <div class=" grille-3-txt"> \
                                               <p style="margin:0px; font-weight:600"><a href="' + route_vers_profil + '">' + pEntry['membre_username'] + '</a></p> \
                                             <p style="margin:0px">' + pEntry['smart_reponses'] + ' Smart\'Reponses</p> \
                                             <p style="margin:0px">' + pEntry['nb_questions_membre'] + ' Questions</p> \
                                             <p style="margin:0px">' + pEntry['points_membre'] + ' Smart\'Points</p> \
-                                            </div> \
-                                            <div class="grille-3-rond"> \
-                                              <div class="square-blue"> \
-                                                ' + pEntry['membre_reputation'] + ' \
-                                                </div> \
+                                            <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/> \
+											<p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p> \
                                             </div> \
                                         </div> \
                                 </div> \

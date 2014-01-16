@@ -125,6 +125,11 @@
 	color: white;
 	font-family: centrale;	
 }
+
+.bouton-repondre:focus
+{
+	outline: 0;
+}
 	
 .bouton-soutient
 {
@@ -176,7 +181,7 @@
 }
 
 .panel-default {
-	background-color: #b2d3da;
+	background-color: #daeaed;
 	border:0px;
 	overflow:hidden;
 	border-radius:0px;

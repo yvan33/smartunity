@@ -204,15 +204,16 @@
 	background-color: #e6e6e6;
 	border-radius:2px;
 	overflow:hidden;
-	padding:10px;
+	padding:10px 29px 10px 10px;
 	clear:both;
 	
 }
+
 .grille-3-im
 {
-	
 	float:left;
 }
+
 .grille-3-txt
 {
 	
@@ -220,9 +221,9 @@
 	float:left;
 	font-size:11px;
 }
+
 .grille-3-rond
 {
-	
 	margin-left:15px;
 	float:left;
 	margin-top:5px;
@@ -232,6 +233,36 @@
 	clear:both;
 	overflow:hidden;
 }
+
+.grille-3 p
+{
+	font-family: centrale;
+	color: #505050;
+}
+
+.etoile
+{
+	position: relative;
+	display: inline;
+	bottom: 3px;
+	width: 14px;
+}
+
+.grille-3 .reputation
+{
+	font-weight: 600;
+	font-family: tahoma;
+	font-size: 1.1em;
+}
+
+.grille-3 a
+{
+	color: #505050;
+	font-family: tahoma;
+	font-weight: 600;
+	font-size: 1.1em;
+}
+
 .square-blue
 {
 	background-color:#3699d0;
@@ -244,6 +275,7 @@
 	color:#FFF;
 	font-family:Cookie;
 }
+
 .grille-reponse
 {
         border-bottom: solid 1px #e8e4dc;
@@ -294,27 +326,18 @@
 }
 .bouton-com-rep
 {
-	background: linear-gradient( to top, #68ae28, #aed664);
-	background: -webkit-linear-gradient( ... );
-    background:    -moz-linear-gradient( ... ); 
-    background:     -ms-linear-gradient( ... );
-    background:      -o-linear-gradient( ... );
-    background:         linear-gradient( ... );
+	background: #ff3800 ;
 	border-color:#999;
 	color:#FFF;
 	font-size:13px;
 	line-height:30px;
-	height:30x;
+	height:30px;
 	float:right;
 	margin-bottom:5px;
 	text-align:center;
 	width:135px;
-	/*font-family:Cookie;*/
+	font-family: centrale;
 	border-radius:2px;
-	border: solid 1px #CCC;
-	-webkit-box-shadow: 0 0 5px  #E6E6E6;
-       -moz-box-shadow: 0 0 5px  #E6E6E6;
-            box-shadow: 0 0 5px  #E6E6E6;
 	cursor:pointer;
 }
 .bouton-com-rep:active
@@ -503,25 +526,4 @@ a.reponse:hover{
 {
 	font-family: centrale;
 	color: #7e7e7e;
-}
-
-.grille-3 p
-{
-	font-family: centrale;
-	color: #505050;
-}
-
-.grille-3 img
-{
-	display: inline;
-	position: relative;
-	bottom: 3px;
-	margin-right: 2px;
-}
-
-.grille-3 .reputation
-{
-	font-weight: 900;
-	font-family: tahoma;
-	font-size: 1.2em;
 }
