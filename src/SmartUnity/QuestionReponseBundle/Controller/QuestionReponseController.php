@@ -353,6 +353,7 @@ class QuestionReponseController extends Controller {
             $avatar = $avatar->getWebPath();
         }
 
+// Creation des formulaires        
         $newCommentaireQuestion = new \SmartUnity\AppBundle\Entity\CommentaireQuestion();
         $formCommentaireQuestion = $this->createFormBuilder($newCommentaireQuestion)
                 ->add('description', 'textarea', array('label' => false))
@@ -369,11 +370,15 @@ class QuestionReponseController extends Controller {
                     'label' => false,
                     'attr' => array('placeholder' => 'Tapez votre réponse ici...')
     ))
-                ->add('valider', 'submit'
-                    
-                )
+                ->add('valider', 'submit')
                 ->getForm(); 
-
+           
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $formSoutien = $this->createFormBuilder()
+                ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
+                ->add('soutenir', 'submit')
+                ->getForm();
+        
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
                     'error' => $error,
@@ -395,6 +400,7 @@ class QuestionReponseController extends Controller {
                     'formCommentaireQuestion' => $formCommentaireQuestion->createView(),
                     'formCommentaireReponse' => $formCommentaireReponse->createView(),
                     'formReponse' => $formReponse->createView(),
+                    'formSoutien' => $formSoutien->createView(),
         ));
     }
 
@@ -715,7 +721,7 @@ class QuestionReponseController extends Controller {
         $user = $this->getUser();
         $formSoutien = $this->createFormBuilder()
                 ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
-                ->add('save', 'submit')
+                ->add('valider', 'submit')
                 ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST') {
@@ -734,8 +740,9 @@ class QuestionReponseController extends Controller {
                 return new Response('Votre soutien a bien été ajouté');
             }
         }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddSoutien.html.twig', array(
-                    'formSoutien' => $formSoutien->createView()));
+//        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddSoutien.html.twig', array(
+//                    'formSoutien' => $formSoutien->createView()));
+        return "";
     }
 
     public function signalerQuestionAction($slug) {

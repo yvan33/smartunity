@@ -32,7 +32,7 @@
 
 
                     <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
-                                {% if not is_certif and not is_validated %}<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>{% endif %}
+                                {#{% if not is_certif and not is_validated %}#}<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>{#{% endif %}#}
 
                     </div>
                 </div>
@@ -384,15 +384,35 @@
             'placement': 'right'
 
         });
+        
 {% if is_granted('ROLE_USER') %}
         $('.bouton-soutient').popover({
             'html': true,
-            'content': '<iframe style:"width:300px" src="{{path('smart_unity_question_reponse_add_soutien_question', {slug: question.slug})}}"></iframe>',
+            'content':  '<div id="addSoutienHolder"> \
+	<div class="grille-content"> \
+	    <legend class="legend-soutenir">Soutenir la question</legend> \
+		{{ form_start(formSoutien)}} \
+		<div class="erreur"> \
+            {{ form_errors(formSoutien) }} \
+	    </div> \
+	<div class="row row-soutenir"> \
+  <div class="grille-1 grille-1-soutenir"> Agmenter dotation: </div> \
+	           <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}}) }}</div> \
+</div> \
+        <div class="row row-soutenir"> \
+	        <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'bouton-soutenir'}})}}</div> \
+	    </div> \
+	    {{form_end(formSoutien)}} \
+	</div> \
+</div>',
+{#        'content': '<iframe style:"width:600px" src="{{path('smart_unity_question_reponse_add_soutien_question', {slug: question.slug})}}"></iframe>',#}
             'placement': 'right',
             'animation': true
-        })
+        });
 {% endif %}
-    })
+
+
+    });
 
 ////////////////////////////
 ////////// PAGINATION & AJAX
