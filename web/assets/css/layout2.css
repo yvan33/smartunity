@@ -449,3 +449,23 @@ textarea {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 } 
+
+#toast{
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	width: 200px;
+	margin-left: -100px;
+	border: 1px solid #666;
+	background-color: #B1BCCF;
+	padding: 10px 0 ;
+	text-align:center;
+	opacity: .9;
+ 
+	/*The good stuff */
+	-webkit-transition: opacity 0.5s ease-out;  /* Saf3.2+, Chrome */
+	-moz-transition: opacity 0.5s ease-out;  /* FF4+ */
+	-ms-transition: opacity 0.5s ease-out;  /* IE10? */
+	-o-transition: opacity 0.5s ease-out;  /* Opera 10.5+ */
+	transition: opacity 0.5s ease-out;	
+}

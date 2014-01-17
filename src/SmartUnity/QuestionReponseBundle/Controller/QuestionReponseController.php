@@ -247,10 +247,11 @@ class QuestionReponseController extends Controller {
         ));
     }
 
-    public function displayReponseAction($slug, $page, $tri, Request $request) {
+    public function displayReponseAction($slug, $page, $tri,$haveAddedAnswer, Request $request) {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
-
+        
+//p($haveAddedAnswer);
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -342,7 +343,7 @@ class QuestionReponseController extends Controller {
 
         $isValidated = $questionRepository->isQuestionValid($question->getId());
         $isCertif = $questionRepository->isQuestionCertif($question->getId());
-
+    
         $membre = $question->getMembre();
 
         $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
@@ -353,6 +354,8 @@ class QuestionReponseController extends Controller {
             $avatar = $avatar->getWebPath();
         }
 
+        
+        
 // Creation des formulaires        
         $newCommentaireQuestion = new \SmartUnity\AppBundle\Entity\CommentaireQuestion();
         $formCommentaireQuestion = $this->createFormBuilder($newCommentaireQuestion)
@@ -401,6 +404,7 @@ class QuestionReponseController extends Controller {
                     'formCommentaireReponse' => $formCommentaireReponse->createView(),
                     'formReponse' => $formReponse->createView(),
                     'formSoutien' => $formSoutien->createView(),
+                    'haveAddedAnswer' => $haveAddedAnswer,
         ));
     }
 
@@ -535,14 +539,14 @@ class QuestionReponseController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newReponse);
                 $em->flush();
-
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
+                $haveAddedAnswer = true;
+                
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveAddedAnswer' =>$haveAddedAnswer)));
             }
             throw new \Exception('Votre réponse n\'a pas pu être ajoutée');
         
                 }
-        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddReponse.html.twig', array(
-                    'formReponse' => $formReponse->createView()));
+        return "";
     }
 
     public function validationReponseAction($idReponse) {
