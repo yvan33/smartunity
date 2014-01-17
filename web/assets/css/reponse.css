@@ -354,6 +354,32 @@
 
 }
 
+.bouton-com-rep-input
+{
+	background: #ff3800 ;
+	color:#FFF;
+	font-size:13px;
+	height:30px;
+	float:right;
+	text-align:center;
+	width:135px;
+	font-family: centrale;
+	border-radius:2px;
+	cursor:pointer;
+	border:0;
+}
+
+.bouton-com-rep-input:focus
+{
+	outline:0;
+}
+
+.bouton-com-rep-input:hover
+{
+	background: #ff3800 ;
+	color: #2b3a41;
+}
+
 .bouton-com-rep:hover
 {
 	background: #ff3800 ;
@@ -427,6 +453,11 @@
     color:#A4A4A4;
     font-style: italic;
     font-size: 90%;
+}
+
+.signaler-comment
+{
+	display: none;
 }
 
 span.label-default{
@@ -529,6 +560,7 @@ a.reponse:hover{
 input
 {
 	border: 0;
+	line-height: 0;
 }
 
 #form-commenter-reponse{

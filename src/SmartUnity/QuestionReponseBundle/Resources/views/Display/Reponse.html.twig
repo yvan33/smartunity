@@ -92,7 +92,7 @@
                                 <div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaireQuestion.description, {'attr': {'class': 'form-control forminfo','style': 'resize: none' }} )}}
                                     <span class="croix-close" onClick="closeCommentQuestion(this)"> &#10006;</span>
                                 </div>
-                                <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep" style="margin-left:10px"/>
+                                <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep-input" style="margin-left:10px"/>
                          {{  form_rest(formCommentaireQuestion) }}
                             </form>
 
@@ -117,7 +117,7 @@
                     <div  id="commentaire-input-reponse"class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
                         <span class="croix-close" onClick="closeCommentReponse(this)"> &#10006;</span>
                     </div>
-                    <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep commentaire-btn" style="margin-left:10px"/>
+                    <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep-input commentaire-btn" style="margin-left:10px"/>
                          {{  form_rest(formCommentaireReponse) }}
                 </form>
             </div>
@@ -193,7 +193,7 @@ Toast
 	        {{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'class': 'form-control forminfo reponse-input'}}) }}</div>
                                     	    {{form_widget(formReponse._token)}}
                                     <div class="row">
-                                        <div class="cent-h">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep'}})}}</div>
+                                        <div class="cent-h">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
                                     </div>
                                 </form>
                             </div>
@@ -213,12 +213,10 @@ Toast
 
 
 <script>
-                                            console.log('ta mère la chienne'); 
 
 ////////////
 /// VOTES
 ////////////
-
 
 
 ////////Hover
@@ -322,6 +320,16 @@ Toast
         $('.espace-vide-pour-cadre-repondre').hide();
 
     })
+
+////////////////////////////
+///////////hover signaler commenter
+////////////////////////////
+
+function displaySignal(e) {
+console.log(
+		$(e).children());
+		}
+
 
 ////////////////////////////
 ///////////Commenter question
@@ -591,9 +599,9 @@ Toast
                                 <p style="min-height: 100px">' + pEntry['description'] + '</p>';
         pEntry['commentaires'].forEach(function(pCom, i) {
 
-            entity += '<div class="commentaire"> \
+            entity += '<div class="commentaire" onmouseover="displaySignal()"> \
                                     <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_username'] + ' le ' + pCom['date'] + ' \
-                                    <a href="#" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
+                                    <a href="#"><img class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
                                     </div>';
         });
 
