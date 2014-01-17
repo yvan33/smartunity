@@ -151,14 +151,18 @@
 .fleche
 {
 	display: inline-block;
-	font-size:26px;
 	font-weight:600;
-	margin: 10px 5px;
+	margin: 0px 5px;
 	cursor:pointer;
 }
 
 .fleche:hover{
 	cursor:pointer;
+}
+
+.fleche p
+{
+	font-size:26px;
 }
 
 .roww
@@ -292,25 +296,28 @@
 
 .grille-content-2
 {
-	
         /*position: relative;*/	    
-        margin-bottom: 25px;
+    margin-bottom: 25px;
 	background-color: #f8f8ef;
 	border-radius:5px;
 	border:1px solid #e8e4dc;
 	/*overflow:hidden;*/
 }
+
 .head-blue
 {
 	background: #559aa9;
 	width:100%;
 	overflow:hidden;
 	color:#FFF;
+	font-family: centrale;
 	padding-left:2%;
 	padding-right:2%;
 	clear:both;
+	
 
 }
+
 .head-blue a
 {
 	
@@ -318,35 +325,44 @@
 	padding-left:1%;
 
 }
+
 .bouton-soutient
 {
 	background-color:transparent;
 	border-color:transparent;
 	color:#75c731;
 }
+
 .bouton-com-rep
 {
 	background: #ff3800 ;
-	border-color:#999;
 	color:#FFF;
 	font-size:13px;
 	line-height:30px;
 	height:30px;
 	float:right;
-	margin-bottom:5px;
 	text-align:center;
 	width:135px;
 	font-family: centrale;
 	border-radius:2px;
 	cursor:pointer;
 }
+
+.bouton-com-rep:hover
+{
+	background: #ff3800 ;
+	color: #2b3a41;
+}
+
+.bouton-com-rep:focus
+{
+	outline: 0;
+}
+
 .bouton-com-rep:active
 {
-	background:none;
-	background-color:#68ae28;
-	-webkit-box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
-       -moz-box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
-            box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
+	background: #ff3800 ;
+	color: #2b3a41;
 }
 
 .grille-soutient
@@ -463,6 +479,11 @@ a.reponse:hover{
 
 #bouton-com-envoyer-question{
     display:none;
+}
+
+input
+{
+	border: 0;
 }
 
 #form-commenter-reponse{

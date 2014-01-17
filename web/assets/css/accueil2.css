@@ -234,3 +234,13 @@
 {
 	margin-bottom: 30px;
 }
+
+.btn:hover
+{
+	color: #2b3a41;
+}
+
+.btn:focus
+{
+	outline: 0;
+}

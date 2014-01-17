@@ -102,7 +102,7 @@
 
         {% if not is_validated and not is_certif %}
                             <a class="reponse" href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}">
-                                <div class="bouton-com-rep" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} >Repondre</div>
+                                <div class="bouton-com-rep" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} >Répondre</div>
                             </a>{% endif %}
                         </div>
                     </div>
