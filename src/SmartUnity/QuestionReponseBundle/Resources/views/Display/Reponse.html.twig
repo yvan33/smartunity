@@ -30,11 +30,11 @@
                 <div class="grille-1">
                     <div class="rond-point"><p>{{ question.remuneration }} pts</p></div>
 
-
+{% if not is_certif and not is_validated %}
                     <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
-                                {#{% if not is_certif and not is_validated %}#}<button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>{#{% endif %}#}
-
+                                <button type="button" class="bouton-soutient" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour soutenir une question."{% endif %}><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                     </div>
+                    {% endif %}
                 </div>
 
                 <div class="grille-2">
@@ -219,7 +219,7 @@ Toast
 ////////////
 
 
-////////Hover
+////////Hover sur les fleches
 	function upVoteHover(e) {
 	var cheminFlechePlusVerte = '{{ asset('assets/img/')}}';
 		$(e).children().attr('src', cheminFlechePlusVerte+ 'fleche_plus.png');
@@ -403,7 +403,11 @@ console.log(
         $('.bouton-com-rep').tooltip({
             'placement': 'bottom'
         });
+        $('.bouton-soutient').tooltip({
+            'placement': 'right'
+        });
         
+  {% else %}
         $('.bouton-soutient').popover({
             'html': true,
             'content':  '<div id="addSoutienHolder"> \
@@ -426,9 +430,7 @@ console.log(
             'placement': 'right',
             'animation': true
         });
-        
   {% endif %}
-
 
     });
 
