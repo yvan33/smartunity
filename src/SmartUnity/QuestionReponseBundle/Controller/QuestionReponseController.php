@@ -55,7 +55,7 @@ class QuestionReponseController extends Controller {
         //On récupère la réponse du controleur Ajax (pour avaoir une réponse au cas ou)
 
 
-        $nbParPage = 5;
+        $nbParPage = 10;
 
         $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
             'type' => $type,
@@ -272,7 +272,7 @@ class QuestionReponseController extends Controller {
 
         //Affichage de LA question avec liste réponses
         //Fonctionne de la même manière que displayListOfQuestionAction()
-        $nbParPage = 5;
+        $nbParPage = 10;
 
         $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getReponses', array(
             'slug' => $slug,
