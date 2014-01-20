@@ -141,7 +141,7 @@ class QuestionReponseController extends Controller {
 
         $question = $this->getRequest()->query->get('q');
         $page = $this->getRequest()->query->get('p');
-        $nbParPage = 5;
+        $nbParPage = 10;
 
 
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
