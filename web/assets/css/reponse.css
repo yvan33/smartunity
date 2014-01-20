@@ -621,6 +621,18 @@ input
 
     font-size:26px;
     font-family: centrale;
-	color: #7e7e7e;
+}
+
+.textevert{
+
+    color:#85c53a;
+}
+.texterouge{
+
+    color:#d42434;
+}
+.textegris{
+
+    color:#7e7e7e;
 }
 
