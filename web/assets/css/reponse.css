@@ -9,7 +9,7 @@
 
     .grille-2
     {
-        width:845px;
+        width:815px;
         margin:15px 10px;
     }
 
@@ -43,7 +43,7 @@
 @media (min-width: 992px)  and (max-width: 1200px) {
     .grille-2
     {
-        width:675px;
+        width:645px;
         margin:15px 10px;
     } 
 
@@ -77,7 +77,7 @@
 @media screen and (min-width: 768px) and (max-width: 992px) {
     .grille-2
     {
-        width:595px;
+        width:565px;
         margin:15px 10px;
     }
 
@@ -522,11 +522,6 @@ a.reponse:hover{
     opacity: 0;
 }
 
-.cadre-general
-{
-    margin-top: 20px;
-}
-
 .commentaire-input{
 
     position:relative;
@@ -597,6 +592,11 @@ input
 
 .row-avec-margin{
     padding: 5px;
+}
+
+.row-sans-margin{
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .espace-vide-pour-cadre-repondre{

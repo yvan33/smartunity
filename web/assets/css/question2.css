@@ -290,8 +290,8 @@ color: black;
 color: #FFF;
 margin-right: 10px;
 line-height: 2.5;
-border: 1px solid transparent;
-border-radius:0;
+/*border: 1px solid transparent;*/
+border-radius:3px 0 0 0;
 }
 
 .tab-ajax > .nav>li>a {
@@ -323,9 +323,4 @@ border-right: 1px solid #ddd;
 .tab-ajax > .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
     
     border: 1px solid transparent;
-}
-
-.nav-tabs-question{
-        border: 1px solid #ddd;
-
 }
