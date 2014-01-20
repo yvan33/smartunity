@@ -3,7 +3,7 @@
 {% block title %}Smart'Unity - Questions de {{username}} {% endblock %}
 
 {% block stylesheets %}
-<link href="{{asset('assets/css/question.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/css/question2.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
 
 {% endblock %}
@@ -18,7 +18,6 @@
 
 <!-- nav div-->
 <div class="row">
-    <div class="col-md-offset-1 col-md-10">
 
             <!-- nav div menu-->
             <div class="title text-center cookie-title">
@@ -27,11 +26,11 @@
         <div class="grille-content-2">
             <!-- nav div menu-->
 
-            <div class="collapse-menu">
+            <div class="collapse-menu tab-ajax">
                 <ul class="nav nav-tabs" id="myTab">
-                    <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Questions r&eacute;solues</a></li>
-                    <li {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'onFire', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="onFire-tab">On Fire</a></li>
-                    <li {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
+                    <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Solutions</a></li>
+                    <li style="float:right" {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'onFire', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="onFire-tab">Questions brûlantes</a></li>
+                    <li style="float:right" {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
                 </ul>
             </div>
             <!-- nav div menu fin-->
@@ -260,7 +259,6 @@
                 </ul>
             </div>
 
-        </div><!-- grille fin-->
 
     </div><!-- col fin-->
 </div>  <!-- row fin-->

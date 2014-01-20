@@ -27,9 +27,9 @@
             <!-- nav div menu-->
             <div class="collapse-menu tab-ajax">
                 <ul class="nav nav-tabs" id="myTab">
-                    <li class="{% if type=='onFire' %}active{% endif %}"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'reponses', page: '1'}) }}" data-toggle="tab" id="reponses-tab">Solutions</a></li>
+                    <li class="{% if type=='reponses' %}active{% endif %}"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'reponses', page: '1'}) }}" data-toggle="tab" id="reponses-tab">Solutions</a></li>
                     <li class="{% if type=='onFire' %}active{% endif %}" style="float:right"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'onFire', page: '1'}) }}" data-toggle="tab" id="onFire-tab">Questions brûlantes</a></li>
-                    <li class="{% if type=='onFire' %}active{% endif %}" style="float:right"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'last', page: '1'}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
+                    <li class="{% if type=='last' %}active{% endif %}" style="float:right"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'last', page: '1'}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
                 </ul>
             </div>
             <!-- nav div menu fin-->

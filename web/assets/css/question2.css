@@ -104,7 +104,7 @@
 	overflow:hidden;
 	margin-bottom:10px;
         margin-top: 20px;
-    	border: 1px solid #e8e4dc;
+    	/*border: 1px solid #e8e4dc;*/
 
 
 }
@@ -316,6 +316,8 @@ border-top-color: transparent;
 #accordion-reponses > .panel > .panel-heading, #accordion-onFire > .panel > .panel-heading, #accordion-last > .panel > .panel-heading {
 border-top-right-radius: 0;
 border-top-left-radius: 0;
+border-left: 1px solid #ddd;
+border-right: 1px solid #ddd;
 }
 
 .tab-ajax > .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
