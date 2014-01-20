@@ -163,10 +163,6 @@
     cursor:pointer;
 }
 
-.fleche p
-{
-	font-size:26px;
-}
 
 .roww
 {
@@ -622,7 +618,9 @@ input
 
 .fleche p
 {
-	font-family: centrale;
+
+    font-size:26px;
+    font-family: centrale;
 	color: #7e7e7e;
 }
 
