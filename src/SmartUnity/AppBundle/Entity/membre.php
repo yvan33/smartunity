@@ -748,7 +748,6 @@ class membre extends BaseUser {
      */
     public function addSoutienQuestion(\SmartUnity\AppBundle\Entity\question $soutienQuestions) {
         $this->soutienQuestions[] = $soutienQuestions;
-
         return $this;
     }
 

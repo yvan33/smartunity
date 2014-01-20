@@ -376,10 +376,10 @@ class QuestionReponseController extends Controller {
                 ->add('valider', 'submit')
                 ->getForm();
 
-        if (true === $this->get('security.context')->isGranted('ROLE_ADMIN') || true === $this->get('security.context')->isGranted('ROLE_USER') || 
-                true === $this->get('security.context')->isGranted('ROLE_MODERATEUR1') || true === $this->get('security.context')->isGranted('ROLE_MODERATEUR2')) {
+        if (true === $this->get('security.context')->isGranted('ROLE_USER')) {
             $user = $this->container->get('security.context')->getToken()->getUser();
             $formSoutien = $this->createFormBuilder()
+                    ->setAction($this->generateUrl('smart_unity_question_reponse_add_soutien_question', array('slug' => $slug)))
                     ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
                     ->add('soutenir', 'submit')
                     ->getForm();
@@ -488,6 +488,10 @@ class QuestionReponseController extends Controller {
                     'formQuestion' => $formQuestion->createView(),
                     'dotationMax' => $dotationMax
         ));
+    }
+
+    public function editQuestion($slug) {
+        
     }
 
     public function slugify($str) {
@@ -725,18 +729,23 @@ class QuestionReponseController extends Controller {
     }
 
     public function addSoutienQuestionAction($slug) {
-        $user = $this->getUser();
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
         $formSoutien = $this->createFormBuilder()
+                ->setAction($this->generateUrl('smart_unity_question_reponse_add_soutien_question', array('slug' => $slug)))
                 ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
-                ->add('valider', 'submit')
+                ->add('soutenir', 'submit')
                 ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSoutien->bind($this->getRequest());
 
+
+            p($formSoutien->getErrors());
             if ($formSoutien->isValid()) {
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
                 $question->setRemuneration($question->getRemuneration() + ($formSoutien->get('soutien')->getData()));
+                $question->getSoutienMembres()->add($user);
                 $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
 
                 //ajouté l'utilisateur à la liste de soutien
@@ -744,12 +753,11 @@ class QuestionReponseController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
-                return new Response('Votre soutien a bien été ajouté');
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
-//        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddSoutien.html.twig', array(
-//                    'formSoutien' => $formSoutien->createView()));
-        return "";
+
+        return new Response("cassé");
     }
 
     public function signalerQuestionAction($slug) {

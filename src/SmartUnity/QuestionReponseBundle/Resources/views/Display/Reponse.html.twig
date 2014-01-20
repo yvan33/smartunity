@@ -25,7 +25,7 @@
                 <div class="bouton-signaler">
                     <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                 </div>                
-                <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-share"></span></a><p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
+                <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-pencil"></span></a><p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                 </div>
 
                 <div class="grille-1">
@@ -33,7 +33,7 @@
 
 {% if not is_certif and not is_validated %}
                     <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
-                                <button type="button" class="bouton-soutient" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour soutenir une question."{% endif %}><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                                <button type="button" class="bouton-soutien" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour soutenir une question."{% endif %}><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                     </div>
                     {% endif %}
                 </div>
@@ -404,12 +404,12 @@ console.log(
         $('.bouton-com-rep').tooltip({
             'placement': 'bottom'
         });
-        $('.bouton-soutient').tooltip({
+        $('.bouton-soutien').tooltip({
             'placement': 'right'
         });
         
   {% else %}
-        $('.bouton-soutient').popover({
+        $('.bouton-soutien').popover({
             'html': true,
             'content':  '<div id="addSoutienHolder"> \
 	<div class="grille-content"> \
