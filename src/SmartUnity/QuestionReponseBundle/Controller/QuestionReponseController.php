@@ -387,7 +387,6 @@ class QuestionReponseController extends Controller {
             $formSoutien = $this->createFormBuilder()->getForm();
         }
 
-p($haveAddedAnswer);        
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
                     'error' => $error,

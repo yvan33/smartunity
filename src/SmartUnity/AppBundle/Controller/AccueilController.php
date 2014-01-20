@@ -132,8 +132,8 @@ class AccueilController extends Controller {
         return $this->redirect($this->generateUrl('smart_unity_app_homepage'));
     }
 
-    public function logoutAction() {
-        return $this->redirect($this->generateUrl('smart_unity_app_homepage'));
+    public function logoutAction(Request $request) {
+        return $this->redirect($request->headers->get('referer'));
     }
 
 
