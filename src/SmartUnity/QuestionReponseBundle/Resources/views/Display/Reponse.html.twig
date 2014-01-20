@@ -25,7 +25,7 @@
                 <div class="bouton-signaler">
                     <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
                 </div>                
-                <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="#"><span class="glyphicon glyphicon-pencil"></span></a><p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
+                <div class="head-blue"><p style="float:left">{{ question.sujet }}</p><a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-pencil"></span></a><p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                 </div>
 
                 <div class="grille-1">
@@ -140,14 +140,6 @@
 </div>
 
 
-{#/////////////////////////////////////////////////
-Toast
-///////////////////////////////////////////////////#}
-
-{% if haveAddedAnswer == 1 %}
-<div id="toast"> Votre réponse a bien été ajoutée </div>
- {% endif%}
-
 <div class="row">
     <div style="text-align:center; cursor:pointer">
         <ul id="pages" class="pagination pagination-lg"  style="margin-bottom:30px">
@@ -157,6 +149,15 @@ Toast
         </ul>
     </div>
 </div>
+
+{#/////////////////////////////////////////////////
+Toast
+///////////////////////////////////////////////////#}
+
+{% if haveAddedAnswer == 1 %}
+<div class="toast"> Votre réponse a bien été ajoutée </div>
+ {% endif%}
+
 
 </div>
 </div>

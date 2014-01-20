@@ -247,11 +247,10 @@ class QuestionReponseController extends Controller {
         ));
     }
 
-    public function displayReponseAction($slug, $page, $tri, $haveAddedAnswer, Request $request) {
+    public function displayReponseAction( Request $request, $slug, $tri, $page, $haveAddedAnswer='0') {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
-//p($haveAddedAnswer);
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -386,7 +385,7 @@ class QuestionReponseController extends Controller {
         } else {
             $formSoutien = $this->createFormBuilder()->getForm();
         }
-
+p($haveAddedAnswer);
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
                     'error' => $error,
@@ -409,7 +408,7 @@ class QuestionReponseController extends Controller {
                     'formCommentaireReponse' => $formCommentaireReponse->createView(),
                     'formReponse' => $formReponse->createView(),
                     'formSoutien' => $formSoutien->createView(),
-                    'haveAddedAnswer' => $haveAddedAnswer,
+                    'haveAddedAnswer'=>$haveAddedAnswer
         ));
     }
 
@@ -490,8 +489,67 @@ class QuestionReponseController extends Controller {
         ));
     }
 
-    public function editQuestion($slug) {
-        
+    public function editQuestionAction($slug) {
+        $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
+        $user = $this->getUser();
+        $ancienneDotation = $question->getRemuneration();
+        $dotationMax = $question->getRemuneration() + $user->getCagnotte();
+
+        $formEditQuestion = $this->createFormBuilder($question)
+                ->add('sujet', 'textarea', array(
+                    'required' => true))
+                ->add('description', 'textarea', array(
+                    'required' => true))
+                ->add('marque', 'entity', array(
+                    'class' => 'SmartUnityAppBundle:marque',
+                    'property' => 'nom',
+                    'required' => false,
+                    'empty_value' => 'Choisissez',
+                    'empty_data' => NULL))
+                ->add('modele', 'entity', array(
+                    'class' => 'SmartUnityAppBundle:modele',
+                    'property' => 'nom',
+                    'required' => false,
+                    'empty_value' => 'Choisissez',
+                    'empty_data' => NULL))
+                ->add('os', 'entity', array(
+                    'class' => 'SmartUnityAppBundle:os',
+                    'property' => 'nom',
+                    'required' => false,
+                    'empty_value' => 'Choisissez',
+                    'empty_data' => NULL))
+                ->add('typeQuestion', 'entity', array(
+                    'class' => 'SmartUnityAppBundle:typeQuestion',
+                    'property' => 'nom',
+                    'empty_value' => 'Choisissez une option',
+                    'required' => true))
+                ->add('remuneration', 'integer', array('attr' => array('min' => 10, 'max' => ($dotationMax))))
+                ->add('save', 'submit', array('label' => 'Modifier ma question'))
+                ->getForm();
+
+        if ($this->getRequest()->getMethod() == 'POST') {
+
+
+            $formEditQuestion->bind($this->getRequest());
+
+            if ($formEditQuestion->isValid()) {
+
+//                $question->setSlug($this->slugify($formEditQuestion->get('sujet')->getData()));
+                $nouvelleDotation = $question->getRemuneration($formEditQuestion->get('remuneration')->getData());
+                $cagnotte = $user->getCagnotte() - $nouvelleDotation - $ancienneDotation;
+                $user->setCagnotte($cagnotte);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($question);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
+            }
+        }
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:EditQuestion.html.twig', array(
+                    'formEditQuestion' => $formEditQuestion->createView(),
+                    'dotationMax' => $dotationMax
+        ));
     }
 
     public function slugify($str) {
@@ -548,9 +606,14 @@ class QuestionReponseController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newReponse);
                 $em->flush();
-                $haveAddedAnswer = true;
-
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveAddedAnswer' => $haveAddedAnswer)));
+                $haveAddedAnswer = '1';
+p($haveAddedAnswer);
+                return $this->forward('SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse', array(
+                            'slug' => $slug,
+                            'tri' => 'vote',
+                            'page' =>'2',
+                            'haveAddedAnwser' => '1',
+                ));
             }
             throw new \Exception('Votre réponse n\'a pas pu être ajoutée');
         }
