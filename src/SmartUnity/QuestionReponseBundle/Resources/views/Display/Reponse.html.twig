@@ -46,9 +46,9 @@
                                 <div class="grille-3-im">
 
                                             {% if avatar %}
-                                    <img src="{{ asset('') }}{{ avatar }}" alt="avatar" height="80" width="80" />
+                                    <a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}"><img src="{{ asset('') }}{{ avatar }}" alt="avatar" height="80" width="80" /></a>
                                             {% else %}
-                                    <img src="{{ asset('uploads/documents/logo.png') }}" height="80" width="80" />
+                                    <a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}"> <img src="{{ asset('uploads/documents/logo.png') }}" height="80" width="80" /></a>
                                             {% endif %}
 
                                 </div>
@@ -143,9 +143,9 @@
 Toast
 ///////////////////////////////////////////////////#}
 
-{#                            {% if haveAddedAnswer == true %}
+{% if haveAddedAnswer == 1 %}
 <div id="toast"> Votre réponse a bien été ajoutée </div>
- {% endif%}#}
+ {% endif%}
 
 <div class="row" style="margin-bottom:40px">
     <div style="text-align:center; cursor:pointer">
@@ -385,10 +385,17 @@ console.log(
 
 
 //////////
-/// TOOLTIPS
+/// TOOLTIPS & TOAST
 //////////
 
     $(document).ready(function() {
+ 
+        $('.roww').tooltip({
+            'placement': 'right'
+        });
+
+        $('#toast').css('opacity', '0');
+  
   {% if not is_granted('ROLE_USER') %}
         $('.reponse').tooltip({
             'placement': 'bottom'
@@ -396,14 +403,7 @@ console.log(
         $('.bouton-com-rep').tooltip({
             'placement': 'bottom'
         });
-  {% endif %}
-
-        $('.roww').tooltip({
-            'placement': 'right'
-
-        });
         
-{% if is_granted('ROLE_USER') %}
         $('.bouton-soutient').popover({
             'html': true,
             'content':  '<div id="addSoutienHolder"> \
@@ -423,11 +423,11 @@ console.log(
 	    {{form_end(formSoutien)}} \
 	</div> \
 </div>',
-{#        'content': '<iframe style:"width:600px" src="{{path('smart_unity_question_reponse_add_soutien_question', {slug: question.slug})}}"></iframe>',#}
             'placement': 'right',
             'animation': true
         });
-{% endif %}
+        
+  {% endif %}
 
 
     });

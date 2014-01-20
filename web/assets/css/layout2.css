@@ -461,11 +461,11 @@ textarea {
 	padding: 10px 0 ;
 	text-align:center;
 	opacity: .9;
- 
+        z-index: 10000;
 	/*The good stuff */
-	-webkit-transition: opacity 0.5s ease-out;  /* Saf3.2+, Chrome */
-	-moz-transition: opacity 0.5s ease-out;  /* FF4+ */
-	-ms-transition: opacity 0.5s ease-out;  /* IE10? */
-	-o-transition: opacity 0.5s ease-out;  /* Opera 10.5+ */
-	transition: opacity 0.5s ease-out;	
+	-webkit-transition: opacity 2s ease-out 2s;  /* Saf3.2+, Chrome */
+	-moz-transition: opacity 2s ease-out 2s;  /* FF4+ */
+	-ms-transition: opacity 2s ease-out 2s;  /* IE10? */
+	-o-transition: opacity 2s ease-out 2s;  /* Opera 10.5+ */
+	transition: opacity 2s ease-out 2s;	
 }
