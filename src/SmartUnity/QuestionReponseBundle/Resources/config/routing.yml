@@ -35,7 +35,9 @@ smart_unity_question_reponse_add_reponse:
 smart_unity_question_reponse_validation_reponse:
     pattern:  /validation/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:validationReponse }
-
+    options:
+        expose: true
+        
 smart_unity_question_reponse_certification:
     pattern:  /certification/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:certificationReponse }

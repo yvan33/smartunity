@@ -35,7 +35,7 @@
 
 {% if not is_certif and not is_validated %}
                     <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
-                                <button type="button" class="bouton-soutien" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour soutenir une question."{% endif %}><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
+                        <button type="button" class="bouton-soutien" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour soutenir une question."{% endif %}><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                     </div>
                     {% endif %}
                 </div>
@@ -61,7 +61,7 @@
                                     <p style="margin:0px">{{nb_questions_membre}} Questions</p>
                                     <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
                                     <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/>
-									<p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p>
+                                    <p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p>
                                 </div>
                             </div>
 
@@ -103,10 +103,14 @@
                                 <div  class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
                             </a>
 
-        {% if not is_validated and not is_certif %}
+        {% if not is_validated and not is_certif and not is_answered %}
+
                             <a class="reponse" href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}">
                                 <div class="bouton-com-rep" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} >Répondre</div>
-                            </a>{% endif %}
+                            </a>                        
+                           
+        {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -114,7 +118,7 @@
 
                           {% for reponse in listeReponses %}
                               {% if loop.index == 1 %}
-            
+
             <div id="form-commenter-reponse">
                 <form action="{{path('smart_unity_question_reponse_add_commentaire_reponse', { slug: question.slug, idReponse: reponse.id})}}" method="POST">
                     <div  id="commentaire-input-reponse"class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
@@ -228,29 +232,29 @@ Toast
 
 
 ////////Hover sur les fleches
-	function upVoteHover(e) {
-	var cheminFlechePlusVerte = '{{ asset('assets/img/')}}';
-		$(e).children().attr('src', cheminFlechePlusVerte+ 'fleche_plus.png');
-    	$(e).children().next().css('color', '#85c53a');
-		}
-		
-	function upVoteUnhover(e) {
-	var cheminFlechePlusGrise = '{{ asset('assets/img/')}}';
-		$(e).children().attr('src', cheminFlechePlusGrise+ 'fleche_plus_grise.png');
-    	$(e).children().next().css('color', '#7e7e7e');
-		}
-		
-	function downVoteHover(e) {
-    var cheminFlecheMoinsRouge = '{{ asset('assets/img/')}}';
-		$(e).children().attr('src', cheminFlecheMoinsRouge+ 'fleche_moins.png');
-    	$(e).children().next().css('color', '#d42434');
-		}
-		
-	function downVoteUnhover(e) {
-	var cheminFlecheMoinsGrise = '{{ asset('assets/img/')}}';
-		$(e).children().attr('src', cheminFlecheMoinsGrise+ 'fleche_moins_grise.png');
-    	$(e).children().next().css('color', '#7e7e7e');
-		}
+    function upVoteHover(e) {
+        var cheminFlechePlusVerte = '{{ asset('assets/img/')}}';
+        $(e).children().attr('src', cheminFlechePlusVerte + 'fleche_plus.png');
+        $(e).children().next().css('color', '#85c53a');
+    }
+
+    function upVoteUnhover(e) {
+        var cheminFlechePlusGrise = '{{ asset('assets/img/')}}';
+        $(e).children().attr('src', cheminFlechePlusGrise + 'fleche_plus_grise.png');
+        $(e).children().next().css('color', '#7e7e7e');
+    }
+
+    function downVoteHover(e) {
+        var cheminFlecheMoinsRouge = '{{ asset('assets/img/')}}';
+        $(e).children().attr('src', cheminFlecheMoinsRouge + 'fleche_moins.png');
+        $(e).children().next().css('color', '#d42434');
+    }
+
+    function downVoteUnhover(e) {
+        var cheminFlecheMoinsGrise = '{{ asset('assets/img/')}}';
+        $(e).children().attr('src', cheminFlecheMoinsGrise + 'fleche_moins_grise.png');
+        $(e).children().next().css('color', '#7e7e7e');
+    }
 
 
 ////////////Ajax
@@ -333,10 +337,10 @@ Toast
 ///////////hover signaler commenter
 ////////////////////////////
 
-function displaySignal(e) {
-console.log(
-		$(e).children());
-		}
+    function displaySignal(e) {
+        console.log(
+                $(e).children());
+    }
 
 
 ////////////////////////////
@@ -397,13 +401,13 @@ console.log(
 //////////
 
     $(document).ready(function() {
- 
+
         $('.roww').tooltip({
             'placement': 'right'
         });
 
         $('.toast').css('opacity', '0');
-  
+
   {% if not is_granted('ROLE_USER') %}
         $('.reponse').tooltip({
             'placement': 'bottom'
@@ -414,26 +418,26 @@ console.log(
         $('.bouton-soutien').tooltip({
             'placement': 'right'
         });
-        
+
   {% else %}
         $('.bouton-soutien').popover({
             'html': true,
-            'content':  '<div id="addSoutienHolder"> \
-	<div class="grille-content"> \
-	    <legend class="legend-soutenir">Soutenir la question</legend> \
-		{{ form_start(formSoutien)}} \
-		<div class="erreur"> \
+            'content': '<div id="addSoutienHolder"> \
+        <div class="grille-content"> \
+            <legend class="legend-soutenir">Soutenir la question</legend> \
+                {{ form_start(formSoutien)}} \
+                <div class="erreur"> \
             {{ form_errors(formSoutien) }} \
-	    </div> \
-	<div class="row row-soutenir"> \
+            </div> \
+        <div class="row row-soutenir"> \
   <div class="grille-1 grille-1-soutenir"> Augmenter dotation: </div> \
-	           <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}}) }}</div> \
+                   <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}}) }}</div> \
 </div> \
         <div class="row row-soutenir"> \
-	        <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'bouton-soutenir'}})}}</div> \
-	    </div> \
-	    {{form_end(formSoutien)}} \
-	</div> \
+                <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'bouton-soutenir'}})}}</div> \
+            </div> \
+            {{form_end(formSoutien)}} \
+        </div> \
 </div>',
             'placement': 'right',
             'animation': true
@@ -529,27 +533,27 @@ console.log(
     <div class="grille-reponse"> \
                 <div class = "bouton-signaler"> \
             <a href = "#"> <img src = "{{ asset('assets/img/signaler.png') }}"/></a> \
-            </div>';   
-      
+            </div>';
+
           {% if  is_granted('ROLE_ADMIN') %}
-           entity +='          <div class="dropdown bouton-admin"> \
+        entity += '          <div class="dropdown bouton-admin"> \
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a> \
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">';
-    
-    if (!(pEntry['is_certif']) && pEntry['is_validated']) {
-      
-        entity+=' <li><a href="'+Routing.generate('smart_unity_question_reponse_certification', {idReponse : 36})+'" tabindex="-1">Certifier réponse</a></li>';
-  }
-      entity +='      <li><a tabindex="-1" href="#">Another action</a></li> \
+
+        if (!(pEntry['is_certif']) && pEntry['is_validated']) {
+
+            entity += ' <li><a href="' + Routing.generate('smart_unity_question_reponse_certification', {idReponse: pEntry['id']}) + '" tabindex="-1">Certifier réponse</a></li>';
+        }
+        entity += '      <li><a tabindex="-1" href="#">Another action</a></li> \
             <li><a tabindex="-1" href="#">Something else here</a></li> \
             <li class="divider"></li> \
             <li><a tabindex="-1" href="#">Separated link</a></li> \
         </ul> \
     </div> \
-    <div class="reponse-id"> Id: '+pEntry['id']+'</div>';
-  
-        {% endif %}          
-        entity +='                        <div class="grille-1" style="text-align:center"> \
+    <div class="reponse-id"> Id: ' + pEntry['id'] + '</div>';
+
+        {% endif %}
+        entity += '                        <div class="grille-1" style="text-align:center"> \
                                     <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
         if (pEntry['is_voted']) {
             entity += 'Vous avez déjà noté cette question.';
@@ -587,7 +591,7 @@ console.log(
                               \
                                         <div class="grille-3-grey"> \
                                             <div class="grille-3-im">';
-                                            
+
         if (pEntry['avatar'])
             entity += ' \
  <img src="{{ asset('') }}' + pEntry['avatar'] + ' " alt="avatar" height="80" width="80" />';
@@ -601,7 +605,7 @@ console.log(
                                             <p style="margin:0px">' + pEntry['nb_questions_membre'] + ' Questions</p> \
                                             <p style="margin:0px">' + pEntry['points_membre'] + ' Smart\'Points</p> \
                                             <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/> \
-											<p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p> \
+                                                                                        <p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p> \
                                             </div> \
                                         </div> \
                                 </div> \
@@ -617,13 +621,12 @@ console.log(
 
         entity += '        <div style="float:right"> \
                                     <div class="grille-3-btn">';
-        entity += '         {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %} \
-            <div style = "float:left; margin-right:5px;"> \
-            <a href = "{{path('smart_unity_question_reponse_homepage')}}validation/' + pEntry['id'] + '"> <img src = "{{ asset('assets/img/valid-btn.png') }}" /> </a> \
-            </div> \    
-                                      {% endif %} \
-            <div></div>';
-        entity += ' <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div> \
+               {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
+       entity += '<div style = "float:left; margin-right:5px;"> \
+            <a href = "'+ Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a></div>';    
+                             {% endif %}
+          entity += '      <div></div> \
+         <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div> \
             </div> \
             </div> \
             </div> \

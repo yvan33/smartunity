@@ -247,7 +247,7 @@ class QuestionReponseController extends Controller {
         ));
     }
 
-    public function displayReponseAction( Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion) {
+    public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion) {
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -266,9 +266,6 @@ class QuestionReponseController extends Controller {
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
         }
-
-
-
 
         //Affichage de LA question avec liste réponses
         //Fonctionne de la même manière que displayListOfQuestionAction()
@@ -337,14 +334,20 @@ class QuestionReponseController extends Controller {
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:avatar');
 
-
-
         $question = $questionRepository->findOneBySlug($slug);
 
         $isValidated = $questionRepository->isQuestionValid($question->getId());
         $isCertif = $questionRepository->isQuestionCertif($question->getId());
-
+        $isAnswered = FALSE;
         $membre = $question->getMembre();
+
+        foreach ($listeReponses as $reponse) {
+            $user = $this->container->get('security.context')->getToken()->getUser();
+            if ($reponse->membre_username == $user->getUsername()) {
+                $isAnswered = TRUE;
+                break;
+            }
+        }
 
         $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
         $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
@@ -377,6 +380,7 @@ class QuestionReponseController extends Controller {
                 ->getForm();
 
         if (true === $this->get('security.context')->isGranted('ROLE_USER')) {
+
             $user = $this->container->get('security.context')->getToken()->getUser();
             $formSoutien = $this->createFormBuilder()
                     ->setAction($this->generateUrl('smart_unity_question_reponse_add_soutien_question', array('slug' => $slug)))
@@ -408,8 +412,9 @@ class QuestionReponseController extends Controller {
                     'formCommentaireReponse' => $formCommentaireReponse->createView(),
                     'formReponse' => $formReponse->createView(),
                     'formSoutien' => $formSoutien->createView(),
-                    'haveAddedAnswer'=>$haveAddedAnswer,
-                    'haveEditedQuestion' => $haveEditedQuestion
+                    'haveAddedAnswer' => $haveAddedAnswer,
+                    'haveEditedQuestion' => $haveEditedQuestion,
+                    'is_answered' => $isAnswered
         ));
     }
 
@@ -545,7 +550,6 @@ class QuestionReponseController extends Controller {
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedQuestion' => '1')));
-
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:EditQuestion.html.twig', array(
@@ -610,7 +614,6 @@ class QuestionReponseController extends Controller {
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveAddedAnswer' => '1')));
-
             }
             throw new \Exception('Votre réponse n\'a pas pu être ajoutée');
         }
