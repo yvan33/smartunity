@@ -14,8 +14,8 @@ smart_unity_question_reponse_search_questions:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchQuestion }
 
 smart_unity_question_reponse_display_reponse:
-    pattern:  /reponse/{slug}/{tri}/{page}/{haveAddedAnswer}/{haveEditedQuestion}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'', tri:'vote', haveAddedAnswer:'0', haveEditedQuestion:'0' }
+    pattern:  /reponse/{slug}/{tri}/{page}/{haveAddedAnswer}/{haveEditedQuestion}/{haveEditedReponse}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'', tri:'vote', haveAddedAnswer:'0', haveEditedQuestion:'0', haveEditedReponse:'0' }
     requirements:
         tri: vote|date
         page: \d+
@@ -32,6 +32,10 @@ smart_unity_question_reponse_add_reponse:
     pattern:  /ajouter-reponse/{slug}/
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addReponse, slug:''}
 
+smart_unity_question_reponse_editer_reponse:
+    pattern: /editer-reponse/{slug}/{id}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:editReponse}
+    
 smart_unity_question_reponse_validation_reponse:
     pattern:  /validation/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:validationReponse }

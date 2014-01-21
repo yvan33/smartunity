@@ -247,7 +247,7 @@ class QuestionReponseController extends Controller {
         ));
     }
 
-    public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion) {
+    public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion, $haveEditedReponse) {
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -341,14 +341,6 @@ class QuestionReponseController extends Controller {
         $isAnswered = FALSE;
         $membre = $question->getMembre();
 
-        foreach ($listeReponses as $reponse) {
-            $user = $this->container->get('security.context')->getToken()->getUser();
-            if ($reponse->membre_username == $user->getUsername()) {
-                $isAnswered = TRUE;
-                break;
-            }
-        }
-
         $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
         $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
 
@@ -379,9 +371,23 @@ class QuestionReponseController extends Controller {
                 ->add('valider', 'submit')
                 ->getForm();
 
+        $formEditReponse = $this->createFormBuilder()
+                ->add('description', 'textarea', array(
+                    'label' => false,
+                ))
+                ->add('valider', 'submit')
+                ->getForm();        
+        
         if (true === $this->get('security.context')->isGranted('ROLE_USER')) {
-
             $user = $this->container->get('security.context')->getToken()->getUser();
+            
+            foreach ($listeReponses as $reponse) {
+            if ($reponse->membre_id == $user->getId()) {
+                $isAnswered = TRUE;
+                break;
+            }
+        }
+        
             $formSoutien = $this->createFormBuilder()
                     ->setAction($this->generateUrl('smart_unity_question_reponse_add_soutien_question', array('slug' => $slug)))
                     ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
@@ -411,10 +417,12 @@ class QuestionReponseController extends Controller {
                     'formCommentaireQuestion' => $formCommentaireQuestion->createView(),
                     'formCommentaireReponse' => $formCommentaireReponse->createView(),
                     'formReponse' => $formReponse->createView(),
+                    'formEditReponse' => $formEditReponse->createView(),
                     'formSoutien' => $formSoutien->createView(),
                     'haveAddedAnswer' => $haveAddedAnswer,
                     'haveEditedQuestion' => $haveEditedQuestion,
-                    'is_answered' => $isAnswered
+                    'haveEditedReponse' => $haveEditedReponse,
+                    'is_answered_by_user' => $isAnswered,
         ));
     }
 
@@ -556,7 +564,7 @@ class QuestionReponseController extends Controller {
                     'formEditQuestion' => $formEditQuestion->createView(),
                     'dotationMax' => $dotationMax
         ));
-    }
+    } 
 
     public function slugify($str) {
         $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
@@ -619,6 +627,33 @@ class QuestionReponseController extends Controller {
         }
         return "";
     }
+    
+    public function editReponseAction($id, $slug) {
+        $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($id);
+
+        $formEditReponse = $this->createFormBuilder($reponse)
+                ->add('description', 'textarea', array(
+                    'label' => false,
+                ))
+                ->add('valider', 'submit')
+                ->getForm();   
+
+        if ($this->getRequest()->getMethod() == 'POST') {
+
+
+            $formEditReponse->bind($this->getRequest());
+
+            if ($formEditReponse->isValid()) {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($reponse);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedReponse' => '1')));
+            }
+        }
+        return new \Exception('Votre réponse n\'a pas pu être ajoutée');
+    }    
 
     public function validationReponseAction($idReponse) {
         $reponseRepository = $this->getDoctrine()
