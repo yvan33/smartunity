@@ -158,6 +158,10 @@ Toast
 <div class="toast"> Votre réponse a bien été ajoutée </div>
  {% endif%}
 
+{% if haveEditedQuestion == 1 %}
+<div class="toast"> Votre réponse a bien été modifiée </div>
+ {% endif%}
+
 
 </div>
 </div>
@@ -396,7 +400,7 @@ console.log(
             'placement': 'right'
         });
 
-        $('#toast').css('opacity', '0');
+        $('.toast').css('opacity', '0');
   
   {% if not is_granted('ROLE_USER') %}
         $('.reponse').tooltip({

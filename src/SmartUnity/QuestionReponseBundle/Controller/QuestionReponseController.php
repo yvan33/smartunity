@@ -247,7 +247,7 @@ class QuestionReponseController extends Controller {
         ));
     }
 
-    public function displayReponseAction( Request $request, $slug, $tri, $page, $haveAddedAnswer='0') {
+    public function displayReponseAction( Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion) {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -385,7 +385,6 @@ class QuestionReponseController extends Controller {
         } else {
             $formSoutien = $this->createFormBuilder()->getForm();
         }
-p($haveAddedAnswer);
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
                     'error' => $error,
@@ -408,7 +407,8 @@ p($haveAddedAnswer);
                     'formCommentaireReponse' => $formCommentaireReponse->createView(),
                     'formReponse' => $formReponse->createView(),
                     'formSoutien' => $formSoutien->createView(),
-                    'haveAddedAnswer'=>$haveAddedAnswer
+                    'haveAddedAnswer'=>$haveAddedAnswer,
+                    'haveEditedQuestion' => $haveEditedQuestion
         ));
     }
 
@@ -493,7 +493,7 @@ p($haveAddedAnswer);
         $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
         $user = $this->getUser();
         $ancienneDotation = $question->getRemuneration();
-        $dotationMax = $question->getRemuneration() + $user->getCagnotte();
+        $dotationMax = $ancienneDotation + $user->getCagnotte();
 
         $formEditQuestion = $this->createFormBuilder($question)
                 ->add('sujet', 'textarea', array(
@@ -523,7 +523,7 @@ p($haveAddedAnswer);
                     'property' => 'nom',
                     'empty_value' => 'Choisissez une option',
                     'required' => true))
-                ->add('remuneration', 'integer', array('attr' => array('min' => 10, 'max' => ($dotationMax))))
+                ->add('remuneration', 'integer', array('attr' => array('min' => $ancienneDotation, 'max' => $dotationMax)))
                 ->add('save', 'submit', array('label' => 'Modifier ma question'))
                 ->getForm();
 
@@ -535,7 +535,7 @@ p($haveAddedAnswer);
             if ($formEditQuestion->isValid()) {
 
 //                $question->setSlug($this->slugify($formEditQuestion->get('sujet')->getData()));
-                $nouvelleDotation = $question->getRemuneration($formEditQuestion->get('remuneration')->getData());
+                $nouvelleDotation = $formEditQuestion->get('remuneration')->getData();
                 $cagnotte = $user->getCagnotte() - $nouvelleDotation - $ancienneDotation;
                 $user->setCagnotte($cagnotte);
 
@@ -543,7 +543,7 @@ p($haveAddedAnswer);
                 $em->persist($question);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedQuestion' => '1')));
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:EditQuestion.html.twig', array(
@@ -606,8 +606,7 @@ p($haveAddedAnswer);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newReponse);
                 $em->flush();
-                $haveAddedAnswer = '1';
-p($haveAddedAnswer);
+
                 return $this->forward('SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse', array(
                             'slug' => $slug,
                             'tri' => 'vote',
