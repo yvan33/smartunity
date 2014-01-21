@@ -248,6 +248,7 @@ class QuestionReponseController extends Controller {
     }
 
     public function displayReponseAction( Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion) {
+
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -544,6 +545,7 @@ class QuestionReponseController extends Controller {
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedQuestion' => '1')));
+
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:EditQuestion.html.twig', array(
@@ -607,12 +609,8 @@ class QuestionReponseController extends Controller {
                 $em->persist($newReponse);
                 $em->flush();
 
-                return $this->forward('SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse', array(
-                            'slug' => $slug,
-                            'tri' => 'vote',
-                            'page' =>'2',
-                            'haveAddedAnwser' => '1',
-                ));
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveAddedAnswer' => '1')));
+
             }
             throw new \Exception('Votre réponse n\'a pas pu être ajoutée');
         }
