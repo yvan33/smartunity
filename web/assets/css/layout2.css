@@ -536,3 +536,25 @@ border-right: 1px solid #ddd;
     cursor: pointer;
     
 }
+
+.bouton-repondre:focus
+{
+	outline: 0;
+}
+
+.bouton-repondre
+{
+	border-radius:2px;
+	background-color: #ff3800;
+	height:25px;
+	line-height:5px;
+	color: white;
+	font-family: centrale;	
+}
+
+.grille-content h3 
+{
+	font-family: centrale;
+	margin-top: 0px;
+	color: #ff3800;
+}

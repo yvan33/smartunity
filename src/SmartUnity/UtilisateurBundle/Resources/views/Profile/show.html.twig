@@ -10,7 +10,7 @@
 
 {% if avancement < 100 %}
 <div class="progress progress-striped">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ avancement }}%"> Complétez votre profil
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ avancement }}%"> Profil complété à {{ avancement }}%
     <span class="sr-only">{{ avancement }} % Complete</span>
   </div>
 </div>
@@ -72,9 +72,7 @@
 <div class="cent-h bouton-bas-block">
     <a href="{{ path('fos_user_change_password') }}" class="btn btn-sm btn-default">
         <span class="glyphicon glyphicon-credit-card"></span> Changer mot de passe
-    </a>
-
-
+    </a>&nbsp;
     <a href="{{ path('smart_unity_utilisateur_editavatar') }}" class="btn btn-sm btn-default">
         <span class="glyphicon glyphicon-user"></span> Changer mon avatar
     </a>

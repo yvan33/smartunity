@@ -1,6 +1,6 @@
 .grille-1
 {
-        width:42.5%;
+        width:35%;
         margin: 3px 2.5% 3px 5%;
         /*background-color:#00C;*/
         /*height:20px;*/
@@ -8,7 +8,7 @@
 }
 .grille-2
 {
-        width:42.5%;
+        width:50%;
         margin: 3px 5% 3px 2.5%;
         /*background-color:#3C9;*/
         height:20px;
@@ -59,14 +59,12 @@
 
 .grille-content
 {
-        padding:15px;
-        background-color: #f8f8ef;
-        margin-top:30px;
-        margin-bottom:30px;
-        border-radius:7px;
-        -webkit-box-shadow: 0 0 20px  #CCCCCC;
-       -moz-box-shadow: 0 0 20px  #CCCCCC;
-            box-shadow: 0 0 20px  #CCCCCC;
+    padding:15px;
+    background-color: #ffffff;
+    margin-top:30px;
+    margin-bottom:30px;
+    border-radius:3px;
+    border: 1px solid #e8e4dc;
 }
 
 .forminfo
@@ -161,4 +159,9 @@
 .bouton-valider {
     
    height: auto;
+}
+
+.progress-striped{
+    
+    margin-top: 15px;
 }
