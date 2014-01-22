@@ -102,14 +102,25 @@
                     <div class="bloc-commenter-repondre">
                         <div class="grille-3-btn">
 
-
+<!-- 
 
           {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
                             <div style="float:left; margin-right:5px;">
                                 <a href="{{path('smart_unity_question_reponse_validation_reponse', {idReponse: reponse.id})}}"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a>
                             </div>
           {% endif %}
-                            <div></div>
+                            <div></div> -->
+
+                                      {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
+                <div style="float:left; margin-right:5px;">
+       
+            <img class="bouton-validation" src="{{ asset('assets/img/valid-btn.png') }}"/>
+        
+<!--                      -->
+                </div>
+                                      {% endif %}
+                <div></div>
+
 
                             <div>   
                                 <div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this, {{reponse.id}})" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
@@ -127,3 +138,13 @@
             </div>
         </div>
 
+<script>
+
+$(function(){
+  $('.bouton-validation').popover({
+    placement: 'right',
+    html: 'true',   
+    content : 'Etes vous sur de vouloir valdider cette réponse <a href="{{path('smart_unity_question_reponse_validation_reponse', {idReponse: reponse.id})}}">OUI     </a><a href="">NON</a>'
+  })
+});
+  </script>
