@@ -87,7 +87,7 @@
     margin-top:30px;
     margin-bottom:30px;
     background-color: #ffffff;
-    border-radius:3px;
+    border-radius: 5px;
     border: 1px solid #e8e4dc;
     /* border:1px solid #999999; */
     /*
@@ -210,6 +210,16 @@
     left: 34%;
     display: inline-block;
     width: 30%;
+}
+
+.carousel-control.left
+{
+	background-image:none;
+}
+
+.carousel-control.right
+{
+	background-image:none;
 }
 
 .tab-content .bouton-repondre
