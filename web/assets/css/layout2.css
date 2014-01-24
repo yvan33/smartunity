@@ -5,6 +5,13 @@
     src : url(../fonts/Centrale.ttf);
 }
 
+@font-face{
+    font-family : "neuro";
+    src : url(../fonts/neuropol.ttf) format ('truetype');
+    /* pour IE */
+    src : url(../fonts/neuropol.ttf);
+}
+
 @media (min-width: 1201px){
 
     .container {
@@ -278,10 +285,11 @@ textarea {
 {
     margin: 10px;	
 }
+
 .cook-foot
 {
     font-family:Cookie;
-    color:#FFF;
+    color: #99bbc3;
     font-size:36px;
     display: inline-block;
     vertical-align: middle;
@@ -290,12 +298,14 @@ textarea {
 
 .cook-head
 {
-    color: white;
+    color: #99bbc3;
     float: right;
-    font-family:Cookie;
+    font-family: neuro;
+    font-size: 14px;
+    font-weight: 500;
     margin-left:10px;
-    margin-top:0px;
-    margin-bottom:0px;
+    margin-top:3px;
+    margin-bottom:-3px;
     font-size: 20pt;
 }
 
@@ -399,9 +409,15 @@ textarea {
 .fixed-right-corner
 {
     position: absolute;
-    top:15px;
-    right:30px;
-    color:#F2F2F2;
+    top: 15px;
+    right: 30px;
+    color: #99bbc3;
+}
+
+.fixed-right-corner:hover
+{
+	cursor: pointer;
+	color: #fff;
 }
 
 .souvenir-de-moi{
