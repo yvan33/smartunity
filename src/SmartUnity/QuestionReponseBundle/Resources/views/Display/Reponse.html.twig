@@ -185,6 +185,7 @@ Toast
 {#Blocs en display : none#}
 {#///////////////////////////////////////////////////#}
 
+{#Formulaire de Réponse#}
 <div id="addReponseHolder">
     <div class="container"  style="padding-left: 0; padding-right: 0;">
         <div class="row">
@@ -276,7 +277,7 @@ Toast
     }
 
 
-////////////Ajax
+////////////Ajax votes
     function upVote(pId) {
 
         $.getJSON('{{ path('smart_unity_question_reponse_ajax_upvote') }}/' + pId, function(donnees) {
@@ -329,6 +330,16 @@ Toast
         });
     }
 
+    
+////////////////////////////
+///////////hover signaler commenter
+////////////////////////////
+
+    function displaySignal(e) {
+        console.log(
+                $(e).children());
+    }
+
 
 //////////
 /// OnClick Events
@@ -361,15 +372,6 @@ Toast
         $('.espace-vide-pour-cadre-repondre').show();
     {% endif %}
     };
-    
-////////////////////////////
-///////////hover signaler commenter
-////////////////////////////
-
-    function displaySignal(e) {
-        console.log(
-                $(e).children());
-    }
 
 ////////////////////////////
 ///////////Commenter question
@@ -411,7 +413,9 @@ Toast
         $(e).parent().prev().append($('#form-commenter-reponse'));
         $('#form-commenter-reponse').show();
         $(e).parent().prev().show();
+        $(e).parent().next().hide();
         $(e).parent().hide();
+        
     {% endif %}
     }
 
