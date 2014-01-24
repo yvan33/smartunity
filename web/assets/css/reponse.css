@@ -336,7 +336,7 @@
 
 .bouton-com-rep
 {
-	background: #ff3800 ;
+	background: #e37151 ;
 	color:#FFF;
 	font-size:13px;
 	line-height:30px;
@@ -372,13 +372,13 @@
 
 .bouton-com-rep-input:hover
 {
-	background: #ff3800 ;
+	background: #e37151;
 	color: #2b3a41;
 }
 
 .bouton-com-rep:hover
 {
-	background: #ff3800 ;
+	background: #e37151;
 	color: #2b3a41;
 }
 
@@ -390,7 +390,7 @@
 .bouton-com-rep:active
 {
 
-	background: #ff3800 ;
+	background: #e37151;
 	color: #2b3a41;
 
 }

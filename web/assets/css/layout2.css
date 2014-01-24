@@ -572,7 +572,7 @@ border-right: 1px solid #ddd;
 .bouton-repondre
 {
 	border-radius:2px;
-	background-color: #ff3800;
+	background-color: #e37151;
 	height:25px;
 	line-height:5px;
 	color: white;
@@ -583,7 +583,7 @@ border-right: 1px solid #ddd;
 {
 	font-family: centrale;
 	margin-top: 0px;
-	color: #ff3800;
+	color: #e37151;
 }
 
 .form-control {
