@@ -206,7 +206,7 @@
 .carousel-control img
 {
     position: absolute;
-    top: 44%;
+    top: 2%;
     left: 34%;
     display: inline-block;
     width: 30%;
@@ -220,11 +220,13 @@
 .carousel-control.left
 {
 	background-image:none;
+	margin: 145px 0 145px 0;	
 }
 
 .carousel-control.right
 {
 	background-image:none;
+	margin: 145px 0 145px 0;
 }
 
 .carousel-indicators .active
