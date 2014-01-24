@@ -393,6 +393,11 @@ textarea {
     margin-bottom: 15px;
 }
 
+.titre-smartunity .col-md-6
+{
+	padding-left: 0px;
+}
+
 .nav-tabs a
 {
     font-family: centrale;
