@@ -676,16 +676,19 @@ class QuestionReponseController extends Controller {
                     $questionSlug = $reponse[0]->getQuestion()->getSlug();
 
                     $reponse[0]->setDateValidation(new \DateTime(date("Y-m-d H:i:s")));
-
+                    $repondant = $reponse[0]->getMembre();
+                    $repondant->setReputation($repondant->getReputation() +50);       
+                            
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($reponse[0]);
+                    $em->persist($repondant);
                     $em->flush();
 
-                    $membreReponse = $reponse[0]->getMembre();
-                    $prefRepValideemembre = $membreReponse->getPrefRepValidee();
-                    $mailMembreReponse = $membreReponse->getEmail();
+                    
+                    $prefRepValideeMembre = $repondant->getPrefRepValidee();
+                    $mailMembreReponse = $repondant->getEmail();
 
-                    if ($prefRepValideemembre == true) {
+                    if ($prefRepValideeMembre == true) {
 
                         //Envoi du mail
                         $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
@@ -700,7 +703,6 @@ class QuestionReponseController extends Controller {
                                 ->setBody($contenu);
                         $this->get('mailer')->send($message);
                     }
-
 
                     return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug())));
                 }
@@ -726,14 +728,18 @@ class QuestionReponseController extends Controller {
                 $questionSlug = $reponse[0]->getQuestion()->getSlug();
 
                 $reponse[0]->setDateCertification(new \DateTime(date("Y-m-d H:i:s")));
-
+                
+                $repondant = $reponse[0]->getMembre();
+                $repondant->setReputation($repondant->getReputation() +50); 
+                
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse[0]);
+                $em->persist($repondant);
+                
                 $em->flush();
 
-                $membreReponse = $reponse[0]->getMembre();
-                $prefRepCertifieemembre = $membreReponse->getPrefRepCertifiee();
-                $mailMembreReponse = $membreReponse->getEmail();
+                $prefRepCertifieemembre = $repondant->getPrefRepCertifiee();
+                $mailMembreReponse = $repondant->getEmail();
 
                 if ($prefRepCertifieemembre == true) {
 
