@@ -258,10 +258,10 @@ class AjaxController extends Controller
             return new Response(json_encode(array(
                 'status'=>'error',
                 'error'=>'NOT_LOGGED',
-                'error_msg'=>'Vous devez être connécté pour pouvoir voter.'
+                'error_msg'=>'Vous devez être connecté pour pouvoir voter.'
             )));
 
-        }else{//User pas loggé
+        }else{//User loggé
 
             $noteReponseRepository = $this->getDoctrine()
                             ->getManager()
@@ -297,9 +297,14 @@ class AjaxController extends Controller
                 $newNoteReponse->setNote(1);
                 $newNoteReponse->setMembre($user);
                 $newNoteReponse->setReponse($reponseEntity[0]);
+                
+                $repondant = $reponseEntity[0]->getMembre();
+                $reputation = $repondant->getReputation();
+                $repondant->setReputation($reputation + 1 );
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newNoteReponse);
+                $em->persist($repondant);
                 $em->flush();
 
                 return new Response(json_encode(array(
@@ -308,8 +313,6 @@ class AjaxController extends Controller
                 )));
 
             }
-
-
         }
     }
 
@@ -361,9 +364,13 @@ class AjaxController extends Controller
                 $newNoteReponse->setNote(-1);
                 $newNoteReponse->setMembre($user);
                 $newNoteReponse->setReponse($reponseEntity[0]);
-
+                $repondant = $reponseEntity[0]->getMembre();
+                $reputation = $repondant->getReputation();
+                $repondant->setReputation($reputation - 1 );
+                
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newNoteReponse);
+                $em->persist($repondant);
                 $em->flush();
 
                 return new Response(json_encode(array(

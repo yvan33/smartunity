@@ -39,7 +39,7 @@ security:
                 check_path: fos_user_security_check
                 target_path_parameter: _target_path
                 use_referer:        true
-#                default_target_path: /
+                default_target_path: /
                 
             fos_facebook:
                 app_url: "http://apps.facebook.com/smartunity/"

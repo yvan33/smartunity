@@ -14,15 +14,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\CommentRepository")
  * 
- * @ORM\AttributeOverrides({
- *      @ORM\AttributeOverride(name="pseudo",
- *          column=@ORM\Column(
- *              nullable = true
- *          )
- *      )
- * })
  */
 class Comment extends BaseComment
 {
 
 }
+
+// * @ORM\AttributeOverrides({
+// *      @ORM\AttributeOverride(name="pseudo",
+// *          column=@ORM\Column(
+// *              nullable = true
+// *          )
+// *      )
+// * })
