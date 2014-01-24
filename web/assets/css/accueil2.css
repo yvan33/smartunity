@@ -212,6 +212,11 @@
     width: 30%;
 }
 
+.carousel-indicators
+{
+	margin-left: 12%;
+}
+
 .carousel-control.left
 {
 	background-image:none;
@@ -220,6 +225,23 @@
 .carousel-control.right
 {
 	background-image:none;
+}
+
+.carousel-indicators .active
+{
+	background-color: #abccd3;
+	width: 14px;
+	height: 14px;
+	margin: 0 2px 0 2px;
+}
+
+.carousel-indicators li
+{
+	border: 1px solid #abccd3;
+	width: 14px;
+	height: 14px;
+	border-radius: 14px;
+	margin: 0 2px 0 2px;
 }
 
 .tab-content .bouton-repondre
