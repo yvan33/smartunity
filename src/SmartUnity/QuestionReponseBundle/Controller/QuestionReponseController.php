@@ -190,6 +190,7 @@ class QuestionReponseController extends Controller {
                         $bestReponse = $reponse->getDescription();
                         $auteurBestreponse = $reponse->getMembre()->getUsername();
                         $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+                       
                         break;
                     }
                 }

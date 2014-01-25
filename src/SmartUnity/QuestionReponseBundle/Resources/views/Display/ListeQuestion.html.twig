@@ -52,16 +52,13 @@
                                 <h4 class="panel-title">
                                     <!-- rond pts-->
                                     <div class="grille-1"> 
-                                    {% if question.reponses is defined %}
-                                            {% for rep in question.reponses %}
-                                            {% if rep.is_validated %} 
-                                         <div class="rond-point"><p class="txt-rond" style="font-weight:200;">pts</p></div>
-                                         {% else %}   
-                                        <div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div>
-                                       {% endif %} 
-                                    {% endfor %}
-                                    <div class="rond-point"><p class="txt-rond" style="font-weight:200;">pts</p></div>
-                                    {% endif %}    
+                                        
+                                    {% if question.certif_best_reponse is not null %}
+                                        <div><img src="{{ asset('assets/img/certif.png') }}" style="margin-left:9px"/></div>
+                                    {% else %}   
+                                        <div><img src="{{ asset('assets/img/check.png') }}" style="margin-left:19px"/></div>
+                                    {% endif %} 
+   
                                     </div>
                                     <!-- rond pts fin-->
                                     <!-- describ question-->

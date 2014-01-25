@@ -147,4 +147,56 @@ $(function(){
     content : 'Etes vous sur de vouloir valdider cette réponse <a href="{{path('smart_unity_question_reponse_validation_reponse', {idReponse: reponse.id})}}">OUI     </a><a href="">NON</a>'
   })
 });
+
+ $('div.fleche downVote').click(function(){
+
+
+                if (pEntry['up_vote'] > (- pEntry['down_vote'] + 1) ){
+                     $('img.fleche upVote').attr('src', "{{ asset('assets/img/fleche_plus.png') }}");
+                     $('p.fleche upVote').attr('class',"textevert");
+                     $('img.fleche downVote').attr('src', "{{ asset('assets/img/fleche_moins_grise.png') }}");
+                     $('p.fleche downVote').attr('class',"textegris");
+                 }
+                else if( (- pEntry['down_vote'] + 1) > pEntry['up_vote']){
+                    $('img.fleche upVote').attr('src', "{{ asset('assets/img/fleche_plus_grise.png') }}");
+                    $('p.fleche upVote').attr('class',"textegris");
+                    $('img.fleche downVote').attr('src', "{{ asset('assets/img/fleche_moins.png') }}");
+                    $('p.fleche downVote').attr('class',"texterouge");
+                }   
+                else{        
+                    $('img.fleche upVote').attr('src', "{{ asset('assets/img/fleche_plus_grise.png') }}");
+                    $('p.fleche upVote').attr('class',"textegris");
+                    $('img.fleche downVote').attr('src', "{{ asset('assets/img/fleche_moins_grise.png') }}");
+                    $('p.fleche downVote').attr('class',"textegris");
+                }
+   
+
+  });
+
+ $('div.fleche upVote').click(function(){
+
+
+                if ((pEntry['up_vote'] + 1 )> (- pEntry['down_vote']) ){
+
+                     $('img.fleche upVote').attr('src', "{{ asset('assets/img/fleche_plus.png') }}");
+                     $('p.fleche upVote').attr('class',"textevert");
+                     $('img.fleche downVote').attr('src', "{{ asset('assets/img/fleche_moins_grise.png') }}");
+                     $('p.fleche downVote').attr('class',"textegris");
+                 }
+                 else if( (- pEntry['down_vote']) > (pEntry['up_vote'] + 1) )
+                {
+                    $('img.fleche upVote').attr('src', "{{ asset('assets/img/fleche_plus_grise.png') }}");
+                    $('p.fleche upVote').attr('class',"textegris");
+                    $('img.fleche downVote').attr('src', "{{ asset('assets/img/fleche_moins.png') }}");
+                    $('p.fleche downVote').attr('class',"texterouge");
+                }
+                else{        
+                    $('img.fleche upVote').attr('src', "{{ asset('assets/img/fleche_plus_grise.png') }}");
+                    $('p.fleche upVote').attr('class',"textegris");
+                    $('img.fleche downVote').attr('src', "{{ asset('assets/img/fleche_moins_grise.png') }}");
+                    $('p.fleche downVote').attr('class',"textegris");
+                }
+   
+
+  });
   </script>

@@ -60,6 +60,7 @@ class AjaxController extends Controller
                 $idBestReponse = '';
                 $auteurBestreponse= '';
                 $dateBestReponse = '';
+                $certifBestReponse='';
 
                 $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
                 if ($idBestReponse['repId'] !== false){
@@ -69,6 +70,7 @@ class AjaxController extends Controller
                             $bestReponse = $reponse->getDescription();
                             $auteurBestreponse = $reponse->getMembre()->getUsername();
                             $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+                            $certifBestReponse = $reponse->getDateCertification();            
                             break;
                         }
                     }
@@ -85,6 +87,7 @@ class AjaxController extends Controller
                     'nb_reponses'=>$Question->getReponses()->count(),
                     'best_reponse'=>$bestReponse,
                     'auteur_best_reponse'=>$auteurBestreponse,
+                    'certif_best_reponse' => $certifBestReponse,
                     'date_best_reponse'=>$dateBestReponse,
                     'slug'=>$Question->getSlug(),
                     'count_soutien'=>$Question->getSoutienMembres()->count(),
