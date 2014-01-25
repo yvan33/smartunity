@@ -37,7 +37,7 @@
                     </div>
 
             {% if -(reponse.down_vote) > (reponse.up_vote) %}
-                    <div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %}onClick="javascript:downVote({{reponse.id}})"{% endif %}>
+                    <div class="fleche downVote" onmouseover="downVoteHover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %} onClick="javascript:downVote({{reponse.id}})"{% endif %}>
                         <img src="{{ asset('assets/img/fleche_moins.png') }}" /><p class="texterouge">{{reponse.down_vote}}</p>
             {% else %} 
                         <div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %}onClick="javascript:downVote({{reponse.id}})"{% endif %}>

@@ -51,7 +51,18 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <!-- rond pts-->
-                                    <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
+                                    <div class="grille-1"> 
+                                    {% if question.reponses is defined %}
+                                            {% for rep in question.reponses %}
+                                            {% if rep.is_validated %} 
+                                         <div class="rond-point"><p class="txt-rond" style="font-weight:200;">pts</p></div>
+                                         {% else %}   
+                                        <div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div>
+                                       {% endif %} 
+                                    {% endfor %}
+                                    <div class="rond-point"><p class="txt-rond" style="font-weight:200;">pts</p></div>
+                                    {% endif %}    
+                                    </div>
                                     <!-- rond pts fin-->
                                     <!-- describ question-->
                                     <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
