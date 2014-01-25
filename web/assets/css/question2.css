@@ -209,29 +209,24 @@
 .bouton-com-rep
 {
 	margin: 0 auto;	
-	background-color: red;
-	border-color:#999;
+	background-color: #e37151;
 	color:#FFF;
 	font-family: centrale;
 	font-size:22px;
 	line-height:44px;
-	height:30x;
 	margin-bottom:25px;
 	text-align:center;
 	width:250px;
 	border-radius:2px;
 }
 
-.bouton-com-rep:active
+.bouton-com-rep a:active
 {
-	background:none;
-	background-color:#68ae28;
-	-webkit-box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
-       -moz-box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
-            box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
+	background: none;
+	background-color: #e37151;
 }
 
-.bouton-com-rep:hover
+.bouton-com-rep a:hover
 {
 	text-decoration: none;
 }

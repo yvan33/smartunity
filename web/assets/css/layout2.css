@@ -242,9 +242,15 @@ textarea {
 .footer a
 {
     display: inline-block;
-    color: #FFF;
+    color: #99bbc3;
     vertical-align: middle;
     margin: 0px 5px;
+}
+
+.footer a:hover
+{
+	text-decoration: none;
+	color: white;
 }
 
 .cent-h
@@ -289,9 +295,9 @@ textarea {
 
 .cook-foot
 {
-    font-family:Cookie;
+    font-family: centrale;
     color: #99bbc3;
-    font-size:36px;
+    font-size:26px;
     display: inline-block;
     vertical-align: middle;
     margin-right: 0px;
@@ -577,7 +583,12 @@ border-right: 1px solid #ddd;
 	line-height:5px;
 	color: white;
 	font-family: centrale;	
-        font-size: 13px;
+    font-size: 13px;
+}
+
+.bouton-repondre:
+{
+	background-color: #e37151;
 }
 
 .grille-content h3 
@@ -597,4 +608,9 @@ border-right: 1px solid #ddd;
 .form-control:focus {
 	border: 0px;
 	border-radius: 10px;
-	}
+}
+
+#popupQuestion
+{
+	color: white;
+}

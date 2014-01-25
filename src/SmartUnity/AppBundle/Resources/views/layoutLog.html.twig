@@ -232,9 +232,9 @@
                 <div class="row footer" >
                     <div  style="display:inline-block;">
                         <span class="cook-foot">Suivez nous :</span>
-                        <a href="http://facebook.com/smartunityy"><img src="{{ asset('assets/img/logo-f-f.png') }}" class="foot-im"/></a>
-                        <a href="http://twitter.com/Smart_unity"><img src="{{ asset('assets/img/logo-t-f.png') }}" class="foot-im"/></a>
-                        <a href="http://plus.google.com/103420400147208470743"><img src="{{ asset('assets/img/logo-g-f.png') }}" class="foot-im"/></a>
+                        <a href="http://facebook.com/smartunityy"><img alt="facebook"  onmouseover="logoFacebookHover(this)" onmouseout="logoFacebookUnHover(this)" src="{{ asset('assets/img/logo-facebook-footer-bleu.png') }}" class="foot-im"/></a>
+                        <a href="http://twitter.com/Smart_unity"><img alt="twitter"  onmouseover="logoTwitterHover(this)" onmouseout="logoTwitterUnHover(this)" src="{{ asset('assets/img/logo-twitter-footer-bleu.png') }}" class="foot-im"/></a>
+                        <a href="http://plus.google.com/103420400147208470743"><img alt="google" onmouseover="logoGoogleHover(this)" onmouseout="logoGoogleUnHover(this)" src="{{ asset('assets/img/logo-google-footer-bleu.png') }}" class="foot-im"/></a>
                     </div>
                     <div class="footer-text" style="display:inline-block;">
                         <a href="{{ path('smart_unity_app_aproposPage') }} ">A propos de Smart'Unity</a>
@@ -250,6 +250,37 @@
 {% block modal %}{% endblock %}
 
      <script>
+//logo réseau sociaux footer
+	function logoFacebookHover(e) {
+        var cheminLogoFacebookBlanc = '{{ asset('assets/img/')}}';
+        $(e).attr('src', cheminLogoFacebookBlanc + 'logo-facebook-footer-blanc.png');
+        }
+    
+    function logoFacebookUnHover(e) {
+        var cheminLogoFacebookBleu = '{{ asset('assets/img/')}}';
+        $(e).attr('src', cheminLogoFacebookBleu + 'logo-facebook-footer-bleu.png');
+        }
+        
+    function logoTwitterHover(e) {
+        var cheminLogoTwitterBlanc = '{{ asset('assets/img/')}}';
+        $(e).attr('src', cheminLogoTwitterBlanc + 'logo-twitter-footer-blanc.png');
+        }
+    
+    function logoTwitterUnHover(e) {
+        var cheminLogoTwitterBleu = '{{ asset('assets/img/')}}';
+        $(e).attr('src', cheminLogoTwitterBleu + 'logo-twitter-footer-bleu.png');
+        }
+        
+    function logoGoogleHover(e) {
+        var cheminLogoTwitterBlanc = '{{ asset('assets/img/')}}';
+        $(e).attr('src', cheminLogoTwitterBlanc + 'logo-google-footer-blanc.png');
+        }
+    
+    function logoGoogleUnHover(e) {
+        var cheminLogoGoogleBleu = '{{ asset('assets/img/')}}';
+        $(e).attr('src', cheminLogoGoogleBleu + 'logo-google-footer-bleu.png');
+        }
+        
 //logo fleur hover navbar
 	function fleurNavHover(e) {
         var cheminFleurBlanche = '{{ asset('assets/img/')}}';
