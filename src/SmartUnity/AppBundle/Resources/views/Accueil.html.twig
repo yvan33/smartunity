@@ -86,9 +86,11 @@ Bonjour {{ app.user.username}}
 
                                     <div class="grille-question-centent">
                                     <div class="grille-question-rond">
-                                        <div class="rond-point">
-                                          {{ question.remuneration }} pts
-                                          </div>
+                                          {% if question.certif_best_reponse is not null %}
+                                        <img src="{{ asset('assets/img/certif.png') }}" style="margin-right:0px"/>
+                                    {% else %}   
+                                        <img src="{{ asset('assets/img/check.png') }}" style="margin-right:0px"/>
+                                    {% endif %} 
                                       </div>
                                       <div class="grille-question-det">
                                         <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
