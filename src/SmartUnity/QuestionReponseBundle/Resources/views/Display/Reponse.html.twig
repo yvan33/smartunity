@@ -382,6 +382,7 @@ Toast
         $(this).prev().children([0]).show();
         $(this).children([0]).hide();
         $(this).prev().children([1]).show();
+        $(this).next().hide();
     {% endif %}
     });
 
@@ -390,6 +391,7 @@ Toast
         $(e).parent().hide();
         $(e).parent().next([0]).hide();
         $(e).parent().parent().next().children().show();
+        $(e).parent().parent().next().next().show();
     }
 
 ////////////////////////////
@@ -422,7 +424,10 @@ Toast
     function closeCommentReponse(e) {
         //Affichage bouton commenter
         $(e).parent().parent().parent().parent().next().show();
-
+        
+        //Affichage bouton editer
+        console.log($(e).parent(4).next().next().show());
+        
         //Efface formulaire et bouton envoyer
         $(e).parent().parent().parent().hide();
     }
