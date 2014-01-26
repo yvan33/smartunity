@@ -23,7 +23,7 @@
         <div class="grille-content-2">
             <div class="grille-reponse">
                 <div class="bouton-signaler">
-                    <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                    <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img alt="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>
                 </div>                
                 <div class="head-blue"><p style="float:left">{{ question.sujet }}</p>
                     {% if app.user==question.membre.username and not is_validated %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-pencil"></span></a> {% endif %}
@@ -575,7 +575,7 @@ Toast
         var entity = '<div style="position:relative;"> \
     <div class="grille-reponse"> \
                 <div class = "bouton-signaler"> \
-            <a href = "#"> <img src = "{{ asset('assets/img/signaler.png') }}"/></a> \
+            <a title="Signaler" href = "#"> <img alt="Signaler" src = "{{ asset('assets/img/signaler.png') }}"/></a> \
             </div>';
 
           {% if  is_granted('ROLE_ADMIN') %}

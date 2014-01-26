@@ -1,7 +1,7 @@
 <div style="position:relative;">
     <div class="grille-reponse{% if reponse.is_certif or reponse.is_validated %}-smart{% endif %}">
         <div class="bouton-signaler">
-            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id, slug: question.slug})}}{% else %}#{% endif %}"><img src="{{ asset('assets/img/signaler.png') }}"/></a>      
+            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id, slug: question.slug})}}{% else %}#{% endif %}"><img title="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>      
         </div>
 
 {% if  is_granted('ROLE_ADMIN') %}
@@ -94,7 +94,7 @@
                     <div class="commentaire" onmouseover="displaySignal()">
                         <p style="float:left">{{commentaire.description}}</p><p style="float:right">
                                             {{commentaire.membre_username}} le {{commentaire.date}}
-                            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_reponse', {idCommentaireReponse: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a>
+                            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_reponse', {idCommentaireReponse: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img alt="Signaler" class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a>
                         </p>
                     </div>
                                     {% endfor %}
