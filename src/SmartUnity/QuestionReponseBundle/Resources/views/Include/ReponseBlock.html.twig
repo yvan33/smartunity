@@ -48,6 +48,18 @@
                     <div class="roww">
                         <p style="font-size:11px">{{reponse.date}}</p>
                     </div>
+
+
+                                      {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
+<!--                 <div class="roww">                 
+                    <img class="bouton-validation" src="{{ asset('assets/img/valid-btn.png') }}"/>
+                </div> -->
+
+                <div class="valider rep">
+                    <button type="button" class="btn bouton-validation">Valider</button>
+                </div>    
+
+                                      {% endif %}
                                     {% if reponse.is_certif %}
                     <div class="roww" rel="tooltip" data-original-title="Cette réponse à été certifiée Smart'Solution.">
                         <img src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/>
@@ -111,14 +123,6 @@
           {% endif %}
                             <div></div> -->
 
-                                      {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
-                <div style="float:left; margin-right:5px;">
-       
-            <img class="bouton-validation" src="{{ asset('assets/img/valid-btn.png') }}"/>
-        
-<!--                      -->
-                </div>
-                                      {% endif %}
                 <div>{#ICI LE FORMULAIRE POUR COMMENTER#}</div>
 
 

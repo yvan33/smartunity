@@ -350,7 +350,19 @@
 	cursor:pointer;
 
 }
+.bouton-validation
+{
+    background: #e37151 ;
+    color:#FFF;
+    font-size:13px;
+    height:20px;
+    width:80px;
+    font-family: centrale;
+    border-radius:2px;
+    cursor:pointer;
+    padding: 0em;
 
+}
 .bouton-com-rep-input
 {
 	background: #e37151;
