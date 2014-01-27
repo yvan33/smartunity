@@ -197,28 +197,27 @@ class AjaxController extends Controller
                     }
                 }
 
-                $upvote =(int) $reponse['upVote'];
+                $upvote = (int) $reponse['upVote'];
                 $downvote = (int) $reponse['downVote'];
 
-                if ($upvote > $upvote_global_ref = &$upvote_global)
+                if ($upvote > ($upvote_global_ref = &$upvote_global))
                 {
                     $isup=$reponse[0]->getId();
                     $upvote_global_ref=$upvote;    
                 }
-                elseif ($upvote == $upvote_global_ref= &$upvote_global)
+                elseif ($upvote == ($upvote_global_ref= &$upvote_global))
                 {
                     $isup='';    
                 }
-                if ($downvote_global > $downvote_global_ref= &$downvote_global)
+                if ($downvote < ($downvote_global_ref = &$downvote_global))
                 {
                     $isdown=$reponse[0]->getId();
                     $downvote_global_ref=$downvote;    
                 }
-                elseif ($downvote_global == $downvote_global_ref= &$downvote_global)
+                elseif ($downvote == ($downvote_global_ref = &$downvote_global))
                 {
                     $isdown='';    
                 }
-   
 
                 $membre = $reponse[0]->getMembre();
 
@@ -254,8 +253,7 @@ class AjaxController extends Controller
         $array2=array(
             'isdown'=>$isdown,
             'isup'=>$isup
-            );
-
+        );
         $array_global=array($returnArray, $array2);
         }
 

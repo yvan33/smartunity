@@ -409,7 +409,7 @@ class QuestionReponseController extends Controller {
         //      p($key->$val);
         // }
         $isup_rep= $voteReponses[0]->isup;
-        $isdown_rep= $voteReponses[0]->isup;
+        $isdown_rep= $voteReponses[0]->isdown;
        
 
 
@@ -441,8 +441,7 @@ class QuestionReponseController extends Controller {
                     'haveEditedReponse' => $haveEditedReponse,
                     'is_answered_by_user' => $isAnswered,
                     'isup' => $isup_rep,
-                    'isdown' => $isdown_rep,
-
+                    'isdown' => $isdown_rep
         ));
     }
 

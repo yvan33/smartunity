@@ -34,14 +34,14 @@
                         <img src="{{ asset('assets/img/fleche_plus_grise.png') }}" /><p class="textegris">{{reponse.up_vote}}</p>
                 {% endif %}    
                     </div>
-            {% if (reponse.id == isdown) %}
-                    <div class="fleche downVote" onmouseover="downVoteHover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %} onClick="javascript:downVote({{reponse.id}})"{% endif %}>
-                        <img src="{{ asset('assets/img/fleche_moins.png') }}" /><p class="texterouge">{{reponse.down_vote}}</p>
-            {% else %} 
-                        <div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %}onClick="javascript:downVote({{reponse.id}})"{% endif %}>
-                            <img src="{{ asset('assets/img/fleche_moins_grise.png') }}" /><p class="textegris">{{reponse.down_vote}}</p>
-            {% endif %}       
-                    </div>
+                {% if (reponse.id == isdown ) %}
+                        <div class="fleche downVote" onmouseover="downVoteHover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %} onClick="javascript:downVote({{reponse.id}})"{% endif %}>
+                            <img src="{{ asset('assets/img/fleche_moins.png') }}" /><p class="texterouge">{{reponse.down_vote}}</p>
+                {% else %} 
+                            <div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %}onClick="javascript:downVote({{reponse.id}})"{% endif %}>
+                                <img src="{{ asset('assets/img/fleche_moins_grise.png') }}" /><p class="textegris">{{reponse.down_vote}}</p>
+                {% endif %}       
+                        </div>
            <!--  {% if -(reponse.down_vote) > (reponse.up_vote) %}
                     <div class="fleche downVote" onmouseover="downVoteHover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %} onClick="javascript:downVote({{reponse.id}})"{% endif %}>
                         <img src="{{ asset('assets/img/fleche_moins.png') }}" /><p class="texterouge">{{reponse.down_vote}}</p>
@@ -157,7 +157,7 @@ $(function(){
   })
 });
 
- // $('div.fleche downVote').click(function(){
+ // $('div.downVote').click(function(){
 
 
  //                if (pEntry['up_vote'] > (- pEntry['down_vote'] + 1) ){
