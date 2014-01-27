@@ -30,9 +30,10 @@
 
     }
 
-    .commentaire-input{
-
-        width: 585px;
+    .commentaire-input
+    {
+        width: 540px;
+        margin-left: 40px;
     }
 
     .min{
@@ -184,7 +185,7 @@
 .grille-2
 {
     float:right;
-
+    padding-right: 4px;
 }
 
 .grille-3
@@ -363,6 +364,7 @@
 }
 .bouton-com-rep-input
 {
+	margin-left: 0px;
 	background: #e37151;
 	color:#FFF;
 	font-size:13px;

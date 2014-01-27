@@ -95,12 +95,12 @@
                                 <div  id="commentaire-input-question" class="commentaire-input" >{{ form_widget(formCommentaireQuestion.description, {'attr': {'class': 'form-control forminfo','style': 'resize: none' }} )}}
                                     <span class="croix-close" onClick="closeCommentQuestion(this)"> &#10006;</span>
                                 </div>
-                                <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep-input" style="margin-left:10px"/>
+                                <input type="submit" value="Envoyer" id="bouton-com-envoyer-question" class="bouton-com-rep-input"/>
                          {{  form_rest(formCommentaireQuestion) }}
                             </form>
 
                             <a id="bouton-commenter-question" href="">
-                                <div  class="bouton-com-rep" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
+                                <div  class="bouton-com-rep" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
                             </a>
 
         {% if not is_validated and not is_certif and not is_answered_by_user %}
@@ -124,7 +124,7 @@
                     <div  id="commentaire-input-reponse"class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
                         <span class="croix-close" onClick="closeCommentReponse(this)"> &#10006;</span>
                     </div>
-                    <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep-input commentaire-btn" style="margin-left:10px"/>
+                    <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep-input commentaire-btn"/>
                          {{  form_rest(formCommentaireReponse) }}
                 </form>
             </div>
@@ -688,7 +688,7 @@ Toast
             <a href = "'+ Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a></div>';    
                              {% endif %}
           entity += '      <div></div> \
-         <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div>';
+         <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div>';
     
      {% if is_granted('ROLE_USER')%}
     if (userId == pEntry['membre_id']) {    
