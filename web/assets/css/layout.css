@@ -639,3 +639,8 @@ border-right: 1px solid #ddd;
 {
 	color: white;
 }
+
+.pagination
+{
+	background: #559aa9;
+}

@@ -65,7 +65,7 @@
             <div class="container" style="padding-left: 0; padding-right: 0;">
 
                 <a type="button" class="fixed-right-corner" id="loupe" ><span class="glyphicon glyphicon-search"></span></a>
-                <div id="top-barre-recherche">
+                <div spellcheck="false" id="top-barre-recherche">
                     <form action="{{ path('smart_unity_question_reponse_search_questions') }}" method="GET">
                         <input type="text" name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="top-barre-recherche-input" placeholder="Entrez votre question...">
                         <input type="hidden" name="p" id="p" value="1" class="form-control">
