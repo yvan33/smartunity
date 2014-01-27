@@ -1,3 +1,10 @@
+@font-face{
+    font-family : "centrale";
+    src : url(../fonts/Centrale.ttf) format ('truetype');
+    /* pour IE */
+    src : url(../fonts/Centrale.ttf);
+}
+
 .grille-1
 {
 	width:80px;
@@ -192,6 +199,7 @@
 	font-family:Cookie;
 	font-size:56px;
 }
+
 .panel-title {
   margin-top: 0;
   margin-bottom: 0;
@@ -233,9 +241,17 @@
 
 .cookie-title
 {
-    font-family: 'Cookie', cursive;
+    font-family: centrale;
     font-size: 3em;
     margin-bottom: 10px;
+}
+
+.cookie-title h1
+{
+    font-family: centrale;
+    font-size: 36px;
+    line-height: 30px;
+    margin: 10px 0 35px 0;
 }
 
 .cadre-general

@@ -3,7 +3,7 @@
 {% block title %}Smart'Unity - Questions de {{username}} {% endblock %}
 
 {% block stylesheets %}
-<link href="{{asset('assets/css/question2.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/css/question.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
 
 {% endblock %}
@@ -21,7 +21,7 @@
 
             <!-- nav div menu-->
             <div class="title text-center cookie-title">
-                Questions posées par {{username}}
+                <h1>Questions posées par {{username}}</h1>
             </div>
 <div class="col-md-12">            
         <div class="grille-content-2">
@@ -31,7 +31,7 @@
                 <ul class="nav nav-tabs nav-tabs-question" id="myTab">
                     <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Solutions</a></li>
                     <li style="float:right" {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'onFire', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="onFire-tab">Questions brûlantes</a></li>
-                    <li style="float:right" {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
+                    <li style="float:right" {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Dernières Questions</a></li>
                 </ul>
             </div>
             <!-- nav div menu fin-->
@@ -42,9 +42,9 @@
                           {% if type=='reponses' %}
 
                               {% if countListe == 0 %}
-                        <br/>
+                        <div class="panel">
                         <p align="center">Il n'y a aucune question r&eacute;solue</p>
-                        <br/>
+                        </div>
                               {% else %}
                                   {% for question in listeQuestions %}
 
@@ -111,9 +111,9 @@
                     <div class="panel-group" id="accordion-onFire">
                                 {% if type=='onFire' %}
                                   {% if countListe == 0 %}
-                        <br/>
-                        <p align="center">Il n'y a aucune question On Fire</p>
-                        <br/>
+                        <div class="panel">
+                        <p align="center">Il n'y a aucune dernière question</p>
+                        </div>
                                   {% else %}
                                     {% for question in listeQuestions %}
 

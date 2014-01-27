@@ -26,7 +26,7 @@
 .grille-3
 {
         width:5%;
-        margin: 3px 2.5% 3px 5%;
+        margin: 3px 0px 3px 5%;
         /*background-color:#00C;*/
         height:20px;
         float:left;
@@ -34,10 +34,16 @@
 .grille-4
 {
         width:42.5%;
-        margin: 3px 0% 3px 2.5%;
+        margin: 3px 5px 3px 2px;
         /*background-color:#3C9;*/
         height:20px;
         float:left;
+}
+
+.lien-activite a
+{
+	color: black;
+	font-weight: bold;
 }
 
 .grille-1.pref

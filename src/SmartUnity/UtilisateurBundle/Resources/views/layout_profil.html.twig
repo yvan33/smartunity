@@ -1,3 +1,4 @@
+{% block title %}Smart'Unity - Mon compte{% endblock %}
 {% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
 {% form_theme form_pref 'SmartUnityUtilisateurBundle:Form:form_mon_compte.html.twig' %}
 
@@ -123,13 +124,13 @@
             <div class="row text-center ">
                 <h3> Mon activité </h3> 
             </div>
-            <div class="row premiere-ligne ">
+            <div class="row premiere-ligne lien-activite ">
     <a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': app.user.id}) }}">
                 <div class="grille-3">{{ app.user.questions.count}}</div>
                 <div class="grille-4">questions posées</div>  
     </a>            
             </div>
-            <div class="row">
+            <div class="row lien-activite">
     <a href="{{ path('smart_unity_membre_reponses', {'type': 'reponses', 'page': '1', 'id': app.user.id}) }}">
                 <div class="grille-3">{{ app.user.reponses.count}}</div>
                 <div class="grille-4">réponses apportées</div>
