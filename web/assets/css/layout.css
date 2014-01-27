@@ -640,7 +640,8 @@ border-right: 1px solid #ddd;
 	color: white;
 }
 
-.pagination
+.pagination>.active>a
 {
 	background: #559aa9;
+	border: 0;
 }
