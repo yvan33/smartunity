@@ -615,13 +615,12 @@ border-right: 1px solid #ddd;
 .form-control {
 	border: 1px solid #CCCCCC;
 	height: 32px;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 200;
 }
 
 .form-control:focus {
-	border: 0px;
-	border-radius: 10px;
+	border: 1px solid #CCCCCC;
 }
 
 #popupQuestion
