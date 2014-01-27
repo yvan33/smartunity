@@ -454,10 +454,10 @@
 .commentaire
 {
     border-bottom: solid 1px #CCCCCC;
-    clear:both;
-    overflow:hidden;
-    margin-bottom:15px;
-    color:#A4A4A4;
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 12px;
+    color: #A4A4A4;
     font-style: italic;
     font-size: 90%;
 }
