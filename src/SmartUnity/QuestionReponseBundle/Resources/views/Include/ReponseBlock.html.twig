@@ -56,7 +56,7 @@
                 </div> -->
 
                 <div class="valider rep">
-                    <button type="button" class="btn bouton-validation">Valider</button>
+                    <button type="button" class="btn bouton-validation" rel="popover">Valider</button>
                 </div>    
 
                                       {% endif %}
@@ -148,7 +148,7 @@ $(function(){
   $('.bouton-validation').popover({
     placement: 'right',
     html: 'true',   
-    content : 'Etes vous sur de vouloir valdider cette réponse <a href="{{path('smart_unity_question_reponse_validation_reponse', {idReponse: reponse.id})}}">OUI     </a><a href="">NON</a>'
+    content : 'Etes vous sur de vouloir valider cette réponse ? <div class="coucou"><a href="{{path('smart_unity_question_reponse_validation_reponse', {idReponse: reponse.id})}}">OUI     </a><a href="">NON</a></div>'
   })
 });
 
