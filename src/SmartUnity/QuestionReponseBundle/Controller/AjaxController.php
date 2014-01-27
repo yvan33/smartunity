@@ -75,6 +75,19 @@ class AjaxController extends Controller
                         }
                     }
                 }
+                // $idUpVoteReponse = $reponseRepository->getBestReponse($Question->getId());
+                // if ($idBestReponse['repId'] !== false){
+
+                //     foreach($Question->getReponses() as $reponse){
+                //         if($reponse->getId() == $idBestReponse['repId']){
+                //             $bestReponse = $reponse->getDescription();
+                //             $auteurBestreponse = $reponse->getMembre()->getUsername();
+                //             $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+                //             $certifBestReponse = $reponse->getDateCertification();            
+                //             break;
+                //         }
+                //     }
+                // }
 
 
                 array_push($returnArray, array(
