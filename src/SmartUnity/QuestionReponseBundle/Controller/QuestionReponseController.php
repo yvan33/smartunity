@@ -403,11 +403,6 @@ class QuestionReponseController extends Controller {
             $formSoutien = $this->createFormBuilder()->getForm();
         }
 
-
-        // foreach ( $voteReponses[0] as $key => $val ) {
-
-        //      p($key->$val);
-        // }
         $isup_rep= $voteReponses[0]->isup;
         $isdown_rep= $voteReponses[0]->isdown;
        
@@ -863,8 +858,6 @@ class QuestionReponseController extends Controller {
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSoutien->bind($this->getRequest());
 
-
-            p($formSoutien->getErrors());
             if ($formSoutien->isValid()) {
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
                 $question->setRemuneration($question->getRemuneration() + ($formSoutien->get('soutien')->getData()));
