@@ -44,7 +44,7 @@
   }
   .find-slider
     {
-       margin-top: 10px;
+      margin-top: 10px;
       padding-right: 35px;
 
     }
@@ -111,12 +111,36 @@ line-height: 40px;
   background-color: #7b7a7a;
   border-radius: 10px;
   color: #FFF;
+  border: 0;
+  font-size: 14px;
+  font-family: centrale;
+}
+
+.form-control:focus
+{
+  background-color: #7b7a7a;
+  border-radius: 10px;
+  color: #FFF;
+  border: 0;
+}
+
+::-webkit-input-placeholder {
+    font-size: 14px;
+	font-family: centrale;
+}
+
+:-moz-placeholder {
+    font-size: 14px;
+    font-weight: 600;
+}
+:-ms-input-placeholder {
+    font-size: 14px;
 }
 
 .cook-btn-demander-repondre
 {
-  font-family:Cookie;
-  font-size:32px;
+  font-family: Cookie;
+  font-size: 32px;
 }
 
 .question
@@ -149,7 +173,7 @@ line-height: 40px;
                         </div>
                         <div class="find-content">
                             <form action="{{ path('smart_unity_question_reponse_search_questions') }}" method="GET">
-                            <div class="input-group cent-h find-slider">
+                            <div spellcheck="false" class="input-group cent-h find-slider">
                               <input type="text" placeholder="Entrez votre question ici..." name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">
                               <input type="hidden" name="p" id="p" value="1" class="form-control">
                               <span class="input-group-btn">
