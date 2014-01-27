@@ -75,19 +75,6 @@ class AjaxController extends Controller
                         }
                     }
                 }
-                // $idUpVoteReponse = $reponseRepository->getBestReponse($Question->getId());
-                // if ($idBestReponse['repId'] !== false){
-
-                //     foreach($Question->getReponses() as $reponse){
-                //         if($reponse->getId() == $idBestReponse['repId']){
-                //             $bestReponse = $reponse->getDescription();
-                //             $auteurBestreponse = $reponse->getMembre()->getUsername();
-                //             $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
-                //             $certifBestReponse = $reponse->getDateCertification();            
-                //             break;
-                //         }
-                //     }
-                // }
 
 
                 array_push($returnArray, array(
@@ -163,6 +150,10 @@ class AjaxController extends Controller
 
         //On parcourt les réponses
         if($listeReponse[0] != null){
+            $isup='';
+            $isdown='';
+            $upvote='';
+            $downvote='';
             foreach($listeReponse as $reponse){
 
 
@@ -181,6 +172,7 @@ class AjaxController extends Controller
                         'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
                         'membre_username'=>$commentaire->getMembre()->getUsername(),
                         'membre_id' => $commentaire->getMembre()->getId(),
+                        'membre' => $commentaire->getMembre()
                     ));
                 }
 
@@ -201,6 +193,7 @@ class AjaxController extends Controller
                         break;
                     }
                 }
+
 
 
                 $membre = $reponse[0]->getMembre();

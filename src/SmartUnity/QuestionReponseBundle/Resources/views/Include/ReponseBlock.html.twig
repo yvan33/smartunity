@@ -105,7 +105,7 @@
                                     {% for commentaire in reponse.commentaires %}
                     <div class="commentaire" onmouseover="displaySignal()">
                         <p style="float:left">{{commentaire.description}}</p><p style="float:right">
-                                            {{commentaire.membre_username}} le {{commentaire.date}}
+                                          <a href="{{ path('smart_unity_membre_profil', {id: commentaire.membre_id}) }}">{{commentaire.membre_username}}</a>  le {{commentaire.date}}
                             <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_reponse', {idCommentaireReponse: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img alt="Signaler" class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a>
                         </p>
                     </div>
