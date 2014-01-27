@@ -87,7 +87,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                            	<li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage'%} class="active" {% endif %}><a href={{ path('smart_unity_app_homepage') }}><img onmouseover="fleurNavHover(this)" onmouseout="fleurNavUnHover(this)" src="{{ asset('assets/img/logo-su-nb-bleue.png') }}"/></a></li>
+                            	<li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage'%} class="fleur-active" {% endif %}><a href={{ path('smart_unity_app_homepage') }}><img onmouseover="fleurNavHover(this)" onmouseout="fleurNavUnHover(this)" src="{{ asset('assets/img/logo-su-nb-bleue.png') }}"/></a></li>
                                 <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
                              or  app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_search_questions'
@@ -283,13 +283,17 @@
         
 //logo fleur hover navbar
 	function fleurNavHover(e) {
-        var cheminFleurBlanche = '{{ asset('assets/img/')}}';
-        $(e).attr('src', cheminFleurBlanche + 'logo-su-nb.png');
+        var cheminFleur = '{{ asset('assets/img/')}}';
+        if ($(e)[0] !== $('.fleur-active a img')[0]) {
+        $(e).attr('src', cheminFleur + 'logo-su-nb.png');
+    }
         }
     
     function fleurNavUnHover(e) {
-        var cheminFleurBleue = '{{ asset('assets/img/')}}';
-        $(e).attr('src', cheminFleurBleue + 'logo-su-nb-bleue.png');
+        var cheminFleur = '{{ asset('assets/img/')}}';
+                if ($(e)[0] !== $('.fleur-active a img')[0]) {
+        $(e).attr('src', cheminFleur + 'logo-su-nb-bleue.png');
+                }              
         }
      
 //Responsivité des rubriques de la navbar
@@ -346,6 +350,10 @@ $("#main-content").css('min-height', minimumHeight);
                     $("#loupe").hide();
                 }
 
+///Couleur de la fleur de la navbar 
+var cheminFleur = '{{ asset('assets/img/')}}';
+        $('.fleur-active a img').attr('src', cheminFleur + 'logo-su-nb.png');
+        
             }
                                 </script>        
         <!-- call Javascript & scripts -->
