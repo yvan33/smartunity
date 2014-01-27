@@ -465,6 +465,12 @@
     font-size: 90%;
 }
 
+.commentaire a
+{
+	color: #A4A4A4;
+	font-weight: 600;
+}
+
 .signaler-comment
 {
 	display: none;

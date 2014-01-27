@@ -600,11 +600,6 @@ border-right: 1px solid #ddd;
     font-size: 13px;
 }
 
-.bouton-repondre:
-{
-	background-color: #e37151;
-}
-
 .grille-content h3 
 {
 	font-family: centrale;
@@ -617,6 +612,7 @@ border-right: 1px solid #ddd;
 	height: 32px;
 	font-size: 12px;
 	font-weight: 200;
+	color: #A4A4A4;
 }
 
 .form-control:focus {
