@@ -19,7 +19,7 @@
 {# Bloc  Mes Informations   #}
         <div class="grille-content posRelative">  
             <div class="row text-center ">
-                <h3> Mes informations </h3> 
+                <h3>Mes informations</h3> 
             </div>
 
 {% block infos %} 
@@ -36,37 +36,37 @@
 {# Bloc  Mes Préférences   #}
         <div class="grille-content">
             <div class="row text-center ">
-                <h3> Mes préférences </h3> 
+                <h3>Mes préférences</h3> 
             </div>
 {% block preferences %} 
 
             <form action="{{ path('smart_unity_utilisateur_setpref') }}" {{ form_enctype(form_pref) }} method="POST">
     {{form_errors(form_pref)}}
 
-                <div class="premiere-ligne ">Je souhaite recevoir des notifications par Email pour:
+                <div class="premiere-ligne ">Je souhaite recevoir des notifications par Email pour :
                 </div>
                 <div class="row premiere-ligne ">
-                    <div class="grille-1 pref">Un message privé:</div>
+                    <div class="grille-1 pref">Un message privé</div>
                     <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_mp)}}</div>
                 </div>
                 <div class="row  ">
-                    <div class="grille-1 pref">Un commentaire:</div>
+                    <div class="grille-1 pref">Un commentaire</div>
                     <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_comm)}}</div>
                 </div>
                 <div class="row  ">
-                    <div class="grille-1 pref">Le message sur le Smart'Café:</div>
+                    <div class="grille-1 pref">Le message sur le Smart'Café</div>
                     <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_smartcafe)}}</div>
                 </div>
                 <div class="row  ">
-                    <div class="grille-1 pref">Une réponse à une question:</div>
+                    <div class="grille-1 pref">Une réponse à une question</div>
                     <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_rep)}}</div>
                 </div>
                 <div class="row  ">
-                    <div class="grille-1 pref">Une de mes réponses à été validée:</div>
+                    <div class="grille-1 pref">Une de mes réponses à été validée</div>
                     <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repValidee)}}</div>
                 </div>
                 <div class="row  ">
-                    <div class="grille-1 pref">Smart'Solution:</div>
+                    <div class="grille-1 pref">Smart'Solution</div>
                     <div class="grille-2 pref radio-pref">{{form_widget(form_pref.pref_repCertifiee)}}</div>
                 </div>
 
@@ -94,7 +94,7 @@
 
             {% if parrain is not empty %}
             <div class="row">
-                <div class="grille-1">Votre parrain est:</div>
+                <div class="grille-1">Votre parrain est :</div>
                 <div class="grille-2">{{ parrain }} </div>
             </div>
             {% endif %}
@@ -108,7 +108,7 @@
             {#{{form_start(form_parrainage)}}#}
             {{form_errors(form_parrainage)}}
                 <div class="row">
-                    <div class="grille-1">Adresse Email : </div>
+                    <div class="grille-1">Adresse Email</div>
                     <div class="grille-2">{{form_widget(form_parrainage.email,{'attr': {'class': 'form-control forminfo' }})}} </div>
                 </div>
 

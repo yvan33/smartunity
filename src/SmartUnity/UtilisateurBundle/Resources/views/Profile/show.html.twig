@@ -3,14 +3,14 @@
 
 {% block infos %}  
 
-<div class="edit"> <a href="{{ path('smart_unity_utilisateur_editinfos') }}" class="btn btn-primary btn-xs">
+<div class="edit"> <a href="{{ path('smart_unity_utilisateur_editinfos') }}" class="btn btn-primary btn-xs modify">
         <span class="glyphicon glyphicon-pencil"></span>
     </a>
 </div>
 
 {% if avancement < 100 %}
 <div class="progress progress-striped">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ avancement }}%"><p>Profil complété à {{ avancement }}%</p>
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ avancement }}%"><p>Profil complété à {{ avancement }} %</p>
     <span class="sr-only">{{ avancement }} % Complete</span>
   </div>
 </div>
@@ -26,24 +26,24 @@
 {%endif%}
 
 <div class="row premiere-ligne">
-    <div class="grille-1">Pseudo:</div>
+    <div class="grille-1">Pseudo</div>
     <div class="grille-2">{{app.user.username}}</div>
 </div>
 
 <div class="row  ">
-    <div class="grille-1">E-mail:</div>
+    <div class="grille-1">E-mail</div>
     <div class="grille-2">{{app.user.email}}</div>
 </div>
 <div class="row  ">
-    <div class="grille-1">Nom:</div>
+    <div class="grille-1">Nom</div>
     <div class="grille-2">{{app.user.nom}}</div>
 </div>
 <div class="row  ">
-    <div class="grille-1">Prénom:</div>
+    <div class="grille-1">Prénom</div>
     <div class="grille-2">{{app.user.prenom}}</div>
 </div>
 <div class="row  ">
-    <div class="grille-1">Date de naissance:</div>
+    <div class="grille-1">Date de naissance</div>
     <div class="grille-2">
 {%if app.user.datenaissance !=null %}
 {{ app.user.datenaissance|date("d/m/Y")  }}
@@ -52,7 +52,7 @@
     </div>
 </div>
 <div class="row  ">
-    <div class="grille-1">Sexe:</div>
+    <div class="grille-1">Sexe</div>
     <div class="grille-2">{%if app.user.sexe =="m" %}
         Masculin
          {%elseif app.user.sexe =="f" %}
@@ -62,11 +62,11 @@
         {%endif%}</div>
 </div>
 <div class="row  ">
-    <div class="grille-1">Appareil:</div>
+    <div class="grille-1">Appareil</div>
     <div class="grille-2"></div>
 </div>
 <div class="row  ">
-    <div class="grille-1">Un peu plus sur moi:</div>
+    <div class="grille-1">Un peu plus sur moi</div>
     <div class="grille-2"></div>
 </div>
 <div class="cent-h bouton-bas-block">

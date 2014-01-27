@@ -156,6 +156,7 @@
 .img-avatar {
     z-index:1;
     margin-bottom: 10px;
+    width: 120px;
 }
 
 .erreur
@@ -171,6 +172,8 @@
 .progress
 {
 	background: #99bbc3;
+	margin-right: 7px;
+	margin-left: 7px;
 }
 
 .progress-striped
@@ -215,5 +218,26 @@ h1
 {
 	background: #e37151;
 	border: 0;
+	color: #333;
+}
+
+.glyphicon
+{
+	color: white;
+}
+
+.modify
+{
+	background: #e37151;
+	border: 0;
+	margin: 5px 10px 0 0;
+	height: 22px;
+	line-height: 22px;
+	
+}
+
+.modify:hover
+{
+	color: #e37151;
 	color: #333;
 }

@@ -4,7 +4,7 @@
 {% block edition %}
 
 <div class="edit">
-    <a class="btn btn-primary btn-xs" href="{{ path('smart_unity_utilisateur_homepage') }}" type="button">Annuler
+    <a class="btn btn-primary btn-xs modify" href="{{ path('smart_unity_utilisateur_homepage') }}" type="button"><span class="croix-close"> ✖</span>
     </a>
 </div>  
     
@@ -34,7 +34,7 @@
     
     <div class="row  ">
         <div class="grille-1">
-        Prénom :
+        Prénom
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.prenom)}}
@@ -43,7 +43,7 @@
     
     <div class="row  ">
         <div class="grille-1">
-        Email :
+        Email
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.email)}}
@@ -52,7 +52,7 @@
 
     <div class="row  ">
         <div class="grille-1">
-        Genre :
+        Sexe
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.sexe)}}
@@ -61,7 +61,7 @@
 
     <div class="row  ">
         <div class="grille-1">
-        Date de naissance :
+        Date de naissance
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.date_naissance)}}
@@ -78,7 +78,7 @@
     </div>
 
     <div class="cent-h bouton-bas-block">
-        <button type="submit" class="btn bouton-repondre">Valider mes infos</button>
+        <button type="submit" class="btn bouton-repondre">Valider les modifications</button>
     </div>   
     {{form_end(form_infos)}}  
 
