@@ -614,7 +614,7 @@ border-right: 1px solid #ddd;
 }
 
 .form-control {
-	border: 0px;
+	border: 1px solid #CCCCCC;
 	height: 32px;
 	font-size: 14px;
 	font-weight: 200;
