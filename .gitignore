@@ -1,4 +1,4 @@
-.DS_Store
+*/.DS_Store
 /web/bundles/
 /web/phpconsole/
 /app/bootstrap*
@@ -13,4 +13,4 @@
 /nbproject
 
 
-web/phpconsole/install.php
+/web/phpconsole/install.php

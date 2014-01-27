@@ -287,10 +287,15 @@ class QuestionReponseController extends Controller {
         $cleanJSON = array();
         $listeReponses = array();
         $rebuildJSON = '';
+        $cleanJSON = explode('[', $response,2);
+        $cleanJSON1 = explode('],{', $cleanJSON[1]);
+        $voteReponses = json_decode('[{' . $cleanJSON1[1]);
+        $listeReponses = json_decode($cleanJSON1[0]. ']');
 
 
-        $cleanJSON = explode('[', $response, 2);
-        $listeReponses = json_decode('[' . $cleanJSON[1]);
+ //Original       
+        // $cleanJSON = explode('[', $response, 2);
+        // $listeReponses = json_decode('[' . $cleanJSON[1]);
 
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
         //la requête pour vérifier son authenticité... 
@@ -397,6 +402,17 @@ class QuestionReponseController extends Controller {
         } else {
             $formSoutien = $this->createFormBuilder()->getForm();
         }
+
+
+        // foreach ( $voteReponses[0] as $key => $val ) {
+
+        //      p($key->$val);
+        // }
+        $isup_rep= $voteReponses[0]->isup;
+        $isdown_rep= $voteReponses[0]->isup;
+       
+
+
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
                     'error' => $error,
@@ -424,6 +440,9 @@ class QuestionReponseController extends Controller {
                     'haveEditedQuestion' => $haveEditedQuestion,
                     'haveEditedReponse' => $haveEditedReponse,
                     'is_answered_by_user' => $isAnswered,
+                    'isup' => $isup_rep,
+                    'isdown' => $isdown_rep,
+
         ));
     }
 

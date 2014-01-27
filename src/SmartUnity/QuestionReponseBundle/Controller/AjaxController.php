@@ -147,14 +147,18 @@ class AjaxController extends Controller
             'tri'=>$tri
         ));
 
+            $isup='';
+            $isdown='';
+            $upvote_global=0;
+            $downvote_global=0;
+            $compteur=0;
 
         //On parcourt les réponses
         if($listeReponse[0] != null){
-            $isup='';
-            $isdown='';
-            $upvote='';
-            $downvote='';
+
+
             foreach($listeReponse as $reponse){
+
 
 
                 $commentairesReturn = array();
@@ -171,11 +175,10 @@ class AjaxController extends Controller
                         'description'=>$commentaire->getDescription(),
                         'date'=>$commentaire->getDate()->format('d-m-Y à H:i'),
                         'membre_username'=>$commentaire->getMembre()->getUsername(),
-                        'membre_id' => $commentaire->getMembre()->getId(),
-                        'membre' => $commentaire->getMembre()
+                        'membre_id' => $commentaire->getMembre()->getId()
+                            
                     ));
                 }
-
                 $isCertif=false;
                 if ($reponse[0]->getDateCertification() != null)
                     $isCertif = true;
@@ -194,24 +197,45 @@ class AjaxController extends Controller
                     }
                 }
 
+                $upvote =(int) $reponse['upVote'];
+                $downvote = (int) $reponse['downVote'];
 
+                if ($upvote > $upvote_global_ref = &$upvote_global)
+                {
+                    $isup=$reponse[0]->getId();
+                    $upvote_global_ref=$upvote;    
+                }
+                elseif ($upvote == $upvote_global_ref= &$upvote_global)
+                {
+                    $isup='';    
+                }
+                if ($downvote_global > $downvote_global_ref= &$downvote_global)
+                {
+                    $isdown=$reponse[0]->getId();
+                    $downvote_global_ref=$downvote;    
+                }
+                elseif ($downvote_global == $downvote_global_ref= &$downvote_global)
+                {
+                    $isdown='';    
+                }
+   
 
                 $membre = $reponse[0]->getMembre();
 
                 $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
                 $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
-        $avatar = $avatarRepository->find($membre->getId());
+                $avatar = $avatarRepository->find($membre->getId());
  
-        if (isset($avatar)) {
-            $avatar = $avatar->getWebPath();
-        }
+                if (isset($avatar)) {
+                    $avatar = $avatar->getWebPath();
+                }
                 //Ajour d'une réponse dans le tableau de sortie
                 array_push($returnArray, array(
                     'id'=>$reponse[0]->getId(),
                     'description'=>$reponse[0]->getDescription(),
                     'date'=>$reponse[0]->getDate()->format('d-m-Y à H:i'),
-                    'up_vote'=> (int) $reponse['upVote'],
-                    'down_vote'=> (int) $reponse['downVote'],
+                    'up_vote'=> $upvote,
+                    'down_vote'=> $downvote,
                     'membre_username'=>$membre->getUsername(),
                     'membre_id' => $membre->getId(),
                     'membre_reputation'=>$membre->getReputation(),
@@ -224,10 +248,18 @@ class AjaxController extends Controller
                     'points_membre'=> (int) $membre->getCagnotte(),
                     'avatar' => $avatar,
                 ));
+
             }
+        
+        $array2=array(
+            'isdown'=>$isdown,
+            'isup'=>$isup
+            );
+
+        $array_global=array($returnArray, $array2);
         }
 
-        return new Response(json_encode($returnArray));
+        return new Response(json_encode($array_global));
 
     }
 
