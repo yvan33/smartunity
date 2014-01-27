@@ -181,6 +181,22 @@ textarea {
 	color: #fff;
 }
 
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover {
+	background-color: #2b3a41;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus {
+	background-color: #2b3a41;
+}
+
+.dropdown-menu>li>a {
+	font-size: 13px;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+	background: #e37151;
+}
+
 .foot-im
 {
     padding-bottom:5px;

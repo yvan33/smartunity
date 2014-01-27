@@ -1,3 +1,10 @@
+@font-face{
+    font-family : "centrale";
+    src : url(../fonts/Centrale.ttf) format ('truetype');
+    /* pour IE */
+    src : url(../fonts/Centrale.ttf);
+}
+
 .grille-1
 {
         width:35%;
@@ -61,7 +68,6 @@
 {
     padding:15px;
     background-color: #ffffff;
-    margin-top:30px;
     margin-bottom:30px;
     border-radius:3px;
     border: 1px solid #e8e4dc;
@@ -104,12 +110,12 @@
 
 .bouton-bas-block
 {
-    margin-top: 2em;
+    margin-top: 10px;
 }
 
 .premiere-ligne
 {
-    margin-top: 2em;
+    margin-top: 5px;
 }
 
 .infos-date
@@ -149,11 +155,12 @@
 
 .img-avatar {
     z-index:1;
+    margin-bottom: 10px;
 }
-.erreur {
-    
+
+.erreur
+{  
     color:red;
-    
 }
 
 .bouton-valider {
@@ -161,12 +168,52 @@
    height: auto;
 }
 
-.progress-striped{
-    
-    margin-top: 15px;
+.progress
+{
+	background: #99bbc3;
+}
+
+.progress-striped
+{
+    margin-top: 5px;
+    height: 25px;
+}
+
+.progress-striped .progress-bar
+{
+    background: #559aa9;
+}
+
+.progress p
+{
+	line-height: 25px;
+	font-family: centrale;
 }
 
 .cadre-general
 {
 	margin: 20px 0 20px 0;
+}
+
+h1
+{
+	margin: 0 0 15px 0;
+	line-height: 30px;
+	font-family: centrale;
+}
+
+.btn-sm
+{
+	background: #e37151;
+	border: 0;
+	color: white;
+	font-family: centrale;
+
+}
+
+.btn-sm:hover
+{
+	background: #e37151;
+	border: 0;
+	color: #333;
 }

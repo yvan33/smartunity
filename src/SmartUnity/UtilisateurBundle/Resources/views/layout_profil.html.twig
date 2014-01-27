@@ -4,16 +4,12 @@
 {% block stylesheets %}
 <link href="{{ asset('assets/css/mon-compte.css') }}" rel="stylesheet" type="text/css">
 
-
-
  {% endblock %}
-
-
 
 {% block profil %}
 
 <div class="row">
-    <div class="col-md-12 text-center"><img src="{{asset('assets/img/mon-compte.png')}}" style="padding-top:20px"/>
+    <div class="col-md-12 text-center"><h1>Mon compte</h1>
     </div>
 </div>
 
@@ -27,7 +23,6 @@
             </div>
 
 {% block infos %} 
-
 {% endblock %}
 {% block edition %}  
 {% endblock %}
@@ -35,7 +30,6 @@
 {% endblock %}
 {% block avatar %}  
 {% endblock %}        
-
 
         </div>
 
@@ -92,7 +86,7 @@
     <div class="col-md-6" style="margin-top:20px">
         <div class="grille-content">
             <div class="row text-center ">
-                <h3> Ma communauté </h3> 
+                <h3>Ma communauté</h3> 
             </div>
         {% block parrainage %}
 
