@@ -203,7 +203,17 @@
 
 .panel-title > a {
   color: inherit;
-  
+}
+
+.bouton-repondre {
+	border: 0;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.bouton-repondre:hover {
+	color: #2b3a41;
+
 }
 
 /*    RECHERCHE    */
