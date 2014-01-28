@@ -251,19 +251,22 @@
     margin-top: 7px;
 }
 
-.carousel-inner
+.bouton-repondre
 {
-    margin-bottom: 30px;
+    border: 0;
+    outline: 0;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
-.btn:hover
+.bouton-repondre:hover
 {
     color: #2b3a41;
 }
 
-.btn:focus
+.carousel-inner
 {
-    outline: 0;
+    margin-bottom: 30px;
 }
 
 .cadre-general
