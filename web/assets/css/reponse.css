@@ -361,6 +361,19 @@
     border-radius:2px;
     cursor:pointer;
     padding: 0em;
+}
+
+.bouton-annulation
+{
+    background: #e37151;
+    color:#FFF;
+    font-size:13px;
+    height:20px;
+    width:80px;
+    font-family: centrale;
+    border-radius:2px;
+    cursor:pointer;
+    padding: 0em;
 
 }
 .bouton-com-rep-input
@@ -655,7 +668,7 @@ input
 
     color:#7e7e7e;
 }
-.bouton-validation.popover.right{
+/*.bouton-validation.popover.right{
         background-color: #333;
         width: 200px;   
     }
@@ -667,7 +680,7 @@ input
         color:#fff;
         font-size: 11px;
         font-family: centrale;  
-    }
+    }*/
 .coucou a{
     background-color: #7e7e7e;
     font-size: 12px;
@@ -677,4 +690,34 @@ input
 .cadre-general
 {
 	margin: 20px 0 20px 0;
+}
+
+.validation-dialog{
+    position: relative;
+    background-color: #FFF;
+    width:500px;
+    border-radius: 5px;
+    /*margin:300px auto auto auto;*/
+margin: 20% auto;
+
+    }
+.validation-body{
+
+    font-family: centrale;
+    width:500px;
+    padding-top: 0.6em;
+
+}
+.validation-body p{
+/*
+    margin-top: 30px;*/
+
+    
+}
+.validation-footer{
+
+    height: 30px;
+
+    margin-bottom: 5px ;
+
 }
