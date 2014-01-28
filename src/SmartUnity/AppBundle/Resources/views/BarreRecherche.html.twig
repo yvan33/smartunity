@@ -121,6 +121,8 @@
 	font-family: centrale;
 	font-size: 1.8em;
 	line-height: 2em;
+	padding-left: 10px;
+	padding-right: 10px;
 	border-radius: 3px;
 	display: inline-block;
 	background-color: #3e4956;
@@ -135,8 +137,8 @@
 
 input[type="radio"]:checked + .switch {
 	color: #fff;
-	padding-left: 1.3em;
-	padding-right: 1.3em;
+	padding-left: 1.4em;
+	padding-right: 1.4em;
 }
 
 input[type="radio"]:checked + .switch--on {
@@ -153,10 +155,10 @@ input[type="radio"]:checked + .switch--off {
                       <div class="text-center">
                       	<p>
                       		<input type="radio" name="s1" id="sOn" value="1" hidden checked>  
-					  		<label for="sOn" class="btn switch switch--on" id="sli-de">Demander</label>
+					  		<label for="sOn" class="back-col switch switch--on" id="sli-de">Demander</label>
                         
 					  		<input type="radio" name="s1" id="sOff" value="0" hidden>
-					  		<label for="sOff" class="btn switch switch--off" id="sli-re">Répondre</label>
+					  		<label for="sOff" class="back-col switch switch--off" id="sli-re">Répondre</label>
                         </p>
                       </div>
             </div>
@@ -195,6 +197,28 @@ input[type="radio"]:checked + .switch--off {
                       // Animation complete.
                     });
                   });
+                </script>
+                <script>
+                $(document).ready(function() {
+    $('.back-colo').each(function () {
+    	var col = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+    	$(this).css("background-color", col);
+    });
+});
+                </script>
+                <script>
+                $(document).ready(function() {
+                $('.back-col').each(function () {
+				var backCol = new Array; 
+				backCol[0] = "#03899c"; 
+				backCol[1] = "#FF7A00"; 
+				backCol[2] = "#ffffff"; 
+				backCol[3] = "#CCC"; 
+
+				ChoixCol = Math.floor(Math.random() * backCol; 
+				$(this).css("background-color", ChoixCol); 
+}); 
+});
                 </script>
 
 {% endblock %}
