@@ -128,7 +128,8 @@ class AjaxController extends Controller
         if($Question == null){
             throw new NotFoundHttpException("Cette question n'a pas encore été posée!");
             exit();
-        }else{
+        }
+        else{
             $QuestionId = $Question->getId();
         }
 
@@ -147,8 +148,9 @@ class AjaxController extends Controller
             'tri'=>$tri
         ));
 
-            $isup='';
-            $isdown='';
+
+            $isup=0;
+            $isdown=0;
             $upvote_global=0;
             $downvote_global=0;
             $compteur=0;
@@ -249,15 +251,17 @@ class AjaxController extends Controller
                 ));
 
             }
-        
+        }
         $array2=array(
             'isdown'=>$isdown,
             'isup'=>$isup
         );
-        $array_global=array($returnArray, $array2);
-        }
 
-        return new Response(json_encode($array_global));
+        array_push($returnArray,$array2);
+        // $array_global=array($returnArray, $array2);
+        // }
+
+        return new Response(json_encode($returnArray));
 
     }
 

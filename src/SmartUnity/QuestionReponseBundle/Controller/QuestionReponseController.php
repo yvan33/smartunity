@@ -64,7 +64,7 @@ class QuestionReponseController extends Controller {
         ));
 
         //Suppression de l'en tête HTTP et décodage du JSON
-        $cleanJSON = explode('[', $response, 2);
+        $cleanJSON = explode('[', $response, 3);
         $listeQuestions = json_decode('[' . $cleanJSON[1]);
 
 
@@ -288,29 +288,28 @@ class QuestionReponseController extends Controller {
         $listeReponses = array();
         $rebuildJSON = '';
         $cleanJSON = explode('[', $response,2);
-        $cleanJSON1 = explode('],{', $cleanJSON[1]);
-        $voteReponses = json_decode('[{' . $cleanJSON1[1]);
-        $listeReponses = json_decode($cleanJSON1[0]. ']');
-
-
- //Original       
-        // $cleanJSON = explode('[', $response, 2);
-        // $listeReponses = json_decode('[' . $cleanJSON[1]);
-
+        $listeReponses = json_decode('[' . $cleanJSON[1]);
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
         //la requête pour vérifier son authenticité... 
         //On récupère des infos utiles pour la pagination..
         $nbPages = $listeReponses[0]->nbPages;
         $nbReponses = $listeReponses[0]->nbReponses;
+        $taille= count($listeReponses);
+        $voteReponses=$listeReponses[($taille-1)];
 
         if ($page > $nbPages)
             $page = 1;
 
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
         if ($listeReponses[0]->slug == $slug && $listeReponses[0]->nbParPage == $nbParPage && $listeReponses[0]->page == $page && $listeReponses[0]->tri == $tri)
+        {
             unset($listeReponses[0]);
+            unset($listeReponses[($taille-1)]);
+        }
         else
+        {
             throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
+        }
 
 
         //Génération de la pagination en statique (si pas de JS)
@@ -403,8 +402,8 @@ class QuestionReponseController extends Controller {
             $formSoutien = $this->createFormBuilder()->getForm();
         }
 
-        $isup_rep= $voteReponses[0]->isup;
-        $isdown_rep= $voteReponses[0]->isdown;
+        $isup_rep= $voteReponses->isup;
+        $isdown_rep= $voteReponses->isdown;
        
 
 
