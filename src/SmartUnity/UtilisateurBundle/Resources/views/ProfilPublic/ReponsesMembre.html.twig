@@ -48,12 +48,13 @@
                         <br/>
                               {% else %}
                                   {% for question in listeQuestions %}
-
+{{ question.auteur_best_reponse }}
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <!-- rond pts-->
+
                                     <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                     <!-- rond pts fin-->
                                     <!-- describ question-->
@@ -87,12 +88,19 @@
                                                 {% if question.date_best_reponse != '' %}
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
+                                            <p>{{ username }}</p>
+                                            <p>{{ question.reponse }}</p>
+                                        </div>
+                                        <div class="grille-det2">
+                                            <p>{{question.best_reponse}}</p>
+                                        </div>
+<!--                                         <div class="grille-det1">
                                             <p>{{ question.auteur_best_reponse }}</p>
                                             <p>{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                                 {% endif %}
 
@@ -117,10 +125,10 @@
                         <br/>
                                   {% else %}
                                     {% for question in listeQuestions %}
-
+                                        
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
-
+{{ question.auteur_best_reponse }}
                             <div class="panel-heading">
                                 <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
                                     <h4 class="panel-title">
@@ -130,7 +138,7 @@
                                         <!-- describ question-->
 
                                         <div class="grille-2" ><p>{{question.sujet}}</p>
-                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p> </div>
 
                                         <!-- describ question fin-->
                                         <!-- nb réponses vues-->
