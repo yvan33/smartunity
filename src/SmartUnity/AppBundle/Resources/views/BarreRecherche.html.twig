@@ -4,7 +4,6 @@
     .slider
     {
       position:relative;
-      height:150px;
       width:100%;
     }
 
@@ -42,47 +41,21 @@
         width: 100%;
     }
   }
+  
   .find-slider
     {
       margin-top: 10px;
       padding-right: 35px;
 
     }
+    
   .find-content
   {
-      position:absolute;
       top:100px;
       left:1%;
       width:98%;
   }
-  .bouton-radio
-{
-  background: linear-gradient( to top, #bfbfbf,#fbfbfb);
-  border-radius:6px;
-  border-color:#333;
-  border-width:1px;
-  background-color:#898989;
-  margin-left:10px;
-  margin-right:10px;
-  width: 180px;
-     background: -webkit-linear-gradient( ... );
-     background:    -moz-linear-gradient( ... ); 
-     background:     -ms-linear-gradient( ... );
-     background:      -o-linear-gradient( ... );
-     background:         linear-gradient( ... );
-
-  padding:0px;
-height: 40px;
-line-height: 40px;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-       -o-user-select: none;
-          user-select: none;
-}
+  
 .search-btn {
   display: inline-block;
   padding-bottom: 2px;
@@ -137,40 +110,60 @@ line-height: 40px;
     font-size: 14px;
 }
 
-.cook-btn-demander-repondre
-{
-  font-family: Cookie;
-  font-size: 32px;
-}
-
 .question
 {
-	margin-top: -20px;
+
+}
+
+.switch {
+	color: #6f839a;
+	cursor: pointer;
+	font-family: centrale;
+	font-size: 1.8em;
+	line-height: 2em;
+	border-radius: 3px;
+	display: inline-block;
+	background-color: #3e4956;
+	-webkit-transition: .15s ease;
+	-moz-transition: .15s ease;
+	-ms-transition: .15s ease;
+	-o-transition: .15s ease;
+	transition: .15s ease;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+input[type="radio"]:checked + .switch {
+	color: #fff;
+	padding-left: 1.3em;
+	padding-right: 1.3em;
+}
+
+input[type="radio"]:checked + .switch--on {
+	background-color: #7eab55;
+}
+
+input[type="radio"]:checked + .switch--off {
+	background-color: #dd4a38;
 }
     </style>
+    
     <div class="row question">
             <div class="col-md-6 col-md-offset-3" >
                       <div class="text-center">
-                      <div class="btn-group" data-toggle="buttons" style="margin-top:25px">
-                        <label class="btn bouton-radio active" id="sli-de"> <!-- id a jouter -->
-                          <input type="radio" name="options" id="option1"><p class="cook-btn-demander-repondre">Demander</p>
-                        </label>
-                        <label class="btn bouton-radio" id="sli-re"><!-- id a jouter -->
-                          <input type="radio" name="options" id="option2"><p class="cook-btn-demander-repondre">Répondre</p>
-                        </label>
+                      	<p>
+                      		<input type="radio" name="s1" id="sOn" value="1" hidden checked>  
+					  		<label for="sOn" class="btn switch switch--on" id="sli-de">Demander</label>
+                        
+					  		<input type="radio" name="s1" id="sOff" value="0" hidden>
+					  		<label for="sOff" class="btn switch switch--off" id="sli-re">Répondre</label>
+                        </p>
                       </div>
-                      </div>
-              </div>
-          </div>
+            </div>
+    </div>
 
     <div class="slider" id="sli1" >
                     <div style="clear:both;">
-                        <div style="position:absolute; top:20px; left:20%;width:60%">
-                               <div class="cent-h">
-                               <img src="{{ asset('assets/img/logo-titre.png') }}" class="valign-col-all" style="margin-right:20px" />
-                               <p style="font-family:Cookie; font-size:56px" class="valign-col-all">Smart'Recherche</p>
-                               </div>
-                        </div>
                         <div class="find-content">
                             <form action="{{ path('smart_unity_question_reponse_search_questions') }}" method="GET">
                             <div spellcheck="false" class="input-group cent-h find-slider">
@@ -184,12 +177,6 @@ line-height: 40px;
                         </div>
                     </div>
                     <div style="clear:both;">
-                        <div style="position:absolute; top:20px; left:103%; width:94%" >
-                           <div class="cent-h">
-                               <img src="{{ asset('assets/img/logo-titre.png') }}" class="valign-col-all" style="margin-right:20px" />
-                               <p style="font-family:Cookie; font-size:56px" class="valign-col-all">Apporte ton soutien</p>
-                               </div>
-                        </div>
                     </div>
                 </div>
 
