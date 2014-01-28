@@ -48,9 +48,9 @@ smart_unity_membre_questions:
  
 smart_unity_membre_reponses:
     pattern:  /membre/reponses/{id}/{type}/{page}
-    defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'last', page:'1'  } 
+    defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'all', page:'1'  } 
     requirements:
-        type: onFire|last|reponses|question
+        type: all|certified|validated|reponses
         page: \d+
 
 fos_user_security:
@@ -81,5 +81,13 @@ smart_unity_utilisateur_ajaxmembre_get_questions:
     defaults: { _controller: SmartUnityUtilisateurBundle:AjaxMembre:getQuestions, membreId:null, type:'reponses', page:'1', nbParPage:'3', route:null }
     requirements:
         type: onFire|last|reponses|question
+        page: \d+
+        nbParPage: \d+
+
+smart_unity_utilisateur_ajaxmembre_get_reponses:
+    pattern: /getQuestionsAnswered/{membreId}/{type}/{page}/{nbParPage}/{route}
+    defaults: { _controller: SmartUnityUtilisateurBundle:AjaxMembre:getQuestionsAnswered, membreId:null, type:'reponses', page:'1', nbParPage:'3', route:null }
+    requirements:
+        type: certified|validated|reponses
         page: \d+
         nbParPage: \d+

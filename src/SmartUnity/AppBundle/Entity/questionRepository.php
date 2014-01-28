@@ -439,4 +439,96 @@ class questionRepository extends EntityRepository {
 
         return $query->getSingleScalarResult();
     }
+
+    public function getQuestionswithAnwersValidatedForUser($nbParPage, $page, $membreId) {
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
+        $offset = ($page - 1) * $nbParPage;
+
+        $sql = 'Select q.* from
+        (Select r.id, question_id From reponse r  where r.membre_id = :membreId )as p , question q 
+        Where p.question_id=q.id
+        ORDER BY q.date DESC
+        LIMIT :offset, :nbParPage';
+        
+ 
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('membreId', $membreId);
+        $query->setParameter('offset', (int) $offset);
+        $query->setParameter('nbParPage', (int) $nbParPage);
+        p('resultats');
+        $result = $query->getResult();
+        
+        p($result);
+        if (count($result) != 0) {
+            return $result;            
+        } 
+        else {
+            return false;
+        }
+        
+    }
+    public function getNombreQuestionswithAnwersValidatedForUser($membreId) {
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
+        $rsm->addScalarResult('nb_questions', 'nb');
+
+         $sql = 'Select q.* from
+        (Select r.id, question_id From reponse r  where r.membre_id = :membreId)as p , question q 
+        Where p.question_id=q.id';
+        
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('membreId', $membreId);
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function getQuestionswithAnwersCertifiedForUser($nbParPage, $page, $membreId) {
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
+        $offset = ($page - 1) * $nbParPage;
+
+        $sql = 'Select q.* from
+        (Select r.id, question_id From reponse r  where r.membre_id = :membreId and r.dateCertification is not null )as p , question q 
+        Where p.question_id=q.id
+        ORDER BY q.date DESC
+        LIMIT :offset, :nbParPage';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('membreId', $membreId);
+        $query->setParameter('offset', (int) $offset);
+        $query->setParameter('nbParPage', (int) $nbParPage);
+
+        $result = $query->getResult();
+        p('resultats');
+        p($result);
+        if (count($result) != 0) {
+
+            return $result;
+            
+        } else {
+
+            return false;
+
+        }
+        
+    }
+    public function getNombreQuestionswithAnwersCertifiedForUser($membreId) {
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
+        $rsm->addScalarResult('nb_questions', 'nb');
+
+         $sql = 'Select q.* from
+        (Select r.id, question_id From reponse r  where r.membre_id = :membreId and r.dateCertification is not null )as p , question q 
+        Where p.question_id=q.id';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('membreId', $membreId);
+
+        return $query->getSingleScalarResult();
+    }
 }

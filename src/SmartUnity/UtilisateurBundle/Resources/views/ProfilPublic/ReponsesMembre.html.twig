@@ -31,8 +31,8 @@
             <div class="collapse-menu tab-ajax">
                 <ul class="nav nav-tabs nav-tabs-question" id="myTab">
                     <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Toutes ses réponses</a></li>
-                    <li {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'onFire', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="onFire-tab">Ses réponses validées</a></li>
-                    <li {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Ses réponses certifiées</a></li>
+                    <li {% if type=='validated' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'validated', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="validated-tab">Ses réponses validées</a></li>
+                    <li {% if type=='certified' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'certified', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="certified-tab">Ses réponses certifiées</a></li>
                 </ul>
             </div>
             <!-- nav div menu fin-->
@@ -40,7 +40,7 @@
             <div class="tab-content" id="content-frame">
                 <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
                     <div class="panel-group" id="accordion-reponses">
-                          {% if type=='reponses' %}
+                          {% if type == 'reponses' %}
 
                               {% if countListe == 0 %}
                         <br/>
@@ -48,7 +48,6 @@
                         <br/>
                               {% else %}
                                   {% for question in listeQuestions %}
-{{ question.auteur_best_reponse }}
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
                             <div class="panel-heading">
@@ -89,7 +88,7 @@
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
                                             <p>{{ username }}</p>
-                                            <p>{{ question.reponse }}</p>
+                                            <!--  -->
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -115,22 +114,21 @@
                                 {% endif %}
                     </div>
                 </div>
-                <div class="tab-pane fade in out{% if type=='onFire' %} active{% endif %}" id="onFire">
+                <div class="tab-pane fade in out{% if type=='validated' %} active{% endif %}" id="validated">
                     <!-- accordion general-->
-                    <div class="panel-group" id="accordion-onFire">
-                                {% if type=='onFire' %}
+                    <div class="panel-group" id="accordion-validated">
+                                {% if type == 'validated' %}
                                   {% if countListe == 0 %}
                         <br/>
-                        <p align="center">Il n'y a aucune question On Fire</p>
+                        <p align="center">Il n'y a aucune question dont la r&eacute;ponse a &eacute;t&eacute; valid&eacute;e</p>
                         <br/>
                                   {% else %}
                                     {% for question in listeQuestions %}
                                         
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
-{{ question.auteur_best_reponse }}
                             <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
+                                <a data-toggle="collapse" data-parent="#accordion-validated" href="#collapse{{loop.index}}">
                                     <h4 class="panel-title">
                                         <!-- rond pts-->
                                         <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
@@ -190,13 +188,13 @@
 
                 </div><!-- contenue 1 fin--> 
                 <!-- contenue 2-->
-                <div class="tab-pane fade in out{% if type=='last' %} active{% endif %}" id="last">
-                    <div class="panel-group" id="accordion-last">
-                            {% if type=='last' %}
+                <div class="tab-pane fade in out{% if type=='certified' %} active{% endif %}" id="certified">
+                    <div class="panel-group" id="accordion-certified">
+                            {% if type == 'certified' %}
 
                               {% if countListe == 0 %}
                         <br/>
-                        <p align="center">Il n'y a aucune question r&eacute;cente</p>
+                        <p align="center">Il n'y a aucune question dont la r&eacute;ponse a &eacute;t&eacute; certifi&eacute;e</p>
                         <br/>
                               {% else %}
 
@@ -210,7 +208,7 @@
                                     <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                     <!-- rond pts fin-->
                                     <!-- describ question-->
-                                    <a data-toggle="collapse" data-parent="#accordion-last" href="#collapse{{loop.index}}">
+                                    <a data-toggle="collapse" data-parent="#accordion-certified" href="#collapse{{loop.index}}">
                                         <div class="grille-2" ><p>{{question.sujet}}</p>
                                             <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
                                     </a>
@@ -362,8 +360,7 @@
 
             fixHeight();
             $('#accordion-' + type).fadeOut('fast');
-            console.log('Testing console');
-            $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId + '/' + type + '/1/' + nbParPage + '/' + route, function(donnees) {
+            $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_reponses') }}/' + membreId + '/' + type + '/1/' + nbParPage + '/' + route, function(donnees) {
                 var content = '';
                 if (donnees[0]['page'] == 1 && donnees[0]['type'] == type && donnees[0]['nbParPage'] == nbParPage) {
 
@@ -425,7 +422,7 @@
         page[type] = pPage;
 
         //On récupère le JSON depuis le controller AjaxController
-        $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_questions') }}/' + membreId + '/' + type + '/' + pPage + '/' + nbParPage + '/' + route, function(donnees) {
+        $.getJSON('{{ path('smart_unity_utilisateur_ajaxmembre_get_reponses') }}/' + membreId + '/' + type + '/' + pPage + '/' + nbParPage + '/' + route, function(donnees) {
             var content = '';
             if (donnees[0]['page'] == pPage && donnees[0]['type'] == type && donnees[0]['nbParPage'] == nbParPage) {
                 donnees.shift(); //On supprime la ligne de check du JSON
@@ -478,8 +475,8 @@
     $(document).ready(function() {
 
         //Si JS est activé, on change les href des tabs par les id des content (pour bootstrap auto tabs!)
-        $('#onFire-tab').attr('href', '#onFire');
-        $('#last-tab').attr('href', '#last');
+        $('#validated-tab').attr('href', '#validated');
+        $('#certified-tab').attr('href', '#certified');
         $('#reponses-tab').attr('href', '#reponses');
 
 
@@ -489,10 +486,10 @@
         page = new Array();
         route = '{{ route }}';
         page[type] ={{ page }};
-        if (page['onFire'] == null)
-            page['onFire'] = 1;
-        if (page['last'] == null)
-            page['last'] = 1;
+        if (page['validated'] == null)
+            page['validated'] = 1;
+        if (page['certified'] == null)
+            page['certified'] = 1;
         if (page['reponses'] == null)
             page['reponses'] = 1;
 
@@ -531,12 +528,12 @@
         $('#pages').bootstrapPaginator(options);
 
         //Gestion de la pagination pour les changement d'onglets
-        $('#onFire-tab').click(function() {
-            type = 'onFire';
+        $('#validated-tab').click(function() {
+            type = 'validated';
             MaJPagination();
         });
-        $('#last-tab').click(function() {
-            type = 'last';
+        $('#certified-tab').click(function() {
+            type = 'certified';
             MaJPagination();
         });
         $('#reponses-tab').click(function() {
