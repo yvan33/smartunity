@@ -50,6 +50,13 @@ class reponse
     private $dateCertification;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateModification", type="datetime", nullable=true)
+     */
+    private $dateModification;
+
+    /**
     * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\question", inversedBy="reponses")
     * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
     */
