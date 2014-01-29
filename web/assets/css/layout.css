@@ -645,3 +645,13 @@ border-right: 1px solid #ddd;
 	background: #559aa9;
 	border: 0;
 }
+
+.fleur-active
+{
+	margin-right: -20px;
+}
+
+.fleur-inactive
+{
+	margin-right: -20px;
+}
