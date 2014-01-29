@@ -429,9 +429,9 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-        $sql = 'Select count(q.id) as nb_questions 
+        $sql = 'SELECT count(q.id) as nb_questions 
             FROM
-        (Select r.id, question_id From reponse r  where r.membre_id = :membreId )as p , question q 
+        (SELECT r.id, question_id FROM reponse r  WHERE r.membre_id = :membreId ) AS p , question q 
         Where p.question_id=q.id';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
@@ -440,59 +440,13 @@ class questionRepository extends EntityRepository {
         return $query->getSingleScalarResult();
     }
 
-    public function getQuestionswithAnwersValidatedForUser($nbParPage, $page, $membreId) {
-
+    public function getQuestionsWithValidatedAnswersForUser($nbParPage, $page, $membreId) {
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
         $offset = ($page - 1) * $nbParPage;
 
         $sql = 'Select q.* from
-        (Select r.id, question_id From reponse r  where r.membre_id = :membreId )as p , question q 
-        Where p.question_id=q.id
-        ORDER BY q.date DESC
-        LIMIT :offset, :nbParPage';
-        
- 
-        $query = $this->_em->createNativeQuery($sql, $rsm);
-        $query->setParameter('membreId', $membreId);
-        $query->setParameter('offset', (int) $offset);
-        $query->setParameter('nbParPage', (int) $nbParPage);
-        p('resultats');
-        $result = $query->getResult();
-        
-        p($result);
-        if (count($result) != 0) {
-            return $result;            
-        } 
-        else {
-            return false;
-        }
-        
-    }
-    public function getNombreQuestionswithAnwersValidatedForUser($membreId) {
-
-        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
-
-        $rsm->addScalarResult('nb_questions', 'nb');
-
-         $sql = 'Select q.* from
-        (Select r.id, question_id From reponse r  where r.membre_id = :membreId)as p , question q 
-        Where p.question_id=q.id';
-        
-        $query = $this->_em->createNativeQuery($sql, $rsm);
-        $query->setParameter('membreId', $membreId);
-
-        return $query->getSingleScalarResult();
-    }
-
-    public function getQuestionswithAnwersCertifiedForUser($nbParPage, $page, $membreId) {
-
-        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
-        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
-        $offset = ($page - 1) * $nbParPage;
-
-        $sql = 'Select q.* from
-        (Select r.id, question_id From reponse r  where r.membre_id = :membreId and r.dateCertification is not null )as p , question q 
+        (Select r.id, question_id From reponse r  where r.membre_id = :membreId and r.dateValidation <> null and r.dateCertification = null )as p , question q 
         Where p.question_id=q.id
         ORDER BY q.date DESC
         LIMIT :offset, :nbParPage';
@@ -503,27 +457,68 @@ class questionRepository extends EntityRepository {
         $query->setParameter('nbParPage', (int) $nbParPage);
 
         $result = $query->getResult();
-        p('resultats');
-        p($result);
         if (count($result) != 0) {
-
             return $result;
             
         } else {
-
             return false;
 
         }
         
     }
-    public function getNombreQuestionswithAnwersCertifiedForUser($membreId) {
+    public function getNombreQuestionsWithValidatedAnswersForUser($membreId) {
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-         $sql = 'Select q.* from
-        (Select r.id, question_id From reponse r  where r.membre_id = :membreId and r.dateCertification is not null )as p , question q 
+        $sql = 'SELECT count(q.id) as nb_questions 
+            FROM
+        (SELECT r.id, question_id FROM reponse r  WHERE r.membre_id = :membreId AND r.dateValidation <> null and r.dateCertification = null ) AS p , question q 
+        Where p.question_id=q.id';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('membreId', $membreId);
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function getQuestionsWithCertifiedAnswersForUser($nbParPage, $page, $membreId) {
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
+        $offset = ($page - 1) * $nbParPage;
+
+        $sql = 'Select q.* from
+        (Select r.id, question_id From reponse r  where r.membre_id = :membreId and r.dateCertification <> "" )as p , question q 
+        Where p.question_id=q.id
+        ORDER BY q.date DESC
+        LIMIT :offset, :nbParPage';
+
+        $query = $this->_em->createNativeQuery($sql, $rsm);
+        $query->setParameter('membreId', $membreId);
+        $query->setParameter('offset', (int) $offset);
+        $query->setParameter('nbParPage', (int) $nbParPage);
+
+        $result = $query->getResult();
+        if (count($result) != 0) {
+            return $result;
+            
+        } else {
+            return false;
+
+        }
+        
+    }
+    public function getNombreQuestionsWithCertifiedAnswersForUser($membreId) {
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
+        $rsm->addScalarResult('nb_questions', 'nb');
+
+        $sql = 'SELECT count(q.id) as nb_questions 
+            FROM
+        (SELECT r.id, question_id FROM reponse r  WHERE r.membre_id = :membreId AND r.dateCertification <> "" ) AS p , question q 
         Where p.question_id=q.id';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
