@@ -48,9 +48,9 @@ smart_unity_membre_questions:
  
 smart_unity_membre_reponses:
     pattern:  /membre/reponses/{id}/{type}/{page}
-    defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'all', page:'1'  } 
+    defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'reponses', page:'1'  } 
     requirements:
-        type: all|certified|validated|reponses
+        type: certified|validated|reponses
         page: \d+
 
 fos_user_security:

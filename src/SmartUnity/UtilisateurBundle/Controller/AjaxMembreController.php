@@ -26,22 +26,18 @@ class AjaxMembreController extends Controller {
            
             //Appel au repository
             if ($type == 'onFire') {
-                p('onFire');
                 $listeQuestion = $questionRepository->getQuestionsOnFireForUser($nbParPage, $page, $membreId);
                 $nbQuestions = $questionRepository->getNombreQuestionsOnFireForUser($membreId);
             } else if ($type == 'last') {
-                p('last');
                 $listeQuestion = $questionRepository->getLastQuestionsForUser($nbParPage, $page, $membreId);
                 $nbQuestions = $questionRepository->getNombreLastQuestionsForUser($membreId);
             } else if ($type == 'reponses') {
-                p('reponses');
                 $listeQuestion = $questionRepository->getValidatedQuestionsForUser($nbParPage, $page, $membreId);
                 $nbQuestions = $questionRepository->getNombreValidatedQuestionsForUser($membreId);
             } else {
                 throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
             }
-        } elseif ($route == 'smart_unity_membre_reponses') {
-           
+        } elseif ($route == 'smart_unity_membre_reponses') {           
             $listeQuestion = $questionRepository->getQuestionsAnsweredByUser($nbParPage, $page, $membreId);
             $nbQuestions = $questionRepository->getNombreQuestionsAnsweredByUser($membreId);
         }
@@ -96,14 +92,14 @@ class AjaxMembreController extends Controller {
                 ));
             }
         }
-        p($returnArray);
+
 
         //SORTIE: JSON du tableau de sortie
         return new Response(json_encode($returnArray));
     }
 
     public function getQuestionsAnsweredAction($type, $page, $nbParPage, $membreId, $route) {
-
+        p($type);
         //Récupération des repositories pour les réponses (meilleure réponse) et questions
         $questionRepository = $this->getDoctrine()
                 ->getManager()
@@ -133,6 +129,7 @@ class AjaxMembreController extends Controller {
 
             $nbQuestions = $questionRepository->getNombreQuestionswithAnwersValidatedForUser($membreId);
         } else if ($type == 'reponses') {
+            p('c\'est moi');
             $listeQuestion = $questionRepository->getQuestionsAnsweredByUser($nbParPage, $page, $membreId);
             $nbQuestions = $questionRepository->getNombreQuestionsAnsweredByUser($membreId);  
         } else {
