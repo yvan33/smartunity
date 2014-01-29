@@ -120,9 +120,10 @@
             {% else %}
                                 <li><a href="{{ path('smart_unity_app_descriptionpage') }}" class="menu-pad">COMMENT ÇA MARCHE?</a></li>
                                 <li>
-                                    <a href="{{ path('fos_user_security_login') }}" id="clic-pop">
+                                    <a href="{{ path('fos_user_security_login') }}" id="clic-pop" >
                                         Se connecter
-                                    </a>            
+                                    </a>      
+{#
                                     <div>
                                         <div class="connection" id="pop">
                                             <div class="connection-triangle-content">
@@ -156,7 +157,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li>
+#}
+ </li>
+
+
 
 
                             
@@ -170,6 +174,51 @@
         </nav>
 
         <!-- end nav -->
+        
+{# modal de connexion  #}
+<div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+ <div class="panel-body logo2">
+                                                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                                                        <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
+                                                        <fieldset>
+                                                            <div class="form-group">
+                                                                <input class="form-control username-input" style="background-color: #FFF; color:#666" placeholder="pseudo" type="text" id="username" name="_username" value="{{ last_username }}" required="required">        
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Password" type="password" id="password" name="_password" required="required">
+                                                            </div>
+                                                            <div style="margin-top: -14px;"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a></div>
+                                                            <div class="checkbox souvenir-de-moi" >
+                                                                <label>
+                                                                    <input id="remember_me" type="checkbox"  name="_remember_me" value="on" > Se souvenir de moi
+                                                                </label>
+                                                            </div>
+                                                            <input class="btn btn-lg btn-success btn-block" id="_submit" name="_submit" type="submit" value="Login" style="line-height:14px">
+                                                            <div class="pad-l">{{ facebook_login_button({'autologoutlink': false}) }}</div>
+                                                            <a href="{{ path('fos_user_registration_register') }} ">
+                                                                <p  style=" margin-top: 20px;">S'inscire</p>
+                                                            </a>
+
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+        
+        
         <div id="cont"></div>
         <div id="main-content">
 
@@ -334,7 +383,8 @@ $("#main-content").css('min-height', minimumHeight);
                     $('#clic-pop').attr('href', '#');
                     $("#clic-pop,#pop").click(function(event) {
                         $("#top-barre-recherche").hide();
-                        $("#pop").slideDown();
+{#                         $("#pop").slideDown(); #}
+                        $(".modal.fade").modal('show');
                         event.stopPropagation();
 
                     });
