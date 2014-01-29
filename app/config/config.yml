@@ -95,13 +95,24 @@ fos_elastica:
     indexes:
         smartunity:
             client: default
-            index_name: smartunity
+            settings:
+                index:
+                    analysis:
+                        analyzer:                                
+                            custom_french_analyzer:
+                                type: custom
+                                tokenizer: letter
+                                filter: ["asciifolding", "lowercase", "french_stem", "stop_fr"]
+                        filter:
+                            stop_fr:
+                                type: "stop"
+                                stopwords: ["l", "m", "t", "qu", "n", "s", "j", "d"]
             types:
                 question:
                     mappings:
-                        date: { type: date }
-                        sujet: { type: string }
-                        description: { type: string }
+                        date: {  type: date }
+                        sujet: { analyzer: custom_french_analyzer, type: string }
+                        description: { analyzer: custom_french_analyzer, type: string }
                     persistence:
                         driver: orm # orm, mongodb, propel are available
                         model: SmartUnity\AppBundle\Entity\question
