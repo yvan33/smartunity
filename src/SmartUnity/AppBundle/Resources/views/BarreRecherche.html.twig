@@ -1,243 +1,278 @@
 {% block recherche %}
 
-    <style>
+<style>
     .slider
     {
-      position:relative;
-      width:100%;
+        position:relative;
+        width:100%;
     }
 
+    #sli2
+    {
+        display: none;
+    }
     .bouton-radio.active
     {
-      text-shadow: 2px 1px  #FFFFFF;
+        text-shadow: 2px 1px  #FFFFFF;
     }
 
-    
-@media (min-width: 1200px){
+
+    @media (min-width: 1200px){
+        .find-slider
+        {
+            width: 700px;
+
+        }
+    }
+    @media (min-width: 992px)  and (max-width: 1200px) {
+        .find-slider
+        {
+
+            width: 600px;
+        }
+    }
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+        .find-slider
+        {
+            width: 500px;
+
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .find-slider
+        {
+
+            width: 100%;
+        }
+    }
+
     .find-slider
     {
-        width: 700px;
+        margin-top: 10px;
+        padding-right: 35px;
 
     }
-  }
- @media (min-width: 992px)  and (max-width: 1200px) {
-    .find-slider
+
+    .find-content
     {
-      
-        width: 600px;
+        top:100px;
+        left:1%;
+        width:98%;
     }
-  }
-@media screen and (min-width: 768px) and (max-width: 992px) {
-    .find-slider
+
+    .search-btn {
+        display: inline-block;
+        padding-bottom: 2px;
+        padding-top: 2px;
+        background-color: #7b7a7a;
+        border:solid 1px #7b7a7a;
+        height: 32px;
+        color: #FFF;
+        width: 40px;
+        outline: none;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+
+    .form-control
     {
-        width: 500px;
-
+        background-color: #7b7a7a;
+        border-radius: 10px;
+        color: #FFF;
+        border: 0;
+        font-size: 14px;
+        font-family: centrale;
     }
-  }
-@media screen and (max-width: 768px) {
-    .find-slider
+
+    .form-control:focus
     {
-      
-        width: 100%;
+        background-color: #7b7a7a;
+        border-radius: 10px;
+        color: #FFF;
+        border: 0;
     }
-  }
-  
-  .find-slider
+
+    ::-webkit-input-placeholder {
+        font-size: 14px;
+        font-family: centrale;
+    }
+
+    :-moz-placeholder {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    :-ms-input-placeholder {
+        font-size: 14px;
+    }
+
+    .question
     {
-      margin-top: 10px;
-      padding-right: 35px;
 
     }
-    
-  .find-content
-  {
-      top:100px;
-      left:1%;
-      width:98%;
-  }
-  
-.search-btn {
-  display: inline-block;
-  padding-bottom: 2px;
-  padding-top: 2px;
-  background-color: #7b7a7a;
-  border:solid 1px #7b7a7a;
-    height: 32px;
-    color: #FFF;
-    width: 40px;
-    outline: none;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px;
-    text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-       -o-user-select: none;
-          user-select: none;
-}
 
+    .switch {
+        color: #6f839a;
+        cursor: pointer;
+        font-family: centrale;
+        font-size: 1.8em;
+        line-height: 2em;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 3px;
+        display: inline-block;
+        background-color: #3e4956;
+        -webkit-transition: .15s ease;
+        -moz-transition: .15s ease;
+        -ms-transition: .15s ease;
+        -o-transition: .15s ease;
+        transition: .15s ease;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
 
-.form-control
-{
-  background-color: #7b7a7a;
-  border-radius: 10px;
-  color: #FFF;
-  border: 0;
-  font-size: 14px;
-  font-family: centrale;
-}
+    input[type="radio"]:checked + .switch {
+        color: #fff;
+        padding-left: 1.4em;
+        padding-right: 1.4em;
+    }
 
-.form-control:focus
-{
-  background-color: #7b7a7a;
-  border-radius: 10px;
-  color: #FFF;
-  border: 0;
-}
+    input[type="radio"]:checked + .switch--on {
+        background-color: #7eab55;
+    }
 
-::-webkit-input-placeholder {
-    font-size: 14px;
-	font-family: centrale;
-}
+    input[type="radio"]:checked + .switch--off {
+        background-color: #dd4a38;
 
-:-moz-placeholder {
-    font-size: 14px;
-    font-weight: 600;
-}
-:-ms-input-placeholder {
-    font-size: 14px;
-}
+    }
+    .switch
+    {
+        padding-bottom: 4px;
+    }
+</style>
 
-.question
-{
+<div class="row question">
+    <div class="col-md-6 col-md-offset-3" >
+        <div class="recherche text-center">
+            <p>
+                <input type="radio" name="s1" id="sOn" value="1" hidden checked>  
+                <label for="sOn" class="back-color switch switch--on" id="sli-de">Demander</label>
 
-}
-
-.switch {
-	color: #6f839a;
-	cursor: pointer;
-	font-family: centrale;
-	font-size: 1.8em;
-	line-height: 2em;
-	padding-left: 10px;
-	padding-right: 10px;
-	border-radius: 3px;
-	display: inline-block;
-	background-color: #3e4956;
-	-webkit-transition: .15s ease;
-	-moz-transition: .15s ease;
-	-ms-transition: .15s ease;
-	-o-transition: .15s ease;
-	transition: .15s ease;
-	margin-left: 5px;
-	margin-right: 5px;
-}
-
-input[type="radio"]:checked + .switch {
-	color: #fff;
-	padding-left: 1.4em;
-	padding-right: 1.4em;
-}
-
-input[type="radio"]:checked + .switch--on {
-	background-color: #7eab55;
-}
-
-input[type="radio"]:checked + .switch--off {
-	background-color: #dd4a38;
-	
-}
-.switch
-{
-	padding-bottom: 4px;
-}
-    </style>
-    
-    <div class="row question">
-            <div class="col-md-6 col-md-offset-3" >
-                      <div class="recherche text-center">
-                      	<p>
-                      		<input type="radio" name="s1" id="sOn" value="1" hidden checked>  
-					  		<label for="sOn" class="back-color switch switch--on" id="sli-de">Demander</label>
-                        
-					  		<input type="radio" name="s1" id="sOff" value="0" hidden>
-					  		<label for="sOff" class="back-color switch switch--off" id="sli-re">Répondre</label>
-                        </p>
-                      </div>
-            </div>
+                <input type="radio" name="s1" id="sOff" value="0" hidden>
+                <label for="sOff" class="back-color switch switch--off" id="sli-re">Répondre</label>
+            </p>
+        </div>
     </div>
+</div>
 
-    <div class="slider" id="sli1" >
-                    <div style="clear:both;">
-                        <div class="find-content">
-                            <form action="{{ path('smart_unity_question_reponse_search_questions') }}" method="GET">
-                            <div spellcheck="false" class="input-group cent-h find-slider">
-                              <input type="text" placeholder="Entrez votre question ici..." name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">
-                              <input type="hidden" name="p" id="p" value="1" class="form-control">
-                              <span class="input-group-btn">
-                                <button class="search-btn" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
-                              </span>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div style="clear:both;">
+<div class="slider" id="sli1">
+    <div style="clear:both;">
+        <div class="find-content">
+            <form action="{{ path('smart_unity_question_reponse_search_questions') }}" method="GET">
+                <div spellcheck="false" class="input-group cent-h find-slider">
+                    <input type="text" placeholder="Entrez votre question ici..." name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">
+                    <input type="hidden" name="p" id="p" value="1" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="search-btn" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="clear:both;">
+    </div>
+</div>
+
+<div class="slider" id="sli2">
+    <div style="clear:both;">
+        <div class="find-content">
+            <form action="" method="GET">
+                <div class="cent-h">
+                    <div class="row">
+                    {{ form_widget(formQuestion.marque) }}
+                    {{ form_widget(formQuestion.modele) }}
+                    {{ form_widget(formQuestion.os) }}
+                    {{ form_widget(formQuestion.typeQuestion) }}
+                            <button class="search-btn" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                     </div>
                 </div>
+            </form>
+        </div>
+    </div>
+    <div style="clear:both;">
+    </div>  
+</div>
 
-                <script>
-                  $( "#sli-de" ).click(function() {
-                    $( "#sli1" ).animate({  
-                      marginLeft: "0%",
-                    }, 600,"swing", function() {
-                      // Animation complete.
-                    });
-                  });
-                  $( "#sli-re" ).click(function() {
-                    $( "#sli1" ).animate({  
-                      marginLeft: "-100%",
-                    }, 600,"swing" , function() {
-                      // Animation complete.
-                    });
-                  });
-                </script>
-              
-              
-                <script>
- ///Initilisation des couleurs pour les boutons demander et répondre
-               
-                var nbAl = Math.floor((Math.random()*6)+1)-1; 
-				var backColDemand = new Array(); 
-						backColDemand[0] = "#8AC757"; 
-						backColDemand[1] = "#3E7F89"; 
-						backColDemand[2] = "#5B4E9B";
-						backColDemand[3] = "#4AA95F"; 
-						backColDemand[4] = "#CCDA5F";
-						backColDemand[5] = "#559AA9";
-				var backColRep = new Array(); 
-						backColRep[0] = "#C7587A"; 
-						backColRep[1] = "#DF9E62"; 
-						backColRep[2] = "#DFC762"; 
-						backColRep[3] = "#DF6E62";	
-						backColRep[4] = "#459E6E";
-						backColRep[5] = "#E37151";	
-	
-			$('#sli-de').css("background-color", backColDemand[nbAl]);
+<script>
+{#                  $( "#sli-de" ).click(function() {
+    $( "#sli1" ).animate({  
+      marginLeft: "0%",
+    }, 600,"swing", function() {
+      // Animation complete.
+    });
+  });#}
+{#                  $( "#sli-re" ).click(function() {
+    $( "#sli1" ).animate({  
+      marginLeft: "-100%",
+    }, 600,"swing" , function() {
+      // Animation complete.
+    });
+  });#}
+    $("#sli-re").click(function() {
+        $('#sli1').fadeToggle(100, 'linear', function() {
+            $('#sli2').fadeToggle(100);
+        });
+    });
+
+    $("#sli-de").click(function() {
+        $('#sli2').fadeToggle(100, 'linear', function() {
+            $('#sli1').fadeToggle(100);
+        });
+    });
+</script>
+
+
+<script>
+///Initilisation des couleurs pour les boutons demander et répondre
+
+    var nbAl = Math.floor((Math.random() * 6) + 1) - 1;
+    var backColDemand = new Array();
+    backColDemand[0] = "#8AC757";
+    backColDemand[1] = "#3E7F89";
+    backColDemand[2] = "#5B4E9B";
+    backColDemand[3] = "#4AA95F";
+    backColDemand[4] = "#CCDA5F";
+    backColDemand[5] = "#559AA9";
+    var backColRep = new Array();
+    backColRep[0] = "#C7587A";
+    backColRep[1] = "#DF9E62";
+    backColRep[2] = "#DFC762";
+    backColRep[3] = "#DF6E62";
+    backColRep[4] = "#459E6E";
+    backColRep[5] = "#E37151";
+
+    $('#sli-de').css("background-color", backColDemand[nbAl]);
 
 //// Modifications des couleurs quand on clique		
-		
-			$('#sli-re').click(function () {
-						$(this).css("background-color", backColRep[nbAl]);
-						$('#sli-de').css("background-color", "#3e4956");
-					});
-					
-			$('#sli-de').click(function () {
-						$(this).css("background-color", backColDemand[nbAl]);
-						$('#sli-re').css("background-color", "#3e4956");
-					});			
-							
-                </script>
+
+    $('#sli-re').click(function() {
+        $(this).css("background-color", backColRep[nbAl]);
+        $('#sli-de').css("background-color", "#3e4956");
+    });
+
+    $('#sli-de').click(function() {
+        $(this).css("background-color", backColDemand[nbAl]);
+        $('#sli-re').css("background-color", "#3e4956");
+    });
+
+</script>
 
 {% endblock %}

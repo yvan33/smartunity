@@ -81,7 +81,7 @@ class AccueilController extends Controller {
 
 
 
-        //Liste Reponses
+        //Liste Solutions
         ////////////
         $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
             'type' => 'reponses',
@@ -99,6 +99,36 @@ class AccueilController extends Controller {
         else
             throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
 
+        
+//Création du formulaire pour les filtres de recherche de question
+        
+        $newQuestion = new \SmartUnity\AppBundle\Entity\Question();
+        
+        $formQuestion = $this->createFormBuilder($newQuestion)
+                ->add('marque', 'entity', array(
+                    'class' => 'SmartUnityAppBundle:marque',
+                    'property' => 'nom',
+                    'required' => false,
+                    'empty_value' => 'Choisissez',
+                    'empty_data' => NULL))
+                ->add('modele', 'entity', array(
+                    'class' => 'SmartUnityAppBundle:modele',
+                    'property' => 'nom',
+                    'required' => false,
+                    'empty_value' => 'Choisissez',
+                    'empty_data' => NULL))
+                ->add('os', 'entity', array(
+                    'class' => 'SmartUnityAppBundle:os',
+                    'property' => 'nom',
+                    'required' => false,
+                    'empty_value' => 'Choisissez',
+                    'empty_data' => NULL))
+                ->add('typeQuestion', 'entity', array(
+                    'class' => 'SmartUnityAppBundle:typeQuestion',
+                    'property' => 'nom',
+                    'empty_value' => 'Choisissez une option',
+                    'required' => true))
+                ->getForm();
 
 
         return $this->renderLogin(array(
@@ -109,6 +139,7 @@ class AccueilController extends Controller {
                     'countLast' => count($listeLastQuestions),
                     'listeSolvedQuestions' => $listeSolvedQuestions,
                     'countSolved' => count($listeSolvedQuestions),
+                    'formQuestion' => $formQuestion->createView(),
         ));
     }
 
