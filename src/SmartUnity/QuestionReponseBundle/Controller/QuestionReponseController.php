@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 use Elastica;
 
+
 class QuestionReponseController extends Controller {
 
     public function indexAction() {
@@ -141,14 +142,17 @@ class QuestionReponseController extends Controller {
         $page = $this->getRequest()->query->get('p');
         $nbParPage = 10;
 
-
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
+
     $sujetQuery = new \Elastica\Query\Text();
+
     $sujetQuery->setFieldQuery('sujet', $question);
 //    $sujetQuery->setFieldParam('sujet', 'analyzer', 'custom_french_analyzer');        
     
+
     $descriptionQuery = new \Elastica\Query\Text();
+
     $descriptionQuery->setFieldQuery('description', $question);
 //    $descriptionQuery->setFieldParam('description', 'analyzer', 'custom_french_analyzer'); 
     
