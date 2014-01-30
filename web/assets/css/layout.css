@@ -657,4 +657,37 @@ border-right: 1px solid #ddd;
 }
 
 /* Fenêtre modale log in */
+.modal-content
+{
+	margin-top: 150px;
+	margin-left: 90px;
+	background: #f3f0eb;
+	border-radius: 0;
+	border-color: 1px solid #e8e4dc;
+	width: 400px;
+}
+
+.modal-header
+{
+	border-bottom: 0;
+	padding-bottom: 0;
+	padding-left: 36px;
+}
+
+.modal-header h4
+{
+	font-family: centrale;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.modal-title
+{
+	line-height: 1;
+}
+
+.modal-body .panel-body
+{
+	padding-top: 0;
+}
 
