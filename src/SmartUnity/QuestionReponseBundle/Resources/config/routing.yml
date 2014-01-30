@@ -9,10 +9,10 @@ smart_unity_question_reponse_list_of_question:
         type: onFire|last|reponses|question
         page: \d+
 
-smart_unity_question_reponse_search_questions:
+smart_unity_question_reponse_demander_questions:
     pattern: /recherche/
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchQuestion }
-
+    
 smart_unity_question_reponse_display_reponse:
     pattern:  /reponse/{slug}/{tri}/{page}/{haveAddedAnswer}/{haveEditedQuestion}/{haveEditedReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'', tri:'vote', haveAddedAnswer:'0', haveEditedQuestion:'0', haveEditedReponse:'0' }
