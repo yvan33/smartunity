@@ -652,22 +652,67 @@ input
 .fleche p
 {
 
-    font-size:26px;
     font-family: centrale;
 }
 
-.textevert{
+.textevert-petit{
 
     color:#85c53a;
+    font-size:22px;
 }
-.texterouge{
+
+.textevert-moyen{
+
+    color:#85c53a;
+    font-size:24px;
+}
+
+.textevert-grand{
+
+    color:#85c53a;
+    font-size:26px;
+}
+
+.texterouge-petit{
 
     color:#d42434;
+    font-size:22px;
 }
-.textegris{
+
+.texterouge-moyen{
+
+    color:#d42434;
+    font-size:24px;
+}
+
+.texterouge-grand{
+
+    color:#d42434;
+    font-size:26px;
+}
+
+.textegris-petit{
 
     color:#7e7e7e;
+    font-size:22px;
 }
+
+.textegris-moyen{
+
+    color:#7e7e7e;
+    font-size:24px;
+}
+
+.textegris-grand{
+
+    color:#7e7e7e;
+    font-size:26px;
+}
+
+/*.textegris{
+
+    color:#7e7e7e;
+}*/
 /*.bouton-validation.popover.right{
         background-color: #333;
         width: 200px;   
