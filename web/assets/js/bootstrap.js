@@ -290,6 +290,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
  * limitations under the License.
  * ======================================================================== */
 
+/*
 
 +function ($) { "use strict";
 
@@ -488,6 +489,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   })
 
 }(window.jQuery);
+*/
 
 /* ========================================================================
  * Bootstrap: collapse.js v3.0.0

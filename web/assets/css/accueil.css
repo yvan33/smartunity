@@ -252,8 +252,7 @@
 .carousel-indicators li:hover
 {
 	opacity: 1;
-}
-	
+}	
 
 .tab-content .bouton-repondre
 {
@@ -340,3 +339,44 @@
 	width: 160px;
 	font-size: 18px;
 }
+
+.text-autre
+{
+	margin-left: 305px;
+	width: 33%;
+	position: absolute;
+	text-align: left;
+	padding-top: 0;
+	top: 9.5%;
+}
+
+.text-autre hr
+{
+	margin: 0 0 13px 0;
+	width: 95%;
+}
+
+.text-autre h1
+{
+	margin-top: 0;
+	margin-bottom: 7px;
+	font-size: 2.45em;
+	font-family: centrale;
+}
+
+.text-autre h2
+{
+	margin-top: 0;
+	margin-bottom: 8px;
+	font-size: 1.45em;
+	font-family: centrale;
+	font-weight: bold;
+}
+
+.text-autre h3
+{
+	margin-top: 0;
+	font-size: 1.05em;
+	font-family: centrale;
+}
+
