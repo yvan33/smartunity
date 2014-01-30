@@ -5,13 +5,11 @@ namespace SmartUnity\QuestionReponseBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Elastica\Query;
-use Elastica;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
+use FOS\ElasticaBundle;
 
 class QuestionReponseController extends Controller {
 
@@ -146,35 +144,54 @@ class QuestionReponseController extends Controller {
 
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
-        $queryString = '{
-                "query" : {';
+    $sujetQuery = new \Elastica_Query_Text();
+    $sujetQuery->setFieldQuery('sujet', $question);
+    $sujetQuery->setFieldParam('sujet', 'analyzer', 'custom_french_analyzer');        
+    
+    $descriptionQuery = new \Elastica_Query_Text();
+    $descriptionQuery->setFieldQuery('description', $question);
+    $descriptionQuery->setFieldParam('description', 'analyzer', 'custom_french_analyzer'); 
+    
+    $boolQuery = new \Elastica_Query_Bool();
+    $boolQuery->addShould($sujetQuery);
+    $boolQuery->addShould($descriptionQuery);
+//        $queryString = '{
+//                "query" : {';
+//
+//        if ($question == '') {
+//            $queryString .= '"match_all": {}';
+//        } else {
+//            $queryString .= '"query_string" : {
+//                        "query" : "' . urldecode($question) . '",
+//                        "fields": ["sujet^5","description"],
+//                        "analyzer": "snowball"
+//                    }';
+//        }
+//
+//        $queryString .= '},
+//                "from" : "' . $nbParPage * ($page - 1) . '",
+//                "size" : "' . $nbParPage . '"
+//                }';
+//        
+//    
+//        $query = new Elastica\Query\Builder($queryString);
 
-        if ($question == '') {
-            $queryString .= '"match_all": {}';
-        } else {
-            $queryString .= '"query_string" : {
-                        "query" : "' . urldecode($question) . '"
-                    }';
-        }
+        
+        
+        p($boolQuery);
 
-        $queryString .= '},
-                "from" : "' . $nbParPage * ($page - 1) . '",
-                "size" : "' . $nbParPage . '"
-                }';
-
-        $query = new Elastica\Query\Builder($queryString);
-
-        $nbQuestions = count($finder->find(urldecode($question)));
+        $nbQuestions = count($finder->find($boolQuery));
         $nbPages = ceil($nbQuestions / $nbParPage);
 
-        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
-
+//        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
+        $resultSet = $finder->find($boolQuery);
+        
         $listeQuestions = array();
-
         foreach ($resultSet as $result) {
 
 
-            $Question = $result->getTransformed();
+//            $Question = $result->getTransformed();
+            $Question = $result;
 
 
             $bestReponse = '';

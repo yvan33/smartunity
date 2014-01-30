@@ -21,6 +21,14 @@ smart_unity_admin:
     resource: "@SmartUnityAdminBundle/Resources/config/routing.yml"
     prefix:   /Admin/
 
+smart_unity_blog:
+    resource: "@SmartUnityBlogBundle/Resources/config/routing.yml"
+    prefix: /Blog 
+    
+mv_blog_admin:
+    resource: "@MvBlogBundle/Resources/config/routing_admin.yml"
+    prefix: /badp
+    
 smart_unity_app:
     resource: "@SmartUnityAppBundle/Resources/config/routing.yml"
     prefix:   /
@@ -41,9 +49,7 @@ _facebook_secured:
 fos_facebook_channel:
     resource: "@FOSFacebookBundle/Resources/config/routing.xml" 
 
-smart_unity_blog:
-    resource: "@SmartUnityBlogBundle/Resources/config/routing.yml"
-    prefix: /Blog  
+
 
    
 

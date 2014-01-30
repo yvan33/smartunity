@@ -110,9 +110,9 @@ fos_elastica:
             types:
                 question:
                     mappings:
-                        date: {  type: date }
-                        sujet: { analyzer: custom_french_analyzer, type: string }
-                        description: { analyzer: custom_french_analyzer, type: string }
+                        date: {}
+                        sujet: { analyzer: custom_french_analyzer}
+                        description: { analyzer: custom_french_analyzer}
                     persistence:
                         driver: orm # orm, mongodb, propel are available
                         model: SmartUnity\AppBundle\Entity\question
