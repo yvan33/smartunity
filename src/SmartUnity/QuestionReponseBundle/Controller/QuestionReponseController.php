@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
-use FOS\ElasticaBundle;
+use Elastica;
 
 class QuestionReponseController extends Controller {
 
@@ -144,15 +144,15 @@ class QuestionReponseController extends Controller {
 
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
-    $sujetQuery = new \Elastica_Query_Text();
+    $sujetQuery = new \Elastica\Query\Text();
     $sujetQuery->setFieldQuery('sujet', $question);
-    $sujetQuery->setFieldParam('sujet', 'analyzer', 'custom_french_analyzer');        
+//    $sujetQuery->setFieldParam('sujet', 'analyzer', 'custom_french_analyzer');        
     
-    $descriptionQuery = new \Elastica_Query_Text();
+    $descriptionQuery = new \Elastica\Query\Text();
     $descriptionQuery->setFieldQuery('description', $question);
-    $descriptionQuery->setFieldParam('description', 'analyzer', 'custom_french_analyzer'); 
+//    $descriptionQuery->setFieldParam('description', 'analyzer', 'custom_french_analyzer'); 
     
-    $boolQuery = new \Elastica_Query_Bool();
+    $boolQuery = new \Elastica\Query\Bool();
     $boolQuery->addShould($sujetQuery);
     $boolQuery->addShould($descriptionQuery);
 //        $queryString = '{
