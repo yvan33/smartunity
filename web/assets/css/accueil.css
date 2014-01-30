@@ -301,9 +301,11 @@
 
 .text-accueil hr
 {
-	margin: 0 0 13px 0;
+	margin: 0 0 18px 0;
 	width: 70%;
 	margin-left: 140px;
+	background-color: white;
+	height: 1.5px;
 }
 
 .text-accueil h1
@@ -316,7 +318,7 @@
 .text-accueil h2
 {
 	margin-top: 0;
-	margin-bottom: 8px;
+	margin-bottom: 18px;
 	font-size: 1.45em;
 	font-family: centrale;
 }
@@ -334,7 +336,7 @@
 	z-index: 2;
 	left: 50%;
 	margin-left: -80px;
-	margin-top: 40px;
+	margin-top: 30px;
 	height: 45px;
 	width: 160px;
 	font-size: 18px;
@@ -354,6 +356,8 @@
 {
 	margin: 0 0 13px 0;
 	width: 95%;
+	background-color: white;
+	height: 1.5px;
 }
 
 .text-autre h1
