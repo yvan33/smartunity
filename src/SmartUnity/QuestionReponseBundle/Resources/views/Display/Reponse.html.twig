@@ -608,7 +608,19 @@ Toast
             if (!pEntry['is_voted'])
                 entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
             entity += ' {% endif %}> \
-                                          <img src="{{ asset('assets/img/fleche_plus.png') }}" /><p class="textevert">' + pEntry['up_vote'] + '</p> \
+                                          <img src="{{ asset('assets/img/fleche_plus.png') }}" />';
+            if (pEntry['up_vote'] > 9 and pEntry['up_vote'] < 100)
+            {
+                entity+='<p class="textegris-moyen">';
+            }
+            elseif(pEntry['up_vote'] > 100)
+            {
+                entity+='<p class="textegris-petit">';
+            }
+            else{
+                entity+='<p class="textegris-grand">';
+            }
+            entity+= pEntry['up_vote'] + '</p> \
                                         </div>';}
         else        
             { 
@@ -616,7 +628,19 @@ Toast
             if (!pEntry['is_voted'])
                 entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
             entity += ' {% endif %}> \
-                                          <img src="{{ asset('assets/img/fleche_plus_grise.png') }}" /><p class="textegris">' + pEntry['up_vote'] + '</p> \
+                <img src="{{ asset('assets/img/fleche_plus_grise.png') }}" />';
+            if (pEntry['up_vote'] > 9 and pEntry['up_vote'] < 100)
+            {
+                entity+='<p class="textegris-moyen">';
+            }
+            elseif(pEntry['up_vote'] > 100)
+            {
+                entity+='<p class="textegris-petit">';
+            }
+            else{
+                entity+='<p class="textegris-grand">';
+            }
+            entity += pEntry['up_vote'] + '</p> \
                                         </div> ';
         }
         if (- pEntry['down_vote'] > pEntry['up_vote'])
@@ -624,14 +648,39 @@ Toast
             if (!pEntry['is_voted'])
                 entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
             entity += ' {% endif %}> \
-                                          <img src="{{ asset('assets/img/fleche_moins.png') }}" /><p class="texterouge">' + pEntry['down_vote'] + '</p> \
+                                          <img src="{{ asset('assets/img/fleche_moins.png') }}" />';
+
+            if (pEntry['down_vote']< -9 and pEntry['down_vote'] > -100)
+            {
+                entity+='<p class="texterouge-moyen">';
+            }
+            elseif(pEntry['down_vote'] < -100)
+            {
+                entity+='<p class="texterouge-petit">';
+            }
+            else{
+                entity+='<p class="texterouge-grand">';
+            }
+            entity+= pEntry['down_vote'] + '</p> \
                                         </div>';}
         else        
          {   entity+='<div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') %}';
             if (!pEntry['is_voted'])
                 entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
             entity += ' {% endif %}> \
-                                          <img src="{{ asset('assets/img/fleche_moins_grise.png') }}" /><p class="textegris">' + pEntry['down_vote'] + '</p> \
+                                          <img src="{{ asset('assets/img/fleche_moins_grise.png') }}" />';
+            if (pEntry['down_vote']< -9 and pEntry['down_vote'] > -100)
+            {
+                entity+='<p class="textegris-moyen">';
+            }
+            elseif(pEntry['down_vote'] < -100)
+            {
+                entity+='<p class="textegris-petit">';
+            }
+            else{
+                entity+='<p class="textegris-grand">';
+            } 
+            entity += pEntry['down_vote'] + '</p> \
                                         </div>';     
         }
         entity+='</div> \
