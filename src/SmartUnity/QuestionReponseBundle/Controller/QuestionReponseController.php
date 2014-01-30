@@ -145,20 +145,25 @@ class QuestionReponseController extends Controller {
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
 
-    $sujetQuery = new \Elastica\Query\Text();
-
+          if ($question == '') { 
+          $query = new \Elastica\Query\MatchAll(); 
+//          $query->addParam('from', $nbParPage * ($page - 1));
+//          $query->addParam('size', $nbParPage);
+          }
+          else{
+    $sujetQuery = new \Elastica\Query\Match;
     $sujetQuery->setFieldQuery('sujet', $question);
 //    $sujetQuery->setFieldParam('sujet', 'analyzer', 'custom_french_analyzer');        
     
-
-    $descriptionQuery = new \Elastica\Query\Text();
-
+    $descriptionQuery = new \Elastica\Query\Match;
     $descriptionQuery->setFieldQuery('description', $question);
 //    $descriptionQuery->setFieldParam('description', 'analyzer', 'custom_french_analyzer'); 
     
-    $boolQuery = new \Elastica\Query\Bool();
-    $boolQuery->addShould($sujetQuery);
-    $boolQuery->addShould($descriptionQuery);
+    $query = new \Elastica\Query\Bool();
+    $query->addShould($sujetQuery);
+    $query->addShould($descriptionQuery);
+          }
+          
 //        $queryString = '{
 //                "query" : {';
 //
@@ -182,13 +187,14 @@ class QuestionReponseController extends Controller {
 
         
         
-        p($boolQuery);
 
-        $nbQuestions = count($finder->find($boolQuery));
+        $nbQuestions = count($finder->find($query));
+                p($nbQuestions);
+
         $nbPages = ceil($nbQuestions / $nbParPage);
 
 //        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
-        $resultSet = $finder->find($boolQuery);
+        $resultSet = $finder->find($query);
         
         $listeQuestions = array();
         foreach ($resultSet as $result) {
