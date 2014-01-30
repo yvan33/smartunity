@@ -1,0 +1,156 @@
+root { 
+  display: block;
+}
+
+H1, H2{
+  margin: 0 0 0.3em 0;
+  padding: 0;
+  font-size: 1.4em;
+}
+
+A{
+  text-decoration: none;
+}
+
+A:hover{
+  text-decoration: underline;
+}
+
+
+.clear{
+  clear: both;
+}
+
+DIV#mv_blog_page {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+DIV#mv_blog_menu_left {
+  width: 240px;
+  padding: 10px;
+  float: left;
+  min-height: 500px;
+}
+
+DIV#mv_blog_menu_left UL {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+DIV#mv_blog_menu_left UL LI {
+  padding: 6px 10px;
+}
+
+DIV#mv_blog_menu_left UL > LI A{
+  text-decoration: none;
+}
+
+DIV#mv_blog_menu_left UL > LI A:hover{
+  text-decoration: underline;
+}
+
+DIV#mv_blog_body {
+  float: left;
+  width: 720px;
+  padding: 10px 10px 10px 10px;
+}
+
+DIV#mv_blog_body pre{
+    overflow-x: auto;
+}
+
+DIV.mv_blog_accroche {
+  margin-bottom: 1em;
+}
+
+DIV.mv_blog_article_list {
+  padding: 10px 8px 2px 8px;
+}
+
+P.mv_blog_article_suite A {
+  font-size: 0.9em;
+}
+
+UL.article_categories {
+  list-style: none;
+  padding: 2px 0;
+  margin: 0;
+}
+
+UL.article_categories LI {
+  padding: 2px 10px;
+  font-size: 0.85em;
+}
+
+.mv_blog_mention {
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+/************** Social share ***************/
+DIV.social-share{
+  clear: both;
+  width: 100%;
+}
+
+DIV.social-share > DIV{
+  float: left;
+  margin-right: 20px;
+  width: auto
+}
+
+/************** Commentaires ***************/
+DIV.mv_blog_commentaire {
+  padding: 4px 6px;  
+}
+
+DIV.mv_blog_commentaire.odd {
+  background-color: #f6f6f6;
+}
+
+DIV.mv_blog_commentaire.even {
+  background-color: #fafafa;
+}
+
+DIV.mv_blog_commentaire P {
+  font-size: 0.9em;
+  margin: 3px 0;
+}
+
+DIV.mv_blog_commentaire P.mv_blog_mention {
+  font-size: 0.8em;
+  margin: 3px 0;
+}
+
+FORM.mv_blog_new_comment FIELDSET {
+  border: 1px solid #ccc;
+  width: auto;
+  padding: 8px;
+  margin-top: 10px;
+}
+
+FORM.mv_blog_new_comment FIELDSET LEGEND {
+  font-size: 0.8em;
+  color: #bbb;  
+}
+
+FORM.mv_blog_new_comment FIELDSET P {
+  margin: 0 7.2em; 
+}
+
+FORM.mv_blog_new_comment LABEL {
+  display: inline-block;
+  font-size: 0.9em;
+  vertical-align: top;
+  width: 8em;
+}
+
+FORM.mv_blog_new_comment INPUT[type=text],
+FORM.mv_blog_new_comment INPUT[type=email],
+FORM.mv_blog_new_comment INPUT[type=url],
+FORM.mv_blog_new_comment TEXTAREA {
+  width: 400px;
+}
+/*******************************************/

@@ -1,0 +1,36 @@
+DIV.flash-notice {
+    background-color: #009933;
+    color: #efe;
+    text-align: center;
+    font-size: 0.9em;
+}
+DIV.flash-error {
+    background-color: #AA3333;
+    color: #fee;
+    text-align: center;
+    font-size: 0.9em;
+}
+DIV.mv_blog_navigation {
+    text-align: right;
+    overflow: hidden;
+    white-space: nowrap;
+}
+DIV.mv_blog_navigation SPAN{
+    white-space: normal;
+    padding: 3px;
+    margin: 4px 0;
+    border: 1px solid #bbb;
+    display: inline-block;
+}
+FORM UL.mv_blog_error {
+    margin: 8px 0 2px 0;
+    padding-left: 14px;
+    color: #A33;
+}
+PRE { font-size: 0.8em; font-size: 0.8em; padding: 3px; }
+DIV.mv_blog_accroche A, DIV#mv_blog_article A { text-decoration: underline; }
+DIV.mv_blog_accroche A:hover, DIV#mv_blog_article A:hover { text-decoration: none; }
+
+.clear {
+  clear: both;
+}
