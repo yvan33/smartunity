@@ -26,9 +26,15 @@ Bonjour {{ app.user.username}}
                       
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
-                          <div class="item active">
-                          	<button class="bouton-repondre participer" onclick="self.location.href='{{ path('smart_unity_app_descriptionpage') }}'">En savoir plus</button>
-                            <img src="{{asset('assets/img/carousel-bienvenue.jpg') }}" alt="">
+                          <div id="slide-bienvenue" onload="apparitionTexte()" class="item active">
+                          	<div class="text-accueil">
+						  		<h1>Bienvenue dans la communauté</h1><hr></hr>
+						  		<h2>Le site d'entraide pour utilisateur de smartphone</h2>
+						  		<h3>Trouvez toutes les réponses à vos questions pour que l'utilisation de votre<br>smartphone devienne simple comme bonjour !</h3>
+						  		<h3>Partagez vos connaissances et gagnez des cadeaux !</h3>
+						  		<button class="bouton-repondre savoir-plus" onclick="self.location.href='{{ path('smart_unity_app_descriptionpage') }}'">En savoir plus</button>
+                          	</div>
+                            <img src="{{asset('assets/img/carousel-bienvenue1.jpg') }}" alt="">
                             <div class="carousel-caption">
                             
                             </div>
@@ -195,6 +201,11 @@ Bonjour {{ app.user.username}}
               </div>
   </div>
 </div>
+
+<script>
+{# animation carousel bienvenue #}
+$('.text-accueil').fadeTo(1, 1);
+</script>
 
 {% endblock %}
 

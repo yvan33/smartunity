@@ -220,18 +220,20 @@
 .carousel-control.left
 {
 	background-image:none;
-	margin: 145px 0 145px 0;	
+	margin: 145px 0 145px 0;
+	z-index: 2;	
 }
 
 .carousel-control.right
 {
 	background-image:none;
 	margin: 145px 0 145px 0;
+	    z-index: 2;
 }
 
 .carousel-indicators .active
 {
-	background-color: #abccd3;
+	background-color: white;
 	width: 14px;
 	height: 14px;
 	margin: 0 2px 0 2px;
@@ -239,12 +241,19 @@
 
 .carousel-indicators li
 {
-	border: 1px solid #abccd3;
+	border: 1px solid white;
 	width: 14px;
 	height: 14px;
 	border-radius: 14px;
 	margin: 0 2px 0 2px;
+	opacity: 0.5;
 }
+
+.carousel-indicators li:hover
+{
+	opacity: 1;
+}
+	
 
 .tab-content .bouton-repondre
 {
@@ -274,12 +283,59 @@
 	margin-bottom: 20px;
 }
 
-.participer
+.text-accueil
+{
+	margin-top: 22px;
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	text-align: center;
+	color: white;
+	opacity: 0;
+    -webkit-transition: opacity 2s ease;
+    -moz-transition: opacity 2s ease;
+    -ms-transition: opacity 2s ease;
+    -o-transition: opacity 2s ease;
+    transition: opacity 2s ease;
+    transition-delay: 0.5s;
+}
+
+.text-accueil hr
+{
+	margin: 0 0 13px 0;
+	width: 70%;
+	margin-left: 140px;
+}
+
+.text-accueil h1
+{
+	margin-bottom: 7px;
+	font-size: 2.45em;
+	font-family: centrale;
+}
+
+.text-accueil h2
+{
+	margin-top: 0;
+	margin-bottom: 8px;
+	font-size: 1.45em;
+	font-family: centrale;
+}
+
+.text-accueil h3
+{
+	margin-top: 0;
+	font-size: 1.05em;
+	font-family: centrale;
+}
+
+.savoir-plus
 {
 	position: absolute;
-	z-index: 1000;
-	left: 23%;
-	bottom: 12%;
+	z-index: 2;
+	left: 50%;
+	margin-left: -80px;
+	margin-top: 40px;
 	height: 45px;
 	width: 160px;
 	font-size: 18px;
