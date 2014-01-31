@@ -102,34 +102,8 @@ class AccueilController extends Controller {
         
 //Création du formulaire pour les filtres de recherche de question
         
-        $newQuestion = new \SmartUnity\AppBundle\Entity\Question();
-        
-        $formQuestion = $this->createFormBuilder($newQuestion)
-                ->add('marque', 'entity', array(
-                    'class' => 'SmartUnityAppBundle:marque',
-                    'property' => 'nom',
-                    'required' => false,
-                    'empty_value' => 'Choisissez',
-                    'empty_data' => NULL))
-                ->add('modele', 'entity', array(
-                    'class' => 'SmartUnityAppBundle:modele',
-                    'property' => 'nom',
-                    'required' => false,
-                    'empty_value' => 'Choisissez',
-                    'empty_data' => NULL))
-                ->add('os', 'entity', array(
-                    'class' => 'SmartUnityAppBundle:os',
-                    'property' => 'nom',
-                    'required' => false,
-                    'empty_value' => 'Choisissez',
-                    'empty_data' => NULL))
-                ->add('typeQuestion', 'entity', array(
-                    'class' => 'SmartUnityAppBundle:typeQuestion',
-                    'property' => 'nom',
-                    'empty_value' => 'Choisissez une option',
-                    'required' => true))
-                ->getForm();
-
+        $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
+        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche);
 
         return $this->renderLogin(array(
                     'error' => $error,

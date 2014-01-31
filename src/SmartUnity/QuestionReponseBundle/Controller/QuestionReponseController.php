@@ -96,8 +96,10 @@ class QuestionReponseController extends Controller {
             array_push($pagination, array('>', $page + 1, '3'));
             array_push($pagination, array('>>', $nbPages, '4'));
         }
-
-
+        
+/////Creation du formulaires pour les filtres
+        $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
+        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche);
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
         return $this->render($template, array(
@@ -108,7 +110,8 @@ class QuestionReponseController extends Controller {
                     'listeQuestions' => $listeQuestions,
                     'countListe' => count($listeQuestions),
                     'nbParPage' => $nbParPage,
-                    'pagination' => $pagination
+                    'pagination' => $pagination,
+                    'formQuestion' => $formQuestion->createView()
         ));
     }
 
@@ -259,8 +262,15 @@ class QuestionReponseController extends Controller {
             array_push($pagination, array('>>', $nbPages, '4'));
         }
 
-
-
+///Construction du formulaire pour les filtres avec comme valeur par défaur la recherche     
+        $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
+        $QuestionRecherche->setMarque();
+        $QuestionRecherche->setModele();
+        $QuestionRecherche->setOs();
+//        $QuestionRecherche->setTypeQuestion();
+        
+        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche);
+               
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Recherche.html.twig');
         return $this->render($template, array(
                     'error' => $error,
@@ -270,7 +280,8 @@ class QuestionReponseController extends Controller {
                     'listeQuestions' => $listeQuestions,
                     'countListe' => $nbQuestions,
                     'nbParPage' => $nbParPage,
-                    'pagination' => $pagination
+                    'pagination' => $pagination,
+                    'formQuestion' => $formQuestion->createView(),
         ));
     }
 
