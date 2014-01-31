@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: "@SmartUnityUtilisateurBundle/Resources/config/services.yml"}
+    - { resource: "@SmartUnityQuestionReponseBundle/Resources/config/services.yml"}
     - { resource: "@MvBlogBundle/Resources/config/config.yml" }
 
 framework:
@@ -113,6 +114,10 @@ fos_elastica:
                         date: {}
                         sujet: { analyzer: custom_french_analyzer}
                         description: { analyzer: custom_french_analyzer}
+                        marque: {}
+                        modele: {}
+                        os: {}
+                        typeQuestion: {}
                     persistence:
                         driver: orm # orm, mongodb, propel are available
                         model: SmartUnity\AppBundle\Entity\question
