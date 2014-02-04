@@ -651,6 +651,7 @@ class QuestionReponseController extends Controller {
                 $nouvelleDotation = $formEditQuestion->get('remuneration')->getData();
                 $cagnotte = $user->getCagnotte() - $nouvelleDotation - $ancienneDotation;
                 $user->setCagnotte($cagnotte);
+                $question->setDateModification(new \DateTime(date("Y-m-d H:i:s")));
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($question);

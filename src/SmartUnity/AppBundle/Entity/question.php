@@ -107,6 +107,12 @@ class question
     */
     private $commentaireQuestions;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateModification", type="datetime", nullable=true)
+     */
+    private $dateModification;
 
     /**
      * Constructor
@@ -477,5 +483,28 @@ class question
     public function getCommentaireQuestions()
     {
         return $this->commentaireQuestions;
+    }
+
+    /**
+     * Set dateModification
+     *
+     * @param \DateTime $dateModification
+     * @return question
+     */
+    public function setDateModification($dateModification) 
+    {
+        $this->dateModification = $dateModification;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateModification
+     *
+     * @return \DateTime 
+     */
+    public function getDateModification()
+    {
+        return $this->dateModification;
     }
 }

@@ -75,7 +75,10 @@
                               {% if question.os.nom is defined %}<span class="label label-default">{{question.os.nom}}</span>{% endif %}
                               {% if question.typeQuestion.nom is defined %}<span class="label label-default">{{question.typeQuestion.nom}}</span>{% endif %}
                     </div>
-
+                              <div>   {% if question.datemodification is not null %}
+<p>Modifiée le {{ question.datemodification|date('d-m-Y H:i:s') }} </p>
+{% endif %}
+</div>
 
                               {% for commentaire in question.commentaireQuestions %}
                                 {% if commentaire.signaler == 0 %}
@@ -87,6 +90,7 @@
                     </div>
                                 {% endif %}
                               {% endfor %}
+
 
                     <div class="bloc-commenter-repondre">
                         <div class="grille-3-btn">
@@ -112,7 +116,9 @@
         {% endif %}
 
                         </div>
+
                     </div>
+
                 </div>
             </div>
 
@@ -699,7 +705,7 @@ Toast
                                 <div class="grille-2" > \
                           \
                                   <div class="grille-3-over"> \
-                                    
+                                    <div class="grille-3"> \
                               \
                                         <div class="grille-3-grey"> \
                                             <div class="grille-3-im">';
