@@ -107,6 +107,12 @@ class question
     */
     private $commentaireQuestions;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateModification", type="datetime", nullable=true)
+     */
+    private $dateModification;
 
     /**
      * Constructor

@@ -358,4 +358,27 @@ class reponse
     {
         return $this->commentaireReponses;
     }
+
+    /**
+     * Set dateModification
+     *
+     * @param \DateTime $dateModification
+     * @return reponse
+     */
+    public function setDateModification($dateModification)
+    {
+        $this->dateModification = $dateModification;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateModification
+     *
+     * @return \DateTime 
+     */
+    public function getDateModification()
+    {
+        return $this->dateModification;
+    }
 }
