@@ -30,7 +30,6 @@
 	margin-right:-150px;
 	font-weight:bold;
   	width:130px;
-
 } 
 
 .grille-det2
@@ -39,9 +38,7 @@
   	float:left;
 	margin-top:10px;
 	margin-left:150px;
-	width:auto;
-
-	
+	width:auto;	
 } 
 
 .rond-point
@@ -65,8 +62,10 @@
 	margin-top:10px;
 	max-width:440px ;
 	min-width:380px ;
+}
 
-
+.grille-2 p {
+	margin-bottom: 0px;
 }
 
 .grille-3
