@@ -11,6 +11,11 @@
 	margin:10px 10px 10px 0;
 	float:left;
 }
+
+.grille-1 img {
+	margin-left: 20px;
+}
+
 .grille-det
 {
 	margin-left:110px;
@@ -66,6 +71,7 @@
 
 .grille-2 p {
 	margin-bottom: 0px;
+	line-height: 1.428571429;
 }
 
 .grille-3
