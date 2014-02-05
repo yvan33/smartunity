@@ -260,7 +260,7 @@ textarea {
     display: inline-block;
     color: #99bbc3;
     vertical-align: middle;
-    margin: 0px 5px;
+    margin: 0 5px;
 }
 
 .footer p
@@ -268,13 +268,18 @@ textarea {
     display: inline-block;
     color: #99bbc3;
     vertical-align: middle;
-    margin: 0px 5px;
 }
 
 .footer a:hover
 {
 	text-decoration: none;
 	color: white;
+}
+
+.copyright {
+	font-size: 12px;
+	margin-top: 9px;
+	margin-left: 5px;
 }
 
 .cent-h
@@ -416,7 +421,8 @@ textarea {
 .footer-text 
 {
     font-size: 12px;
-    margin-left: 30px;
+    margin-left: 20px;
+    margin-top: 0px;
 }
 
 .titre-smartunity{
@@ -698,4 +704,3 @@ border-right: 1px solid #ddd;
 {
 	padding-top: 0;
 }
-
