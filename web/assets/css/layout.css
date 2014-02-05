@@ -263,6 +263,14 @@ textarea {
     margin: 0px 5px;
 }
 
+.footer p
+{
+    display: inline-block;
+    color: #99bbc3;
+    vertical-align: middle;
+    margin: 0px 5px;
+}
+
 .footer a:hover
 {
 	text-decoration: none;
