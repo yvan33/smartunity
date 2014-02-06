@@ -4,11 +4,11 @@
     margin: 3px -150px 3px 0px;
     float: left;
 }
+
 .grille-2
 {
     margin: 3px 0px 3px 150px;
     width: auto;
-
 }
 
 .grille-content
@@ -19,7 +19,6 @@
     -webkit-box-shadow: 0 0 20px  #CCCCCC;
        -moz-box-shadow: 0 0 20px  #CCCCCC;
             box-shadow: 0 0 20px  #CCCCCC;
-
 }
 
 .head-blue
@@ -36,7 +35,6 @@
     height:35px;
     line-height:35px;
     margin: 0px -15px;
-
 }
 
 .premiere-ligne
@@ -54,7 +52,6 @@
 }
 
 .reponse-input{
-    
     height: 100px;
     width: 100%;
     margin: 2%;

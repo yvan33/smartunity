@@ -81,6 +81,25 @@
         -o-user-select: none;
         user-select: none;
     }
+    
+    .search-answer {
+    	display: inline-block;
+        background-color: #7b7a7a;
+        border:solid 1px #7b7a7a;
+        height: 32px;
+        color: #FFF;
+        width: 34px;
+        outline: none;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    	border-radius: 10px;
+    }
 
 
     .form-control
@@ -151,11 +170,15 @@
 
     input[type="radio"]:checked + .switch--off {
         background-color: #dd4a38;
-
     }
+    
     .switch
     {
         padding-bottom: 4px;
+    }
+    
+    .glyphicon {
+    	top: 2px;
     }
 </style>
 
@@ -196,13 +219,15 @@
         <div class="find-content">
                 {{form_start(formQuestion) }}
             <div class="cent-h">
-                <div class="row">
+                <div class="row select-dropdown">
+
                     {{ form_widget(formQuestion.marque) }}
                     {{ form_widget(formQuestion.os) }}
                     {{ form_widget(formQuestion.typeQuestion) }}
                     {{ form_widget(formQuestion.motCle) }}
                     {{form_widget(formQuestion._token)}}
-                    <button class="search-btn" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
+                    <button class="search-answer" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
+
                 </div>
             </div>
             </form>
@@ -213,20 +238,6 @@
 </div>
 
 <script>
-{#                  $( "#sli-de" ).click(function() {
-    $( "#sli1" ).animate({  
-      marginLeft: "0%",
-    }, 600,"swing", function() {
-      // Animation complete.
-    });
-  });#}
-{#                  $( "#sli-re" ).click(function() {
-    $( "#sli1" ).animate({  
-      marginLeft: "-100%",
-    }, 600,"swing" , function() {
-      // Animation complete.
-    });
-  });#}
     $("#sli-re").click(function() {
         if ($("#sli1").is(':visible')) {
 

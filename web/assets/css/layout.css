@@ -180,6 +180,14 @@ nav.navbar.navbar-inverse.navbar-fixed-top.menu-bg
 
 .navbar-inverse .navbar-nav>li>a {
     color: #99bbc3;
+    padding-bottom: 0;
+    padding-top: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.navbar-inverse {
+	border: none;
 }
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover {
@@ -716,3 +724,54 @@ border-right: 1px solid #ddd;
 {
 	padding-top: 0;
 }
+
+/* select barre de recherche */
+
+.select-dropdown {
+	margin-top: 8px;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #7b7a7a;
+	border: 0 !important;
+    height: 32px;
+    color: white;
+    font-family: centrale;
+    cursor: pointer;
+    background: url('../img/dropdown-arrows.png') no-repeat right #7b7a7a;
+    padding-left: 10px;
+    width : 105px;
+}
+
+select:focus {
+	outline: 0;
+}
+  
+#smartunity_filtres_repondre_typeQuestion {
+	width : 180px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
