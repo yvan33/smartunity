@@ -201,7 +201,7 @@
                     {{ form_widget(formQuestion.modele) }}
                     {{ form_widget(formQuestion.os) }}
                     {{ form_widget(formQuestion.typeQuestion) }}
-                            <button class="search-btn" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
+                        <button class="search-btn" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                     </div>
                 </div>
             </form>
@@ -227,15 +227,19 @@
     });
   });#}
     $("#sli-re").click(function() {
-        $('#sli1').fadeToggle(100, 'linear', function() {
-            $('#sli2').fadeToggle(100);
-        });
-    });
+        if ($("#sli1").is(':visible')) {
 
+            $('#sli1').fadeToggle(100, 'linear', function() {
+                $('#sli2').fadeToggle(100);
+        });
+    }
+});
     $("#sli-de").click(function() {
+                if ($("#sli2").is(':visible')) {
         $('#sli2').fadeToggle(100, 'linear', function() {
             $('#sli1').fadeToggle(100);
         });
+                }
     });
 </script>
 
