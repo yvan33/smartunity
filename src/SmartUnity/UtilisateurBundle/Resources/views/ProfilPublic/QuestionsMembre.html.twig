@@ -294,7 +294,19 @@
         var entity = '                               <div class="panel panel-default"> \
                                             <div class="panel-heading"> \
                                               <h4 class="panel-title"> \
-                                                <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">' + pEntry['remuneration'] + ' pts</p></div></div> \
+                                                                                                <div class="grille-1">';
+        
+        if(type == 'reponses'){
+            if (pEntry['certif_best_reponse'] != ''){
+                entity+='<div><img src="{{ asset('assets/img/certif.png') }}"/></div>'; 
+            }else{
+                entity+='<div><img src="{{ asset('assets/img/check.png') }}"/></div>'; 
+            }
+        }
+        else{
+            entity +='<div class="rond-point"><p class="txt-rond" style="font-weight:200;">' + pEntry['remuneration'] + ' pts</p></div>';
+        }
+        entity+='</div> \
                                                 <a data-toggle="collapse" data-parent="#accordion-' + type + '" href="#collapse' + type + i + '"> \
                                                 <div class="grille-2" ><p>' + pEntry['sujet'] + '</p> \
                                                 <p style="font-weight:200; font-style:italic">' + pEntry['membre_username'] + ' le ' + pEntry['date'] + '</p> </div></a> \
