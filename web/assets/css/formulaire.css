@@ -75,7 +75,8 @@
 
 .label-normal
 {
-    font-weight: normal;
+    font-weight: normal;.
+    font-size: 1.6em;
 }
 
 /*.validationInfos
@@ -148,6 +149,22 @@
     height:auto;
     width:auto;
     
+}
+
+.bouton-envoyer {
+
+    margin: 20px auto; 
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:22px;
+    height: 44px;
+    line-height:44px;
+    margin-bottom:25px;
+    text-align:center;
+    width:120px;
+    border-radius:2px;
+
 }
 
 .bouton-com-rep
