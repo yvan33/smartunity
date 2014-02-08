@@ -194,16 +194,17 @@
 <div class="slider" id="sli2">
     <div style="clear:both;">
         <div class="find-content">
-            <form action="" method="GET">
-                <div class="cent-h">
-                    <div class="row">
+                {{form_start(formQuestion) }}
+            <div class="cent-h">
+                <div class="row">
                     {{ form_widget(formQuestion.marque) }}
-                    {{ form_widget(formQuestion.modele) }}
                     {{ form_widget(formQuestion.os) }}
                     {{ form_widget(formQuestion.typeQuestion) }}
-                        <button class="search-btn" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
-                    </div>
+                    {{ form_widget(formQuestion.motCle) }}
+                    {{form_widget(formQuestion._token)}}
+                    <button class="search-btn" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                 </div>
+            </div>
             </form>
         </div>
     </div>
@@ -231,18 +232,17 @@
 
             $('#sli1').fadeToggle(100, 'linear', function() {
                 $('#sli2').fadeToggle(100);
-        });
-    }
-});
+            });
+        }
+    });
     $("#sli-de").click(function() {
-                if ($("#sli2").is(':visible')) {
-        $('#sli2').fadeToggle(100, 'linear', function() {
-            $('#sli1').fadeToggle(100);
-        });
-                }
+        if ($("#sli2").is(':visible')) {
+            $('#sli2').fadeToggle(100, 'linear', function() {
+                $('#sli1').fadeToggle(100);
+            });
+        }
     });
 </script>
-
 
 <script>
 ///Initilisation des couleurs pour les boutons demander et répondre

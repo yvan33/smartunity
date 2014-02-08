@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 use Elastica;
 
-
 class QuestionReponseController extends Controller {
 
     public function indexAction() {
@@ -96,10 +95,11 @@ class QuestionReponseController extends Controller {
             array_push($pagination, array('>', $page + 1, '3'));
             array_push($pagination, array('>>', $nbPages, '4'));
         }
-        
+
 /////Creation du formulaires pour les filtres
         $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
-        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche);
+        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
+            'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
         return $this->render($template, array(
@@ -115,7 +115,7 @@ class QuestionReponseController extends Controller {
         ));
     }
 
-    public function searchQuestionAction(Request $request) {
+    public function searchDemanderQuestionAction(Request $request) {
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -148,57 +148,32 @@ class QuestionReponseController extends Controller {
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
 
-          if ($question == '') { 
-          $query = new \Elastica\Query\MatchAll(); 
+        if ($question == '') {
+            $query = new \Elastica\Query\MatchAll();
 //          $query->addParam('from', $nbParPage * ($page - 1));
 //          $query->addParam('size', $nbParPage);
-          }
-          else{
-    $sujetQuery = new \Elastica\Query\Match;
-    $sujetQuery->setFieldQuery('sujet', $question);
+        } else {
+            $sujetQuery = new \Elastica\Query\Match;
+            $sujetQuery->setFieldQuery('sujet', $question);
 //    $sujetQuery->setFieldParam('sujet', 'analyzer', 'custom_french_analyzer');        
-    
-    $descriptionQuery = new \Elastica\Query\Match;
-    $descriptionQuery->setFieldQuery('description', $question);
-//    $descriptionQuery->setFieldParam('description', 'analyzer', 'custom_french_analyzer'); 
-    
-    $query = new \Elastica\Query\Bool();
-    $query->addShould($sujetQuery);
-    $query->addShould($descriptionQuery);
-          }
-          
-//        $queryString = '{
-//                "query" : {';
-//
-//        if ($question == '') {
-//            $queryString .= '"match_all": {}';
-//        } else {
-//            $queryString .= '"query_string" : {
-//                        "query" : "' . urldecode($question) . '",
-//                        "fields": ["sujet^5","description"],
-//                        "analyzer": "snowball"
-//                    }';
-//        }
-//
-//        $queryString .= '},
-//                "from" : "' . $nbParPage * ($page - 1) . '",
-//                "size" : "' . $nbParPage . '"
-//                }';
-//        
-//    
-//        $query = new Elastica\Query\Builder($queryString);
 
-        
-        
+            $descriptionQuery = new \Elastica\Query\Match;
+            $descriptionQuery->setFieldQuery('description', $question);
+//    $descriptionQuery->setFieldParam('description', 'analyzer', 'custom_french_analyzer'); 
+
+            $query = new \Elastica\Query\Bool();
+            $query->addShould($sujetQuery);
+            $query->addShould($descriptionQuery);
+        }
 
         $nbQuestions = count($finder->find($query));
-                p($nbQuestions);
+        p($nbQuestions);
 
         $nbPages = ceil($nbQuestions / $nbParPage);
 
 //        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
         $resultSet = $finder->find($query);
-        
+
         $listeQuestions = array();
         foreach ($resultSet as $result) {
 
@@ -262,15 +237,16 @@ class QuestionReponseController extends Controller {
             array_push($pagination, array('>>', $nbPages, '4'));
         }
 
-///Construction du formulaire pour les filtres avec comme valeur par défaur la recherche     
+///Construction du formulaire pour les filtres avec comme valeur par défaut la recherche     
         $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
         $QuestionRecherche->setMarque();
         $QuestionRecherche->setModele();
         $QuestionRecherche->setOs();
 //        $QuestionRecherche->setTypeQuestion();
-        
-        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche);
-               
+
+        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
+            'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
+
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Recherche.html.twig');
         return $this->render($template, array(
                     'error' => $error,
@@ -283,6 +259,28 @@ class QuestionReponseController extends Controller {
                     'pagination' => $pagination,
                     'formQuestion' => $formQuestion->createView(),
         ));
+    }
+
+    public function searchRepondreQuestionAction(Request $request) {
+
+        $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
+
+        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
+            'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
+
+
+        if ($this->getRequest()->getMethod() == 'POST') {
+            $formQuestion->bind($this->getRequest());
+            if ($formQuestion->isValid()) {
+                      
+                $marque = $formQuestion->get('marque')->getData();
+                die($marque->getNom());
+                    
+  
+            }
+        }
+
+        return new \Symfony\Component\HttpFoundation\Response('cool');
     }
 
     public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion, $haveEditedReponse) {
@@ -324,27 +322,24 @@ class QuestionReponseController extends Controller {
         $cleanJSON = array();
         $listeReponses = array();
         $rebuildJSON = '';
-        $cleanJSON = explode('[', $response,2);
+        $cleanJSON = explode('[', $response, 2);
         $listeReponses = json_decode('[' . $cleanJSON[1]);
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
         //la requête pour vérifier son authenticité... 
         //On récupère des infos utiles pour la pagination..
         $nbPages = $listeReponses[0]->nbPages;
         $nbReponses = $listeReponses[0]->nbReponses;
-        $taille= count($listeReponses);
-        $voteReponses=$listeReponses[($taille-1)];
+        $taille = count($listeReponses);
+        $voteReponses = $listeReponses[($taille - 1)];
 
         if ($page > $nbPages)
             $page = 1;
 
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
-        if ($listeReponses[0]->slug == $slug && $listeReponses[0]->nbParPage == $nbParPage && $listeReponses[0]->page == $page && $listeReponses[0]->tri == $tri)
-        {
+        if ($listeReponses[0]->slug == $slug && $listeReponses[0]->nbParPage == $nbParPage && $listeReponses[0]->page == $page && $listeReponses[0]->tri == $tri) {
             unset($listeReponses[0]);
-            unset($listeReponses[($taille-1)]);
-        }
-        else
-        {
+            unset($listeReponses[($taille - 1)]);
+        } else {
             throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
         }
 
@@ -364,14 +359,12 @@ class QuestionReponseController extends Controller {
             array_push($pagination, array('>>', $nbPages, '4'));
         }
 
-
         $questionRepository = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:question');
         $reponseRepository = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:reponse');
-
         $avatarRepository = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:avatar');
@@ -390,8 +383,6 @@ class QuestionReponseController extends Controller {
         if (isset($avatar)) {
             $avatar = $avatar->getWebPath();
         }
-
-
 
 // Creation des formulaires        
         $newCommentaireQuestion = new \SmartUnity\AppBundle\Entity\CommentaireQuestion();
@@ -418,18 +409,18 @@ class QuestionReponseController extends Controller {
                     'label' => false,
                 ))
                 ->add('valider', 'submit')
-                ->getForm();        
-        
+                ->getForm();
+
         if (true === $this->get('security.context')->isGranted('ROLE_USER')) {
             $user = $this->container->get('security.context')->getToken()->getUser();
-            
+
             foreach ($listeReponses as $reponse) {
-            if ($reponse->membre_id == $user->getId()) {
-                $isAnswered = TRUE;
-                break;
+                if ($reponse->membre_id == $user->getId()) {
+                    $isAnswered = TRUE;
+                    break;
+                }
             }
-        }
-        
+
             $formSoutien = $this->createFormBuilder()
                     ->setAction($this->generateUrl('smart_unity_question_reponse_add_soutien_question', array('slug' => $slug)))
                     ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
@@ -439,9 +430,9 @@ class QuestionReponseController extends Controller {
             $formSoutien = $this->createFormBuilder()->getForm();
         }
 
-        $isup_rep= $voteReponses->isup;
-        $isdown_rep= $voteReponses->isdown;
-       
+        $isup_rep = $voteReponses->isup;
+        $isdown_rep = $voteReponses->isdown;
+
 
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
@@ -516,37 +507,25 @@ class QuestionReponseController extends Controller {
                 ->add('save', 'submit', array('label' => 'Poser ma question'))
                 ->getForm();
 
-        if ($this->getRequest()->getMethod() == 'POST') {
-            $formQuestion->bind($this->getRequest());
 
-            if ($formQuestion->isValid()) {
-                $newQuestion->setMembre($user);
-                $newQuestion->setSignaler(false);
+        $newQuestion->setMembre($user);
+        $newQuestion->setSignaler(false);
 
-                $newQuestion->setDate(new \DateTime(date("Y-m-d H:i:s"))); //date locale
-                // $str = $formQuestion->get('sujet')->getData();
-                // $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-                // $replace = array('s', 't', 's', 't', 's', 't', 's', 't', 'i', 'a', 'a', 'i', 'a', 'a', 'e', 'E');
-                // $str = str_ireplace($search, $replace, strtolower(trim($str)));
-                // $str = preg_replace('/[^\w\d\-\ ]/', '', $str);
-                // $str = str_replace(' ', '-', $str);
-                // $slug= preg_replace('/\-{2,}', '-', $str);
+        $newQuestion->setDate(new \DateTime(date("Y-m-d H:i:s"))); //date locale
+        $newQuestion->setSlug($this->slugify($formQuestion->get('sujet')->getData()));
 
-                $newQuestion->setSlug($this->slugify($formQuestion->get('sujet')->getData()));
+        // $newQuestion->addSoutien($user);
+        $cagnotte = $user->getCagnotte() - $formQuestion->get('remuneration')->getData() + 10;
+        if ($cagnotte >= 0) {
+            $user->setCagnotte($cagnotte);
 
-                // $newQuestion->addSoutien($user);
-                $cagnotte = $user->getCagnotte() - $formQuestion->get('remuneration')->getData() + 10;
-                if ($cagnotte >= 0) {
-                    $user->setCagnotte($cagnotte);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newQuestion);
+            $em->flush();
 
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($newQuestion);
-                    $em->flush();
-
-                    return new Response('Votre question a bien été ajoutée');
-                }
-            }
+            return new Response('Votre question a bien été ajoutée');
         }
+
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig', array(
                     'formQuestion' => $formQuestion->createView(),
                     'dotationMax' => $dotationMax
@@ -615,7 +594,7 @@ class QuestionReponseController extends Controller {
                     'formEditQuestion' => $formEditQuestion->createView(),
                     'dotationMax' => $dotationMax
         ));
-    } 
+    }
 
     public function slugify($str) {
         $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
@@ -678,7 +657,7 @@ class QuestionReponseController extends Controller {
         }
         return "";
     }
-    
+
     public function editReponseAction($id, $slug) {
         $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($id);
 
@@ -687,7 +666,7 @@ class QuestionReponseController extends Controller {
                     'label' => false,
                 ))
                 ->add('valider', 'submit')
-                ->getForm();   
+                ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST') {
 
@@ -704,7 +683,7 @@ class QuestionReponseController extends Controller {
             }
         }
         return new \Exception('Votre réponse n\'a pas pu être ajoutée');
-    }    
+    }
 
     public function validationReponseAction($idReponse) {
         $reponseRepository = $this->getDoctrine()
@@ -728,14 +707,14 @@ class QuestionReponseController extends Controller {
 
                     $reponse[0]->setDateValidation(new \DateTime(date("Y-m-d H:i:s")));
                     $repondant = $reponse[0]->getMembre();
-                    $repondant->setReputation($repondant->getReputation() +50);       
-                            
+                    $repondant->setReputation($repondant->getReputation() + 50);
+
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($reponse[0]);
                     $em->persist($repondant);
                     $em->flush();
 
-                    
+
                     $prefRepValideeMembre = $repondant->getPrefRepValidee();
                     $mailMembreReponse = $repondant->getEmail();
 
@@ -779,14 +758,14 @@ class QuestionReponseController extends Controller {
                 $questionSlug = $reponse[0]->getQuestion()->getSlug();
 
                 $reponse[0]->setDateCertification(new \DateTime(date("Y-m-d H:i:s")));
-                
+
                 $repondant = $reponse[0]->getMembre();
-                $repondant->setReputation($repondant->getReputation() +50); 
-                
+                $repondant->setReputation($repondant->getReputation() + 50);
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse[0]);
                 $em->persist($repondant);
-                
+
                 $em->flush();
 
                 $prefRepCertifieemembre = $repondant->getPrefRepCertifiee();
