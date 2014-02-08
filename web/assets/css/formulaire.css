@@ -1,3 +1,10 @@
+@font-face{
+    font-family : "centrale";
+    src : url(../fonts/Centrale.ttf) format ('truetype');
+    /* pour IE */
+    src : url(../fonts/Centrale.ttf);
+}
+
 .grille-1
 {
     width:15%;
@@ -64,7 +71,9 @@
 
 .forminfo
 {
-    height: 100%;
+    height: 130%;
+    line-height: 13px;
+    padding-left: 10px;
 }
 
 .label-radio
@@ -78,12 +87,6 @@
     font-weight: normal;
     font-size: 15px;
 }
-
-/*.validationInfos
-{
-    position: relative;
-    top: 10em;
-}*/
 
 .bouton-bas-block
 {
@@ -125,23 +128,13 @@
     margin-bottom:20px; 
 }
 
-/*.fieldset-etroit
-{
-    padding-right: 0px;
-}*/
-
-/*@media screen and (max-width: 768px)
-{
-.fieldset-etroit
-{
-    padding-right: 0px;
-}
-}*/
-
 .erreur{
     
     color:red;
     
+}
+.cadre-general {
+	margin: 20px 0;
 }
 
 .cleared{
@@ -204,18 +197,45 @@
             box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
 }
 
-.bouton-envoyer
-{
-    margin: 15px auto 0 auto; 
-    background-color: #e37151;
-    color:#FFF;
-    font-family: centrale;
-    font-size:22px;
-    margin-bottom:25px;
-    text-align:center;
-    width:120px;
-    height:40px;
-    border-radius:2px;
-    border: 0;
+/* Registration */
+.text-why {
+	margin-bottom: 20px;
+}
 
+legend {
+	font-family: centrale;
+	border-bottom: 1px solid #CCC;
+	padding-bottom: 5px;
+}
+
+.btn-inscription {
+	border-radius: 2px;
+	background-color: #e37151;
+	height: 35px;
+	line-height: 35px;
+	color: white;
+	font-family: centrale;	
+    font-size: 20px;
+    border: 0;
+    padding: 0 20px;
+}
+
+.btn-inscription:focus {
+	outline: 0;
+}
+
+.titre-inscription {
+	margin-bottom: -15px;
+}
+
+fieldset {
+	margin-bottom: 15px;
+}
+
+.label-normal {
+	line-height: 25px;
+}
+
+.pref label {
+	margin-bottom: 0;
 }

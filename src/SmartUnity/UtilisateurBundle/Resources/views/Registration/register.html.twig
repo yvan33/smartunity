@@ -9,8 +9,7 @@
 {% block register %}
 <div class="row">
 
-    <div class="col-md-offset-1 col-md-10">
-{#        <div class="grille-content"> #}
+    <div class="col-md-offset-1 col-md-10 text-why">
             <div class="title text-center cookie-title">
                 Pourquoi?
             </div>
@@ -20,23 +19,19 @@
                     autres membres de la communauté.
                 </p>
                 <p>Pour s’incrire, il vous suffit de remplir le formulaire suivant. Les champs 
-                    marqués d’un * sont obligatoires. L’adresse e-mail doit être valide pour que
+                    marqués d’un <span style="color: red;">*</span> sont obligatoires. L’adresse e-mail doit être valide pour que
                     le compte soit créé. Un mail de confirmation vous sera envoyé à la fin de l’inscription.
                 </p>
             </div>
-{#        </div>#}
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-offset-1 col-md-10">
-{#        <div class="grille-content panneau-bas">  #}
-            <div class="row text-center cookie-title">
+            <div class="row text-center cookie-title titre-inscription">
                 Inscription
             </div>
-
             <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-
 
                 <div class="erreur">
                     <p>{{form_errors(form.username)}}</p>
@@ -44,7 +39,6 @@
                     <p>{{form_errors(form.plainPassword.first)}}</p> 
                     <p>{{form_errors(form.plainPassword.second)}}</p> 
                 </div>
-
                 <fieldset>
                     <legend>Compte</legend>
                     <div class="row premiere-ligne ">
@@ -69,14 +63,13 @@
                     </div>   -->
 
                     <div class="cent-h bouton-bas-block">
-                        <button type="submit" class="btn btn-primary btn-lg">Inscription express</button>
+                        <button type="submit" class="btn-inscription">Inscription express</button>
                     </div> 
                 </fieldset>
 
 
                 <fieldset>
                     <legend>Informations personnelles</legend>
-
                     <div class="row premiere-ligne ">
                         <div class="grille-1">{{form_label(form.nom)}} :</div>
                         <div class="grille-2">{{form_widget(form.nom)}}</div>
@@ -93,13 +86,10 @@
                         <div class="grille-1">Smartphone :</div>
                         <div class="grille-2">{{form_widget(form.telephone)}}</div>
                     </div>                    
-                   
                 </fieldset>
 
                 <fieldset>
                     <legend>Préférences</legend>    
-
-
                     <div class="row premiere-ligne ">
                         <div class="grille-1 pref">{{form_label(form.pref_mp)}}</div>
                         <div class="grille-2 pref">{{form_widget(form.pref_mp)}}</div>
@@ -127,7 +117,7 @@
 
                 </fieldset>
                 <div class="cent-h bouton-bas-block">
-                    <button type="submit" class="btn btn-primary btn-lg">Inscription complète</button>
+                    <button type="submit" class="btn-inscription">Inscription complète</button>
                 </div> 
 
 {{form_end(form)}}
