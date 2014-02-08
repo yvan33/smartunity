@@ -17,7 +17,7 @@
 		<div class="row text-center cookie-title">
         	Formulaire de contact
         </div>
-        <div>{{confirmation}}</div>
+        <div>{{confirmation }}</div>
 
 <div class="erreur">
                     <p>{{form_errors(form_contact.email)}}</p>
@@ -29,7 +29,7 @@
 <fieldset>
                 
                     <div class="row premiere-ligne ">
-                        <div class="grille-1">{{form_label(form_contact.email)}}<span style="color: red;"> *</span></div>
+                        <div class="grille-1 label-normal">{{form_label(form_contact.email)}}<span style="color: red;"> *</span></div>
                         <div class="grille-2">{{form_widget(form_contact.email)}}</div>
                     </div> 
                     <div class="row">
