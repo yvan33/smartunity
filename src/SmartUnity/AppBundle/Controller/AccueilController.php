@@ -180,12 +180,29 @@ class AccueilController extends Controller {
         ->add('message', 'textarea', array(
             'required' => true))    
         ->getForm();
+        $confirmation="";
         if ($request->getMethod() == 'POST') {  
             $form->handleRequest($request);
             $sujet= $form->get('sujet')->getData();
             $sujetMail = "Message formulaire de contact: " . $sujet;
             $expediteurMail = $form->get('email')->getData();
+            $destinataireMail="contact@smartunity.fr";
             $contenu = $form->get('message')->getData();
+            $message = \Swift_Message::newInstance()
+                        ->setContentType('text/html')
+                        ->setSubject($sujetMail)
+                        ->setFrom($expediteurMail)
+                        ->setTo($destinataireMail)
+                        ->setBody($contenu);
+            $this->get('mailer')->send($message);
+
+            $confirmation="Votre message a bien été envoyé à l'équipe Smart'Unity";
+
+            $sujet= $form->get('sujet')->getData();
+            $sujetMail = "Confirmation contact Smart'Unity";
+            $expediteurMail = "contact@smartunity.fr";
+            $destinataireMail =$form->get('email')->getData();
+            $contenu = "Bonjour, <br/> votre message : " . $sujet ." nous a bien été envoyé. <br/> Nous vous remercions pour votre demande. <br/> <br/> L'équipe Smart'Unity";
             $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
@@ -193,11 +210,16 @@ class AccueilController extends Controller {
                         ->setTo("contact@smartunity.fr")
                         ->setBody($contenu);
             $this->get('mailer')->send($message);
-        return $this->redirect($this->generateUrl('smart_unity_app_contactPage'));
-        }
 
+            return $this->render($template, array(
+            'form_contact'=> $form->createView(),
+            'confirmation'=> $confirmation)
+        );
+
+        }
         return $this->render($template, array(
-            'form_contact'=> $form->createView())
+            'form_contact'=> $form->createView(),
+            'confirmation'=> $confirmation)
         );
         
     }  
