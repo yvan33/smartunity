@@ -23,8 +23,9 @@ class FiltresRepondreFormType extends AbstractType {
                     'class' => 'SmartUnityAppBundle:typeQuestion',
                     'property' => 'nom',
                     'required' => false))
-                 ->add('motCle', 'text', array('mapped' => false));
-
+                 ->add('motCle', 'text', array(
+                     'mapped' => false,
+                     'required' => false));
     }
 
     public function getName()

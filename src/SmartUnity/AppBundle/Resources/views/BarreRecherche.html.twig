@@ -76,8 +76,9 @@
                     {{ form_widget(formQuestion.typeQuestion, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Type de question'} }) }}
 					{{ form_widget(formQuestion.motCle, { 'attr': {'class': 'text-mot-cle', 'placeholder':'Mot(s) clé(s)'} }) }}
                     {{form_widget(formQuestion._token)}}
-                     <button class="search-answer" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                    </div>
+
+                    <input type="hidden" name="p" id="p" value="1" class="form-control">
+                    <button class="search-answer" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                 </div>
             </form>
         </div>

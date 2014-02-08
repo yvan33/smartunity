@@ -167,18 +167,143 @@ class QuestionReponseController extends Controller {
         }
 
         $nbQuestions = count($finder->find($query));
-        p($nbQuestions);
 
         $nbPages = ceil($nbQuestions / $nbParPage);
 
 //        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
         $resultSet = $finder->find($query);
+        $listeQuestions = $this->generateSearchResults($resultSet);
+
+        //Génération de la pagination en statique (si pas de JS)
+        $pagination = array();
+        if ($page != 1) {
+            array_push($pagination, array('<<', '1', '-4'));
+            array_push($pagination, array('<', $page - 1, '-3'));
+        }
+        for ($i = -2; $i < 3; $i++) {
+            if (($page + $i) >= 1 && ($page + $i) <= $nbPages)
+                array_push($pagination, array($page + $i, $page + $i, $i));
+        }
+        if ($page < $nbPages) {
+            array_push($pagination, array('>', $page + 1, '3'));
+            array_push($pagination, array('>>', $nbPages, '4'));
+        }
+
+///Construction du formulaire pour les filtres avec comme valeur par défaut la recherche     
+        $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
+        $QuestionRecherche->setMarque();
+        $QuestionRecherche->setModele();
+        $QuestionRecherche->setOs();
+//        $QuestionRecherche->setTypeQuestion();
+
+        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
+            'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
+
+        $template = sprintf('SmartUnityQuestionReponseBundle:Display:Recherche.html.twig');
+        return $this->render($template, array(
+                    'error' => $error,
+                    'requete' => $question,
+                    'page' => $page,
+                    'nbPages' => $nbPages,
+                    'listeQuestions' => $listeQuestions,
+                    'countListe' => $nbQuestions,
+                    'nbParPage' => $nbParPage,
+                    'pagination' => $pagination,
+                    'formQuestion' => $formQuestion->createView(),
+        ));
+    }
+
+    public function searchRepondreQuestionAction(Request $request) {
+
+        $session = $request->getSession();
+
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = '';
+        }
+        if ($error) {
+            // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
+            $error = $error->getMessage();
+        }
+
+        $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
+
+        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
+            'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
+
+        $nbParPage = 10;
+        $finder = $this->container->get('fos_elastica.finder.smartunity.question');
+
+
+        $formQuestion->bind($this->getRequest());
+
+
+        $marque = $formQuestion->get('marque')->getData()->getNom();
+
+        $marqueQuery = new \Elastica\Query\Match;
+        $marqueQuery->setFieldQuery('nom', $marque);
+
+        $nestedMarqueQuery = new \Elastica\Query\Nested;
+        $nestedMarqueQuery->setPath('marque');
+        $nestedMarqueQuery->setQuery($marqueQuery);
+
+        $query = new \Elastica\Query\Bool();
+        $query->addMust($nestedMarqueQuery);
+
+        
+        $nbQuestions = count($finder->find($query));
+        $nbPages = ceil($nbQuestions / $nbParPage);
+
+//        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
+        $resultSet = $finder->find($query);
+        $listeQuestions = $this->generateSearchResults($resultSet);
+
+//         Génération de la pagination en statique (si pas de JS)
+        $page = $this->getRequest()->query->get('p');      
+        $pagination = array();
+        if ($page != 1) {
+            array_push($pagination, array('<<', '1', '-4'));
+            array_push($pagination, array('<', $page - 1, '-3'));
+        }
+        for ($i = -2; $i < 3; $i++) {
+            if (($page + $i) >= 1 && ($page + $i) <= $nbPages)
+                array_push($pagination, array($page + $i, $page + $i, $i));
+        }
+        if ($page < $nbPages) {
+            array_push($pagination, array('>', $page + 1, '3'));
+            array_push($pagination, array('>>', $nbPages, '4'));
+        }    
+        
+        $template = sprintf('SmartUnityQuestionReponseBundle:Display:Recherche.html.twig');
+
+                return $this->render($template, array(
+                    'error' => $error,
+                    'page' => $page,
+                    'nbPages' => $nbPages,
+                    'requete' => '',
+                    'listeQuestions' => $listeQuestions,
+                    'countListe' => $nbQuestions,
+                    'nbParPage' => $nbParPage,
+                    'pagination' => $pagination,
+                    'formQuestion' => $formQuestion->createView(),
+        ));
+    }
+
+    private function generateSearchResults($resultSet) {
 
         $listeQuestions = array();
+        $reponseRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('SmartUnityAppBundle:reponse');
+
         foreach ($resultSet as $result) {
 
 
-//            $Question = $result->getTransformed();
             $Question = $result;
 
 
@@ -222,65 +347,7 @@ class QuestionReponseController extends Controller {
              */
         }
 
-        //Génération de la pagination en statique (si pas de JS)
-        $pagination = array();
-        if ($page != 1) {
-            array_push($pagination, array('<<', '1', '-4'));
-            array_push($pagination, array('<', $page - 1, '-3'));
-        }
-        for ($i = -2; $i < 3; $i++) {
-            if (($page + $i) >= 1 && ($page + $i) <= $nbPages)
-                array_push($pagination, array($page + $i, $page + $i, $i));
-        }
-        if ($page < $nbPages) {
-            array_push($pagination, array('>', $page + 1, '3'));
-            array_push($pagination, array('>>', $nbPages, '4'));
-        }
-
-///Construction du formulaire pour les filtres avec comme valeur par défaut la recherche     
-        $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
-        $QuestionRecherche->setMarque();
-        $QuestionRecherche->setModele();
-        $QuestionRecherche->setOs();
-//        $QuestionRecherche->setTypeQuestion();
-
-        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
-            'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
-
-        $template = sprintf('SmartUnityQuestionReponseBundle:Display:Recherche.html.twig');
-        return $this->render($template, array(
-                    'error' => $error,
-                    'requete' => $question,
-                    'page' => $page,
-                    'nbPages' => $nbPages,
-                    'listeQuestions' => $listeQuestions,
-                    'countListe' => $nbQuestions,
-                    'nbParPage' => $nbParPage,
-                    'pagination' => $pagination,
-                    'formQuestion' => $formQuestion->createView(),
-        ));
-    }
-
-    public function searchRepondreQuestionAction(Request $request) {
-
-        $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
-
-        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
-            'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
-
-
-        if ($this->getRequest()->getMethod() == 'POST') {
-            $formQuestion->bind($this->getRequest());
-            if ($formQuestion->isValid()) {
-                      
-                $marque = $formQuestion->get('marque')->getData();
-                die($marque->getNom());
-                    
-  
-            }
-        }
-
-        return new \Symfony\Component\HttpFoundation\Response('cool');
+        return $listeQuestions;
     }
 
     public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion, $haveEditedReponse) {
