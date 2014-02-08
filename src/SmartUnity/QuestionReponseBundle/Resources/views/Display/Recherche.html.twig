@@ -52,7 +52,6 @@
                                       <h4 class="panel-title">
                                               <!-- rond pts-->
                                         <div class="grille-1">
-                             {% if question. %}  
                                           <div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                                 <!-- rond pts fin-->
                                                 <!-- describ question-->
@@ -69,13 +68,6 @@
                                         <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                         </div>
                                                 <!-- bouton rep fin-->
-                                                <!-- bouton +-->
-                                       <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                          {% if not question.soutenue %}
-                                          <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
-                                          {% endif %}
-                                        </div>
-                                                <!-- bouton + fin-->
                                       </h4>                           
                                     </div>
                                         <!-- contenue visible fin-->
@@ -105,8 +97,6 @@
                                     {% endfor %}
 
                                   {% endif %}
-
-
 
 
                       </div><!-- accordion general fin-->
@@ -152,7 +142,7 @@
 ////// POPUP
 /////////////
 {% if is_granted('ROLE_USER') %}
-$('#popupQuestion').magnificPopup({
+{#$('#popupQuestion').magnificPopup({
   type: 'iframe',
   callbacks: {
     open: function(){
@@ -170,7 +160,7 @@ $('#popupQuestion').magnificPopup({
     return true;
   },
 
-});
+});#}
 {% else %}
 $(document).ready(function(){
   $('#popupQuestion').tooltip();
