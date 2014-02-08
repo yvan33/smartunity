@@ -583,12 +583,6 @@ class QuestionReponseController extends Controller {
                     'required' => false,
                     'empty_value' => 'Choisissez',
                     'empty_data' => NULL))
-                ->add('modele', 'entity', array(
-                    'class' => 'SmartUnityAppBundle:modele',
-                    'property' => 'nom',
-                    'required' => false,
-                    'empty_value' => 'Choisissez',
-                    'empty_data' => NULL))
                 ->add('os', 'entity', array(
                     'class' => 'SmartUnityAppBundle:os',
                     'property' => 'nom',
@@ -604,31 +598,43 @@ class QuestionReponseController extends Controller {
                 ->add('save', 'submit', array('label' => 'Poser ma question'))
                 ->getForm();
 
+        if ($this->getRequest()->getMethod() == 'POST') {
+            $formQuestion->bind($this->getRequest());
 
-        $newQuestion->setMembre($user);
-        $newQuestion->setSignaler(false);
+            if ($formQuestion->isValid()) {
+                $newQuestion->setMembre($user);
+                $newQuestion->setSignaler(false);
 
-        $newQuestion->setDate(new \DateTime(date("Y-m-d H:i:s"))); //date locale
-        $newQuestion->setSlug($this->slugify($formQuestion->get('sujet')->getData()));
+                $newQuestion->setDate(new \DateTime(date("Y-m-d H:i:s"))); //date locale
+                // $str = $formQuestion->get('sujet')->getData();
+                // $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+                // $replace = array('s', 't', 's', 't', 's', 't', 's', 't', 'i', 'a', 'a', 'i', 'a', 'a', 'e', 'E');
+                // $str = str_ireplace($search, $replace, strtolower(trim($str)));
+                // $str = preg_replace('/[^\w\d\-\ ]/', '', $str);
+                // $str = str_replace(' ', '-', $str);
+                // $slug= preg_replace('/\-{2,}', '-', $str);
 
-        // $newQuestion->addSoutien($user);
-        $cagnotte = $user->getCagnotte() - $formQuestion->get('remuneration')->getData() + 10;
-        if ($cagnotte >= 0) {
-            $user->setCagnotte($cagnotte);
+                $newQuestion->setSlug($this->slugify($formQuestion->get('sujet')->getData()));
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($newQuestion);
-            $em->flush();
+                // $newQuestion->addSoutien($user);
+                $cagnotte = $user->getCagnotte() - $formQuestion->get('remuneration')->getData() + 10;
+                if ($cagnotte >= 0) {
+                    $user->setCagnotte($cagnotte);
 
-            return new Response('Votre question a bien été ajoutée');
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($newQuestion);
+                    $em->flush();
+
+                    return new Response('Votre question a bien été ajoutée');
+                }
+            }
         }
-
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddQuestion.html.twig', array(
                     'formQuestion' => $formQuestion->createView(),
                     'dotationMax' => $dotationMax
         ));
     }
-
+    
     public function editQuestionAction($slug) {
         $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
         $user = $this->getUser();
@@ -672,12 +678,6 @@ class QuestionReponseController extends Controller {
                     'required' => true))
                 ->add('marque', 'entity', array(
                     'class' => 'SmartUnityAppBundle:marque',
-                    'property' => 'nom',
-                    'required' => false,
-                    'empty_value' => 'Choisissez',
-                    'empty_data' => NULL))
-                ->add('modele', 'entity', array(
-                    'class' => 'SmartUnityAppBundle:modele',
                     'property' => 'nom',
                     'required' => false,
                     'empty_value' => 'Choisissez',
