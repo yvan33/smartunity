@@ -13,3 +13,8 @@ smart_unity_app_aproposPage:
 smart_unity_app_conditionsPage:
     pattern: /Conditions-generales
     defaults: { _controller: SmartUnityAppBundle:Accueil:affichageConditions}
+
+smart_unity_app_contactPage:
+    pattern: /Nous-contacter
+    defaults: { _controller: SmartUnityAppBundle:Accueil:formulaireContact}
+

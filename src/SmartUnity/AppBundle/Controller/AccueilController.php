@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
+use SmartUnity\AppBundle\Form\Type\ContactType;
 
 class AccueilController extends Controller {
 
@@ -165,4 +166,31 @@ class AccueilController extends Controller {
         return $this->render($template);
         
     }   
+
+   public function formulaireContactAction(Request $request) {
+
+        $template = 'SmartUnityAppBundle::Contact.html.twig';
+
+
+        $form = $this->createFormBuilder()
+        ->add('email', 'email', array(
+            'required' => true))
+        ->add('sujet', 'text', array(
+            'required' => true))
+        ->add('message', 'textarea', array(
+            'required' => true))    
+        ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            echo("coucou");
+        }
+
+        return $this->render($template, array(
+            'form_contact'=> $form->createView())
+        );
+        
+    }  
+    
 }
