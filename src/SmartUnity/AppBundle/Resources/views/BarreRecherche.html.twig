@@ -1,186 +1,27 @@
-{% block recherche %}
-
 <style>
-    .slider
-    {
-        position:relative;
-        width:100%;
-    }
+.text-mot-cle {
+	width: 190px;
+	background-color: #CCC;
+	color: #7b7a7a;
+	border: 0;
+	font-size: 14px;
+	font-family: centrale;
+	height: 32px;
+	padding-left: 12px;
+	border-radius: 5px;
+	padding-bottom: 5px;
+}
 
-    #sli2
-    {
-        display: none;
-    }
-    .bouton-radio.active
-    {
-        text-shadow: 2px 1px  #FFFFFF;
-    }
+.text-mot-cle:focus {
+	outline: 0;
+}
 
-
-    @media (min-width: 1200px){
-        .find-slider
-        {
-            width: 700px;
-
-        }
-    }
-    @media (min-width: 992px)  and (max-width: 1200px) {
-        .find-slider
-        {
-
-            width: 600px;
-        }
-    }
-    @media screen and (min-width: 768px) and (max-width: 992px) {
-        .find-slider
-        {
-            width: 500px;
-
-        }
-    }
-    @media screen and (max-width: 768px) {
-        .find-slider
-        {
-
-            width: 100%;
-        }
-    }
-
-    .find-slider
-    {
-        margin-top: 10px;
-        padding-right: 35px;
-
-    }
-
-    .find-content
-    {
-        top:100px;
-        left:1%;
-        width:98%;
-    }
-
-    .search-btn {
-        display: inline-block;
-        padding-bottom: 2px;
-        padding-top: 2px;
-        background-color: #7b7a7a;
-        border:solid 1px #7b7a7a;
-        height: 32px;
-        color: #FFF;
-        width: 40px;
-        outline: none;
-        border-bottom-right-radius: 10px;
-        border-top-right-radius: 10px;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        -o-user-select: none;
-        user-select: none;
-    }
-    
-    .search-answer {
-    	display: inline-block;
-        background-color: #7b7a7a;
-        border:solid 1px #7b7a7a;
-        height: 32px;
-        color: #FFF;
-        width: 34px;
-        outline: none;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        -o-user-select: none;
-        user-select: none;
-    	border-radius: 10px;
-    }
-
-
-    .form-control
-    {
-        background-color: #7b7a7a;
-        border-radius: 10px;
-        color: #FFF;
-        border: 0;
-        font-size: 14px;
-        font-family: centrale;
-    }
-
-    .form-control:focus
-    {
-        background-color: #7b7a7a;
-        border-radius: 10px;
-        color: #FFF;
-        border: 0;
-    }
-
-    ::-webkit-input-placeholder {
-        font-size: 14px;
-        font-family: centrale;
-    }
-
-    :-moz-placeholder {
-        font-size: 14px;
-        font-weight: 600;
-    }
-    :-ms-input-placeholder {
-        font-size: 14px;
-    }
-
-    .question
-    {
-
-    }
-
-    .switch {
-        color: #6f839a;
-        cursor: pointer;
-        font-family: centrale;
-        font-size: 1.8em;
-        line-height: 2em;
-        padding-left: 10px;
-        padding-right: 10px;
-        border-radius: 3px;
-        display: inline-block;
-        background-color: #3e4956;
-        -webkit-transition: .15s ease;
-        -moz-transition: .15s ease;
-        -ms-transition: .15s ease;
-        -o-transition: .15s ease;
-        transition: .15s ease;
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-
-    input[type="radio"]:checked + .switch {
-        color: #fff;
-        padding-left: 1.4em;
-        padding-right: 1.4em;
-    }
-
-    input[type="radio"]:checked + .switch--on {
-        background-color: #7eab55;
-    }
-
-    input[type="radio"]:checked + .switch--off {
-        background-color: #dd4a38;
-    }
-    
-    .switch
-    {
-        padding-bottom: 4px;
-    }
-    
-    .glyphicon {
-    	top: 2px;
-    }
+::-webkit-input-placeholder {
+	font-weight: 200;
+}
 </style>
+
+{% block recherche %}
 
 <div class="row question">
     <div class="col-md-6 col-md-offset-3" >
@@ -217,19 +58,18 @@
 <div class="slider" id="sli2">
     <div style="clear:both;">
         <div class="find-content">
-                {{form_start(formQuestion) }}
-            <div class="cent-h">
-                <div class="row select-dropdown">
+             {{form_start(formQuestion) }}
+                <div class="cent-h">
+                    <div class="row">
 
-                    {{ form_widget(formQuestion.marque) }}
-                    {{ form_widget(formQuestion.os) }}
-                    {{ form_widget(formQuestion.typeQuestion) }}
-                    {{ form_widget(formQuestion.motCle) }}
+                    {{ form_widget(formQuestion.marque, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Marque'}}) }}
+                    {{ form_widget(formQuestion.os, { 'attr': {'class': 'chosen-select', 'data-placeholder':"Système d'exploitation"} }) }}
+                    {{ form_widget(formQuestion.typeQuestion, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Type de question'} }) }}
+					{{ form_widget(formQuestion.motCle, { 'attr': {'class': 'text-mot-cle', 'placeholder':'Mot(s) clé(s)'} }) }}
                     {{form_widget(formQuestion._token)}}
-                    <button class="search-answer" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
-
+                     <button class="search-answer" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
     </div>
@@ -253,6 +93,11 @@
             });
         }
     });
+</script>
+
+<script>
+//// Barre de filtre réponse ////
+$(".chosen-select").chosen({disable_search_threshold: 10, allow_single_deselect: true});
 </script>
 
 <script>

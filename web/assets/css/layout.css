@@ -645,18 +645,6 @@ border-right: 1px solid #ddd;
 	color: #e37151;
 }
 
-.form-control {
-	border: 1px solid #CCCCCC;
-	height: 32px;
-	font-size: 12px;
-	font-weight: 200;
-	color: #A4A4A4;
-}
-
-.form-control:focus {
-	border: 1px solid #CCCCCC;
-}
-
 #popupQuestion
 {
 	color: white;
@@ -679,6 +667,7 @@ border-right: 1px solid #ddd;
 }
 
 /* Fenêtre modale log in */
+
 .modal-content
 {
 	margin-top: 150px;
@@ -712,54 +701,3 @@ border-right: 1px solid #ddd;
 {
 	padding-top: 0;
 }
-
-/* select barre de recherche */
-
-.select-dropdown {
-	margin-top: 8px;
-}
-
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: #7b7a7a;
-	border: 0 !important;
-    height: 32px;
-    color: white;
-    font-family: centrale;
-    cursor: pointer;
-    background: url('../img/dropdown-arrows.png') no-repeat right #7b7a7a;
-    padding-left: 10px;
-    width : 105px;
-}
-
-select:focus {
-	outline: 0;
-}
-  
-#smartunity_filtres_repondre_typeQuestion {
-	width : 180px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
