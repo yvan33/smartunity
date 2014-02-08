@@ -46,8 +46,7 @@ class QuestionReponseMembreController extends Controller {
         //DONC :
         //On récupère la réponse du controleur Ajax (pour avaoir une réponse au cas ou)
 
-        if ($route == 'smart_unity_membre_questions'){  
-        p('bonne route');  
+        if ($route == 'smart_unity_membre_questions'){ 
             
             $response = $this->forward('SmartUnityUtilisateurBundle:AjaxMembre:getQuestions', array(
                 'type' => $type,
@@ -110,8 +109,7 @@ class QuestionReponseMembreController extends Controller {
                 ));
         }
 
-        if ($route == 'smart_unity_membre_reponses'){ 
-        p('bonne route');  
+        if ($route == 'smart_unity_membre_reponses'){  
             $response = $this->forward('SmartUnityUtilisateurBundle:AjaxMembre:getQuestionsAnswered', array(
                 'type' => $type,
                 'page' => $page,

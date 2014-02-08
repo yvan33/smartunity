@@ -403,7 +403,7 @@ class questionRepository extends EntityRepository {
         $offset = ($page - 1) * $nbParPage;
 
         $sql = 'Select q.* from
-        (Select r.id, question_id From reponse r  where r.membre_id = :membreId )as p , question q 
+        (Select r.id, r.question_id From reponse r  where r.membre_id = :membreId )as p , question q 
         Where p.question_id=q.id
         ORDER BY q.date DESC
         LIMIT :offset, :nbParPage';
@@ -431,7 +431,7 @@ class questionRepository extends EntityRepository {
 
         $sql = 'SELECT count(q.id) as nb_questions 
             FROM
-        (SELECT r.id, question_id FROM reponse r  WHERE r.membre_id = :membreId ) AS p , question q 
+        (SELECT r.id, r.question_id FROM reponse r  WHERE r.membre_id = :membreId ) AS p , question q 
         Where p.question_id=q.id';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
@@ -445,8 +445,14 @@ class questionRepository extends EntityRepository {
         $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
         $offset = ($page - 1) * $nbParPage;
 
-        $sql = 'Select q.* from
-        (Select r.id, question_id From reponse r  where r.membre_id = :membreId and r.dateValidation <> null and r.dateCertification = null )as p , question q 
+        // $sql = 'SELECT q.* FROM
+        //     (SELECT r.id, r.question_id AS question_id
+        //     FROM reponse r  
+        //     WHERE r.membre_id = :membreId 
+        //     ) AS p , question q 
+        // WHERE p.question_id=q.id';
+        $sql='Select q.* from
+        (Select r.id, r.question_id as question_id From reponse r  where r.membre_id = :membreId and r.dateValidation <> "" and r.dateCertification <=> null )as p , question q 
         Where p.question_id=q.id
         ORDER BY q.date DESC
         LIMIT :offset, :nbParPage';
@@ -472,10 +478,17 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
+        // $sql = 'SELECT count(q.id) as nb_questions 
+        //     FROM
+        // (SELECT r.id, r.question_id AS question_id FROM reponse r  WHERE r.membre_id = :membreId ) AS p , question q 
+        // Where p.question_id=q.id';
+
+        
         $sql = 'SELECT count(q.id) as nb_questions 
             FROM
-        (SELECT r.id, question_id FROM reponse r  WHERE r.membre_id = :membreId AND r.dateValidation <> null and r.dateCertification = null ) AS p , question q 
+        (SELECT r.id, r.question_id AS question_id FROM reponse r  WHERE r.membre_id = :membreId AND r.dateValidation <> "" and r.dateCertification <=> NULL ) AS p , question q 
         Where p.question_id=q.id';
+        
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
         $query->setParameter('membreId', $membreId);
@@ -490,7 +503,7 @@ class questionRepository extends EntityRepository {
         $offset = ($page - 1) * $nbParPage;
 
         $sql = 'Select q.* from
-        (Select r.id, question_id From reponse r  where r.membre_id = :membreId and r.dateCertification <> "" )as p , question q 
+        (Select r.id, r.question_id as question_id From reponse r  where r.membre_id = :membreId and r.dateCertification <> "" )as p , question q 
         Where p.question_id=q.id
         ORDER BY q.date DESC
         LIMIT :offset, :nbParPage';
@@ -518,7 +531,7 @@ class questionRepository extends EntityRepository {
 
         $sql = 'SELECT count(q.id) as nb_questions 
             FROM
-        (SELECT r.id, question_id FROM reponse r  WHERE r.membre_id = :membreId AND r.dateCertification <> "" ) AS p , question q 
+        (SELECT r.id, r.question_id AS question_id FROM reponse r  WHERE r.membre_id = :membreId AND r.dateCertification <> "" ) AS p , question q 
         Where p.question_id=q.id';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);

@@ -108,15 +108,15 @@ class AjaxMembreController extends Controller {
         if ($route == 'smart_unity_membre_reponses') {
            
             //Appel au repository
-            if ($type == 'validated') {
-                $listeQuestion = $questionRepository->getQuestionsWithValidatedAnswersForUser($nbParPage, $page, $membreId);
-                $nbQuestions = $questionRepository->getNombreQuestionsWithValidatedAnswersForUser($membreId);
-            } else if ($type == 'certified') {
-                $listeQuestion = $questionRepository->getQuestionsWithCertifiedAnswersForUser($nbParPage, $page, $membreId);
-                $nbQuestions = $questionRepository->getNombreQuestionsWithCertifiedAnswersForUser($membreId);
-            } else if ($type == 'reponses') {
+            if ($type == 'reponses') {
                 $listeQuestion = $questionRepository->getQuestionsAnsweredByUser($nbParPage, $page, $membreId);
                 $nbQuestions = $questionRepository->getNombreQuestionsAnsweredByUser($membreId);
+            } else if ($type == 'certified') {  
+                $listeQuestion = $questionRepository->getQuestionsWithCertifiedAnswersForUser($nbParPage, $page, $membreId);
+                $nbQuestions = $questionRepository->getNombreQuestionsWithCertifiedAnswersForUser($membreId);
+            } else if ($type == 'validated') {
+                $listeQuestion = $questionRepository->getQuestionsWithValidatedAnswersForUser($nbParPage, $page, $membreId);
+                $nbQuestions = $questionRepository->getNombreQuestionsWithValidatedAnswersForUser($membreId);
             } else {
                 throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
             }
