@@ -7,3 +7,9 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: smartunity_user_registration }
+
+    smart_unity_app.contact.form.type:
+        class:  SmartUnity\AppBundle\Form\Type\ContactFormType
+        tags:
+            - { name: form.type, alias: smart_unity_app_contact }
+   

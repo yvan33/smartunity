@@ -75,10 +75,11 @@
                               {% if question.os.nom is defined %}<span class="label label-default">{{question.os.nom}}</span>{% endif %}
                               {% if question.typeQuestion.nom is defined %}<span class="label label-default">{{question.typeQuestion.nom}}</span>{% endif %}
                     </div>
-                              <div>   {% if question.datemodification is not null %}
-<p>Modifiée le {{ question.datemodification|date('d-m-Y H:i:s') }} </p>
-{% endif %}
-</div>
+                    <div>   
+                        {% if question.datemodification is not null %}
+                        <p>Modifiée le {{ question.datemodification|date('d-m-Y H:i:s') }} </p>
+                        {% endif %}
+                    </div>
 
                               {% for commentaire in question.commentaireQuestions %}
                                 {% if commentaire.signaler == 0 %}
