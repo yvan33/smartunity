@@ -104,7 +104,8 @@ class AccueilController extends Controller {
 //Création du formulaire pour les filtres de recherche de question
         
         $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
-        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche);
+        $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
+            'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
 
         return $this->renderLogin(array(
                     'error' => $error,
