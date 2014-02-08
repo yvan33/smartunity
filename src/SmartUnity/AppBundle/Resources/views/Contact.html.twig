@@ -16,15 +16,19 @@
 				<div class="row text-center cookie-title">
 			      	Formulaire de contact
 			    </div>
-			     <div>{{confirmation }}</div>
-
+			    <div class="description">
+			    	<p>Une question? Besoin de renseignement, contactez nous en remplissant ce formulaire.</p>
+			    </div>
+			    
 				<div class="erreur">
 			       	<p>{{form_errors(form_contact.email)}}</p>
 			        <p>{{form_errors(form_contact.message)}}</p>
 			        <p>{{form_errors(form_contact.sujet)}}</p>
 				</div>
 
-				<fieldset>                
+				<fieldset>    
+				 <div class="row text-center cookie-title confirmation">{{confirmation }}</div>
+            
 					<div class="row premiere-ligne ">
 			          	<div class="grille-1">{{form_label(form_contact.email)}}<span style="color: red;"> *</span></div>
 						<div class="grille-2">{{form_widget(form_contact.email)}}</div>
