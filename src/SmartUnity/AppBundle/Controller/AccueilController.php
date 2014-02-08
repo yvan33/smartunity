@@ -180,11 +180,20 @@ class AccueilController extends Controller {
         ->add('message', 'textarea', array(
             'required' => true))    
         ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            echo("coucou");
+        if ($request->getMethod() == 'POST') {  
+            $form->handleRequest($request);
+            $sujet= $form->get('sujet')->getData();
+            $sujetMail = "Message formulaire de contact: " . $sujet;
+            $expediteurMail = $form->get('email')->getData();
+            $contenu = $form->get('message')->getData();
+            $message = \Swift_Message::newInstance()
+                        ->setContentType('text/html')
+                        ->setSubject($sujetMail)
+                        ->setFrom($expediteurMail)
+                        ->setTo("contact@smartunity.fr")
+                        ->setBody($contenu);
+            $this->get('mailer')->send($message);
+        return $this->redirect($this->generateUrl('smart_unity_app_contactPage'));
         }
 
         return $this->render($template, array(
