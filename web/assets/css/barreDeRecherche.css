@@ -91,6 +91,7 @@
 	-o-user-select:none;
 	user-select:none;
 	border-radius:10px;
+	margin-left: 2.5px;
 }
 
 .search-answer .glyphicon {
@@ -109,9 +110,6 @@
 }
 
 .form-control:focus {
-	background-color: #CCC;
-	border-radius: 10px;
-	color: #7b7a7a;
 	border: 0;
 }
 
@@ -120,6 +118,7 @@
 	font-family: centrale;
 	color: #7b7a7a;
 	font-weight: 200;
+	line-height: 20px;
 }
 
 :-moz-placeholder {

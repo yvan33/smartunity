@@ -22,6 +22,12 @@
 .chosen-single abbr {
 	margin-top: 5px;
 }
+
+.chosen-container .chosen-results li.highlighted {
+  	color: #fff;
+	background: #e37151;
+	background-image: none;
+}
 </style>
 
 {% block recherche %}
@@ -66,7 +72,7 @@
                     <div class="row">
 
                     {{ form_widget(formQuestion.marque, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Marque'}}) }}
-                    {{ form_widget(formQuestion.os, { 'attr': {'class': 'chosen-select', 'data-placeholder':"Système d'exploitation"} }) }}
+                    {{ form_widget(formQuestion.os, { 'attr': {'class': 'chosen-select', 'data-placeholder':"Système logiciel"} }) }}
                     {{ form_widget(formQuestion.typeQuestion, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Type de question'} }) }}
 					{{ form_widget(formQuestion.motCle, { 'attr': {'class': 'text-mot-cle', 'placeholder':'Mot(s) clé(s)'} }) }}
                     {{form_widget(formQuestion._token)}}
