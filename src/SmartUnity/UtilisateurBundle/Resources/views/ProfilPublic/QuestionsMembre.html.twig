@@ -53,7 +53,15 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <!-- rond pts-->
-                                    <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
+                                    <div class="grille-1"> 
+                                        
+                                    {% if question.certif_best_reponse is not null %}
+                                        <div><img src="{{ asset('assets/img/certif.png') }}"/></div>
+                                    {% else %}   
+                                        <div><img src="{{ asset('assets/img/check.png') }}"/></div>
+                                    {% endif %} 
+   
+                                    </div>
                                     <!-- rond pts fin-->
                                     <!-- describ question-->
                                     <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
