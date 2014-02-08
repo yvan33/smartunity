@@ -13,20 +13,18 @@ class FiltresRepondreFormType extends AbstractType {
                     'class' => 'SmartUnityAppBundle:marque',
                     'property' => 'nom',
                     'required' => false,
-                    'empty_value' => 'Choisissez',
                     'empty_data' => NULL))
                 ->add('os', 'entity', array(
                     'class' => 'SmartUnityAppBundle:os',
                     'property' => 'nom',
                     'required' => false,
-                    'empty_value' => 'Choisissez',
                     'empty_data' => NULL))
                 ->add('typeQuestion', 'entity', array(
                     'class' => 'SmartUnityAppBundle:typeQuestion',
                     'property' => 'nom',
-                    'empty_value' => 'Choisissez une option',
-                    'required' => true))
+                    'required' => false))
                  ->add('motCle', 'text', array('mapped' => false));
+
     }
 
     public function getName()
