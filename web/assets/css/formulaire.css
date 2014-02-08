@@ -75,8 +75,8 @@
 
 .label-normal
 {
-    font-weight: normal;.
-    font-size: 1.6em;
+    font-weight: normal;
+    font-size: 15px;
 }
 
 /*.validationInfos
@@ -104,8 +104,20 @@
 .cookie-title
 {
     font-family: centrale;
-    font-size: 2em;
+    font-size: 40px;
     margin-bottom: 15px;
+}
+
+.description{
+
+    margin:15px auto;
+}
+.description p {
+    font-size: 1.2em;
+    text-align: center;
+    font-family: centrale;
+    
+
 }
 
 .panneau-bas
@@ -151,20 +163,11 @@
     
 }
 
-.bouton-envoyer {
+.confirmation{
 
-    margin: 20px auto; 
-    background-color: #e37151;
-    color:#FFF;
+    font-size: 1.1em;
+    font-weight: normal;
     font-family: centrale;
-    font-size:22px;
-    height: 44px;
-    line-height:44px;
-    margin-bottom:25px;
-    text-align:center;
-    width:120px;
-    border-radius:2px;
-
 }
 
 .bouton-com-rep
@@ -199,4 +202,20 @@
 	-webkit-box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
        -moz-box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
             box-shadow: 0 0 20px  rgba(0,0,0,0.5) inset;
+}
+
+.bouton-envoyer
+{
+    margin: 15px auto 0 auto; 
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:22px;
+    margin-bottom:25px;
+    text-align:center;
+    width:120px;
+    height:40px;
+    border-radius:2px;
+    border: 0;
+
 }
