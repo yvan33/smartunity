@@ -238,4 +238,36 @@ fieldset {
 
 .pref label {
 	margin-bottom: 0;
+
+}
+
+.bouton-questions{
+    margin: 20px auto 0 auto ; 
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:15px;
+    line-height: 15px;
+    margin-bottom:25px;
+    text-align:center;
+    width:150px;
+    height:30px;
+    border-radius:2px;
+    border: 0;
+}
+
+.bouton-reponses{
+    margin-left:10px; 
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:15px;
+    line-height: 15px;
+    margin-bottom:25px;
+    text-align:center;
+    width:150px;
+    height:30px;
+    border-radius:2px;
+    border: 0;
+>>>>>>> motif bouton profil public membre
 }
