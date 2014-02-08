@@ -17,9 +17,13 @@
 		<div class="row text-center cookie-title">
         	Formulaire de contact
         </div>
+        <div>{{confirmation}}</div>
 
 <div class="erreur">
                     <p>{{form_errors(form_contact.email)}}</p>
+                    <p>{{form_errors(form_contact.message)}}</p>
+                    <p>{{form_errors(form_contact.sujet)}}</p>
+
 </div>
 
 <fieldset>
