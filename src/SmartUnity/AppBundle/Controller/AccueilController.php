@@ -211,8 +211,16 @@ class AccueilController extends Controller {
                         ->setTo("contact@smartunity.fr")
                         ->setBody($contenu);
             $this->get('mailer')->send($message);
+        $form = $this->createFormBuilder()
+        ->add('email', 'email', array(
+            'required' => true))
+        ->add('sujet', 'text', array(
+            'required' => true))
+        ->add('message', 'textarea', array(
+            'required' => true))    
+        ->getForm();
 
-            return $this->render($template, array(
+            $this->container->get('templating')->renderResponse($template, array(
             'form_contact'=> $form->createView(),
             'confirmation'=> $confirmation)
         );
