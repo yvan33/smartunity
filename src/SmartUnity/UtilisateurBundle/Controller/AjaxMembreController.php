@@ -66,6 +66,7 @@ class AjaxMembreController extends Controller {
                             $bestReponse = $reponse->getDescription();
                             $auteurBestreponse = $reponse->getMembre()->getUsername();
                             $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+                            $certifBestReponse = $reponse->getDateCertification();
                             break;
                         }
                     }
@@ -83,6 +84,7 @@ class AjaxMembreController extends Controller {
                     'best_reponse' => $bestReponse,
                     'auteur_best_reponse' => $auteurBestreponse,
                     'date_best_reponse' => $dateBestReponse,
+                    'certif_best_reponse' => $certifBestReponse,
                     'slug' => $Question->getSlug(),
                     'count_soutien' => $Question->getSoutienMembres()->count(),
                     'soutenue' => $Question->getSoutienMembres()->contains($this->getUser()),
