@@ -52,20 +52,18 @@
                                       <h4 class="panel-title">
                                               <!-- rond pts-->
                                         <div class="grille-1">
+                                          {%  if question.best_reponse != '' %}
 
-                                          {%  if question.best_reponse is not null %}
-                                          <div>   
-                                            <div>
-                                            {% if question.certif_best_reponse is not null %}
+                                            {% if question.certif_best_reponse != '' %}
                                                 <div><img src="{{ asset('assets/img/certif.png') }}"/></div>
                                             {% else %}   
                                                 <div><img src="{{ asset('assets/img/check.png') }}"/></div>
                                             {% endif %} 
-                                                </div>
-                                                </div>
+
                                           {% else %}
                                             <div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div>
                                           {% endif %}
+                                          </div>
                                                 <!-- rond pts fin-->
                                                 <!-- describ question-->
                                         <a data-toggle="collapse" data-parent="#liste" href="#collapse{{loop.index}}">
