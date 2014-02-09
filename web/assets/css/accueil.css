@@ -55,10 +55,10 @@
 
 .grille-question-centent
 {
-    clear:both;
-    overflow:hidden;
-    background-color:#ffffff;
-    border-bottom: solid 1px #e8e4dc;;
+    clear: both;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-bottom: solid 1px #e8e4dc;
 }
 
 .grille-question-rond
@@ -546,6 +546,10 @@
 		margin-left: 1px;
 		margin-right: 1px;	
 	}
+	
+	.cadre-cafe-boutique img {
+		width: 20%;
+	}
 
 }
 
@@ -560,5 +564,9 @@
         display:none;
 
     }
+    
+    .cadre-cafe-boutique img {
+		width: 20%;
+	}
 }
 
