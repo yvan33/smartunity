@@ -748,6 +748,7 @@ border-right: 1px solid #ddd;
 .modal-body .panel-body
 {
 	padding-top: 0;
+	padding-bottom: 0;
 }
 
 .solution-tab {

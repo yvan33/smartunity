@@ -141,16 +141,16 @@
                                                             <div class="form-group">
                                                                 <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Password" type="password" id="password" name="_password" required="required">
                                                             </div>
-                                                            <div style="margin-top: -14px;"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a></div>
+                                                            <div style="margin-top: -14px;"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a></div>
                                                             <div class="checkbox souvenir-de-moi" >
                                                                 <label>
                                                                     <input id="remember_me" type="checkbox"  name="_remember_me" value="on" > Se souvenir de moi
                                                                 </label>
                                                             </div>
-                                                            <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="Login" style="line-height:14px">
-                                                            <div class="pad-l">{{ facebook_login_button({'autologoutlink': false}) }}</div>
+                                                            <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="Se connecter" style="line-height:14px">
+                                                            <div class="pad-l">{{ facebook_login_button({'autologoutlink': false, 'size': 'large'}) }}</div>
                                                             <a href="{{ path('fos_user_registration_register') }} ">
-                                                                <p  style=" margin-top: 20px;">S'inscire</p>
+                                                                <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="S'inscrire" style="line-height:14px">
                                                             </a>
 
                                                         </fieldset>
@@ -231,8 +231,8 @@
                     <div class="footer-text" style="display:inline-block;">
                         <a href="{{ path('smart_unity_app_contactPage') }} ">Nous contacter</a>
                         <a href="{{ path('smart_unity_app_aproposPage') }} ">A propos de Smart'Unity</a>
-                        <a href="{{ path('smart_unity_app_conditionsPage') }}">Conditions generales d'utilisation</a>
-                        <a href="#">Publicité</a>
+                        <a href="{{ path('smart_unity_app_conditionsPage') }}">Conditions générales d'utilisation</a>
+                        <a href="#">Partenariats</a>
                         <p class="copyright">Copyright © 2014 Smart'Unity | Tous droits réservés</p>
                     </div>
 
