@@ -440,7 +440,7 @@ textarea {
 .cadre-general{
     box-shadow: 0px 0px 30px #758c92;
     background-color: #f3f0eb;
-    overflow:hidden; 
+    overflow: hidden; 
     padding: 30px 30px 0px 30px;
 }
 
@@ -709,8 +709,8 @@ border-right: 1px solid #ddd;
 	margin-top: 150px;
 	margin-left: 90px;
 	background: #f3f0eb;
-	border-radius: 0;
-	border-color: 1px solid #e8e4dc;
+	border-radius: 3px;
+	border: 0;
 	width: 400px;
 }
 
