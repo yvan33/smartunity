@@ -148,13 +148,16 @@
                                                                 </label>
                                                             </div>
                                                             <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="Se connecter" style="line-height:14px">
-                                                            <div class="pad-l">{{ facebook_login_button({'autologoutlink': false, 'size': 'large', 'label': "Se connecter", showFaces: 'True'}) }}</div>
-                                                            <a href="{{ path('fos_user_registration_register') }} ">
-                                                                <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="S'inscrire" style="line-height:14px">
-                                                            </a>
+
 
                                                         </fieldset>
                                                     </form>
+                                                    <div class="pad-l">
+                                                        {{ facebook_login_button({'autologoutlink': false, 'size': 'large', 'label': "Se connecter", showFaces: 'True'}) }}
+                                                    </div>
+                                                    <a href="{{ path('fos_user_registration_register') }} ">
+                                                        <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="S'inscrire" style="line-height:14px">
+                                                    </a>
                                              </div>
       </div>
     </div><!-- /.modal-content -->
