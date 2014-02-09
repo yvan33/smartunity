@@ -135,6 +135,12 @@ class membre extends BaseUser {
     private $pref_repCertifiee;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="info_plus", type="text")
+     */
+    private $info_plus;
+    /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="membre")
      */
     private $questions;
@@ -748,7 +754,6 @@ class membre extends BaseUser {
      */
     public function addSoutienQuestion(\SmartUnity\AppBundle\Entity\question $soutienQuestions) {
         $this->soutienQuestions[] = $soutienQuestions;
-
         return $this;
     }
 

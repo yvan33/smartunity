@@ -135,6 +135,12 @@ class membre extends BaseUser {
     private $pref_repCertifiee;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="info_plus", type="text")
+     */
+    private $info_plus;
+    /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\question", mappedBy="membre")
      */
     private $questions;
@@ -951,4 +957,27 @@ class membre extends BaseUser {
         return $this->parrain;
     }
 
+
+    /**
+     * Set info_plus
+     *
+     * @param string $infoPlus
+     * @return membre
+     */
+    public function setInfoPlus($infoPlus)
+    {
+        $this->info_plus = $infoPlus;
+    
+        return $this;
+    }
+
+    /**
+     * Get info_plus
+     *
+     * @return string 
+     */
+    public function getInfoPlus()
+    {
+        return $this->info_plus;
+    }
 }
