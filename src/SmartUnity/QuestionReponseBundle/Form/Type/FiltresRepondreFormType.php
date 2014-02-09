@@ -25,7 +25,11 @@ class FiltresRepondreFormType extends AbstractType {
                     'required' => false))
                  ->add('motCle', 'text', array(
                      'mapped' => false,
-                     'required' => false));
+                     'required' => false))
+                ->add('p', 'hidden', array(
+                    'mapped' => false,
+                    'attr' => array('value' => '1')
+                ));
     }
 
     public function getName()

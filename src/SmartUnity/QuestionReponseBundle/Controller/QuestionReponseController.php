@@ -21,6 +21,7 @@ class QuestionReponseController extends Controller {
 
     public function displayListOfQuestionAction($type, $page, Request $request) {
 
+        $nbParPage = 100;
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -53,7 +54,7 @@ class QuestionReponseController extends Controller {
         //On récupère la réponse du controleur Ajax (pour avaoir une réponse au cas ou)
 
 
-        $nbParPage = 10;
+
 
         $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
             'type' => $type,
@@ -136,14 +137,9 @@ class QuestionReponseController extends Controller {
         }
 
 
-
-        $reponseRepository = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('SmartUnityAppBundle:reponse');
-
         $question = $this->getRequest()->query->get('q');
         $page = $this->getRequest()->query->get('p');
-        $nbParPage = 10;
+        $nbParPage = 100;
 
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
@@ -166,12 +162,12 @@ class QuestionReponseController extends Controller {
             $query->addShould($descriptionQuery);
         }
 
-        $nbQuestions = count($finder->find($query));
-
+        $nbQuestions = count($finder->find($query, 13));
+        p($nbQuestions);
         $nbPages = ceil($nbQuestions / $nbParPage);
 
 //        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
-        $resultSet = $finder->find($query);
+        $resultSet = $finder->find($query, 100);
         $listeQuestions = $this->generateSearchResults($resultSet);
 
         //Génération de la pagination en statique (si pas de JS)
@@ -191,10 +187,6 @@ class QuestionReponseController extends Controller {
 
 ///Construction du formulaire pour les filtres avec comme valeur par défaut la recherche     
         $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
-        $QuestionRecherche->setMarque();
-        $QuestionRecherche->setModele();
-        $QuestionRecherche->setOs();
-//        $QuestionRecherche->setTypeQuestion();
 
         $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
             'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
@@ -236,35 +228,73 @@ class QuestionReponseController extends Controller {
         $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
             'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
 
-        $nbParPage = 10;
+        $nbParPage = 100;
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
 
         $formQuestion->bind($this->getRequest());
 
+//récupération des champs de formulaire
+        $marque = $formQuestion->get('marque')->getData();
+        $os = $formQuestion->get('os')->getData();
+        $typeQuestion = $formQuestion->get('typeQuestion')->getData();
+        $motCle = $formQuestion->get('motCle')->getData();
+        $page = $formQuestion->get('p')->getData();
 
-        $marque = $formQuestion->get('marque')->getData()->getNom();
+//Création query générale  
+        if (is_null($marque) && is_null($os) && is_null($typeQuestion) && is_null($motCle)) {
+            $query = new \Elastica\Query\MatchAll();
+        } else {
+            $query = new \Elastica\Query\Bool();
+                 
+        if (isset($marque)) {
+            $marque = $marque->getNom();
+            $marqueQuery = new \Elastica\Query\Match;
+            $marqueQuery->setFieldQuery('marque.nom', $marque);
+            $nestedMarqueQuery = new \Elastica\Query\Nested;
+            $nestedMarqueQuery->setPath('marque');
+            $nestedMarqueQuery->setQuery($marqueQuery);
+            $query->addShould($nestedMarqueQuery);
+        }
 
-        $marqueQuery = new \Elastica\Query\Match;
-        $marqueQuery->setFieldQuery('nom', $marque);
+        if (isset($os)) {
+            $os = $os->getNom();
+            $osQuery = new \Elastica\Query\Match;
+            $osQuery->setFieldQuery('os.nom', $os);
+            $nestedOsQuery = new \Elastica\Query\Nested;
+            $nestedOsQuery->setPath('os');
+            $nestedOsQuery->setQuery($osQuery);
+            $query->addShould($nestedOsQuery);
+        }
 
-        $nestedMarqueQuery = new \Elastica\Query\Nested;
-        $nestedMarqueQuery->setPath('marque');
-        $nestedMarqueQuery->setQuery($marqueQuery);
+        if (isset($typeQuestion)) {
+            $typeQuestion = $typeQuestion->getNom();
+            $typeQuestionQuery = new \Elastica\Query\Match;
+            $typeQuestionQuery->setFieldQuery('typeQuestion.nom', $typeQuestion);
+            $nestedTypeQuestionQuery = new \Elastica\Query\Nested;
+            $nestedTypeQuestionQuery->setPath('typeQuestion');
+            $nestedTypeQuestionQuery->setQuery($typeQuestionQuery);
+            $query->addShould($nestedTypeQuestionQuery);
+        }
 
-        $query = new \Elastica\Query\Bool();
-        $query->addMust($nestedMarqueQuery);
+        if (isset($motCle)) {
+            $sujetQuery = new \Elastica\Query\Match;
+            $sujetQuery->setFieldQuery('sujet', $motCle);
+            $descriptionQuery = new \Elastica\Query\Match;
+            $descriptionQuery->setFieldQuery('description', $motCle);
+            $query->addShould($sujetQuery);
+            $query->addShould($descriptionQuery);
+        }            
+            
+        }
 
-        
-        $nbQuestions = count($finder->find($query));
+        $nbQuestions = count($finder->find($query, 100));
         $nbPages = ceil($nbQuestions / $nbParPage);
 
-//        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
         $resultSet = $finder->find($query);
         $listeQuestions = $this->generateSearchResults($resultSet);
 
 //         Génération de la pagination en statique (si pas de JS)
-        $page = $this->getRequest()->query->get('p');      
         $pagination = array();
         if ($page != 1) {
             array_push($pagination, array('<<', '1', '-4'));
@@ -277,11 +307,11 @@ class QuestionReponseController extends Controller {
         if ($page < $nbPages) {
             array_push($pagination, array('>', $page + 1, '3'));
             array_push($pagination, array('>>', $nbPages, '4'));
-        }    
-        
+        }
+
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Recherche.html.twig');
 
-                return $this->render($template, array(
+        return $this->render($template, array(
                     'error' => $error,
                     'page' => $page,
                     'nbPages' => $nbPages,
@@ -634,7 +664,7 @@ class QuestionReponseController extends Controller {
                     'dotationMax' => $dotationMax
         ));
     }
-    
+
     public function editQuestionAction($slug) {
         $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
         $user = $this->getUser();

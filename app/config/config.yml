@@ -117,16 +117,15 @@ fos_elastica:
                         marque:
                             type: "nested"
                             properties:
-                                nom: {}
-#                        os:
-#                            type: "nested"
-#                            properties:
-#                                nom: {}
-#                            
-#                        typeQuestion:
-#                            type: "nested"
-#                            properties:
-#                                nom: {}
+                                nom: {type: string, index_name: nomMarque}
+                        os:
+                            type: "nested"
+                            properties:
+                                nom: {type: string, index_name: nomOS}
+                        typeQuestion:
+                            type: "nested"
+                            properties:
+                                nom: {type: string, index_name: nomTypeQuestion}
                         
                     persistence:
                         driver: orm # orm, mongodb, propel are available
