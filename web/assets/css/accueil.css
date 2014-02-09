@@ -55,9 +55,10 @@
 
 .grille-question-centent
 {
-    clear: both;
-    overflow: hidden;
-    background-color: #ffffff;
+
+    clear:both;
+    overflow:hidden;
+    background-color:#ffffff;
     border-bottom: solid 1px #e8e4dc;
 }
 
