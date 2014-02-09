@@ -5,52 +5,7 @@
     src : url(../fonts/Centrale.ttf);
 }
 
-@media (min-width: 1200px){
-    .bouton-radio
-    {
-        width:200px;
-    }
-    .carousel-show
-    {
 
-    }
-}
-@media (min-width: 992px)  and (max-width: 1200px) {
-    .bouton-radio
-    {
-        width:200px;
-    }
-    .carousel-show
-    {
-
-    }
-
-}
-
-@media screen and (min-width: 768px) and (max-width: 992px) {
-    .bouton-radio
-    {
-        width:200px;
-    }
-    .carousel-show
-    {
-
-    } 
-
-}
-
-@media screen and (max-width: 768px)
-{
-    .bouton-radio
-    {
-        width:100%;
-    }
-    .carousel-show
-    {
-        display:none;
-
-    }
-}
 
 .grille-1
 {
@@ -325,7 +280,19 @@
 {
 	position: absolute;
 	z-index: 2;
-	left: 50%;
+	left: 40%;
+	margin-left: -80px;
+	margin-top: 30px;
+	height: 45px;
+	width: 160px;
+	font-size: 18px;
+}
+
+.nous-rejoindre
+{
+	position: absolute;
+	z-index: 2;
+	left: 60%;
 	margin-left: -80px;
 	margin-top: 30px;
 	height: 45px;
@@ -373,5 +340,141 @@
 	margin-top: 0;
 	font-size: 1.05em;
 	font-family: centrale;
+}
+
+.carousel-caption {
+	z-index: 0;
+}
+
+@media (min-width: 1200px){
+    .bouton-radio
+    {
+        width:200px;
+    }
+    .carousel-show
+    {
+
+    }
+}
+@media (min-width: 992px)  and (max-width: 1200px) {
+    .bouton-radio
+    {
+        width:200px;
+    }
+    
+    .savoir-plus {
+	    height: 35px;
+		width: 140px;
+		margin-top: 10px;
+		left: 40%;
+		font-size: 14px;
+		z-index: 1000;
+    }
+    
+    .nous-rejoindre {
+	    height: 35px;
+		width: 140px;
+		margin-top: 10px;
+		left: 60%;
+		font-size: 14px;
+		z-index: 1000;
+    }
+    
+    .text-accueil h1 {
+	font-size: 2em;
+	}
+	
+	.text-accueil h2 {
+	font-size: 1.3em;
+	}
+	
+	.text-accueil h3 {
+	font-size: 1em;
+	}
+	
+	.text-accueil hr {
+	margin: 0 0 18px 0;
+	width: 64%;
+	margin-left: 140px;
+	background-color: white;
+	height: 1px;
+	}
+	
+	.carousel-control.left {
+		margin: 125px 0 125px 0;
+	}
+	
+	.carousel-control.right {
+		margin: 125px 0 125px 0;
+	}
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .bouton-radio
+    {
+        width:200px;
+    }
+    
+    .savoir-plus {
+	    height: 35px;
+		width: 120px;
+		margin-top: 10px;
+		left: 40%;
+		font-size: 14px;
+		z-index: 1000;
+    }
+    
+    .nous-rejoindre {
+	    height: 35px;
+		width: 120px;
+		margin-top: 10px;
+		left: 60%;
+		font-size: 14px;
+		z-index: 1000;
+    }
+    
+    .text-accueil h1 {
+	font-size: 2em;
+	margin-top: 0;
+	}
+	
+	.text-accueil h2 {
+	font-size: 1.3em;
+	}
+	
+	.text-accueil h3 {
+	font-size: 1em;
+	}
+	
+	.text-accueil hr {
+	margin: 0 0 18px 0;
+	width: 64%;
+	margin-left: 140px;
+	background-color: white;
+	height: 1px;
+	}
+	
+	.carousel-control.left {
+		margin: 115px 0 115px 0;
+	}
+	
+	.carousel-control.right {
+		margin: 115px 0 115px 0;
+	}
+
+}
+
+@media screen and (max-width: 768px)
+{
+    .bouton-radio
+    {
+        width:100%;
+    }
+    .carousel-show
+    {
+        display:none;
+
+    }
 }
 
