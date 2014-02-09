@@ -83,9 +83,13 @@
                         <div class="grille-2">{{form_widget(form.date_naissance)}}</div>
                     </div>
                     <div class="row ">
-                        <div class="grille-1">Smartphone :</div>
+                        <div class="grille-1">{{form_label(form.telephone)}}</div>
                         <div class="grille-2">{{form_widget(form.telephone)}}</div>
-                    </div>                    
+                    </div>     
+                    <div class="row ">
+                        <div class="grille-1 info-plus">{{form_label(form.info_plus)}}</div>
+                        <div class="grille-2">{{form_widget(form.info_plus)}}</div>
+                    </div>                
                 </fieldset>
 
                 <fieldset>
