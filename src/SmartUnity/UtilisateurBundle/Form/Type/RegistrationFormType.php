@@ -31,8 +31,11 @@ class RegistrationFormType extends BaseType {
                 ->add('date_naissance', 'date', array(
                     'empty_value' => '',
                     'widget' => 'choice',
-                    'years' => range(date('Y') - 100, date('Y')),
-                    'required' => false
+                    'years' => range(date('Y'), date('Y') - 100),
+                    'required' => false,
+                    'format' =>'dd MM yyyy',
+                    'model_timezone' => 'Europe/Paris',
+                    'empty_value' => (array('year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'))
                 ))
 //                ->add('ville', 'text', array(
 //                    'label' => 'Ville',
