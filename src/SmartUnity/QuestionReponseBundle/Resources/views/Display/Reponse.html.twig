@@ -553,12 +553,18 @@ Toast
         //On récupère le JSON depuis le controller AjaxController
         $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/' + tri + '/' + pPage + '/{{nbParPage}}', function(donnees) {
             var content = '';
+            
+            var bestWorstReponses = donnees.pop();
+            var isup = bestWorstReponses['isup'];
+            var isdown = bestWorstReponses['isdown'];
+            
             if (donnees[0]['page'] == pPage && donnees[0]['slug'] == '{{slug}}' && donnees[0]['nbParPage'] == {{nbParPage}} && donnees[0]['tri'] == tri) {
                 donnees.shift(); //On supprime la ligne de check du JSON
+                //On supprime la ligne de check du JSON
 
                 donnees.forEach(function(pEntry, i) {
                     if (!pEntry['is_validated'] && !pEntry['is_certif'])
-                        content += generateContent(pEntry, i);
+                        content += generateContent(pEntry, i, isup, isdown);
                 }); //Generation du code
 
                 //Affichage du nouveau contenu dasn le tab, et fadeIn
@@ -579,7 +585,7 @@ Toast
         var userId = {{app.user.id}};
       {% endif %}
     
-    function generateContent(pEntry, i) {
+    function generateContent(pEntry, i, isup, isdown) {
 
         var route_vers_profil = '{{ path("smart_unity_membre_profil", {'id' : 'membre_id' }) }}';
         route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);
@@ -609,12 +615,15 @@ Toast
         {% endif %}
         entity += '                        <div class="grille-1" style="text-align:center"> \
                                     <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
-        if (pEntry['is_voted']) {
+       
+    
+    if (pEntry['is_voted']) {
             entity += 'Vous avez déjà noté cette question.';
         }
 
         entity += '"> ';
-        if (pEntry['up_vote'] > - pEntry['down_vote'])
+        
+        if (pEntry['id'] == isup)
         {   entity+='<div class="fleche upVote" {% if is_granted('ROLE_USER') %}';
             if (!pEntry['is_voted'])
                 {entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';}
@@ -622,14 +631,14 @@ Toast
                     <img src="{{ asset('assets/img/fleche_plus.png') }}" />';
             if (pEntry['up_vote'] > 9 && pEntry['up_vote'] < 100)
             {
-                entity+='<p class="textegris-moyen">';
+                entity+='<p class="textevert-moyen">';
             }
             else if(pEntry['up_vote'] > 100)
             {
-                entity+='<p class="textegris-petit">';
+                entity+='<p class="textevert-petit">';
             }
             else{
-                entity+='<p class="textegris-grand">';
+                entity+='<p class="textevert-grand">';
             }
             entity+= pEntry['up_vote'] + '</p> \
                                         </div>';
@@ -655,7 +664,7 @@ Toast
             entity += pEntry['up_vote'] + '</p> \
                                         </div> ';
         }
-        if (- pEntry['down_vote'] > pEntry['up_vote'])
+        if ( pEntry['id'] == isdown )
         {   entity+='<div class="fleche downVote" {% if is_granted('ROLE_USER') %}';
             if (!pEntry['is_voted'])
                 entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
@@ -674,7 +683,9 @@ Toast
                 entity+='<p class="texterouge-grand">';
             }
             entity+= pEntry['down_vote'] + '</p> \
-                                        </div>';}
+                                        </div>';
+        }
+        
         else        
          {   entity+='<div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') %}';
             if (!pEntry['is_voted'])
