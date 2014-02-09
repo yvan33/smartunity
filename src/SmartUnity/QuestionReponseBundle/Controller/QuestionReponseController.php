@@ -163,7 +163,6 @@ class QuestionReponseController extends Controller {
         }
 
         $nbQuestions = count($finder->find($query, 13));
-        p($nbQuestions);
         $nbPages = ceil($nbQuestions / $nbParPage);
 
 //        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
