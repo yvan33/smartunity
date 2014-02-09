@@ -93,7 +93,7 @@
 
 .bouton-bas-block
 {
-    margin-top: 2em;
+    margin-top: 1em;
     margin-bottom: 2em;
 }
 
@@ -259,7 +259,7 @@ fieldset {
     border: 0;
 }
 
-.bouton-reponses{
+.bouton-reponses {
     margin-left:10px; 
     background-color: #e37151;
     color:#FFF;
@@ -272,4 +272,55 @@ fieldset {
     height:30px;
     border-radius:2px;
     border: 0;
+}
+
+/* Formulaire de contact */
+
+.bouton-envoyer {
+	margin-left:-60px; 
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:15px;
+    line-height: 15px;
+    margin-top: 5px;
+    text-align:center;
+    width:150px;
+    height:30px;
+    border-radius:2px;
+    border: 0;
+}
+
+.bouton-envoyer:focus {
+	outline: 0;
+}
+
+.text-message-contact {
+	height: 100%;
+	max-width: 100%;
+	width: 500px;
+	margin-right: 0;
+}
+
+.contact-form {
+	padding-left: 50px;
+	margin-top: -15px;
+}
+
+.description {
+	margin: 0 50px;
+}
+
+.cookie-title {
+	line-height: 40px;
+	margin-bottom: 25px;
+}
+
+textarea.form-control {
+	height: 150px;
+}
+
+textarea {
+	max-width: 600px;
+	max-height: 300px;
 }
