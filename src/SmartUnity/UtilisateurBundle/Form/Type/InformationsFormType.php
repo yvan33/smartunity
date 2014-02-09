@@ -26,7 +26,15 @@ class InformationsFormType extends AbstractType {
         'widget' => 'choice',
         'years' => range(date('Y') - 100, date('Y')),
         'required' => false
-            ));
+            ))
+        ->add('telephone','text',array(
+            'required'=> false,
+            'label' => 'Smartphone :'
+        ))
+        ->add('info_plus','textarea',array(
+            'required'=> false,
+            'label' => 'Un peu plus sur moi :'
+        ));
                 
     }
 
