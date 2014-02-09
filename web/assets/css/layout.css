@@ -404,6 +404,19 @@ body.bg
     margin-left: auto;
     margin-right: auto;
 }
+.bouton-login{
+
+    margin: 10px auto ; 
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:18px;
+    text-align:center;
+    width:150px;
+    height:35px;
+    border-radius:2px;
+    border: 0;
+}
 
 .connection-triangle-content
 {
@@ -484,6 +497,8 @@ body.bg
 .souvenir-de-moi{
 
     text-align: left;
+    font-family: centrale;
+    font-size:13px;
 }
 
 
