@@ -407,6 +407,47 @@
 	.carousel-control.right {
 		margin: 125px 0 125px 0;
 	}
+	
+	.text-autre {
+		margin-left: 250px;
+	}
+	
+	.text-autre h1 {
+		font-size: 2em;
+	}
+
+	.text-autre h2 {
+		font-size: 1.2em;
+	}
+	
+	.text-autre h3 {
+		font-size: 0.9em;
+	}
+	
+	.text-autre hr {
+	margin: 0 0 10px 0;
+	width: 100%;
+	background-color: white;
+	height: 1px;	
+	}
+	
+	.carousel-indicators {
+		bottom: 10px;
+	}
+
+	.carousel-indicators li {
+		width: 12px;
+		height: 12px;
+		margin-left: 1px;
+		margin-right: 1px;
+	}
+	
+	.carousel-indicators .active {
+		width: 12px;
+		height: 12px;
+		margin-left: 1px;
+		margin-right: 1px;	
+	}
 
 }
 
@@ -461,6 +502,49 @@
 	
 	.carousel-control.right {
 		margin: 115px 0 115px 0;
+	}
+	
+		
+	.text-autre {
+		margin-left: 220px;
+	}
+	
+	.text-autre h1 {
+		font-size: 1.8em;
+		margin-top: -10px;
+	}
+
+	.text-autre h2 {
+		font-size: 1.1em;
+	}
+	
+	.text-autre h3 {
+		font-size: 0.85em;
+	}
+	
+	.text-autre hr {
+	margin: 0 0 10px 0;
+	width: 100%;
+	background-color: white;
+	height: 1px;	
+	}
+	
+	.carousel-indicators {
+		bottom: 5px;
+	}
+
+	.carousel-indicators li {
+		width: 12px;
+		height: 12px;
+		margin-left: 1px;
+		margin-right: 1px;
+	}
+	
+	.carousel-indicators .active {
+		width: 12px;
+		height: 12px;
+		margin-left: 1px;
+		margin-right: 1px;	
 	}
 
 }
