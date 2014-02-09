@@ -25,7 +25,10 @@ class InformationsFormType extends AbstractType {
         'empty_value' => '',
         'widget' => 'choice',
         'years' => range(date('Y') - 100, date('Y')),
-        'required' => false
+        'required' => false,
+        'format' =>'dd MM yyyy',
+        'model_timezone' => 'Europe/Paris',
+        'empty_value' => (array('year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'))
             ))
         ->add('telephone','text',array(
             'required'=> false,

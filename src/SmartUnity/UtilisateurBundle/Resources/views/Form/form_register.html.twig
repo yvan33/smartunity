@@ -137,9 +137,10 @@
     {% else %}
         <div {{ block('widget_container_attributes') }}>
             {{ date_pattern|replace({
-                '{{ year }}':  form_widget(form.year),
-                '{{ month }}': form_widget(form.month),
                 '{{ day }}':   form_widget(form.day),
+                '{{ month }}': form_widget(form.month),
+                '{{ year }}':  form_widget(form.year),
+
             })|raw }}
         </div>
     {% endif %}
