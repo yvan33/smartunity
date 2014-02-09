@@ -94,7 +94,6 @@
 .bouton-bas-block
 {
     margin-top: 1em;
-    margin-bottom: 2em;
 }
 
 .premiere-ligne
@@ -274,6 +273,10 @@ fieldset {
     border: 0;
 }
 
+.cadre-general {
+	padding-bottom: 30px;
+}
+
 /* Formulaire de contact */
 
 .bouton-envoyer {
@@ -308,7 +311,7 @@ fieldset {
 }
 
 .description {
-	margin: 0 50px;
+	margin: 0 50px 20px 50px;;
 }
 
 .cookie-title {
@@ -316,13 +319,17 @@ fieldset {
 	margin-bottom: 25px;
 }
 
-textarea.form-control {
+.form-textarea {
 	height: 150px;
-}
+} 
 
 textarea {
 	max-width: 600px;
 	max-height: 300px;
+}
+
+textarea:focus {
+	outline: 0;
 }
 
 /* Conditions générales d'utilisation */
@@ -343,6 +350,6 @@ textarea {
 .articles-conditions {
 	font-weight: bold;
 	font-size: 1.2em;
-	margin-left: 50px;
-	margin-top: 15px;
+	margin-left: 70px;
+	margin-bottom: 15px;
 }
