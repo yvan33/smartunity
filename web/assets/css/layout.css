@@ -146,6 +146,10 @@
     {
         z-index:101; 
     }
+    
+    .logo {
+	    display: none;
+    }
 
     .menu-pad 
     {
