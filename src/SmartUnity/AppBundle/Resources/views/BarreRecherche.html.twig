@@ -36,17 +36,17 @@
     <div class="col-md-6 col-md-offset-3" >
         <div class="recherche text-center">
             <p>
-                <input type="radio" name="s1" id="sOn" value="1" hidden checked>  
+                <input type="radio" name="s1" id="sOn" value="1" hidden {% if app.request.attributes.get('_route') != 'smart_unity_question_reponse_repondre_questions' %} checked {% endif %}>  
                 <label for="sOn" class="back-color switch switch--on" id="sli-de">Demander</label>
 
-                <input type="radio" name="s1" id="sOff" value="0" hidden>
+                <input type="radio" name="s1" id="sOff" value="0" hidden {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_repondre_questions' %} checked{% endif %}>
                 <label for="sOff" class="back-color switch switch--off" id="sli-re">Répondre</label>
             </p>
         </div>
     </div>
 </div>
 
-<div class="slider" id="sli1">
+<div class="slider" id="sli1" {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_repondre_questions' %} style="display:none;"{% endif %}>
     <div style="clear:both;">
         <div class="find-content">
             <form action="{{ path('smart_unity_question_reponse_demander_questions') }}" method="GET">
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-<div class="slider" id="sli2">
+<div class="slider" id="sli2"  {% if app.request.attributes.get('_route') != 'smart_unity_question_reponse_repondre_questions' %} style="display:none;"{% endif %}>
     <div style="clear:both;">
         <div class="find-content">
              {{form_start(formQuestion) }}
@@ -74,10 +74,10 @@
                     {{ form_widget(formQuestion.marque, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Marque'}}) }}
                     {{ form_widget(formQuestion.os, { 'attr': {'class': 'chosen-select', 'data-placeholder':"Système logiciel"} }) }}
                     {{ form_widget(formQuestion.typeQuestion, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Type de question'} }) }}
-					{{ form_widget(formQuestion.motCle, { 'attr': {'class': 'text-mot-cle', 'placeholder':'Mot(s) clé(s)'} }) }}
+                    {{ form_widget(formQuestion.motCle, { 'attr': {'class': 'text-mot-cle', 'placeholder':'Mot(s) clé(s)'} }) }}
                     {{form_widget(formQuestion._token)}}
-
-                    <input type="hidden" name="p" id="p" value="1" class="form-control">
+                    {{form_widget(formQuestion.p)}}
+                    
                     <button class="search-answer" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                 </div>
                 </div>    
@@ -130,8 +130,12 @@ $(".chosen-select").chosen({disable_search_threshold: 10, allow_single_deselect:
     backColRep[4] = "#459E6E";
     backColRep[5] = "#E37151";
 
+{% if app.request.attributes.get('_route') != 'smart_unity_question_reponse_repondre_questions' %}
     $('#sli-de').css("background-color", backColDemand[nbAl]);
-
+{#    {% else %}    #}
+{#    $('#sli-de').css("background-color", backColDemand[nbAl]);    #}
+{% endif %}
+    
 //// Modifications des couleurs quand on clique		
 
     $('#sli-re').click(function() {
