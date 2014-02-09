@@ -639,6 +639,18 @@ border-right: 1px solid #ddd;
         border: 1px solid #ddd;
 
 }
+.form_moncompte{
+        font-family: centrale;
+}
+
+.form-textarea{
+
+    width:100%;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    height: 50px;
+}
+
 
 .bouton-retour{
     
@@ -663,6 +675,11 @@ border-right: 1px solid #ddd;
 	color: white;
 	font-family: centrale;	
     font-size: 13px;
+}
+.bouton-valid-modif
+{
+
+    margin-top:30px;
 }
 
 .grille-content h3 
