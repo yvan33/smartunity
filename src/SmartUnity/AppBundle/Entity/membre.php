@@ -225,23 +225,13 @@ class membre extends BaseUser {
      * @ORM\Column(name="ip_inscription", type="string", length=50, nullable=true)
      */
     private $ip_inscription;
-<<<<<<< HEAD
     
     /** @var string
-=======
-
-    /**
-     * @var string
->>>>>>> fin debug (?)
      *
      * @ORM\Column(name="ip_confirmation", type="string", length=50, nullable=true)
      */
     private $ip_confirmation;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> fin debug (?)
     /**
      * Constructor
      */
