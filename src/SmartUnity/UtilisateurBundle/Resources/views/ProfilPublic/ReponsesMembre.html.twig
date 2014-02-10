@@ -57,15 +57,14 @@
                                     {%  if question.auteur_best_reponse == username%}
                                         <div>   
                                             <div>
-                                            {% if question.certif_best_reponse is not null %}
-                                                <div><img src="{{ asset('assets/img/certif.png') }}"/></div>
-                                            {% else %}   
-                                                <div><img src="{{ asset('assets/img/check.png') }}"/></div>
+                                            {% if question.is_certif_question == 'true' %}
+                                                <img src="{{ asset('assets/img/certif.png') }}" style="margin-right:0px"/>
+                                            {% elseif question.is_validated_question == 'true' %}   
+                                                <img src="{{ asset('assets/img/check.png') }}" style="margin-right:0px"/>
                                             {% endif %} 
                                             </div>
                                         </div>
                                     {% else %}
-                                        <!-- <div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div> -->
                                     {% endif %}
                                     </div>
                                     <!-- rond pts fin-->
@@ -159,7 +158,7 @@
                                         </div>
                                         <!-- nb réponses vues fin-->
                                         <!-- bouton rep -->
-                                        <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
+                                        <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                         </div>
                                         <!-- bouton rep fin-->
                                     </h4>
@@ -228,7 +227,7 @@
                                     </div>
                                     <!-- nb réponses vues fin-->
                                     <!-- bouton rep -->
-                                    <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
+                                    <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                     </div>
                                     <!-- bouton rep fin-->
                                 </h4>                           

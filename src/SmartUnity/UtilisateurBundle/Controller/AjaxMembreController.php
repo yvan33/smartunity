@@ -51,44 +51,74 @@ class AjaxMembreController extends Controller {
             'slug' => '_infos'
         ));
 
-        if ($listeQuestion[0] != null) {
-            foreach ($listeQuestion as $Question) { //On parcourt toutes les questions, on les liste dans le tableau de sortie
-                $bestReponse = '';
-                $idBestReponse = '';
-                $auteurBestreponse = '';
-                $dateBestReponse = '';
+                if($listeQuestion[0] != null){
+            foreach($listeQuestion as $Question){ //On parcourt toutes les questions, on les liste dans le tableau de sortie
 
-                $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
-                if ($idBestReponse['repId'] !== false) {
 
-                    foreach ($Question->getReponses() as $reponse) {
-                        if ($reponse->getId() == $idBestReponse['repId']) {
-                            $bestReponse = $reponse->getDescription();
+                $descriptionBestReponse = null;
+                $auteurBestreponse= null;
+                $dateBestReponse = null;
+                $is_certif_question = false;
+                $is_validated_question = false;
+
+
+if ($questionRepository->isQuestionValid($Question->getId())){    
+    foreach($Question->getReponses() as $reponse){
+        if ($reponse->getDateCertification() instanceof \DateTime){
+            $auteurBestreponse = $reponse->getMembre()->getUsername();
+            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+            $is_certif_question = true;
+            $descriptionBestReponse = $reponse->getDescription();
+            break;
+        }
+
+        else if($reponse->getDateValidation() instanceof \DateTime ){
+            $auteurBestreponse = $reponse->getMembre()->getUsername();
+            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+            $is_validated_question = true;
+            $descriptionBestReponse = $reponse->getDescription();
+            break;
+        }
+        // else {
+            // throw new \Exception("Erreur sur une question");
+            // }
+    }
+}
+
+else{
+
+                $bestReponse = $reponseRepository->getBestReponse($Question->getId());
+                
+                if ($bestReponse !== false){
+
+                    foreach($Question->getReponses() as $reponse){
+                        if($reponse->getId() == $bestReponse['repId']){
+                            $descriptionBestReponse = $reponse->getDescription();
                             $auteurBestreponse = $reponse->getMembre()->getUsername();
-                            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
-                            $certifBestReponse = $reponse->getDateCertification();
+                            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i'); 
                             break;
                         }
                     }
                 }
-
-
+            }    
                 array_push($returnArray, array(
-                    'id' => $Question->getId(),
-                    'sujet' => $Question->getSujet(),
-                    'description' => $Question->getDescription(),
-                    'date' => $Question->getDate()->format('d-m-Y à H:i'),
-                    'membre_username' => $Question->getMembre()->getUsername(),
-                    'remuneration' => $Question->getRemuneration(),
-                    'nb_reponses' => $Question->getReponses()->count(),
-                    'best_reponse' => $bestReponse,
-                    'auteur_best_reponse' => $auteurBestreponse,
-                    'date_best_reponse' => $dateBestReponse,
-                    'certif_best_reponse' => $certifBestReponse,
-                    'slug' => $Question->getSlug(),
-                    'count_soutien' => $Question->getSoutienMembres()->count(),
-                    'soutenue' => $Question->getSoutienMembres()->contains($this->getUser()),
+                    'id'=>$Question->getId(),
+                    'sujet'=>$Question->getSujet(),
+                    'description'=>$Question->getDescription(),
+                    'date'=>$Question->getDate()->format('d-m-Y à H:i'),
+                    'membre_username'=>$Question->getMembre()->getUsername(),
+                    'remuneration'=>$Question->getRemuneration(),
+                    'nb_reponses'=>$Question->getReponses()->count(),
+                    'best_reponse'=>$descriptionBestReponse,
+                    'auteur_best_reponse'=>$auteurBestreponse,
+                    'is_validated_question'=>$is_validated_question,
+                    'is_certif_question'=>$is_certif_question,
+                    'date_best_reponse'=>$dateBestReponse,
+                    'slug'=>$Question->getSlug(),
+                    'count_soutien'=>$Question->getSoutienMembres()->count(),
+                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
                 ));
+
             }
         }
 
@@ -135,44 +165,74 @@ class AjaxMembreController extends Controller {
             'slug' => '_infos'
         ));
 
-        if ($listeQuestion[0] != null) {
-            foreach ($listeQuestion as $Question) { //On parcourt toutes les questions, on les liste dans le tableau de sortie
-                $bestReponse = '';
-                $idBestReponse = '';
-                $auteurBestreponse = '';
-                $dateBestReponse = '';
+if($listeQuestion[0] != null){
+            foreach($listeQuestion as $Question){ //On parcourt toutes les questions, on les liste dans le tableau de sortie
 
-                $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
-                if ($idBestReponse['repId'] !== false) {
 
-                    foreach ($Question->getReponses() as $reponse) {
-                        if ($reponse->getId() == $idBestReponse['repId']) {
-                            $bestReponse = $reponse->getDescription();
+                $descriptionBestReponse = null;
+                $auteurBestreponse= null;
+                $dateBestReponse = null;
+                $is_certif_question = false;
+                $is_validated_question = false;
+
+
+if ($questionRepository->isQuestionValid($Question->getId())){    
+    foreach($Question->getReponses() as $reponse){
+        if ($reponse->getDateCertification() instanceof \DateTime){
+            $auteurBestreponse = $reponse->getMembre()->getUsername();
+            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+            $is_certif_question = true;
+            $descriptionBestReponse = $reponse->getDescription();
+            break;
+        }
+
+        else if($reponse->getDateValidation() instanceof \DateTime ){
+            $auteurBestreponse = $reponse->getMembre()->getUsername();
+            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+            $is_validated_question = true;
+            $descriptionBestReponse = $reponse->getDescription();
+            break;
+        }
+        // else {
+            // throw new \Exception("Erreur sur une question");
+            // }
+    }
+}
+
+else{
+
+                $bestReponse = $reponseRepository->getBestReponse($Question->getId());
+                
+                if ($bestReponse !== false){
+
+                    foreach($Question->getReponses() as $reponse){
+                        if($reponse->getId() == $bestReponse['repId']){
+                            $descriptionBestReponse = $reponse->getDescription();
                             $auteurBestreponse = $reponse->getMembre()->getUsername();
-                            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
-                            $certifBestReponse=$reponse->getDateCertification();
+                            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i'); 
                             break;
                         }
                     }
                 }
-
-
+            }    
                 array_push($returnArray, array(
-                    'id' => $Question->getId(),
-                    'sujet' => $Question->getSujet(),
-                    'description' => $Question->getDescription(),
-                    'date' => $Question->getDate()->format('d-m-Y à H:i'),
-                    'membre_username' => $Question->getMembre()->getUsername(),
-                    'remuneration' => $Question->getRemuneration(),
-                    'nb_reponses' => $Question->getReponses()->count(),
-                    'best_reponse' => $bestReponse,
-                    'auteur_best_reponse' => $auteurBestreponse,
-                    'date_best_reponse' => $dateBestReponse,
-                    'certif_best_reponse' => $certifBestReponse,
-                    'slug' => $Question->getSlug(),
-                    'count_soutien' => $Question->getSoutienMembres()->count(),
-                    'soutenue' => $Question->getSoutienMembres()->contains($this->getUser()),
+                    'id'=>$Question->getId(),
+                    'sujet'=>$Question->getSujet(),
+                    'description'=>$Question->getDescription(),
+                    'date'=>$Question->getDate()->format('d-m-Y à H:i'),
+                    'membre_username'=>$Question->getMembre()->getUsername(),
+                    'remuneration'=>$Question->getRemuneration(),
+                    'nb_reponses'=>$Question->getReponses()->count(),
+                    'best_reponse'=>$descriptionBestReponse,
+                    'auteur_best_reponse'=>$auteurBestreponse,
+                    'is_validated_question'=>$is_validated_question,
+                    'is_certif_question'=>$is_certif_question,
+                    'date_best_reponse'=>$dateBestReponse,
+                    'slug'=>$Question->getSlug(),
+                    'count_soutien'=>$Question->getSoutienMembres()->count(),
+                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
                 ));
+
             }
         }
 

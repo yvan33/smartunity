@@ -54,13 +54,15 @@
                                 <h4 class="panel-title">
                                     <!-- rond pts-->
                                     <div class="grille-1"> 
-
-                                    {% if question.certif_best_reponse is not null %}
-                                        <div><img src="{{ asset('assets/img/certif.png') }}"/></div>
+                                        <div>
+                                    {% if question.is_certif_question == 'true' %}
+                                        <img src="{{ asset('assets/img/certif.png') }}" style="margin-right:0px"/>
                                     {% else %}   
-                                        <div><img src="{{ asset('assets/img/check.png') }}"/></div>
+                                        <img src="{{ asset('assets/img/check.png') }}" style="margin-right:0px"/>
                                     {% endif %} 
-
+                                      
+                                        </div>
+   
                                     </div>
                                     <!-- rond pts fin-->
                                     <!-- describ question-->
