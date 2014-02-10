@@ -746,3 +746,9 @@ border-right: 1px solid #ddd;
 .bouton-login:focus {
 	outline: 0;
 }
+
+.navbar-inverse .navbar-nav>.dropdown>a .caret {
+	border-top-color: #99bbc3;
+	border-bottom-color: #99bbc3;
+	margin-left: 5px;
+}

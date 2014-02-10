@@ -29,9 +29,9 @@
 
             <div class="collapse-menu tab-ajax">
                 <ul class="nav nav-tabs nav-tabs-question" id="myTab">
-                    <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Solutions</a></li>
+                    <li {% if type=='reponses' %}class="active first-tab"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Questions solutionnées</a></li>
                     <li style="float:right" {% if type=='onFire' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'onFire', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="onFire-tab">Questions brûlantes</a></li>
-                    <li style="float:right" {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Dernières Questions</a></li>
+                    <li style="float:right" {% if type=='last' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {'type': 'last', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="last-tab">Dernières questions</a></li>
                 </ul>
             </div>
             <!-- nav div menu fin-->
@@ -42,7 +42,7 @@
                           {% if type=='reponses' %}
 
                               {% if countListe == 0 %}
-                        <div class="panel">
+                        <div class="panel no-question">
                         <p align="center">Il n'y a aucune question r&eacute;solue</p>
                         </div>
                               {% else %}
@@ -119,7 +119,7 @@
                     <div class="panel-group" id="accordion-onFire">
                                 {% if type=='onFire' %}
                                   {% if countListe == 0 %}
-                        <div class="panel">
+                        <div class="panel no-question">
                         <p align="center">Il n'y a aucune dernière question</p>
                         </div>
                                   {% else %}
