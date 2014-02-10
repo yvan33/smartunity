@@ -70,7 +70,7 @@ class QuestionReponseController extends Controller {
         //la requête pour vérifier son authenticité... 
         //On récupère des infos utiles pour la pagination..
         $nbPages = $listeQuestions[0]->nbPages;
-p($listeQuestions);
+
         if ($page > $nbPages)
             $page = 1;
 
@@ -100,7 +100,7 @@ p($listeQuestions);
         $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
         $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
             'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
-        
+
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
         return $this->render($template, array(
                     'error' => $error,
@@ -431,52 +431,6 @@ else{
                 ));
 
             }
-
-
-//
-//            $bestReponse = '';
-//            $idBestReponse = '';
-//            $auteurBestreponse = '';
-//            $dateBestReponse = '';
-//            $certifBestReponse= '';
-//
-//            $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
-//            if ($idBestReponse['repId'] !== false) {
-//
-//                foreach ($Question->getReponses() as $reponse) {
-//                    if ($reponse->getId() == $idBestReponse['repId']) {
-//                        $bestReponse = $reponse->getDescription();
-//                        $auteurBestreponse = $reponse->getMembre()->getUsername();
-//                        $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
-//                        $certifBestReponse = $reponse->getDateCertification();            
-//
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            array_push($listeQuestions, array(
-//                'id' => $Question->getId(),
-//                'sujet' => $Question->getSujet(),
-//                'description' => $Question->getDescription(),
-//                'date' => $Question->getDate()->format('d-m-Y à H:i'),
-//                'membre_username' => $Question->getMembre()->getUsername(),
-//                'membre_id' => $Question->getMembre()->getId(),
-//                'remuneration' => $Question->getRemuneration(),
-//                'nb_reponses' => $Question->getReponses()->count(),
-//                'best_reponse' => $bestReponse,
-//                'auteur_best_reponse' => $auteurBestreponse,
-//                'date_best_reponse' => $dateBestReponse,
-//                'certif_best_reponse' => $certifBestReponse,
-//                'slug' => $Question->getSlug(),
-//                'count_soutien' => $Question->getSoutienMembres()->count(),
-//                'soutenue' => $Question->getSoutienMembres()->contains($this->getUser())
-//            ));
-
-            /*
-              $html.= $result->getResult()->getScore();
-             */
-
         return $listeQuestions;
     }
 
