@@ -278,6 +278,8 @@
     overflow:hidden;
     clear:both;
     background-color: rgba(137,177,185, 0.3);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
 .grille-content-2
@@ -298,8 +300,8 @@
 	padding-left:2%;
 	padding-right:2%;
 	clear:both;
-	
-
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
 }
 
 .head-blue a
