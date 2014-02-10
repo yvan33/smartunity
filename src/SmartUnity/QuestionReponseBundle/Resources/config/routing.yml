@@ -14,8 +14,8 @@ smart_unity_question_reponse_demander_questions:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchDemanderQuestion }
 
 smart_unity_question_reponse_repondre_questions:
-    pattern: /recherche-filtres/
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchRepondreQuestion }
+    pattern: /recherche-filtres/{page}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchRepondreQuestion, page:'1' }
     
 smart_unity_question_reponse_display_reponse:
     pattern:  /reponse/{slug}/{tri}/{page}/{haveAddedAnswer}/{haveEditedQuestion}/{haveEditedReponse}

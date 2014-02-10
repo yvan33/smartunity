@@ -32,6 +32,7 @@
 
 {% block recherche %}
 
+{#BOUTONS DEMANDER ET REPONDRE#}
 <div class="row question">
     <div class="col-md-6 col-md-offset-3" >
         <div class="recherche text-center">
@@ -45,7 +46,9 @@
         </div>
     </div>
 </div>
+{# FIN BOUTONS DEMANDER ET REPONDRE#}
 
+{#BARRE RECHERCHE DEMANDER#}
 <div class="slider" id="sli1" {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_repondre_questions' %} style="display:none;"{% endif %}>
     <div style="clear:both;">
         <div class="find-content">
@@ -63,7 +66,9 @@
     <div style="clear:both;">
     </div>
 </div>
+{#FIN BARRE RECHERCHE DEMANDER#}
 
+{#BARRE RECHERCHE REPONDRE#}
 <div class="slider" id="sli2"  {% if app.request.attributes.get('_route') != 'smart_unity_question_reponse_repondre_questions' %} style="display:none;"{% endif %}>
     <div style="clear:both;">
         <div class="find-content">
@@ -75,9 +80,8 @@
                     {{ form_widget(formQuestion.os, { 'attr': {'class': 'chosen-select', 'data-placeholder':"Système logiciel"} }) }}
                     {{ form_widget(formQuestion.typeQuestion, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Type de question'} }) }}
                     {{ form_widget(formQuestion.motCle, { 'attr': {'class': 'text-mot-cle', 'placeholder':'Mot(s) clé(s)'} }) }}
-                    {{form_widget(formQuestion._token)}}
-                    {{form_widget(formQuestion.p)}}
-                    
+                    {{form_widget(formQuestion._token)}} 
+                    <input type="hidden" name="p" id="p" value="1" class="form-control">
                     <button class="search-answer" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
                 </div>
                 </div>    
@@ -87,6 +91,7 @@
     <div style="clear:both;">
     </div>  
 </div>
+{#FIN BARRE RECHERCHE REPONDRE#}
 
 <script>
     $("#sli-re").click(function() {

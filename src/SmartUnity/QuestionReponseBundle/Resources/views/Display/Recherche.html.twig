@@ -119,7 +119,10 @@
                 <div style="text-align:center;">
                     <ul id="pages" class="pagination pagination-lg">
                       {% for page in pagination %}
-                      <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_demander_questions') }}?q={{requete}}&p={{page[1]}}">{{ page[0] }}</a></li>
+                      <li {% if page[2]=='0' %}class="active"{% endif %}><a
+                  {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_demander_questions' %} href="{{ path('smart_unity_question_reponse_demander_questions') }}?q={{requete}}&p={{page[1]}}"
+                  {% elseif app.request.attributes.get('_route') == 'smart_unity_question_reponse_repondre_questions' %} href="{{ path('smart_unity_question_reponse_repondre_questions', { page : page[1] }) }}"
+                  {% endif %} >{{ page[0] }}</a></li>
                       {% endfor %}
                   </ul>
                 </div>
