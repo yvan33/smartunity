@@ -75,6 +75,8 @@ smart_unity_question_reponse_signaler_reponse:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerReponse }
     requirements:
         idReponse: \d+
+    options:
+        expose: true
 
 smart_unity_question_reponse_signaler_commentaire_question:
     pattern:  /signaler-commentaireQuestion/{idCommentaireQuestion}/
