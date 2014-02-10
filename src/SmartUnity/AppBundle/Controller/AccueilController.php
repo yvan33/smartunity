@@ -88,7 +88,6 @@ class AccueilController extends Controller {
             'page' => 1,
             'nbParPage' => $nbParPage
         ));
-        p($response);
         //Suppression de l'en tête HTTP et décodage du JSON
         $cleanJSON = explode('[', $response, 2);
         $listeSolvedQuestions = json_decode('[' . $cleanJSON[1]);
