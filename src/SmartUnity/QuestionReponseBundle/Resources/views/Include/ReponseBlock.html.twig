@@ -145,11 +145,12 @@
                             <div>   
                                 <div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this, {{reponse.id}})" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
                             </div>
-
+        {% if not (reponse.is_certif or reponse.is_validated) %}                 
           {% if is_granted('ROLE_USER') and app.user.id == reponse.membre_id %}
                             <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this, {{reponse.id}}, '{{reponse.description}}')">
                                 <div class="bouton-com-rep">Editer</div>
                             </div>                        
+          {% endif %}
           {% endif %}
                             
                         </div>
