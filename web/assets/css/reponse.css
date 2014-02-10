@@ -21,7 +21,7 @@
     .grille-1
     {
         width:80px;
-        margin:15px 10px;
+        margin: 17px 0px 0px 15px;
     }
 
     .commentaire
@@ -284,6 +284,7 @@
     overflow:hidden;
     clear:both;
     position: relative;
+    border-top: 1px solid #e8e4dc;
 }
 
 .grille-reponse-smart
@@ -291,17 +292,14 @@
     overflow:hidden;
     clear:both;
     background-color: rgba(137,177,185, 0.3);
-
 }
 
 .grille-content-2
-{
-        /*position: relative;*/	    
+{    
     margin-bottom: 25px;
 	background-color: #f8f8ef;
-	border-radius:5px;
+	border-radius: 3px;
 	border:1px solid #e8e4dc;
-	/*overflow:hidden;*/
 }
 
 .head-blue
@@ -484,6 +482,10 @@
 	font-weight: 600;
 }
 
+.commentaire img {
+	width: 50%;
+}
+
 .signaler-comment
 {
 	display: none;
@@ -596,7 +598,10 @@ input
     position: absolute;
     bottom: 2px;
     left:4px;
+}
 
+.bouton-signaler img {
+	width: 50%;
 }
 
 .tooltip {
