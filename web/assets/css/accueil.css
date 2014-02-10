@@ -68,8 +68,11 @@
     float: left;
     width: 80px;
     padding-right: 15px;
-    margin-top: 10px;
+    margin-top: 12px;
     margin-bottom: 10px;
+}
+.grille-question-rond img {
+	width: 61%
 }
 
 .grille-question-txt
