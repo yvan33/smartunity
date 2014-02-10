@@ -15,6 +15,7 @@
 
 
 {% block body %}
+
 <a href="{{path('smart_unity_question_reponse_homepage')}}"><span class="glyphicon glyphicon-chevron-left bouton-retour"></span></a>
 <div class="row row-sans-margin">
     <div class="col-md-12" style="padding:0px;">
@@ -29,16 +30,16 @@
                     {% if app.user==question.membre.username and not is_validated and listeReponses is empty %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-pencil"></span></a> {% endif %}
                     <p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                 </div>
-
+{% if not is_certif and not is_validated %}
                 <div class="grille-1">
                     <div class="rond-point"><p>{{ question.remuneration }} pts</p></div>
 
-{% if not is_certif and not is_validated %}
+
                     <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
                         <button type="button" class="bouton-soutien" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour soutenir une question."{% endif %}><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                     </div>
-                    {% endif %}
                 </div>
+                    {% endif %}
 
                 <div class="grille-2">
 
