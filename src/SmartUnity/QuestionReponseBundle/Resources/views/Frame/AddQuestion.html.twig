@@ -24,6 +24,9 @@
             <div class="row text-center cookie-title">
                 Poser une question
             </div>
+            <div class="explication-poser-question text-center">
+            	<p>Pensez à effectuer une recherche avant de poser une question. Si vous rencontrez un problème avec votre smartphone, il y a de fortes chances que quelqu'un d'autre l'ait également expérimenté. L'objectif du site est de polluer le moins possible l'information pertinente !<br/></p><b class="merci">Merci :)</b>
+            </div>
 		
 		{{ form_start(formQuestion)}}
 		<div class="erreur">
@@ -31,34 +34,38 @@
 	    </div>
 	    <div class="row premiere-ligne" >
 	        <div class="grille-1">{{ form_label(formQuestion.sujet) }}</div>
-	        <div class="grille-2 text-area">{{ form_errors(formQuestion.sujet) }}{{ form_widget(formQuestion.sujet) }}</div>
+	        <div class="grille-2 text-area">{{ form_errors(formQuestion.sujet) }}{{ form_widget(formQuestion.sujet, { 'attr': {'class': 'text-subject'}}) }}</div>
 	    </div>
 	    <div class="row">
 	        <div class="grille-1">{{ form_label(formQuestion.description) }}</div>
-	        <div class="grille-2 text-area">{{ form_errors(formQuestion.description) }}{{ form_widget(formQuestion.description) }}</div>
+	        <div class="grille-2 text-area">{{ form_errors(formQuestion.description) }}{{ form_widget(formQuestion.description, { 'attr': {'class': 'text-description'}}) }}</div>
 	    </div>
 	    <div class="row">
 	        <div class="grille-1">{{ form_label(formQuestion.marque) }}</div>
-	        <div class="grille-2">{{ form_errors(formQuestion.marque) }}{{ form_widget(formQuestion.marque) }}</div>
+	        <div class="grille-2">{{ form_errors(formQuestion.marque) }}{{ form_widget(formQuestion.marque, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Choisissez'}}) }}</div>
 	    </div>
 	    <div class="row">
 	        <div class="grille-1">{{ form_label(formQuestion.os) }}</div>
-	        <div class="grille-2">{{ form_errors(formQuestion.os) }}{{ form_widget(formQuestion.os) }}</div>
+	        <div class="grille-2">{{ form_errors(formQuestion.os) }}{{ form_widget(formQuestion.os, { 'attr': {'class': 'chosen-select', 'data-placeholder':"Choisissez"} }) }}</div>
 	    </div>
 	    <div class="row">
 	        <div class="grille-1 ">{{ form_label(formQuestion.typeQuestion) }}</div>
-	        <div class="grille-2">{{ form_errors(formQuestion.typeQuestion) }}{{ form_widget(formQuestion.typeQuestion) }}</div>
+	        <div class="grille-2">{{ form_errors(formQuestion.typeQuestion) }}{{ form_widget(formQuestion.typeQuestion, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Choisissez'} }) }}</div>
 	    </div>
 	    <div class="row">
-                <div class="grille-1">Dotation <a id="popupDotation" rel="tooltip" data-original-title="Vous pouvez augmenter la dotation de la question en utilisant les points de votre cagnotte pour améliorer son attractivité."><span class="glyphicon glyphicon-info-sign" style="color:#9999ff;"></span></a>:</div>
+                <div class="grille-1">Dotation <a id="popupDotation" rel="tooltip" data-original-title="Vous pouvez augmenter la dotation de la question en utilisant les points de votre cagnotte pour améliorer son attractivité."><span class="glyphicon glyphicon-info-sign" style="color:#BBB;"></span></a></div>
                 
 	        <div class="grille-2 dotation">{{ form_errors(formQuestion.remuneration) }}{{ form_widget(formQuestion.remuneration) }} Max: {{dotationMax}} </div>
 	    </div>
 	    <div class="cent-h bouton-bas-block">
-	        {{form_widget(formQuestion.save,{'attr': {'class': 'btn btn-primary'}})}}
+	        {{form_widget(formQuestion.save,{'attr': {'class': 'btn ask-question'}})}}
 	    </div>
 	    {{form_end(formQuestion)}}
 	</div>
+
+<script>
+$(".chosen-select").chosen({disable_search_threshold: 10, allow_single_deselect: true });
+</script>
 
 <script>
 $(document).ready(function(){

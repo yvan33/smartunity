@@ -14,6 +14,11 @@
     float:left;
     text-align: right;
 }
+
+.grille-1 label {
+	margin-bottom: 7px;
+}
+
 .grille-2
 {
     width:40%;
@@ -283,7 +288,9 @@ fieldset {
 }
 
 .textarea-register {
-	height: 50px;
+	height: 150px;
+	padding: 5px 0;
+	max-height: 270px;
 }
 
 /* Formulaire de contact */
@@ -329,7 +336,6 @@ fieldset {
 }
 
 .form-textarea {
-	height: 50px;
 	padding-left: 10px;
 	color: #555;
 	font-size: 13px;
@@ -347,6 +353,7 @@ textarea:focus {
 
 .form-control {
 	font-size: 13px;
+	box-shadow: none;
 }
 
 /* Conditions générales d'utilisation */
@@ -369,4 +376,107 @@ textarea:focus {
 	font-size: 1.2em;
 	margin-left: 70px;
 	margin-bottom: 15px;
+}
+
+/* Poser une question */
+
+.ask-question {
+	border-radius:2px;
+	background-color: #e37151;
+	height: 40px;
+	width: 250px;
+	line-height: 0;
+	color: white;
+	font-family: centrale;	
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.text-subject {
+	height: 30px;
+	padding-left: 10px;
+	color: #555;
+	font-size: 13px;
+	padding: 6px 5px 0 10px;
+	width: 100%;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	width: 550px;
+}
+
+.text-description {
+	height: 90px;
+	padding-left: 10px;
+	color: #555;
+	font-size: 13px;
+	padding: 6px 5px 0 10px;
+	width: 100%;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	width: 550px;
+}
+
+.explication-poser-question {
+	margin: 0 70px;
+}
+
+.explication-poser-question p {
+	margin-bottom: 5px;
+}
+
+.merci {
+	font-size: 1.2em;
+	padding-top: 5px;
+}
+
+/* Chosen */
+
+.chosen-container-single .chosen-single div b {
+	margin-top: 5px;
+}
+
+.chosen-container {
+	min-width: 190px;
+	border: 0;
+	margin: 0 2.5px 2.5px 0;
+}
+
+.chosen-container-single .chosen-single {
+	height: 32px;
+	background: #FFF;
+	color: #7b7a7a;
+	line-height: 32px;
+	border: 0;
+	padding-left: 10px;
+	font-weight: 200;
+	font-style: italic;
+	box-shadow: none;
+	font-family: centrale;
+	border: 1px solid #CCC;
+	border-radius: 3px;
+}
+
+.chosen-container-active .chosen-single {
+	border: 1px solid #CCC;
+
+.chosen-single:focus {
+	border: 1px solid #CCC;
+}
+
+.search-choice-close {
+	top: 11px;
+}
+	
+.chosen-with-drop .chosen-container-single .chosen-single {
+	color: black;
+}
+
+.chosen-container .chosen-results li.highlighted {
+  	color: #fff;
+	background-color: #7b7a7a;
+	background-image: #7b7a7a;
+}
+
+.chosen-single abbr {
+	margin-top: 10px;
 }

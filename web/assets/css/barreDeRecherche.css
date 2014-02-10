@@ -207,10 +207,6 @@ input[type="radio"]:checked + .switch--off {
 .chosen-container-active .chosen-single {
 	border: 0;
 
-.chosen-select {
-	
-}
-
 .chosen-select:focus {
 	outline: 0;
 	border: 0;
