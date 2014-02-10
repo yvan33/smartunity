@@ -54,11 +54,12 @@
                                     <!-- rond pts-->
                                     <div class="grille-1"> 
                                         <div>
-                                    {% if question.is_certif_question %}
+                                    {% if question.is_certif_question == 'true' %}
                                         <img src="{{ asset('assets/img/certif.png') }}" style="margin-right:0px"/>
                                     {% else %}   
                                         <img src="{{ asset('assets/img/check.png') }}" style="margin-right:0px"/>
                                     {% endif %} 
+                                      
                                         </div>
    
                                     </div>

@@ -61,7 +61,7 @@ class QuestionReponseController extends Controller {
             'page' => $page,
             'nbParPage' => $nbParPage
         ));
-        p($response);
+
         //Suppression de l'en tête HTTP et décodage du JSON
 
         $cleanJSON = explode('[', $response, 3);
@@ -70,7 +70,7 @@ class QuestionReponseController extends Controller {
         //la requête pour vérifier son authenticité... 
         //On récupère des infos utiles pour la pagination..
         $nbPages = $listeQuestions[0]->nbPages;
-
+p($listeQuestions);
         if ($page > $nbPages)
             $page = 1;
 
