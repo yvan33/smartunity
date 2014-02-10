@@ -207,12 +207,19 @@ else{
                     ));
                 }
                 $isCertif=false;
-                if ($reponse[0]->getDateCertification() != null)
+                $dateCertification=false;
+                if ($reponse[0]->getDateCertification() != null){
                     $isCertif = true;
+                    $dateCertification=$reponse[0]->getDateCertification()->format('d-m-Y à H:i');
+                }
 
                 $isValid=false;
-                if ($reponse[0]->getDateValidation() != null)
+                $dateValidation=false;
+                if ($reponse[0]->getDateValidation() != null){
                     $isValid = true;
+                    $dateValidation=$reponse[0]->getDateValidation()->format('d-m-Y à H:i');
+
+                }
 
                 $getNoteReponses = $reponse[0]->getNoteReponses();
                 $isVoted = false;
@@ -273,6 +280,8 @@ else{
                     'nb_questions_membre'=> (int) $nb_questions_membre,
                     'points_membre'=> (int) $membre->getCagnotte(),
                     'avatar' => $avatar,
+                    'date_validation'=>$dateValidation,
+                    'date_certification'=> $dateCertification
                 ));
 
             }
