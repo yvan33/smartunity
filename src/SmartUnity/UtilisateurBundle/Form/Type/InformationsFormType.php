@@ -14,8 +14,8 @@ class InformationsFormType extends AbstractType {
         ->add('prenom', 'text', array(
             'required' => false, 
         ))                
-        ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-        ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
+        ->add('email', 'email', array('label' => 'Adresse e-mail'))
+        ->add('username', null, array('label' => 'Nom d\'utilisateur'))
         ->add('sexe', 'choice', array(
         'choices' => array(
             'na' =>'Non renseigné', 'm' => 'Masculin', 'f' => 'Féminin'),
@@ -46,3 +46,4 @@ class InformationsFormType extends AbstractType {
     }
 
 }
+ 
