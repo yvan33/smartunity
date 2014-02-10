@@ -1,6 +1,5 @@
 {# Widgets #}
 
-
 {% block form_widget %}
 {% spaceless %}
     {% if compound %}
@@ -41,7 +40,7 @@
 
 {% block textarea_widget %}
 {% spaceless %}
-    <textarea class="form-textarea textarea-register" {{ block('widget_attributes') }}>{{ value }}</textarea>
+    <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
 {% endspaceless %}
 {% endblock textarea_widget %}
 
@@ -71,7 +70,7 @@
     {% if required and empty_value is none and not empty_value_in_choices %}
         {% set required = false %}
     {% endif %}
-    <select class="infos-date" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none %}
             <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
         {% endif %}
