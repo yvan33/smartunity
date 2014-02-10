@@ -245,8 +245,7 @@ h1
 
 .modify:hover
 {
-	color: #e37151;
-	color: #333;
+	background-color: #333;
 }
 
 .form-control
@@ -254,4 +253,9 @@ h1
 	padding-left: 5px;
 	color: black;
 	height: 20px;
+}
+
+.bouton-repondre {
+	height: 28px;
+	line-height: 12px;
 }

@@ -754,3 +754,7 @@ border-right: 1px solid #ddd;
 .solution-tab {
 	margin-left: 10px;
 }
+
+.bouton-login:focus {
+	outline: 0;
+}
