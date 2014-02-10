@@ -103,7 +103,12 @@
 
 .infos-date
 {
-    margin-right: 0.3em; 
+    margin-right: 0.3em;
+    height: 26px;   
+}
+
+select, input:active {
+	outline: 0;
 }
 
 .cookie-title
@@ -279,10 +284,6 @@ fieldset {
 
 .textarea-register {
 	height: 50px;
-}
-
-.infos-date {
-	height: 26px;
 }
 
 /* Formulaire de contact */
