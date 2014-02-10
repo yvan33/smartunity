@@ -22,9 +22,9 @@
 
 
         <div class="grille-content-2">
-            <div class="grille-reponse">
+            <div class="grille-reponse" onmouseover="displaySignalQuestion(this);" onmouseout="hideSignalQuestion(this);">
                 <div class="bouton-signaler">
-                    <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img alt="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>
+                    <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img class="signaler-comment" alt="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>
                 </div>                
                 <div class="head-blue"><p style="float:left">{{ question.sujet }}</p>
                     {% if app.user==question.membre.username and not is_validated and listeReponses is empty %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-pencil"></span></a> {% endif %}
@@ -84,10 +84,10 @@
 
                               {% for commentaire in question.commentaireQuestions %}
                                 {% if commentaire.signaler == 0 %}
-                    <div class="commentaire">
+                    <div class="commentaire" onmouseover="displaySignalComment(this);" onmouseout="hideSignalComment(this);">
                         <p style="float:left">{{commentaire.description}}</p><p style="float:right">
                             <a href="{{ path('smart_unity_membre_profil', {id: commentaire.membre.id}) }}">{{commentaire.membre.username}}</a> le {{commentaire.date|date('d-m-Y H:i')}}
-                            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_question', {idCommentaireQuestion: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img src="{{ asset('assets/img/signaler.png') }}"/></a>
+                            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_question', {idCommentaireQuestion: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img class= "signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a>
                         </p>
                     </div>
                                 {% endif %}
@@ -344,12 +344,25 @@ Toast
 ///////////hover signaler commenter
 ////////////////////////////
 
-    function displaySignal(e) {
+    function displaySignalComment(e) {
         $(e).children().next().children().next().children().css('display','inline-block');
     }
-    function hideSignal(e) {
+    function hideSignalComment(e) {
         $(e).children().next().children().next().children().css('display','none');
     }
+    function displaySignalerReponse(e) {
+        $(e).children().children().children('img.signaler-comment').css('display','inline-block');
+    }
+    function hideSignalerReponse(e) {
+        $(e).children().children().children('img.signaler-comment').css('display','none');
+    }
+    function displaySignalQuestion(e) {
+        $(e).children().children().children('img').css('display','inline-block');
+    }
+    function hideSignalQuestion(e) {
+        $(e).children().children().children('img').css('display','none');
+    }
+
 
 
 //////////
@@ -591,12 +604,10 @@ Toast
     function generateContent(pEntry, i, isup, isdown) {
 
         var route_vers_profil = '{{ path("smart_unity_membre_profil", {'id' : 'membre_id' }) }}';
-        route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);
+        route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);        
         var entity = '<div style="position:relative;"> \
-    <div class="grille-reponse"> \
-                <div class = "bouton-signaler"> \
-            <a title="Signaler" href = "#"> <img alt="Signaler" src = "{{ asset('assets/img/signaler.png') }}"/></a> \
-            </div>';
+    <div class="grille-reponse" onmouseout="hideSignalerReponse(this);" onmouseover="displaySignalerReponse(this);"> \
+                <div class = "bouton-signaler"><a href="{% if is_granted('ROLE_USER') %} '+ Routing.generate('smart_unity_question_reponse_signaler_reponse', {idReponse: pEntry['id']}) + '{% else %}#{% endif %}"> <img class="signaler-comment" alt="Signaler" src = "{{ asset('assets/img/signaler.png') }}"/></a></div>';
 
           {% if  is_granted('ROLE_ADMIN') %}
         entity += '          <div class="dropdown bouton-admin"> \
@@ -750,7 +761,7 @@ Toast
                                 <p style="min-height: 100px">' + pEntry['description'] + '</p>';
         pEntry['commentaires'].forEach(function(pCom, i) {
 
-            entity += '<div class="commentaire" onmouseover="displaySignal(this)" onmouseout="hideSignal(this)"> \
+            entity += '<div class="commentaire" onmouseover="displaySignalComment(this);" onmouseout="hideSignalComment(this);"> \
                                     <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_username'] + ' le ' + pCom['date'] + ' \
                                     <a href="#"><img class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
                                     </div>';

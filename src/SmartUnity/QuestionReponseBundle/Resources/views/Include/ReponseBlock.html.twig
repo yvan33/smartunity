@@ -1,7 +1,7 @@
 <div style="position:relative;">
-    <div class="grille-reponse{% if reponse.is_certif or reponse.is_validated %}-smart{% endif %}">
+    <div class="grille-reponse{% if reponse.is_certif or reponse.is_validated %}-smart{% endif %}" onmouseover="displaySignalerReponse(this);" onmouseout="hideSignalerReponse(this);">
         <div class="bouton-signaler">
-            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id, slug: question.slug})}}{% else %}#{% endif %}"><img title="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>      
+            <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id})}}{% else %}#{% endif %}"><img class= "signaler-comment" title="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>      
         </div>
 
 {% if  is_granted('ROLE_ADMIN') %}
@@ -42,13 +42,6 @@
                                 <img src="{{ asset('assets/img/fleche_moins_grise.png') }}" />{% if reponse.up_vote < -9 and reponse.up_vote > -100 %}<p class="textegris-moyen"> {% elseif reponse.up_vote < -100 %} <p class="textegris-petit"> {% else %}<p class="textegris-grand"> {% endif %}{{reponse.down_vote}}</p>
                 {% endif %}       
                         </div>
-           <!--  {% if -(reponse.down_vote) > (reponse.up_vote) %}
-                    <div class="fleche downVote" onmouseover="downVoteHover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %} onClick="javascript:downVote({{reponse.id}})"{% endif %}>
-                        <img src="{{ asset('assets/img/fleche_moins.png') }}" /><p class="texterouge">{{reponse.down_vote}}</p>
-            {% else %} 
-                        <div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted %}onClick="javascript:downVote({{reponse.id}})"{% endif %}>
-                            <img src="{{ asset('assets/img/fleche_moins_grise.png') }}" /><p class="textegris">{{reponse.down_vote}}</p>
-            {% endif %}     -->
                     </div>
                     <div class="roww">
                         <p style="font-size:11px">{{reponse.date}}</p>
@@ -67,10 +60,6 @@
                 <div class="modal fade" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="validation-dialog">
                     <div class="validation-content">
-<!--                       <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                      </div> -->
                       <div class="validation-body">
                         <p>Êtes vous sûr de vouloir valider la réponse suivante: {{ reponse.description }}</p>
                       </div>
@@ -127,7 +116,7 @@
                     </div>
                     <p style="min-height: 100px">{{reponse.description}}</p>
                                     {% for commentaire in reponse.commentaires %}
-                    <div class="commentaire" onmouseover="displaySignal(this)" onmouseout="hideSignal(this)">
+                    <div class="commentaire" onmouseover="displaySignalComment(this);" onmouseout="hideSignalComment(this);">
                         <p style="float:left">{{commentaire.description}}</p><p style="float:right">
                                           <a href="{{ path('smart_unity_membre_profil', {id: commentaire.membre_id}) }}">{{commentaire.membre_username}}</a>  le {{commentaire.date}}
                             <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_commentaire_reponse', {idCommentaireReponse: commentaire.id})}}{% else %}#{% endif %}" style="display: inline-block"><img alt="Signaler" class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a>
