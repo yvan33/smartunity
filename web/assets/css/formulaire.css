@@ -277,6 +277,14 @@ fieldset {
 	padding-bottom: 30px;
 }
 
+.textarea-register {
+	height: 50px;
+}
+
+.infos-date {
+	height: 26px;
+}
+
 /* Formulaire de contact */
 
 .bouton-envoyer {
@@ -320,7 +328,11 @@ fieldset {
 }
 
 .form-textarea {
-	height: 150px;
+	height: 50px;
+	padding-left: 10px;
+	color: #555;
+	font-size: 13px;
+	
 } 
 
 textarea {
@@ -330,6 +342,10 @@ textarea {
 
 textarea:focus {
 	outline: 0;
+}
+
+.form-control {
+	font-size: 13px;
 }
 
 /* Conditions générales d'utilisation */
