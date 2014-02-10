@@ -14,3 +14,4 @@
 /web/phpconsole/*
 
 web/phpconsole/install.php
+web/assets/img/.DS_Store
