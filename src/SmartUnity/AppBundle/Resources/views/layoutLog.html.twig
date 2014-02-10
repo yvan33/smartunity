@@ -320,9 +320,22 @@ $(".cadre-general").css('min-height', minimumHeightCadreGeneral);
                 if ($(window).width() > 768)
                 {
 
+                            event.stopPropagation();
+
                     //Affichage de la barre de recherche
                     $("#loupe").show();
-                    $("#loupe, #top-barre-recherche").click(function(event) {
+                    $("#loupe").click(function(event) {
+                        $("#pop").hide();
+                        if($("#top-barre-recherche").is(':visible')){
+                            $("#top-barre-recherche").hide();
+                            event.stopPropagation();
+                        }else{
+                            $("#top-barre-recherche").slideDown(200);
+                            event.stopPropagation();
+                        }
+
+                    });
+                    $("#top-barre-recherche").click(function(event) {
                         $("#pop").hide();
                         $("#top-barre-recherche").slideDown(200);
                         event.stopPropagation();
