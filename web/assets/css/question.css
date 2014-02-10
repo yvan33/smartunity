@@ -43,6 +43,12 @@
   	width:130px;
 } 
 
+.panel-collapse {
+	background-color: #f4f4f4;
+	border-left: 1px solid #DDD;
+	border-right: 1px solid #DDD;
+}
+
 .grille-det2
 {
 	
