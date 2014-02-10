@@ -994,7 +994,7 @@ p($listeQuestions);
     public function signalerQuestionAction($slug) {
 
         $formSignaler = $this->createFormBuilder()
-                ->add('motif', 'textarea', array('label' => false))
+                ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
 
@@ -1018,6 +1018,7 @@ p($listeQuestions);
 
     public function signalerReponseAction($idReponse) {
         $formSignaler = $this->createFormBuilder()
+                ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
 
@@ -1042,6 +1043,7 @@ p($listeQuestions);
 
     public function signalerCommentaireQuestionAction($idCommentaireQuestion) {
         $formSignaler = $this->createFormBuilder()
+                ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
 
@@ -1066,6 +1068,7 @@ p($listeQuestions);
 
     public function signalerCommentaireReponseAction($idCommentaireReponse) {
         $formSignaler = $this->createFormBuilder()
+                ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
 
