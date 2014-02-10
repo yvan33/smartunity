@@ -305,9 +305,10 @@
             function initDisplay() {
 
 	//Determination de lahauteur minimale d'une page
-var minimumHeight = $(window).height()-$('.bg').css('padding-top').replace("px", "") - $('.foot-sep').css('margin-top').replace("px", "") - $('.foot-sep').height();
-
-$("#main-content").css('min-height', minimumHeight);
+var minimumHeightMainContent = $(window).height()-$('.bg').css('padding-top').replace("px", "") - $('.foot-sep').css('margin-top').replace("px", "") - $('.foot-sep').height();
+var minimumHeightCadreGeneral = minimumHeightMainContent-$('.cadre-general').css('margin-top').replace("px", "")-$('.cadre-general').css('margin-bottom').replace("px", "");
+$("#main-content").css('min-height', minimumHeightMainContent);
+$(".cadre-general").css('min-height', minimumHeightCadreGeneral);
                 if ($(window).width() > 768 && $(window).width() < 992) {
                     $("#comment-marche-connecter").attr('class', 'nav navbar-nav');
 
