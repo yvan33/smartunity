@@ -61,12 +61,11 @@ class QuestionReponseController extends Controller {
             'page' => $page,
             'nbParPage' => $nbParPage
         ));
-
+        p($response);
         //Suppression de l'en tête HTTP et décodage du JSON
+
         $cleanJSON = explode('[', $response, 3);
         $listeQuestions = json_decode('[' . $cleanJSON[1]);
-        p($listeQuestions);
-
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
         //la requête pour vérifier son authenticité... 
         //On récupère des infos utiles pour la pagination..
@@ -101,7 +100,7 @@ class QuestionReponseController extends Controller {
         $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
         $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
             'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
-
+p($listeQuestions);
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
         return $this->render($template, array(
                     'error' => $error,
