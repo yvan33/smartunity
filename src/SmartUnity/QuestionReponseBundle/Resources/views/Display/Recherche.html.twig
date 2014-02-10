@@ -54,11 +54,11 @@
                                         <div class="grille-1">
                                           {%  if question.best_reponse != '' %}
 
-                                            {% if question.certif_best_reponse != '' %}
-                                                <div><img src="{{ asset('assets/img/certif.png') }}"/></div>
-                                            {% else %}   
-                                                <div><img src="{{ asset('assets/img/check.png') }}"/></div>
-                                            {% endif %} 
+                                    {% if question.is_certif_question == 'true' %}
+                                        <img src="{{ asset('assets/img/certif.png') }}" style="margin-right:0px"/>
+                                    {% else %}   
+                                        <img src="{{ asset('assets/img/check.png') }}" style="margin-right:0px"/>
+                                    {% endif %} 
 
                                           {% else %}
                                             <div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div>

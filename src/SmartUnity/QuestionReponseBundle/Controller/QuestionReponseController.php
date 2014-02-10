@@ -238,8 +238,6 @@ p($listeQuestions);
 
         $nbParPage = 10;
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
-
-
         $formQuestion->bind($this->getRequest());
 
 //récupération des champs de formulaire
@@ -304,6 +302,11 @@ p($listeQuestions);
         
         $resultSet = $finder->find($mainQuery);
         $listeQuestions = $this->generateSearchResults($resultSet);
+        p($listeQuestions);
+///Fonction de tri du tableau des questions
+//        usort($listeQuestions, array($this, "cmp"));        
+
+ 
 
 //         Génération de la pagination en statique (si pas de JS)
         $pagination = array();
@@ -334,63 +337,143 @@ p($listeQuestions);
                     'formQuestion' => $formQuestion->createView(),
         ));
     }
-
+       
+    function cmp($a, $b){
+            
+            if ($a['is_certif_question']==true && $b['is_certif_question']==false ) {
+                return 1;
+            }           
+            if ($a['is_validated_question']==true && $b['is_validated_question']==false ) {
+                return 1;
+            }
+            if ($a['is_validated_question']==false && $b['is_validated_question']==true ) {
+                return -1;
+            }            
+            if ($a['is_validated_question']==true && $b['is_certif_question']==true ) {
+             return -1;
+            }
+            return 0;        
+        }
+        
+    
     private function generateSearchResults($resultSet) {
 
         $listeQuestions = array();
         $reponseRepository = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:reponse');
+        $questionRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('SmartUnityAppBundle:question');
+        foreach ($resultSet as $Question) {
 
-        foreach ($resultSet as $result) {
+
+                $descriptionBestReponse = null;
+                $auteurBestreponse= null;
+                $dateBestReponse = null;
+                $is_certif_question = false;
+                $is_validated_question = false;
 
 
-            $Question = $result;
+if ($questionRepository->isQuestionValid($Question->getId())){    
+    foreach($Question->getReponses() as $reponse){
+        if ($reponse->getDateCertification() instanceof \DateTime){
+            $auteurBestreponse = $reponse->getMembre()->getUsername();
+            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+            $is_certif_question = true;
+            $descriptionBestReponse = $reponse->getDescription();
+            break;
+        }
 
-
-            $bestReponse = '';
-            $idBestReponse = '';
-            $auteurBestreponse = '';
-            $dateBestReponse = '';
-            $certifBestReponse= '';
-
-            $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
-            if ($idBestReponse['repId'] !== false) {
-
-                foreach ($Question->getReponses() as $reponse) {
-                    if ($reponse->getId() == $idBestReponse['repId']) {
-                        $bestReponse = $reponse->getDescription();
-                        $auteurBestreponse = $reponse->getMembre()->getUsername();
-                        $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
-                        $certifBestReponse = $reponse->getDateCertification();            
-
-                        break;
+        else if($reponse->getDateValidation() instanceof \DateTime ){
+            $auteurBestreponse = $reponse->getMembre()->getUsername();
+            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+            $is_validated_question = true;
+            $descriptionBestReponse = $reponse->getDescription();
+            break;
+        }
+        // else {
+            // throw new \Exception("Erreur sur une question");
+            // }
+    }
+}
+else{
+                $bestReponse = $reponseRepository->getBestReponse($Question->getId());
+                if ($bestReponse !== false){
+                    foreach($Question->getReponses() as $reponse){
+                        if($reponse->getId() == $bestReponse['repId']){
+                            $descriptionBestReponse = $reponse->getDescription();
+                            $auteurBestreponse = $reponse->getMembre()->getUsername();
+                            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i'); 
+                            break;
+                        }
                     }
                 }
+            }    
+                array_push($listeQuestions, array(
+                	'id'=>$Question->getId(),
+                	'sujet'=>$Question->getSujet(),
+                	'description'=>$Question->getDescription(),
+                	'date'=>$Question->getDate()->format('d-m-Y à H:i'),
+                    'membre_username'=>$Question->getMembre()->getUsername(),
+                    'remuneration'=>$Question->getRemuneration(),
+                    'nb_reponses'=>$Question->getReponses()->count(),
+                    'best_reponse'=>$descriptionBestReponse,
+                    'auteur_best_reponse'=>$auteurBestreponse,
+                    'is_validated_question'=>$is_validated_question,
+                    'is_certif_question'=>$is_certif_question,
+                    'date_best_reponse'=>$dateBestReponse,
+                    'slug'=>$Question->getSlug(),
+                    'count_soutien'=>$Question->getSoutienMembres()->count(),
+                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
+                ));
+
             }
 
-            array_push($listeQuestions, array(
-                'id' => $Question->getId(),
-                'sujet' => $Question->getSujet(),
-                'description' => $Question->getDescription(),
-                'date' => $Question->getDate()->format('d-m-Y à H:i'),
-                'membre_username' => $Question->getMembre()->getUsername(),
-                'membre_id' => $Question->getMembre()->getId(),
-                'remuneration' => $Question->getRemuneration(),
-                'nb_reponses' => $Question->getReponses()->count(),
-                'best_reponse' => $bestReponse,
-                'auteur_best_reponse' => $auteurBestreponse,
-                'date_best_reponse' => $dateBestReponse,
-                'certif_best_reponse' => $certifBestReponse,
-                'slug' => $Question->getSlug(),
-                'count_soutien' => $Question->getSoutienMembres()->count(),
-                'soutenue' => $Question->getSoutienMembres()->contains($this->getUser())
-            ));
+
+//
+//            $bestReponse = '';
+//            $idBestReponse = '';
+//            $auteurBestreponse = '';
+//            $dateBestReponse = '';
+//            $certifBestReponse= '';
+//
+//            $idBestReponse = $reponseRepository->getBestReponse($Question->getId());
+//            if ($idBestReponse['repId'] !== false) {
+//
+//                foreach ($Question->getReponses() as $reponse) {
+//                    if ($reponse->getId() == $idBestReponse['repId']) {
+//                        $bestReponse = $reponse->getDescription();
+//                        $auteurBestreponse = $reponse->getMembre()->getUsername();
+//                        $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+//                        $certifBestReponse = $reponse->getDateCertification();            
+//
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            array_push($listeQuestions, array(
+//                'id' => $Question->getId(),
+//                'sujet' => $Question->getSujet(),
+//                'description' => $Question->getDescription(),
+//                'date' => $Question->getDate()->format('d-m-Y à H:i'),
+//                'membre_username' => $Question->getMembre()->getUsername(),
+//                'membre_id' => $Question->getMembre()->getId(),
+//                'remuneration' => $Question->getRemuneration(),
+//                'nb_reponses' => $Question->getReponses()->count(),
+//                'best_reponse' => $bestReponse,
+//                'auteur_best_reponse' => $auteurBestreponse,
+//                'date_best_reponse' => $dateBestReponse,
+//                'certif_best_reponse' => $certifBestReponse,
+//                'slug' => $Question->getSlug(),
+//                'count_soutien' => $Question->getSoutienMembres()->count(),
+//                'soutenue' => $Question->getSoutienMembres()->contains($this->getUser())
+//            ));
 
             /*
               $html.= $result->getResult()->getScore();
              */
-        }
 
         return $listeQuestions;
     }
