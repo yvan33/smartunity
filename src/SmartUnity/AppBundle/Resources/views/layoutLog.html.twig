@@ -108,7 +108,7 @@
                                 <li><a href="{{ path('smart_unity_app_descriptionpage') }}" class="menu-pad">COMMENT ÇA MARCHE?</a></li>
                                 <li>
                                     <a href="{{ path('fos_user_security_login') }}" class="menu-pad" id="clic-pop" >
-                                        Se connecter
+                                        Connexion
                                     </a>      
  </li>
             {% endif %}
@@ -128,7 +128,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Connexion</h4>
+        <h4 class="modal-title">Se connecter</h4>
       </div>
       <div class="modal-body">
  <div class="panel-body logo2">
@@ -141,13 +141,13 @@
                                                             <div class="form-group">
                                                                 <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Password" type="password" id="password" name="_password" required="required">
                                                             </div>
-                                                            <div style="margin-top: -14px;"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a></div>
+                                                            <div class="passwd-forgotten"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a></div>
                                                             <div class="checkbox souvenir-de-moi" >
                                                                 <label>
                                                                     <input id="remember_me" type="checkbox"  name="_remember_me" value="on" > Se souvenir de moi
                                                                 </label>
                                                             </div>
-                                                            <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="Se connecter" style="line-height:14px">
+                                                            <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="Connexion" style="line-height:14px">
 
 
                                                         </fieldset>
