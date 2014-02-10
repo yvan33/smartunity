@@ -25,7 +25,7 @@ class membre extends BaseUser {
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookId", type="string", length=255)
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
      */
     protected $facebookId;
 
@@ -137,7 +137,7 @@ class membre extends BaseUser {
     /**
      * @var string
      *
-     * @ORM\Column(name="info_plus", type="text")
+     * @ORM\Column(name="info_plus", type="text", nullable=true)
      */
     private $info_plus;
     /**
@@ -218,6 +218,20 @@ class membre extends BaseUser {
      *
      * */
     private $parrain;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_inscription", type="string", length=50, nullable=true)
+     */
+    private $ip_inscription;
+    
+    /** @var string
+     *
+     * @ORM\Column(name="ip_confirmation", type="string", length=50, nullable=true)
+     */
+    private $ip_confirmation;
+
 
     /**
      * Constructor
@@ -957,4 +971,73 @@ class membre extends BaseUser {
         return $this->parrain;
     }
 
+
+    /**
+     * Set info_plus
+     *
+     * @param string $infoPlus
+     * @return membre
+     */
+    public function setInfoPlus($infoPlus)
+    {
+        $this->info_plus = $infoPlus;
+    
+        return $this;
+    }
+
+    /**
+     * Get info_plus
+     *
+     * @return string 
+     */
+    public function getInfoPlus()
+    {
+        return $this->info_plus;
+    }
+
+    /**
+     * Set ip_inscription
+     *
+     * @param \varchar $ipInscription
+     * @return membre
+     */
+    public function e(\varchar $ipInscription)
+    {
+        $this->ip_inscription = $ipInscription;
+    
+        return $this;
+    }
+
+    /**
+     * Get ip_inscription
+     *
+     * @return \varchar 
+     */
+    public function getIpInscription()
+    {
+        return $this->ip_inscription;
+    }
+
+    /**
+     * Set ip_confirmation
+     *
+     * @param \varchar $ipConfirmation
+     * @return membre
+     */
+    public function setIpConfirmation(\varchar $ipConfirmation)
+    {
+        $this->ip_confirmation = $ipConfirmation;
+    
+        return $this;
+    }
+
+    /**
+     * Get ip_confirmation
+     *
+     * @return \varchar 
+     */
+    public function getIpConfirmation()
+    {
+        return $this->ip_confirmation;
+    }
 }
