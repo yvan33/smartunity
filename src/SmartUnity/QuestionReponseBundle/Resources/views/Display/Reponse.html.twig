@@ -26,7 +26,7 @@
                     <a href="{% if is_granted('ROLE_USER') %}{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}{% else %}#{% endif %}"><img alt="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>
                 </div>                
                 <div class="head-blue"><p style="float:left">{{ question.sujet }}</p>
-                    {% if app.user==question.membre.username and not is_validated %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-pencil"></span></a> {% endif %}
+                    {% if app.user==question.membre.username and not is_validated and listeReponses is empty %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-pencil"></span></a> {% endif %}
                     <p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                 </div>
 
@@ -77,7 +77,7 @@
                     </div>
                     <div>   
                         {% if question.datemodification is not null %}
-                        <p>Modifiée le {{ question.datemodification|date('d-m-Y H:i:s') }} </p>
+                        <p class="questionModifiée">Modifiée le {{ question.datemodification|date('d-m-Y H:i:s') }} </p>
                         {% endif %}
                     </div>
 

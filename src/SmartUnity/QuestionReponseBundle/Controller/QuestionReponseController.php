@@ -65,7 +65,7 @@ class QuestionReponseController extends Controller {
         //Suppression de l'en tête HTTP et décodage du JSON
         $cleanJSON = explode('[', $response, 3);
         $listeQuestions = json_decode('[' . $cleanJSON[1]);
-
+        p($listeQuestions);
 
         //Le tableau JSON contient une ligne d'entête qui contient les infos à propos de
         //la requête pour vérifier son authenticité... 
@@ -533,7 +533,7 @@ class QuestionReponseController extends Controller {
         $isup_rep = $voteReponses->isup;
         $isdown_rep = $voteReponses->isdown;
 
-
+p($listeReponses);
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
@@ -596,7 +596,7 @@ class QuestionReponseController extends Controller {
                     'class' => 'SmartUnityAppBundle:typeQuestion',
                     'property' => 'nom',
                     'empty_value' => 'Choisissez une option',
-                    'required' => true))
+                    'required' => false))
                 ->add('remuneration', 'integer', array('attr' => array('min' => 10, 'max' => ($dotationMax))))
                 ->add('save', 'submit', array('label' => 'Poser ma question'))
                 ->getForm();
@@ -617,7 +617,8 @@ class QuestionReponseController extends Controller {
                 // $str = str_replace(' ', '-', $str);
                 // $slug= preg_replace('/\-{2,}', '-', $str);
 
-                $newQuestion->setSlug($this->slugify($formQuestion->get('sujet')->getData()));
+                $slug = $this->slugify($formQuestion->get('sujet')->getData());
+                $newQuestion->setSlug($slug);
 
                 // $newQuestion->addSoutien($user);
                 $cagnotte = $user->getCagnotte() - $formQuestion->get('remuneration')->getData() + 10;
@@ -628,7 +629,7 @@ class QuestionReponseController extends Controller {
                     $em->persist($newQuestion);
                     $em->flush();
 
-                    return new Response('Votre question a bien été ajoutée');
+                    return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$slug)));
                 }
             }
         }
@@ -665,7 +666,7 @@ class QuestionReponseController extends Controller {
                     'class' => 'SmartUnityAppBundle:typeQuestion',
                     'property' => 'nom',
                     'empty_value' => 'Choisissez une option',
-                    'required' => true))
+                    'required' => false))
                 ->add('remuneration', 'integer', array('attr' => array('min' => $ancienneDotation, 'max' => $dotationMax)))
                 ->add('save', 'submit', array('label' => 'Modifier ma question'))
                 ->getForm();

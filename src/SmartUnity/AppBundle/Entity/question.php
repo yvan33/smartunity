@@ -85,7 +85,7 @@ class question
 
     /**
      * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\typeQuestion", inversedBy="questions")
-     * @ORM\JoinColumn(name="typeQuestion_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="typeQuestion_id", referencedColumnName="id", nullable=true)
      */
     private $typeQuestion;
 
