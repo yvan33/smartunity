@@ -1,0 +1,10 @@
+@font-face{
+    font-family : "centrale";
+    src : url(../fonts/Centrale.ttf) format ('truetype');
+    /* pour IE */
+    src : url(../fonts/Centrale.ttf);
+}
+
+.cadre-general {
+	margin: 20px 0;
+}
