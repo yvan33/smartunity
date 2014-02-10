@@ -827,7 +827,7 @@ p($listeQuestions);
                     //Envoi du mail
                     $sujetQuestion = $question->getSujet();
                     $sujetMail = "Réponse à votre question : " . $sujetQuestion . "sur smartunity.fr";
-                    $expediteurMail = "";
+                    $expediteurMail = "ne-pas-repondre@smartunity.fr";
                     $contenu = "";
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
