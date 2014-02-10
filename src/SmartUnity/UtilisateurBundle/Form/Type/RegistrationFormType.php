@@ -14,13 +14,13 @@ class RegistrationFormType extends BaseType {
 
         $builder
                 ->add('nom')
-                ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-                ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
+                ->add('email', 'email', array('label' => 'Adresse e-mail'))
+                ->add('username', null, array('label' => 'Nom d\'utilisateur'))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
                     'options' => array('translation_domain' => 'FOSUserBundle'),
-                    'first_options' => array('label' => 'form.password'),
-                    'second_options' => array('label' => 'form.password_confirmation'),
+                    'first_options' => array('label' => 'Mot de passe'),
+                    'second_options' => array('label' => 'Veuillez le retaper'),
                     'invalid_message' => 'fos_user.password.mismatch'))
                 ->add('sexe', 'choice', array(
                     'choices' => array(
@@ -36,6 +36,7 @@ class RegistrationFormType extends BaseType {
                     'format' =>'dd MM yyyy',
                     'model_timezone' => 'Europe/Paris',
                     'empty_value' => (array('year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'))
+                    
                 ))
 //                ->add('ville', 'text', array(
 //                    'label' => 'Ville',
