@@ -5,7 +5,9 @@
     <div class="col-md-12" style="padding:0px">
         <div class="grille-content-2">
             <div class="head-blue">
-                <p style="float:left">{% if reponse.is_certif or reponse.is_validated %}{{ nbReponses - 1 }} autre{% if nbReponses > 1 %}s{% endif %} {% else %}{{ nbReponses }}{% endif %} r&eacute;ponse{% if nbReponses > 1 %}s{% endif %}</p>
+                <p style="float:left">
+                {% if reponse.is_certif or reponse.is_validated %}
+                {{ nbReponses - 1 }} autre{% if nbReponses-1 > 1 %}s{% endif %} {% else %}{{ nbReponses }}{% endif %} r&eacute;ponse{% if reponse.is_certif or reponse.is_validated %}{% if nbReponses-1 > 1 %}s{% endif %}{% else %}{% if nbReponses > 1 %}s{% endif %}{% endif %}</p>
                 <p style="float:right">Trier les r&eacute;ponses par : 
                     <a id="triVote" {% if tri == "date" %}href="{{path('smart_unity_question_reponse_display_reponse', {slug:slug, tri:'vote'})}}"{% endif %} style="padding-left:0px{% if tri == "vote" %}; font-weight:bold{% endif %}">Nombre de votes</a> &#124; 
                     <a id="triDate" {% if tri == "vote" %}href="{{path('smart_unity_question_reponse_display_reponse', {slug:slug, tri:'date'})}}"{% endif %} style="padding-left:0px{% if tri == "date" %}; font-weight:bold{% endif %}">Date</a>
