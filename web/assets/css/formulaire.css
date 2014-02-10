@@ -402,6 +402,7 @@ textarea:focus {
 	border-radius: 3px;
 	border: 1px solid #ccc;
 	width: 550px;
+	resize: none;
 }
 
 .text-description {
@@ -414,6 +415,7 @@ textarea:focus {
 	border-radius: 3px;
 	border: 1px solid #ccc;
 	width: 550px;
+	max-width: 550px;
 }
 
 .explication-poser-question {
