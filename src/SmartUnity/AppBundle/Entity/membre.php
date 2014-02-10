@@ -220,6 +220,20 @@ class membre extends BaseUser {
     private $parrain;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_inscription", type="string", length=50, nullable=true)
+     */
+    private $ip_inscription;
+    
+    /** @var string
+     *
+     * @ORM\Column(name="ip_confirmation", type="string", length=50, nullable=true)
+     */
+    private $ip_confirmation;
+
+
+    /**
      * Constructor
      */
     public function __construct() {
@@ -979,5 +993,51 @@ class membre extends BaseUser {
     public function getInfoPlus()
     {
         return $this->info_plus;
+    }
+
+    /**
+     * Get ip_inscription
+     *
+     * @return \varchar 
+     */
+    public function getIpInscription()
+    {
+        return $this->ip_inscription;
+    }
+
+    /**
+     * Set ip_confirmation
+     *
+     * @param \varchar $ipConfirmation
+     * @return membre
+     */
+    public function setIpConfirmation(\varchar $ipConfirmation)
+    {
+        $this->ip_confirmation = $ipConfirmation;
+    
+        return $this;
+    }
+
+    /**
+     * Get ip_confirmation
+     *
+     * @return \varchar 
+     */
+    public function getIpConfirmation()
+    {
+        return $this->ip_confirmation;
+    }
+
+    /**
+     * Set ip_inscription
+     *
+     * @param string $ipInscription
+     * @return membre
+     */
+    public function setIpInscription($ipInscription)
+    {
+        $this->ip_inscription = $ipInscription;
+    
+        return $this;
     }
 }

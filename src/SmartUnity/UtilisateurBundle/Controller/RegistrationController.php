@@ -46,6 +46,7 @@ class RegistrationController extends BaseController
         $user = $userManager->createUser();
         $user->setEnabled(true);
 
+        // $user->setIpInscription($this->get('request')->getClientIp());
 
 
         $event = new GetResponseUserEvent($user, $request);
@@ -75,12 +76,14 @@ class RegistrationController extends BaseController
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-                $test_parrain=$form->getData()->getParrain();
-                if($test_parrain  != null){
+                $parrain=$form->getData()->getParrain();
+                $ip=$request->getClientIp();
+                $user->setIpInscription($ip);
+                if($parrain  != null){
                     $user->setCagnotte(10);
                     $test_parrain=$form->getData()->getParrain();
-                    $parrain_cagnotte=$test_parrain->getCagnotte() + 10 ;
-                    $test_parrain->setCagnotte($parrain_cagnotte);
+                    $parrain_cagnotte=$parrain->getCagnotte() + 10 ;
+                    $parrain->setCagnotte($parrain_cagnotte);
                     $userManager->updateUser($test_parrain);                  
                 }
 
@@ -139,6 +142,8 @@ class RegistrationController extends BaseController
 
         $user->setConfirmationToken(null);
         $user->setEnabled(true);
+        $ip=$request->getClientIp();
+        $user->setIpConfirmation($ip);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
