@@ -649,7 +649,11 @@ class membre extends BaseUser {
      */
     public function setFacebookId($facebookId) {
         $this->facebookId = $facebookId;
-        $this->setUsername($facebookId);
+        if ($this->username != $facebookId && $this->username != null){
+        }
+        else{
+                 $this->setUsername($facebookId);
+        }
         $this->salt = '';
     }
 
@@ -697,7 +701,8 @@ class membre extends BaseUser {
         
         if (isset($fbdata['birthday'])) {
            $this->setDateNaissance(new \DateTime($fbdata['birthday']));
-        }        
+        }   
+
     }
 
     /**

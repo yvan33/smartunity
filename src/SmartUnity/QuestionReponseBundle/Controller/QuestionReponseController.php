@@ -533,7 +533,6 @@ class QuestionReponseController extends Controller {
         $isup_rep = $voteReponses->isup;
         $isdown_rep = $voteReponses->isdown;
 
-p($listeReponses);
 
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:Reponse.html.twig');
         return $this->render($template, array(
