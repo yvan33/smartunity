@@ -732,11 +732,6 @@ input
     color:#7e7e7e;
 }    
 
-.cadre-general
-{
-	margin: 20px 0 20px 0;
-}
-
 .validation-dialog{
     position: relative;
     background-color: #FFF;

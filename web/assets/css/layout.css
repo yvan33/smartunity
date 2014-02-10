@@ -454,6 +454,8 @@ body.bg
     background-color: #f3f0eb;
     overflow: hidden; 
     padding: 30px 30px 0px 30px;
+    margin-top: 20px;
+    margin-bottom: 25px;
 }
 
 .footer-text 
@@ -461,10 +463,6 @@ body.bg
     font-size: 12px;
     margin-left: 20px;
     margin-top: 0px;
-}
-
-.titre-smartunity{
-    margin-bottom: 15px;
 }
 
 .titre-smartunity .col-md-6
