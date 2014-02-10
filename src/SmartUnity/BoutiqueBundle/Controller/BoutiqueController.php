@@ -4,10 +4,10 @@ namespace SmartUnity\BoutiqueBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class BoutiqueController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SmartUnityBoutiqueBundle:Default:index.html.twig');
+        return $this->render('SmartUnityBoutiqueBundle::boutique.html.twig');
     }
 }

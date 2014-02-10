@@ -87,7 +87,7 @@
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_demander_questions'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
                        %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}" class="menu-pad">SMART'SOLUTIONS</a></li>
-                                <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href="#" class="menu-pad">BOUTIQUE CADEAUX</a></li>
+                                <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href={{ path('smart_unity_boutique_homepage') }} class="menu-pad">BOUTIQUE CADEAUX</a></li>
                                 <li><a target="blank" href="http://blog.smartunity.fr" class="menu-pad">BLOG</a></li>
                             </ul>
                             <ul id="comment-marche-connecter" class="nav navbar-nav navbar-right">
