@@ -37,8 +37,7 @@
     margin-top:30px;
     margin-bottom:30px;
     background-color: #ffffff;
-    border-radius: 5px;
-    border: 1px solid #e8e4dc;
+    border-radius: 5px 5px 0 0;
 }
 
 .grille-content-2 p
@@ -48,11 +47,6 @@
     font-weight: 500;
 }
 
-.grille-question-centent:last-child
-{
-    border:none;
-}
-
 .grille-question-centent
 {
 
@@ -60,6 +54,8 @@
     overflow:hidden;
     background-color:#ffffff;
     border-bottom: solid 1px #e8e4dc;
+    border-left: 1px solid #e8e4dc;
+    border-right: 1px solid #e8e4dc;
 }
 
 .grille-question-rond
@@ -68,8 +64,7 @@
     float: left;
     width: 80px;
     padding-right: 15px;
-    margin-top: 12px;
-    margin-bottom: 10px;
+    margin: 12px 0px 10px 15px;
 }
 
 .grille-question-rond img {
@@ -87,25 +82,29 @@
 .grille-question-det
 {
     text-align:center;
-    margin-top:15px;
-    margin-bottom:15px;
-    padding-left:10px;
-    float:right;
-    width:100px;
+    margin: 15px 15px 0 0;
+    padding-left: 10px;
+    float: right;
+    width: 100px;
 }
 
 .rond-point
 {
     background: linear-gradient( to top, #e8e4dc,#FFF);
-    border-radius:30px;
+    border-radius: 40px;
     margin-right:auto;
     margin-left:auto;
-    width:50px;
-    height:50px;
+    width: 40px;
+    height: 40px;
     border: solid 1px #e8e4dc;
-    text-align:center;
-    line-height:50px;
-    font-weight: 200;	
+    text-align: center;
+    line-height: 38px;
+    font-weight: 200;
+    font-size: 10px;
+}
+
+.nav-tabs {
+	border: 0;
 }
 
 
