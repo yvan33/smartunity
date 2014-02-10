@@ -21,7 +21,7 @@ class QuestionReponseController extends Controller {
 
     public function displayListOfQuestionAction($type, $page, Request $request) {
 
-        $nbParPage = 100;
+        $nbParPage = 20;
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -138,11 +138,17 @@ p($listeQuestions);
 
         $question = $this->getRequest()->query->get('q');
         $page = $this->getRequest()->query->get('p');
-        $nbParPage = 100;
+        $nbParPage = 10;
 
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
-
+        
+        
+        
+        $mainQuery = new \Elastica\Query();
+        $mainQuery->setSize($nbParPage);
+        $mainQuery->setFrom(($page - 1) * $nbParPage);
+        
         if ($question == '') {
             $query = new \Elastica\Query\MatchAll();
 //          $query->addParam('from', $nbParPage * ($page - 1));
@@ -160,13 +166,17 @@ p($listeQuestions);
             $query->addShould($sujetQuery);
             $query->addShould($descriptionQuery);
         }
-
-        $nbQuestions = count($finder->find($query, 13));
+        
+        $mainQuery->setQuery($query);
+        
+        $nbQuestions = count($finder->find($query, 1000000));
         $nbPages = ceil($nbQuestions / $nbParPage);
 
 //        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
-        $resultSet = $finder->find($query, 100);
+        
+        $resultSet = $finder->find($mainQuery);
         $listeQuestions = $this->generateSearchResults($resultSet);
+//        p($listeQuestions);
 
         //Génération de la pagination en statique (si pas de JS)
         $pagination = array();
@@ -203,7 +213,7 @@ p($listeQuestions);
         ));
     }
 
-    public function searchRepondreQuestionAction(Request $request) {
+    public function searchRepondreQuestionAction(Request $request, $page) {
 
         $session = $request->getSession();
 
@@ -226,7 +236,7 @@ p($listeQuestions);
         $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
             'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
 
-        $nbParPage = 100;
+        $nbParPage = 10;
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
 
@@ -237,9 +247,13 @@ p($listeQuestions);
         $os = $formQuestion->get('os')->getData();
         $typeQuestion = $formQuestion->get('typeQuestion')->getData();
         $motCle = $formQuestion->get('motCle')->getData();
-        $page = $formQuestion->get('p')->getData();
 
-//Création query générale  
+//Création query générale
+        $mainQuery = new \Elastica\Query();
+        $mainQuery->setSize($nbParPage);
+        $mainQuery->setFrom(($page - 1) * $nbParPage);
+        
+//Création de la query quasi générale        
         if (is_null($marque) && is_null($os) && is_null($typeQuestion) && is_null($motCle)) {
             $query = new \Elastica\Query\MatchAll();
         } else {
@@ -283,13 +297,12 @@ p($listeQuestions);
             $query->addShould($sujetQuery);
             $query->addShould($descriptionQuery);
         }            
-            
         }
-
-        $nbQuestions = count($finder->find($query, 100));
+              $mainQuery->setQuery($query);
+        $nbQuestions = count($finder->find($query, 1000000));
         $nbPages = ceil($nbQuestions / $nbParPage);
-
-        $resultSet = $finder->find($query);
+        
+        $resultSet = $finder->find($mainQuery);
         $listeQuestions = $this->generateSearchResults($resultSet);
 
 //         Génération de la pagination en statique (si pas de JS)

@@ -9,6 +9,7 @@ class FiltresRepondreFormType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder            
+                ->setMethod('GET')
                 ->add('marque', 'entity', array(
                     'class' => 'SmartUnityAppBundle:marque',
                     'property' => 'nom',
@@ -25,11 +26,7 @@ class FiltresRepondreFormType extends AbstractType {
                     'required' => false))
                  ->add('motCle', 'text', array(
                      'mapped' => false,
-                     'required' => false))
-                ->add('p', 'hidden', array(
-                    'mapped' => false,
-                    'attr' => array('value' => '1')
-                ));
+                     'required' => false));
     }
 
     public function getName()
