@@ -32,11 +32,11 @@ class InformationsFormType extends AbstractType {
             ))
         ->add('telephone','text',array(
             'required'=> false,
-            'label' => 'Smartphone :'
+            'label' => 'Smartphone'
         ))
         ->add('info_plus','textarea',array(
             'required'=> false,
-            'label' => 'Un peu plus sur moi :'
+            'label' => 'Un peu plus sur moi'
         ));
                 
     }
