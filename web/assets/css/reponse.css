@@ -144,10 +144,13 @@
 
 }
 
-
 .grille-1
 {	
     float:left;	
+}
+
+.certif-img {
+	width: 50%;
 }
 
 .fleche
@@ -185,7 +188,7 @@
 .grille-2
 {
     float:right;
-    padding-right: 4px;
+    padding-right: 3px;
 }
 
 .grille-3
@@ -280,7 +283,9 @@
 {
     overflow:hidden;
     clear:both;
+    position: relative;
 }
+
 .grille-reponse-smart
 {
     overflow:hidden;
