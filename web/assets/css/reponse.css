@@ -266,25 +266,11 @@
 	font-size: 1.1em;
 }
 
-.square-blue
-{
-    background-color:#3699d0;
-    border-radius:6px;
-    width:90px;
-    height:40px;
-    line-height:40px;
-    border: solid 2px #118fc7;
-    text-align:center;
-    color:#FFF;
-    font-family:Cookie;
-}
-
 .grille-reponse
 {
     overflow:hidden;
     clear:both;
     position: relative;
-    border-top: 1px solid #e8e4dc;
 }
 
 .grille-reponse-smart
