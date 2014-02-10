@@ -719,11 +719,17 @@ border-right: 1px solid #ddd;
 	padding-left: 36px;
 }
 
+.modal-header .close {
+	margin-top: -10px;
+	margin-right: -2px;
+}
+
 .modal-header h4
 {
 	font-family: centrale;
 	font-size: 1.5em;
 	text-align: center;
+	margin-top: 10px;
 }
 
 .modal-title
@@ -749,4 +755,21 @@ border-right: 1px solid #ddd;
 	border-top-color: #99bbc3;
 	border-bottom-color: #99bbc3;
 	margin-left: 5px;
+}
+
+.passwd-forgotten {
+	margin-top: -10px;
+	text-align: right;
+	font-style: italic;
+	font-size: 12px;
+	font-family: centrale;
+}
+
+.passwd-forgotten a {
+	color: #A4A4A4;
+}
+
+.passwd-forgotten a:hover {
+	text-decoration: none;
+	color: #7a7876;
 }
