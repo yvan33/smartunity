@@ -89,6 +89,8 @@ smart_unity_question_reponse_signaler_commentaire_reponse:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerCommentaireReponse }
     requirements:
         idCommentaireReponse: \d+
+    options:
+        expose: true
 
 ######################
 #### AJAX ROUTING ####
