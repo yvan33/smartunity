@@ -766,3 +766,8 @@ margin: 20% auto;
     margin-bottom: 5px ;
 
 }
+
+.questionModifiée {
+    font-style:italic;
+    font-weight:bold
+}

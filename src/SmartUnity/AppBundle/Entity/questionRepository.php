@@ -164,7 +164,6 @@ class questionRepository extends EntityRepository {
         $query->setParameter('nbParPage', (int) $nbParPage);
 
         $result = $query->getResult();
-
         if (count($result) != 0)
             return $result;
         else

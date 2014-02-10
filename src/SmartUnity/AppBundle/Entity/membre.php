@@ -137,7 +137,7 @@ class membre extends BaseUser {
     /**
      * @var string
      *
-     * @ORM\Column(name="info_plus", type="text")
+     * @ORM\Column(name="info_plus", type="text", nullable=true)
      */
     private $info_plus;
     /**
