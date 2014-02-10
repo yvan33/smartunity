@@ -106,7 +106,7 @@
 
                                     <div class="grille-question-centent">
                                     <div class="grille-question-rond">
-                                    {% if question.certif_best_reponse is not null %}
+                                    {% if question.is_certif_question %}
                                         <img src="{{ asset('assets/img/certif.png') }}" style="margin-right:0px"/>
                                     {% else %}   
                                         <img src="{{ asset('assets/img/check.png') }}" style="margin-right:0px"/>

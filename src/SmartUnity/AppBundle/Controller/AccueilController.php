@@ -69,11 +69,10 @@ class AccueilController extends Controller {
             'page' => 1,
             'nbParPage' => $nbParPage
         ));
-
         //Suppression de l'en tête HTTP et décodage du JSON
         $cleanJSON = explode('[', $response, 2);
         $listeLastQuestions = json_decode('[' . $cleanJSON[1]);
-
+  
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
         if ($listeLastQuestions[0]->type == 'last' && $listeLastQuestions[0]->nbParPage == $nbParPage && $listeLastQuestions[0]->page == 1)
             unset($listeLastQuestions[0]);
@@ -89,7 +88,7 @@ class AccueilController extends Controller {
             'page' => 1,
             'nbParPage' => $nbParPage
         ));
-
+        p($response);
         //Suppression de l'en tête HTTP et décodage du JSON
         $cleanJSON = explode('[', $response, 2);
         $listeSolvedQuestions = json_decode('[' . $cleanJSON[1]);
