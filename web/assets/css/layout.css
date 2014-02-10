@@ -772,3 +772,11 @@ border-right: 1px solid #ddd;
 	text-decoration: none;
 	color: #7a7876;
 }
+
+.message-js{
+
+    font-size: 20px;
+    font-family: centrale; 
+    text-align: center;
+       
+}
