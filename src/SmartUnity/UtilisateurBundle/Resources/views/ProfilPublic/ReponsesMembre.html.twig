@@ -30,7 +30,7 @@
 
             <div class="collapse-menu tab-ajax">
                 <ul class="nav nav-tabs nav-tabs-question" id="myTab">
-                    <li {% if type=='reponses' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Toutes ses réponses</a></li>
+                    <li {% if type=='reponses' %}class="active first-tab"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'reponses', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="reponses-tab">Toutes ses réponses</a></li>
                     <li {% if type=='validated' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'validated', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="validated-tab">Ses réponses validées</a></li>
                     <li {% if type=='certified' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_reponses', {'type': 'certified', 'page': '1', 'id': membreId}) }}" data-toggle="tab" id="certified-tab">Ses réponses certifiées</a></li>
                 </ul>
