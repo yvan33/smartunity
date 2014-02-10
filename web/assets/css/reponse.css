@@ -196,19 +196,14 @@
 
 
 }
-.grille-3-over
-{
 
-
-}
 .grille-3-grey
-{
-	
-	background-color: #e6e6e6;
-	border-radius:2px;
-	overflow:hidden;
-	padding:10px 29px 10px 10px;
-	clear:both;
+{	
+	background-color: rgba(164,164,164, 0.5);
+	border-radius: 2px;
+	overflow: hidden;
+	padding: 10px 29px 10px 10px;
+	clear: both;
 
 }
 
@@ -290,7 +285,7 @@
 {
     overflow:hidden;
     clear:both;
-    background-color:#f5f4df;
+    background-color: rgba(137,177,185, 0.3);
 
 }
 
@@ -469,7 +464,7 @@
 
 .commentaire
 {
-    border-bottom: solid 1px #CCCCCC;
+    border-bottom: solid 1px rgba(164,164,164, 0.7);
     clear: both;
     overflow: hidden;
     margin-bottom: 12px;
