@@ -96,6 +96,8 @@
 
 .search-answer .glyphicon {
 	left: 0;
+	top: 2px;
+	color: #CCC;
 }
 
 .form-control {
