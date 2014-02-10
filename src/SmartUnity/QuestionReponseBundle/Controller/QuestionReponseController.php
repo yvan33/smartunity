@@ -1089,7 +1089,7 @@ p($listeQuestions);
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
-
+         $type="une question"; 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
@@ -1113,7 +1113,7 @@ p($listeQuestions);
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
-
+         $type="une réponse";       
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
@@ -1130,7 +1130,8 @@ p($listeQuestions);
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
-                    'formSignaler' => $formSignaler->createView()));
+                    'formSignaler' => $formSignaler->createView(),
+                    'type'=>$type));
     }
 
     public function signalerCommentaireQuestionAction($idCommentaireQuestion) {
@@ -1138,7 +1139,7 @@ p($listeQuestions);
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
-
+        $type="un commentaire"; 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
@@ -1163,6 +1164,7 @@ p($listeQuestions);
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
+        $type="un commentaire"; 
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
