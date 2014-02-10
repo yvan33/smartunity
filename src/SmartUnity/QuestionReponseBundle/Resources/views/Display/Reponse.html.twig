@@ -345,8 +345,10 @@ Toast
 ////////////////////////////
 
     function displaySignal(e) {
-        console.log(
-                $(e).children());
+        $(e).children().next().children().next().children().css('display','inline-block');
+    }
+    function hideSignal(e) {
+        $(e).children().next().children().next().children().css('display','none');
     }
 
 
@@ -748,7 +750,7 @@ Toast
                                 <p style="min-height: 100px">' + pEntry['description'] + '</p>';
         pEntry['commentaires'].forEach(function(pCom, i) {
 
-            entity += '<div class="commentaire" onmouseover="displaySignal()"> \
+            entity += '<div class="commentaire" onmouseover="displaySignal(this)" onmouseout="hideSignal(this)"> \
                                     <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_username'] + ' le ' + pCom['date'] + ' \
                                     <a href="#"><img class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
                                     </div>';
