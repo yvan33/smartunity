@@ -24,7 +24,7 @@ class InformationsFormType extends AbstractType {
         ->add('date_naissance', 'date', array(
         'empty_value' => '',
         'widget' => 'choice',
-        'years' => range(date('Y') - 100, date('Y')),
+        'years' => range(date('Y'), date('Y')-100),
         'required' => false,
         'format' =>'dd MM yyyy',
         'model_timezone' => 'Europe/Paris',
