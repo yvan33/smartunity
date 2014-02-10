@@ -225,14 +225,23 @@ class membre extends BaseUser {
      * @ORM\Column(name="ip_inscription", type="string", length=50, nullable=true)
      */
     private $ip_inscription;
+<<<<<<< HEAD
     
     /** @var string
+=======
+
+    /**
+     * @var string
+>>>>>>> fin debug (?)
      *
      * @ORM\Column(name="ip_confirmation", type="string", length=50, nullable=true)
      */
     private $ip_confirmation;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fin debug (?)
     /**
      * Constructor
      */
@@ -1001,39 +1010,6 @@ class membre extends BaseUser {
     }
 
     /**
-     * Get ip_inscription
-     *
-     * @return \varchar 
-     */
-    public function getIpInscription()
-    {
-        return $this->ip_inscription;
-    }
-
-    /**
-     * Set ip_confirmation
-     *
-     * @param \varchar $ipConfirmation
-     * @return membre
-     */
-    public function setIpConfirmation(\varchar $ipConfirmation)
-    {
-        $this->ip_confirmation = $ipConfirmation;
-    
-        return $this;
-    }
-
-    /**
-     * Get ip_confirmation
-     *
-     * @return \varchar 
-     */
-    public function getIpConfirmation()
-    {
-        return $this->ip_confirmation;
-    }
-
-    /**
      * Set ip_inscription
      *
      * @param string $ipInscription
@@ -1044,5 +1020,37 @@ class membre extends BaseUser {
         $this->ip_inscription = $ipInscription;
     
         return $this;
+    }
+
+    /**
+     * Get ip_inscription
+     *
+     * @return string 
+     */
+    public function getIpInscription()
+    {
+        return $this->ip_inscription;
+    }
+
+    /**
+     * Set ip_confirmation
+     * @param string $ipConfirmation
+     * @return membre
+     */
+    public function setIpConfirmation($ipConfirmation)
+    {
+        $this->ip_confirmation = $ipConfirmation;
+    
+        return $this;
+    }
+
+    /**
+     * Get ip_confirmation
+     *
+     * @return string 
+     */
+    public function getIpConfirmation()
+    {
+        return $this->ip_confirmation;
     }
 }

@@ -225,14 +225,23 @@ class membre extends BaseUser {
      * @ORM\Column(name="ip_inscription", type="string", length=50, nullable=true)
      */
     private $ip_inscription;
+<<<<<<< HEAD
     
     /** @var string
+=======
+
+    /**
+     * @var string
+>>>>>>> fin debug (?)
      *
      * @ORM\Column(name="ip_confirmation", type="string", length=50, nullable=true)
      */
     private $ip_confirmation;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fin debug (?)
     /**
      * Constructor
      */
@@ -994,6 +1003,7 @@ class membre extends BaseUser {
     {
         return $this->info_plus;
     }
+<<<<<<< HEAD
 
     /**
      * Set ip_inscription
@@ -1040,4 +1050,6 @@ class membre extends BaseUser {
     {
         return $this->ip_confirmation;
     }
+=======
+>>>>>>> fin debug (?)
 }
