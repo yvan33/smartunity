@@ -14,7 +14,7 @@ class QuestionReponseMembreController extends Controller {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
-        $nbParPage = 5;
+        $nbParPage = 20;
 
 
         $request = $this->get('request');
@@ -93,20 +93,20 @@ class QuestionReponseMembreController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $username = $em->getRepository('SmartUnityAppBundle:membre')->find($id)->getUsername();
 
-                $template = sprintf('SmartUnityUtilisateurBundle:ProfilPublic:QuestionsMembre.html.twig');
-                return $this->render($template, array(
-                            'error' => $error,
-                            'page' => $page,
-                            'type' => $type,
-                            'nbPages' => $nbPages,
-                            'listeQuestions' => $listeQuestions,
-                            'countListe' => count($listeQuestions),
-                            'nbParPage' => $nbParPage,
-                            'pagination' => $pagination,
-                            'membreId' => $id,
-                            'username' => $username,
-                            'route' => $route,
-                ));
+            $template = sprintf('SmartUnityUtilisateurBundle:ProfilPublic:QuestionsMembre.html.twig');
+            return $this->render($template, array(
+                'error' => $error,
+                'page' => $page,
+                'type' => $type,
+                'nbPages' => $nbPages,
+                'listeQuestions' => $listeQuestions,
+                'countListe' => count($listeQuestions),
+                'nbParPage' => $nbParPage,
+                'pagination' => $pagination,
+                'membreId' => $id,
+                'username' => $username,
+                'route' => $route,
+            ));
         }
 
         if ($route == 'smart_unity_membre_reponses'){  

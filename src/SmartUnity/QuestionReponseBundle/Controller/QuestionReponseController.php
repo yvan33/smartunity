@@ -325,7 +325,9 @@ class QuestionReponseController extends Controller {
         $nbQuestions = count($finder->find($queryBool, 1000000));
         $nbPages = ceil($nbQuestions / $nbParPage);       
         $resultSet = $finder->find($mainQuery);
+
         $listeQuestions = $this->generateSearchResults($resultSet);    
+
 
 //         Génération de la pagination en statique (si pas de JS)
         $pagination = array();
