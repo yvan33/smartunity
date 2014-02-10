@@ -659,8 +659,8 @@ border-right: 1px solid #ddd;
 .bouton-retour{
     
     position:absolute;
-    top:2px;
-    left:2px;
+    top:25px;
+    left:5px;
     cursor: pointer;
     
 }
