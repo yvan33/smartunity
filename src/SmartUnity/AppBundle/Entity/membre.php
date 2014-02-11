@@ -247,6 +247,8 @@ class membre extends BaseUser {
         $this->filleuls = new \Doctrine\Common\Collections\ArrayCollection();
         $date = new \DateTime('now');
         $this->setDateInscription($date);
+        $this->setPrefMp(1);
+        $this->setPrefSmartcafe(1);
     }
 
     /**
