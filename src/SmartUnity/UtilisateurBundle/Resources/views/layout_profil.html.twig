@@ -83,7 +83,7 @@
             </div>
         {% block parrainage %}
 
-            <div class="premiere-ligne"> Vous pouvez parrainer vos amis simplement en entrant leur adresse Email ci-dessous. Vous et votre filleul gagnent XXX points!</div>
+            <div class="premiere-ligne prem-ligne-parrainage"> Vous pouvez parrainer vos amis en entrant leur adresse Email ci-dessous. Vous et votre filleul gagnent XXX points!</div>
 
             {% if parrain is not empty %}
             <div class="row">
@@ -92,11 +92,6 @@
             </div>
             {% endif %}
 
-
-            <div class="row">
-                <div class="grille-1"></div>
-                <div class="grille-2"></div>
-            </div>          
             <form action="{{ path('smart_unity_utilisateur_envoiparrainage') }}" {{ form_enctype(form_parrainage) }} method="POST">
             {#{{form_start(form_parrainage)}}#}
             {{form_errors(form_parrainage)}}
@@ -108,6 +103,10 @@
                 <div class="cent-h bouton-bas-block">
                     <button type="submit" class="btn bouton-repondre">Envoyer 
                 </div>
+                	<div class="row">
+					<div class="grille-1"></div>
+					<div class="grille-2"></div>
+				</div>
             {{form_end(form_parrainage)}}
         {% endblock %}
         </div>

@@ -8,10 +8,9 @@
 .grille-1
 {
         width:35%;
-        margin: 3px 2.5% 3px 5%;
-        /*background-color:#00C;*/
-        /*height:20px;*/
+        margin: 3px 2.5% 5px 5%;
         float:left;
+        padding-top: 3px;
 }
 .grille-2
 {
@@ -229,27 +228,59 @@ h1
 
 .modify
 {
-	background: #e37151;
+	background: transparent;
 	border: 0;
 	margin: 5px 10px 0 0;
 	height: 22px;
 	line-height: 22px;
-	
+	color: #e37151;	
 }
 
-.modify:hover
-{
-	background-color: #333;
+.modify .glyphicon {
+	color: #e37151;
+}
+
+.modify:hover {
+	background-color: transparent;
+	color: #333;
+}
+
+.modify:active {
+	box-shadow: none;
+	background-color: transparent;
+}
+
+.modify .glyphicon:hover {
+	color: #333;
+}
+
+.bouton-repondre {
+	height: 28px;
+	line-height: 12px;
 }
 
 .form-control
 {
 	padding-left: 5px;
 	color: black;
-	height: 20px;
+	height: 22px;
+	font-size: 12px;
 }
 
-.bouton-repondre {
-	height: 28px;
-	line-height: 12px;
+.form-textarea{
+
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    height: 50px;
+    /* max-width: 227px; */
+    resize: none;
+}
+
+.form-textarea:focus {
+	outline: 0;
+}
+
+.prem-ligne-parrainage {
+	margin-bottom: 10px
 }
