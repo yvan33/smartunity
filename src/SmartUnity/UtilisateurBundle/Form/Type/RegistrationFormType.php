@@ -66,22 +66,22 @@ class RegistrationFormType extends BaseType {
                     'label' => 'Un peu plus sur moi'
                 ))
         
-                ->add('pref_mp', 'choice', array(
-                    'label' => 'Recevoir les notifications des messages privés',
-                    'choices' => array(
-                        '1' => 'Oui', '0' => 'Non'),
-                    'expanded' => true,
-                    'data' => 1
-                ))
-                ->add('pref_smartcafe', 'choice', array(
-                    'label' => 'Recevoir les notifications du Smart\'Café',
-                    'choices' => array(
-                        '1' => 'Oui', '0' => 'Non'),
-                    'expanded' => true,
-                    'data' => 1
-                ))
+                // ->add('pref_mp', 'choice', array(
+                //     'label' => 'Recevoir les notifications des messages privés',
+                //     'choices' => array(
+                //         '1' => 'Oui', '0' => 'Non'),
+                //     'expanded' => true,
+                //     'data' => 1
+                // ))
+                // ->add('pref_smartcafe', 'choice', array(
+                //     'label' => 'Recevoir les notifications du Smart\'Café',
+                //     'choices' => array(
+                //         '1' => 'Oui', '0' => 'Non'),
+                //     'expanded' => true,
+                //     'data' => 1
+                // ))
                 ->add('pref_comm', 'choice', array(
-                    'label' => 'Recevoir les notifications de la communauté',
+                    'label' => 'Recevoir les notifications lorsqu\' un membre a commenté une de mes questions ou réponses',
                     'choices' => array(
                         '1' => 'Oui', '0' => 'Non'),
                     'expanded' => true,

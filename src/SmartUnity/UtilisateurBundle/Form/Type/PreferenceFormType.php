@@ -19,22 +19,20 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 //        parent::buildForm($builder, $options);
     
         $builder 
-            ->add('pref_mp', 'choice', array(
-                'label' => 'Recevoir les notifications des messages privés',
-                'choices' => array(
-                '1' => 'Oui', '0' => 'Non'),
-                'expanded' => true,
-                // 'data' => membre.pref_mp
-                ))          
-            ->add('pref_smartcafe', 'choice', array(
-                'label' => 'Recevoir les notifications du Smart\'Café',
-                'choices' => array(
-                '1' => 'Oui', '0' => 'Non'),
-                'expanded' => true,
-                // 'data' => membre.pref_smartcafe   
-            ))
-                
-                
+            // ->add('pref_mp', 'choice', array(
+            //     'label' => 'Recevoir les notifications des messages privés',
+            //     'choices' => array(
+            //     '1' => 'Oui', '0' => 'Non'),
+            //     'expanded' => true,
+            //     // 'data' => membre.pref_mp
+            //     ))          
+            // ->add('pref_smartcafe', 'choice', array(
+            //     'label' => 'Recevoir les notifications du Smart\'Café',
+            //     'choices' => array(
+            //     '1' => 'Oui', '0' => 'Non'),
+            //     'expanded' => true,
+            //     // 'data' => membre.pref_smartcafe   
+            // ))              
             ->add('pref_comm', 'choice', array(
                 'label' => 'Recevoir les notifications de la communauté',
                 'choices' => array(
