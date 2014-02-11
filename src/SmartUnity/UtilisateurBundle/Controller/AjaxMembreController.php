@@ -37,6 +37,13 @@ class AjaxMembreController extends Controller {
                 throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
             }
         } 
+        if (ceil($nbQuestions / $nbParPage) == 0)
+        {   
+            $nbPages=1;
+        }else{
+            $nbPages=ceil($nbQuestions / $nbParPage);
+        }
+            
 
 
 
@@ -47,7 +54,7 @@ class AjaxMembreController extends Controller {
             'nbParPage' => $nbParPage,
             'page' => $page,
             'nbQuestions' => $nbQuestions,
-            'nbPages' => ceil($nbQuestions / $nbParPage),
+            'nbPages' => $nbPages,
             'slug' => '_infos'
         ));
 
@@ -153,7 +160,13 @@ else{
                 throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
             }
         }
-
+        if (ceil($nbQuestions / $nbParPage) == 0)
+        {   
+            $nbPages=1;
+        }else{
+            $nbPages=ceil($nbQuestions / $nbParPage);
+        }
+            
         //Initalisation du tableau de retour
         $returnArray = array();
         array_push($returnArray, array(//Première ligne du tableau contient des infos sur la requête
@@ -161,7 +174,7 @@ else{
             'nbParPage' => $nbParPage,
             'page' => $page,
             'nbQuestions' => $nbQuestions,
-            'nbPages' => ceil($nbQuestions / $nbParPage),
+            'nbPages' => $nbPages,
             'slug' => '_infos'
         ));
 
