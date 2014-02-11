@@ -69,7 +69,6 @@ class QuestionReponseMembreController extends Controller {
             //la requête pour vérifier son authenticité... 
             //On récupère des infos utiles pour la pagination..
             $nbPages = $listeQuestions[0]->nbPages;
-            p($nbPages);
             if ($page > $nbPages)
                 $page = 1;
 
