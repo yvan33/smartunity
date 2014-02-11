@@ -116,12 +116,13 @@
                     <!-- accordion general-->
                     <div class="panel-group" id="accordion-onFire">
                                 {% if type=='onFire' %}
-                                  {% if countListe == 0 %}
+                                  {% if countQuestionsOnFire == 0 %}
                         <div class="panel no-question">
                         <p align="center">Il n'y a aucune dernière question</p>
                         </div>
                                   {% else %}
-                                    {% for question in listeQuestions %}
+                                  bouffon {{ countQuestionsOnFire }}
+                                    {% for question in listeQuestionsOnFire %}
 
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
@@ -186,13 +187,13 @@
                     <div class="panel-group" id="accordion-last">
                             {% if type=='last' %}
 
-                              {% if countListe == 0 %}
+                              {% if countlastQuestions == 0 %}
                         <br/>
                         <p align="center">Il n'y a aucune question r&eacute;cente</p>
                         <br/>
                               {% else %}
 
-                                  {% for question in listeQuestions %}
+                                  {% for question in listelastQuestions %}
 
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
@@ -247,15 +248,32 @@
                     </div>
                 </div>
             </div><!-- nav div fin--> 
+{% if type =='reponses' %}
 
             <div style="text-align:center; cursor:pointer">
                 <ul id="pages" class="pagination pagination-lg">
-                      {% for page in pagination %}
-                    <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {page: page[1], type: type, id: membreId}) }}">{{ page[0] }}</a></li>
+                      {% for page in paginationSol %}
+                    <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {page: page[1], type: 'reponses', id: membreId}) }}">{{ page[0] }}</a></li>
                       {% endfor %}
                 </ul>
             </div>
-
+{% elseif type =='onFire' %}
+            <div style="text-align:center; cursor:pointer">
+                <ul id="pages" class="pagination pagination-lg">
+                      {% for page in paginationOnFire %}
+                    <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {page: page[1], type: 'onFire', id: membreId}) }}">{{ page[0] }}</a></li>
+                      {% endfor %}
+                </ul>
+            </div>
+{% elseif type =='last' %}
+            <div style="text-align:center; cursor:pointer">
+                <ul id="pages" class="pagination pagination-lg">
+                      {% for page in paginationlast %}
+                    <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {page: page[1], type: 'last', id: membreId}) }}">{{ page[0] }}</a></li>
+                      {% endfor %}
+                </ul>
+            </div>
+{%endif%}
 
     </div><!-- grille-content2 fin-->
 </div>    
@@ -478,7 +496,9 @@
         nbParPage = {{ nbParPage }};
 
         nbPages = new Array();
-        nbPages[type] = {{ nbPages }};
+        nbPages['last'] = {{ nbPagesLast }};
+        nbPages['onFire'] = {{ nbPagesOnFire }};
+        nbPages['reponses'] = {{ nbPagesSol }};
 
 
         //Options du bootStrap Paginator

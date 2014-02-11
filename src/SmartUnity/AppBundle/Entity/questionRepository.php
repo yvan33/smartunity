@@ -229,7 +229,6 @@ class questionRepository extends EntityRepository {
         else
             return false;
     }
-
     //Liste de questions On Fire
     public function getQuestionsOnFireForUser($nbParPage, $page, $membreId) {
 
@@ -257,7 +256,6 @@ class questionRepository extends EntityRepository {
         $query->setParameter('membreId', $membreId);
 
         $result = $query->getResult();
-
         if (count($result) != 0)
             return $result;
         else
