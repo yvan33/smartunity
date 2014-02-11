@@ -113,13 +113,13 @@ smart_unity_question_reponse_ajax_get_reponses:
         tri: vote|date
 
 smart_unity_question_reponse_ajax_upvote:
-    pattern: /setUpVote/{reponse}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:setUpVote, reponse:'0'}
+    pattern: /setUpVote/{reponseId}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:setUpVote, reponseId:'0'}
     requirements:
         reponse: \d+
 
 smart_unity_question_reponse_ajax_downvote:
-    pattern: /setDownVote/{reponse}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:setDownVote, reponse:'0'}
+    pattern: /setDownVote/{reponseId}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:Ajax:setDownVote, reponseId:'0'}
     requirements:
         reponse: \d+
