@@ -493,8 +493,12 @@ Toast
             'html': true,
             'content': '<div id="addSoutienHolder"> \
         <div class="grille-content"> \
-            <legend class="legend-soutenir">Soutenir la question</legend> \
-                {{ form_start(formSoutien)}} \
+        {% if app.user.id == question.membre.id  %} \
+        <legend class="legend-soutenir">Revaloriser ma question</legend> \
+        {% else %} \
+        <legend class="legend-soutenir">Soutenir la question</legend> \
+        {% endif %} \
+           {{ form_start(formSoutien)}} \
                 <div class="erreur"> \
             {{ form_errors(formSoutien) }} \
             </div> \
@@ -782,8 +786,9 @@ Toast
                   <div class="validation-dialog"> \
                     <div class="validation-content"> \
                       <div class="validation-body"> \
-                        <p>Êtes vous sûr de vouloir valider la réponse suivante:' + pEntry['description'] +'</p> \
-                      </div> \
+                        <p>Vous êtes sur le point de valider la réponse suivante: ' + pEntry['description'] +'</p> \
+                      <p> Les points de votre question seront attibués au membre ayant apporté cette réponse. Ce choix est définitif. Etes-vous sûr de votre choix?</p> \
+</div> \
                       <div class="validation-footer"> \
                         <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button> \
                         <a href="' + Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '> \
