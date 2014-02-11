@@ -297,7 +297,7 @@ Toast
                 score = parseInt($('#vote' + pId + ' .upVote p').html());
                 $('#vote' + pId + ' .upVote p').html(score + 1);
                 $('#vote' + pId).attr('rel', "tooltip");
-                $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+                $('#vote' + pId).attr('data-original-title', "Vous avez déjà noté cette question.");
                 $('#vote' + pId + ' .upVote').attr('onclick', '');
                 $('#vote' + pId + ' .downVote').attr('onclick', '');
                 $('.roww').tooltip({
@@ -323,7 +323,7 @@ Toast
                 score = parseInt($('#vote' + pId + ' .downVote p').html());
                 $('#vote' + pId + ' .downVote p').html(score - 1);
                 $('#vote' + pId).attr('rel', "tooltip");
-                $('#vote' + pId).attr('data-original-title', "Vous venez de noter cette question.");
+                $('#vote' + pId).attr('data-original-title', "Vous avez déjà noté cette question.");
                 $('#vote' + pId + ' .upVote').attr('onclick', '');
                 $('#vote' + pId + ' .downVote').attr('onclick', '');
                 $('.roww').tooltip({
