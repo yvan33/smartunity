@@ -83,10 +83,6 @@
                                     <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Détails</button></a>
                                     </div>
                                     <!-- bouton rep fin-->
-                                    <!-- bouton +-->
-                                    <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                    </div>
-                                    <!-- bouton + fin-->
                                 </h4>                           
                             </div>
                             <!-- contenue visible fin-->
@@ -166,11 +162,6 @@
                                         <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
                                         </div>
                                         <!-- bouton rep fin-->
-                                        <!-- bouton +-->
-                                        <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                            <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
-                                        </div>
-                                        <!-- bouton + fin-->
                                     </h4>
                                 </a>                           
                             </div>
@@ -240,11 +231,6 @@
                                     <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="btn bouton-repondre">Répondre</button></a>
                                     </div>
                                     <!-- bouton rep fin-->
-                                    <!-- bouton +-->
-                                    <div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                        <button type="button" class="bouton-soutient"><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
-                                    </div>
-                                    <!-- bouton + fin-->
                                 </h4>                           
                             </div>
                             <!-- contenue visible fin-->
@@ -350,22 +336,8 @@
         else
             entity += 'Répondre';
 
-        entity += '</button></a></div> \
-                                                <div class="grille-5"><p style="color:#75c731; font-weight:';
-
-        if (pEntry['soutenue'])
-            entity += '900';
-        else
-            entity += '400';
-
-        entity += ';">' + pEntry['count_soutien'] + ' soutien';
-
-        if (pEntry['count_soutien'] > 1)
-            entity += 's';
-
-        entity += '</p>';
+        entity += '</button></a></div>';
         entity += '</h4> \
-                                            </div> \
                                               <div id="collapse' + type + i + '" class="panel-collapse collapse"> \
                                                   <div class="panel-body"> \
                                                   <div class="grille-det"> \
