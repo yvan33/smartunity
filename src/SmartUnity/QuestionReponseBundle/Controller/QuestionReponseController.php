@@ -994,9 +994,8 @@ else{
                     $reponse[0]->setDateValidation(new \DateTime(date("Y-m-d H:i:s")));
                     $repondant = $reponse[0]->getMembre();
                     $repondant->setReputation($repondant->getReputation() + 50);
+                    $repondant->setCagnotte($repondant->getCagnotte()+ $question->getRemuneration());
                     $question->setIsValidatedQuestion(true);
-                    
-                    
                     
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($reponse[0]);
@@ -1038,6 +1037,7 @@ else{
                 ->getRepository('SmartUnityAppBundle:reponse');
 
         $reponse = $reponseRepository->findById($idReponse);
+        $question = $reponse[0]->getQuestion();
 
         if (count($reponse) > 0) { //S'il y a des réponses
             if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
@@ -1045,11 +1045,11 @@ else{
             } else if ($reponse[0]->getDateValidation() == null) { //Si la question n'a pas été validée
                 throw new \Exception('Cette réponse n\'est pas encore validée!');
             } else { //Si tout va bien
-                $question = $reponse[0]->getQuestion();
 
                 $reponse[0]->setDateCertification(new \DateTime(date("Y-m-d H:i:s")));
                 $repondant = $reponse[0]->getMembre();
                 $repondant->setReputation($repondant->getReputation() + 50);
+                $repondant->setCagnotte($repondant->getCagnotte()+ $question->getRemuneration());                
                 $question->setIsCertifiedQuestion(true);
                 
                 $em = $this->getDoctrine()->getManager();
