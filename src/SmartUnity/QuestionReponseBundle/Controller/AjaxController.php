@@ -162,19 +162,20 @@ else{
         else{
             $QuestionId = $Question->getId();
         }
-        if (ceil($nbQuestions / $nbParPage) == 0)
-        {   
-            $nbPages=1;
-        }else{
-            $nbPages=ceil($nbQuestions / $nbParPage);
-        }
+
             
 
         //Récupération de la liste des réponses
         $listeReponse = $reponseRepository->getReponsesWithVotes($QuestionId, $page, $nbParPage, $tri);
-
         $nbReponses = $reponseRepository->getNbReponses($QuestionId);
-
+     
+        if (ceil($nbReponses / $nbParPage) == 0)
+        {   
+            $nbPages=1;
+        }else{
+            $nbPages=ceil($nbReponses / $nbParPage);
+        }
+        
         $returnArray=array();
         array_push($returnArray, array( //Première ligne du tableau contient des infos sur la requête
             'nbParPage'=>$nbParPage,

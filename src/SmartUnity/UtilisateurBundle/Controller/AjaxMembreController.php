@@ -160,6 +160,7 @@ else{
                 throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
             }
         }
+        
         if (ceil($nbQuestions / $nbParPage) == 0)
         {   
             $nbPages=1;
