@@ -27,6 +27,7 @@
 	margin-left:110px;
 	
 }
+
 .grille-det-content
 {
 	margin-left:140px;
@@ -232,8 +233,7 @@
 
 /*    RECHERCHE    */
 
-.bouton-com-rep
-{
+.bouton-com-rep {
 	margin: 0 auto;	
 	background-color: #e37151;
 	color:#FFF;
@@ -250,45 +250,60 @@
 	color: #333;
 }
 
-.bouton-com-rep a:active
-{
+.bouton-com-rep a:active {
 	background: none;
 	background-color: #e37151;
 }
 
-.bouton-com-rep a:hover
-{
+.bouton-com-rep a:hover {
 	text-decoration: none;
 	color: #333;
 }
 
-.cookie-title
-{
+.cookie-title {
     font-family: centrale;
     font-size: 3em;
     margin-bottom: 10px;
 }
 
-.cookie-title h1
-{
+.cookie-title h1 {
     font-family: centrale;
     font-size: 36px;
     line-height: 30px;
     margin: 10px 0 35px 0;
 }
 
-p
-{
+p {
 	font-size: 13px;
 }
 
-.txt-rond
-{
+.txt-rond {
 	margin-bottom: 0px;
 }
 
+/* Liste Q/R */
 
-///// Modifs des classes bootstrap
+.panel-group .panel {
+	border-radius: 0;
+	border-left: 1px solid #e8e4dc;
+	border-right: 1px solid #e8e4dc;
+}
+
+.panel-heading {
+	border-radius: 0;
+}
+
+.nav-tabs>li>a {
+	border-radius: 0;
+	color: black;
+	line-height: 28px;
+}
+
+.nav-tabs>li.active>a {
+	border-color: transparent;
+}
+
+/* Modifs des classes bootstrap */
 
 .tab-ajax > .nav-tabs>li>a:hover {
 	background-color: #ffffff;
