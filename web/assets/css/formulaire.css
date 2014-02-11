@@ -360,6 +360,10 @@ textarea:focus {
     padding-bottom: 10px;
 }
 
+.ask-question:focus {
+	outline: 0;
+}
+
 .text-subject {
 	height: 30px;
 	padding-left: 10px;
@@ -434,7 +438,7 @@ textarea:focus {
 }
 
 .search-choice-close {
-	top: 11px;
+	top: 20px;
 }
 	
 .chosen-with-drop .chosen-container-single .chosen-single {
@@ -447,8 +451,12 @@ textarea:focus {
 	background-image: #7b7a7a;
 }
 
-.chosen-single abbr {
-	margin-top: 10px;
+.chosen-container-single .chosen-single abbr {
+	top: 10px;
+}
+
+abbr {
+	top: 10px;
 }
 
 /* Profil publique */
