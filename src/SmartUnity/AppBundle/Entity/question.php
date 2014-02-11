@@ -82,7 +82,20 @@ class question
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question")
      */
     private $reponses;
+    
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="isValidatedQuestion", type="boolean")
+     */
+    private $isValidatedQuestion=false;    
 
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="isCertifiedQuestion", type="boolean")
+     */
+    private $isCertifiedQuestion=false;     
     /**
      * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\typeQuestion", inversedBy="questions")
      * @ORM\JoinColumn(name="typeQuestion_id", referencedColumnName="id", nullable=true)
@@ -506,5 +519,51 @@ class question
     public function getDateModification()
     {
         return $this->dateModification;
+    }
+
+    /**
+     * Set isValidatedQuestion
+     *
+     * @param boolean $isValidatedQuestion
+     * @return question
+     */
+    public function setIsValidatedQuestion($isValidatedQuestion)
+    {
+        $this->isValidatedQuestion = $isValidatedQuestion;
+    
+        return $this;
+    }
+
+    /**
+     * Get isValidatedQuestion
+     *
+     * @return boolean 
+     */
+    public function getIsValidatedQuestion()
+    {
+        return $this->isValidatedQuestion;
+    }
+
+    /**
+     * Set isCertifiedQuestion
+     *
+     * @param boolean $isCertifiedQuestion
+     * @return question
+     */
+    public function setIsCertifiedQuestion($isCertifiedQuestion)
+    {
+        $this->isCertifiedQuestion = $isCertifiedQuestion;
+    
+        return $this;
+    }
+
+    /**
+     * Get isCertifiedQuestion
+     *
+     * @return boolean 
+     */
+    public function getIsCertifiedQuestion()
+    {
+        return $this->isCertifiedQuestion;
     }
 }

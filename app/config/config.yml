@@ -112,26 +112,29 @@ fos_elastica:
                 question:
                     mappings:
                         date: {}
-                        sujet: { analyzer: custom_french_analyzer}
-                        description: { analyzer: custom_french_analyzer}
+                        sujet: { analyzer: custom_french_analyzer, boost: 10}
+                        description: { analyzer: custom_french_analyzer, boost: 5}
+                        isValidatedQuestion : {}
+                        isCertifiedQuestion : {}
                         marque:
                             type: "nested"
                             properties:
-                                nom: {type: string, index_name: nomMarque}
+                                nom: {type: string, index_name: nomMarque, boost: 5}
                         os:
                             type: "nested"
                             properties:
-                                nom: {type: string, index_name: nomOS}
+                                nom: {type: string, index_name: nomOS, boost: 5}
                         typeQuestion:
                             type: "nested"
                             properties:
-                                nom: {type: string, index_name: nomTypeQuestion}
+                                nom: {type: string, index_name: nomTypeQuestion, boost: 5}
                         
                     persistence:
                         driver: orm # orm, mongodb, propel are available
                         model: SmartUnity\AppBundle\Entity\question
                         provider: ~
                         finder: ~
+                        listener: ~
 
 fos_facebook:
     alias:  facebook

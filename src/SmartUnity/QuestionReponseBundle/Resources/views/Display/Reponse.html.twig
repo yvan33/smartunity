@@ -773,12 +773,11 @@ Toast
 
         entity += '        <div> \
                                     <div class="grille-3-btn">';
-               {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
-
-               entity+='<div class="valider rep"> \
+              
+                {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
+               entity+= '<div class="valider rep"> \
                     <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalValidation" >Valider</button> \
                 </div> \
-
                 <div class="modal fade" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> \
                   <div class="validation-dialog"> \
                     <div class="validation-content"> \
@@ -786,9 +785,8 @@ Toast
                         <p>Êtes vous sûr de vouloir valider la réponse suivante:' + pEntry['description'] +'</p> \
                       </div> \
                       <div class="validation-footer"> \
-
                         <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button> \
-                        <a href="' + Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '" target="_blank"> \
+                        <a href="' + Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '> \
                                 <button type="button" class="btn bouton-validation">Valider</button></a> \
                       </div> \
                     </div> \
