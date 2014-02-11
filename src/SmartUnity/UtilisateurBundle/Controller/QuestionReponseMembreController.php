@@ -46,6 +46,11 @@ class QuestionReponseMembreController extends Controller {
         //DONC :
         //On récupère la réponse du controleur Ajax (pour avaoir une réponse au cas ou)
 
+        
+////////////////////////////////////////////////////////////////////////////        
+//////////////////RECUPERATION DES QUESTIONS POSEES PAR LE MEMBRE//////////////////////////////////////////////////////////        
+////////////////////////////////////////////////////////////////////////////    
+        
         if ($route == 'smart_unity_membre_questions'){ 
 
             //On récupère les solutions
@@ -117,6 +122,11 @@ class QuestionReponseMembreController extends Controller {
             ));
         }
 
+        
+////////////////////////////////////////////////////////////////////////////        
+//////////////////RECUPERATION DES QUESTIONS REPONDUES PAR LE MEMBRE//////////////////////////////////////////////////////////        
+////////////////////////////////////////////////////////////////////////////        
+        
         if ($route == 'smart_unity_membre_reponses'){  
             $response = $this->forward('SmartUnityUtilisateurBundle:AjaxMembre:getQuestionsAnswered', array(
                 'type' => $type,
