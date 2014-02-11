@@ -7,11 +7,9 @@
 
 .grille-1
 {
-    width:15%;
+    width: 20%;
     margin: 3px 2.5% 3px 5%;
-    /*background-color:#00C;*/
-    /*height:20px;*/
-    float:left;
+    float: left;
     text-align: right;
 }
 
@@ -259,11 +257,11 @@ fieldset {
     color:#FFF;
     font-family: centrale;
     font-size:15px;
-    line-height: 15px;
+    line-height: 17px;
     margin-bottom:25px;
     text-align:center;
-    width:150px;
-    height:30px;
+    width: 160px;
+    height: 30px;
     border-radius:2px;
     border: 0;
 }
@@ -273,11 +271,11 @@ fieldset {
     background-color: #e37151;
     color:#FFF;
     font-family: centrale;
-    font-size:15px;
-    line-height: 15px;
+    font-size: 15px;
+    line-height: 17px;
     margin-bottom:25px;
     text-align:center;
-    width:150px;
+    width: 160px;
     height:30px;
     border-radius:2px;
     border: 0;
@@ -482,3 +480,5 @@ textarea:focus {
 .chosen-single abbr {
 	margin-top: 10px;
 }
+
+/* Profil publique */
