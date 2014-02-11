@@ -26,7 +26,7 @@ class RegistrationFormType extends BaseType {
                     'choices' => array(
                         'na' => 'Non défini', 'm' => 'Masculin', 'f' => 'Féminin'),
                     'expanded' => false,
-                    'data' => 'na'
+                    'data' => 'na',
                 ))
                 ->add('date_naissance', 'date', array(
                     'empty_value' => '',

@@ -37,8 +37,13 @@ class AjaxController extends Controller
             throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
         }
 
-
-        
+        if (ceil($nbQuestions / $nbParPage) == 0)
+        {   
+            $nbPages=1;
+        }else{
+            $nbPages=ceil($nbQuestions / $nbParPage);
+        }
+            
 
         //Initalisation du tableau de retour
         $returnArray=array();
@@ -47,7 +52,7 @@ class AjaxController extends Controller
             'nbParPage'=>$nbParPage,
             'page'=>$page,
             'nbQuestions'=>$nbQuestions,
-            'nbPages'=>ceil($nbQuestions / $nbParPage),
+            'nbPages'=>$nbPages,
             'slug'=>'_infos'
         ));
 
@@ -157,6 +162,13 @@ else{
         else{
             $QuestionId = $Question->getId();
         }
+        if (ceil($nbQuestions / $nbParPage) == 0)
+        {   
+            $nbPages=1;
+        }else{
+            $nbPages=ceil($nbQuestions / $nbParPage);
+        }
+            
 
         //Récupération de la liste des réponses
         $listeReponse = $reponseRepository->getReponsesWithVotes($QuestionId, $page, $nbParPage, $tri);
@@ -168,7 +180,7 @@ else{
             'nbParPage'=>$nbParPage,
             'page'=> (int) $page,
             'nbReponses'=> (int) $nbReponses,
-            'nbPages'=>ceil($nbReponses / $nbParPage),
+            'nbPages'=>$nbPages,
             'slug'=>$slug,
             'tri'=>$tri
         ));

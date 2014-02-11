@@ -115,14 +115,13 @@
                 <div class="tab-pane fade in out{% if type=='onFire' %} active{% endif %}" id="onFire">
                     <!-- accordion general-->
                     <div class="panel-group" id="accordion-onFire">
-                                {% if type=='onFire' %}
-                                  {% if countQuestionsOnFire == 0 %}
+                        {% if type=='onFire' %}
+                                  {% if countListe == 0 %}
                         <div class="panel no-question">
                         <p align="center">Il n'y a aucune dernière question</p>
                         </div>
                                   {% else %}
-                                  bouffon {{ countQuestionsOnFire }}
-                                    {% for question in listeQuestionsOnFire %}
+                                    {% for question in listeQuestions %}
 
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
@@ -187,7 +186,7 @@
                     <div class="panel-group" id="accordion-last">
                             {% if type=='last' %}
 
-                              {% if countlastQuestions == 0 %}
+                              {% if countListe == 0 %}
                         <br/>
                         <p align="center">Il n'y a aucune question r&eacute;cente</p>
                         <br/>
@@ -248,35 +247,18 @@
                     </div>
                 </div>
             </div><!-- nav div fin--> 
-{% if type =='reponses' %}
 
-            <div style="text-align:center; cursor:pointer">
-                <ul id="pages" class="pagination pagination-lg">
-                      {% for page in paginationSol %}
-                    <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {page: page[1], type: 'reponses', id: membreId}) }}">{{ page[0] }}</a></li>
-                      {% endfor %}
-                </ul>
-            </div>
-{% elseif type =='onFire' %}
-            <div style="text-align:center; cursor:pointer">
-                <ul id="pages" class="pagination pagination-lg">
-                      {% for page in paginationOnFire %}
-                    <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {page: page[1], type: 'onFire', id: membreId}) }}">{{ page[0] }}</a></li>
-                      {% endfor %}
-                </ul>
-            </div>
-{% elseif type =='last' %}
-            <div style="text-align:center; cursor:pointer">
-                <ul id="pages" class="pagination pagination-lg">
-                      {% for page in paginationlast %}
-                    <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {page: page[1], type: 'last', id: membreId}) }}">{{ page[0] }}</a></li>
-                      {% endfor %}
-                </ul>
-            </div>
-{%endif%}
 
     </div><!-- grille-content2 fin-->
-</div>    
+
+</div>   
+<div style="text-align:center; cursor:pointer">
+                <ul id="pages" class="pagination pagination-lg">
+                      {% for page in pagination %}
+                    <li {% if page[2]=='0' %}class="active"{% endif %}><a href="{{ path('smart_unity_membre_questions', {page: page[1], type: type, id: membreId}) }}">{{ page[0] }}</a></li>
+                      {% endfor %}
+                </ul>
+            </div> 
 </div>  <!-- row fin-->
 
 {% endblock %}
@@ -356,8 +338,10 @@
     }
 
     function MaJPagination() {
+        console.log(type);
+        console.log(nbPages[type]);
         if (nbPages[type] == null) { //Si le tab est vide....
-
+            console.log('null');
             fixHeight();
             $('#accordion-' + type).fadeOut('fast');
 
@@ -402,6 +386,8 @@
             });
 
         } else {
+            console.log('non null');
+
             fixHeight();
             if (nbPages[type] != 0) {
                 options.currentPage = page[type];
@@ -473,19 +459,18 @@
 
 
     $(document).ready(function() {
-
+        console.log('bouffon4');
         //Si JS est activé, on change les href des tabs par les id des content (pour bootstrap auto tabs!)
         $('#onFire-tab').attr('href', '#onFire');
         $('#last-tab').attr('href', '#last');
         $('#reponses-tab').attr('href', '#reponses');
-
 
         //Initialise les valeurs des pages/onglets ouverts.... 
         membreId = '{{ membreId }}';
         route = '{{ route }}';
         type = '{{ type }}';
         page = new Array();
-        page[type] ={{ page }};
+        // page[type] ={{ page }};
         if (page['onFire'] == null)
             page['onFire'] = 1;
         if (page['last'] == null)
@@ -496,13 +481,13 @@
         nbParPage = {{ nbParPage }};
 
         nbPages = new Array();
-        nbPages['last'] = {{ nbPagesLast }};
-        nbPages['onFire'] = {{ nbPagesOnFire }};
-        nbPages['reponses'] = {{ nbPagesSol }};
+        nbPages[type] = {{ nbPages}};
+console.log(nbPages[type]);
 
 
         //Options du bootStrap Paginator
         options = new Object();
+
         options = {
             currentPage: {{ page }},
             totalPages: nbPages[type],
@@ -520,6 +505,7 @@
 
 
 
+
 //////////////
 ////// EVENTS
 //////////////
@@ -528,17 +514,20 @@
 
         //Definition du comportement du paginator
         $('#pages').bootstrapPaginator(options);
-
         //Gestion de la pagination pour les changement d'onglets
         $('#onFire-tab').click(function() {
+            console.log('clic sur on Fire questions');
             type = 'onFire';
             MaJPagination();
         });
         $('#last-tab').click(function() {
+            console.log('clic sur last questions');
             type = 'last';
             MaJPagination();
         });
         $('#reponses-tab').click(function() {
+            console.log('clic sur solutions');
+
             type = 'reponses';
             MaJPagination();
         });
