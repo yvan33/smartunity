@@ -37,12 +37,10 @@
                   				<!-- accordion general-->
                           <div class="panel-group" id="liste">
 
-
-
                               {% if countListe == 0 %}
-                                <br/>
-                                <p align="center">Aucune question ne correspond &agrave; votre recherche!</p>
-                                <br/>
+                                <div class="panel-empty">
+                                <p align="center">Aucune question ne correspond &agrave; votre recherche !</p>
+                                </div>
                               {% else %}
                                   {% for question in listeQuestions %}
 
@@ -135,18 +133,12 @@
             </div>
         <div class="tooltip-arrow"></div>
         </div>
-        <a id="popupQuestion"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour poser une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_question')}}{% else %}#{% endif %}">
-            <div class="bouton-com-rep">Posez votre question!</div>
-        </a>
-
-    </div><!-- col fin-->
+        <div class="bouton-com-rep">
+        	<a id="popupQuestion"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour poser une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_question')}}{% else %}#{% endif %}">Posez votre question</a>
+		</div>		
 </div>  <!-- row fin-->
 
 {% endblock %}
-
-
-
-
 
 {% block callJS %}
 
