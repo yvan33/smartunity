@@ -638,19 +638,6 @@ border-top-left-radius: 0;
     border: 1px solid transparent;
 }
 
-.form_moncompte{
-        font-family: centrale;
-}
-
-.form-textarea{
-
-    width:100%;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    height: 50px;
-}
-
-
 .bouton-retour{
     
     position:absolute;
