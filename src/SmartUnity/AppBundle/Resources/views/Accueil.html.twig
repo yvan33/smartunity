@@ -29,8 +29,14 @@
 						  		<h2>Le site d'entraide pour utilisateur de smartphone</h2>
 						  		<h3>Trouvez toutes les réponses à vos questions pour que l'utilisation de votre<br>smartphone devienne simple comme bonjour !</h3>
 						  		<h3>Partagez vos connaissances et gagnez des cadeaux !</h3>
+						  		
+						  		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+						  		<button class="bouton-repondre savoir-plus-log" onclick="self.location.href='{{ path('smart_unity_app_descriptionpage') }}'">En savoir plus</button>
+						  		{% else %}			  		
 						  		<button class="bouton-repondre savoir-plus" onclick="self.location.href='{{ path('smart_unity_app_descriptionpage') }}'">En savoir plus</button>
 						  		<button class="bouton-repondre nous-rejoindre" onclick="self.location.href='{{ path('fos_user_registration_register') }}'">Nous rejoindre</button>
+						  		{% endif %}
+
                           	</div>
                             <img src="{{asset('assets/img/carousel-bienvenue.jpg') }}" alt="">
                             <div class="carousel-caption">
