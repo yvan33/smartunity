@@ -100,8 +100,8 @@
                                                 {% if question.date_best_reponse != '' %}
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
-                                            <p>{{ question.auteur_best_reponse }}</p>
-                                            <p>{{ question.date_best_reponse }}</p>
+                                            <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
+                                            <p style="font-weight: 300; font-style: italic;">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -177,8 +177,8 @@
                                                 {% if question.date_best_reponse != '' %}
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
-                                            <p>{{ question.auteur_best_reponse }}</p>
-                                            <p>{{ question.date_best_reponse }}</p>
+                                            <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
+                                            <p style="font-weight: 300; font-style: italic;">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -250,8 +250,8 @@
                                                 {% if question.date_best_reponse != '' %}
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
-                                            <p>{{ question.auteur_best_reponse }}</p>
-                                            <p>{{ question.date_best_reponse }}</p>
+                                            <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
+                                            <p style="font-weight: 300; font-style: italic;">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -366,8 +366,8 @@
         if (pEntry['date_best_reponse'] != '')
             entity += '<div class="grille-det-content"> \
                                                     <div class="grille-det1"> \
-                                                            <p>' + pEntry['auteur_best_reponse'] + '</p> \
-                                                            <p>' + pEntry['date_best_reponse'] + '</p> \
+                                                            <p style="margin-bottom: 0;">' + pEntry['auteur_best_reponse'] + '</p> \
+                                                            <p style="font-weight: 300; font-style: italic;">' + pEntry['date_best_reponse'] + '</p> \
                                                       </div> \
                                                         <div class="grille-det2"> \
                                                         <p>' + pEntry['best_reponse'] + '</p> \

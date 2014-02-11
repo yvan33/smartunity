@@ -21,16 +21,13 @@
 {
     width:40%;
     margin: 3px 30% 3px 2.5%;
-    /*background-color:#3C9;*/
-    height:20px;
+    height: 100%;
     float:left;
 }
 .grille-1.pref
 {
     width:50%;
     margin: 3px 3% 3px 5%;
-    /*background-color:#00C;*/
-    /*height:20px;*/
     float:left;
     text-align: left;
     
@@ -39,7 +36,6 @@
 {
     width:40%;
     margin: 3px 1% 3px 1%;
-    /*background-color:#3C9;*/
     height:20px;
     float:right;
 }
@@ -47,15 +43,12 @@
 .grille-1-reinitialisation{
     width:35%;
     margin: 3px 2.5% 3px 12.5%;
-    /*background-color:#00C;*/
-    /*height:20px;*/
     float:left;}
 
 .grille-2-reinitialisation
 {
     width:35%;
     margin: 3px 12.5% 3px 2.5%;
-    /*background-color:#3C9;*/
     height:20px;
     float:right;
 }
@@ -291,6 +284,14 @@ fieldset {
 	max-height: 270px;
 }
 
+#fos_user_registration_form_info_plus {
+	width: 450px;
+	height: 100px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
 /* Formulaire de contact */
 
 .bouton-envoyer {
@@ -352,6 +353,7 @@ textarea:focus {
 .form-control {
 	font-size: 13px;
 	box-shadow: none;
+	border-radius: 3px;
 }
 
 /* Conditions générales d'utilisation */
