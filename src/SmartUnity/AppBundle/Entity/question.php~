@@ -82,10 +82,23 @@ class question
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question")
      */
     private $reponses;
+    
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="isValidatedQuestion", type="boolean")
+     */
+    private $isValidatedQuestion=false;    
 
     /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="isCertifiedQuestion", type="boolean")
+     */
+    private $isCertifiedQuestion=false;     
+    /**
      * @ORM\ManyToOne(targetEntity="SmartUnity\AppBundle\Entity\typeQuestion", inversedBy="questions")
-     * @ORM\JoinColumn(name="typeQuestion_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="typeQuestion_id", referencedColumnName="id", nullable=true)
      */
     private $typeQuestion;
 
@@ -483,5 +496,28 @@ class question
     public function getCommentaireQuestions()
     {
         return $this->commentaireQuestions;
+    }
+
+    /**
+     * Set dateModification
+     *
+     * @param \DateTime $dateModification
+     * @return question
+     */
+    public function setDateModification($dateModification) 
+    {
+        $this->dateModification = $dateModification;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateModification
+     *
+     * @return \DateTime 
+     */
+    public function getDateModification()
+    {
+        return $this->dateModification;
     }
 }

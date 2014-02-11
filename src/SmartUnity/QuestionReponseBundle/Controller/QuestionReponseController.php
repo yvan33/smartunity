@@ -100,7 +100,7 @@ p($listeQuestions);
         $QuestionRecherche = new \SmartUnity\AppBundle\Entity\Question();
         $formQuestion = $this->createForm('smartunity_filtres_repondre', $QuestionRecherche, array(
             'action' => $this->generateUrl('smart_unity_question_reponse_repondre_questions')));
-p($listeQuestions);
+        
         $template = sprintf('SmartUnityQuestionReponseBundle:Display:ListeQuestion.html.twig');
         return $this->render($template, array(
                     'error' => $error,
@@ -144,32 +144,43 @@ p($listeQuestions);
 
         
         
-        
+//Création query principale pour la pagination.        
         $mainQuery = new \Elastica\Query();
         $mainQuery->setSize($nbParPage);
         $mainQuery->setFrom(($page - 1) * $nbParPage);
+//FIN Création query principale pour la pagination.
+        
+//Création de la boolean query et ajout des boosts pour les questions certifiées et validées.        
+        $queryBool= new \Elastica\Query\Bool();
+        $subValidatedQueryTerm =  new \Elastica\Query\Term();
+        $subValidatedQueryTerm ->setTerm('isValidatedQuestion', true, 1);
+        $subCertifiedQueryTerm =  new \Elastica\Query\Term();
+        $subCertifiedQueryTerm ->setTerm('isCertifiedQuestion', true, 2);       
+        $queryBool->addShould($subValidatedQueryTerm);
+        $queryBool->addShould($subCertifiedQueryTerm);
+//FIN  Création de la boolean query et ajout des boosts pour les questions certifiées et validées. 
+        
         
         if ($question == '') {
-            $query = new \Elastica\Query\MatchAll();
-//          $query->addParam('from', $nbParPage * ($page - 1));
-//          $query->addParam('size', $nbParPage);
+
+            $subQueryMatchAll = new \Elastica\Query\MatchAll();
+            $queryBool->addMust($subQueryMatchAll);
+
         } else {
             $sujetQuery = new \Elastica\Query\Match;
             $sujetQuery->setFieldQuery('sujet', $question);
-//    $sujetQuery->setFieldParam('sujet', 'analyzer', 'custom_french_analyzer');        
 
             $descriptionQuery = new \Elastica\Query\Match;
             $descriptionQuery->setFieldQuery('description', $question);
 //    $descriptionQuery->setFieldParam('description', 'analyzer', 'custom_french_analyzer'); 
 
-            $query = new \Elastica\Query\Bool();
-            $query->addShould($sujetQuery);
-            $query->addShould($descriptionQuery);
+            $queryBool->addShould($sujetQuery);
+            $queryBool->addShould($descriptionQuery);
+            
         }
+        $mainQuery->setQuery($queryBool);
         
-        $mainQuery->setQuery($query);
-        
-        $nbQuestions = count($finder->find($query, 1000000));
+        $nbQuestions = count($finder->find($queryBool, 1000000));
         $nbPages = ceil($nbQuestions / $nbParPage);
 
 //        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
@@ -250,12 +261,25 @@ p($listeQuestions);
         $mainQuery = new \Elastica\Query();
         $mainQuery->setSize($nbParPage);
         $mainQuery->setFrom(($page - 1) * $nbParPage);
+//FIN  Création query générale
+//
+//  
+//Création de la boolean query et ajout des boosts pour les questions certifiées et validées.        
+        $queryBool= new \Elastica\Query\Bool();
+        $subValidatedQueryTerm =  new \Elastica\Query\Term();
+        $subValidatedQueryTerm ->setTerm('isValidatedQuestion', true, 1);
+        $subCertifiedQueryTerm =  new \Elastica\Query\Term();
+        $subCertifiedQueryTerm ->setTerm('isCertifiedQuestion', true, 2);       
+        $queryBool->addShould($subValidatedQueryTerm);
+        $queryBool->addShould($subCertifiedQueryTerm);
+//FIN  Création de la boolean query et ajout des boosts pour les questions certifiées et validées.         
+    
         
 //Création de la query quasi générale        
         if (is_null($marque) && is_null($os) && is_null($typeQuestion) && is_null($motCle)) {
-            $query = new \Elastica\Query\MatchAll();
+            $subQueryMatchAll = new \Elastica\Query\MatchAll();
+            $queryBool->addMust($subQueryMatchAll);
         } else {
-            $query = new \Elastica\Query\Bool();
                  
         if (isset($marque)) {
             $marque = $marque->getNom();
@@ -264,8 +288,8 @@ p($listeQuestions);
             $nestedMarqueQuery = new \Elastica\Query\Nested;
             $nestedMarqueQuery->setPath('marque');
             $nestedMarqueQuery->setQuery($marqueQuery);
-            $query->addShould($nestedMarqueQuery);
-        }
+            $queryBool->addMust($nestedMarqueQuery);
+            }
 
         if (isset($os)) {
             $os = $os->getNom();
@@ -274,7 +298,7 @@ p($listeQuestions);
             $nestedOsQuery = new \Elastica\Query\Nested;
             $nestedOsQuery->setPath('os');
             $nestedOsQuery->setQuery($osQuery);
-            $query->addShould($nestedOsQuery);
+            $queryBool->addMust($nestedOsQuery);
         }
 
         if (isset($typeQuestion)) {
@@ -284,7 +308,7 @@ p($listeQuestions);
             $nestedTypeQuestionQuery = new \Elastica\Query\Nested;
             $nestedTypeQuestionQuery->setPath('typeQuestion');
             $nestedTypeQuestionQuery->setQuery($typeQuestionQuery);
-            $query->addShould($nestedTypeQuestionQuery);
+            $queryBool->addMust($nestedTypeQuestionQuery);
         }
 
         if (isset($motCle)) {
@@ -292,21 +316,16 @@ p($listeQuestions);
             $sujetQuery->setFieldQuery('sujet', $motCle);
             $descriptionQuery = new \Elastica\Query\Match;
             $descriptionQuery->setFieldQuery('description', $motCle);
-            $query->addShould($sujetQuery);
-            $query->addShould($descriptionQuery);
+            $queryBool->addShould($sujetQuery);
+            $queryBool->addShould($descriptionQuery);
         }            
         }
-              $mainQuery->setQuery($query);
-        $nbQuestions = count($finder->find($query, 1000000));
-        $nbPages = ceil($nbQuestions / $nbParPage);
         
+        $mainQuery->setQuery($queryBool);
+        $nbQuestions = count($finder->find($queryBool, 1000000));
+        $nbPages = ceil($nbQuestions / $nbParPage);       
         $resultSet = $finder->find($mainQuery);
-        $listeQuestions = $this->generateSearchResults($resultSet);
-        p($listeQuestions);
-///Fonction de tri du tableau des questions
-//        usort($listeQuestions, array($this, "cmp"));        
-
- 
+        $listeQuestions = $this->generateSearchResults($resultSet);    
 
 //         Génération de la pagination en statique (si pas de JS)
         $pagination = array();
@@ -338,24 +357,6 @@ p($listeQuestions);
         ));
     }
        
-    function cmp($a, $b){
-            
-            if ($a['is_certif_question']==true && $b['is_certif_question']==false ) {
-                return 1;
-            }           
-            if ($a['is_validated_question']==true && $b['is_validated_question']==false ) {
-                return 1;
-            }
-            if ($a['is_validated_question']==false && $b['is_validated_question']==true ) {
-                return -1;
-            }            
-            if ($a['is_validated_question']==true && $b['is_certif_question']==true ) {
-             return -1;
-            }
-            return 0;        
-        }
-        
-    
     private function generateSearchResults($resultSet) {
 
         $listeQuestions = array();
@@ -381,6 +382,7 @@ if ($questionRepository->isQuestionValid($Question->getId())){
             $auteurBestreponse = $reponse->getMembre()->getUsername();
             $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
             $is_certif_question = true;
+            $is_validated_question = true;
             $descriptionBestReponse = $reponse->getDescription();
             break;
         }
@@ -847,7 +849,7 @@ else{
             }
             throw new \Exception('Votre réponse n\'a pas pu être ajoutée');
         }
-        return "";
+        return new \Exception('Erreur Javascript');
     }
 
     public function editReponseAction($id, $slug) {
@@ -895,15 +897,20 @@ else{
                 if ($question->getMembre() != $user) {//TEST SI USER LOGGE A BIEN POSE LA QUESTION
                     throw new \Exception('Vous ne pouvez valider que des réponses à vos questions.');
                 } else {
-                    $questionSlug = $reponse[0]->getQuestion()->getSlug();
 
+//Modifs sur la base de données                    
                     $reponse[0]->setDateValidation(new \DateTime(date("Y-m-d H:i:s")));
                     $repondant = $reponse[0]->getMembre();
                     $repondant->setReputation($repondant->getReputation() + 50);
-
+                    $question->setIsValidatedQuestion(true);
+                    
+                    
+                    
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($reponse[0]);
                     $em->persist($repondant);
+                    $em->persist($question);
+                    
                     $em->flush();
 
 
@@ -911,7 +918,6 @@ else{
                     $mailMembreReponse = $repondant->getEmail();
 
                     if ($prefRepValideeMembre == true) {
-
                         //Envoi du mail
                         $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
                         $sujetMail = "Votre réponse à la question : " . $sujetQuestion . "sur smartunity.fr a été validée";
@@ -947,17 +953,17 @@ else{
             } else if ($reponse[0]->getDateValidation() == null) { //Si la question n'a pas été validée
                 throw new \Exception('Cette réponse n\'est pas encore validée!');
             } else { //Si tout va bien
-                $questionSlug = $reponse[0]->getQuestion()->getSlug();
+                $question = $reponse[0]->getQuestion();
 
                 $reponse[0]->setDateCertification(new \DateTime(date("Y-m-d H:i:s")));
-
                 $repondant = $reponse[0]->getMembre();
                 $repondant->setReputation($repondant->getReputation() + 50);
-
+                $question->setIsCertifiedQuestion(true);
+                
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse[0]);
                 $em->persist($repondant);
-
+                $em->persist($question);
                 $em->flush();
 
                 $prefRepCertifieemembre = $repondant->getPrefRepCertifiee();
@@ -979,7 +985,7 @@ else{
                     $this->get('mailer')->send($message);
                 }
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $questionSlug)));
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug())));
             }
         } else {
             throw new \Exception('La reponse passée en paramètre n\'éxiste pas!');
