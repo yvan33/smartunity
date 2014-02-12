@@ -17,8 +17,53 @@
 			<p>Trouver une information dans la jungle que représente le web est bien souvent une difficulté insurmontable... C'est pourquoi nous avons décidé de mettre en place le système des Questions/Réponses agrémenté d'un système de valorisation sous forme de points (et de cadeaux...).
 			
 			<h2 class="title-comment">Le fonctionnement de Smart'Unity</h2>
+			<h3 class="title-comment text-center">Demander/Répondre</h3>
+			<p>La consultation de la totalité des questions et réponses du site est totalement libre et ne demande pas d'être inscrit. Après vous être gratuitement inscrit(e), vous pouvez demander ou répondre grâce à la barre de recherche (passez la souris sur l'image) :</p>
 			
-				
-        </div>
-{% endblock %}
+			<div class="dem-rep">
+				<img class="dem-howto" onmouseover="HideDem(this);" src="{{ asset('assets/img/quest-howto.png') }}"/>
+				<img class="rep-howto" onmouseout="DisplayDem(this);" src="{{ asset('assets/img/repondre-howto.png') }}"/>
+			</div>
+			
+			<h3 class="title-comment text-center">Fonctionnalités</h3>
+			<h4><span class="glyphicon glyphicon-ok"></span>Mise en avant des meilleures réponses !</h4>
+			<p class="prec-img">Chaque réponse peut être votée par les membres de la communauté grâce aux flèches suivantes :</p>
+			<img class="up-down" src="{{ asset('assets/img/up-down.png') }}"/>
+			<p>Pour chaque question, les meilleures réponses peuvent ensuite être affichées en haut de la liste pour ainsi avoir un bon aperçu du contenu intéressant.</p>
 
+			<h4 class="second-title"><span class="glyphicon glyphicon-ok"></span>Validation et certification de la meilleure réponse !</h4>
+			<p class="prec-img">Chaque réponse peut être votée par les membres de la communauté grâce aux flèches suivantes :</p>
+			<div class="div-valid">
+				<img class="valid" src="{{ asset('assets/img/check.png') }}"/>
+				<img class="valid" src="{{ asset('assets/img/certif.png') }}"/>
+			</div>
+			<p>Pour chaque question, les meilleures réponses peuvent ensuite être affichées en haut de la liste pour ainsi avoir un bon aperçu du contenu intéressant.</p>
+        
+        
+        </div>
+      
+      
+{% endblock %}
+ 
+{% block callJS %}
+
+<script>
+/// Affichage image
+
+$(document).ready(function() {
+	$('.rep-howto').hide();
+});
+
+function HideDem(e) {
+   $('.rep-howto').show();
+   $('.dem-howto').hide();
+};
+
+function DisplayDem(e) {
+   $('.rep-howto').hide();
+   $('.dem-howto').show();
+};
+
+</script>
+
+{% endblock %}
