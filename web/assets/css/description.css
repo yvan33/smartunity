@@ -83,11 +83,30 @@
 
 .valid {
 	width: 50px;
-	margin: 10px;
+	margin-top: 10px;
 }
 
 .div-valid {
 	display: block;
 	margin: 0 auto;
 	width: 150px;
+}
+
+.div-valid-1 {
+	float: left;
+	width: 47.5%;
+	border: 1px solid black;
+	margin-right: 2.5%;
+}
+
+.div-valid-2 {
+	float: right;
+	width: 47.5%;
+	border: 1px solid black;
+	margin-left: 2.5%;
+}
+
+.contenu-comment h5 {
+	font-family: centrale;
+	color: #559aa9;
 }
