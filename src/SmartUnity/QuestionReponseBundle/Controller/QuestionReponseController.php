@@ -877,12 +877,10 @@ class QuestionReponseController extends Controller {
                         //Envoi du mail
                         $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
                         $sujetMail = "Votre réponse à la question : " . $sujetQuestion . "sur smartunity.fr a été validée";
-                        $expediteurMail = "";
                         $contenu = "";
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
-                                ->setFrom($expediteurMail)
                                 ->setTo($mailMembreReponse)
                                 ->setBody($contenu);
                         $this->get('mailer')->send($message);
