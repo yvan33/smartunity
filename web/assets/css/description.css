@@ -82,8 +82,9 @@
 }
 
 .valid {
+	display: block;
 	width: 50px;
-	margin-top: 10px;
+	margin: 10px auto;
 }
 
 .div-valid {
@@ -95,14 +96,12 @@
 .div-valid-1 {
 	float: left;
 	width: 47.5%;
-	border: 1px solid black;
 	margin-right: 2.5%;
 }
 
 .div-valid-2 {
 	float: right;
 	width: 47.5%;
-	border: 1px solid black;
 	margin-left: 2.5%;
 }
 
