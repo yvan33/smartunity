@@ -11,11 +11,15 @@
 <div class="row">
 
     <div class="col-md-offset-1 col-md-10">
-        <div class="grille-content"> 
+        <div> 
             <div class="title text-center cookie-title">
-                Inscription validée!
+                Merci !
             </div>
-            <div>
+            <div class="text-center">
+                <h3 style="font-family:centrale;">Vous venez de rejoindre la communauté Smart'Unity !</h3><br/>
+            </div>
+
+            <div class="text-center">
     <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
     {% if app.session is not empty %}
         {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
