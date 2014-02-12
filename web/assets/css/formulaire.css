@@ -191,6 +191,10 @@ legend {
 	outline: 0;
 }
 
+.btn-inscription:hover {
+	color: #333;
+}
+
 .titre-inscription {
 	margin-bottom: -15px;
 }
