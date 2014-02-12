@@ -852,7 +852,6 @@ body.bg
 
 .panel-default {
 	background: rgba(250, 250, 250, 0.6);
-	margin-top: 20px;
 }
 
 .bouton-login-fix {
@@ -937,4 +936,9 @@ body.bg
 	margin: 0 auto;
 	font-family: centrale;
 	font-size: 30px;
+}
+
+/* Autre */
+.send-answer {
+	margin-bottom: 10px;
 }
