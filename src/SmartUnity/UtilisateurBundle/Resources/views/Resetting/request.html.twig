@@ -1,3 +1,5 @@
+{% block title %}Reinitialisation du mot de passe{% endblock %}
+
 {% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
@@ -7,21 +9,9 @@
 
 {% block fos_user_content %}
 
-
-{#<div class="row">
-
-    <div class="col-md-offset-2 col-md-8"">
-        <div class="grille-content"> 
-            <div class="title text-center cookie-title">
-                Réinitialisation de votre mot de passe
-            </div>
-        </div>
-    </div>
-</div>#}
-
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
-        <div class="grille-content panneau-bas">  
+        <div class="panneau-bas">  
             <div class="row text-center cookie-title">
                 Réinitialisation de votre mot de passe
             </div>
@@ -33,13 +23,13 @@
         {% endif %}
                     </div>
                     <div class="grille-1-reinitialisation">
-                         <label class="label-normal" for="username">{{ 'resetting.request.username'|trans }}</label>
+                         <label class="label-normal" for="username">Nom d'utilisateur ou adresse e-mail</label>
                     </div>
                     <div class="grille-2-reinitialisation">
                         <input class="form-control forminfo" type="text" id="username" name="username" required="required" />
                     </div>
                 <div class="cent-h bouton-bas-block cleared">
-                    <button type="submit" class="btn btn-primary btn-lg">Valider</button>
+                    <button type="submit" class="btn bouton-envoyer">Valider</button>
                 </div> 
             </form>
         </div>
