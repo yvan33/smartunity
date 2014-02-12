@@ -23,19 +23,21 @@
                             <div class="form-group">
                                 <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Mot de passe" type="password" id="password" name="_password" required="required">
                             </div>
-                            <div style="margin-top: -14px;"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a></div>
-                            <div class="checkbox souvenir-de-moi" >
+                            <div class="mdp-oublie-fix"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a></div>
+                            <div class="checkbox souvenir-de-moi-fix" >
                                 <label>
-                                    <input id="remember_me" type="checkbox"  name="_remember_me" value="on" >Se souvenir de moi
+                                    <input id="remember_me_fix" type="checkbox"  name="_remember_me" value="on" >Se souvenir de moi
                                 </label>
                             </div>
-                            <input class="btn bouton-login" id="_submit" name="_submit" type="submit" value="Connexion" style="line-height:14px">
+                            <input class="btn bouton-login-fix" id="_submit" name="_submit" type="submit" value="Connexion" style="line-height:14px">
                         </fieldset>
                     </form>
+                    <p class="ou-fb-fixed">ou alors avec Facebook :</p>
                     <div class="pad-l">{{ facebook_login_button({'autologoutlink': false, 'size': 'large', 'label': "Se connecter"}) }}</div>
                             <a href="{{ path('fos_user_registration_register') }} ">
-                                <input class="btn btn-lg bouton-signin" id="_submit" name="_submit" type="submit" value="S'inscrire" style="line-height:14px">
+                                <input class="btn btn-lg bouton-signin-fix" id="_submit" name="_submit" type="submit" value="S'inscrire" style="line-height:14px">
                             </a>
+                            <p class="bonne-visite-fixed">Bonne visite :)</p>
                 </div> 
             </div>
         </div>

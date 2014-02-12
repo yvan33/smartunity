@@ -745,8 +745,7 @@ textarea {
 
     font-size: 20px;
     font-family: centrale; 
-    text-align: center;
-       
+    text-align: center;    
 }
 
 .souvenir-de-moi{
@@ -756,10 +755,6 @@ textarea {
     font-size: 13px;
     margin-top: -18px;
     margin-bottom: 150px;
-}
-
-#remember-me {
-	margin-top: 3px;
 }
 
 .bouton-login {
@@ -824,4 +819,104 @@ textarea {
 
 .panel-login{
 	width: 80%;
+}
+
+.panel-title {
+	font-family: centrale;
+	font-size: 2em;
+	margin-top: 10px;
+}
+
+.panel-default>.panel-heading {
+	background: none;
+	border: 0;
+}
+
+.panel-default {
+	background: rgba(250, 250, 250, 0.6);
+	margin-top: 20px;
+}
+
+.bouton-login-fix {
+	position: absolute;
+    top: 53%;
+    left: 25%;
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:18px;
+    text-align:center;
+    width: 155px;
+    height: 35px;
+    border-radius:2px;
+    border: 0;
+}
+
+.bouton-signin-fix {
+	position: absolute;
+    top: 53%;
+    left: 52%;
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:18px;
+    text-align:center;
+    width: 155px;
+    height: 35px;
+    border-radius:2px;
+    border: 0;
+}
+
+.bouton-signin-fix:focus {
+	outline:0;
+}
+
+.bouton-login-fix:focus {
+	outline:0;
+}
+
+
+.souvenir-de-moi-fix {
+    text-align: left;
+    font-family: centrale;
+    font-size: 13px;
+    margin-top: -19px;
+    margin-bottom: 80px;
+}
+
+#remember_me_fix {
+	margin-top: 2px;
+}
+
+.mdp-oublie-fix {
+	margin-top: 0px;
+	margin-left: 310px;
+}
+
+.mdp-oublie-fix a {
+	text-decoration: none;
+	color: #7a7876;
+	font-style: italic;
+}
+
+.mdp-oublie-fix a:hover {
+	color: #7a7876;
+	text-decoration: none;
+	
+.ou-fb-fixed {
+	position: absolute;
+	top: 102px;
+	width: 330px;
+	margin: 0 auto;
+	font-family: centrale;
+	font-size: 11px;
+}
+
+.bonne-visite-fixed {
+	position: absolute;
+	top: 157px;
+	width: 330px;
+	margin: 0 auto;
+	font-family: centrale;
+	font-size: 30px;
 }
