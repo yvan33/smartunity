@@ -78,11 +78,11 @@
                     {% endif %}
                                     {% if reponse.is_certif %}
                     <div class="roww" rel="tooltip" data-original-title="Cette réponse à été certifiée Smart'Solution le {{reponse.date_certification}} .">
-                        <img class="certif-img" src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/>
+                        <img class="certif-img" src="{{ asset('assets/img/certif.png') }}" style="margin-bottom:10px"/>
                     </div>
         {% elseif reponse.is_validated %}
                     <div class="roww" rel="tooltip" data-original-title="Cette réponse à été validée par {{ question.membre.username}} le {{ reponse.date_validation}}.">
-                        <img src="{{ asset('assets/img/check.png') }}"/>
+                        <img src="{{ asset('assets/img/check.png') }}"style="margin-bottom:10px" />
                     </div>
                                     {% endif %}
 
