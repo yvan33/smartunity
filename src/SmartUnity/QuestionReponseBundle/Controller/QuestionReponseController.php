@@ -1141,10 +1141,12 @@ else{
     public function signalerQuestionAction($slug) {
 
         $formSignaler = $this->createFormBuilder()
+                ->setAction($this->generateUrl('smart_unity_question_reponse_signaler_question', array('slug' => $slug)))
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
-         $type="une question"; 
+         
+        $type="une question"; 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
@@ -1156,26 +1158,35 @@ else{
                 $em->persist($question);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_list_of_question'));
+////////SEND MAIL TO SMARTUNITY                
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
-                    'formSignaler' => $formSignaler->createView()));
+                    'formSignaler' => $formSignaler->createView(),
+                    'type'=>$type
+                ));
     }
 
     public function signalerReponseAction($idReponse) {
+
+        $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($idReponse);
+        $questionSlug = $reponse->getQuestion()->getSlug();        
         $formSignaler = $this->createFormBuilder()
+                ->setAction($this->generateUrl('smart_unity_question_reponse_signaler_reponse', array('idReponse' => $idReponse)))
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
-         $type="une réponse";       
+         
+        $type="une réponse";       
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
             if ($formSignaler->isValid()) {
-                $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($idReponse);
+
                 $reponse->setSignaler(true);
-                $questionSlug = $reponse->getQuestion()->getSlug();
+
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse);
