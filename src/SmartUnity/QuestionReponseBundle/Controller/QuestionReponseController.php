@@ -756,18 +756,15 @@ class QuestionReponseController extends Controller {
                     'class' => 'SmartUnityAppBundle:marque',
                     'property' => 'nom',
                     'required' => false,
-                    'empty_value' => 'Choisissez',
                     'empty_data' => NULL))
                 ->add('os', 'entity', array(
                     'class' => 'SmartUnityAppBundle:os',
                     'property' => 'nom',
                     'required' => false,
-                    'empty_value' => 'Choisissez',
                     'empty_data' => NULL))
                 ->add('typeQuestion', 'entity', array(
                     'class' => 'SmartUnityAppBundle:typeQuestion',
                     'property' => 'nom',
-                    'empty_value' => 'Choisissez une option',
                     'required' => false))
                 ->add('remuneration', 'integer', array('attr' => array('min' => $ancienneDotation, 'max' => $dotationMax)))
                 ->add('save', 'submit', array('label' => 'Modifier ma question'))
