@@ -142,30 +142,28 @@ class QuestionReponseController extends Controller {
 
         $finder = $this->container->get('fos_elastica.finder.smartunity.question');
 
-        
-        
+
+
 //Création query principale pour la pagination.        
         $mainQuery = new \Elastica\Query();
         $mainQuery->setSize($nbParPage);
         $mainQuery->setFrom(($page - 1) * $nbParPage);
 //FIN Création query principale pour la pagination.
-        
 //Création de la boolean query et ajout des boosts pour les questions certifiées et validées.        
-        $queryBool= new \Elastica\Query\Bool();
-        $subValidatedQueryTerm =  new \Elastica\Query\Term();
-        $subValidatedQueryTerm ->setTerm('isValidatedQuestion', true, 1);
-        $subCertifiedQueryTerm =  new \Elastica\Query\Term();
-        $subCertifiedQueryTerm ->setTerm('isCertifiedQuestion', true, 2);       
+        $queryBool = new \Elastica\Query\Bool();
+        $subValidatedQueryTerm = new \Elastica\Query\Term();
+        $subValidatedQueryTerm->setTerm('isValidatedQuestion', true, 1);
+        $subCertifiedQueryTerm = new \Elastica\Query\Term();
+        $subCertifiedQueryTerm->setTerm('isCertifiedQuestion', true, 2);
         $queryBool->addShould($subValidatedQueryTerm);
         $queryBool->addShould($subCertifiedQueryTerm);
 //FIN  Création de la boolean query et ajout des boosts pour les questions certifiées et validées. 
-        
-        
+
+
         if ($question == '') {
 
             $subQueryMatchAll = new \Elastica\Query\MatchAll();
             $queryBool->addMust($subQueryMatchAll);
-
         } else {
             $sujetQuery = new \Elastica\Query\Match;
             $sujetQuery->setFieldQuery('sujet', $question);
@@ -176,19 +174,17 @@ class QuestionReponseController extends Controller {
 
             $queryBool->addShould($sujetQuery);
             $queryBool->addShould($descriptionQuery);
-            
         }
         $mainQuery->setQuery($queryBool);
-        
+
         $nbQuestions = count($finder->find($queryBool, 1000000));
         $nbPages = ceil($nbQuestions / $nbParPage);
 
 //        $resultSet = $finder->findHybrid(new Elastica\Query($query->toArray()));
-        
+
         $resultSet = $finder->find($mainQuery);
         $listeQuestions = $this->generateSearchResults($resultSet);
 //        p($listeQuestions);
-
         //Génération de la pagination en statique (si pas de JS)
         $pagination = array();
         if ($page != 1) {
@@ -265,68 +261,66 @@ class QuestionReponseController extends Controller {
 //
 //  
 //Création de la boolean query et ajout des boosts pour les questions certifiées et validées.        
-        $queryBool= new \Elastica\Query\Bool();
-        $subValidatedQueryTerm =  new \Elastica\Query\Term();
-        $subValidatedQueryTerm ->setTerm('isValidatedQuestion', true, 1);
-        $subCertifiedQueryTerm =  new \Elastica\Query\Term();
-        $subCertifiedQueryTerm ->setTerm('isCertifiedQuestion', true, 2);       
+        $queryBool = new \Elastica\Query\Bool();
+        $subValidatedQueryTerm = new \Elastica\Query\Term();
+        $subValidatedQueryTerm->setTerm('isValidatedQuestion', true, 1);
+        $subCertifiedQueryTerm = new \Elastica\Query\Term();
+        $subCertifiedQueryTerm->setTerm('isCertifiedQuestion', true, 2);
         $queryBool->addShould($subValidatedQueryTerm);
         $queryBool->addShould($subCertifiedQueryTerm);
 //FIN  Création de la boolean query et ajout des boosts pour les questions certifiées et validées.         
-    
-        
 //Création de la query quasi générale        
         if (is_null($marque) && is_null($os) && is_null($typeQuestion) && is_null($motCle)) {
             $subQueryMatchAll = new \Elastica\Query\MatchAll();
             $queryBool->addMust($subQueryMatchAll);
         } else {
-                 
-        if (isset($marque)) {
-            $marque = $marque->getNom();
-            $marqueQuery = new \Elastica\Query\Match;
-            $marqueQuery->setFieldQuery('marque.nom', $marque);
-            $nestedMarqueQuery = new \Elastica\Query\Nested;
-            $nestedMarqueQuery->setPath('marque');
-            $nestedMarqueQuery->setQuery($marqueQuery);
-            $queryBool->addMust($nestedMarqueQuery);
+
+            if (isset($marque)) {
+                $marque = $marque->getNom();
+                $marqueQuery = new \Elastica\Query\Match;
+                $marqueQuery->setFieldQuery('marque.nom', $marque);
+                $nestedMarqueQuery = new \Elastica\Query\Nested;
+                $nestedMarqueQuery->setPath('marque');
+                $nestedMarqueQuery->setQuery($marqueQuery);
+                $queryBool->addMust($nestedMarqueQuery);
             }
 
-        if (isset($os)) {
-            $os = $os->getNom();
-            $osQuery = new \Elastica\Query\Match;
-            $osQuery->setFieldQuery('os.nom', $os);
-            $nestedOsQuery = new \Elastica\Query\Nested;
-            $nestedOsQuery->setPath('os');
-            $nestedOsQuery->setQuery($osQuery);
-            $queryBool->addMust($nestedOsQuery);
+            if (isset($os)) {
+                $os = $os->getNom();
+                $osQuery = new \Elastica\Query\Match;
+                $osQuery->setFieldQuery('os.nom', $os);
+                $nestedOsQuery = new \Elastica\Query\Nested;
+                $nestedOsQuery->setPath('os');
+                $nestedOsQuery->setQuery($osQuery);
+                $queryBool->addMust($nestedOsQuery);
+            }
+
+            if (isset($typeQuestion)) {
+                $typeQuestion = $typeQuestion->getNom();
+                $typeQuestionQuery = new \Elastica\Query\Match;
+                $typeQuestionQuery->setFieldQuery('typeQuestion.nom', $typeQuestion);
+                $nestedTypeQuestionQuery = new \Elastica\Query\Nested;
+                $nestedTypeQuestionQuery->setPath('typeQuestion');
+                $nestedTypeQuestionQuery->setQuery($typeQuestionQuery);
+                $queryBool->addMust($nestedTypeQuestionQuery);
+            }
+
+            if (isset($motCle)) {
+                $sujetQuery = new \Elastica\Query\Match;
+                $sujetQuery->setFieldQuery('sujet', $motCle);
+                $descriptionQuery = new \Elastica\Query\Match;
+                $descriptionQuery->setFieldQuery('description', $motCle);
+                $queryBool->addShould($sujetQuery);
+                $queryBool->addShould($descriptionQuery);
+            }
         }
 
-        if (isset($typeQuestion)) {
-            $typeQuestion = $typeQuestion->getNom();
-            $typeQuestionQuery = new \Elastica\Query\Match;
-            $typeQuestionQuery->setFieldQuery('typeQuestion.nom', $typeQuestion);
-            $nestedTypeQuestionQuery = new \Elastica\Query\Nested;
-            $nestedTypeQuestionQuery->setPath('typeQuestion');
-            $nestedTypeQuestionQuery->setQuery($typeQuestionQuery);
-            $queryBool->addMust($nestedTypeQuestionQuery);
-        }
-
-        if (isset($motCle)) {
-            $sujetQuery = new \Elastica\Query\Match;
-            $sujetQuery->setFieldQuery('sujet', $motCle);
-            $descriptionQuery = new \Elastica\Query\Match;
-            $descriptionQuery->setFieldQuery('description', $motCle);
-            $queryBool->addShould($sujetQuery);
-            $queryBool->addShould($descriptionQuery);
-        }            
-        }
-        
         $mainQuery->setQuery($queryBool);
         $nbQuestions = count($finder->find($queryBool, 1000000));
-        $nbPages = ceil($nbQuestions / $nbParPage);       
+        $nbPages = ceil($nbQuestions / $nbParPage);
         $resultSet = $finder->find($mainQuery);
 
-        $listeQuestions = $this->generateSearchResults($resultSet);    
+        $listeQuestions = $this->generateSearchResults($resultSet);
 
 
 //         Génération de la pagination en statique (si pas de JS)
@@ -358,7 +352,7 @@ class QuestionReponseController extends Controller {
                     'formQuestion' => $formQuestion->createView(),
         ));
     }
-       
+
     private function generateSearchResults($resultSet) {
 
         $listeQuestions = array();
@@ -371,68 +365,64 @@ class QuestionReponseController extends Controller {
         foreach ($resultSet as $Question) {
 
 
-                $descriptionBestReponse = null;
-                $auteurBestreponse= null;
-                $dateBestReponse = null;
-                $is_certif_question = false;
-                $is_validated_question = false;
+            $descriptionBestReponse = null;
+            $auteurBestreponse = null;
+            $dateBestReponse = null;
+            $is_certif_question = false;
+            $is_validated_question = false;
 
 
-if ($questionRepository->isQuestionValid($Question->getId())){    
-    foreach($Question->getReponses() as $reponse){
-        if ($reponse->getDateCertification() instanceof \DateTime){
-            $auteurBestreponse = $reponse->getMembre()->getUsername();
-            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
-            $is_certif_question = true;
-            $is_validated_question = true;
-            $descriptionBestReponse = $reponse->getDescription();
-            break;
-        }
-
-        else if($reponse->getDateValidation() instanceof \DateTime ){
-            $auteurBestreponse = $reponse->getMembre()->getUsername();
-            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
-            $is_validated_question = true;
-            $descriptionBestReponse = $reponse->getDescription();
-            break;
-        }
-        // else {
-            // throw new \Exception("Erreur sur une question");
-            // }
-    }
-}
-else{
+            if ($questionRepository->isQuestionValid($Question->getId())) {
+                foreach ($Question->getReponses() as $reponse) {
+                    if ($reponse->getDateCertification() instanceof \DateTime) {
+                        $auteurBestreponse = $reponse->getMembre()->getUsername();
+                        $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+                        $is_certif_question = true;
+                        $is_validated_question = true;
+                        $descriptionBestReponse = $reponse->getDescription();
+                        break;
+                    } else if ($reponse->getDateValidation() instanceof \DateTime) {
+                        $auteurBestreponse = $reponse->getMembre()->getUsername();
+                        $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
+                        $is_validated_question = true;
+                        $descriptionBestReponse = $reponse->getDescription();
+                        break;
+                    }
+                    // else {
+                    // throw new \Exception("Erreur sur une question");
+                    // }
+                }
+            } else {
                 $bestReponse = $reponseRepository->getBestReponse($Question->getId());
-                if ($bestReponse !== false){
-                    foreach($Question->getReponses() as $reponse){
-                        if($reponse->getId() == $bestReponse['repId']){
+                if ($bestReponse !== false) {
+                    foreach ($Question->getReponses() as $reponse) {
+                        if ($reponse->getId() == $bestReponse['repId']) {
                             $descriptionBestReponse = $reponse->getDescription();
                             $auteurBestreponse = $reponse->getMembre()->getUsername();
-                            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i'); 
+                            $dateBestReponse = $reponse->getDate()->format('d-m-Y à H:i');
                             break;
                         }
                     }
                 }
-            }    
-                array_push($listeQuestions, array(
-                	'id'=>$Question->getId(),
-                	'sujet'=>$Question->getSujet(),
-                	'description'=>$Question->getDescription(),
-                	'date'=>$Question->getDate()->format('d-m-Y à H:i'),
-                    'membre_username'=>$Question->getMembre()->getUsername(),
-                    'remuneration'=>$Question->getRemuneration(),
-                    'nb_reponses'=>$Question->getReponses()->count(),
-                    'best_reponse'=>$descriptionBestReponse,
-                    'auteur_best_reponse'=>$auteurBestreponse,
-                    'is_validated_question'=>$is_validated_question,
-                    'is_certif_question'=>$is_certif_question,
-                    'date_best_reponse'=>$dateBestReponse,
-                    'slug'=>$Question->getSlug(),
-                    'count_soutien'=>$Question->getSoutienMembres()->count(),
-                    'soutenue'=>$Question->getSoutienMembres()->contains($this->getUser())
-                ));
-
             }
+            array_push($listeQuestions, array(
+                'id' => $Question->getId(),
+                'sujet' => $Question->getSujet(),
+                'description' => $Question->getDescription(),
+                'date' => $Question->getDate()->format('d-m-Y à H:i'),
+                'membre_username' => $Question->getMembre()->getUsername(),
+                'remuneration' => $Question->getRemuneration(),
+                'nb_reponses' => $Question->getReponses()->count(),
+                'best_reponse' => $descriptionBestReponse,
+                'auteur_best_reponse' => $auteurBestreponse,
+                'is_validated_question' => $is_validated_question,
+                'is_certif_question' => $is_certif_question,
+                'date_best_reponse' => $dateBestReponse,
+                'slug' => $Question->getSlug(),
+                'count_soutien' => $Question->getSoutienMembres()->count(),
+                'soutenue' => $Question->getSoutienMembres()->contains($this->getUser())
+            ));
+        }
         return $listeQuestions;
     }
 
@@ -709,7 +699,7 @@ else{
                     $em->persist($newQuestion);
                     $em->flush();
 
-                    return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug'=>$slug)));
+                    return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
                 }
             }
         }
@@ -855,22 +845,21 @@ else{
                 ->add('valider', 'submit')
                 ->getForm();
 
-                 $user = $this->getUser();
-                $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);    
-                
-        foreach ($question->getReponses() as $reponse) {
-                if ($reponse->getMembre() == $user) {
-      return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'alreadyAnswered' => '1')));
+        $user = $this->getUser();
+        $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
 
-                }
+        foreach ($question->getReponses() as $reponse) {
+            if ($reponse->getMembre() == $user) {
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'alreadyAnswered' => '1')));
             }
-    
+        }
+
         if ($this->getRequest()->getMethod() == 'POST') {
             $formReponse->bind($this->getRequest());
             if ($formReponse->isValid()) {
-                
 
-                
+
+
                 $newReponse->setMembre($user);
 
                 $newReponse->setDate(new \DateTime(date("Y-m-d H:i:s"))); //date locale
@@ -962,14 +951,14 @@ else{
                     $reponse[0]->setDateValidation(new \DateTime(date("Y-m-d H:i:s")));
                     $repondant = $reponse[0]->getMembre();
                     $repondant->setReputation($repondant->getReputation() + 50);
-                    $repondant->setCagnotte($repondant->getCagnotte()+ $question->getRemuneration());
+                    $repondant->setCagnotte($repondant->getCagnotte() + $question->getRemuneration());
                     $question->setIsValidatedQuestion(true);
-                    
+
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($reponse[0]);
                     $em->persist($repondant);
                     $em->persist($question);
-                    
+
                     $em->flush();
 
 
@@ -1013,13 +1002,12 @@ else{
             } else if ($reponse[0]->getDateValidation() == null) { //Si la question n'a pas été validée
                 throw new \Exception('Cette réponse n\'est pas encore validée!');
             } else { //Si tout va bien
-
                 $reponse[0]->setDateCertification(new \DateTime(date("Y-m-d H:i:s")));
                 $repondant = $reponse[0]->getMembre();
                 $repondant->setReputation($repondant->getReputation() + 50);
-                $repondant->setCagnotte($repondant->getCagnotte()+ $question->getRemuneration());                
+                $repondant->setCagnotte($repondant->getCagnotte() + $question->getRemuneration());
                 $question->setIsCertifiedQuestion(true);
-                
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse[0]);
                 $em->persist($repondant);
@@ -1157,8 +1145,8 @@ else{
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
-         
-        $type="une question"; 
+
+        $type = "une question";
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
@@ -1172,26 +1160,40 @@ else{
 
 ////////SEND MAIL TO SMARTUNITY                
 
+                $sujetQuestion = $question->getSujet();
+                $idQuestion = $question->getId();
+                $sujetMail = "Question numéro :".$idQuestion . " signalée ";
+                $expediteurMail = "ne-pas-repondre@smartunity.fr";
+                $contenu = "La question suivante à été signalée : " .$sujetQuestion. "Son id est le : ". $idQuestion;
+                $message = \Swift_Message::newInstance()
+                        ->setContentType('text/html')
+                        ->setSubject($sujetMail)
+                        ->setFrom($expediteurMail)
+                        ->setTo("contact@smartunity.fr")
+                        ->setBody($contenu);
+                $this->get('mailer')->send($message);
+                p('mail Evoyé');
+
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
                     'formSignaler' => $formSignaler->createView(),
-                    'type'=>$type
-                ));
+                    'type' => $type
+        ));
     }
 
     public function signalerReponseAction($idReponse) {
 
         $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($idReponse);
-        $questionSlug = $reponse->getQuestion()->getSlug();        
+        $questionSlug = $reponse->getQuestion()->getSlug();
         $formSignaler = $this->createFormBuilder()
                 ->setAction($this->generateUrl('smart_unity_question_reponse_signaler_reponse', array('idReponse' => $idReponse)))
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
-         
-        $type="une réponse";       
+
+        $type = "une réponse";
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
@@ -1209,7 +1211,7 @@ else{
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
                     'formSignaler' => $formSignaler->createView(),
-                    'type'=>$type));
+                    'type' => $type));
     }
 
     public function signalerCommentaireQuestionAction($idCommentaireQuestion) {
@@ -1217,7 +1219,7 @@ else{
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
-        $type="un commentaire"; 
+        $type = "un commentaire";
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
@@ -1242,7 +1244,7 @@ else{
                 ->add('motif', 'textarea')
                 ->add('Signaler', 'submit')
                 ->getForm();
-        $type="un commentaire"; 
+        $type = "un commentaire";
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
