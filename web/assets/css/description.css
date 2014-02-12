@@ -14,3 +14,14 @@
 	font-family: centrale;
 	margin-top: 0px;
 }
+
+.contenu-comment {
+	font-family: centrale;
+	margin-left: 70px;
+	margin-right: 70px;
+}
+
+.contenu-comment h2 {
+	font-family: centrale;
+	font-size: 1.8em;
+}
