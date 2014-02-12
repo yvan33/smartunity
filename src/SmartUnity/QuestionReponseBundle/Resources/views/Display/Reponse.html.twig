@@ -1,6 +1,6 @@
 {% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
 
-{% block title %}Resultats de la recherche{% endblock %}
+{% block title %}Question - {{ question.sujet }}{% endblock %}
 
 {% block stylesheets %}
 <link href="{{ asset('assets/css/reponse.css') }}" rel="stylesheet" type="text/css">
@@ -221,7 +221,7 @@ Toast
 	        {{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'class': 'form-control forminfo reponse-input'}}) }}</div>
                                     	    {{form_widget(formReponse._token)}}
                                     <div class="row">
-                                        <div class="cent-h">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
+                                        <div class="cent-h send-answer">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
                                     </div>
                                 </form>
 {% else %}
@@ -236,7 +236,7 @@ Toast
 	        {{ form_errors(formEditReponse.description) }}{{ form_widget(formEditReponse.description,{'attr': {'class': 'form-control forminfo reponse-input edit-input'}}) }}</div>
                                     	    {{form_widget(formEditReponse._token)}}
                                     <div class="row">
-                                        <div class="cent-h">{{form_widget(formEditReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
+                                        <div class="cent-h send-answer">{{form_widget(formEditReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
                                     </div>
                                 </form>
 {% endif %}

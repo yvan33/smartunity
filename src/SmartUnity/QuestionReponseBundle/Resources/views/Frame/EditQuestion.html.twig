@@ -31,7 +31,7 @@
 	    </div>
 	    <div class="row premiere-ligne" >
 	        <div class="grille-1">{{ form_label(formEditQuestion.sujet) }}</div>
-	        <div class="grille-2 text-area">{{ form_errors(formEditQuestion.sujet) }}{{ form_widget(formEditQuestion.sujet) }}</div>
+	        <div class="grille-2 text-area">{{ form_errors(formEditQuestion.sujet) }}{{ form_widget(formEditQuestion.sujet, { 'attr': {'class': 'text-subject'}}) }}</div>
 	    </div>
 	    <div class="row">
 	        <div class="grille-1">{{ form_label(formEditQuestion.description) }}</div>
