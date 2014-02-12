@@ -11,27 +11,37 @@
         <div class="text-center cookie-title"><h1>Comment ça marche ?</h1></div>
         <div class="contenu-comment">
 			<h2 class="title-comment">Le principe de Smart'Unity</h2>
-			<p>Smart'Unity est une plateforme communautaire en ligne d'entraide à l'utilisation des smartphones. Que vous recontriez des problèmes avec votre terminal ou que vous puissiez apporter aux autres vos connaissances, Smart'Unity est fait pour vous !<br/>Que ce soit un problème sur le matériel, sur le logiciel, sur les applications installées ou même sur le choix d'un terminal, toutes les questions en rapport avec le monde des smartphones sont acceptées sur Smart'Unity !</p>
+			<p>Smart'Unity est une plateforme communautaire en ligne d'entraide à l'utilisation des smartphones. Que vous rencontriez des problèmes avec votre terminal ou que vous puissiez apporter aux autres vos connaissances, Smart'Unity est fait pour vous !<br/>Que ce soit un problème sur le matériel, sur le logiciel, sur les applications installées ou même sur le choix d'un terminal, toutes les questions en rapport avec le monde des smartphones sont acceptées sur Smart'Unity !</p>
 			
 			<h3 class="title-comment text-center">Les Questions/Réponses, un système qui en vaut la peine.</h3>
 			<p>Trouver une information dans la jungle que représente le web est bien souvent une difficulté insurmontable... C'est pourquoi nous avons décidé de mettre en place le système des Questions/Réponses agrémenté d'un système de valorisation sous forme de points (et de cadeaux...).</p>
 			
 			<h2 class="title-comment">Le fonctionnement de Smart'Unity</h2>
-			<h3 class="title-comment text-center">Demander/Répondre</h3>
-			<p>La consultation de la totalité des questions et réponses du site est totalement libre et ne demande pas d'être inscrit. Après vous être gratuitement inscrit(e), vous pouvez demander ou répondre grâce à la barre de recherche (passez la souris sur l'image) :</p>
+			
+			<h3 class="title-comment text-center">1) Inscription</h3>
+			<img class="sign-in-logo" src="{{ asset('assets/img/logo-checkemail.png') }}"/>
+			<p>Après votre <a href="{{ path('fos_user_registration_register') }}">inscription</a>, vous recevez 50 points qui constitue le début de votre "cagnotte" ! Ces points sont utilisables pour valoriser une question (la votre ou celle d'un autre membre) et sont convertibles en cadeaux !</p>
+			
+			
+			<h3 class="title-comment text-center">2) Faire une recherche</h3>
+			<p>La consultation de la totalité des questions et réponses du site est totalement libre et ne demande pas d'être inscrit. Après vous être gratuitement inscrit(e), vous pouvez effectuer une recherche sur le site grâce à la barre de recherche (passez la souris sur l'image) :</p>
 			
 			<div class="dem-rep">
 				<img class="dem-howto" onmouseover="HideDem(this);" src="{{ asset('assets/img/quest-howto.png') }}"/>
 				<img class="rep-howto" onmouseout="DisplayDem(this);" src="{{ asset('assets/img/repondre-howto.png') }}"/>
 			</div>
+			<p>Avant de poser une question, il est impératif d'utiliser cette barre de recherche pour être sûr que le sujet n'a pas déjà été abordé !</p>
 			
-			<h3 class="title-comment text-center">Fonctionnalités</h3>
-			<h4><span class="glyphicon glyphicon-ok"></span>Mise en avant des meilleures réponses !</h4>
+			<h3 class="title-comment text-center">3) Poser une question</h3>
+			<p>Vous pouvez poser autant de question que vous le désirez (en respectant les conditions générales d'utilisation du site). Il est possible d'attribuer des points de votre cagnotte pour la rendre plus attractive
+			
+			<h2 class="title-comment">Fonctionnalités</h2>
+			<h4><span class="glyphicon glyphicon-ok"></span>Mise en avant des meilleures réponses</h4>
 			<p class="prec-img">Chaque réponse peut être votée par les membres de la communauté grâce aux flèches suivantes :</p>
 			<img class="up-down" src="{{ asset('assets/img/up-down.png') }}"/>
 			<p>Pour chaque question, les meilleures réponses peuvent ensuite être affichées en haut de la liste pour ainsi avoir un bon aperçu du contenu intéressant.</p>
 
-			<h4 class="second-title"><span class="glyphicon glyphicon-ok"></span>Validation et certification de la meilleure réponse !</h4>
+			<h4 class="second-title"><span class="glyphicon glyphicon-ok"></span>Validation et certification de la meilleure réponse</h4>
 			
 				<div class="div-valid-1">
 					<h5 class="text-center">Validation</h5>
@@ -46,7 +56,12 @@
 				</div>
 			
 			<h4 class="trois-title"><span class="glyphicon glyphicon-ok"></span>Soutien d'une question</h4>
-			
+			<img class="soutien-img" src="{{ asset('assets/img/soutien.png') }}"/>
+			<p>Si vous trouvez une question correspondant à l'un de vos critères de recherche, vous pouvez la soutenir en cliquant sur la croix verte ci-contre. Deux options sont alors possibles : 
+				<ul> 
+					<li>Vous pouvez simplement soutenir la question. Vous serez ainsi notifié si une réponse est validée.</li> 
+					<li>Vous pouvez également revaloriser la dotation de la questionen rajoutant des points de votre cagnotte personnelle pour rendre la question plus attractive.</li> 
+				</ul> 
         </div>
               
       
