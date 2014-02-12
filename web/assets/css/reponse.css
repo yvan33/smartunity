@@ -611,9 +611,13 @@ input
     /*overflow: hidden;*/
 }
 
-.reponse-input{
-
-    resize:vertical;
+textarea.reponse-input {
+	height: 150px;
+	margin-left: 2.8%;
+	margin-right: 2.8%;
+	width: 94.4%;
+	margin-top: 10px;
+    resize: vertical;
 }
 
 .row-avec-margin{
@@ -626,7 +630,7 @@ input
 }
 
 .espace-vide-pour-cadre-repondre{
-    height: 150px;
+    height: 200px;
     display: none;
 }
 
@@ -758,4 +762,13 @@ margin: 20% auto;
 .questionModifiée {
     font-style:italic;
     font-weight:bold
+}
+
+.head-blue .glyphicon:hover {
+	color: #333;
+}
+
+.send-answer {
+	margin-top: 10px;
+	margin-bottom : 20px;
 }
