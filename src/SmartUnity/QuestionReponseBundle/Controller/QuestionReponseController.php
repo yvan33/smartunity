@@ -436,7 +436,7 @@ else{
         return $listeQuestions;
     }
 
-    public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion, $haveEditedReponse) {
+    public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion, $haveEditedReponse, $alreadyAnswered) {
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -613,6 +613,7 @@ else{
                     'haveAddedAnswer' => $haveAddedAnswer,
                     'haveEditedQuestion' => $haveEditedQuestion,
                     'haveEditedReponse' => $haveEditedReponse,
+                    'alreadyAnswered' => $alreadyAnswered,
                     'is_answered_by_user' => $isAnswered,
                     'isup' => $isup_rep,
                     'isdown' => $isdown_rep
@@ -854,10 +855,22 @@ else{
                 ->add('valider', 'submit')
                 ->getForm();
 
+                 $user = $this->getUser();
+                $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);    
+                
+        foreach ($question->getReponses() as $reponse) {
+                if ($reponse->getMembre() == $user) {
+      return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'alreadyAnswered' => '1')));
+
+                }
+            }
+    
         if ($this->getRequest()->getMethod() == 'POST') {
             $formReponse->bind($this->getRequest());
             if ($formReponse->isValid()) {
-                $user = $this->getUser();
+                
+
+                
                 $newReponse->setMembre($user);
 
                 $newReponse->setDate(new \DateTime(date("Y-m-d H:i:s"))); //date locale
@@ -865,7 +878,6 @@ else{
                 $newReponse->setDateValidation(NULL);
                 $newReponse->setDateCertification(NULL);
 
-                $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
                 $newReponse->SetQuestion($question);
                 $newReponse->setSignaler(false);
 

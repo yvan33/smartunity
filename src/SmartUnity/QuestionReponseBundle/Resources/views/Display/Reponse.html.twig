@@ -184,6 +184,9 @@ Toast
 <div class="toast"> Votre réponse a bien été modifiée </div>
  {% endif%}
 
+{% if alreadyAnswered == 1 %}
+<div class="toast"> Vous avez déjà répondu à cette question! Vous pouvez seulement modifier votre réponse. </div>
+ {% endif%}
 
 </div>
 </div>
