@@ -881,6 +881,7 @@ class QuestionReponseController extends Controller {
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
+                                ->setFrom("contact@smartunity.fr")
                                 ->setTo($mailMembreReponse)
                                 ->setBody($contenu);
                         $this->get('mailer')->send($message);
