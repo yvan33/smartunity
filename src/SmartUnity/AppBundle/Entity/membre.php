@@ -62,7 +62,7 @@ class membre extends BaseUser {
      *
      * @ORM\Column(name="cagnotte", type="integer")
      */
-    private $cagnotte = 0;
+    private $cagnotte = 50;
 
     /**
      * @var integer
