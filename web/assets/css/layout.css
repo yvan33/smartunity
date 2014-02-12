@@ -799,6 +799,10 @@ body.bg
     border: 0;
 }
 
+.bouton-signin:focus {
+	outline:0;
+}
+
 .ou-fb {
 	position: absolute;
 	top: 182px;
