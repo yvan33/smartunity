@@ -1,5 +1,5 @@
 <div style="position:relative;">
-    <div class="grille-reponse{% if reponse.is_certif or reponse.is_validated %}-smart{% endif %}" onmouseover="displaySignalerReponse(this);" onmouseout="hideSignalerReponse(this);">
+    <div class="grille-reponse{% if reponse.is_certif or reponse.is_validated %}-smart{% endif %}" {% if not reponse.is_certif %}onmouseover="displaySignalerReponse(this);" onmouseout="hideSignalerReponse(this);"{% endif %}>
         <div class="bouton-signaler">
             {% if is_granted('ROLE_USER') %}<a href="{{path('smart_unity_question_reponse_signaler_reponse', {idReponse: reponse.id})}}"><img class= "signaler-comment" title="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>  
             {% endif %}    

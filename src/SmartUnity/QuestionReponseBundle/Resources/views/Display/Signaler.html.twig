@@ -33,6 +33,7 @@
         <div style="margin-top: 20px;" class="row">
             <div class="grille-1">Motif :<span style="color: red;"> *</span></div>
             <div class="grille-2">{{form_widget(formSignaler.motif, { 'attr': {'class': 'form-textarea textarea-register'} })}}</div>
+            {{form_widget(formSignaler._token) }}
             <div class="cent-h bouton-bas-block">
                 <button type="submit" style="margin-top: 20px;" class="bouton-envoyer">Envoyer</button></div>
             </div>

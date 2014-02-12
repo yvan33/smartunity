@@ -67,11 +67,11 @@ smart_unity_question_reponse_add_soutien_question:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:addSoutienQuestion }
 
 smart_unity_question_reponse_signaler_question:
-    pattern:  /signaler-question/{slug}/
+    pattern:  /signaler-question/{slug}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerQuestion }
 
 smart_unity_question_reponse_signaler_reponse:
-    pattern:  /signaler-reponse/{idReponse}/
+    pattern:  /signaler-reponse/{idReponse}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:signalerReponse }
     requirements:
         idReponse: \d+
