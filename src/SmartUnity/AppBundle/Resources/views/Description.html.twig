@@ -1,6 +1,6 @@
 {% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
 
-{% block title %}Comment ça marche{% endblock %}
+{% block title %}Comment ça marche ?{% endblock %}
 
 {% block stylesheets %}
 <link href="{{ asset('assets/css/description.css') }}"  rel="stylesheet" type="text/css">
@@ -12,8 +12,9 @@ Bonjour {{ app.user.username}}
 {% endif %} </p>  -->
 
 
-        <h1><span>Comment ça marche ?</span></h1>
-        <div class="row">
+        <div class="text-center cookie-title"><h1>Comment ça marche ?</h1></div>
+        <div class="row contenu-description">
+            
             <div class="span3">
                 <ul class="nav">
                     <li><a class="active" href="/fr/comment-ca-marche">Comment ça marche</a></li>
@@ -25,6 +26,7 @@ Bonjour {{ app.user.username}}
                     <li><a href="/fr/nous-contacter">Contactez-nous</a></li>
                 </ul>
             </div>
+            
             <div class="span9">
                 <div class="box howdoesitwork">
                     <h2 class="heading">Leetchi c'est quoi ?</h2>

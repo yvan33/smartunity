@@ -5,6 +5,12 @@
     src : url(../fonts/Centrale.ttf);
 }
 
-.cadre-general {
-	margin: 20px 0;
+
+.contenu-description {
+	margin: 0 20px;
+}
+
+.cookie-title h1 {
+	font-family: centrale;
+	margin-top: 0px;
 }
