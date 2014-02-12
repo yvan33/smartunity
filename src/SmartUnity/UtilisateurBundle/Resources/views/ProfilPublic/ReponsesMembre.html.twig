@@ -21,7 +21,7 @@
 
             <!-- nav div menu-->
             <div class="title text-center cookie-title">
-                <h1>Questions auxquelles {{username}} a répondues </h1>
+                <h1>Questions auxquelles {{username}} a répondues</h1>
             </div>
             <div class="col-md-12">            
 
@@ -43,9 +43,11 @@
                           {% if type == 'reponses' %}
 
                               {% if countListe == 0 %}
+                        <div class="panel no-question">
                         <br/>
                         <p align="center">Il n'y a aucune question r&eacute;solue</p>
                         <br/>
+                        </div>
                               {% else %}
                                   {% for question in listeQuestions %}
                         <div class="panel panel-default fade in out">
@@ -383,7 +385,7 @@
 
                     //Puis on remplit le nouveau tab
                     if (donnees.length == 0) {
-                        content += '<br/><p align="center">Il n\'y a aucune question à afficher dans cette catégorie</p><br/>';
+                        content += '<div class="panel no-question"><br/><p align="center">Il n\'y a aucune question à afficher dans cette catégorie</p><br/></div>';
                         $('#pages').fadeOut();
                     } else {
                         donnees.forEach(function(pEntry, i) {

@@ -34,7 +34,43 @@
 
         </div>
 
-{# Bloc  Mes Préférences   #}
+    </div>    
+
+    <div class="col-md-6" style="margin-top:20px">
+    
+    <div class="grille-content">
+        {%block activite%}
+            <div class="row text-center ">
+                <h3> Mon activité </h3> 
+            </div>
+            <div class="row premiere-ligne lien-activite ">
+    <a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': app.user.id}) }}">
+                <div class="grille-3">{{ app.user.questions.count}}</div>
+                <div class="grille-4">questions posées</div>  
+    </a>            
+            </div>
+            <div class="row lien-activite">
+    <a href="{{ path('smart_unity_membre_reponses', {'type': 'reponses', 'page': '1', 'id': app.user.id}) }}">
+                <div class="grille-3">{{ app.user.reponses.count}}</div>
+                <div class="grille-4">réponses apportées</div>
+    </a>
+            </div>
+            <div class="row  ">
+                	<div class="grille-3">{{ smartrep}}</div>  
+                <div class="grille-4">Smart'Réponses</div>  
+            </div>
+            <div class="row  ">
+                <div class="grille-3">{{ remuneration }}</div>
+                <div class="grille-4">Points gagnés</div>
+            </div>
+            <div class="row  ">
+                <div class="grille-3">0</div>
+                <div class="grille-4">Cadeaux gagnés</div>
+            </div>
+        {%endblock%}
+        </div>
+        
+        {# Bloc  Mes Préférences   #}
         <div class="grille-content">
             <div class="row text-center ">
                 <h3>Mes préférences</h3> 
@@ -74,9 +110,7 @@
 {% endblock %}
 
         </div>
-    </div>    
 
-    <div class="col-md-6" style="margin-top:20px">
         <div class="grille-content">
             <div class="row text-center ">
                 <h3>Ma communauté</h3> 
@@ -110,39 +144,7 @@
             {{form_end(form_parrainage)}}
         {% endblock %}
         </div>
-        <div class="grille-content">
-        {%block activite%}
-            <div class="row text-center ">
-                <h3> Mon activité </h3> 
-            </div>
-            <div class="row premiere-ligne lien-activite ">
-    <a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': app.user.id}) }}">
-                <div class="grille-3">{{ app.user.questions.count}}</div>
-                <div class="grille-4">questions posées</div>  
-    </a>            
-            </div>
-            <div class="row lien-activite">
-    <a href="{{ path('smart_unity_membre_reponses', {'type': 'reponses', 'page': '1', 'id': app.user.id}) }}">
-                <div class="grille-3">{{ app.user.reponses.count}}</div>
-                <div class="grille-4">réponses apportées</div>
-    </a>
-            </div>
-            <div class="row  ">
-                <div class="grille-3">{{ smartrep}}</div>  
-                <div class="grille-4">Smart'Réponses</div>  
-            </div>
-            <div class="row  ">
-                <div class="grille-3">{{ remuneration }}</div>
-                <div class="grille-4">Points gagnés</div>
-            </div>
-            <div class="row  ">
-                <div class="grille-3">0</div>
-                <div class="grille-4">Cadeaux gagnés</div>
-            </div>
-        {%endblock%}
-        </div>
-    </div>
+     </div>
 </div>
 
         {%endblock%}
-
