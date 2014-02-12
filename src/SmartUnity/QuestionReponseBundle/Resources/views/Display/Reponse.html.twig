@@ -62,7 +62,7 @@
                                     <p style="margin:0px; font-weight:600"><a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}">{{ question.membre.username }}</a></p>
                                     <p style="margin:0px">{{smart_reponses}} Smart'Reponses</p>
                                     <p style="margin:0px">{{nb_questions_membre}} Questions</p>
-                                    <p style="margin:0px">{{question.membre.cagnotte}} Smart'Points</p>
+                                    <p style="margin:0px">{{nb_reponses_membre}} réponses</p>
                                     <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/>
                                     <p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p>
                                 </div>
@@ -765,7 +765,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                                               <p style="margin:0px; font-weight:600"><a href="' + route_vers_profil + '">' + pEntry['membre_username'] + '</a></p> \
                                             <p style="margin:0px">' + pEntry['smart_reponses'] + ' Smart\'Reponses</p> \
                                             <p style="margin:0px">' + pEntry['nb_questions_membre'] + ' Questions</p> \
-                                            <p style="margin:0px">' + pEntry['points_membre'] + ' Smart\'Points</p> \
+                                            <p style="margin:0px">' + pEntry['nb_reponses_membre'] + ' Réponses</p> \
                                             <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/> \
                                                                                         <p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p> \
                                             </div> \

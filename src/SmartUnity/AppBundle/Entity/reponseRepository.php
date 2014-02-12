@@ -66,6 +66,22 @@ class reponseRepository extends EntityRepository
         return $result[0][1];
     }
 
+       public function getNbReponsesForUser($membreId)
+    {
+        $query = $this->_em->createQuery('
+            SELECT COUNT(r.id)
+            FROM
+            SmartUnityAppBundle:reponse r
+            WHERE r.membre = :membreId
+            AND r.signaler = 0
+            ')
+            ->setParameter('membreId', $membreId);
+
+        $result = $query->getScalarResult();
+
+        return $result[0][1];           
+    }
+    
     public function getNbReponses($QuestionId){
          $query = $this->_em->createQuery('
             SELECT COUNT(r.id)

@@ -247,6 +247,7 @@ class AjaxController extends Controller {
 
                 $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
                 $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
+                $nb_reponses_membre = $reponseRepository->getNbReponsesForUser($membre->getId());
                 $avatar = $avatarRepository->find($membre->getId());
 
                 if (isset($avatar)) {
@@ -268,6 +269,7 @@ class AjaxController extends Controller {
                     'is_voted' => $isVoted,
                     'smart_reponses' => (int) $smartReponses,
                     'nb_questions_membre' => (int) $nb_questions_membre,
+                    'nb_reponses_membre' => (int) $nb_reponses_membre,
                     'points_membre' => (int) $membre->getCagnotte(),
                     'avatar' => $avatar,
                     'date_validation' => $dateValidation,
