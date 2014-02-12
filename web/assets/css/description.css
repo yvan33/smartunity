@@ -5,6 +5,11 @@
     src : url(../fonts/Centrale.ttf);
 }
 
+.cadre-general {
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
 
 .contenu-description {
 	margin: 0 20px;
@@ -17,11 +22,22 @@
 
 .contenu-comment {
 	font-family: centrale;
-	margin-left: 70px;
-	margin-right: 70px;
+}
+
+.title-comment {
+	font-family: centrale;
 }
 
 .contenu-comment h2 {
-	font-family: centrale;
 	font-size: 1.8em;
+	color: #559aa9;
 }
+
+.contenu-comment h3 {
+	font-size: 1.3em;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-style: italic;
+	color: #e37151;
+}
+
