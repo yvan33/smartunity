@@ -362,7 +362,6 @@ textarea {
     font-size: 20pt;
 }
 
-
 .connection
 {
     position: absolute;
@@ -399,48 +398,6 @@ textarea {
     margin-top:-13px;
     margin-left: auto;
     margin-right: auto;
-}
-.bouton-login {
-	position: absolute;
-    top: 54%;
-    left: 9%;
-    background-color: #e37151;
-    color:#FFF;
-    font-family: centrale;
-    font-size:18px;
-    text-align:center;
-    width: 155px;
-    height:35px;
-    border-radius:2px;
-    border: 0;
-}
-
-.bouton-signin {
-	position: absolute;
-    top: 54%;
-    left: 52%;
-    background-color: #e37151;
-    color:#FFF;
-    font-family: centrale;
-    font-size:18px;
-    text-align:center;
-    width: 155px;
-    height:35px;
-    border-radius:2px;
-    border: 0;
-}
-
-.ou-fb {
-	position: absolute;
-	top: 185px;
-	width: 330px;
-	margin: 0 auto;
-}
-
-.bouton-fb-log {
-	position: absolute;
-	top: 195px;
-	left: 32%;
 }
 
 .connection-triangle-content
@@ -516,20 +473,6 @@ textarea {
 	cursor: pointer;
 	color: #fff;
 }
-
-.souvenir-de-moi{
-
-    text-align: left;
-    font-family: centrale;
-    font-size:13px;
-    margin-top: -18px;
-    margin-bottom: 110px;
-}
-
-#remember-me {
-	margin-top: -2px;
-}
-
 
 #top-barre-recherche
 {
@@ -614,36 +557,36 @@ textarea {
 /////Bloc Listequestions
 
 .tab-ajax > .nav-tabs>li>a:hover {
-background-color: #ffffff;
-color: black;
+	background-color: #ffffff;
+	color: black;
 }
 
 .tab-ajax > .nav>li>a:hover, .nav > li > a:focus {
-background-color: #ffffff;
-color: black;
+	background-color: #ffffff;
+	color: black;
 
 }
 
 .tab-ajax > .nav-tabs>li>a {
-color: #FFF;
-margin-right: 10px;
-line-height: 2.5;
-border: 1px solid transparent;
-border-radius:0;
+	color: #FFF;
+	margin-right: 10px;
+	line-height: 2.5;
+	border: 1px solid transparent;
+	border-radius:0;
 }
 
 .tab-ajax > .nav>li>a {
-position: relative;
-display: block;
-padding: 7px 15px;
+	position: relative;
+	display: block;
+	padding: 7px 15px;
 }
 
 .tab-ajax > .nav-tabs > li.active > a, .tab-ajax > .nav-tabs > li.active > a:hover, .tab-ajax > .nav-tabs > li.active > a:focus {
-color: black;
-cursor: default;
-background-color: #ffffff;
-border-bottom-color: transparent;
-border-top-color: transparent;
+	color: black;
+	cursor: default;
+	background-color: #ffffff;
+	border-bottom-color: transparent;
+	border-top-color: transparent;
 }
 
 #accordion-reponses > .panel, #accordion-onFire > .panel, #accordion-last > .panel {
@@ -652,8 +595,8 @@ border-top-color: transparent;
 }
 
 #accordion-reponses > .panel > .panel-heading, #accordion-onFire > .panel > .panel-heading, #accordion-last > .panel > .panel-heading {
-border-top-right-radius: 0;
-border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
 }
 
 .tab-ajax > .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
@@ -763,6 +706,15 @@ border-top-left-radius: 0;
 	padding-bottom: 0;
 }
 
+.passwd-forgotten a {
+	color: #A4A4A4;
+}
+
+.passwd-forgotten a:hover {
+	text-decoration: none;
+	color: #7a7876;
+}
+
 .solution-tab {
 	margin-left: 10px;
 }
@@ -778,20 +730,11 @@ border-top-left-radius: 0;
 }
 
 .passwd-forgotten {
-	margin-top: -10px;
+	margin-top: -4px;
 	text-align: right;
 	font-style: italic;
 	font-size: 12px;
 	font-family: centrale;
-}
-
-.passwd-forgotten a {
-	color: #A4A4A4;
-}
-
-.passwd-forgotten a:hover {
-	text-decoration: none;
-	color: #7a7876;
 }
 
 .message-js{
@@ -800,4 +743,75 @@ border-top-left-radius: 0;
     font-family: centrale; 
     text-align: center;
        
+}
+
+.souvenir-de-moi{
+
+    text-align: left;
+    font-family: centrale;
+    font-size: 13px;
+    margin-top: -18px;
+    margin-bottom: 150px;
+}
+
+#remember-me {
+	margin-top: 3px;
+}
+
+.bouton-login {
+	position: absolute;
+    top: 47%;
+    left: 9%;
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:18px;
+    text-align:center;
+    width: 155px;
+    height: 35px;
+    border-radius:2px;
+    border: 0;
+}
+
+.bouton-signin {
+	position: absolute;
+    top: 47%;
+    left: 52%;
+    background-color: #e37151;
+    color:#FFF;
+    font-family: centrale;
+    font-size:18px;
+    text-align:center;
+    width: 155px;
+    height: 35px;
+    border-radius:2px;
+    border: 0;
+}
+
+.ou-fb {
+	position: absolute;
+	top: 182px;
+	width: 330px;
+	margin: 0 auto;
+	font-family: centrale;
+	font-size: 11px;
+}
+
+.bouton-fb-log {
+	position: absolute;
+	top: 190px;
+	left: 32%;
+}
+
+.bonne-visite {
+	position: absolute;
+	top: 237px;
+	width: 330px;
+	margin: 0 auto;
+	font-family: centrale;
+	font-size: 20px;
+}
+
+.form-group {
+	margin-bottom: 10px;
 }
