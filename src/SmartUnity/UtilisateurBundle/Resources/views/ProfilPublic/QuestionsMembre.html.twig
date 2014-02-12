@@ -21,7 +21,7 @@
 
             <!-- nav div menu-->
             <div class="title text-center cookie-title">
-                <h1>Questions posées par {{username}} </h1>
+                <h1>Questions posées par {{username}}</h1>
             </div>
 <div class="col-md-12">            
         <div class="grille-content-2">
@@ -362,7 +362,7 @@
 
                     //Puis on remplit le nouveau tab
                     if (donnees.length == 0) {
-                        content += '<br/><p align="center">Il n\'y a aucune question à afficher dans cette catégorie</p><br/>';
+                        content += '<div class="panel no-question"><br/><p align="center">Il n\'y a aucune question à afficher dans cette catégorie</p><br/></div>';
                         $('#pages').fadeOut();
                     } else {
                         donnees.forEach(function(pEntry, i) {

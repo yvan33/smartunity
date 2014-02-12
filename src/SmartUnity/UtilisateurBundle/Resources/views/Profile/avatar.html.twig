@@ -1,6 +1,4 @@
 {% extends "SmartUnityUtilisateurBundle::layout_profil.html.twig" %}
-{% form_theme form_avatar 'SmartUnityUtilisateurBundle:Form:form_mon_compte.html.twig' %}
-
 {% block avatar %}
 
 <div class="edit">
@@ -34,7 +32,7 @@
 </div>
 
 <div class="cent-h bouton-bas-block">
-    <button type="submit" class="btn btn-primary btn-sm">Valider la modification</button>
+    <button type="submit" class="btn bouton-repondre">Valider la modification</button>
 </div> 
 
 {{form_end(form_avatar)}}

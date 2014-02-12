@@ -286,6 +286,10 @@ p {
 
 /* Liste Q/R */
 
+.panel {
+	box-shadow: none;
+}
+
 .panel-group .panel {
 	border-radius: 0;
 	border-left: 1px solid #e8e4dc;
@@ -362,6 +366,8 @@ p {
 
 .no-question {
 	padding-top: 10px;
-	border-left: 1px solid #ddd;
-	border-right: 1px solid #ddd;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border: 1px solid #ddd;
+	border-top: 0;
 }
