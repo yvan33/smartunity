@@ -622,7 +622,37 @@ class QuestionReponseController extends Controller {
         $formQuestion = $this->createFormBuilder($newQuestion)
                 ->add('sujet', 'textarea', array(
                     'required' => true))
-                ->add('description', 'textarea', array(
+                ->add('description', 'ckeditor', array(
+                    'config' => array(
+                        'toolbar' => array(
+                            array(
+                                'name'  => 'basicstyles',
+                                'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
+                                ),
+                            array(
+                                 'name' => 'clipboard',
+                                 'groups' => array('clipboard', 'undo'),
+                                 'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ) ),
+                            array(
+                                'name' => 'paragraph',
+                                'groups' => array('list', 'indent', 'align'),
+                                'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',)),
+                            array(
+                                 'name' => 'links',
+                                  'items' => array('Link', 'Unlink','-', 'Image','Smiley','SpecialChar')
+                                 ),
+                            array(
+                                 'name' => 'styles', 
+                                 'items' => array('Font', 'FontSize'),
+                                 ),
+                            array(
+                                'name' => 'colors',
+                                'items' =>array('TextColor', 'BGColor')
+                                ),
+                         ),
+                        'uiColor' => '#ffffff',
+                        'removePlugins' => 'elementspath'
+                        ),
                     'required' => true))
                 ->add('marque', 'entity', array(
                     'class' => 'SmartUnityAppBundle:marque',
