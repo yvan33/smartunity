@@ -252,6 +252,15 @@ fieldset {
 	max-height: 270px;
 }
 
+.textarea-register {
+	height: 150px;
+	padding: 5px 0;
+	max-height: 270px;
+	width: 500px;
+	border: 1px solid #CCC;
+	border-radius: 3px;
+}
+
 #fos_user_registration_form_info_plus {
 	width: 450px;
 	height: 100px;
