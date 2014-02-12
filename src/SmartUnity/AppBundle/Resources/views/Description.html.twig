@@ -7,7 +7,13 @@
 {% endblock %}
 
 {% block body %}
-
+<div class="menu-ccm">        
+<ul class="nav">
+            <li class="active"><a href="#">Principe</a></li>
+            <li><a href="#">Fonctionnement</a></li>
+            <li><a href="#">Récompenses</a></li>   
+        </ul>
+</div>
         <div class="text-center cookie-title"><h1>Comment ça marche ?</h1></div>
         <div class="contenu-comment">
 			<h2 class="title-comment">Le principe de Smart'Unity</h2>
@@ -49,13 +55,11 @@
 					<p class="prec-img">Si une réponse a solutionné le problème d'un membre, il peut "Valider" cette réponse. Celle-ci sera ensuite collée sous la réponse et le logo ci-dessous apparaitra :</p>
 					<img class="valid" src="{{ asset('assets/img/check.png') }}"/>
 				</div>
-			
 				<div class="div-valid-2">
 					<h5 class="text-center">Certification</h5>
 					<p>Si une réponse déjà validée est réellement pertinente, l'équipe Smart'Unity la certifiera et le logo ci-dessous apparaitra :</p>
 					<img class="valid" src="{{ asset('assets/img/certif.png') }}"/>
 				</div>
-			
 			<h4 class="trois-title"><span class="glyphicon glyphicon-ok"></span>Soutien d'une question</h4>
 			<img class="soutien-img" src="{{ asset('assets/img/soutien.png') }}"/>
 			<p>Si vous trouvez une question correspondant à l'un de vos critères de recherche, vous pouvez la soutenir en cliquant sur la croix verte ci-contre. Deux options sont alors possibles : 
@@ -64,7 +68,6 @@
 					<li>Vous pouvez également revaloriser la dotation de la questionen rajoutant des points de votre cagnotte personnelle pour rendre la question plus attractive.</li> 
 				</ul> 
         </div>
-              
       
 {% endblock %}
  
