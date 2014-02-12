@@ -873,14 +873,13 @@ class QuestionReponseController extends Controller {
                 $membreQuestion = $question->getMembre();
                 $prefRepmembre = $membreQuestion->getPrefRep();
                 $mailMembreQuestion = $membreQuestion->getEmail();
-
                 if ($prefRepmembre == true) {
 
                     //Envoi du mail
-                    $sujetQuestion = $question->getSujet();
-                    $sujetMail = "Réponse à votre question : " . $sujetQuestion . "sur smartunity.fr";
+                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)); 
+                    $sujetMail = "Vous avez une nouvelle réponse!";
                     $expediteurMail = "ne-pas-repondre@smartunity.fr";
-                    $contenu = "";
+                    $contenu = ".$user. a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : .$urlQuestion. ";
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
