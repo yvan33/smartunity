@@ -138,3 +138,43 @@
 .contenu-comment a {
 	cursor: pointer;
 }
+
+.container-ccm {
+    margin-left: 10%;
+    z-index: 100;
+    position: relative;
+}
+.menu-ccm {
+    position: fixed;
+    top : 80px;
+    margin-left: -200px;
+    background-color: #f3f0eb;
+    font-family: centrale;
+    
+}
+
+.nav>li>a {
+    color: black;
+}
+
+@media(max-width: 990px){
+    
+.container-ccm {
+    margin-left: 15%;
+}
+
+}
+
+@media (max-width: 890px){
+.container-ccm {
+    margin-left:auto;
+    position: relative;
+}
+.menu-ccm {
+    position: initial;
+    margin-left: 0;
+    background-color: #f3f0eb;
+    font-family: centrale;
+    
+}
+}
