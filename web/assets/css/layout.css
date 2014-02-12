@@ -831,3 +831,9 @@ body.bg
 .form-group {
 	margin-bottom: 10px;
 }
+
+/* Page login */
+
+.panel-login{
+	width: 80%;
+}
