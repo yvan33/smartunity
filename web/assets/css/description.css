@@ -105,7 +105,16 @@
 	margin-left: 2.5%;
 }
 
+.div-valid-2 h5 {
+	color: #42a692;
+}
+
 .contenu-comment h5 {
 	font-family: centrale;
 	color: #559aa9;
+}
+
+.trois-title {
+	clear: both;
+	margin-top: 30px;
 }
