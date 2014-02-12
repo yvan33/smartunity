@@ -73,6 +73,7 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+    sender_address: ne-pas-repondre@smartunity.fr
 #    transport: gmail
 #    username:  yvan.gadeau@gmail.com
 #    password:  
@@ -88,7 +89,9 @@ fos_user:
             type: smartunity_user_registration
         confirmation:
             enabled:    true
-
+    from_email:
+        address:        ne-pas-repondre@smartunity.fr
+        sender_name:    Smart'Unity
 # FOSElasticaBundle Configuration
 fos_elastica:
     clients:
