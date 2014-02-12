@@ -359,6 +359,14 @@ textarea:focus {
 	margin-bottom: 15px;
 }
 
+hr {
+	background-color: #CCC;
+	border: 0;
+	height: 1px;
+	margin-left: 70px;
+	margin-right: 70px;
+}
+
 /* Poser une question */
 
 .ask-question {
