@@ -699,6 +699,10 @@ body.bg
 	margin-right: -2px;
 }
 
+.modal-header .close:focus {
+	outline: 0;
+}
+
 .modal-header h4
 {
 	font-family: centrale;
