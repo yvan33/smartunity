@@ -15,10 +15,10 @@
                 Votre inscription est effectuée !
             </div>
             <div class="text-center text-checkemail">
-                <p style="font-family: centrale;">{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p><br/>
-                <p style="font-family: centrale;">Il se peut que ce mail soit redirigé dans votre dossier SPAM...</p>
-                <h2 style="font-family: centrale; margin-top: 30px; margin-bottom:0;">Merci d'avoir rejoint la communauté Smart'Unity !</h2><br/>
-                <h3 style="font-family: centrale; margin-top:0px; margin-bottom: 20px;">Pour plus de détails sur le fonctionnement du site, rendez-vous sur la page <a style="color: #CCC; text-decoration: none" href="{{ path('smart_unity_app_descriptionpage') }}">Comment ça marche</a> !</h3>
+                <p class="police-text">{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p><br/>
+                <p class="police-text">Il se peut que ce mail soit redirigé dans votre dossier SPAM...</p>
+                <h2 class="police-text"style=" margin-top: 30px; margin-bottom:0;">Merci d'avoir rejoint la communauté Smart'Unity !</h2><br/>
+                <h3 class="police-text" style="margin-top:0px; margin-bottom: 20px;">Pour plus de détails sur le fonctionnement du site, rendez-vous sur la page <a style="color: #CCC; text-decoration: none" href="{{ path('smart_unity_app_descriptionpage') }}">Comment ça marche</a> !</h3>
                 <img style="width:35%" src="{{asset('assets/img/logo-checkemail.png') }}"></img>
             </div>
         </div>

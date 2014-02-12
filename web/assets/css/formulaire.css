@@ -307,7 +307,7 @@ fieldset {
 }
 
 .description {
-	margin: 0 50px 20px 50px;;
+	margin: 0 50px 20px 50px;
 }
 
 .cookie-title {
@@ -453,7 +453,7 @@ hr {
 
 .chosen-container-active .chosen-single {
 	border: 1px solid #CCC;
-
+}
 .chosen-single:focus {
 	border: 1px solid #CCC;
 }
@@ -507,4 +507,7 @@ abbr {
 
 .bouton-signaler {
 	margin-top: 20px;
+}
+.police-text {
+	font-family:centrale;
 }
