@@ -941,12 +941,18 @@ body.bg
 
 #submit-a-bug {
     position: fixed;
-    right : 0px;
-    top: 50%;
+/*    right : 0px;*/
+    left: 92%;
+    top: 45%;
     -webkit-transform: rotate(90deg);
 -moz-transform: rotate(90deg);
 -ms-transform: rotate(90deg);
 -o-transform: rotate(90deg);
 transform: rotate(90deg);
 
+}
+@media (max-width: 1000px) { 
+#submit-a-bug {
+     display:none;
+}
 }
