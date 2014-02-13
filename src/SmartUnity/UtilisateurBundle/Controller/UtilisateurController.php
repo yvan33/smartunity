@@ -209,15 +209,15 @@ class UtilisateurController extends Controller {
                 $mail = $form->get('email')->getData();
                 $userid = $parrainage->getId();
                 $concat = $mail . $userid;
-                $code = hash('sha256', $concat);
+                $code = sha1($concat);
                 $parrainage->setCode($code);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($parrainage);
                 $em->flush();
                 $url = "http://smartunity.fr/parrainage/" . $code;
-                $contenu="Bonjour,  <br/><br/>".$user->getUsername()."te conseille de découvrir le <a href=\"http://smartunity.fr\">Smart'Unity.fr</a>, une plateforme d'entraide sur l'utilisation des smartphones en te parrainant.<br/>";
+                $contenu="Bonjour,  <br/><br/>".$user->getUsername()." te conseille de découvrir le <a href=\"http://smartunity.fr\">smartunity.fr</a>, une plateforme d'entraide sur l'utilisation des smartphones en te parrainant.<br/>";
                 $contenu.="Ce parrainage te permettra d'augmenter ta cagnotte de 30 points. <br/> Il suffit de s'inscrire à l'adresse suivante: <br/>";
-                $contenu.=$url ."Toute la communauté serait heureuse de t'accueillir. <br/> A bientôt sur Smart'Unity.fr <br/>";
+                $contenu.=$url ."<br/> Toute la communauté serait heureuse de t'accueillir. <br/><br/> A bientôt sur Smart'Unity <br/>";
                 $message = \Swift_Message::newInstance()
                     ->setContentType('text/html')
                     ->setSubject("Offre de parrainage, rejoingez la communauté Smart'Unity")
