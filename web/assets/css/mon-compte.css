@@ -300,3 +300,11 @@ h1
 #form_file:focus {
 	outline: 0;
 }
+
+.cagnotte {
+	float: right;
+}
+
+.cagnotte img {
+	width: 90%;
+}
