@@ -303,8 +303,29 @@ h1
 
 .cagnotte {
 	float: right;
+	position: absolute;
+	top: 7%;
+	left: 50%;
 }
 
 .cagnotte img {
 	width: 90%;
+}
+
+.nb-pts-cagnotte {
+	color: white;
+	font-family: centrale;
+	font-size: 30px;
+	top: 32%;
+	left: 37%;
+	position: absolute;
+}
+
+.pts-cagnotte {
+	color: white;
+	font-family: centrale;
+	font-size: 18px;
+	top: 55%;
+	left: 40.5%;
+	position: absolute;
 }
