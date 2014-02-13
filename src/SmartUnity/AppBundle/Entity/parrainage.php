@@ -99,9 +99,10 @@ class parrainage
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($user)
     {
         $this->membre = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setMembre($user);
     }
     
     /**

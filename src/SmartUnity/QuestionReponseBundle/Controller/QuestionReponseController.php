@@ -878,7 +878,7 @@ class QuestionReponseController extends Controller {
                     $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)); 
                     $sujetMail = "Vous avez une nouvelle réponse!";
                     $expediteurMail = "ne-pas-repondre@smartunity.fr";
-                    $contenu = ".$user. a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : .$urlQuestion. ";
+                    $contenu = $user. "a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse :" .$urlQuestion;
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
