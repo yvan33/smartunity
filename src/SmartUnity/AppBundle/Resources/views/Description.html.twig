@@ -10,11 +10,13 @@
 
 <div class="menu-ccm">        
 <ul class="nav">
-            <li class="active"><a href="#">Principe</a></li>
-            <li><a href="#">Fonctionnement</a></li>
-            <li><a href="#">Récompenses</a></li>   
+            <li class="active"><a href="#">Smart'Unity</a></li>
+            <li><a href="#fonctionnement">Fonctionnement</a></li>
+            <li><a href="#simplicite">Simplicité</a></li>
+            <li><a href="#cadeaux">Des cadeaux !</a></li>  
         </ul>
 </div>
+
         <div class="text-center cookie-title"><h1>Bienvenue sur Smart'Unity !</h1></div>
 
         <div class="contenu-comment">
@@ -22,10 +24,9 @@
 			<p><b>Smart'Unity</b> est une plateforme communautaire en ligne d'entraide à l'utilisation des smartphones. Que vous rencontriez des problèmes avec votre terminal ou que vous puissiez apporter aux autres vos connaissances, Smart'Unity est fait pour vous !<br/>Que ce soit un problème sur le matériel, sur le logiciel, sur les applications installées ou même sur le choix d'un terminal, toutes les questions en rapport avec le monde des smartphones sont acceptées sur Smart'Unity !</p>
 			
 			<h3 class="title-comment text-center">Les Questions/Réponses, un système qui en vaut la peine.</h3>
-			<p>Trouver une information dans la jungle que représente le web est bien souvent une difficulté insurmontable... C'est pourquoi nous avons décidé de mettre en place le système des Questions/Réponses agrémenté d'un système de valorisation sous forme de points (et de cadeaux...).</p>
+			<p id="fonctionnement">Trouver une information dans la jungle que représente le web est bien souvent une difficulté insurmontable... C'est pourquoi nous avons décidé de mettre en place le système des Questions/Réponses agrémenté d'un système de valorisation sous forme de points (et de cadeaux...).</p>
 			
 			<h2 class="title-comment">Le fonctionnement de Smart'Unity</h2>
-			
 			<h3 class="title-comment text-center">1) Inscription</h3>
 			<img class="sign-in-logo" src="{{ asset('assets/img/logo-checkemail.png') }}"/>
 			<p class="paragraphe">La consultation de la totalité des Questions/Réponses du site Smart'Unity est totalement libre et ne demande pas d'être inscrit.<br/><br/>Néanmoins, pour participer à la communauté, vous devez vous inscrire soit grâce à votre compte Facebook, soit après une inscription plus classique. Tout cela en cliquant sur Connexion.<br/><br/>Cela vous permettra de poser vos questions et d'apporter vos réponses aux autres membres. De nombreuses fonctionnalités sont à venir... :)</p>
@@ -42,7 +43,7 @@
 			<p>Si vous n'avez pas trouvé de solution à votre problème en recherchant dans les questions existantes, vous pouvez poser votre question. Choisissez des mots clés pertients et des catégories adaptées dans le formulaire d'ajout d'une question. Cela maximosera vos chances d'avoir une réponse !</p>
 			
 			<h3 class="title-comment text-center">3.2) Répondre à des questions</h3>
-			<p>La rubrique QUESTIONS/REPONSES du menu comprend tout les sujets abordés par les membres de la communauté. Vous pouvez leur apporter votre expérience en solutionnant leurs problèmes via le bouton Répondre pour filtrer la totalité des messages du site.</p>
+			<p id="simplicite">La rubrique QUESTIONS/REPONSES du menu comprend tout les sujets abordés par les membres de la communauté. Vous pouvez leur apporter votre expérience en solutionnant leurs problèmes via le bouton Répondre pour filtrer la totalité des messages du site.</p>
 			
 			<h2 class="title-comment">Pourquoi est-ce un système efficace ?</h2>
 			<h4><span class="glyphicon glyphicon-ok"></span>Mise en avant des meilleures réponses</h4>
@@ -65,7 +66,8 @@
 			
 			<h4 class="second-title"><span class="glyphicon glyphicon-ok"></span>Chaque membre est évalué par sa réputation</h4>
 			<img class="membre-img" src="{{ asset('assets/img/membre-img.png') }}"/>
-			<p>En participant aux questions et réponses, les membres gagnent en réputation. Ce score représente l’implication, et la pertinence d’un membre sur la communauté, il est inscrit à côté de l’étoile grise.<br/><br/>Vous ferez certainement plus confiance aux réponses d’un membre ayant une forte reputation !<br/><br/>
+			<p>En participant aux questions et réponses, les membres gagnent en réputation. Ce score représente l’implication, et la pertinence d’un membre sur la communauté, il est inscrit à côté de l’étoile grise.<br/><br/></p>
+			<p id="cadeaux">Vous ferez certainement plus confiance aux réponses d’un membre ayant une forte reputation !<br/><br/></p>
 			
 			<h2 class="trois-title title-comment">Qu'est-ce que je gagne à aider les autres ? Des cadeaux !</h2>
 			<h3 class="title-comment text-center">Avec les points, c'est donant-donnant.</h3>
@@ -90,6 +92,11 @@
 					<li>Vous pouvez également revaloriser la dotation de la question en rajoutant des points de votre cagnotte personnelle pour rendre la question plus attractive.</li> 
 				</ul>
 			<img class="points-SU" src="{{ asset('assets/img/points-SU.png') }}"/>
+			
+			<div class="title-go">
+				<h2 class="text-center">Rendez-vous sur la page <a href="{{ path('smart_unity_question_reponse_homepage') }}">Questions/Réponses</a> pour ajouter votre pierre à l'édifice :)</h2>
+			</div>
+			
         </div>
       
 {% endblock %}
