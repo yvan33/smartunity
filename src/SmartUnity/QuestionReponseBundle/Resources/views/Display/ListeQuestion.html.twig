@@ -67,8 +67,8 @@
                                     
                                     <!-- describ question-->
                                     <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p>
-                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                        <div class="grille-2" ><p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:500;">{{question.sujet}}</p>
+                                            <p style="font-size: 12px; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
                                     </a>
                                     <!-- describ question fin-->
                                     
@@ -144,8 +144,8 @@
                                         <!-- rond pts fin-->
                                         <!-- describ question-->
 
-                                        <div class="grille-2" ><p>{{question.sujet}}</p>
-                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                        <div class="grille-2" ><p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:500;">{{question.sujet}}</p>
+                                            <div class="grille-2" ><p style="font-size: 12px; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
 
                                         <!-- describ question fin-->
                                         <!-- nb réponses vues-->
@@ -217,8 +217,8 @@
                                     <!-- rond pts fin-->
                                     <!-- describ question-->
                                     <a data-toggle="collapse" data-parent="#accordion-last" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p>{{question.sujet}}</p>
-                                            <p style="font-weight:200; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                        <div class="grille-2" ><p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:500;">{{question.sujet}}</p>
+                                            <div class="grille-2" ><p style="font-size: 12px; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
                                     </a>
                                     <!-- describ question fin-->
                                     <!-- nb réponses vues-->
@@ -313,8 +313,8 @@
         }
         entity+='</div> \
                                                 <a data-toggle="collapse" data-parent="#accordion-' + type + '" href="#collapse' + type + i + '"> \
-                                                <div class="grille-2" ><p>' + pEntry['sujet'] + '</p> \
-                                                <p style="font-weight:200; font-style:italic">' + pEntry['membre_username'] + ' le ' + pEntry['date'] + '</p> </div></a> \
+                                                <div class="grille-2" ><p style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif; font-weight:500;">' + pEntry['sujet'] + '</p> \
+                                                <p style="font-size: 12px; font-style:italic">' + pEntry['membre_username'] + ' le ' + pEntry['date'] + '</p> </div></a> \
                                                 <div style="overflow:hidden;min-width:100px"> \
                                                 \
                                                 <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
