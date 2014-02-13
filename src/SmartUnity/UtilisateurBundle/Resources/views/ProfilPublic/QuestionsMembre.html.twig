@@ -338,10 +338,7 @@
     }
 
     function MaJPagination() {
-        console.log(type);
-        console.log(nbPages[type]);
         if (nbPages[type] == null) { //Si le tab est vide....
-            console.log('null');
             fixHeight();
             $('#accordion-' + type).fadeOut('fast');
 
@@ -386,7 +383,6 @@
             });
 
         } else {
-            console.log('non null');
 
             fixHeight();
             if (nbPages[type] != 0) {
@@ -459,7 +455,6 @@
 
 
     $(document).ready(function() {
-        console.log('bouffon4');
         //Si JS est activé, on change les href des tabs par les id des content (pour bootstrap auto tabs!)
         $('#onFire-tab').attr('href', '#onFire');
         $('#last-tab').attr('href', '#last');
@@ -482,7 +477,6 @@
 
         nbPages = new Array();
         nbPages[type] = {{ nbPages}};
-console.log(nbPages[type]);
 
 
         //Options du bootStrap Paginator
@@ -516,17 +510,14 @@ console.log(nbPages[type]);
         $('#pages').bootstrapPaginator(options);
         //Gestion de la pagination pour les changement d'onglets
         $('#onFire-tab').click(function() {
-            console.log('clic sur on Fire questions');
             type = 'onFire';
             MaJPagination();
         });
         $('#last-tab').click(function() {
-            console.log('clic sur last questions');
             type = 'last';
             MaJPagination();
         });
         $('#reponses-tab').click(function() {
-            console.log('clic sur solutions');
 
             type = 'reponses';
             MaJPagination();
