@@ -853,7 +853,7 @@ textarea {
 
 .bouton-login-fix {
 	position: absolute;
-    top: 53%;
+    top: 60%;
     left: 25%;
     background-color: #e37151;
     color:#FFF;
@@ -868,7 +868,7 @@ textarea {
 
 .bouton-signin-fix {
 	position: absolute;
-    top: 53%;
+    top: 60%;
     left: 52%;
     background-color: #e37151;
     color:#FFF;
@@ -920,8 +920,8 @@ textarea {
 
 .ou-fb-fixed {
 	position: absolute;
-	top: 102px;
-	width: 330px;
+	top: 242px;
+	width: 440px;
 	margin: 0 auto;
 	font-family: centrale;
 	font-size: 11px;

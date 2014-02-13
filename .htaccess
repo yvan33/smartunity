@@ -1,4 +1,0 @@
-AuthUserFile /var/www/secure/.htpasswd 
-AuthName "Accès sécurisé au site Smartunity" 
-AuthType Basic 
-Require valid-user
