@@ -165,6 +165,21 @@ select, input:active {
 }
 
 /* Registration */
+
+.cgu {
+	border: 1px solid #CCC;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 3px;
+}
+.accept-cgu {
+	font-family: centrale;
+	margin: 0;
+	display: inline;
+	font-size: 16px;
+}
+
 .text-why {
 	margin-bottom: 20px;
 }
