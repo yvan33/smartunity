@@ -260,6 +260,11 @@ Toast
 
 
 <script>
+/////Définition variable User///////////
+      {% if  is_granted('ROLE_USER') %}
+        var userId = {{app.user.id}};
+      {% endif %}
+///////////////////////////////////////
 
 ////////////
 /// VOTES
@@ -607,9 +612,7 @@ Toast
         });
     }
     
-      {% if  is_granted('ROLE_USER') %}
-        var userId = {{app.user.id}};
-      {% endif %}
+
     
     function generateContent(pEntry, i, isup, isdown) {
 
@@ -644,14 +647,17 @@ Toast
     if (pEntry['is_voted']) {
             entity += 'Vous avez déjà noté cette question.';
         }
-    if ( {{app.user.id}} == pEntry['membre_id']) {        
+        {% if is_granted('ROLE_USER') %}
+    if ( userId == pEntry['membre_id']) {        
 entity += 'Vous ne pouvez pas voter pour votre réponse.';
     }
+    {% endif %}
+        
         entity += '"> ';
         
         if (pEntry['id'] == isup)
         {   entity+='<div class="fleche upVote" {% if is_granted('ROLE_USER') %}';
-            if (!pEntry['is_voted'] && {{app.user.id}} !== pEntry['membre_id'])
+            if (!pEntry['is_voted'] && userId !== pEntry['membre_id'])
                 {entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';}
             entity += ' {% endif %}> \
                     <img src="{{ asset('assets/img/fleche_plus.png') }}" />';
@@ -672,7 +678,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
         else        
             { 
                 entity+='<div class="fleche upVote" onmouseover="upVoteHover(this);" onmouseout="upVoteUnhover(this);" {% if is_granted('ROLE_USER') %}';
-            if (!pEntry['is_voted'] && {{app.user.id}} !== pEntry['membre_id'] )
+            if (!pEntry['is_voted'] && userId !== pEntry['membre_id'] )
                 {entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';}
             entity += ' {% endif %}> \
                 <img src="{{ asset('assets/img/fleche_plus_grise.png') }}" />';
@@ -693,7 +699,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
         
         if ( pEntry['id'] == isdown )
         {   entity+='<div class="fleche downVote" {% if is_granted('ROLE_USER') %}';
-            if (!pEntry['is_voted'] && {{app.user.id}} !== pEntry['membre_id'])
+            if (!pEntry['is_voted'] && userId !== pEntry['membre_id'])
                 entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
             entity += ' {% endif %}> \
                                           <img src="{{ asset('assets/img/fleche_moins.png') }}" />';
@@ -715,7 +721,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
         
         else        
          {   entity+='<div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') %}';
-            if (!pEntry['is_voted'] && {{app.user.id}} !== pEntry['membre_id'])
+            if (!pEntry['is_voted'] && {{ is_granted('ROLE_USER') }} && userId !== pEntry['membre_id'])
                 entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
             entity += ' {% endif %}> \
                 <img src="{{ asset('assets/img/fleche_moins_grise.png') }}" />';
