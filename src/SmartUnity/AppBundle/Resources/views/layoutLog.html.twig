@@ -51,7 +51,7 @@
     </head>
     <!-- bg body -->
     <NOSCRIPT> <div class="alert alert-danger message-js">Javascript n'est pas activé sur votre navigateur. Vous devez l'activer pour naviguer correctement sur Smart'Unity.</div></NOSCRIPT>
-    <body class="bg" >
+    <body class="bg">
         
 {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 
@@ -99,6 +99,8 @@
                                     <a href="#" class="dropdown-toggle text-user" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('smart_unity_utilisateur_homepage') }}">Mon compte</a></li>
+                                        <li><a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': app.user.id }) }}">Mes Questions</a></li>
+                                        <li><a href="{{ path('smart_unity_membre_reponses', {'type': 'reponses', 'page': '1', 'id': app.user.id}) }}">Mes Réponses</a></li>
                                         <li><a href="{{ path('smart_unity_app_descriptionpage') }}">Comment ça marche?</a></li>
                                         <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
 
