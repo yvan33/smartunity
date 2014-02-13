@@ -184,9 +184,9 @@ class AccueilController extends Controller {
             $form->handleRequest($request);
             $sujet= $form->get('sujet')->getData();
             $sujetMail = "Message formulaire de contact: " . $sujet;
-            $expediteurMail = $form->get('email')->getData();
+            $expediteurMail = "ne-pas-repondre@smartunity.fr";
             $destinataireMail="contact@smartunity.fr";
-            $contenu = $form->get('message')->getData();
+            $contenu = "Formulaire de contact de:" .$form->get('email')->getData() ."<br/>".$form->get('message')->getData();
             $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
@@ -199,7 +199,7 @@ class AccueilController extends Controller {
 
             $sujet= $form->get('sujet')->getData();
             $sujetMail = "Confirmation contact Smart'Unity";
-            $expediteurMail = "contact@smartunity.fr";
+            $expediteurMail = "ne-pas-repondre@smartunity.fr";
             $destinataireMail =$form->get('email')->getData();
             $contenu = "Bonjour, <br/> votre message : " . $sujet ." nous a bien été envoyé. <br/> Nous vous remercions pour votre demande. <br/> <br/> L'équipe Smart'Unity";
             $message = \Swift_Message::newInstance()
@@ -231,4 +231,68 @@ class AccueilController extends Controller {
         
     }  
     
+    public function formulaireBugAction(Request $request) {
+
+        $template = 'SmartUnityAppBundle::Bug.html.twig';
+
+
+        $form = $this->createFormBuilder()
+        ->add('email', 'email', array(
+            'required' => true))
+        ->add('sujet', 'text', array(
+            'required' => true))
+        ->add('message', 'textarea', array(
+            'required' => true))    
+        ->getForm();
+        $confirmation="";
+        if ($request->getMethod() == 'POST') {  
+            $form->handleRequest($request);
+            $sujet= $form->get('sujet')->getData();
+            $sujetMail = "[Bug]: " . $sujet;
+            $expediteurMail = $form->get('email')->getData();
+            $destinataireMail="ne-pas-repondre@smartunity.fr";
+            $contenu = "Bug signalé par ".$$form->get('email')->getData()."<br/>". $form->get('message')->getData();
+            $message = \Swift_Message::newInstance()
+                        ->setContentType('text/html')
+                        ->setSubject($sujetMail)
+                        ->setFrom($expediteurMail)
+                        ->setTo($destinataireMail)
+                        ->setBody($contenu);
+            $this->get('mailer')->send($message);
+
+            $confirmation="Votre bug a bien été signalé à l'équipe Smart'Unity";
+
+            $sujet= $form->get('sujet')->getData();
+            $sujetMail = "Confirmation contact Smart'Unity";
+            $expediteurMail = "ne-pas-repondre@smartunity.fr";
+            $destinataireMail =$form->get('email')->getData();
+            $contenu = "Bonjour, <br/> Votre bug : " . $sujet ." nous a bien été envoyé. <br/> Nous vous remercions d'avoir signaler ce bug <br/> Nous allons tout mettre en oeuvre pour corriger cela le plus rapidement. <br/> <br/> L'équipe Smart'Unity";
+            $message = \Swift_Message::newInstance()
+                        ->setContentType('text/html')
+                        ->setSubject($sujetMail)
+                        ->setFrom($expediteurMail)
+                        ->setTo("contact@smartunity.fr")
+                        ->setBody($contenu);
+            $this->get('mailer')->send($message);
+        $form = $this->createFormBuilder()
+        ->add('email', 'email', array(
+            'required' => true))
+        ->add('sujet', 'text', array(
+            'required' => true))
+        ->add('message', 'textarea', array(
+            'required' => true))    
+        ->getForm();
+
+            $this->container->get('templating')->renderResponse($template, array(
+            'form_contact'=> $form->createView(),
+            'confirmation'=> $confirmation)
+        );
+
+        }
+        return $this->render($template, array(
+            'form_contact'=> $form->createView(),
+            'confirmation'=> $confirmation)
+        );
+        
+    }  
 }
