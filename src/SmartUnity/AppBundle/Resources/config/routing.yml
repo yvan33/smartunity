@@ -18,3 +18,7 @@ smart_unity_app_contactPage:
     pattern: /Nous-contacter
     defaults: { _controller: SmartUnityAppBundle:Accueil:formulaireContact}
 
+smart_unity_app_bugPage:
+    pattern: /Nous-Signaler-un-bug
+    defaults: { _controller: SmartUnityAppBundle:Accueil:formulaireBug}
+
