@@ -95,7 +95,7 @@
 .valid {
 	display: block;
 	width: 50px;
-	margin: 10px auto;
+	margin: 10px auto 30px auto;
 }
 
 .div-valid {
@@ -127,7 +127,11 @@
 
 .trois-title {
 	clear: both;
-	margin-top: 30px;
+	margin-top: 20px;
+}
+
+.trois-title-p {
+	margin-bottom: 0;
 }
 
 .soutien-img {
@@ -138,7 +142,6 @@
 .contenu-comment a {
 	cursor: pointer;
 }
-
 
 .container-ccm {
     z-index: 100;
@@ -182,4 +185,21 @@
     font-family: centrale;
     
 }
+
+.membre-img {
+	float: left;
+	width: 30%;
+	margin-right: 15px;
+}
+
+.points-SU {
+	width: 20%;
+	display: block;
+	margin: 0 auto 10px auto;
+}
+
+.pts-cadeaux {
+	width: 25%;
+	display: block;
+	margin: -5px auto 0 auto;
 }
