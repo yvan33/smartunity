@@ -1,0 +1,25 @@
+@font-face{
+    font-family : "centrale";
+    src : url(../fonts/Centrale.ttf) format ('truetype');
+    /* pour IE */
+    src : url(../fonts/Centrale.ttf);
+}
+
+body {
+	display: block;
+	margin: 100px auto;
+	width: 700px;
+	font-family: centrale;
+	background-color: ;
+	text-align: center;
+	background-color: #99bbc3;
+	background-image: url(../img/noise2.png);
+}
+
+h2 a {
+	color: grey;
+}
+
+.logo-SU {
+	width: 25%;
+}

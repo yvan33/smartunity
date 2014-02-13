@@ -2,16 +2,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>pff vlà un bug</title>
+        <title>Pfff, v'la un bug...</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}" />
+        <link href="{{ asset('assets/css/error.css') }}" rel="stylesheet" type="text/css">
     </head>
+    
     <body>
-        <h1>Ohhh non !!! Vous avez tout cassé enfin !!</h1>
-        <h2>Voici les insultes de la machine : "{{ status_code }} {{ status_text }}".</h2>
-        <p> Soit vous avez rentré une mauvaise adresse dans la barre d'url, soit il y a un bug sur notre site :( </p>
-        <p> Pour qu'on le corrige au plus vite,vous pouvez cliquer sur le bouton signaler un bug et nous le faire remonte </p>
-        <div>
-            
-        </div>
+        <h1>Ohhh non !!! Vous avez tout cassé...</h1>
+        <h2>Voici les insultes de la machine : "{{ status_code }} {{ status_text }}" !</h2>
+        <p>Non, on plaisante :) Soit vous avez rentré une mauvaise adresse dans la barre d'url, soit il y a un bug sur notre site :( </p>
+        <p>Si c'est le cas, vous pouvez cliquer sur le bouton signaler un bug et nous le faire remonte pour qu'on le corrige au plus vite !</p>
+        <br/>
+        <h2>Retour vers la <a href="href={{ path('smart_unity_app_homepage') }}">page d'accueil</a> de Smart'Unity</h2>
+        <img class="logo-SU" src="{{ asset('assets/img/logo-checkemail.png') }}"/>
     </body>
 </html>
+
 
