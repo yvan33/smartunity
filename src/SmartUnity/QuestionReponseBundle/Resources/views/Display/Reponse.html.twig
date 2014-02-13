@@ -787,7 +787,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                                     </div>{% endif %}';
         });
 
-        entity += '        <div> \
+        entity += '        <div class="bloc-commenter-repondre"> \
                                     <div class="grille-3-btn">';
               
                 {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
