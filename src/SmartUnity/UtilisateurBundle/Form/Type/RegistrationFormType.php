@@ -13,8 +13,12 @@ class RegistrationFormType extends BaseType {
 
 
         $builder
-                ->add('nom')
-                ->add('email', 'email', array('label' => 'Adresse e-mail'))
+                     ->add('nom')
+                    ->add('cgu', 'checkbox', array(
+                    'required' => true,
+                        'mapped' => false,
+                     ))
+        ->add('email', 'email', array('label' => 'Adresse e-mail'))
                 ->add('username', null, array('label' => 'Nom d\'utilisateur'))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
@@ -33,53 +37,18 @@ class RegistrationFormType extends BaseType {
                     'widget' => 'choice',
                     'years' => range(date('Y'), date('Y') - 100),
                     'required' => false,
-                    'format' =>'dd MM yyyy',
+                    'format' => 'dd MM yyyy',
                     'model_timezone' => 'Europe/Paris',
                     'empty_value' => (array('year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'))
-                    
                 ))
-//                ->add('ville', 'text', array(
-//                    'label' => 'Ville',
-//                    'required' => false
-//                    'class' => 'SmartUnityAppBundle:ville',
-//                    'property' => 'nom',
-//                    'query_builder' => function(\Doctrine\ORM\EntityRepository $er) {
-//                                       return $er->createQueryBuilder('u')
-//                                       ->orderBy('u.nom', 'ASC');},
-//                ))
-//                ->add('appareils', 'text', array(
-//                    'type' => 'choice',
-//                    'required' => false,
-//                    'label' => 'Smartphone(s) en possession',
-//                    'options' => array(
-//                        'choices' => $appareil_choices,
-//                    ),
-//                    'allow_add' => true,
-//                    'prototype' => true
-//                ))
-                ->add('telephone','text',array(
-                    'required'=> false,
+                ->add('telephone', 'text', array(
+                    'required' => false,
                     'label' => 'Smartphone'
                 ))
-                ->add('info_plus','textarea',array(
-                    'required'=> false,
+                ->add('info_plus', 'textarea', array(
+                    'required' => false,
                     'label' => 'Un peu plus sur moi'
                 ))
-        
-                // ->add('pref_mp', 'choice', array(
-                //     'label' => 'Recevoir les notifications des messages privés',
-                //     'choices' => array(
-                //         '1' => 'Oui', '0' => 'Non'),
-                //     'expanded' => true,
-                //     'data' => 1
-                // ))
-                // ->add('pref_smartcafe', 'choice', array(
-                //     'label' => 'Recevoir les notifications du Smart\'Café',
-                //     'choices' => array(
-                //         '1' => 'Oui', '0' => 'Non'),
-                //     'expanded' => true,
-                //     'data' => 1
-                // ))
                 ->add('pref_comm', 'choice', array(
                     'label' => 'Recevoir les notifications lorsqu\' un membre a commenté une de mes questions ou réponses',
                     'choices' => array(
@@ -92,7 +61,7 @@ class RegistrationFormType extends BaseType {
                     'choices' => array(
                         '1' => 'Oui', '0' => 'Non'),
                     'expanded' => true,
-                  'data' => 1
+                    'data' => 1
                 ))
                 ->add('pref_repValidee', 'choice', array(
                     'label' => 'Recevoir une notification lorsque mes réponses sont validées',
