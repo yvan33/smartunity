@@ -208,9 +208,7 @@
         <!-- end BODY-->   
 
         <!-- footer --> 
-        <!-- footer separation --> 	
 
-        <!-- footer separation fin --> 
         <div class="foot-sep">
             <div class="container"> 
                 <div class="row footer" >
@@ -230,7 +228,10 @@
                 </div> 
             </div>
         </div>
-
+{#        Fin footer    #}
+        
+ <div id="submit-a-bug"><a href="{{ path( 'smart_unity_app_bugPage') }}" class="btn btn-primary btn-bug">Signaler un bug</a></div>       
+        
 {% block modal %}{% endblock %}
 
      <script>
@@ -354,7 +355,20 @@ var cheminFleur = '{{ asset('assets/img/')}}';
         $('.fleur-active a img').attr('src', cheminFleur + 'logo-su-nb.png');
         
             }
-                                </script>        
+                        
+                                </script> 
+///////Google Analytics/////////
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47425623-1', 'smartunity.fr');
+  ga('send', 'pageview');
+
+</script>
+////////////////////////////////////
         <!-- call Javascript & scripts -->
 {% block callJS %}{% endblock %}
 

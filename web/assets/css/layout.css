@@ -919,7 +919,8 @@ body.bg
 .mdp-oublie-fix a:hover {
 	color: #7a7876;
 	text-decoration: none;
-	
+}
+
 .ou-fb-fixed {
 	position: absolute;
 	top: 102px;
@@ -936,4 +937,16 @@ body.bg
 	margin: 0 auto;
 	font-family: centrale;
 	font-size: 30px;
+}
+
+#submit-a-bug {
+    position: fixed;
+    right : 0px;
+    top: 50%;
+    -webkit-transform: rotate(90deg);
+-moz-transform: rotate(90deg);
+-ms-transform: rotate(90deg);
+-o-transform: rotate(90deg);
+transform: rotate(90deg);
+
 }
