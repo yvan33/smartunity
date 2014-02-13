@@ -5,16 +5,13 @@ namespace SmartUnity\UtilisateurBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use SmartUnity\AppBundle\Entity\avatar;
-use Imagine\Gd\Imagine;
-use Imagine\Image\Box;
-use Imagine\Image\Point;
 use SmartUnity\AppBundle\Entity\parrainage;
-use SmartUnity\AppBundle\Entity\membre;
+
 
 
 class UtilisateurController extends Controller {
 
-    public function indexAction(Request $request, $formPassword = null, $formInfos = null, $formAvatar = null) {
+    public function indexAction( $formPassword = null, $formInfos = null, $formAvatar = null) {
 
         $user = $this->container->get('security.context')->getToken()->getUser();
 
@@ -30,8 +27,6 @@ class UtilisateurController extends Controller {
 
         $userid = $user->getId();
         $smartreponse = $membreRepository->getSmartReponses($userid);
-        $remuneration = 0;
-        $remuneration = $membreRepository->getRemuneration($userid);
         $parrainmembre = $user->getParrain();
         if (isset($parrainmembre)){
         $parrain=$membreRepository->find($parrainmembre)->getUsername();            
@@ -78,7 +73,6 @@ class UtilisateurController extends Controller {
             return $this->render('SmartUnityUtilisateurBundle:ChangePassword:changePassword.html.twig', array(
                         'form_pref' => $form_pref->createView(),
                         'smartrep' => $smartreponse,
-                        'remuneration' => $remuneration,
                         'form_password' => $formPassword,
                         'form_parrainage' => $form_parrainage->createView(),
                         'parrain'=> $parrain
@@ -87,7 +81,6 @@ class UtilisateurController extends Controller {
             return $this->render('SmartUnityUtilisateurBundle:Profile:edit.html.twig', array(
                         'form_pref' => $form_pref->createView(),
                         'smartrep' => $smartreponse,
-                        'remuneration' => $remuneration,
                         'form_infos' => $formInfos,
                         'form_parrainage' => $form_parrainage->createView(),
                         'parrain'=> $parrain
@@ -96,7 +89,6 @@ class UtilisateurController extends Controller {
             return $this->render('SmartUnityUtilisateurBundle:Profile:avatar.html.twig', array(
                         'form_pref' => $form_pref->createView(),
                         'smartrep' => $smartreponse,
-                        'remuneration' => $remuneration,
                         'form_parrainage' => $form_parrainage->createView(),
                         'parrain'=> $parrain,
                         'form_avatar' => $formAvatar,
@@ -107,7 +99,6 @@ class UtilisateurController extends Controller {
             return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
                         'form_pref' => $form_pref->createView(),
                         'smartrep' => $smartreponse,
-                        'remuneration' => $remuneration,
                         'avatar' => $avatar,
                         'form_parrainage' => $form_parrainage->createView(),
                         'parrain'=> $parrain,
