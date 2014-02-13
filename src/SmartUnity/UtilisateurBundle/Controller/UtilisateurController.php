@@ -214,7 +214,6 @@ class UtilisateurController extends Controller {
         if ($request->getMethod() == 'POST') {
             $form = $this->createForm('smartunity_user_parrainage', $parrainage);
             $form->handleRequest($request);
-
             if ($form->isValid()) {
                 $mail = $form->get('email')->getData();
                 $userid = $parrainage->getId();
@@ -225,13 +224,17 @@ class UtilisateurController extends Controller {
                 $em->persist($parrainage);
                 $em->flush();
                 $url = "http://smartunity.fr/parrainage/" . $code;
-                // $message = \Swift_Message::newInstance()
-                //     ->setContentType('text/html')
-                //     ->setSubject("Test")
-                //     ->setFrom("florent@yopmail.com")
-                //     ->setTo($mail)
-                //     ->setBody($url);
-                // $this->get('mailer')->send($message);
+                $contenu="Bonjour,  <br/><br/>".$user->getUsername()."te conseille de découvrir le <a href=\"http://smartunity.fr\">Smart'Unity.fr</a>, une plateforme d'entraide sur l'utilisation des smartphones en te parrainant.<br/>";
+                $contenu.="Ce parrainage te permettra d'augmenter ta cagnotte de 30 points. <br/> Il suffit de s'inscrire à l'adresse suivante: <br/>";
+                $contenu.=$url ."Toute la communauté serait heureuse de t'accueillir. <br/> A bientôt sur Smart'Unity.fr <br/>";
+                $message = \Swift_Message::newInstance()
+                    ->setContentType('text/html')
+                    ->setSubject("Offre de parrainage, rejoingez la communauté Smart'Unity")
+                    ->setFrom("ne-pas-repondre@smartunity.fr")
+                    ->setTo($mail)
+                    ->setBody($contenu);
+                $this->get('mailer')->send($message);
+                
             }
             return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
         }
