@@ -397,8 +397,11 @@ Toast
     });
     
 // Bouton Editer
-   function displayEditFormReponse(e, reponseId, reponseDescription) {
+   function displayEditFormReponse(e) {
     {% if is_granted('ROLE_USER') %}
+            var reponseId = $('#reponseId').val();
+            var reponseDescription = $('#reponseDescription').val();
+                    
         $('.edit-reponse-form').attr('action', function(i, url) {
   return url.replace(url.substr(url.lastIndexOf('/') + 1), reponseId); });
   
@@ -827,7 +830,9 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
     
      {% if is_granted('ROLE_USER')%}
     if (userId == pEntry['membre_id']) {    
-    entity += '         <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this, '+ pEntry['id'] +', \'' + pEntry['description'] + '\')"> \
+    entity += ' <input id="reponseId" type="hidden" value="'+ pEntry['id'] +'" /> \
+                <input id="reponseDescription" type="hidden" value="' + pEntry['description'] + '" /> \
+ <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this)"> \
                                 <div class="bouton-com-rep">Editer</div> \
                             </div>';  
     }
