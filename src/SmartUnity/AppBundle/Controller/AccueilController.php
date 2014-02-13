@@ -182,33 +182,31 @@ class AccueilController extends Controller {
         $confirmation="";
         if ($request->getMethod() == 'POST') {  
             $form->handleRequest($request);
-            $sujet= $form->get('sujet')->getData();
-            $sujetMail = "Message formulaire de contact: " . $sujet;
-            $expediteurMail = "ne-pas-repondre@smartunity.fr";
-            $destinataireMail="contact@smartunity.fr";
-            $contenu = "Formulaire de contact de:" .$form->get('email')->getData() ."<br/>".$form->get('message')->getData();
-            $message = \Swift_Message::newInstance()
+            $sujetForm= $form->get('sujet')->getData();
+            $sujetMail = "Message formulaire de contact: " . $sujetForm;
+            $expediteurUser = $form->get('email')->getData();
+            $contenu = "Formulaire de contact de:" .$expediteurUser ."<br/>".$form->get('message')->getData();
+            $message1 = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
-                        ->setFrom($expediteurMail)
-                        ->setTo($destinataireMail)
+                        ->setFrom($expediteurUser)
+                        ->setTo("contact@smartunity.fr")
                         ->setBody($contenu);
-            $this->get('mailer')->send($message);
+            $this->get('mailer')->send($message1);
 
             $confirmation="Votre message a bien été envoyé à l'équipe Smart'Unity";
 
-            $sujet= $form->get('sujet')->getData();
             $sujetMail = "Confirmation contact Smart'Unity";
-            $expediteurMail = "ne-pas-repondre@smartunity.fr";
             $destinataireMail =$form->get('email')->getData();
-            $contenu = "Bonjour, <br/> votre message : " . $sujet ." nous a bien été envoyé. <br/> Nous vous remercions pour votre demande. <br/> <br/> L'équipe Smart'Unity";
-            $message = \Swift_Message::newInstance()
+            $contenu = "Bonjour, <br/> votre message : " . $sujetForm ." nous a bien été envoyé. <br/> Nous vous remercions pour votre demande et vous répondrons dans les meilleurs délais. <br/> <br/> L'équipe Smart'Unity";
+            $message2 = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
-                        ->setFrom($expediteurMail)
-                        ->setTo("contact@smartunity.fr")
+                        ->setFrom("ne-pas-repondre@smartunity.fr")
+                        ->setTo($destinataireMail)
                         ->setBody($contenu);
-            $this->get('mailer')->send($message);
+            $this->get('mailer')->send($message2);
+            
         $form = $this->createFormBuilder()
         ->add('email', 'email', array(
             'required' => true))
