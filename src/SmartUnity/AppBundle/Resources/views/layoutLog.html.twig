@@ -291,7 +291,7 @@
                 initDisplay();
             });
 
-            function initDisplay() {
+            function initDisplay(event) {
 
 	//Determination de lahauteur minimale d'une page
 var minimumHeightMainContent = $(window).height()-$('.bg').css('padding-top').replace("px", "") - $('.foot-sep').css('margin-top').replace("px", "") - $('.foot-sep').height();
@@ -307,8 +307,6 @@ $(".cadre-general").css('min-height', minimumHeightCadreGeneral);
 
                 if ($(window).width() > 768)
                 {
-
-                            event.stopPropagation();
 
                     //Affichage de la barre de recherche
                     $("#loupe").show();

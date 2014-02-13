@@ -172,7 +172,6 @@
                                     <div class="grille-det">
                                         <p>{{question.description}}</p>
                                     </div>
-
                                                 {% if question.date_best_reponse != '' %}
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
@@ -341,8 +340,7 @@
                                                   <div class="grille-det"> \
                                                         <p>' + pEntry['description'] + '</p> \
                                                 </div>';
-
-        if (pEntry['date_best_reponse'] != '')
+        if (pEntry['date_best_reponse'] != null)
             entity += '<div class="grille-det-content"> \
                                                     <div class="grille-det1"> \
                                                             <p style="margin-bottom: 0;">' + pEntry['auteur_best_reponse'] + '</p> \
