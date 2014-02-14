@@ -118,7 +118,7 @@
                         {% if type=='onFire' %}
                                   {% if countListe == 0 %}
                         <div class="panel no-question">
-                        <p align="center">Il n'y a aucune dernière question</p>
+                        <p align="center">Il n'y a aucune question brûlante</p>
                         </div>
                                   {% else %}
                                     {% for question in listeQuestions %}
@@ -187,9 +187,9 @@
                             {% if type=='last' %}
 
                               {% if countListe == 0 %}
-                        <br/>
+                        <div class="panel no-question">
                         <p align="center">Il n'y a aucune question r&eacute;cente</p>
-                        <br/>
+                        </div>
                               {% else %}
 
                                   {% for question in listelastQuestions %}
@@ -359,7 +359,16 @@
 
                     //Puis on remplit le nouveau tab
                     if (donnees.length == 0) {
-                        content += '<div class="panel no-question"><br/><p align="center">Il n\'y a aucune question à afficher dans cette catégorie</p><br/></div>';
+                        content += '<div class="panel no-question"><p align="center">';
+                            if(type == 'last'){
+                                content+="Il n\'y a aucune question r&eacute;cente</p></div>'";
+                            }
+                            else if(type == 'onFire'){
+                                content+="Il n\'y a aucune question brûlante</p></div>'";
+                            } 
+                            else{
+                                content+="Il n\'y a aucune question résolue</p></div>'";
+                            }
                         $('#pages').fadeOut();
                     } else {
                         donnees.forEach(function(pEntry, i) {
