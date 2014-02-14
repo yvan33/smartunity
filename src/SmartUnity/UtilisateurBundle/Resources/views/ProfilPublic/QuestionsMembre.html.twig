@@ -301,7 +301,7 @@
                                                 <div class="grille-3"><p>' + pEntry['nb_reponses'] + ' réponse';
 
         if (pEntry['nb_reponses'] > 1)
-            entity += 's';
+            {entity += 's';}
 
         entity += '</p></div> \
                                                 <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
@@ -309,9 +309,9 @@
 
 
         if (type == 'reponses')
-            entity += 'Détails';
+            {entity += 'Détails';}
         else
-            entity += 'Répondre';
+            {entity += 'Répondre';}
 
         entity += '</button></a></div>';
         entity += '</h4><div id="collapse' + type + i + '" class="panel-collapse collapse"> \
@@ -332,7 +332,7 @@
 
         entity += '</div> \
                                               </div> \
-                                          </div>';
+                                          </div></div>';
 
         return entity;
     }
