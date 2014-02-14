@@ -325,7 +325,7 @@
                                                 <div class="grille-3"><p>' + pEntry['nb_reponses'] + ' réponse';
 
         if (pEntry['nb_reponses'] > 1)
-            entity += 's';
+            {eeentity += 's';}
 
         entity += '</p></div> \
                                                 <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
@@ -333,9 +333,9 @@
 
 
         if (type == 'reponses')
-            entity += 'Détails';
+            {entity += 'Détails';}
         else
-            entity += 'Répondre';
+            {entity += 'Répondre';}
 
         entity += '</button></a></div>';
         entity += '</h4> \
@@ -346,7 +346,7 @@
                                                 </div>';
 
         if (pEntry['date_best_reponse'] != '')
-            entity += '<div class="grille-det-content"> \
+            {entity += '<div class="grille-det-content"> \
                                                     <div class="grille-det1"> \
                                                             <p>' + pEntry['auteur_best_reponse'] + '</p> \
                                                             <p>' + pEntry['date_best_reponse'] + '</p> \
@@ -355,10 +355,11 @@
                                                         <p>' + pEntry['best_reponse'] + '</p> \
                                                       </div> \
                                                 </div>';
+            }
 
         entity += '</div> \
                                               </div> \
-                                          </div>';
+                                          </div></div>';
 
         return entity;
     }
