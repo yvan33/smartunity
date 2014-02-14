@@ -322,7 +322,7 @@
                                 <a data-toggle="collapse" data-parent="#accordion-' + type + '" href="#collapse' + type + i + '"> \
                                     <div class="grille-2" ><p>' + pEntry['sujet'] + '</p> \
                                         <p style="font-weight:200; font-style:italic">' + pEntry['membre_username'] + ' le ' + pEntry['date'] + '</p> \
-                                    </div>/
+                                    </div> \
                                 </a> \
                                 <div class="grille-3"><p>' + pEntry['nb_reponses'] + ' réponse';
 
@@ -389,7 +389,16 @@
 
                     //Puis on remplit le nouveau tab
                     if (donnees.length == 0) {
-                        content += '<div class="panel no-question"><br/><p align="center">Il n\'y a aucune question à afficher dans cette catégorie</p><br/></div>';
+                        content += '<div class="panel no-question"><p align="center">';
+                            if(type == 'validated'){
+                                content+="Il n\'y a aucune réponse validée </p></div>'";
+                            }
+                            else if(type == 'certified'){
+                                content+="Il n\'y a aucune réponse certifiée</p></div>'";
+                            } 
+                            else{
+                                content+="Il n\'y a aucune réponse dans cette catégorie</p></div>'";
+                            }
                         $('#pages').fadeOut();
                     } else {
                         donnees.forEach(function(pEntry, i) {
