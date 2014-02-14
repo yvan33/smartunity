@@ -321,15 +321,15 @@
 
 
         if (type == 'reponses')
-            entity += 'Détails';
+            {entity += 'Détails';}
         else
-            entity += 'Répondre';
+            {entity += 'Répondre';}
 
         entity += '</button></a></div> \
                                                 <div class="grille-3"><p>' + pEntry['nb_reponses'] + ' réponse';
 
         if (pEntry['nb_reponses'] > 1)
-            entity += 's';
+            {entity += 's';}
 
         entity += '</p></div> \
                                                  \
@@ -341,7 +341,7 @@
                                                         <p>' + pEntry['description'] + '</p> \
                                                 </div>';
         if (pEntry['date_best_reponse'] != null)
-            entity += '<div class="grille-det-content"> \
+            {entity += '<div class="grille-det-content"> \
                                                     <div class="grille-det1"> \
                                                             <p style="margin-bottom: 0;">' + pEntry['auteur_best_reponse'] + '</p> \
                                                             <p style="font-weight: 300; font-style: italic;">' + pEntry['date_best_reponse'] + '</p> \
@@ -349,10 +349,11 @@
                                                         <div class="grille-det2"> \
                                                         <p>' + pEntry['best_reponse'] + '</p> \
                                                       </div> \
-                                                </div>';
+                                                </div>';}
 
         entity += '</div> \
                                               </div> \
+                                          </div>\
                                           </div>';
 
         return entity;
