@@ -181,6 +181,12 @@ textarea {
     background-image: none;
 }
 
+nav.navbar.navbar-inverse.navbar-fixed-top.menu-bg
+{
+	margin-right:0;
+	padding-right:0;
+}
+
 .navbar-inverse .navbar-nav>li>a {
     color: #99bbc3;
     padding-bottom: 0;
@@ -232,6 +238,12 @@ textarea {
     background-color:#2b3a41;
     /*	background-repeat: repeat-x;
             width:100%;*/
+}
+
+body.bg
+{
+	margin-right:0;
+	padding-right:0;
 }
 
 .bg
