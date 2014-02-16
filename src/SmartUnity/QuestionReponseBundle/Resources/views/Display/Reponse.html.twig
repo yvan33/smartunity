@@ -71,16 +71,18 @@
 
                         </div>
                     </div>
-                    <p class="min">{{ question.description }}</p>
+                    
+                    <div class="min">{{ question.description | raw}}</div>
+
                     <div style="float:left;margin-bottom:10px;" >
                               {% if question.marque.nom is defined %}<span class="label label-default">{{question.marque.nom}}</span>{% endif %}
                               {% if question.modele.nom is defined %}<span class="label label-default">{{question.modele.nom}}</span>{% endif %}
                               {% if question.os.nom is defined %}<span class="label label-default">{{question.os.nom}}</span>{% endif %}
                               {% if question.typeQuestion.nom is defined %}<span class="label label-default">{{question.typeQuestion.nom}}</span>{% endif %}
                     </div>
-                    <div>   
+                    <div class="questionModifiée">   
                         {% if question.datemodification is not null %}
-                        <p class="questionModifiée">Modifiée le {{ question.datemodification|date('d-m-Y H:i:s') }} </p>
+                        <p >Modifiée le {{ question.datemodification|date('d-m-Y H:i:s') }} </p>
                         {% endif %}
                     </div>
 
@@ -352,7 +354,7 @@ Toast
 
     
 ////////////////////////////
-///////////hover signaler commenter
+///////////Affichage des boutons signaler
 ////////////////////////////
 
     function displaySignalComment(e) {
