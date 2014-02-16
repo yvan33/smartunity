@@ -15,7 +15,6 @@ $loader->register(true);
 
 require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
-include_once('googleAnalytics/analyticstracking.php');
 
 
 $kernel = new AppKernel('prod', true);
