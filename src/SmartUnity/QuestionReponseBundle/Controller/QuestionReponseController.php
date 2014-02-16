@@ -630,7 +630,7 @@ class QuestionReponseController extends Controller {
                                 'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
                                 ),
                             array(
-                                 'name' => 'clipboard',
+                                 'name' => 'clipboardundo',
                                  'groups' => array('clipboard', 'undo'),
                                  'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ) ),
                             array(
