@@ -765,8 +765,7 @@ margin: 20% auto;
 }
 
 .questionModifiée {
-    font-style:italic;
-    font-weight:bold
+    font-style: italic;
 }
 
 .head-blue .glyphicon:hover {
