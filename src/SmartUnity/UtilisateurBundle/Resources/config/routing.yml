@@ -37,7 +37,7 @@ smart_unity_membre_profil:
 
 smart_unity_utilisateur_confirmparrainage:
     pattern:  /parrainage/{code}
-    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:ConfirmParrainage, code:$code}
+    defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:confirmParrainage}
 
 smart_unity_membre_questions:
     pattern:  /membre/questions/{id}/{type}/{page}

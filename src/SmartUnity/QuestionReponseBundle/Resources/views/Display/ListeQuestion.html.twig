@@ -299,13 +299,15 @@
                                             <div class="panel-heading"> \
                                               <h4 class="panel-title"> \
                                                 <div class="grille-1">';
-        
+ 
+
         if(type == 'reponses'){
-            if (pEntry['certif_best_reponse'] != ''){
+            if (pEntry['is_certif_question'] == true){
                 entity+='<div><img src="{{ asset('assets/img/certif.png') }}"/></div>'; 
             }else{
                 entity+='<div><img src="{{ asset('assets/img/check.png') }}"/></div>'; 
             }
+
         }
         else{
             entity +='<div class="rond-point"><p class="txt-rond" style="font-weight:200;">' + pEntry['remuneration'] + ' pts</p></div>';
@@ -431,7 +433,6 @@
             var content = '';
             if (donnees[0]['page'] == pPage && donnees[0]['type'] == type && donnees[0]['nbParPage'] == nbParPage) {
                 donnees.shift(); //On supprime la ligne de check du JSON
-
                 donnees.forEach(function(pEntry, i) {
                     content += generateContent(pEntry, i);
                 }); //Generation du code

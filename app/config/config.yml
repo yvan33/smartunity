@@ -88,6 +88,10 @@ fos_user:
             type: smartunity_user_registration
         confirmation:
             enabled:    true
+    resetting:
+        form:
+            type: smartunity_user_resetting
+
 
 # FOSElasticaBundle Configuration
 fos_elastica:

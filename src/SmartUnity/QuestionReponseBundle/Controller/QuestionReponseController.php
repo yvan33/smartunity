@@ -184,7 +184,7 @@ class QuestionReponseController extends Controller {
 
         $resultSet = $finder->find($mainQuery);
         $listeQuestions = $this->generateSearchResults($resultSet);
-//        p($listeQuestions);
+
         //Génération de la pagination en statique (si pas de JS)
         $pagination = array();
         if ($page != 1) {
@@ -878,7 +878,8 @@ class QuestionReponseController extends Controller {
                     $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)); 
                     $sujetMail = "Vous avez une nouvelle réponse!";
                     $expediteurMail = "ne-pas-repondre@smartunity.fr";
-                    $contenu = $user. "a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse :" .$urlQuestion;
+
+                    $contenu = $user. "a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : http://smartunity.fr" .$urlQuestion;
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
@@ -948,6 +949,7 @@ class QuestionReponseController extends Controller {
 //Modifs sur la base de données                    
                     $reponse[0]->setDateValidation(new \DateTime(date("Y-m-d H:i:s")));
                     $repondant = $reponse[0]->getMembre();
+
                     $repondant->setReputation($repondant->getReputation() + 50);
                     $repondant->setCagnotte($repondant->getCagnotte() + $question->getRemuneration());
                     $question->setIsValidatedQuestion(true);
@@ -962,16 +964,16 @@ class QuestionReponseController extends Controller {
 
                     $prefRepValideeMembre = $repondant->getPrefRepValidee();
                     $mailMembreReponse = $repondant->getEmail();
-
                     if ($prefRepValideeMembre == true) {
-                        //Envoi du mail
+
+                        //Envoi du mail`
                         $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
-                        $sujetMail = "Votre réponse à la question : " . $sujetQuestion . "sur smartunity.fr a été validée";
-                        $contenu = "";
+                        $sujetMail = "Votre réponse à la question : " . $sujetQuestion . " sur smartunity.fr a été validée";
+                        $contenu = "Bonjour ". $repondant->getUsername() .", <br/> La réponse que vous avez apportée à la question " .$sujetQuestion ." vient d'être validée par " .$reponse[0]->getQuestion()->getMembre().". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de ". $$reponse[0]->getQuestion()->getRemuneration()  ." points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr " ;
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
-                                ->setFrom("contact@smartunity.fr")
+                                ->setFrom("ne-pas-repondre@smartunity.fr")
                                 ->setTo($mailMembreReponse)
                                 ->setBody($contenu);
                         $this->get('mailer')->send($message);
@@ -1019,12 +1021,11 @@ class QuestionReponseController extends Controller {
                     //Envoi du mail
                     $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
                     $sujetMail = "Votre réponse à la question : " . $sujetQuestion . "sur smartunity.fr a été certifiée";
-                    $expediteurMail = "";
-                    $contenu = "";
+                    $contenu = "Bonjour ". $repondant->getUsername() .", <br/> La réponse que vous avez apportée à la question " .$sujetQuestion ." vient d'être certifiée. <br/> Merci pour votre contribution. <br/> La certification de cette réponse vous a permis d'augmenter votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr " ;
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
-                            ->setFrom($expediteurMail)
+                            ->setFrom("ne-pas-repondre@smartunity.fr")
                             ->setTo($mailMembreReponse)
                             ->setBody($contenu);
                     $this->get('mailer')->send($message);
@@ -1159,6 +1160,7 @@ class QuestionReponseController extends Controller {
 
                 $sujetQuestion = $question->getSujet();
                 $idQuestion = $question->getId();
+
                 $sujetMail = "Question numéro :".$idQuestion . " signalée ";
                 $expediteurMail = "ne-pas-repondre@smartunity.fr";
                 $contenu = "La question suivante à été signalée : " .$sujetQuestion. "Son id est le : ". $idQuestion;
@@ -1169,7 +1171,7 @@ class QuestionReponseController extends Controller {
                         ->setTo("contact@smartunity.fr")
                         ->setBody($contenu);
                 $this->get('mailer')->send($message);
-                p('mail Evoyé');
+
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
@@ -1203,6 +1205,18 @@ class QuestionReponseController extends Controller {
                 $em->persist($reponse);
                 $em->flush();
 
+                $descriptionReponse = $reponse->getDescription();
+                $sujetMail = "Réponse numéro :".$idReponse . " signalée ";
+                $expediteurMail = "ne-pas-repondre@smartunity.fr";
+                $contenu = "La réponse suivante à été signalée : " .$descriptionReponse. "Son id est le : ". $idReponse;
+                $message = \Swift_Message::newInstance()
+                        ->setContentType('text/html')
+                        ->setSubject($sujetMail)
+                        ->setFrom($expediteurMail)
+                        ->setTo("contact@smartunity.fr")
+                        ->setBody($contenu);
+                $this->get('mailer')->send($message);
+
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $questionSlug)));
             }
         }
@@ -1229,6 +1243,19 @@ class QuestionReponseController extends Controller {
                 $em->persist($commentaireQuestion);
                 $em->flush();
 
+
+                $sujetQuestion = $commentaireQuestion->getQuestion()->getSujet();
+                $sujetMail = "Commentaire question numéro :".$idCommentaireQuestion . " signalé ";
+                $expediteurMail = "ne-pas-repondre@smartunity.fr";
+                $contenu = "Le commentaire sur la question " .$sujetQuestion. "Son id est le : ". $idCommentaireQuestion;
+                $message = \Swift_Message::newInstance()
+                        ->setContentType('text/html')
+                        ->setSubject($sujetMail)
+                        ->setFrom($expediteurMail)
+                        ->setTo("contact@smartunity.fr")
+                        ->setBody($contenu);
+                $this->get('mailer')->send($message);
+
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $questionSlug)));
             }
         }
@@ -1254,6 +1281,18 @@ class QuestionReponseController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($commentaireReponse);
                 $em->flush();
+
+                $sujetReponse = $commentaireReponse->getReponse()->getDescription();
+                $sujetMail = "Commentaire réponse numéro :". $idCommentaireReponse . " signalé ";
+                $expediteurMail = "ne-pas-repondre@smartunity.fr";
+                $contenu = "Le commentaire sur la réponse " .$sujetReponse. "Son id est le : ". $idCommentaireReponse;
+                $message = \Swift_Message::newInstance()
+                        ->setContentType('text/html')
+                        ->setSubject($sujetMail)
+                        ->setFrom($expediteurMail)
+                        ->setTo("contact@smartunity.fr")
+                        ->setBody($contenu);
+                $this->get('mailer')->send($message);
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $questionSlug)));
             }

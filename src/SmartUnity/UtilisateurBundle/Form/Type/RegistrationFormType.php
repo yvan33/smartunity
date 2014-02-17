@@ -43,7 +43,7 @@ class RegistrationFormType extends BaseType {
                 ))
                 ->add('telephone', 'text', array(
                     'required' => false,
-                    'label' => 'Smartphone'
+                    'label' => 'Modèle de smartphone'
                 ))
                 ->add('info_plus', 'textarea', array(
                     'required' => false,

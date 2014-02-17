@@ -80,9 +80,10 @@
                               {% if question.os.nom is defined %}<span class="label label-default">{{question.os.nom}}</span>{% endif %}
                               {% if question.typeQuestion.nom is defined %}<span class="label label-default">{{question.typeQuestion.nom}}</span>{% endif %}
                     </div>
-                    <div class="questionModifiée">   
+
+                    <div>   
                         {% if question.datemodification is not null %}
-                        <p >Modifiée le {{ question.datemodification|date('d-m-Y H:i:s') }} </p>
+                        <p class="questionModifiée">Modifiée le {{ question.datemodification|date('d-m-Y H:i:s') }} </p>
                         {% endif %}
                     </div>
 
@@ -375,6 +376,7 @@ Toast
     function hideSignalQuestion(e) {
         $(e).children().children().children('img').css('display','none');
     }
+
 
 
 

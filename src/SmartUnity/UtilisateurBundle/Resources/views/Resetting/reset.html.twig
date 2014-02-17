@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
@@ -8,5 +9,45 @@
         <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" /> 
     </div>
 </form>
+=======
+{% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
+
+{% block title %}Choisir un nouveau mot de passe{% endblock %}
+
+{% block stylesheets %} 
+<link href="{{ asset('assets/css/formulaire.css') }}" rel="stylesheet" type="text/css">
+{%endblock%}
+
+{% block fos_user_content %}
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <div class="panneau-bas">
+		<div class="row text-center cookie-title">
+                Choisir votre nouveau mot de passe
+            </div>
+
+			<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+
+                    <div class="grille-1-reinitialisation">
+                         <label class="label-normal police-text" for="username">Nouveau mot de passe</label>
+                         <label class="label-normal police-text" for="username" style="width:250px;" >Confirmation du mot de passe</label>
+                    </div>
+                    
+                    <div class="grille-2-reinitialisation">
+                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control forminfo' }})}}
+                    </div>
+                    <div class="grille-2-reinitialisation">
+                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control forminfo' }})}}
+                    </div>
+                    
+					<div>
+						<input type="submit" class="btn bouton-envoyer" style="margin-top: 20px;" value="Réinitialiser" /> 
+					</div>
+			</form>
+        </div>
+    </div>
+</div>
+>>>>>>> 58610be9ef44f1134887e65c62b51375358e2b95
 
 {% endblock fos_user_content %}

@@ -1,8 +1,20 @@
+<<<<<<< HEAD
 @font-face{
     font-family : "centrale";
     src : url(../fonts/Centrale.ttf) format ('truetype');
     /* pour IE */
     src : url(../fonts/Centrale.ttf);
+=======
+@font-face {
+    font-family: 'Centrale';
+    src: url(../fonts/Centrale.eot);
+    src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
+         url(../fonts/Centrale.woff) format('woff'),
+         url(../fonts/Centrale.ttf) format('truetype'),
+         url(../fonts/Centrale.svg#centrale) format('svg');
+    font-weight: normal;
+    font-style: normal;
+>>>>>>> 58610be9ef44f1134887e65c62b51375358e2b95
 }
 
 .slider {
@@ -192,6 +204,10 @@ input[type="radio"]:checked + .switch--off {
 
 .chosen-container-active .chosen-single {
 	border: 0;
+<<<<<<< HEAD
+=======
+}
+>>>>>>> 58610be9ef44f1134887e65c62b51375358e2b95
 
 .chosen-select:focus {
 	outline: 0;
@@ -209,7 +225,11 @@ input[type="radio"]:checked + .switch--off {
 .chosen-container .chosen-results li.highlighted {
   	color: #fff;
 	background-color: #7b7a7a;
+<<<<<<< HEAD
 	background-image: #7b7a7a;
+=======
+	background-image: none;
+>>>>>>> 58610be9ef44f1134887e65c62b51375358e2b95
 }
 
 .chosen-single abbr {

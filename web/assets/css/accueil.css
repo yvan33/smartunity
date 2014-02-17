@@ -1,10 +1,13 @@
-@font-face{
-    font-family : "centrale";
-    src : url(../fonts/Centrale.ttf) format ('truetype');
-    /* pour IE */
-    src : url(../fonts/Centrale.ttf);
+@font-face {
+    font-family: 'Centrale';
+    src: url(../fonts/Centrale.eot);
+    src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
+         url(../fonts/Centrale.woff) format('woff'),
+         url(../fonts/Centrale.ttf) format('truetype'),
+         url(../fonts/Centrale.svg#centrale) format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
-
 
 
 .grille-1
@@ -173,6 +176,9 @@
 	margin: 145px 0 145px 0;
 	z-index: 2;	
 }
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
 
 .carousel-control.right
 {

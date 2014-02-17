@@ -18,6 +18,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 include_once('googleAnalytics/analyticstracking.php');
 
 
+
 $kernel = new AppKernel('prod', true);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);

@@ -300,22 +300,15 @@
                             <h4 class="panel-title"> \
                                 <div class="grille-1"> \
                                     <div>';
-                                    if (type == 'validated'){
-                                        entity += '<img src="{{ asset('assets/img/check.png') }}"/>';
-                                    }else if (type =='certified'){
-                                        entity += '<img src="{{ asset('assets/img/certif.png') }}"/>';
-                                    }
-                                    else{
 
-                                        if (pEntry['auteur_best_reponse'] == username ){
-                                            if(pEntry['certif_best_reponse'] != ''){
-                                                entity += '<img src="{{ asset('assets/img/certif.png') }}"/>';
-                                            }
-                                            else{
-                                                entity += '<img src="{{ asset('assets/img/check.png') }}"/>';
-                                            }
-                                        }else{
-
+                                    if (pEntry['auteur_best_reponse'] == username ){
+                                        if (pEntry['is_certif_question'] == true){
+                                            entity += '<img src="{{ asset('assets/img/certif.png') }}"/>';
+                                        }else if (pEntry['is_validated_question'] == true){
+                                            entity += '<img src="{{ asset('assets/img/check.png') }}"/>';
+                                        }
+                                        else{
+                                            entity +="";
                                         }
                                     }
                                     entity +='</div></div>  \
@@ -484,6 +477,7 @@
     var nbParPages;
     var options;
     var route;
+    var username;
 
 
 
@@ -507,6 +501,7 @@
         page = new Array();
         route = '{{ route }}';
         page[type] ={{ page }};
+        username ='{{ username}}';
         if (page['validated'] == null)
             page['validated'] = 1;
         if (page['certified'] == null)
