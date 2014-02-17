@@ -54,7 +54,7 @@ class ResettingController extends BaseController
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('fos_user_security_login');
+                    $url = $this->container->get('router')->generate('smart_unity_app_homepage');
                     $response = new RedirectResponse($url);
                 }
 
