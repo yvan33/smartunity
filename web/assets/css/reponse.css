@@ -41,7 +41,8 @@
     }
 
     .min{
-        min-height: 100px
+        margin-bottom: 20px;
+        min-height: 0;
     }
 }
 @media (min-width: 992px)  and (max-width: 1200px) {
