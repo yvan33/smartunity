@@ -1,0 +1,462 @@
+/* Global Styles */
+
+@font-face {
+  font-family: csr; 
+  src: url('../fonts/Centrale.ttf');
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  min-width: 400px;
+}
+
+#menu-toggle {
+  top: 0;
+  right: 0;
+  position: fixed;
+  z-index: 1;
+}
+
+.toggle {
+  margin: 5px 5px 0 0;
+}
+
+.navbar {
+  background-color: black;
+  opacity: 0.6;
+}
+
+.navbar-brand {
+  font-family: neuropol;
+  font-size: 1.5em;
+  margin-left: 20px;
+}
+
+.navbar img {
+	display: none;
+}
+
+/* Full Page Image Header Area */
+
+.header {
+  display: table;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  background-color: #99b8c3; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* Newsletter */
+
+.titre-smartunity{
+	margin-top: 0px;
+	display: inline-block;
+}
+
+.accroche
+{
+	display: inline-block;
+}
+
+.fleur {
+	float: left;
+	padding-top: 60px;
+}
+
+.vert-text {
+  position:inherit;
+  display: table-cell;
+  text-align: center;
+}
+
+.vert-text-desinscription {
+  position:inherit;
+  display: table-cell;
+  text-align: center;
+  padding-top: 10%;
+}
+
+.newsletter {
+  /*position: absolute;*/
+  width: 100%;
+  margin-left: - 50%;
+  /*margin: 150px auto 0 auto;*/
+  /*top: 5%;*/
+  color: white;
+  padding: 50px 10px 10px 10px;
+}
+
+.newsletter h1 {
+  display: inline;
+  font-family: neuropol, Helvetica, Arial, sans-serif;
+  color: white;
+  text-shadow: 2px 2px 1px black;  
+  font-size: 7em;
+
+}
+
+.newsletter h2 {
+  position: relative;
+  top: -14px;
+  left: -33px;
+  font-family: csr;
+  color: white;
+  font-size: 1.15em;  
+  text-align: center;
+  margin-top: 0px;
+  color: rgba(45,45,45,.9);
+  margin-bottom: 10px;
+}
+
+.newsletter .decouvrir{
+
+  margin-bottom:50px;
+}
+
+.newsletter p {
+  font-family: csr;
+  color: white;
+  font-size: 1.4em;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.newsletter .envoyer {
+  margin-left: 10px;
+  height: 35px;
+  font-size: 1.2em;
+  padding-top: 5px;
+}
+
+.newsletter .envoyer:focus {
+	outline: 0;
+}
+
+.newsletter-email
+{
+	margin-top: 40px;
+}
+
+#email 
+{
+  padding-left: 10px;
+  width: 400px;
+  height: 35px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+  border: 1px solid #c1c1c1;
+}
+
+#email:focus {
+  outline: 0px;
+}
+
+::-webkit-input-placeholder {
+   font-style: italic;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   font-style: italic; 
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-style: italic;
+
+}
+
+:-ms-input-placeholder {  
+   font-style: italic;
+}
+#merci{
+  margin-top: 10px;
+  color: #474E5D;
+}
+
+/* Intro */
+
+.intro {
+    padding: 56px 0 14px 0;
+    background: #edebeb;
+    background: -moz-linear-gradient(top,  #edebeb 63%, #c9c9c9 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(63%,#edebeb), color-stop(100%,#c9c9c9));
+    background: -webkit-linear-gradient(top,  #edebeb 63%,#c9c9c9 100%);
+    background: -o-linear-gradient(top,  #edebeb 63%,#c9c9c9 100%);
+    background: -ms-linear-gradient(top,  #edebeb 63%,#c9c9c9 100%);
+    background: linear-gradient(to bottom,  #edebeb 63%,#c9c9c9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#edebeb', endColorstr='#c9c9c9',GradientType=0 );
+    color: #505050;
+}
+
+/* Services */
+
+.services {
+    /*height: 75%;*/
+  background: #29383f;
+  padding: 14px 0 50px 0;
+  color: #ffffff;
+}
+.services h2{
+ font-family: tahoma;
+}
+
+.service-item {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+i.service-icon {
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 56px;
+  width: 140px;
+  height: 140px;
+  line-height: 136px;
+  vertical-align: middle; 
+  text-align: center;
+}
+
+#comment{
+
+  padding-top: 24px;
+}
+
+/* Callout */
+
+.callout {
+  padding: 56px 0 40px 0;
+  color: #ffffff;
+  display: table;
+  height: 100%;
+  width: 100%;
+  background: #cb8c80;
+  /*background: url(../img/callout.jpg) no-repeat center center fixed; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.infographies{
+  position:relative;
+}
+.infographie1{
+  width: 40%;
+  display:inline;
+}
+.infographie2{
+  width: 40%;
+  display:inline;
+}
+.trait-vertical{
+  border-left:1px #ffffff solid; 
+  height:90%; 
+  position:absolute; 
+  left:50.5%; 
+  top:7%;
+}
+/* Suite */
+
+.suite {
+/*height:100%;*/
+  padding: 56px 0 0 0;
+  color: #ffffff;
+  background: #559aa9 ;
+  }
+
+.suite-item {
+    margin-top: 20px;
+  }
+
+ .titre-suite{
+  margin-bottom: 100px;
+ } 
+
+/* Footer */
+
+footer {
+  padding: 80px 0 90px 0;
+}
+
+.top-scroll {
+  margin-top: 50px;
+}
+
+.top-scroll a {
+  text-decoration: none;
+  color: inherit;
+}
+
+i.scroll {
+  color: #333333;
+}
+
+i.scroll:hover {
+  color: #0a5175;
+}
+
+.unite{
+  font-size: 18px;
+
+}
+
+/*
+ *
+ * Template Name: Alissa
+ * Template URI: http://azmind.com
+ * Description: Alissa - Responsive Coming Soon Template
+ * Author: Anli Zaimi
+ * Author URI: http://azmind.com
+ *
+ */
+
+
+/*body {
+    text-align: left;
+    font-family: 'Lato', Arial, sans-serif;
+    color: #555;
+    font-weight: 400;
+
+}*/
+
+strong { font-weight: 700; }
+a:hover { text-decoration: none; }
+
+.logo h1 {
+    margin-top: 7px;
+    padding-left: 50px;
+    font-family: 'Lobster', cursive;
+    font-size: 38px;
+    font-weight: 400;
+    color: #555;
+}
+
+.logo h1 span { color: #e75967; }
+
+.logo a {
+    color: #555;
+    text-decoration: none;
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+.logo a:hover { color: #e75967; }
+
+.call-us {
+    font-size: 18px;
+    text-align: right;
+}
+
+.call-us p {
+    margin-top: 18px;
+    padding-right: 50px;
+}
+
+.call-us p span { color: #888; }
+
+
+/***** Coming Soon *****/
+
+.coming-soon {
+    margin: 40px auto 40px auto;
+    text-align: center;
+    color: #fff;
+}
+
+.coming-soon h2 {
+    font-size: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 1px 7px rgba(0,0,0,.2);
+}
+
+.coming-soon p {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 36px;
+    text-shadow: 1px 1px 1px black;
+}
+
+.timer {
+    margin-top: 20px;
+    text-shadow: 0 1px 5px rgba(0,0,0,.1);
+}
+
+.timer .days-wrapper,
+.timer .hours-wrapper,
+.timer .minutes-wrapper,
+.timer .seconds-wrapper {
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+    margin: 0 10px;
+    padding-top: 20px;
+    background: #2d2d2d; /* browsers that don't support rgba */
+    background: rgba(45,45,45,.7);
+    font-size: 18px;
+    -moz-border-radius: 80px;
+    -webkit-border-radius: 80px;
+    border-radius: 80px;
+    font-family: csr;
+    opacity: 0.9;
+}
+
+.timer .days-wrapper:hover,
+.timer .hours-wrapper:hover,
+.timer .minutes-wrapper:hover,
+.timer .seconds-wrapper:hover {
+    opacity: 0.6;
+    text-shadow: none;
+}
+
+.timer .days,
+.timer .hours,
+.timer .minutes,
+.timer .seconds {
+    font-size: 40px;
+    line-height: 60px;
+}
+
+@media (max-width: 767px) {
+
+    body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .logo h1 {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .call-us {
+        padding-bottom: 7px;
+        text-align: center;
+    }
+
+    .call-us p {
+        padding-right: 0;
+    }
+
+    .inner-bg {
+        padding: 0px 0 10px 0;
+    }
+
+    .coming-soon h2 {
+        font-size: 36px;
+        padding: 0 20px;
+    }
+
+    .coming-soon p {
+        padding: 0 20px;
+    }
+
+}
