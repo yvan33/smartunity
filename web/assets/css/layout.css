@@ -777,6 +777,8 @@ textarea {
     height: 35px;
     border-radius:2px;
     border: 0;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 .bouton-signin {
@@ -792,6 +794,8 @@ textarea {
     height: 35px;
     border-radius:2px;
     border: 0;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 .bouton-signin:focus {
