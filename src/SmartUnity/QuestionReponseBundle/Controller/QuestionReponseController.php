@@ -874,7 +874,7 @@ class QuestionReponseController extends Controller {
                         //Envoi du mail`
                         $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
                         $sujetMail = "Votre réponse à la question : " . $sujetQuestion . " sur smartunity.fr a été validée";
-                        $contenu = "Bonjour ". $repondant->getUsername() .", <br/> La réponse que vous avez apportée à la question " .$sujetQuestion ." vient d'être validée par " .$reponse[0]->getQuestion()->getMembre().". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de ". $$reponse[0]->getQuestion()->getRemuneration()  ." points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr " ;
+                        $contenu = "Bonjour ". $repondant->getUsername() .", <br/> La réponse que vous avez apportée à la question " .$sujetQuestion ." vient d'être validée par " .$reponse[0]->getQuestion()->getMembre().". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de ". $reponse[0]->getQuestion()->getRemuneration()  ." points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr " ;
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
