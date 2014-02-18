@@ -1050,6 +1050,7 @@ class QuestionReponseController extends Controller {
                 ->getForm();
 
         $type = "une question";
+
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
@@ -1062,11 +1063,12 @@ class QuestionReponseController extends Controller {
                 $em->flush();
 
 ////////SEND MAIL TO SMARTUNITY                
-
+                $motif = $formSignaler->get('motif')->getData();
+                $rapporteur = $this->getUser();
                 $sujetQuestion = $question->getSujet();
-                $sujetMail = "Question numéro :".$idQuestion . " signalée ";
-                $expediteurMail = "ne-pas-repondre@smartunity.fr";
-                $contenu = "La question suivante à été signalée : " .$sujetQuestion. "Son id est le : ". $idQuestion;
+                $sujetMail = "Question numéro : ".$question->getId() . " signalée ";
+                $expediteurMail = $rapporteur->getEmail();
+                $contenu = "La question suivante à été signalée : " .$sujetQuestion. "<br/>Par: ".$rapporteur->getUsername()."<br/>Son id est le : ". $question->getId(). "<br/>Motif: ".$motif;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
@@ -1101,16 +1103,16 @@ class QuestionReponseController extends Controller {
             if ($formSignaler->isValid()) {
 
                 $reponse->setSignaler(true);
-
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse);
                 $em->flush();
-
+                
+                $motif = $formSignaler->get('motif')->getData();
+                $rapporteur = $this->getUser();
                 $descriptionReponse = $reponse->getDescription();
-                $sujetMail = "Réponse numéro :".$idReponse . " signalée ";
-                $expediteurMail = "ne-pas-repondre@smartunity.fr";
-                $contenu = "La réponse suivante à été signalée : " .$descriptionReponse. "Son id est le : ". $idReponse;
+                $sujetMail = "Réponse numéro : ".$idReponse . " signalée ";
+                $expediteurMail = $rapporteur->getEmail();
+                $contenu = "La réponse suivante à été signalée : " .$descriptionReponse. "<br/>Par: ".$rapporteur->getEmail()."<br/>Son id est le : ". $idReponse. "<br/>Motif: ".$motif;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
