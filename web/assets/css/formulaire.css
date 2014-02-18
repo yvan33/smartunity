@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
@@ -355,6 +354,8 @@ textarea:focus {
 	font-size: 13px;
 	box-shadow: none;
 	border-radius: 3px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 /* Conditions générales d'utilisation */
@@ -528,7 +529,6 @@ abbr {
 .bouton-signaler {
 	margin-top: 20px;
 }
-.police-text {
-		
+.police-text {	
 	font-family:centrale;
 }
