@@ -221,7 +221,7 @@ class UtilisateurController extends Controller {
                 $contenu.="<a href=\"$url\">".$url."</a><br/> Toute la communauté serait heureuse de t'accueillir. <br/><br/> A bientôt sur Smart'Unity <br/>";
                 $message = \Swift_Message::newInstance()
                     ->setContentType('text/html')
-                    ->setSubject("Offre de parrainage, rejoignez la communauté Smart'Unity")
+                    ->setSubject($user->getUsername()." souhaite vous parrainer! Rejoignez la communauté Smart'Unity ")
                     ->setFrom("ne-pas-repondre@smartunity.fr")
                     ->setTo($mail)
                     ->setBody($contenu);
