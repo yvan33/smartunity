@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Une communauté d'entraide efficace autour de l'utilisation des smartphones et des tablettes.">
+  <meta name="keywords" content="communauté, smartphone, aide, problème">
+  <meta name="author" content="Smart'Unity">
+
+  <title>Smart'Unity</title>
+
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch-icon-ipad.png" /> <!--icones pour iphone -->
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/touch-icon-iphone.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch-icon-iphone-retina.png" />
+  <link rel="apple-touch-startup-image" href="img/startup.png"> <!-- page de chargement iphone -->    
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Add custom CSS here -->
+  <link href="assets/css/general-style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  
+  <!-- Full Page Image Header Area -->
+  <div id="top" class="header">
+    <div class="vert-text-desinscription">    
+     <div class="newsletter">
+     <div class="titre-smartunity">
+     <h1 class="smartunity">Smart'Unity</h1>     
+     <p>Pour vous désabonner de la newsletter, saisissez votre adresse mail :</p>
+      <form id="form1" name="form1" method="post" action="desabonnement-newsletter.php">
+        <input onfocus="this.placeholder=''" onblur="this.placeholder='Votre adresse email ici'" name="email" type="email" id="email" placeholder="Votre adresse email ici">
+        <input type="submit" name="Submit" class="btn btn-default btn-lg envoyer" value="Se désabonner">
+      </form>
+      <div id ="merci"></div>
+    </div>          
+  </div>
+
+
+
+</div>
+<!-- /Full Page Image Header Area -->
+
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/retina.js"></script>
+
+<script>
+  $(document).ready(function() {
+    // lorsque je soumets le formulaire
+    $('#form1').on('submit', function() {
+
+        // je récupère les valeurs
+        var mail = $('#email').val();
+
+
+        // je vérifie une première fois pour ne pas lancer la requête HTTP
+        // si je sais que mon PHP renverra une erreur
+
+        if(mail == '') {
+          alert('Les champs doivent êtres remplis');
+        } 
+        else {
+            // appel Ajax
+
+            $.ajax({
+                url: $(this).attr('action'), // le nom du fichier indiqué dans le formulaire
+                type: $(this).attr('method'), // la méthode indiquée dans le formulaire (get ou post)
+                data: $(this).serialize(), // je sérialise les données (voir plus loin), ici les $_POST
+                success: function(html) { // je récupère la réponse du fichier PHP
+                  var div = document.getElementById("merci");
+                  div.textContent = html;
+                }
+              });
+            document.getElementById("email").value="";
+          }
+        return false; // j'empêche le navigateur de soumettre lui-même le formulaire
+      });
+});
+</script>
+</body>
+
+</html>
