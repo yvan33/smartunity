@@ -969,7 +969,7 @@ class QuestionReponseController extends Controller {
                         //Envoi du mail`
                         $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
                         $sujetMail = "Votre réponse à la question : " . $sujetQuestion . " sur smartunity.fr a été validée";
-                        $contenu = "Bonjour ". $repondant->getUsername() .", <br/> La réponse que vous avez apportée à la question " .$sujetQuestion ." vient d'être validée par " .$reponse[0]->getQuestion()->getMembre().". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de ". $$reponse[0]->getQuestion()->getRemuneration()  ." points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr " ;
+                        $contenu = "Bonjour ". $repondant->getUsername() .", <br/> La réponse que vous avez apportée à la question " .$sujetQuestion ." vient d'être validée par " .$reponse[0]->getQuestion()->getMembre().". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de ". $reponse[0]->getQuestion()->getRemuneration()  ." points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr " ;
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
@@ -1145,6 +1145,7 @@ class QuestionReponseController extends Controller {
                 ->getForm();
 
         $type = "une question";
+
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSignaler->bind($this->getRequest());
 
@@ -1157,13 +1158,13 @@ class QuestionReponseController extends Controller {
                 $em->flush();
 
 ////////SEND MAIL TO SMARTUNITY                
-
+                $motif = $formSignaler->get('motif')->getData();
+                $rapporteur = $this->getUser();
                 $sujetQuestion = $question->getSujet();
-                $idQuestion = $question->getId();
 
-                $sujetMail = "Question numéro :".$idQuestion . " signalée ";
-                $expediteurMail = "ne-pas-repondre@smartunity.fr";
-                $contenu = "La question suivante à été signalée : " .$sujetQuestion. "Son id est le : ". $idQuestion;
+                $sujetMail = "Question numéro : ".$question->getId() . " signalée ";
+                $expediteurMail = $rapporteur->getEmail();
+                $contenu = "La question suivante à été signalée : " .$sujetQuestion. "<br/>Par: ".$rapporteur->getUsername()."<br/>Son id est le : ". $question->getId(). "<br/>Motif: ".$motif;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
@@ -1199,16 +1200,16 @@ class QuestionReponseController extends Controller {
             if ($formSignaler->isValid()) {
 
                 $reponse->setSignaler(true);
-
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse);
                 $em->flush();
-
+                
+                $motif = $formSignaler->get('motif')->getData();
+                $rapporteur = $this->getUser();
                 $descriptionReponse = $reponse->getDescription();
-                $sujetMail = "Réponse numéro :".$idReponse . " signalée ";
-                $expediteurMail = "ne-pas-repondre@smartunity.fr";
-                $contenu = "La réponse suivante à été signalée : " .$descriptionReponse. "Son id est le : ". $idReponse;
+                $sujetMail = "Réponse numéro : ".$idReponse . " signalée ";
+                $expediteurMail = $rapporteur->getEmail();
+                $contenu = "La réponse suivante à été signalée : " .$descriptionReponse. "<br/>Par: ".$rapporteur->getEmail()."<br/>Son id est le : ". $idReponse. "<br/>Motif: ".$motif;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)

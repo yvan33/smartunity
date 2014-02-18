@@ -40,11 +40,12 @@
                     <div class="grille-2-reinitialisation">
                         {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control forminfo' }})}}
                     </div>
+                            
                     
 					<div>
 						<input type="submit" class="btn bouton-envoyer" style="margin-top: 20px;" value="Réinitialiser" /> 
 					</div>
-			</form>
+			{{ form_end(form) }}
         </div>
     </div>
 </div>

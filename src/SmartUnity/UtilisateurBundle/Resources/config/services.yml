@@ -36,12 +36,6 @@ services:
         tags:
             - { name: form.type, alias: hidden_entity }
             
-   smart_unity_app.resetting.form.type:
-        class:  SmartUnity\UtilisateurBundle\Form\Type\ResettingFormType
-        arguments: [%fos_user.model.user.class%]
-        tags:
-            - { name: form.type, alias: smartunity_user_resetting }
-            
    my.facebook.user:
             class: SmartUnity\UtilisateurBundle\Security\User\Provider\FacebookProvider
             arguments:

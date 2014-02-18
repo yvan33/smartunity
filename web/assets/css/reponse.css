@@ -41,7 +41,8 @@
     }
 
     .min{
-        min-height: 100px
+        margin-bottom: 20px;
+        min-height: 0;
     }
 }
 @media (min-width: 992px)  and (max-width: 1200px) {
@@ -766,9 +767,7 @@ margin: 20% auto;
 }
 
 .questionModifiée {
-    font-style:italic;
-    font-weight:bold;
-    clear:both;
+    font-style: italic;
 }
 
 .head-blue .glyphicon:hover {
@@ -778,4 +777,35 @@ margin: 20% auto;
 .send-answer {
 	margin-top: 10px;
 	margin-bottom : 20px;
+}
+
+.glyphicon-share {
+	cursor: pointer;
+	color: white;
+}
+
+
+.glyphicon-share:hover {
+	color: #e37151;
+}
+
+.share-button {
+	background: none;
+	width: 15px;
+	padding: 0;
+	margin-left: 10px;
+}
+
+.share-button:focus {
+	outline: 0;
+}
+
+.share-button:active {
+	box-shadow: none;
+}
+
+.glyphicon-edit {
+	font-size: 14px;
+	top: 3px;
+	left: 3px;
 }
