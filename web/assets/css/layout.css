@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
     src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
@@ -22,13 +22,6 @@
         max-width: 1170px;
     }
 
-    .menu-pad
-    {
-        font-family: centrale;
-        font-size: 15px;
-        line-height: 43px;
-        margin: 0px 10px;
-    }
 
     .valign-row
     {
@@ -72,7 +65,7 @@
         font-family: centrale;
         font-size: 14px;
         line-height: 43px;
-        margin: 0px 8px -7px 8px;
+        margin: 0px 10px -7px 8px;
     }
 
     .valign-row
@@ -155,10 +148,18 @@
 	    display: none;
     }
 
+    .menu-pad
+    {
+        font-family: centrale;
+        font-size: 15px;
+        line-height: 43px;
+        text-align: center ;
+    }
+
     .menu-pad 
     {
         font-family: centrale;
-        font-size:12px;
+        font-size:14px;
         padding-top:5px;
     }
 
@@ -170,7 +171,7 @@
 
     .nav img {
         width: 30px;
-
+        margin-left : 47%;
     }
 }
 
