@@ -30,7 +30,7 @@ class questionRepository extends EntityRepository {
                     WHERE NOT r.dateValidation <=> NULL) as c
                 RIGHT JOIN question q ON q.id = c.question_id
                 WHERE c.date_v <=> NULL
-                AND q.date < SUBTIME(NOW(), \'0 48:00:00.0000\')
+                AND q.date < SUBTIME(NOW(), \'7 00:00:00.0000\')
                 AND q.signaler = 0';
 
         $query = $this->_em->createNativeQuery($sql, $rsm);
@@ -245,7 +245,7 @@ class questionRepository extends EntityRepository {
                     WHERE NOT r.dateValidation <=> NULL) as c
                 RIGHT JOIN question q ON q.id = c.question_id
                 WHERE c.date_v <=> NULL
-                AND q.date < SUBTIME(NOW(), \'0 48:00:00.0000\')
+                AND q.date < SUBTIME(NOW(), \'7 00:00:00.0000\')
                 AND q.membre_id = :membreId
                 ORDER BY q.date ASC
                 LIMIT :offset, :nbParPage';
@@ -276,7 +276,7 @@ class questionRepository extends EntityRepository {
                     WHERE NOT r.dateValidation <=> NULL) as c
                 RIGHT JOIN question q ON q.id = c.question_id
                 WHERE c.date_v <=> NULL
-                AND q.date < SUBTIME(NOW(), \'0 48:00:00.0000\')
+                AND q.date < SUBTIME(NOW(), \'7 00:00:00.0000\')
                 AND q.signaler = 0
                 AND q.membre_id = :membreId';
 

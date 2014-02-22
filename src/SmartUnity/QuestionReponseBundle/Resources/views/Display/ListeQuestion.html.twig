@@ -68,8 +68,8 @@
                                     </div>
                                     <!-- rond pts fin-->
                                     <!-- sujet question-->
-                                        <div class="grille-2" ><p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:500;"><a class="sujet-question" onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">{{question.sujet}}</a></p>
-                                            <p style="font-size: 12px; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                        <div class="grille-2" ><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><p>{{question.sujet}}</p></a>
+                                            <p class="user-and-date">{{ question.membre_username }} le {{ question.date }}</p></div>
                                     <!-- sujet question fin-->
                                     
                                     <div style="overflow:hidden;min-width:100px">
@@ -98,7 +98,7 @@
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
                                             <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
-                                            <p style="font-weight: 300; font-style: italic;">{{ question.date_best_reponse }}</p>
+                                            <p class="user-and-date">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -140,8 +140,8 @@
                                         <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                         <!-- rond pts fin-->
                                         <!-- describ question-->
-                                    <div class="grille-2" ><p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:500;"><a class="sujet-question" onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">{{question.sujet}}</a></p>
-                                        <p style="font-size: 12px; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                    <div class="grille-2" ><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><p>{{question.sujet}}</p></a>
+                                        <p class="user-and-date">{{ question.membre_username }} le {{ question.date }}</p></div>
                                 </a>                           
                                         <!-- describ question fin-->
                                         <!-- nb réponses vues-->
@@ -172,7 +172,7 @@
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
                                             <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
-                                            <p style="font-weight: 300; font-style: italic;">{{ question.date_best_reponse }}</p>
+                                            <p class="user-and-date">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -215,8 +215,8 @@
                                     <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                     <!-- rond pts fin-->
                                     <!-- describ question-->
-                                    <div class="grille-2" ><p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:500;"><a class="sujet-question" onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">{{question.sujet}}</a></p>
-                                         <p style="font-size: 12px; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                    <div class="grille-2" ><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><p>{{question.sujet}}</p></a>
+                                         <p class="user-and-date">{{ question.membre_username }} le {{ question.date }}</p></div>
                                     <!-- describ question fin-->
                                     <!-- nb réponses vues-->
                                     <div style="overflow:hidden;min-width:100px" >
@@ -245,7 +245,7 @@
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
                                             <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
-                                            <p style="font-weight: 300; font-style: italic;">{{ question.date_best_reponse }}</p>
+                                            <p class="user-and-date">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -315,8 +315,8 @@
             entity +='<div class="rond-point"><p class="txt-rond" style="font-weight:200;">' + pEntry['remuneration'] + ' pts</p></div>';
         }
         entity+='</div> \
-                                                <div class="grille-2" ><p style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif; font-weight:500;"><a class="sujet-question" onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '">' + pEntry['sujet'] + '</a></p> \
-                                                <p style="font-size: 12px; font-style:italic">' + pEntry['membre_username'] + ' le ' + pEntry['date'] + '</p> </div> \
+                                                <div class="grille-2" ><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"><p>' + pEntry['sujet'] + '</p></a> \
+                                                <p class="user-and-date">' + pEntry['membre_username'] + ' le ' + pEntry['date'] + '</p> </div> \
                                                 <div style="overflow:hidden;min-width:100px"> \
                                                 \
                                                 <div class="grille-4"><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
@@ -343,7 +343,7 @@
             {entity += '<div class="grille-det-content"> \
                                                     <div class="grille-det1"> \
                                                             <p style="margin-bottom: 0;">' + pEntry['auteur_best_reponse'] + '</p> \
-                                                            <p style="font-weight: 300; font-style: italic;">' + pEntry['date_best_reponse'] + '</p> \
+                                                            <p class="user-and-date">' + pEntry['date_best_reponse'] + '</p> \
                                                       </div> \
                                                         <div class="grille-det2"> \
                                                         <p>' + pEntry['best_reponse'] + '</p> \
