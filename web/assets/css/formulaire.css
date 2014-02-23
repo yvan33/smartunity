@@ -2,9 +2,9 @@
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
     src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/Centrale.woff) format('woff'),
-         url(../fonts/Centrale.ttf) format('truetype'),
-         url(../fonts/Centrale.svg#centrale) format('svg');
+        url(../fonts/Centrale.woff) format('woff'),
+        url(../fonts/Centrale.ttf) format('truetype'),
+        url(../fonts/Centrale.svg#centrale) format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -18,7 +18,7 @@
 }
 
 .grille-1 label {
-	margin-bottom: 7px;
+    margin-bottom: 7px;
 }
 
 .grille-2
@@ -45,13 +45,14 @@
     height: 100%;
     float:left;
 }
+
 .grille-1.pref
 {
     width:50%;
     margin: 3px 3% 3px 5%;
     float:left;
     text-align: left;
-    
+
 }
 
 .grille-2.pref
@@ -72,7 +73,7 @@
     width:35%;
     margin: 3px 12.5% 8px 2.5%;
     height:20px;
-   
+
     float:right;
 }
 .info-plus{
@@ -127,7 +128,7 @@
 }
 
 select, input:active {
-	outline: 0;
+    outline: 0;
 }
 
 .cookie-title
@@ -153,12 +154,12 @@ select, input:active {
 }
 
 .erreur{
-    
+
     color: red;
-    
+
 }
 .cadre-general {
-	margin: 20px 0;
+    margin: 20px 0;
 }
 
 .cleared{
@@ -188,63 +189,63 @@ select, input:active {
 /* Registration */
 
 .cgu {
-	border: 1px solid #CCC;
-	padding-left: 10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	border-radius: 3px;
+    border: 1px solid #CCC;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 3px;
 }
 .accept-cgu {
-	font-family: centrale;
-	margin: 0;
-	display: inline;
-	font-size: 16px;
+    font-family: centrale;
+    margin: 0;
+    display: inline;
+    font-size: 16px;
 }
 
 .text-why {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 legend {
-	font-family: centrale;
-	border-bottom: 1px solid #CCC;
-	padding-bottom: 5px;
+    font-family: centrale;
+    border-bottom: 1px solid #CCC;
+    padding-bottom: 5px;
 }
 
 .btn-inscription {
-	border-radius: 2px;
-	background-color: #e37151;
-	height: 35px;
-	line-height: 35px;
-	color: white;
-	font-family: centrale;	
+    border-radius: 2px;
+    background-color: #e37151;
+    height: 35px;
+    line-height: 35px;
+    color: white;
+    font-family: centrale;	
     font-size: 20px;
     border: 0;
     padding: 0 20px;
 }
 
 .btn-inscription:focus {
-	outline: 0;
+    outline: 0;
 }
 
 .btn-inscription:hover {
-	color: #333;
+    color: #333;
 }
 
 .titre-inscription {
-	margin-bottom: -15px;
+    margin-bottom: -15px;
 }
 
 fieldset {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .label-normal {
-	line-height: 25px;
+    line-height: 25px;
 }
 
 .pref label {
-	margin-bottom: 0;
+    margin-bottom: 0;
 
 }
 
@@ -279,36 +280,36 @@ fieldset {
 }
 
 .cadre-general {
-	padding-bottom: 30px;
+    padding-bottom: 30px;
 }
 
 .textarea-register {
-	height: 150px;
-	padding: 5px 0;
-	max-height: 270px;
+    height: 150px;
+    padding: 5px 0;
+    max-height: 270px;
 }
 
 .textarea-register {
-	height: 150px;
-	padding: 5px 0;
-	max-height: 270px;
-	width: 500px;
-	border: 1px solid #CCC;
-	border-radius: 3px;
+    height: 150px;
+    padding: 5px 0;
+    max-height: 270px;
+    width: 500px;
+    border: 1px solid #CCC;
+    border-radius: 3px;
 }
 
 #fos_user_registration_form_info_plus {
-	width: 450px;
-	height: 100px;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border-radius: 3px;
+    width: 450px;
+    height: 100px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 /* Formulaire de contact */
 
 .bouton-envoyer {
-	margin-left:-60px; 
+    margin-left:-60px; 
     background-color: #e37151;
     color:#FFF;
     font-family: centrale;
@@ -323,201 +324,211 @@ fieldset {
 }
 
 .bouton-envoyer:hover {
-	color: #333;
+    color: #333;
 }
 
 .bouton-envoyer:focus {
-	outline: 0;
+    outline: 0;
 }
 
 .text-message-contact {
-	height: 100%;
-	max-width: 100%;
-	width: 500px;
-	margin-right: 0;
+    height: 100%;
+    max-width: 100%;
+    width: 500px;
+    margin-right: 0;
 }
 
 .contact-form {
-	padding-left: 50px;
-	margin-top: -15px;
+    padding-left: 50px;
+    margin-top: -15px;
 }
 
 .description {
-	margin: 0 50px 20px 50px;
+    margin: 0 50px 20px 50px;
 }
 
 .cookie-title {
-	line-height: 40px;
-	margin-bottom: 25px;
+    line-height: 40px;
+    margin-bottom: 25px;
 }
 
 .form-textarea {
-	padding-left: 10px;
-	color: #555;
-	font-size: 13px;
-	
+    padding-left: 10px;
+    color: #555;
+    font-size: 13px;
+
 } 
 
 textarea {
-	max-width: 600px;
-	max-height: 300px;
+    max-width: 600px;
+    max-height: 300px;
 }
 .form-addquestion textarea {
-	max-width:none;
+    max-width:none;
 }
 
 textarea:focus {
-	outline: 0;
+    outline: 0;
 }
 
 .form-control {
-	font-size: 13px;
-	box-shadow: none;
-	border-radius: 3px;
-	padding-top: 0px;
-	padding-bottom: 0px;
+    font-size: 13px;
+    box-shadow: none;
+    border-radius: 3px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 /* Conditions générales d'utilisation */
 
 .titre-conditions h1 {
-	margin-top: 0;
-	margin: 0 0 25px 0;
-	font-family: centrale;
-	text-align: center;
+    margin-top: 0;
+    margin: 0 0 25px 0;
+    font-family: centrale;
+    text-align: center;
 }
 
 .titre-conditions p {
-	text-align: left;
-	margin: 0 70px;
-	font-size: 12px;
+    text-align: left;
+    margin: 0 70px;
+    font-size: 12px;
 }
 
 .articles-conditions {
-	font-weight: bold;
-	font-size: 1.2em;
-	margin-left: 70px;
-	margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-left: 70px;
+    margin-bottom: 15px;
 }
 
 hr {
-	background-color: #CCC;
-	border: 0;
-	height: 1px;
-	margin-left: 70px;
-	margin-right: 70px;
+    background-color: #CCC;
+    border: 0;
+    height: 1px;
+    margin-left: 70px;
+    margin-right: 70px;
 }
 
 /* Poser une question */
 
 .ask-question {
-	border-radius:2px;
-	background-color: #e37151;
-	height: 40px;
-	width: 250px;
-	line-height: 0;
-	color: white;
-	font-family: centrale;	
+    border-radius:2px;
+    background-color: #e37151;
+    height: 40px;
+    width: 250px;
+    line-height: 0;
+    color: white;
+    font-family: centrale;	
     font-size: 20px;
     padding-bottom: 10px;
 }
 
 .ask-question:focus {
-	outline: 0;
+    outline: 0;
 }
 
 .text-subject {
-	height: 30px;
-	padding-left: 10px;
-	color: #555;
-	font-size: 13px;
-	padding: 6px 5px 0 10px;
-	width: 100%;
-	border-radius: 3px;
-	border: 1px solid #ccc;
-	resize: none;
+    height: 30px;
+    padding-left: 10px;
+    color: #555;
+    font-size: 13px;
+    padding: 6px 5px 0 10px;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+.input-dotation {
+    height: 30px;
+    padding-left: 10px;
+    color: #555;
+    font-size: 13px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    resize: none;
 }
 
 .text-description {
-	height: 90px;
-	padding-left: 10px;
-	color: #555;
-	font-size: 13px;
-	padding: 6px 5px 0 10px;
-	width: 100%;
-	border-radius: 3px;
-	border: 1px solid #ccc;
-	width: 550px;
-	max-width: 550px;
+    height: 90px;
+    padding-left: 10px;
+    color: #555;
+    font-size: 13px;
+    padding: 6px 5px 0 10px;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    width: 550px;
+    max-width: 550px;
 }
 
 .explication-poser-question {
-	margin: 0 70px;
+    margin: 0 70px;
 }
 
 .explication-poser-question p {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .merci {
-	font-size: 1.2em;
-	padding-top: 5px;
+    font-size: 1.2em;
+    padding-top: 5px;
 }
 
 /* Chosen */
 
 .chosen-container-single .chosen-single div b {
-	margin-top: 5px;
+    margin-top: 5px;
 }
 
 .chosen-container {
-	min-width: 190px;
-	border: 0;
-	margin: 0 2.5px 2.5px 0;
+    min-width: 190px;
+    border: 0;
+    margin: 0 2.5px 2.5px 0;
 }
 
 .chosen-container-single .chosen-single {
-	height: 32px;
-	background: #FFF;
-	color: #7b7a7a;
-	line-height: 32px;
-	border: 0;
-	padding-left: 10px;
-	font-weight: 200;
-	font-style: italic;
-	box-shadow: none;
-	font-family: centrale;
-	border: 1px solid #CCC;
-	border-radius: 3px;
+    height: 32px;
+    background: #FFF;
+    color: #7b7a7a;
+    line-height: 32px;
+    border: 0;
+    padding-left: 10px;
+    font-weight: 200;
+    font-style: italic;
+    box-shadow: none;
+    font-family: centrale;
+    border: 1px solid #CCC;
+    border-radius: 3px;
 }
 
 .chosen-container-active .chosen-single {
-	border: 1px solid #CCC;
+    border: 1px solid #CCC;
 }
 .chosen-single:focus {
-	border: 1px solid #CCC;
+    border: 1px solid #CCC;
 }
 
 .search-choice-close {
-	top: 20px;
+    top: 20px;
 }
-	
+
 .chosen-with-drop .chosen-container-single .chosen-single {
-	color: black;
+    color: black;
 }
 
 .chosen-container .chosen-results li.highlighted {
-  	color: #fff;
-	background-color: #7b7a7a;
-	background-image: #7b7a7a;
+    color: #fff;
+    background-color: #7b7a7a;
+    background-image: #7b7a7a;
 }
 
 .chosen-container-single .chosen-single abbr {
-	top: 10px;
+    top: 10px;
 }
 
 abbr {
-	top: 10px;
+    top: 10px;
 }
 
 /* Profil publique */
@@ -525,30 +536,30 @@ abbr {
 /* Checkemail */
 
 .text-checkemail h2 {
-	font-family: centrale;	
+    font-family: centrale;	
 }
 
 .text-checkemail h3 {
-	font-family: centrale;
-	margin-top: 0;	
+    font-family: centrale;
+    margin-top: 0;	
 }
 
 .text-checkemail a {
-	color: #CCC;
+    color: #CCC;
 }
 
 .text-checkemail a {
-	color: #CCC;
+    color: #CCC;
 }
 
 .text-checkemail a {
-	color: #CCC;
+    color: #CCC;
 }
 
 .bouton-signaler {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .police-text {	
-	font-family:centrale;
+    font-family:centrale;
 }
