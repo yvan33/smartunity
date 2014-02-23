@@ -18,7 +18,64 @@
 
 <div class="row row-sans-margin">
     <div class="col-md-12" style="padding:0px;">
+        
+{% if is_granted('ROLE_USER') %}
 
+{#/////////////////////////////////////////////////#}
+{#Blocs en display : none#}
+{#///////////////////////////////////////////////////#}
+
+{#Formulaire de Réponse#}
+<div id="addReponseHolder">
+    <div class="container"  style="padding-left: 0; padding-right: 0;">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10" style="padding-left:0px; padding-right:0px; position:relative">
+                <div class="container cadre-form-reponse">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div  style="position:absolute;cursor:pointer;right:4px;top:5px;color:#FFF;font-size:20px" id="closeFrame">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </div>
+                            <div class="grille-content">
+{%if not is_answered_by_user %}
+                                <form action="{{path('smart_unity_question_reponse_add_reponse', {slug: question.slug})}}" method="POST">
+                                    <div class="erreur">{{ form_errors(formReponse) }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="head-blue">Formuler une réponse</div>
+                                    </div>
+                                    <div class="row row-avec-margin">
+	        {{ form_widget(formReponse.description,{'attr': {'class': 'form-control forminfo reponse-input'}}) }}</div>
+                                    	    {{form_widget(formReponse._token)}}
+                                    <div class="row">
+                                        <div class="cent-h send-answer">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
+                                    </div>
+                                </form> 
+{% else %}
+                                <form class="edit-reponse-form" action="{{path('smart_unity_question_reponse_editer_reponse', {slug: question.slug, id: 'init'})}}" method="POST">
+                                    <div class="erreur">
+            {{ form_errors(formEditReponse) }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="head-blue">Editer ma réponse</div>
+                                    </div>
+                                    <div class="row row-avec-margin">
+	        {{ form_errors(formEditReponse.description) }}{{ form_widget(formEditReponse.description,{'attr': {'class': 'form-control forminfo reponse-input edit-input'}}) }}</div>
+                                    	    {{form_widget(formEditReponse._token)}}
+                                    <div class="row">
+                                        <div class="cent-h send-answer">{{form_widget(formEditReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
+                                    </div>
+                                </form>
+{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>     
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}        
 
         <div class="grille-content-2">
             <div class="grille-reponse" onmouseover="displaySignalQuestion(this);" onmouseout="hideSignalQuestion(this);">
@@ -158,6 +215,7 @@
                               {% endif %}
                           {% endfor %}
         </div>
+   
     </div>
 </div>
 
@@ -198,67 +256,7 @@ Toast
 
 
 {% block modal %}
-{% if is_granted('ROLE_USER') %}
 
-{#/////////////////////////////////////////////////#}
-{#Blocs en display : none#}
-{#///////////////////////////////////////////////////#}
-
-{#Formulaire de Réponse#}
-<div id="addReponseHolder">
-    <div class="container"  style="padding-left: 0; padding-right: 0;">
-        <div class="row">
-            <div class="col-md-offset-1 col-md-10" style="padding-left:0px; padding-right:0px; position:relative">
-                <div class="container cadre-form-reponse">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div  style="position:absolute;cursor:pointer;right:4px;top:5px;color:#FFF;font-size:20px" id="closeFrame">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                            </div>
-                            <div class="grille-content">
-{%if not is_answered_by_user %}
-                                <form action="{{path('smart_unity_question_reponse_add_reponse', {slug: question.slug})}}" method="POST"
-                                    <div class="erreur">
-             {{ form_errors(formReponse) }}
-                                    </div>
-                                    <div class="row">
-                                        <div class="head-blue">Formuler une réponse</div>
-                                    </div>
-                                    <div class="row row-avec-margin">
-	        {{ form_errors(formReponse.description) }}{{ form_widget(formReponse.description,{'attr': {'class': 'form-control forminfo reponse-input'}}) }}</div>
-                                    	    {{form_widget(formReponse._token)}}
-                                    <div class="row">
-                                        <div class="cent-h send-answer">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
-                                    </div>
-                                </form> 
-{% else %}
-                                <form class="edit-reponse-form" action="{{path('smart_unity_question_reponse_editer_reponse', {slug: question.slug, id: 'init'})}}" method="POST">
-                                    <div class="erreur">
-            {{ form_errors(formEditReponse) }}
-                                    </div>
-                                    <div class="row">
-                                        <div class="head-blue">Editer ma réponse</div>
-                                    </div>
-                                    <div class="row row-avec-margin">
-	        {{ form_errors(formEditReponse.description) }}{{ form_widget(formEditReponse.description,{'attr': {'class': 'form-control forminfo reponse-input edit-input'}}) }}</div>
-                                    	    {{form_widget(formEditReponse._token)}}
-                                    <div class="row">
-                                        <div class="cent-h send-answer">{{form_widget(formEditReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
-                                    </div>
-                                </form>
-{% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>     
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-{% endif %}
 {% endblock %}
 {% block callJS %}
 

@@ -541,19 +541,66 @@ class QuestionReponseController extends Controller {
 
         $newReponse = new \SmartUnity\AppBundle\Entity\Reponse();
         $formReponse = $this->createFormBuilder($newReponse)
-                 /*->add('description', 'password', array(
-                    'label' => false,
-                    'attr' => array('placeholder' => 'Tapez votre réponse ici...')
-                ))*/
                 ->add('description', 'ckeditor', array(
+                    'config' => array(
+                        'toolbar' => array(
+                            array(
+                                'name' => 'basicstyles',
+                                'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
+                            ),
+                            array(
+                                'name' => 'paragraph',
+                                'groups' => array('list', 'indent', 'align'),
+                                'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',)),
+                            array(
+                                'name' => 'links',
+                                'items' => array('Link', 'Unlink', '-', 'Image', 'Smiley', 'SpecialChar')
+                            ),
+                            array(
+                                'name' => 'styles',
+                                'items' => array('Font', 'FontSize'),
+                            ),
+                            array(
+                                'name' => 'colors',
+                                'items' => array('TextColor', 'BGColor')
+                            ),
+                        ),
+                        'uiColor' => '#ffffff',
+                        'removePlugins' => 'elementspath'
+                    ),
                     'required' => true))
                 ->add('valider', 'submit')
                 ->getForm();
 
         $formEditReponse = $this->createFormBuilder()
-                ->add('description', 'textarea', array(
-                    'label' => false,
-                ))
+                ->add('description', 'ckeditor', array(
+                    'config' => array(
+                        'toolbar' => array(
+                            array(
+                                'name' => 'basicstyles',
+                                'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
+                            ),
+                            array(
+                                'name' => 'paragraph',
+                                'groups' => array('list', 'indent', 'align'),
+                                'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',)),
+                            array(
+                                'name' => 'links',
+                                'items' => array('Link', 'Unlink', '-', 'Image', 'Smiley', 'SpecialChar')
+                            ),
+                            array(
+                                'name' => 'styles',
+                                'items' => array('Font', 'FontSize'),
+                            ),
+                            array(
+                                'name' => 'colors',
+                                'items' => array('TextColor', 'BGColor')
+                            ),
+                        ),
+                        'uiColor' => '#ffffff',
+                        'removePlugins' => 'elementspath'
+                    ),
+                    'required' => true))
                 ->add('valider', 'submit')
                 ->getForm();
 
@@ -629,33 +676,29 @@ class QuestionReponseController extends Controller {
                     'config' => array(
                         'toolbar' => array(
                             array(
-                                'name'  => 'basicstyles',
+                                'name' => 'basicstyles',
                                 'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
-                                ),
-                            array(
-                                 'name' => 'clipboardundo',
-                                 'groups' => array('clipboard', 'undo'),
-                                 'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ) ),
+                            ),
                             array(
                                 'name' => 'paragraph',
                                 'groups' => array('list', 'indent', 'align'),
                                 'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',)),
                             array(
-                                 'name' => 'links',
-                                  'items' => array('Link', 'Unlink','-', 'Image','Smiley','SpecialChar')
-                                 ),
+                                'name' => 'links',
+                                'items' => array('Link', 'Unlink', '-', 'Image', 'Smiley', 'SpecialChar')
+                            ),
                             array(
-                                 'name' => 'styles', 
-                                 'items' => array('Font', 'FontSize'),
-                                 ),
+                                'name' => 'styles',
+                                'items' => array('Font', 'FontSize'),
+                            ),
                             array(
                                 'name' => 'colors',
-                                'items' =>array('TextColor', 'BGColor')
-                                ),
-                         ),
+                                'items' => array('TextColor', 'BGColor')
+                            ),
+                        ),
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath'
-                        ),
+                    ),
                     'required' => true))
                 ->add('marque', 'entity', array(
                     'class' => 'SmartUnityAppBundle:marque',
@@ -722,37 +765,37 @@ class QuestionReponseController extends Controller {
         $formEditQuestion = $this->createFormBuilder($question)
                 ->add('sujet', 'textarea', array(
                     'required' => true))
-                 ->add('description', 'ckeditor', array(
+                ->add('description', 'ckeditor', array(
                     'config' => array(
                         'toolbar' => array(
                             array(
-                                'name'  => 'basicstyles',
+                                'name' => 'basicstyles',
                                 'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
-                                ),
+                            ),
                             array(
-                                 'name' => 'clipboardundo',
-                                 'groups' => array('clipboard', 'undo'),
-                                 'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ) ),
+                                'name' => 'clipboardundo',
+                                'groups' => array('clipboard', 'undo'),
+                                'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo')),
                             array(
                                 'name' => 'paragraph',
                                 'groups' => array('list', 'indent', 'align'),
                                 'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',)),
                             array(
-                                 'name' => 'links',
-                                  'items' => array('Link', 'Unlink','-', 'Image','Smiley','SpecialChar')
-                                 ),
+                                'name' => 'links',
+                                'items' => array('Link', 'Unlink', '-', 'Image', 'Smiley', 'SpecialChar')
+                            ),
                             array(
-                                 'name' => 'styles', 
-                                 'items' => array('Font', 'FontSize'),
-                                 ),
+                                'name' => 'styles',
+                                'items' => array('Font', 'FontSize'),
+                            ),
                             array(
                                 'name' => 'colors',
-                                'items' =>array('TextColor', 'BGColor')
-                                ),
-                         ),
+                                'items' => array('TextColor', 'BGColor')
+                            ),
+                        ),
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath'
-                        ),
+                    ),
                     'required' => true))
                 ->add('marque', 'entity', array(
                     'class' => 'SmartUnityAppBundle:marque',
@@ -810,38 +853,38 @@ class QuestionReponseController extends Controller {
     public function addReponseAction($slug) {
         $newReponse = new \SmartUnity\AppBundle\Entity\Reponse();
         $formReponse = $this->createFormBuilder($newReponse)
-               // ->add('description', 'ckeditor')
-               ->add('description', 'ckeditor', array(
+                // ->add('description', 'ckeditor')
+                ->add('description', 'ckeditor', array(
                     'config' => array(
                         'toolbar' => array(
                             array(
-                                'name'  => 'basicstyles',
+                                'name' => 'basicstyles',
                                 'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
-                                ),
+                            ),
                             array(
-                                 'name' => 'clipboardundo',
-                                 'groups' => array('clipboard', 'undo'),
-                                 'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ) ),
+                                'name' => 'clipboardundo',
+                                'groups' => array('clipboard', 'undo'),
+                                'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo')),
                             array(
                                 'name' => 'paragraph',
                                 'groups' => array('list', 'indent', 'align'),
                                 'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',)),
                             array(
-                                 'name' => 'links',
-                                  'items' => array('Link', 'Unlink','-', 'Image','Smiley','SpecialChar')
-                                 ),
+                                'name' => 'links',
+                                'items' => array('Link', 'Unlink', '-', 'Image', 'Smiley', 'SpecialChar')
+                            ),
                             array(
-                                 'name' => 'styles', 
-                                 'items' => array('Font', 'FontSize'),
-                                 ),
+                                'name' => 'styles',
+                                'items' => array('Font', 'FontSize'),
+                            ),
                             array(
                                 'name' => 'colors',
-                                'items' =>array('TextColor', 'BGColor')
-                                ),
-                         ),
+                                'items' => array('TextColor', 'BGColor')
+                            ),
+                        ),
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath'
-                        ),
+                    ),
                     'required' => true))
                 ->add('valider', 'submit')
                 ->getForm();
@@ -877,11 +920,11 @@ class QuestionReponseController extends Controller {
                 if ($prefRepmembre == true) {
 
                     //Envoi du mail
-                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)); 
+                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug));
                     $sujetMail = "Vous avez une nouvelle réponse!";
                     $expediteurMail = "ne-pas-repondre@smartunity.fr";
 
-                    $contenu = $user. "a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : http://smartunity.fr" .$urlQuestion;
+                    $contenu = $user . "a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : http://smartunity.fr" . $urlQuestion;
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
@@ -899,47 +942,43 @@ class QuestionReponseController extends Controller {
             }
             throw new \Exception('Votre réponse n\'a pas pu être ajoutée');
         }
-        return new \Exception('Erreur Javascript');
+        
+        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddReponse.html.twig', array(
+                    'formReponse' => $formReponse->createView(),
+        ));
     }
 
     public function editReponseAction($id, $slug) {
         $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($id);
 
-        $formEditReponse = $this->createFormBuilder($reponse)
-               /* ->add('description', 'textarea', array(
-                    'label' => false,
-                ))*/
-                    ->add('description', 'ckeditor', array(
+        $formEditReponse = $this->createFormBuilder()
+                ->add('description', 'ckeditor', array(
                     'config' => array(
                         'toolbar' => array(
                             array(
-                                'name'  => 'basicstyles',
+                                'name' => 'basicstyles',
                                 'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
-                                ),
-                            array(
-                                 'name' => 'clipboardundo',
-                                 'groups' => array('clipboard', 'undo'),
-                                 'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ) ),
+                            ),
                             array(
                                 'name' => 'paragraph',
                                 'groups' => array('list', 'indent', 'align'),
                                 'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',)),
                             array(
-                                 'name' => 'links',
-                                  'items' => array('Link', 'Unlink','-', 'Image','Smiley','SpecialChar')
-                                 ),
+                                'name' => 'links',
+                                'items' => array('Link', 'Unlink', '-', 'Image', 'Smiley', 'SpecialChar')
+                            ),
                             array(
-                                 'name' => 'styles', 
-                                 'items' => array('Font', 'FontSize'),
-                                 ),
+                                'name' => 'styles',
+                                'items' => array('Font', 'FontSize'),
+                            ),
                             array(
                                 'name' => 'colors',
-                                'items' =>array('TextColor', 'BGColor')
-                                ),
-                         ),
+                                'items' => array('TextColor', 'BGColor')
+                            ),
+                        ),
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath'
-                        ),
+                    ),
                     'required' => true))
                 ->add('valider', 'submit')
                 ->getForm();
@@ -1003,7 +1042,7 @@ class QuestionReponseController extends Controller {
                         //Envoi du mail`
                         $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
                         $sujetMail = "Votre réponse à la question : " . $sujetQuestion . " sur smartunity.fr a été validée";
-                        $contenu = "Bonjour ". $repondant->getUsername() .", <br/> La réponse que vous avez apportée à la question " .$sujetQuestion ." vient d'être validée par " .$reponse[0]->getQuestion()->getMembre().". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de ". $reponse[0]->getQuestion()->getRemuneration()  ." points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr " ;
+                        $contenu = "Bonjour " . $repondant->getUsername() . ", <br/> La réponse que vous avez apportée à la question " . $sujetQuestion . " vient d'être validée par " . $reponse[0]->getQuestion()->getMembre() . ". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de " . $reponse[0]->getQuestion()->getRemuneration() . " points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr ";
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
@@ -1055,7 +1094,7 @@ class QuestionReponseController extends Controller {
                     //Envoi du mail
                     $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
                     $sujetMail = "Votre réponse à la question : " . $sujetQuestion . "sur smartunity.fr a été certifiée";
-                    $contenu = "Bonjour ". $repondant->getUsername() .", <br/> La réponse que vous avez apportée à la question " .$sujetQuestion ." vient d'être certifiée. <br/> Merci pour votre contribution. <br/> La certification de cette réponse vous a permis d'augmenter votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr " ;
+                    $contenu = "Bonjour " . $repondant->getUsername() . ", <br/> La réponse que vous avez apportée à la question " . $sujetQuestion . " vient d'être certifiée. <br/> Merci pour votre contribution. <br/> La certification de cette réponse vous a permis d'augmenter votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr ";
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
@@ -1196,9 +1235,9 @@ class QuestionReponseController extends Controller {
                 $rapporteur = $this->getUser();
                 $sujetQuestion = $question->getSujet();
 
-                $sujetMail = "Question numéro : ".$question->getId() . " signalée ";
+                $sujetMail = "Question numéro : " . $question->getId() . " signalée ";
                 $expediteurMail = $rapporteur->getEmail();
-                $contenu = "La question suivante à été signalée : " .$sujetQuestion. "<br/>Par: ".$rapporteur->getUsername()."<br/>Son id est le : ". $question->getId(). "<br/>Motif: ".$motif;
+                $contenu = "La question suivante à été signalée : " . $sujetQuestion . "<br/>Par: " . $rapporteur->getUsername() . "<br/>Son id est le : " . $question->getId() . "<br/>Motif: " . $motif;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
@@ -1237,13 +1276,13 @@ class QuestionReponseController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse);
                 $em->flush();
-                
+
                 $motif = $formSignaler->get('motif')->getData();
                 $rapporteur = $this->getUser();
                 $descriptionReponse = $reponse->getDescription();
-                $sujetMail = "Réponse numéro : ".$idReponse . " signalée ";
+                $sujetMail = "Réponse numéro : " . $idReponse . " signalée ";
                 $expediteurMail = $rapporteur->getEmail();
-                $contenu = "La réponse suivante à été signalée : " .$descriptionReponse. "<br/>Par: ".$rapporteur->getEmail()."<br/>Son id est le : ". $idReponse. "<br/>Motif: ".$motif;
+                $contenu = "La réponse suivante à été signalée : " . $descriptionReponse . "<br/>Par: " . $rapporteur->getEmail() . "<br/>Son id est le : " . $idReponse . "<br/>Motif: " . $motif;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
@@ -1280,9 +1319,9 @@ class QuestionReponseController extends Controller {
 
 
                 $sujetQuestion = $commentaireQuestion->getQuestion()->getSujet();
-                $sujetMail = "Commentaire question numéro :".$idCommentaireQuestion . " signalé ";
+                $sujetMail = "Commentaire question numéro :" . $idCommentaireQuestion . " signalé ";
                 $expediteurMail = "ne-pas-repondre@smartunity.fr";
-                $contenu = "Le commentaire sur la question " .$sujetQuestion. "Son id est le : ". $idCommentaireQuestion;
+                $contenu = "Le commentaire sur la question " . $sujetQuestion . "Son id est le : " . $idCommentaireQuestion;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
@@ -1318,9 +1357,9 @@ class QuestionReponseController extends Controller {
                 $em->flush();
 
                 $sujetReponse = $commentaireReponse->getReponse()->getDescription();
-                $sujetMail = "Commentaire réponse numéro :". $idCommentaireReponse . " signalé ";
+                $sujetMail = "Commentaire réponse numéro :" . $idCommentaireReponse . " signalé ";
                 $expediteurMail = "ne-pas-repondre@smartunity.fr";
-                $contenu = "Le commentaire sur la réponse " .$sujetReponse. "Son id est le : ". $idCommentaireReponse;
+                $contenu = "Le commentaire sur la réponse " . $sujetReponse . "Son id est le : " . $idCommentaireReponse;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)

@@ -28,6 +28,23 @@
     height: 100%;
     float:left;
 }
+
+
+.form-addquestion .grille-1 
+{
+    width: 15%;
+    margin: 3px 2.5% 3px 5%;
+    float: left;
+    text-align: right;
+}
+
+.form-addquestion .grille-2 
+{
+    width:65%;
+    margin: 3px 10% 3px 2.5%;
+    height: 100%;
+    float:left;
+}
 .grille-1.pref
 {
     width:50%;
@@ -345,6 +362,9 @@ textarea {
 	max-width: 600px;
 	max-height: 300px;
 }
+.form-addquestion textarea {
+	max-width:none;
+}
 
 textarea:focus {
 	outline: 0;
@@ -415,7 +435,6 @@ hr {
 	width: 100%;
 	border-radius: 3px;
 	border: 1px solid #ccc;
-	width: 550px;
 	resize: none;
 }
 

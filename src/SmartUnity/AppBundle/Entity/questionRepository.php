@@ -23,7 +23,7 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-        $sql = 'SELECT COUNT(q.id) AS nb_questions
+        $sql = 'SELECT COUNT(DISTINCT q.id) AS nb_questions
                 FROM 
                     (SELECT r.question_id AS question_id, r.dateValidation as date_v
                     FROM reponse r
@@ -45,7 +45,7 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-        $sql = 'SELECT COUNT(q.id) AS nb_questions
+        $sql = 'SELECT COUNT(DISTINCT q.id) AS nb_questions
                 FROM 
                     (SELECT r.question_id AS question_id, r.dateValidation as date_v
                     FROM reponse r
@@ -66,7 +66,7 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-        $sql = 'SELECT COUNT(q.id) AS nb_questions
+        $sql = 'SELECT COUNT(DISTINCT q.id) AS nb_questions
                 FROM 
                     (SELECT r.question_id AS question_id, r.dateValidation as date_v
                     FROM reponse r
@@ -82,7 +82,7 @@ class questionRepository extends EntityRepository {
 
     public function getNbQuestionsForUser($membreId) {
         $query = $this->_em->createQuery('
-            SELECT COUNT(q.id)
+            SELECT COUNT(DISTINCT q.id)
             FROM
             SmartUnityAppBundle:question q
             WHERE q.membre = :membreId
@@ -269,7 +269,7 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-        $sql = 'SELECT COUNT(q.id) AS nb_questions
+        $sql = 'SELECT COUNT(DISTINCT q.id) AS nb_questions
                 FROM 
                     (SELECT r.question_id AS question_id, r.dateValidation as date_v
                     FROM reponse r
@@ -323,7 +323,7 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-        $sql = 'SELECT COUNT(q.id) AS nb_questions
+        $sql = 'SELECT COUNT(DISTINCT q.id) AS nb_questions
                 FROM 
                     (SELECT r.question_id AS question_id, r.dateValidation as date_v
                     FROM reponse r
@@ -377,7 +377,7 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-        $sql = 'SELECT COUNT(q.id) AS nb_questions
+        $sql = 'SELECT COUNT(DISTINCT q.id) AS nb_questions
                 FROM 
                     (SELECT r.question_id AS question_id, r.dateValidation as date_v
                     FROM reponse r
@@ -399,7 +399,7 @@ class questionRepository extends EntityRepository {
         $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
         $offset = ($page - 1) * $nbParPage;
 
-        $sql = 'Select q.* from
+        $sql = 'Select DISTINCT q.* from
         (Select r.id, r.question_id From reponse r  where r.membre_id = :membreId )as p , question q 
         Where p.question_id=q.id
         ORDER BY q.date DESC
@@ -426,7 +426,7 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-        $sql = 'SELECT count(q.id) as nb_questions 
+        $sql = 'SELECT count(DISTINCT q.id) as nb_questions 
             FROM
         (SELECT r.id, r.question_id FROM reponse r  WHERE r.membre_id = :membreId ) AS p , question q 
         Where p.question_id=q.id';
@@ -442,13 +442,7 @@ class questionRepository extends EntityRepository {
         $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
         $offset = ($page - 1) * $nbParPage;
 
-        // $sql = 'SELECT q.* FROM
-        //     (SELECT r.id, r.question_id AS question_id
-        //     FROM reponse r  
-        //     WHERE r.membre_id = :membreId 
-        //     ) AS p , question q 
-        // WHERE p.question_id=q.id';
-        $sql='Select q.* from
+        $sql='Select DISTINCT q.* from
         (Select r.id, r.question_id as question_id From reponse r  where r.membre_id = :membreId and r.dateValidation <> "" and r.dateCertification <=> null )as p , question q 
         Where p.question_id=q.id
         ORDER BY q.date DESC
@@ -481,7 +475,7 @@ class questionRepository extends EntityRepository {
         // Where p.question_id=q.id';
 
         
-        $sql = 'SELECT count(q.id) as nb_questions 
+        $sql = 'SELECT count(DISTINCT q.id) as nb_questions 
             FROM
         (SELECT r.id, r.question_id AS question_id FROM reponse r  WHERE r.membre_id = :membreId AND r.dateValidation <> "" and r.dateCertification <=> NULL ) AS p , question q 
         Where p.question_id=q.id';
@@ -499,7 +493,7 @@ class questionRepository extends EntityRepository {
         $rsm->addRootEntityFromClassMetadata('SmartUnityAppBundle:question', 'q');
         $offset = ($page - 1) * $nbParPage;
 
-        $sql = 'Select q.* from
+        $sql = 'Select DISTINCT q.* from
         (Select r.id, r.question_id as question_id From reponse r  where r.membre_id = :membreId and r.dateCertification <> "" )as p , question q 
         Where p.question_id=q.id
         ORDER BY q.date DESC
@@ -526,7 +520,7 @@ class questionRepository extends EntityRepository {
 
         $rsm->addScalarResult('nb_questions', 'nb');
 
-        $sql = 'SELECT count(q.id) as nb_questions 
+        $sql = 'SELECT count(DISTINCT q.id) as nb_questions 
             FROM
         (SELECT r.id, r.question_id AS question_id FROM reponse r  WHERE r.membre_id = :membreId AND r.dateCertification <> "" ) AS p , question q 
         Where p.question_id=q.id';

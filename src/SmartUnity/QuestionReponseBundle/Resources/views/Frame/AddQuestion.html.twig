@@ -19,7 +19,7 @@
 {% block body %}
 {#<a ><span class="glyphicon glyphicon-chevron-left bouton-retour" onclick="javascript:history.back()"></span></a>#}
 
-<div class="row">
+<div class="row form-addquestion">
 {#        <div class="grille-content panneau-bas">  #}
             <div class="row text-center cookie-title">
                 Poser une question
@@ -56,7 +56,7 @@
                 <div class="grille-1">Dotation <a id="popupDotation" rel="tooltip" data-original-title="Vous pouvez augmenter la dotation de la question en utilisant les points de votre cagnotte pour améliorer son attractivité."><span class="glyphicon glyphicon-info-sign" style="color:#BBB;"></span></a></div>
                 
 	        <div class="grille-2 dotation">{{ form_errors(formQuestion.remuneration) }}{{ form_widget(formQuestion.remuneration) }} Max : {{dotationMax}} </div>
-	    </div>
+            </div>
 	    <div class="cent-h bouton-bas-block">
 	        {{form_widget(formQuestion.save,{'attr': {'class': 'btn ask-question'}})}}
 	    </div>
