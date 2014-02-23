@@ -71,7 +71,7 @@
 
                         </div>
                     </div>
-                    <p class="min">{{ question.description }}</p>
+                    <p class="min">{{ question.description | raw}}</p>
                     <div style="float:left;margin-bottom:10px;" >
                               {% if question.marque.nom is defined %}<span class="label label-default">{{question.marque.nom}}</span>{% endif %}
                               {% if question.modele.nom is defined %}<span class="label label-default">{{question.modele.nom}}</span>{% endif %}
@@ -213,9 +213,9 @@ Toast
                             </div>
                             <div class="grille-content">
 {%if not is_answered_by_user %}
-                                <form action="{{path('smart_unity_question_reponse_add_reponse', {slug: question.slug})}}" method="POST">
+                                <form action="{{path('smart_unity_question_reponse_add_reponse', {slug: question.slug})}}" method="POST"
                                     <div class="erreur">
-            {{ form_errors(formReponse) }}
+             {{ form_errors(formReponse) }}
                                     </div>
                                     <div class="row">
                                         <div class="head-blue">Formuler une réponse</div>
@@ -226,7 +226,7 @@ Toast
                                     <div class="row">
                                         <div class="cent-h send-answer">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
                                     </div>
-                                </form>
+                                </form> 
 {% else %}
                                 <form class="edit-reponse-form" action="{{path('smart_unity_question_reponse_editer_reponse', {slug: question.slug, id: 'init'})}}" method="POST">
                                     <div class="erreur">

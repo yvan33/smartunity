@@ -540,10 +540,12 @@ class QuestionReponseController extends Controller {
 
         $newReponse = new \SmartUnity\AppBundle\Entity\Reponse();
         $formReponse = $this->createFormBuilder($newReponse)
-                 ->add('description', 'textarea', array(
+                 /*->add('description', 'password', array(
                     'label' => false,
                     'attr' => array('placeholder' => 'Tapez votre réponse ici...')
-                ))
+                ))*/
+                ->add('description', 'ckeditor', array(
+                    'required' => true))
                 ->add('valider', 'submit')
                 ->getForm();
 
@@ -807,8 +809,8 @@ class QuestionReponseController extends Controller {
     public function addReponseAction($slug) {
         $newReponse = new \SmartUnity\AppBundle\Entity\Reponse();
         $formReponse = $this->createFormBuilder($newReponse)
-               // ->add('description', 'textarea')
-               /* ->add('description', 'ckeditor', array(
+               // ->add('description', 'ckeditor')
+               ->add('description', 'ckeditor', array(
                     'config' => array(
                         'toolbar' => array(
                             array(
@@ -839,7 +841,7 @@ class QuestionReponseController extends Controller {
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath'
                         ),
-                    'required' => true))*/
+                    'required' => true))
                 ->add('valider', 'submit')
                 ->getForm();
 
@@ -902,9 +904,41 @@ class QuestionReponseController extends Controller {
         $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($id);
 
         $formEditReponse = $this->createFormBuilder($reponse)
-                ->add('description', 'textarea', array(
+               /* ->add('description', 'textarea', array(
                     'label' => false,
-                ))
+                ))*/
+                    ->add('description', 'ckeditor', array(
+                    'config' => array(
+                        'toolbar' => array(
+                            array(
+                                'name'  => 'basicstyles',
+                                'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'),
+                                ),
+                            array(
+                                 'name' => 'clipboardundo',
+                                 'groups' => array('clipboard', 'undo'),
+                                 'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ) ),
+                            array(
+                                'name' => 'paragraph',
+                                'groups' => array('list', 'indent', 'align'),
+                                'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',)),
+                            array(
+                                 'name' => 'links',
+                                  'items' => array('Link', 'Unlink','-', 'Image','Smiley','SpecialChar')
+                                 ),
+                            array(
+                                 'name' => 'styles', 
+                                 'items' => array('Font', 'FontSize'),
+                                 ),
+                            array(
+                                'name' => 'colors',
+                                'items' =>array('TextColor', 'BGColor')
+                                ),
+                         ),
+                        'uiColor' => '#ffffff',
+                        'removePlugins' => 'elementspath'
+                        ),
+                    'required' => true))
                 ->add('valider', 'submit')
                 ->getForm();
 
