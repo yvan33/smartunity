@@ -13,3 +13,5 @@
 /web/phpconsole/*
 /web/app_dev.php
 .htaccess
+web/phpconsole/install.php
+web/app.php
