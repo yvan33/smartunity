@@ -148,3 +148,26 @@ fos_facebook:
     secret: 8bdcd941ebde437e4adc3963f81dbef3
     cookie: true
     permissions: [email, user_birthday, user_location]
+
+fm_elfinder:
+    locale: %locale% # defaults to current request locale
+    editor: ckeditor # other choices are tinymce or simple
+    showhidden: false # defaults to false
+    fullscreen: true # defaults true, applies to simple and ckeditor editors
+    include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+    compression: false # enable if you configured the uglifycss and uglifyjs2 assetic filters and want compression
+    connector:
+        debug: false # defaults to false
+        roots:       # at least one root must be defined
+            uploads:
+                driver: LocalFileSystem
+                path: uploads
+                upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                upload_deny: ['all']
+                upload_max_size: 2M    
+ 
+ivory_ck_editor:
+    default_config: default
+    configs:
+        default:
+            filebrowserBrowseRoute: elfinder                

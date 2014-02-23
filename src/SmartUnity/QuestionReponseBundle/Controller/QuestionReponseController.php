@@ -951,7 +951,7 @@ class QuestionReponseController extends Controller {
     public function editReponseAction($id, $slug) {
         $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($id);
 
-        $formEditReponse = $this->createFormBuilder()
+        $formEditReponse = $this->createFormBuilder($reponse)
                 ->add('description', 'ckeditor', array(
                     'config' => array(
                         'toolbar' => array(
@@ -989,7 +989,6 @@ class QuestionReponseController extends Controller {
             $formEditReponse->bind($this->getRequest());
 
             if ($formEditReponse->isValid()) {
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse);
                 $em->flush();
@@ -997,7 +996,7 @@ class QuestionReponseController extends Controller {
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedReponse' => '1')));
             }
         }
-        return new \Exception('Votre réponse n\'a pas pu être ajoutée');
+        return new \Exception('Votre réponse n\'a pas pu être éditée');
     }
 
     public function validationReponseAction($idReponse) {

@@ -63,7 +63,7 @@
                         <div class="validation-dialog">
                             <div class="validation-content">
                                 <div class="validation-body">
-                                    <p>Vous êtes sur le point de valider la réponse suivante: {{ reponse.description }}</p>
+                                    <p>Vous êtes sur le point de valider la réponse de {{reponse.membre_username}}, en êtes vous sûr?</p>
                                     <p>Les points de votre question seront attibués au membre ayant apporté cette réponse. Ce choix est définitif. Etes-vous sûr de votre choix?</p>
                                 </div>
                                 <div class="validation-footer">
@@ -118,7 +118,7 @@
 
                         </div>
                     </div>
-                    <p style="min-height: 100px">{{reponse.description}}</p>
+                    <div style="min-height: 100px">{{reponse.description |raw }}</div>
                                     {% for commentaire in reponse.commentaires %}
                     <div class="commentaire" onmouseover="displaySignalComment(this);" onmouseout="hideSignalComment(this);">
                         <p style="float:left">{{commentaire.description}}</p><p style="float:right">
@@ -154,7 +154,7 @@
                             <input id="reponseDescription" type="hidden" value="{{reponse.description}}" />
                             <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this)">
                                 <div class="bouton-com-rep">Editer</div>
-                            </div>                        
+                            </div>                         
           {% endif %}
           {% endif %}
 

@@ -408,7 +408,7 @@ Toast
         $('.edit-reponse-form').attr('action', function(i, url) {
   return url.replace(url.substr(url.lastIndexOf('/') + 1), reponseId); });
   
-        $('.edit-input').text(reponseDescription);
+        CKEDITOR.instances.form_description.setData(reponseDescription);
         $('#addReponseHolder').show('fast');
         $('.espace-vide-pour-cadre-repondre').show();
     {% endif %}

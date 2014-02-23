@@ -62,3 +62,5 @@ security:
         - { path: ^/Admin/, roles: ROLE_ADMIN }
         - { path: ^/secured/.*, role: [IS_AUTHENTICATED_FULLY] } # This is the route secured with fos_facebook
         - { path: ^/.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/efconnect, role: ROLE_USER }
+        - { path: ^/elfinder, role: ROLE_USER }
