@@ -630,10 +630,11 @@ textarea {
 	border-radius:2px;
 	background-color: #e37151;
 	height:25px;
-	line-height:5px;
 	color: white;
 	font-family: centrale;	
     font-size: 13px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 .bouton-valid-modif
 {
@@ -777,6 +778,8 @@ textarea {
     height: 35px;
     border-radius:2px;
     border: 0;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 .bouton-signin {
@@ -792,6 +795,8 @@ textarea {
     height: 35px;
     border-radius:2px;
     border: 0;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 .bouton-signin:focus {
@@ -849,7 +854,7 @@ textarea {
 
 .bouton-login-fix {
 	position: absolute;
-    top: 53%;
+    top: 60%;
     left: 25%;
     background-color: #e37151;
     color:#FFF;
@@ -864,7 +869,7 @@ textarea {
 
 .bouton-signin-fix {
 	position: absolute;
-    top: 53%;
+    top: 60%;
     left: 52%;
     background-color: #e37151;
     color:#FFF;
@@ -916,8 +921,8 @@ textarea {
 
 .ou-fb-fixed {
 	position: absolute;
-	top: 102px;
-	width: 330px;
+	top: 242px;
+	width: 440px;
 	margin: 0 auto;
 	font-family: centrale;
 	font-size: 11px;

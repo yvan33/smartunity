@@ -13,12 +13,8 @@ class RegistrationFormType extends BaseType {
 
 
         $builder
-                     ->add('nom')
-                    ->add('cgu', 'checkbox', array(
-                    'required' => true,
-                        'mapped' => false,
-                     ))
-        ->add('email', 'email', array('label' => 'Adresse e-mail'))
+                ->add('nom')
+                ->add('email', 'email', array('label' => 'Adresse e-mail'))
                 ->add('username', null, array('label' => 'Nom d\'utilisateur'))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
@@ -37,19 +33,21 @@ class RegistrationFormType extends BaseType {
                     'widget' => 'choice',
                     'years' => range(date('Y'), date('Y') - 100),
                     'required' => false,
-                    'format' => 'dd MM yyyy',
+                    'format' =>'dd MM yyyy',
                     'model_timezone' => 'Europe/Paris',
                     'empty_value' => (array('year' => 'Année', 'month' => 'Mois', 'day' => 'Jour'))
+                    
                 ))
                 ->add('telephone', 'text', array(
                     'required' => false,
                     'label' => 'Modèle de smartphone'
-                ))
-                ->add('info_plus', 'textarea', array(
-                    'required' => false,
+               ))
+                ->add('info_plus','textarea',array(
+                    'required'=> false,
                     'label' => 'Un peu plus sur moi'
                 ))
-                ->add('pref_comm', 'choice', array(
+        
+               ->add('pref_comm', 'choice', array(
                     'label' => 'Recevoir les notifications lorsqu\' un membre a commenté une de mes questions ou réponses',
                     'choices' => array(
                         '1' => 'Oui', '0' => 'Non'),
@@ -61,7 +59,7 @@ class RegistrationFormType extends BaseType {
                     'choices' => array(
                         '1' => 'Oui', '0' => 'Non'),
                     'expanded' => true,
-                    'data' => 1
+                  'data' => 1
                 ))
                 ->add('pref_repValidee', 'choice', array(
                     'label' => 'Recevoir une notification lorsque mes réponses sont validées',

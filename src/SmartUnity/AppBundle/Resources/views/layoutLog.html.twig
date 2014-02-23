@@ -99,7 +99,7 @@
                                     <a href="#" class="dropdown-toggle text-user" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('smart_unity_utilisateur_homepage') }}">Mon compte</a></li>
-                                        <li><a href="{{ path('smart_unity_membre_questions', {'type': 'reponses', 'page': '1', 'id': app.user.id }) }}">Mes Questions</a></li>
+                                        <li><a href="{{ path('smart_unity_membre_questions', {'type': 'last', 'page': '1', 'id': app.user.id }) }}">Mes Questions</a></li>
                                         <li><a href="{{ path('smart_unity_membre_reponses', {'type': 'reponses', 'page': '1', 'id': app.user.id}) }}">Mes Réponses</a></li>
                                         <li><a href="{{ path('smart_unity_app_descriptionpage') }}">Comment ça marche?</a></li>
                                         <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
@@ -150,13 +150,13 @@
                                                                     <input id="remember_me" type="checkbox"  name="_remember_me" value="on" /> Se souvenir de moi
                                                                 </label>
                                                             </div>
-                                                            <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="Connexion" style="line-height:14px" />
+                                                            <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="Connexion" />
                                                                                                                   </fieldset>
                                                     </form>
                                                     <p class="ou-fb">ou alors avec Facebook :</p>
                                                     <div class="pad-l bouton-fb-log">{{ facebook_login_button({'autologoutlink': false, 'size': 'large', 'label': "Se connecter"}) }}</div>
                                                     <a href="{{ path('fos_user_registration_register') }} ">
-                                                        <input class="btn btn-lg bouton-signin" id="_submit" name="_submit" type="submit" value="S'inscrire" style="line-height:14px">
+                                                        <input class="btn btn-lg bouton-signin" id="_submit" name="_submit" type="submit" value="S'inscrire" />
                                                     </a>
                                                     <p class="bonne-visite">Bonne visite :)</p>
                                              </div>
@@ -357,7 +357,7 @@ var cheminFleur = '{{ asset('assets/img/')}}';
             }
                         
                                 </script> 
-
+{#///////Google Analytics/////////#}
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -368,6 +368,7 @@ var cheminFleur = '{{ asset('assets/img/')}}';
   ga('send', 'pageview');
 
 </script>
+{#////////////////////////////////////#}
         <!-- call Javascript & scripts -->
 {% block callJS %}{% endblock %}
 

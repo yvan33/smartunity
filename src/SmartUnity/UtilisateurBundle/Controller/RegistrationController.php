@@ -71,7 +71,7 @@ class RegistrationController extends BaseController
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
 
-            p($form->get('cgu')->getData());
+            
 
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);

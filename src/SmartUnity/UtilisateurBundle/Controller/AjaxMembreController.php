@@ -4,10 +4,6 @@ namespace SmartUnity\UtilisateurBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\ExpressionLanguage\Expression;
-use Symfony\Component\HttpFoundation\Request;
-use FOS\UserBundle\Model\UserInterface;
 
 class AjaxMembreController extends Controller {
 
@@ -160,7 +156,7 @@ else{
                 throw new \Exception('Error: Wrong parameter for "type" on AjaxController:getQuestions');
             }
         }
-        
+                        
         if (ceil($nbQuestions / $nbParPage) == 0)
         {   
             $nbPages=1;
@@ -190,7 +186,7 @@ if($listeQuestion[0] != null){
                 $is_validated_question = false;
 
 
-if ($questionRepository->isQuestionValid($Question->getId())){    
+if ($Question->getIsValidatedQuestion()){    
     foreach($Question->getReponses() as $reponse){
         if ($reponse->getDateCertification() instanceof \DateTime){
             $auteurBestreponse = $reponse->getMembre()->getUsername();
@@ -228,7 +224,7 @@ else{
                         }
                     }
                 }
-            }    
+        }    
                 array_push($returnArray, array(
                     'id'=>$Question->getId(),
                     'sujet'=>$Question->getSujet(),
@@ -249,8 +245,7 @@ else{
 
             }
         }
-
-
+        
         //SORTIE: JSON du tableau de sortie
         return new Response(json_encode($returnArray));
     }

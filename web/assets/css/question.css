@@ -86,6 +86,17 @@
 .grille-2 p {
 	margin-bottom: 0px;
 	line-height: 1.428571429;
+        font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-weight:500;
+}
+
+p.user-and-date{
+    font-weight:200; 
+    font-style:italic
+}
+
+.grille-2 a {
+    color : black;
 }
 
 .grille-3

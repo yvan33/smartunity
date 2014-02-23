@@ -28,14 +28,16 @@
             <!-- nav div menu-->
             <div class="collapse-menu tab-ajax">
                 <ul class="nav nav-tabs nav-tabs-question" id="myTab">
-                    <li class="{% if type=='reponses' %}active first-tab{% endif %}"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'reponses', page: '1'}) }}" data-toggle="tab" id="reponses-tab">Solutions</a></li>
-                    <li class="{% if type=='onFire' %}active{% endif %}" style="float:right"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'onFire', page: '1'}) }}" data-toggle="tab" id="onFire-tab">Questions brûlantes</a></li>
-                    <li class="{% if type=='last' %}active{% endif %}" style="float:right"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'last', page: '1'}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
+                    <li class="{% if type=='last' %}active first-tab{% endif %}"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'last', page: '1'}) }}" data-toggle="tab" id="last-tab">Derni&egrave;res Questions</a></li>
+                    <li class="{% if type=='onFire' %}active{% endif %}"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'onFire', page: '1'}) }}" data-toggle="tab" id="onFire-tab">Questions brûlantes</a></li>
+                    <li class="{% if type=='reponses' %}active {% endif %}" style="float:right"><a href="{{ path('smart_unity_question_reponse_list_of_question', {type: 'reponses', page: '1'}) }}" data-toggle="tab" id="reponses-tab">Solutions</a></li>
                 </ul>
             </div>
             <!-- nav div menu fin-->
-            <!-- contenue 1-->
+            
             <div class="tab-content" id="content-frame">
+                
+<!----------------------------------QUESTIONS RESOLUES----------------------------------------->
                 <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
                     <div class="panel-group" id="accordion-reponses">
                           {% if type=='reponses' %}
@@ -50,6 +52,7 @@
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
                             <div class="panel-heading">
+                                    <div data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
                                 <h4 class="panel-title">
                                     <!-- rond pts-->
                                     <div class="grille-1"> 
@@ -64,32 +67,24 @@
    
                                     </div>
                                     <!-- rond pts fin-->
+                                    <!-- sujet question-->
+                                        <div class="grille-2" ><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><p>{{question.sujet}}</p></a>
+                                            <p class="user-and-date">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                    <!-- sujet question fin-->
                                     
-                                    <!-- describ question-->
-                                    <a data-toggle="collapse" data-parent="#accordion-reponses" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:500;">{{question.sujet}}</p>
-                                            <p style="font-size: 12px; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
-                                    </a>
-                                    <!-- describ question fin-->
-                                    
-                                    <!-- nb réponses vues-->
-                                    <div style="overflow:hidden;min-width:100px" >
-                                        <!--<div class="grille-5"><p style="color:#75c731; font-weight:{% if question.soutenue %}900{% else %}400{% endif %};">{{ question.count_soutien }} soutien{% if question.count_soutien > 1 %}s{% endif %}</p>
-                                        </div> -->
-                                        <!-- nb réponses vues fin-->
-                                        <!-- bouton rep -->
-                                        <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="bouton-repondre">Détails</button></a>
+                                    <div style="overflow:hidden;min-width:100px">
+                                        <!-- Bouton détail-->
+                                        <div class="grille-4"><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="bouton-repondre">Détails</button></a>
                                         </div>
-                                        <!-- bouton rep fin-->
-                                        <!-- bouton +-->
-
-                                        <div class="grille-3"><p>{{question.nb_reponses}} réponse{% if  question.nb_reponses > 1%}s{% endif%}</p>
+                                        <!--Fin bouton détail --->
+                                        <!--Nombre de réponses --->
+                                        <div class="grille-3">
+                                            <p>{{question.nb_reponses}} réponse{% if  question.nb_reponses > 1%}s{% endif%}</p>
                                         </div>
+                                        <!--Fin nombre de réponses --->
                                     </div>
-
-
-                                    <!-- bouton + fin-->
-                                </h4>                           
+                                </h4>  
+                                    </div>
                             </div>
                             <!-- contenue visible fin-->
                             <!-- contenue caché-->
@@ -103,7 +98,7 @@
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
                                             <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
-                                            <p style="font-weight: 300; font-style: italic;">{{ question.date_best_reponse }}</p>
+                                            <p class="user-and-date">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -122,6 +117,9 @@
                                 {% endif %}
                     </div>
                 </div>
+<!----------------------------------FIN QUESTIONS RESOLUES----------------------------------------->
+
+<!----------------------------------QUESTIONS BRULANTES----------------------------------------->
                 <div class="tab-pane fade in out{% if type=='onFire' %} active{% endif %}" id="onFire">
                     <!-- accordion general-->
                     <div class="panel-group" id="accordion-onFire">
@@ -135,24 +133,22 @@
 
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
-
                             <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
-                                    <h4 class="panel-title">
+                                <div data-toggle="collapse" data-parent="#accordion-onFire" href="#collapse{{loop.index}}">
+                                <h4 class="panel-title">
                                         <!-- rond pts-->
                                         <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                         <!-- rond pts fin-->
                                         <!-- describ question-->
-
-                                        <div class="grille-2" ><p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:500;">{{question.sujet}}</p>
-                                            <div class="grille-2" ><p style="font-size: 12px; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
-
+                                    <div class="grille-2" ><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><p>{{question.sujet}}</p></a>
+                                        <p class="user-and-date">{{ question.membre_username }} le {{ question.date }}</p></div>
+                                </a>                           
                                         <!-- describ question fin-->
                                         <!-- nb réponses vues-->
                                         <div style="overflow:hidden;min-width:100px" >
                                             <!-- nb réponses vues fin-->
                                             <!-- bouton rep -->
-                                            <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="bouton-repondre">Répondre</button></a>
+                                            <div class="grille-4"><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="bouton-repondre">Répondre</button></a>
                                             </div>
                                             <!-- bouton rep fin-->
                                             <!-- bouton +-->
@@ -161,8 +157,8 @@
                                         </div>
                                         <!-- bouton + fin-->
                                     </h4>
-                                </a>                           
-                            </div>
+                                </div>
+                                </div>
 
                             <!-- contenue visible fin-->
                             <!-- contenue caché-->
@@ -176,7 +172,7 @@
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
                                             <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
-                                            <p style="font-weight: 300; font-style: italic;">{{ question.date_best_reponse }}</p>
+                                            <p class="user-and-date">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -193,8 +189,11 @@
                                 {% endif %}
                     </div><!-- accordion general fin-->
 
-                </div><!-- contenue 1 fin--> 
-                <!-- contenue 2-->
+                </div>
+<!----------------------------------FIN QUESTIONS BRULANTES----------------------------------------->
+                    
+                
+<!---------------------------------- DERNIERES QUESTION----------------------------------------->
                 <div class="tab-pane fade in out{% if type=='last' %} active{% endif %}" id="last">
                     <div class="panel-group" id="accordion-last">
                             {% if type=='last' %}
@@ -210,21 +209,20 @@
                         <div class="panel panel-default fade in out">
                             <!-- contenue visible-->
                             <div class="panel-heading">
+                                <div data-toggle="collapse" data-parent="#accordion-last" href="#collapse{{loop.index}}">
                                 <h4 class="panel-title">
                                     <!-- rond pts-->
                                     <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
                                     <!-- rond pts fin-->
                                     <!-- describ question-->
-                                    <a data-toggle="collapse" data-parent="#accordion-last" href="#collapse{{loop.index}}">
-                                        <div class="grille-2" ><p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:500;">{{question.sujet}}</p>
-                                            <div class="grille-2" ><p style="font-size: 12px; font-style:italic">{{ question.membre_username }} le {{ question.date }}</p></div>
-                                    </a>
+                                    <div class="grille-2" ><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><p>{{question.sujet}}</p></a>
+                                         <p class="user-and-date">{{ question.membre_username }} le {{ question.date }}</p></div>
                                     <!-- describ question fin-->
                                     <!-- nb réponses vues-->
                                     <div style="overflow:hidden;min-width:100px" >
                                         <!-- nb réponses vues fin-->
                                         <!-- bouton rep -->
-                                        <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="bouton-repondre">Répondre</button></a>
+                                       <div class="grille-4"><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="bouton-repondre">Répondre</button></a>
                                         </div>
                                         <!-- bouton rep fin-->
                                         <!-- bouton +-->
@@ -232,7 +230,8 @@
                                         </div>
                                     </div>
                                     <!-- bouton + fin-->
-                                </h4>                           
+                                </h4>
+                            </div>
                             </div>
                             <!-- contenue visible fin-->
                             <!-- contenue caché-->
@@ -246,7 +245,7 @@
                                     <div class="grille-det-content">
                                         <div class="grille-det1">
                                             <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
-                                            <p style="font-weight: 300; font-style: italic;">{{ question.date_best_reponse }}</p>
+                                            <p class="user-and-date">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
                                             <p>{{question.best_reponse}}</p>
@@ -263,6 +262,8 @@
                                 {% endif %}
                     </div>
                 </div>
+<!----------------------------------FIN DERNIERES QUESTION----------------------------------------->
+                    
             </div><!-- nav div fin--> 
 
             <div style="text-align:center;">
@@ -297,6 +298,7 @@
     function generateContent(pEntry, i) {
         var entity = '                               <div class="panel panel-default"> \
                                             <div class="panel-heading"> \
+                                             <div data-toggle="collapse" data-parent="#accordion-' + type + '" href="#collapse' + type + i + '"> \
                                               <h4 class="panel-title"> \
                                                 <div class="grille-1">';
           
@@ -313,15 +315,12 @@
             entity +='<div class="rond-point"><p class="txt-rond" style="font-weight:200;">' + pEntry['remuneration'] + ' pts</p></div>';
         }
         entity+='</div> \
-                                                <a data-toggle="collapse" data-parent="#accordion-' + type + '" href="#collapse' + type + i + '"> \
-                                                <div class="grille-2" ><p style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif; font-weight:500;">' + pEntry['sujet'] + '</p> \
-                                                <p style="font-size: 12px; font-style:italic">' + pEntry['membre_username'] + ' le ' + pEntry['date'] + '</p> </div></a> \
+                                                <div class="grille-2" ><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"><p>' + pEntry['sujet'] + '</p></a> \
+                                                <p class="user-and-date">' + pEntry['membre_username'] + ' le ' + pEntry['date'] + '</p> </div> \
                                                 <div style="overflow:hidden;min-width:100px"> \
                                                 \
-                                                <div class="grille-4"><a href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
+                                                <div class="grille-4"><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse') }}/' + pEntry['slug'] + '"> \
                                                 <button type="button" class="bouton-repondre">';
-
-
         if (type == 'reponses')
             {entity += 'Détails';}
         else
@@ -329,13 +328,11 @@
 
         entity += '</button></a></div> \
                                                 <div class="grille-3"><p>' + pEntry['nb_reponses'] + ' réponse';
-
         if (pEntry['nb_reponses'] > 1)
             {entity += 's';}
 
         entity += '</p></div> \
-                                                 \
-                                                </div></h4> \
+                                                </div></h4></div> \
                                             </div> \
                                               <div id="collapse' + type + i + '" class="panel-collapse collapse"> \
                                                   <div class="panel-body"> \
@@ -346,7 +343,7 @@
             {entity += '<div class="grille-det-content"> \
                                                     <div class="grille-det1"> \
                                                             <p style="margin-bottom: 0;">' + pEntry['auteur_best_reponse'] + '</p> \
-                                                            <p style="font-weight: 300; font-style: italic;">' + pEntry['date_best_reponse'] + '</p> \
+                                                            <p class="user-and-date">' + pEntry['date_best_reponse'] + '</p> \
                                                       </div> \
                                                         <div class="grille-det2"> \
                                                         <p>' + pEntry['best_reponse'] + '</p> \
@@ -457,7 +454,6 @@
         $('#content-frame').height($('#content-frame').height());
     }
 
-
 //////////////////
 ////// VARIABLES
 //////////////////
@@ -550,11 +546,7 @@
                     }
                 });
 
-
-
             });
-</script>
-<script language="javascript">
 
 /////////////
 ////// POPUP SUR "POSER VOTRE QUESTION" 
@@ -567,7 +559,6 @@ $(document).ready(function(){
   })
 });
 {% endif %}
-
 </script>
 
 {% endblock %}
