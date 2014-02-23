@@ -19,3 +19,4 @@
 .project
 /.settings
 .buildpath
+web/phpconsole/install.php
