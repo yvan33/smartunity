@@ -81,6 +81,7 @@ class RegistrationController extends BaseController
                 $ip=$request->getClientIp();
                 $user->setIpInscription($ip);
                 if($test_parrain  != null){
+
                     $user->setCagnotte(80);
                     $parrain_cagnotte=$test_parrain->getCagnotte() + 30;
                     $test_parrain->setCagnotte($parrain_cagnotte);

@@ -48,6 +48,9 @@ _facebook_secured:
     
 fos_facebook_channel:
     resource: "@FOSFacebookBundle/Resources/config/routing.xml" 
+    
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"    
 
 
 

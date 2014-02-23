@@ -214,6 +214,7 @@ class UtilisateurController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($parrainage);
                 $em->flush();
+
                 $url = $this->generateUrl('smart_unity_utilisateur_confirmparrainage', array('code' => $code), true);
                 $contenu="Bonjour,  <br/><br/>".$user->getUsername()." te conseille de découvrir le <a href=\"http://smartunity.fr\">smartunity.fr</a>, une plateforme d'entraide sur l'utilisation des smartphones en te parrainant.<br/>";
                 $contenu.="Ce parrainage te permettra d'augmenter ta cagnotte de 30 points. <br/> Il suffit de s'inscrire à l'adresse suivante: <br/>";

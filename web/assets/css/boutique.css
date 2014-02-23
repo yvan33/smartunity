@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+@font-face{
+    font-family : "centrale";
+    src : url(../fonts/Centrale.ttf) format ('truetype');
+    /* pour IE */
+    src : url(../fonts/Centrale.ttf);
+=======
 @font-face {
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
@@ -7,6 +14,7 @@
          url(../fonts/Centrale.svg#centrale) format('svg');
     font-weight: normal;
     font-style: normal;
+>>>>>>> 58610be9ef44f1134887e65c62b51375358e2b95
 }
 
 .cookie-title
