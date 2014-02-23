@@ -166,8 +166,8 @@ fm_elfinder:
                 upload_deny: ['all']
                 upload_max_size: 2M    
  
-ivory_ck_editor:
-    default_config: default
-    configs:
-        default:
-            filebrowserBrowseRoute: elfinder                
+#ivory_ck_editor:
+#    default_config: default
+#    configs:
+#        default:
+#            filebrowserBrowseRoute: elfinder                
