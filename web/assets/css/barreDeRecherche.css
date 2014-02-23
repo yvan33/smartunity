@@ -161,7 +161,8 @@ input[type="radio"]:checked + .switch--off {
 }
 
 .switch {
-	padding-bottom:4px;
+	padding-bottom: 2px;
+	padding-top: 2px;
 }
 
 .glyph-barre {

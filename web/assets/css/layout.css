@@ -643,10 +643,11 @@ body.bg
 	border-radius:2px;
 	background-color: #e37151;
 	height:25px;
-	line-height:5px;
 	color: white;
 	font-family: centrale;	
     font-size: 13px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 .bouton-valid-modif
 {
