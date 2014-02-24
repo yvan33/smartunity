@@ -11,41 +11,41 @@
 
 
 <div class="row">
-    
-			<form action="{{ path('smart_unity_app_contactPage') }}" {{ form_enctype(form_contact) }} method="POST">
-				<div class="row text-center cookie-title">
-			      	Contactez-nous !
-			    </div>
-			    <div class="description">
-			    	<p>Une question? Besoin de renseignement, envie de nous signaler un problème ou même de nous donner des idées pour améliorer le site Smart'Unity, contactez nous en remplissant ce formulaire :</p>
-			    </div>
-			    
-				<div class="erreur">
-			       	<p>{{form_errors(form_contact.email)}}</p>
-			        <p>{{form_errors(form_contact.message)}}</p>
-			        <p>{{form_errors(form_contact.sujet)}}</p>
-				</div>
 
-				<fieldset class="contact-form">    
-				 <div class="row text-center cookie-title confirmation">{{confirmation }}</div>
-            
-					<div class="row premiere-ligne ">
-			          	<div class="grille-1">{{form_label(form_contact.email)}}<span style="color: red;"> *</span></div>
-						<div class="grille-2">{{form_widget(form_contact.email)}}</div>
-			     	</div> 
-					<div class="row">
-						<div class="grille-1">{{form_label(form_contact.sujet)}}<span style="color: red;"> *</span></div>
-			 			<div class="grille-2">{{form_widget(form_contact.sujet)}}</div>
-					</div> 
-					<div class="row">
-						<div class="grille-1">{{form_label(form_contact.message)}}<span style="color: red;"> *</span></div>
-						<div class="grille-2 text-message-contact">{{form_widget(form_contact.message, { 'attr': {'class': 'form-textarea textarea-register textarea-contact'} })}}</div>
-					</div>  
-					<div class="cent-h bouton-bas-block">	
-						<button type="submit" class="bouton-envoyer">Envoyer</button>
-					</div> 
-				</fieldset>
-			</form>
+    <form action="{{ path('smart_unity_app_contactPage') }}" {{ form_enctype(form_contact) }} method="POST">
+        <div class="row text-center cookie-title">
+            Contactez-nous !
+        </div>
+        <div class="description">
+            <p>Une question? Besoin de renseignement, envie de nous signaler un problème ou même de nous donner des idées pour améliorer le site Smart'Unity, contactez nous en remplissant ce formulaire :</p>
+        </div>
+
+        <div class="erreur">
+            <p>{{form_errors(form_contact.email)}}</p>
+            <p>{{form_errors(form_contact.message)}}</p>
+            <p>{{form_errors(form_contact.sujet)}}</p>
+        </div>
+
+        <fieldset class="contact-form">    
+            <div class="row text-center cookie-title confirmation">{{confirmation }}</div>
+
+            <div class="row premiere-ligne ">
+                <div class="grille-1">{{form_label(form_contact.email)}}<span style="color: red;"> *</span></div>
+                <div class="grille-2">{{form_widget(form_contact.email)}}</div>
+            </div> 
+            <div class="row">
+                <div class="grille-1">{{form_label(form_contact.sujet)}}<span style="color: red;"> *</span></div>
+                <div class="grille-2">{{form_widget(form_contact.sujet)}}</div>
+            </div> 
+            <div class="row">
+                <div class="grille-1">{{form_label(form_contact.message)}}<span style="color: red;"> *</span></div>
+                <div class="grille-2 text-message-contact">{{form_widget(form_contact.message, { 'attr': {'class': 'form-textarea textarea-register textarea-contact'} })}}</div>
+            </div>  
+            <div class="cent-h bouton-bas-block">	
+                <button type="submit" class="bouton-envoyer">Envoyer</button>
+            </div> 
+        </fieldset>
+    </form>
 			{{ form_end(form_contact)}}
 
 </div>

@@ -49,11 +49,7 @@
                         <p style="font-size:11px">{{reponse.date}}</p>
                     </div>
 
-
                     {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
-                    <!--                 <div class="roww">                 
-                                        <img class="bouton-validation" src="{{ asset('assets/img/valid-btn.png') }}"/>
-                                    </div> -->
 
                     <div class="valider rep">
                         <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalValidation" >Valider</button>
@@ -76,7 +72,8 @@
                     </div><!-- /.modal -->  
 
                     {% endif %}
-                                    {% if reponse.is_certif %}
+                    
+        {% if reponse.is_certif %}
                     <div class="roww" rel="tooltip" data-original-title="Cette réponse à été certifiée Smart'Solution le {{reponse.date_certification}} .">
                         <img class="certif-img" src="{{ asset('assets/img/certif.png') }}" style="margin-bottom:10px"/>
                     </div>
@@ -87,8 +84,6 @@
                                     {% endif %}
 
                 </div>
-
-
 
                 <div class="grille-2" >
 

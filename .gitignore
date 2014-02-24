@@ -10,6 +10,7 @@
 /src/SmartUnity/AppBundle/old-Entity
 /test
 /nbproject
-/web/phpconsole/*
+/web/phpconsole/
 /web/app_dev.php
 .htaccess
+/web/uploads/

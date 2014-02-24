@@ -7,13 +7,11 @@ use Symfony\Component\HttpFoundation\Request;
 use SmartUnity\AppBundle\Entity\avatar;
 use SmartUnity\AppBundle\Entity\parrainage;
 
-
-
 class UtilisateurController extends Controller {
 
     public function indexAction( $formPassword = null, $formInfos = null, $formAvatar = null) {
 
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
 
         $parrainage = new parrainage($user);
 
@@ -34,6 +32,7 @@ class UtilisateurController extends Controller {
         else{
             $parrain="";
         }
+        
         $avancement=25;
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
         if (isset($avatar)) {
@@ -41,7 +40,6 @@ class UtilisateurController extends Controller {
             $avancement +=25;
 
         }
-
         if ( (null !== $user->getNom()) && (null !== $user->getPrenom())) {
             $avancement +=10;
         }
@@ -60,13 +58,7 @@ class UtilisateurController extends Controller {
         if ( (null !== $user->getAppareils()) ) {
             $avancement +=10;
         }
-
-
-
-
-        // if ( (null !== $user->getVille())) {
-        //     $avancement +=10;
-        // }
+        
 
         if (isset($formPassword)) {
 
@@ -109,7 +101,7 @@ class UtilisateurController extends Controller {
 
     public function editInfosAction() {
 
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
         $formInfos = $this->createForm('smartunity_user_informations', $user);
 
         return $this->forward(
@@ -121,7 +113,7 @@ class UtilisateurController extends Controller {
     public function setPrefAction() {
 
         $em = $this->getDoctrine()->getManager();
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
         $form = $this->createForm('smartunity_user_preference', $user);
         $form->bind($this->getRequest());
 
@@ -139,7 +131,7 @@ class UtilisateurController extends Controller {
     public function setInfosAction() {
 
         $em = $this->getDoctrine()->getManager();
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
         $form = $this->createForm('smartunity_user_informations', $user);
         $form->bind($this->getRequest());
 
@@ -156,7 +148,7 @@ class UtilisateurController extends Controller {
 
     public function uploadavatarAction(Request $request) {
 
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
         $userid = $user->getId();
 
         $em = $this->getDoctrine()->getManager();
@@ -198,7 +190,7 @@ class UtilisateurController extends Controller {
 
         if (!isset($parrainage)) {
 
-            $user = $this->container->get('security.context')->getToken()->getUser();
+            $user = $this->getUser();
             $parrainage = new parrainage($user);
         }
 
@@ -247,7 +239,7 @@ class UtilisateurController extends Controller {
 
 
     public function removeavatarAction() {
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
         $userid = $user->getId();
         $em = $this->getDoctrine()->getManager();
         $avatar = $em->getRepository('SmartUnityAppBundle:avatar')->find($userid);
