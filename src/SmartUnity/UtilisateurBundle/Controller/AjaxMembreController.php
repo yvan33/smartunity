@@ -65,7 +65,7 @@ class AjaxMembreController extends Controller {
                 $is_validated_question = false;
 
 
-if ($questionRepository->isQuestionValid($Question->getId())){    
+if ($Question->getIsValidatedQuestion()){    
     foreach($Question->getReponses() as $reponse){
         if ($reponse->getDateCertification() instanceof \DateTime){
             $auteurBestreponse = $reponse->getMembre()->getUsername();

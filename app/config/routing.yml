@@ -13,22 +13,10 @@ smart_unity_boutique:
     resource: "@SmartUnityBoutiqueBundle/Resources/config/routing.yml"
     prefix:   /Boutique/
 
-smart_unity_forum:
-    resource: "@SmartUnityForumBundle/Resources/config/routing.yml"
-    prefix:   /Forum/
-
 smart_unity_admin:
     resource: "@SmartUnityAdminBundle/Resources/config/routing.yml"
     prefix:   /Admin/
 
-smart_unity_blog:
-    resource: "@SmartUnityBlogBundle/Resources/config/routing.yml"
-    prefix: /Blog 
-    
-mv_blog_admin:
-    resource: "@MvBlogBundle/Resources/config/routing_admin.yml"
-    prefix: /badp
-    
 smart_unity_app:
     resource: "@SmartUnityAppBundle/Resources/config/routing.yml"
     prefix:   /
@@ -37,7 +25,6 @@ _security_check:
     pattern:  /login_check
     defaults: { _controller: SmartUnityAppBundle:Accueil:loginCheck }    
 
-    
 _security_logout:
     pattern:  /logout
     defaults: { _controller: SmartUnityAppBundle:Accueil:logout }    
