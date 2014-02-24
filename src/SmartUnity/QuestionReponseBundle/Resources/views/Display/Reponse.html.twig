@@ -95,7 +95,7 @@
                     <div class="rond-point"><p>{{ question.remuneration }} pts</p></div>
 
 
-                    <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
+                    <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien{% if question.soutienMembres|length > 1 %}s{% endif %}</p>
                         <button type="button" class="bouton-soutien" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour soutenir une question."{% endif %}><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                     </div>
                 </div>
@@ -516,8 +516,8 @@ Toast
             {{ form_errors(formSoutien) }} \
             </div> \
         <div class="row row-soutenir"> \
-  <div class="grille-1 grille-1-soutenir"> Augmenter dotation: </div> \
-                   <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}}) }}</div> \
+            <div class="grille-1 grille-1-soutenir"> Augmenter dotation </div> \
+            <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}}) }}</div> \
 </div> \
         <div class="row row-soutenir"> \
                 <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'btn bouton-repondre'}})}}</div> \
@@ -635,7 +635,7 @@ Toast
 
         if (!(pEntry['is_certif']) && pEntry['is_validated']) {
 
-            entity += ' <li><a href="' + Routing.generate('smart_unity_question_reponse_certification', {idReponse: '12'}) + '" tabindex="-1">Certifier réponse</a></li>';
+            entity += ' <li><a href="' + Routing.generate('smart_unity_question_reponse_certification', {idReponse: pEntry['id']}) + '" tabindex="-1">Certifier réponse</a></li>';
         }
         entity += '      <li><a tabindex="-1" href="#">Another action</a></li> \
             <li><a tabindex="-1" href="#">Something else here</a></li> \

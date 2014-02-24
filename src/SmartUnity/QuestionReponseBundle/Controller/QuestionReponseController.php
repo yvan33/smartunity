@@ -1176,14 +1176,23 @@ class QuestionReponseController extends Controller {
 
             if ($formSoutien->isValid()) {
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
-                $question->setRemuneration($question->getRemuneration() + ($formSoutien->get('soutien')->getData()));
-                $question->getSoutienMembres()->add($user);
-                $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
+            
+                if($question->getSoutienMembres()->contains($user) ){
+                    $question->setRemuneration($question->getRemuneration() + ($formSoutien->get('soutien')->getData()));
+                    $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($question);
+                    $em->persist($user);
+                    $em->flush();
 
-                //ajouté l'utilisateur à la liste de soutien
-
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
+                }
+                else{
+                    $question->setRemuneration($question->getRemuneration() + ($formSoutien->get('soutien')->getData()));
+                    $question->getSoutienMembres()->add($user);
+                    $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
+                    $em = $this->getDoctrine()->getManager();
+                    $em->flush();
+                }
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
