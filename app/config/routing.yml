@@ -3,54 +3,43 @@ fos_js_routing:
     
 smart_unity_question_reponse:
     resource: "@SmartUnityQuestionReponseBundle/Resources/config/routing.yml"
-    prefix:   /QuestionReponse/
 
 smart_unity_utilisateur:
     resource: "@SmartUnityUtilisateurBundle/Resources/config/routing.yml"
-    prefix:   /Utilisateur/
 
 smart_unity_boutique:
     resource: "@SmartUnityBoutiqueBundle/Resources/config/routing.yml"
     prefix:   /Boutique/
 
-smart_unity_forum:
-    resource: "@SmartUnityForumBundle/Resources/config/routing.yml"
-    prefix:   /Forum/
-
 smart_unity_admin:
     resource: "@SmartUnityAdminBundle/Resources/config/routing.yml"
-    prefix:   /Admin/
+    prefix:   /Admin
 
 smart_unity_blog:
     resource: "@SmartUnityBlogBundle/Resources/config/routing.yml"
     prefix: /Blog 
-    
-mv_blog_admin:
-    resource: "@MvBlogBundle/Resources/config/routing_admin.yml"
-    prefix: /badp
-    
+
 smart_unity_app:
     resource: "@SmartUnityAppBundle/Resources/config/routing.yml"
-    prefix:   /
     
 _security_check:
     pattern:  /login_check
-    defaults: { _controller: SmartUnityAppBundle:Accueil:loginCheck }    
+    defaults: { _controller: SmartUnityAppBundle:Accueil:loginCheck }
 
-    
 _security_logout:
     pattern:  /logout
-    defaults: { _controller: SmartUnityAppBundle:Accueil:logout }    
+    defaults: { _controller: SmartUnityAppBundle:Accueil:logout }
 
 _facebook_secured:
-    pattern: /secured/
-    defaults: { _controller: SmartUnityAppBundle:Accueil:index }    
+    pattern: /secured
+    defaults: { _controller: SmartUnityAppBundle:Accueil:index }
     
 fos_facebook_channel:
     resource: "@FOSFacebookBundle/Resources/config/routing.xml" 
     
 elfinder:
-     resource: "@FMElfinderBundle/Resources/config/routing.yml"    
+    resource: "@FMElfinderBundle/Resources/config/routing.yml"    
+
 
 
 
