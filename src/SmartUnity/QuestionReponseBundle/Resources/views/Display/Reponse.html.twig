@@ -742,8 +742,8 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
             else{
                 entity+='<p class="textegris-grand">';
             } 
-            entity += pEntry['down_vote'] + '</p> \            
-                                        </div>';     
+            entity += pEntry['down_vote'] + '</p>\
+            </div>';     
         }
         
         entity+='</div> \
@@ -793,7 +793,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                                         </div> \
                                 </div> \
                                 </div> \
-                                <p style="min-height: 100px">' + pEntry['description'] + '</p>';
+                                <div style="min-height: 100px">' + pEntry['description'] + '</div>';
         pEntry['commentaires'].forEach(function(pCom, i) {
 
             entity += '<div class="commentaire" onmouseover="displaySignalComment(this);" onmouseout="hideSignalComment(this);"> \
@@ -828,16 +828,15 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
        // entity += '<div style = "float:left; margin-right:5px;"> \
        //      <a href = "'+ Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a></div>';    
                              {% endif %}
-          entity += '      <div></div> \
-         <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div>';
+          
+         entity += '<div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div>';
     
      {% if is_granted('ROLE_USER')%}
     if (userId == pEntry['membre_id']) {    
-    entity += ' <input id="reponseId" type="hidden" value="'+ pEntry['id'] +'" /> \
-                <input id="reponseDescription" type="hidden" value="' + pEntry['description'] + '" /> \
+    entity += ' <input id="reponseId" type="hidden" value="'+ pEntry['id'] +'" > \
+                <input id="reponseDescription" type="hidden" value="' + pEntry['description'] + '"> \
  <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this)"> \
-                                <div class="bouton-com-rep">Editer</div> \
-                            </div>';  
+                                <div class="bouton-com-rep">Editer</div></div>';  
     }
           {% endif %}
            entity += ' </div> \
