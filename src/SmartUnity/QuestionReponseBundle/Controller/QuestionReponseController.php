@@ -1317,7 +1317,8 @@ class QuestionReponseController extends Controller {
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
-                    'formSignaler' => $formSignaler->createView()));
+                    'formSignaler' => $formSignaler->createView(),
+                    'type' => $type));
     }
 
     public function signalerCommentaireReponseAction($idCommentaireReponse) {
@@ -1355,7 +1356,8 @@ class QuestionReponseController extends Controller {
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
-                    'formSignaler' => $formSignaler->createView()));
+                    'formSignaler' => $formSignaler->createView(),
+                    'type' => $type));
     }
 
 }
