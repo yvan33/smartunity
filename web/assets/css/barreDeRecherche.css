@@ -162,7 +162,7 @@ input[type="radio"]:checked + .switch--off {
 
 .switch {
 	padding-bottom: 2px;
-	padding-top: 2px;
+	padding-top: 4px;
 }
 
 .glyph-barre {
