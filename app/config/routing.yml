@@ -15,10 +15,6 @@ smart_unity_admin:
     resource: "@SmartUnityAdminBundle/Resources/config/routing.yml"
     prefix:   /Admin
 
-smart_unity_blog:
-    resource: "@SmartUnityBlogBundle/Resources/config/routing.yml"
-    prefix: /Blog 
-
 smart_unity_app:
     resource: "@SmartUnityAppBundle/Resources/config/routing.yml"
     
