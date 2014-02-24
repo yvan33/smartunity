@@ -14,3 +14,6 @@
 /web/app_dev.php
 .htaccess
 /web/uploads/
+.project
+/.settings
+.buildpath
