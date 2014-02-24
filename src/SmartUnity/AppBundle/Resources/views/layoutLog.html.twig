@@ -83,11 +83,10 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                             	<li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage'%} class="fleur-active" {% else %} class="fleur-inactive" {% endif %}><a href={{ path('smart_unity_app_homepage') }}><img onmouseover="fleurNavHover(this)" onmouseout="fleurNavUnHover(this)" src="{{ asset('assets/img/logo-su-nb-bleue.png') }}"/></a></li>
-                                <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
-                             or  app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
+                                <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_demander_questions'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
-                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}" class="menu-pad">QUESTIONS/REPONSES</a></li>
+                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question') }}" class="menu-pad">QUESTIONS/REPONSES</a></li>
                                 <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href={{ path('smart_unity_boutique_homepage') }} class="menu-pad">BOUTIQUE CADEAUX</a></li>
                                 <li><a target="blank" href="http://blog.smartunity.fr" class="menu-pad">BLOG</a></li>
                             </ul>

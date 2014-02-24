@@ -1,29 +1,29 @@
 smart_unity_utilisateur_setinfos:
-    pattern:  /modify_infos
+    pattern:  /mon-compte/modifier-infos
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:setInfos }
 
 smart_unity_utilisateur_editinfos:
-    pattern:  /edit_infos
+    pattern:  /mon-compte/afficher-infos
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:editInfos }
 
 smart_unity_utilisateur_editavatar:
-    pattern:  /upload_avatar
+    pattern:  /mon-compte/ajouter-avatar
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:uploadavatar }
 
 smart_unity_utilisateur_removeavatar:
-    pattern:  /remove_avatar
+    pattern:  /mon-compte/supprimer-avatar
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:removeavatar }       
 
 smart_unity_utilisateur_changepassword:
-    pattern:  /change_password
+    pattern:  /mon-compte/changer-mdp
     defaults: { _controller: SmartUnityUtilisateurBundle:ChangePassword:changePassword }
     
 smart_unity_utilisateur_setpref:
-    pattern:  /modify_pref
+    pattern:  /mon-compte/modifier-preferences
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:setPref }
 
 smart_unity_utilisateur_homepage:
-    pattern:  /
+    pattern:  /mon-compte
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:index }
 
 smart_unity_utilisateur_envoiparrainage:
@@ -40,14 +40,14 @@ smart_unity_utilisateur_confirmparrainage:
     defaults: { _controller: SmartUnityUtilisateurBundle:Utilisateur:confirmParrainage}
 
 smart_unity_membre_questions:
-    pattern:  /membre/questions/{id}/{type}/{page}
+    pattern:  /membre/{id}/questions/{type}/{page}
     defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'last', page:'1'  } 
     requirements:
         type: onFire|last|reponses|question
         page: \d+
 
 smart_unity_membre_reponses:
-    pattern:  /membre/reponses/{id}/{type}/{page}
+    pattern:  /membre/{id}/reponses/{type}/{page}
     defaults: { _controller: SmartUnityUtilisateurBundle:QuestionReponseMembre:displayListOfQuestion, type:'reponses', page:'1'  } 
     requirements:
         type: certified|validated|reponses|question
@@ -58,11 +58,11 @@ fos_user_security:
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /Utilisateur
+    prefix: /mon-compte
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix: /register
+    prefix: /inscription
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
