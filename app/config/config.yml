@@ -3,7 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: "@SmartUnityUtilisateurBundle/Resources/config/services.yml"}
     - { resource: "@SmartUnityQuestionReponseBundle/Resources/config/services.yml"}
-    - { resource: "@MvBlogBundle/Resources/config/config.yml" }
 
 framework:
     #esi:             ~
@@ -166,8 +165,8 @@ fm_elfinder:
                 upload_deny: ['all']
                 upload_max_size: 2M    
  
-ivory_ck_editor:
-    default_config: default
-    configs:
-        default:
-            filebrowserBrowseRoute: elfinder                
+#ivory_ck_editor:
+#    default_config: default
+#    configs:
+#        default:
+#            filebrowserBrowseRoute: elfinder                

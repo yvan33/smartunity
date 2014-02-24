@@ -9,7 +9,6 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
-use Elastica;
 
 class QuestionReponseController extends Controller {
 
@@ -54,8 +53,6 @@ class QuestionReponseController extends Controller {
         //On récupère la réponse du controleur Ajax (pour avaoir une réponse au cas ou)
 
 
-
-
         $response = $this->forward('SmartUnityQuestionReponseBundle:Ajax:getQuestions', array(
             'type' => $type,
             'page' => $page,
@@ -76,9 +73,9 @@ class QuestionReponseController extends Controller {
 
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
         if ($listeQuestions[0]->type == $type && $listeQuestions[0]->nbParPage == $nbParPage && $listeQuestions[0]->page == $page)
-            unset($listeQuestions[0]);
+        {unset($listeQuestions[0]); }
         else
-            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
+        { throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController'); }
 
 
         //Génération de la pagination en statique (si pas de JS)
@@ -88,8 +85,9 @@ class QuestionReponseController extends Controller {
             array_push($pagination, array('<', $page - 1, '-4'));
         }
         for ($i = -2; $i < 3; $i++) {
-            if (($page + $i) >= 1 && ($page + $i) <= $nbPages)
-                array_push($pagination, array($page + $i, $page + $i, $i));
+            if (($page + $i) >= 1 && ($page + $i) <= $nbPages) {
+             array_push($pagination, array($page + $i, $page + $i, $i)); 
+            }
         }
         if ($page < $nbPages) {
             array_push($pagination, array('>', $page + 1, '3'));
@@ -192,8 +190,8 @@ class QuestionReponseController extends Controller {
             array_push($pagination, array('<', $page - 1, '-3'));
         }
         for ($i = -2; $i < 3; $i++) {
-            if (($page + $i) >= 1 && ($page + $i) <= $nbPages)
-                array_push($pagination, array($page + $i, $page + $i, $i));
+            if (($page + $i) >= 1 && ($page + $i) <= $nbPages) {
+            array_push($pagination, array($page + $i, $page + $i, $i)); }
         }
         if ($page < $nbPages) {
             array_push($pagination, array('>', $page + 1, '3'));
@@ -372,7 +370,7 @@ class QuestionReponseController extends Controller {
             $is_validated_question = false;
 
 
-            if ($questionRepository->isQuestionValid($Question->getId())) {
+            if ($Question->getIsValidatedQuestion()) {
                 foreach ($Question->getReponses() as $reponse) {
                     if ($reponse->getDateCertification() instanceof \DateTime) {
                         $auteurBestreponse = $reponse->getMembre()->getUsername();
@@ -514,8 +512,8 @@ class QuestionReponseController extends Controller {
 
         $question = $questionRepository->findOneBySlug($slug);
 
-        $isValidated = $questionRepository->isQuestionValid($question->getId());
-        $isCertif = $questionRepository->isQuestionCertif($question->getId());
+        $isValidated = $question->getIsValidatedQuestion();
+        $isCertif = $question->getIsCertifiedQuestion();
         $isAnswered = FALSE;
         $membre = $question->getMembre();
 
@@ -726,18 +724,10 @@ class QuestionReponseController extends Controller {
                 $newQuestion->setSignaler(false);
 
                 $newQuestion->setDate(new \DateTime(date("Y-m-d H:i:s"))); //date locale
-                // $str = $formQuestion->get('sujet')->getData();
-                // $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-                // $replace = array('s', 't', 's', 't', 's', 't', 's', 't', 'i', 'a', 'a', 'i', 'a', 'a', 'e', 'E');
-                // $str = str_ireplace($search, $replace, strtolower(trim($str)));
-                // $str = preg_replace('/[^\w\d\-\ ]/', '', $str);
-                // $str = str_replace(' ', '-', $str);
-                // $slug= preg_replace('/\-{2,}', '-', $str);
 
                 $slug = $this->slugify($formQuestion->get('sujet')->getData());
                 $newQuestion->setSlug($slug);
 
-                // $newQuestion->addSoutien($user);
                 $cagnotte = $user->getCagnotte() - $formQuestion->get('remuneration')->getData() + 10;
                 if ($cagnotte >= 0) {
                     $user->setCagnotte($cagnotte);
@@ -822,7 +812,6 @@ class QuestionReponseController extends Controller {
 
             if ($formEditQuestion->isValid()) {
 
-//                $question->setSlug($this->slugify($formEditQuestion->get('sujet')->getData()));
                 $nouvelleDotation = $formEditQuestion->get('remuneration')->getData();
                 $cagnotte = $user->getCagnotte() - $nouvelleDotation - $ancienneDotation;
                 $user->setCagnotte($cagnotte);
@@ -842,18 +831,19 @@ class QuestionReponseController extends Controller {
     }
 
     public function slugify($str) {
-        $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+        $str = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $str);
+        $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',);
         $replace = array('s', 't', 's', 't', 's', 't', 's', 't', 'i', 'a', 'a', 'i', 'a', 'a', 'e', 'E');
         $str = str_ireplace($search, $replace, strtolower(trim($str)));
         $str = preg_replace('/[^\w\d\-\ ]/', '', $str);
         $str = str_replace(' ', '-', $str);
         return preg_replace('/\-{2,}/', '-', $str);
+
     }
 
     public function addReponseAction($slug) {
         $newReponse = new \SmartUnity\AppBundle\Entity\Reponse();
         $formReponse = $this->createFormBuilder($newReponse)
-                // ->add('description', 'ckeditor')
                 ->add('description', 'ckeditor', array(
                     'config' => array(
                         'toolbar' => array(
@@ -901,8 +891,6 @@ class QuestionReponseController extends Controller {
         if ($this->getRequest()->getMethod() == 'POST') {
             $formReponse->bind($this->getRequest());
             if ($formReponse->isValid()) {
-
-
 
                 $newReponse->setMembre($user);
 
@@ -984,7 +972,6 @@ class QuestionReponseController extends Controller {
                 ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST') {
-
 
             $formEditReponse->bind($this->getRequest());
 
@@ -1106,7 +1093,7 @@ class QuestionReponseController extends Controller {
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug())));
             }
         } else {
-            throw new \Exception('La reponse passée en paramètre n\'éxiste pas!');
+            throw new \Exception('La reponse passée en paramètre n\'existe pas!');
         }
     }
 
@@ -1136,9 +1123,6 @@ class QuestionReponseController extends Controller {
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
-//        return $this->render('SmartUnityQuestionReponseBundle:Frame:AddCommentaire.html.twig',array(
-//            'formCommentaire'=>$formCommentaire->createView(),
-//            'type'=>'Question'));
 
         return "";
     }

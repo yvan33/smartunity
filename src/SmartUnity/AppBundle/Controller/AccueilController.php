@@ -4,10 +4,7 @@ namespace SmartUnity\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\HttpFoundation\Response;
-use SmartUnity\AppBundle\Form\Type\ContactType;
 
 class AccueilController extends Controller {
 
@@ -34,9 +31,7 @@ class AccueilController extends Controller {
         }
 
 
-        //////------------ CONTENU LISTE
-        //Cf SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestionAction
-
+/////////Nombre de questions affichées
         $nbParPage = 5;
 
 

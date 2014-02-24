@@ -92,7 +92,7 @@
                                 <div class="panel-body">
 
                                     <div class="grille-det">
-                                        <p>{{question.description}}</p>
+                                        {{question.description |raw}}
                                     </div>
                                                 {% if question.date_best_reponse != '' %}
                                     <div class="grille-det-content">
@@ -101,7 +101,7 @@
                                             <p class="user-and-date">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
-                                            <p>{{question.best_reponse}}</p>
+                                            {{question.best_reponse |raw}}
                                         </div>
                                     </div>
                                                 {% endif %}
@@ -166,7 +166,7 @@
                                 <div class="panel-body">
 
                                     <div class="grille-det">
-                                        <p>{{question.description}}</p>
+                                        {{question.description |raw}}
                                     </div>
                                                 {% if question.date_best_reponse != '' %}
                                     <div class="grille-det-content">
@@ -175,7 +175,7 @@
                                             <p class="user-and-date">{{ question.date_best_reponse }}</p>
                                         </div>
                                         <div class="grille-det2">
-                                            <p>{{question.best_reponse}}</p>
+                                            {{question.best_reponse |raw}}
                                         </div>
                                     </div>
                                                 {% endif %}
@@ -239,7 +239,7 @@
                                 <div class="panel-body">
 
                                     <div class="grille-det">
-                                        <p>{{question.description}}</p>
+                                        {{question.description |raw}}
                                     </div>
                                                 {% if question.date_best_reponse != '' %}
                                     <div class="grille-det-content">
@@ -247,8 +247,8 @@
                                             <p style="margin-bottom: 0;">{{ question.auteur_best_reponse }}</p>
                                             <p class="user-and-date">{{ question.date_best_reponse }}</p>
                                         </div>
-                                        <div class="grille-det2">
-                                            <p>{{question.best_reponse}}</p>
+                                       <div class="grille-det2">
+                                            {{question.best_reponse |raw}}
                                         </div>
                                     </div>
                                                 {% endif %}
