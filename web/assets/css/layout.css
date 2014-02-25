@@ -135,7 +135,7 @@
 
     .container
     {
-      
+      min-width:600px /* A laisser d'après ce que m'a dit Yvan, sinon ça devient dur à gérer à basse résolution*/
 
     }
 
