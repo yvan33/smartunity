@@ -915,11 +915,11 @@ class QuestionReponseController extends Controller {
                 if ($prefRepmembre == true) {
 
                     //Envoi du mail
-                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug));
+                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
                     $sujetMail = "Vous avez une nouvelle réponse!";
                     $expediteurMail = "ne-pas-repondre@smartunity.fr";
 
-                    $contenu = $user . "a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : http://smartunity.fr" . $urlQuestion;
+                    $contenu = $user . "a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : " . $urlQuestion;
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
