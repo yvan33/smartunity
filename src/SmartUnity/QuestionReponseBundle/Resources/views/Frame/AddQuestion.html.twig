@@ -1,26 +1,20 @@
 {% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
-{#{% form_theme formQuestion 'SmartUnityUtilisateurBundle:Form:form_register.html.twig' %}#}
 
-{% block title %}Posez votre question{% endblock %}
+{% block title %}Posez votre question {% endblock %}
 
 {% block stylesheets %}
-<link href="{{asset('assets/css/formulaire.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
-
-{% endblock %}
-
-{% block initJS %}
-<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
-<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/formulaire.css'
+				 'assets/css/magnificpopup.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 
 
 {% block body %}
-{#<a ><span class="glyphicon glyphicon-chevron-left bouton-retour" onclick="javascript:history.back()"></span></a>#}
 
 <div class="row form-addquestion">
-{#        <div class="grille-content panneau-bas">  #}
             <div class="row text-center cookie-title">
                 Poser une question
             </div>
@@ -63,6 +57,9 @@
 	    </div>
 	    {{form_end(formQuestion)}}
 	</div>
+	
+{% endblock %}	
+{% block callJS %}
 
 <script>
 $(".chosen-select").chosen({disable_search_threshold: 10, allow_single_deselect: true });
@@ -75,7 +72,6 @@ $(document).ready(function(){
     e.preventDefault();
   })
 });
-
 </script>
 {% endblock %}
 

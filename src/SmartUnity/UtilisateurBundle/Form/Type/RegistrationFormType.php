@@ -13,9 +13,10 @@ class RegistrationFormType extends BaseType {
 
 
         $builder
-                ->add('nom')
+                ->add('nom','text', array('required'=>false))
+                ->add('prenom','text', array('required'=>false))
                 ->add('email', 'email', array('label' => 'Adresse e-mail'))
-                ->add('username', null, array('label' => 'Nom d\'utilisateur'))
+                ->add('username', null, array('label' => 'Pseudonyme'))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
                     'options' => array('translation_domain' => 'FOSUserBundle'),

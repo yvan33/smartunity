@@ -3,7 +3,10 @@
 {% form_theme form 'SmartUnityUtilisateurBundle:Form:form_register.html.twig' %}
 
 {% block stylesheets %} 
-<link href="{{ asset('assets/css/formulaire.css') }}" rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/formulaire.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {%endblock%}
 
 {% block register %}
@@ -73,6 +76,10 @@
                         <div class="grille-1 police-text">{{form_label(form.nom)}}</div>
                         <div class="grille-2 police-text">{{form_widget(form.nom)}}</div>
                     </div>   
+                    <div class="row ">
+                        <div class="grille-1 police-text">{{form_label(form.prenom)}}</div>
+                        <div class="grille-2 police-text">{{form_widget(form.prenom)}}</div>
+                    </div> 
                     <div class="row">
                         <div class="grille-1 police-text">{{form_label(form.sexe)}}</div>
                         <div class="grille-2 police-text">{{form_widget(form.sexe)}}</div>

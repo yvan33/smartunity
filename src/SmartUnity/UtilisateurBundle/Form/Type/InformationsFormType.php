@@ -15,7 +15,7 @@ class InformationsFormType extends AbstractType {
             'required' => false, 
         ))                
         ->add('email', 'email', array('label' => 'Adresse e-mail'))
-        ->add('username', null, array('label' => 'Nom d\'utilisateur'))
+        ->add('username', null)
         ->add('sexe', 'choice', array(
         'choices' => array(
             'na' =>'Non renseigné', 'm' => 'Masculin', 'f' => 'Féminin'),

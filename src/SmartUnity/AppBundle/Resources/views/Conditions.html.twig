@@ -3,7 +3,10 @@
 {% block title %}Conditions générales d'utilisation{% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/formulaire.css') }}"  rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/formulaire.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 {% block body %}

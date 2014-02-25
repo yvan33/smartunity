@@ -3,14 +3,11 @@
 {% block title %}Q/R - {{ question.sujet }}{% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/reponse.css') }}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
-{% endblock %}
-
-{% block initJS %}
-<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
-<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
-<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/reponse.css' 
+				 'assets/css/magnificpopup.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 
@@ -194,8 +191,9 @@
 
             <div id="form-commenter-reponse">
                 <form action="{{path('smart_unity_question_reponse_add_commentaire_reponse', { slug: question.slug, idReponse: reponse.id})}}" method="POST">
-                    <div  id="commentaire-input-reponse"class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
+                    <div  id="commentaire-input-reponse" class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, { 'id': 'textarea-commentaire-reponse', 'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
                         <span class="croix-close" onClick="closeCommentReponse(this)"> &#10006;</span>
+                        <input id="id-current-reponse" type="hidden" value="" />
                     </div>
                     <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep-input commentaire-btn"/>
                          {{  form_rest(formCommentaireReponse) }}
@@ -259,7 +257,12 @@ Toast
 
 {% endblock %}
 {% block callJS %}
-
+{% javascripts filter='yui_js' 
+				'assets/js/bootstrap-paginator.js' 
+				'assets/js/magnificpopup-0.9.9.min.js'
+				'assets/js/jquery.animateAuto-1.0.0.js'	 %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
 <script>
 /////Définition variable User///////////
@@ -433,10 +436,7 @@ Toast
         $(e).parent().hide();
         $(e).prev().val('');
         $(e).parent().next([0]).hide();
-
-
         $(e).parent().parent().next().children().show();
-
         $(e).parent().parent().next().next().show();
     }
 
@@ -452,29 +452,33 @@ Toast
 {#        $('#form-commenter-reponse').parent().next().show();#}
         //Efface formulaire et bouton envoyer
 
-
         //Modification de l'attribut 'action' du form pour faire correspondre à la réponse
         var actionUrl = $('#form-commenter-reponse').children().get(0).getAttribute('action');
         $('#form-commenter-reponse').children().get(0).setAttribute('action', actionUrl.replace(/\d+$/, reponseId));
-
+        //Ajout de l'id de la réponse correspondante au clic à la valeur du champ hidden pour le récupérer dans la fonction "closeCommentReponse"
+        $('#id-current-reponse').val(reponseId);
         //Déplacement du form pour le mettre sous la réponse correspondante.
-        $(e).parent().prev().append($('#form-commenter-reponse'));
+        $('#bloc-commenter-reponse'+reponseId).append($('#form-commenter-reponse'));
+        //Affichage du form et du bouton envoyer
         $('#form-commenter-reponse').show();
-        $(e).parent().prev().show();
-        $(e).parent().next().hide();
-        $(e).parent().hide();
+        //Masquer le bouton editer
+        $('#bouton-editer'+reponseId).hide();
+        //masquer le bouton commenter
+        $(e).hide();
         
     {% endif %}
     }
 
     function closeCommentReponse(e) {
+        //Récupération de l'id de la réponse
+        reponseId = $('#id-current-reponse').val();
+        ///Vidage du champ
+        $('#textarea-commentaire-reponse').val('');
         //Affichage bouton commenter
-        
-        $(e).prev().val('');
-        $(e).parent().parent().parent().parent().next().show();
-        
+        $('#bouton-editer'+reponseId).show();
+        $('#bouton-commenter'+reponseId).show();
         //Efface formulaire et bouton envoyer
-        $(e).parent().parent().parent().hide();
+        $('#form-commenter-reponse').hide();
     }
 
 
@@ -579,10 +583,10 @@ Toast
         });
     });
     function clickOnPagination(pPage) {
-        $('#reponses-frame').height(function(i, h) {
-            return h;
-        });
-
+ 
+        //On fixe la hauteur pendant l'animation        
+        $('#reponses-frame').height($('#reponses-frame').height());
+        
         $('#form-commenter-reponse').hide();
         $('#reponses-frame').before($('#form-commenter-reponse'));
         $('#reponses-container').fadeOut('fast');
@@ -600,22 +604,26 @@ Toast
                 //On supprime la ligne de check du JSON
 
                 donnees.forEach(function(pEntry, i) {
-                    if (!pEntry['is_validated'] && !pEntry['is_certif'])
+                    if (!pEntry['is_validated'] && !pEntry['is_certif']) {
                         content += generateContent(pEntry, i, isup, isdown);
+                    }
                 }); //Generation du code
 
                 //Affichage du nouveau contenu dasn le tab, et fadeIn
                 $('#reponses-container').html(content);
                 $('#reponses-container').fadeIn('fast');
-                $('#reponses-frame').animateAuto('height', 'fast');
+                $('#reponses-frame').animateAuto('height', 'fast', function() {
+                    $('#reponses-frame').css('height', 'auto');
+                });
+                
             } else { //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
                 $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
                 $('#reponses-container').fadeIn('fast');
-            }
+            }   
             $('.roww').tooltip({
                 'placement': 'right'
             });
-        });
+        });    
     }
     
 
@@ -742,19 +750,42 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
             else{
                 entity+='<p class="textegris-grand">';
             } 
-            entity += pEntry['down_vote'] + '</p> \
-                                        </div>';     
+            entity += pEntry['down_vote'] + '</p>\
+            </div>';     
         }
         
         entity+='</div> \
                                     <div class="roww"> \
                                       <p style="font-size:11px">' + pEntry['date'] + '</p> \
                                     </div>';
-        if (pEntry['is_validated'] || pEntry['is_certif'])
+
+                {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
+               entity+= '<div class="valider rep"> \
+                    <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalValidation" >Valider</button> \
+                </div> \
+                <div class="modal fade" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> \
+                  <div class="validation-dialog"> \
+                    <div class="validation-content"> \
+                      <div class="validation-body"> \
+                        <p>Vous êtes sur le point de valider la réponse suivante: ' + pEntry['description'] +'</p> \
+                      <p> Les points de votre question seront attibués au membre ayant apporté cette réponse. Ce choix est définitif. Etes-vous sûr de votre choix?</p> \
+</div> \
+                      <div class="validation-footer"> \
+                        <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button> \
+                        <a href="' + Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '> \
+                                <button type="button" class="btn bouton-validation">Valider</button></a> \
+                      </div> \
+                    </div> \
+                  </div> \
+                </div>';
+                             {% endif %}
+                                 
+        if (pEntry['is_validated'] || pEntry['is_certif']) {
             entity += '\
                                     <div class="roww"> \
                                       <img class="certif-img" src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/> \
                                     </div>';
+}
         entity += ' \
                                 </div> \
                                  \
@@ -766,12 +797,14 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                                         <div class="grille-3-grey"> \
                                             <div class="grille-3-im">';
 
-        if (pEntry['avatar'])
+        if (pEntry['avatar']) {
             entity += ' \
  <img src="{{ asset('') }}' + pEntry['avatar'] + ' " alt="avatar" height="80" width="80" />';
-        else
+    }
+        else {
             entity += '\
                                              <img src="{{ asset('uploads/documents/logo.png') }}" height="80" width="80" />';
+}
         entity += '      </div> \
                                             <div class=" grille-3-txt"> \
                                               <p style="margin:0px; font-weight:600"><a href="' + route_vers_profil + '">' + pEntry['membre_username'] + '</a></p> \
@@ -793,7 +826,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                                         </div> \
                                 </div> \
                                 </div> \
-                                <p style="min-height: 100px">' + pEntry['description'] + '</p>';
+                                <div style="min-height: 100px">' + pEntry['description'] + '</div>';
         pEntry['commentaires'].forEach(function(pCom, i) {
 
             entity += '<div class="commentaire" onmouseover="displaySignalComment(this);" onmouseout="hideSignalComment(this);"> \
@@ -803,41 +836,16 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
         });
 
         entity += '        <div class="bloc-commenter-repondre"> \
-                                    <div class="grille-3-btn">';
-              
-                {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
-               entity+= '<div class="valider rep"> \
-                    <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalValidation" >Valider</button> \
-                </div> \
-                <div class="modal fade" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> \
-                  <div class="validation-dialog"> \
-                    <div class="validation-content"> \
-                      <div class="validation-body"> \
-                        <p>Vous êtes sur le point de valider la réponse suivante: ' + pEntry['description'] +'</p> \
-                      <p> Les points de votre question seront attibués au membre ayant apporté cette réponse. Ce choix est définitif. Etes-vous sûr de votre choix?</p> \
-</div> \
-                      <div class="validation-footer"> \
-                        <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button> \
-                        <a href="' + Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '> \
-                                <button type="button" class="btn bouton-validation">Valider</button></a> \
-                      </div> \
-                    </div> \
-                  </div> \
-                </div>';
-
-       // entity += '<div style = "float:left; margin-right:5px;"> \
-       //      <a href = "'+ Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a></div>';    
-                             {% endif %}
-          entity += '      <div></div> \
-         <div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div>';
+                                    <div class="grille-3-btn"> \
+                                    <div id="bloc-commenter-reponse' + pEntry['id'] + '">{#ICI LE FORMULAIRE POUR COMMENTER#}</div>';
+         entity += '<div id="bouton-commenter' + pEntry['id'] + '" class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>';
     
      {% if is_granted('ROLE_USER')%}
     if (userId == pEntry['membre_id']) {    
-    entity += ' <input id="reponseId" type="hidden" value="'+ pEntry['id'] +'" /> \
-                <input id="reponseDescription" type="hidden" value="' + pEntry['description'] + '" /> \
- <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this)"> \
-                                <div class="bouton-com-rep">Editer</div> \
-                            </div>';  
+    entity += ' <input id="reponseId" type="hidden" value="'+ pEntry['id'] +'" > \
+                <input id="reponseDescription" type="hidden" value="' + pEntry['description'] + '"> \
+ <div id="bouton-editer' + pEntry['id'] + '" class="edit-reponse" onClick="javascript:displayEditFormReponse(this)"> \
+                                <div class="bouton-com-rep">Editer</div></div>';  
     }
           {% endif %}
            entity += ' </div> \
