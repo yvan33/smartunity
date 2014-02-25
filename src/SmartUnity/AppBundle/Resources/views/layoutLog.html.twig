@@ -9,26 +9,27 @@
 
         <!-- Additional meta content -->
     {% block meta %}{% endblock %}
-
-        <!-- Bootstrap core CSS -->
-{#        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap2.css') }}">#}
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
+        
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/chosen/chosen.min.css' 
+				 'assets/css/bootstrap.min.css'
+				 'assets/css/layout.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 
 
 {% block stylesheets %}{% endblock %}
 
-        <!-- Bootstrap core and general JavaScript files -->
-        <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
-        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('assets/chosen/chosen.jquery.js') }}"></script>
-        <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
-
+{% javascripts filter='yui_js' 
+				'assets/js/jquery-1.10.2.js' 
+				'assets/js/bootstrap.min.js'
+				'assets/chosen/chosen.jquery.js'
+				'bundles/fosjsrouting/js/router.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
         <!-- Additional Javascript src -->
-<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
 {% block initJS %}{% endblock %}
 
@@ -335,7 +336,7 @@ $(".cadre-general").css('min-height', minimumHeightCadreGeneral);
                     $('#clic-pop').attr('href', '#');
                     $("#clic-pop,#pop").click(function(event) {
                         $("#top-barre-recherche").hide();
-{#                         $("#pop").slideDown(); #}
+//                          $("#pop").slideDown(); 
                         $(".modal.fade").modal('show');
                         event.stopPropagation();
 
