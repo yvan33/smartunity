@@ -832,7 +832,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
             entity += '<div class="commentaire" onmouseover="displaySignalComment(this);" onmouseout="hideSignalComment(this);"> \
                                     <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_username'] + ' le ' + pCom['date'] + ' \
                                                         {% if is_granted('ROLE_USER') %}<a href="'+ Routing.generate('smart_unity_question_reponse_signaler_commentaire_reponse', {idCommentaireReponse: pCom['id']})+'><img class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
-                                    </div>{% endif %}';
+                                    {% endif %}</div>';
         });
 
         entity += '        <div class="bloc-commenter-repondre"> \
