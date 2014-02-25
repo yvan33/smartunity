@@ -10,7 +10,8 @@
         <div class="dropdown bouton-admin">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-    {% if not reponse.is_certif and reponse.is_validated%}
+    
+{% if not reponse.is_certif and reponse.is_validated%}
 
                 <li><a href="{{path('smart_unity_question_reponse_certification', {idReponse: reponse.id})}}" tabindex="-1">Certifier réponse</a></li>
                                        {% endif %}
@@ -81,7 +82,7 @@
                     <div class="roww" rel="tooltip" data-original-title="Cette réponse à été validée par {{ question.membre.username}} le {{ reponse.date_validation}}.">
                         <img src="{{ asset('assets/img/check.png') }}"style="margin-bottom:10px" />
                     </div>
-                                    {% endif %}
+         {% endif %}
 
                 </div>
 
@@ -128,28 +129,16 @@
                     <div class="bloc-commenter-repondre">
                         <div class="grille-3-btn">
 
-                            <!-- 
-                            
-          {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
-                                                        <div style="float:left; margin-right:5px;">
-                                                            <a href="{{path('smart_unity_question_reponse_validation_reponse', {idReponse: reponse.id})}}"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a>
-                                                        </div>
-          {% endif %}
-                                                        <div></div> -->
-
-                            <div>{#ICI LE FORMULAIRE POUR COMMENTER#}</div>
-
-
-                            <div>   
-                                <div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this, {{reponse.id}})" style="margin-left:10px"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
-                            </div>
+                            <div id="bloc-commenter-reponse{{reponse.id}}">{#ICI LE FORMULAIRE POUR COMMENTER#}</div>
+                            <div id="bouton-commenter{{reponse.id}}" class="commentaire-btn-reponse bouton-com-rep" onClick="javascript:displayCommentFormReponse(this, {{reponse.id}})"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
         {% if not (reponse.is_certif or reponse.is_validated) %}                 
           {% if is_granted('ROLE_USER') and app.user.id == reponse.membre_id %}
+
+                            <div id="bouton-editer{{reponse.id}}" class="edit-reponse" onClick="javascript:displayEditFormReponse(this)">
+                                <div class="bouton-com-rep">Editer</div>
+                            </div>  
                             <input id="reponseId" type="hidden" value="{{reponse.id}}" />
                             <input id="reponseDescription" type="hidden" value="{{reponse.description}}" />
-                            <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this)">
-                                <div class="bouton-com-rep">Editer</div>
-                            </div>                         
           {% endif %}
           {% endif %}
 
