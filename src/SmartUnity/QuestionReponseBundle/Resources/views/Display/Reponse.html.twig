@@ -2,6 +2,7 @@
 
 {% block title %}Q/R - {{ question.sujet }}{% endblock %}
 
+
 {% block stylesheets %}
 <link href="{{ asset('assets/css/reponse.css') }}" rel="stylesheet" type="text/css">
 <link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
@@ -92,7 +93,7 @@
                 </div>
 {% if not is_certif and not is_validated %}
                 <div class="grille-1">
-                    <div class="rond-point"><p>{{ question.remuneration }} pts</p></div>
+                    <div class="rond-point"><p>{{ question.remuneration + question.supplementremuneration }} pts</p></div>
 
 
                     <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien{% if question.soutienMembres|length > 1 %}s{% endif %}</p>
@@ -393,6 +394,7 @@ Toast
 
     });
 
+
     $('#closeFrame').click(function() {
         $('#addReponseHolder').hide('fast');
         $('.espace-vide-pour-cadre-repondre').hide();
@@ -502,6 +504,7 @@ Toast
         });
 
   {% else %}
+
         $('.bouton-soutien').popover({
             'html': true,
             'content': '<div id="addSoutienHolder"> \
@@ -511,16 +514,16 @@ Toast
         {% else %} \
         <legend class="legend-soutenir">Soutenir la question</legend> \
         {% endif %} \
-           {{ form_start(formSoutien)}} \
+           {{ form_start(formSoutien,{'attr': {'id':'formSoutien'}})}} \
                 <div class="erreur"> \
             {{ form_errors(formSoutien) }} \
             </div> \
         <div class="row row-soutenir"> \
             <div class="grille-1 grille-1-soutenir"> Augmenter dotation </div> \
-            <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}}) }}</div> \
+            <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}, 'id':'valeurSoutien'}) }}</div> \
 </div> \
         <div class="row row-soutenir"> \
-                <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'btn bouton-repondre'}})}}</div> \
+                <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'btn bouton-repondre', 'onClick':'validationFormulaire()'},'id':'boutonSoutien'})}}</div> \
             </div> \
             {{form_end(formSoutien)}} \
         </div> \
@@ -578,6 +581,27 @@ Toast
             e.preventDefault();
         });
     });
+
+function validationFormulaire(){
+    $('#formSoutien').submit(function(event) {   
+        var valeur = parseInt($('#valeurSoutien').val());
+        var min = parseInt($('#valeurSoutien').attr('min')); 
+        var max = parseInt($('#valeurSoutien').attr('max'));  
+        if( valeur <= max && valeur >= min ){
+            $('.erreur').hide();
+            return true; 
+         }
+         else{
+            var message="La valeur doit être comprise entre: " + $('#valeurSoutien').attr('min') + " et " + $('#valeurSoutien').attr('max') ;
+            $('.erreur').css("font-size","4 px"); 
+            $('.erreur').show().text(message);
+            return false;
+         }
+    });
+}
+        
+        
+
     function clickOnPagination(pPage) {
         $('#reponses-frame').height(function(i, h) {
             return h;
@@ -847,6 +871,8 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
 
         return entity;
     }
+
+    
 </script>
 
 {% endblock %}

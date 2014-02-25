@@ -28,7 +28,7 @@
             	<p>Pensez à effectuer une recherche avant de poser une question. Si vous rencontrez un problème avec votre smartphone, il y a de fortes chances que quelqu'un d'autre l'ait également expérimenté. L'objectif du site est de polluer le moins possible l'information pertinente !<br/></p><b class="merci">Merci :)</b>
             </div>
 		
-		{{ form_start(formQuestion)}}
+		{{ form_start(formQuestion, {'id' : 'form-add-question'})}}
 		<div class="erreur">
             {{ form_errors(formQuestion) }}
 	    </div>
@@ -59,7 +59,7 @@
                 
             </div>
 	    <div class="cent-h bouton-bas-block">
-	        {{form_widget(formQuestion.save,{'attr': {'class': 'btn ask-question'}})}}
+	        {{form_widget(formQuestion.save,{'attr': {'class': 'btn ask-question','onclick': 'validationFormulaire()'}})}}
 	    </div>
 	    {{form_end(formQuestion)}}
 	</div>
@@ -75,6 +75,24 @@ $(document).ready(function(){
     e.preventDefault();
   })
 });
+
+function validationFormulaire(){
+    $('form').submit(function(event) {   
+        var valeur = parseInt($('#form_remuneration').val());
+        var min = parseInt($('#form_remuneration').attr('min')); 
+        var max = parseInt($('#form_remuneration').attr('max'));  
+        if( valeur <= max && valeur >= min ){
+            $('.erreur').hide();
+            return true; 
+         }
+         else{
+            var message="La valeur doit être comprise entre: " + $('#form_remuneration').attr('min') + " et " + $('#form_remuneration').attr('max') ;
+            $('.erreur').css("font-size","4 px"); 
+            $('.erreur').show().text(message);
+            return false;
+         }
+    });
+}
 
 </script>
 {% endblock %}
