@@ -60,7 +60,7 @@ class AjaxController extends Controller {
                 $dateBestReponse = null;
                 $is_certif_question = false;
                 $is_validated_question = false;
-
+                $remunerationQuestion=$Question->getRemuneration() + $Question->getSupplementRemuneration();
 
                 if ($Question->getIsValidatedQuestion()) {
                     foreach ($Question->getReponses() as $reponse) {
@@ -103,7 +103,7 @@ class AjaxController extends Controller {
                     'description' => $Question->getDescription(),
                     'date' => $Question->getDate()->format('d-m-Y à H:i'),
                     'membre_username' => $Question->getMembre()->getUsername(),
-                    'remuneration' => $Question->getRemuneration(),
+                    'remuneration' => $remunerationQuestion,
                     'nb_reponses' => $Question->getReponses()->count(),
                     'best_reponse' => $descriptionBestReponse,
                     'auteur_best_reponse' => $auteurBestreponse,

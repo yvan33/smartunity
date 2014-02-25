@@ -368,7 +368,7 @@ class QuestionReponseController extends Controller {
             $dateBestReponse = null;
             $is_certif_question = false;
             $is_validated_question = false;
-
+            $remunerationQuestion=$Question->getRemuneration() + $Question->getSupplementRemuneration();
 
             if ($Question->getIsValidatedQuestion()) {
                 foreach ($Question->getReponses() as $reponse) {
@@ -409,7 +409,7 @@ class QuestionReponseController extends Controller {
                 'description' => $Question->getDescription(),
                 'date' => $Question->getDate()->format('d-m-Y à H:i'),
                 'membre_username' => $Question->getMembre()->getUsername(),
-                'remuneration' => $Question->getRemuneration(),
+                'remuneration' => $remunerationQuestion,
                 'nb_reponses' => $Question->getReponses()->count(),
                 'best_reponse' => $descriptionBestReponse,
                 'auteur_best_reponse' => $auteurBestreponse,
@@ -718,7 +718,6 @@ class QuestionReponseController extends Controller {
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formQuestion->bind($this->getRequest());
-
             if ($formQuestion->isValid()) {
                 $newQuestion->setMembre($user);
                 $newQuestion->setSignaler(false);
@@ -801,7 +800,12 @@ class QuestionReponseController extends Controller {
                     'class' => 'SmartUnityAppBundle:typeQuestion',
                     'property' => 'nom',
                     'required' => false))
-                ->add('remuneration', 'integer', array('attr' => array('min' => $ancienneDotation, 'max' => $dotationMax)))
+                ->add('remuneration', 'integer', array(
+                        'attr' => array(
+                            'min' => '10',
+                            'max' => $dotationMax
+                        ),
+                    ))
                 ->add('save', 'submit', array('label' => 'Modifier ma question'))
                 ->getForm();
 
@@ -813,15 +817,18 @@ class QuestionReponseController extends Controller {
             if ($formEditQuestion->isValid()) {
 
                 $nouvelleDotation = $formEditQuestion->get('remuneration')->getData();
-                $cagnotte = $user->getCagnotte() - $nouvelleDotation - $ancienneDotation;
-                $user->setCagnotte($cagnotte);
-                $question->setDateModification(new \DateTime(date("Y-m-d H:i:s")));
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($question);
-                $em->flush();
+                $cagnotte = $user->getCagnotte() - $nouvelleDotation + $ancienneDotation;
+                if($cagnotte >= 0 && $nouvelleDotation >= 10 ){
+                    $user->setCagnotte($cagnotte);
+                    $question->setDateModification(new \DateTime(date("Y-m-d H:i:s")));
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedQuestion' => '1')));
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($question);
+                    $em->flush();
+                    return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedQuestion' => '1')));
+
+                }
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:EditQuestion.html.twig', array(
@@ -1010,7 +1017,7 @@ class QuestionReponseController extends Controller {
                     $repondant = $reponse[0]->getMembre();
 
                     $repondant->setReputation($repondant->getReputation() + 50);
-                    $repondant->setCagnotte($repondant->getCagnotte() + $question->getRemuneration());
+                    $repondant->setCagnotte($repondant->getCagnotte() + $question->getRemuneration() + $question->getSupplementRemuneration());
                     $question->setIsValidatedQuestion(true);
 
                     $em = $this->getDoctrine()->getManager();
@@ -1028,7 +1035,8 @@ class QuestionReponseController extends Controller {
                         //Envoi du mail`
                         $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
                         $sujetMail = "Votre réponse à la question : " . $sujetQuestion . " sur smartunity.fr a été validée";
-                        $contenu = "Bonjour " . $repondant->getUsername() . ", <br/> La réponse que vous avez apportée à la question " . $sujetQuestion . " vient d'être validée par " . $reponse[0]->getQuestion()->getMembre() . ". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de " . $reponse[0]->getQuestion()->getRemuneration() . " points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr ";
+                        $totalremuneration=$reponse[0]->getQuestion()->getRemuneration() + $reponse[0]->getQuestion()->getSupplementRemuneration();
+                        $contenu = "Bonjour " . $repondant->getUsername() . ", <br/> La réponse que vous avez apportée à la question " . $sujetQuestion . " vient d'être validée par " . $reponse[0]->getQuestion()->getMembre() . ". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de " . $totalremuneration . " points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr ";
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
@@ -1063,7 +1071,6 @@ class QuestionReponseController extends Controller {
                 $reponse[0]->setDateCertification(new \DateTime(date("Y-m-d H:i:s")));
                 $repondant = $reponse[0]->getMembre();
                 $repondant->setReputation($repondant->getReputation() + 50);
-                $repondant->setCagnotte($repondant->getCagnotte() + $question->getRemuneration());
                 $question->setIsCertifiedQuestion(true);
 
                 $em = $this->getDoctrine()->getManager();
@@ -1167,7 +1174,12 @@ class QuestionReponseController extends Controller {
         $user = $this->container->get('security.context')->getToken()->getUser();
         $formSoutien = $this->createFormBuilder()
                 ->setAction($this->generateUrl('smart_unity_question_reponse_add_soutien_question', array('slug' => $slug)))
-                ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
+                ->add('soutien', 'integer', array(
+                        'attr'=> array(
+                            'min' => 0, 
+                            'max' => ($user->getCagnotte())
+                            )
+                    ))
                 ->add('soutenir', 'submit')
                 ->getForm();
 
@@ -1175,15 +1187,25 @@ class QuestionReponseController extends Controller {
             $formSoutien->bind($this->getRequest());
 
             if ($formSoutien->isValid()) {
+
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
-                $question->setRemuneration($question->getRemuneration() + ($formSoutien->get('soutien')->getData()));
-                $question->getSoutienMembres()->add($user);
-                $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
+            
+                if($question->getSoutienMembres()->contains($user) ){
+                    $question->setSupplementRemuneration($question->getSupplementRemuneration() + ($formSoutien->get('soutien')->getData()));
+                    $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($question);
+                    $em->persist($user);
+                    $em->flush();
 
-                //ajouté l'utilisateur à la liste de soutien
-
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
+                }
+                else{
+                    $question->setSupplementRemuneration($question->getSupplementRemuneration() + ($formSoutien->get('soutien')->getData()));
+                    $question->getSoutienMembres()->add($user);
+                    $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
+                    $em = $this->getDoctrine()->getManager();
+                    $em->flush();
+                }
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
@@ -1317,7 +1339,8 @@ class QuestionReponseController extends Controller {
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
-                    'formSignaler' => $formSignaler->createView()));
+                    'formSignaler' => $formSignaler->createView(),
+                    'type' => $type));
     }
 
     public function signalerCommentaireReponseAction($idCommentaireReponse) {
@@ -1355,7 +1378,8 @@ class QuestionReponseController extends Controller {
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
-                    'formSignaler' => $formSignaler->createView()));
+                    'formSignaler' => $formSignaler->createView(),
+                    'type' => $type));
     }
 
 }

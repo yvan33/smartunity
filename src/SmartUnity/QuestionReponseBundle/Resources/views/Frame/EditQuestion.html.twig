@@ -47,12 +47,12 @@
 	        <div class="grille-2">{{ form_errors(formEditQuestion.typeQuestion) }}{{ form_widget(formEditQuestion.typeQuestion, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Choisissez'} }) }}</div>
 	    </div>
 	    <div class="row">
-                <div class="grille-1">Dotation <a id="popupDotation" rel="tooltip" data-original-title="Vous pouvez augmenter la dotation de la question en utilisant les points de votre cagnotte pour améliorer son attractivité."><span class="glyphicon glyphicon-info-sign" style="color:##BBB;"></span></a></div>
+                <div class="grille-1">Dotation <a id="popupDotation" rel="tooltip" data-original-title="Vous pouvez augmenter la dotation de la question en utilisant les points de votre cagnotte pour améliorer son attractivité."><span class="glyphicon glyphicon-info-sign" style="color:#BBB;"></span></a></div>
                 
 	        <div class="grille-2 dotation">{{ form_errors(formEditQuestion.remuneration) }}{{ form_widget(formEditQuestion.remuneration) }} Max : {{dotationMax}} </div>
 	    </div>
 	    <div class="cent-h bouton-bas-block">
-	        {{form_widget(formEditQuestion.save,{'attr': {'class': 'btn ask-question'}})}}
+	        {{form_widget(formEditQuestion.save,{'attr': {'class': 'btn ask-question','onclick': 'validationFormulaire()'}})}}
 	    </div>
 	    {{form_end(formEditQuestion)}}
 	</div>
@@ -68,6 +68,24 @@ $(document).ready(function(){
     e.preventDefault();
   })
 });
+
+function validationFormulaire(){
+    $('form').submit(function(event) {   
+        var valeur = parseInt($('#form_remuneration').val());
+        var min = parseInt($('#form_remuneration').attr('min')); 
+        var max = parseInt($('#form_remuneration').attr('max'));  
+        if( valeur <= max && valeur >= min ){
+            $('.erreur').hide();
+            return true; 
+         }
+         else{
+            var message="La valeur doit être comprise entre: " + $('#form_remuneration').attr('min') + " et " + $('#form_remuneration').attr('max') ;
+            $('.erreur').css("font-size","4 px"); 
+            $('.erreur').show().text(message);
+            return false;
+         }
+    });
+}
 
 </script>
 {% endblock %}
