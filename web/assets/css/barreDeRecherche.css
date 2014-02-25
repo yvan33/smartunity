@@ -221,3 +221,23 @@ input[type="radio"]:checked + .switch--off {
 .chosen-single abbr {
 	margin-top: 10px;
 }
+
+.text-mot-cle {
+	width: 190px;
+	background-color: #CCC;
+	color: #7b7a7a;
+	border: 0;
+	font-size: 14px;
+	font-family: centrale;
+	height: 32px;
+	padding-left: 12px;
+	border-radius: 5px;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 2.5px;
+}
+
+.text-mot-cle:focus {
+	outline: 0;
+}

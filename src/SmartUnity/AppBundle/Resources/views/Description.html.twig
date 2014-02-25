@@ -3,7 +3,10 @@
 {% block title %}Comment ça marche ?{% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/description.css') }}" rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/description.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 {% block body %}
@@ -94,7 +97,7 @@
     <img class="points-SU" src="{{ asset('assets/img/points-SU.png') }}"/>
 
     <div class="title-go">
-        <h2 class="text-center">Rendez-vous sur la page <a href="{{ path('smart_unity_question_reponse_homepage') }}">Questions/Réponses</a> pour ajouter votre pierre à l'édifice :-)</h2>
+        <h2 class="text-center">Rendez-vous sur la page <a href="{{ path('smart_unity_question_reponse_list_of_question') }}">Questions/Réponses</a> pour ajouter votre pierre à l'édifice :-)</h2>
     </div>
 
 </div>

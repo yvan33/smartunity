@@ -3,9 +3,11 @@
 {% block title %}Smart'Unity - Accueil{% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/accueil.css') }}"  rel="stylesheet" type="text/css">
-<link href="{{ asset('assets/css/barreDeRecherche.css') }}"  rel="stylesheet" type="text/css">
-
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/accueil.css' 
+				 'assets/css/barreDeRecherche.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 {% block body %}
@@ -215,8 +217,9 @@
               </div>
   </div>
 </div>
+
 <script>
-{# animation carousel bienvenue #}
+//  animation carousel bienvenue 
 $('.text-accueil').fadeTo(1, 1);
 </script>
 
