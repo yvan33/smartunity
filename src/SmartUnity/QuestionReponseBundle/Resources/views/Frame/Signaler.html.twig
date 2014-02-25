@@ -3,10 +3,11 @@
 {% block title %}Smart'Unity - Resultats de la recherche{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/addQuestionReponse.css') }}">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/addQuestionReponse.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}    
 {% endblock %}
-
 
 
 {% block body %}

@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new SmartUnity\AppBundle\SmartUnityAppBundle(),
-            new SmartUnity\AdminBundle\SmartUnityAdminBundle(),
             new SmartUnity\BoutiqueBundle\SmartUnityBoutiqueBundle(),
             new SmartUnity\UtilisateurBundle\SmartUnityUtilisateurBundle(),
             new SmartUnity\QuestionReponseBundle\SmartUnityQuestionReponseBundle(),

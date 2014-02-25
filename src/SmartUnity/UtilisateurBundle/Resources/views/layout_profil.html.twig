@@ -3,9 +3,12 @@
 {% form_theme form_pref 'SmartUnityUtilisateurBundle:Form:form_mon_compte.html.twig' %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/mon-compte.css') }}" rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/mon-compte.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
+{% endblock %}
 
- {% endblock %}
 
 {% block profil %}
 
