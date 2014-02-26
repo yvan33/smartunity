@@ -885,6 +885,10 @@ transform: rotate(90deg);
 	    padding-left: 10px;
 	    padding-right: 10px;
     }
+    
+    .footer-text {
+	    margin-top: -8px;
+    }
    
 }
 
@@ -923,6 +927,10 @@ transform: rotate(90deg);
     
     .navbar-inverse .navbar-nav>li>a {
     	font-size: 13px;
+    }
+    
+    .footer-text {
+	    margin-top: -8px;
     }
 }
 
@@ -994,5 +1002,9 @@ transform: rotate(90deg);
     
     .navbar-inverse .navbar-toggle .icon-bar {
     background-color: #99bbc3;
+    }
+    
+    .footer-text {
+	    margin-top: -8px;
     }
 }
