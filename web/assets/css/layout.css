@@ -56,6 +56,12 @@
 
 @media (min-width: 993px) and (max-width: 1200px) {
 
+	.col-md-6.col-md-offset-3 {
+		width:450px;
+		position:relative;
+		right:45px;
+	}
+		
     .container {
         max-width: 970px;
     }    
@@ -132,6 +138,12 @@
 }
 
 @media screen and (max-width: 768px) {
+
+	.navbar-inverse .navbar-nav>li>a
+	{
+		top:-10px;
+	
+	}
 
     .container
     {
