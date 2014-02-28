@@ -1,26 +1,42 @@
-<<<<<<< HEAD
-@font-face{
-    font-family : "centrale";
-    src : url(../fonts/Centrale.ttf) format ('truetype');
-    /* pour IE */
-    src : url(../fonts/Centrale.ttf);
-=======
 @font-face {
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
     src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/Centrale.woff) format('woff'),
-         url(../fonts/Centrale.ttf) format('truetype'),
-         url(../fonts/Centrale.svg#centrale) format('svg');
+        url(../fonts/Centrale.woff) format('woff'),
+        url(../fonts/Centrale.ttf) format('truetype'),
+        url(../fonts/Centrale.svg#centrale) format('svg');
     font-weight: normal;
     font-style: normal;
->>>>>>> 58610be9ef44f1134887e65c62b51375358e2b95
 }
 
-.cookie-title
-{
+.texte-presentation-boutique {
+    margin-bottom: 50px;
+}
+
+.infos-cadeau {
+    padding: 0 50px;
+}
+
+.description-cadeau{
+    margin-bottom: 10px;
+    
+}
+
+.apercu-cadeau {
+    margin: 0 auto;
+    width : 60%;
+    height: 200px;
+    text-align: center;
+}
+
+.titre-cadeau{
+    text-align: center;
     font-family: centrale;
-    font-size: 40px;
+    font-size: 28px;
     margin-bottom: 15px;
-    line-height: 40px;
+}
+
+.bloc-boutons-produit{
+    text-align: center;
+    
 }

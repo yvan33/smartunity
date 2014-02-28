@@ -1,0 +1,57 @@
+{% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
+
+{% block title %}Boutique cadeaux{% endblock %}
+
+{% block stylesheets %} 
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/boutique.css'
+                                 'assets/css/formulaire.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
+{%endblock%}
+
+{% block body %}
+<div class="row">
+    <div class="title text-center cookie-title">
+        Boutique 
+    </div>
+    <div class="col-md-12 texte-presentation-boutique">
+        <p class="police-text"> Vous vous trouvez dans la caverne d'Alibaba de Smart'Unity. Chaque cadeaux à une valeur en points. 
+            Pour commander un cadeaux, vous devez avoir suffisament de points dans votre cagnotte.
+
+        </p>
+    </div>
+</div>    
+<div class="row produit">
+    <div class="col-md-6">
+        <div class="apercu-cadeau">
+            <img src="{{asset('assets/img/mdgsm-logo.jpeg') }}"  alt="Produit" height="100%">
+        </div>
+    </div>
+    <div class="col-md-6 infos-cadeau">
+        <div class="row titre-cadeau" style="background-color: yellow;">
+            <div class="col-md-2">
+            <div class="rond-point"><p class="txt-rond" style="font-weight:200;">500 pts</p></div>
+            </div>
+            <div class="col-md-10">
+            Cadeau 1
+            </div>
+        </div>
+        <div class="row description-cadeau" style="background-color: yellow;">
+            Description du produit : Lorem ipsum dolor sit amet, consectetur adipiscing elit.Quisque vel congue quam. Pellentesque dapibus elementum neque feugiat vestibulum. 
+            Nunc dui dui, sollicitudin in justo ut, pulvinar tincidunt velit. Phasellus aliquam lacus arcu, et ultricies tortor lacinia eu. Vestibulum feugiat non lacus a pharetra. Morbi pellentesque lorem commodo, fringilla lorem in, pretium nulla.
+            In non eros magna. Sed vel justo non velit cursus venenatis sed quis odio.
+        </div>
+        <div class="row">
+            <div class="bloc-boutons-produit">
+                <a target="blank" href="#">
+                    <button type="button" class="bouton-reponses">Je le veux!</button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock body %}
+

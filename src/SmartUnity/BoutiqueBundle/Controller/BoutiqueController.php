@@ -8,6 +8,6 @@ class BoutiqueController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SmartUnityBoutiqueBundle::boutique.html.twig');
+        return $this->render('SmartUnityBoutiqueBundle::boutique2.html.twig');
     }
 }
