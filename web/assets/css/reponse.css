@@ -341,6 +341,22 @@
 	margin-left: 10px;
 
 }
+.bouton-com-del
+{
+    background: #e37151 ;
+    color:#FFF;
+    font-size:13px;
+    line-height:30px;
+    height:30px;
+    float:right;
+    text-align:center;
+    width:135px;
+    font-family: centrale;
+    border-radius:2px;
+    cursor:pointer;
+    margin-left: 10px;
+
+}
 .bouton-validation
 {
     background: #e37151 ;
@@ -602,6 +618,15 @@ input
 }
 
 #addReponseHolder{
+    position:fixed;
+    display:none;
+    width:100%;
+    bottom:0px;
+    z-index:1000;
+    left:0;
+}
+
+#DeleteReponseHolder{
     position:fixed;
     display:none;
     width:100%;

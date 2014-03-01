@@ -66,8 +66,43 @@
                                         <div class="cent-h send-answer">{{form_widget(formEditReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
                                     </div>
                                 </form>
+                                
+
 {% endif %}
                             </div>
+                        </div>
+                    </div>
+                </div>     
+            </div>
+        </div>
+    </div>
+</div>
+<div id="DeleteReponseHolder">
+    <div class="container"  style="padding-left: 0; padding-right: 0;">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10" style="padding-left:0px; padding-right:0px; position:relative">
+                <div class="container cadre-form-reponse">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div  style="position:absolute;cursor:pointer;right:4px;top:5px;color:#FFF;font-size:20px" id="closeFrame">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </div>
+                            <div class="grille-content">
+                                <form class="edit-reponse-form" action="{{path('smart_unity_question_reponse_supprimer_reponse', {slug: question.slug, id: 'init'})}}" method="POST">
+                                    <div class="erreur">
+            {{ form_errors(formDeleteReponse) }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="head-blue">Supprimer ma réponse</div>
+                                    </div>
+                                    <div class="row row-avec-margin">
+                                    Souhaitez-vous supprimer votre réponse ?
+                                    <div class="row">
+                                        <div class="cent-h send-answer">{{form_widget(formDeleteReponse.oui,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
+                                    </div>
+                                </div>
+                                </form>
+                                </div>
                         </div>
                     </div>
                 </div>     
@@ -236,6 +271,10 @@ Toast
 
 {% if haveAddedAnswer == 1 %}
 <div class="toast"> Votre réponse a bien été ajoutée </div>
+ {% endif%}
+
+ {% if haveDeletedReponse == 1 %}
+<div class="toast"> Votre réponse a bien été supprimée </div>
  {% endif%}
 
 {% if haveEditedQuestion == 1 %}
@@ -410,6 +449,19 @@ Toast
   
         CKEDITOR.instances.form_description.setData(reponseDescription);
         $('#addReponseHolder').show('fast');
+        $('.espace-vide-pour-cadre-repondre').show();
+    {% endif %}
+    };
+// Bouton Supprimer
+   function displayDeleteFormReponse(e) {
+    {% if is_granted('ROLE_USER') %}
+            var reponseId = $('#reponseId').val();
+            var reponseDescription = $('#reponseDescription').val();
+                    
+        $('.delete-reponse-form').attr('action', function(i, url) {
+  return url.replace(url.substr(url.lastIndexOf('/') + 1), reponseId); });
+  
+        $('#DeleteReponseHolder').show('fast');
         $('.espace-vide-pour-cadre-repondre').show();
     {% endif %}
     };
@@ -837,6 +889,15 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                 <input id="reponseDescription" type="hidden" value="' + pEntry['description'] + '"> \
  <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this)"> \
                                 <div class="bouton-com-rep">Editer</div></div>';  
+    }
+          {% endif %}
+
+    {% if is_granted('ROLE_USER')%}
+    if (userId == pEntry['membre_id']) {    
+    entity += ' <input id="reponseId" type="hidden" value="'+ pEntry['id'] +'" > \
+                <input id="reponseDescription" type="hidden" value="' + pEntry['description'] + '"> \
+ <div class="delete-reponse" onClick="javascript:displayDeleteFormReponse(this)"> \
+                                <div class="bouton-com-del">Supprimer</div></div>';  
     }
           {% endif %}
            entity += ' </div> \

@@ -424,7 +424,7 @@ class QuestionReponseController extends Controller {
         return $listeQuestions;
     }
 
-    public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion, $haveEditedReponse, $alreadyAnswered) {
+    public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion, $haveEditedReponse, $haveDeletedReponse, $alreadyAnswered) {
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -601,6 +601,9 @@ class QuestionReponseController extends Controller {
                     'required' => true))
                 ->add('valider', 'submit')
                 ->getForm();
+        $formDeleteReponse = $this->createFormBuilder()
+                ->add('oui', 'submit')
+                ->getForm();
 
         if (true === $this->get('security.context')->isGranted('ROLE_USER')) {
             $user = $this->container->get('security.context')->getToken()->getUser();
@@ -648,10 +651,12 @@ class QuestionReponseController extends Controller {
                     'formCommentaireReponse' => $formCommentaireReponse->createView(),
                     'formReponse' => $formReponse->createView(),
                     'formEditReponse' => $formEditReponse->createView(),
+                    'formDeleteReponse' => $formDeleteReponse->createView(),
                     'formSoutien' => $formSoutien->createView(),
                     'haveAddedAnswer' => $haveAddedAnswer,
                     'haveEditedQuestion' => $haveEditedQuestion,
                     'haveEditedReponse' => $haveEditedReponse,
+                    'haveDeletedReponse' => $haveDeletedReponse,
                     'alreadyAnswered' => $alreadyAnswered,
                     'is_answered_by_user' => $isAnswered,
                     'isup' => $isup_rep,
@@ -981,6 +986,27 @@ class QuestionReponseController extends Controller {
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedReponse' => '1')));
+            }
+        }
+        return new \Exception('Votre réponse n\'a pas pu être éditée');
+    }
+     public function SupprimerReponseAction($id, $slug) {
+        $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($id);
+
+              $formDeleteReponse = $this->createFormBuilder($reponse)
+                ->add('oui', 'submit')
+                ->getForm();
+
+            if ($this->getRequest()->getMethod() == 'POST') {
+
+            $formDeleteReponse->bind($this->getRequest());
+
+            if ($formDeleteReponse->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($reponse);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveDeletedReponse' => '1')));
             }
         }
         return new \Exception('Votre réponse n\'a pas pu être éditée');
