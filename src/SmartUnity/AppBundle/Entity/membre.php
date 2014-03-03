@@ -235,6 +235,12 @@ class membre extends BaseUser {
      */
     private $ip_confirmation;
 
+    /**	
+     * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\gift", inversedBy="membres")
+     *
+     */
+    private $gifts;    
+
     /**
      * Constructor
      */
@@ -1050,5 +1056,38 @@ class membre extends BaseUser {
     public function getIpConfirmation()
     {
         return $this->ip_confirmation;
+    }
+
+    /**
+     * Add gifts
+     *
+     * @param \SmartUnity\AppBundle\Entity\gift $gifts
+     * @return membre
+     */
+    public function addGift(\SmartUnity\AppBundle\Entity\gift $gifts)
+    {
+        $this->gifts[] = $gifts;
+    
+        return $this;
+    }
+
+    /**
+     * Remove gifts
+     *
+     * @param \SmartUnity\AppBundle\Entity\gift $gifts
+     */
+    public function removeGift(\SmartUnity\AppBundle\Entity\gift $gifts)
+    {
+        $this->gifts->removeElement($gifts);
+    }
+
+    /**
+     * Get gifts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGifts()
+    {
+        return $this->gifts;
     }
 }

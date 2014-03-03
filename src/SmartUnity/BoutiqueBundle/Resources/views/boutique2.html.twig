@@ -26,40 +26,61 @@
         <div class="col-md-6 col-md-offset-6 bloc-cagnotte police-text grille-content">
             Votre cagnotte actuelle:
             <span class="cochon">	
-            <img src="{{ asset('assets/img/piggy-bank.png') }}"/>
-            	<p class="nb-pts-cagnotte">{{ app.user.cagnotte }}</p>
+                <img src="{{ asset('assets/img/piggy-bank.png') }}"/>
+                <p class="nb-pts-cagnotte">{{ app.user.cagnotte }}</p>
             </span>
         </div>
     </div>
-       {% endif %}         
-        <div class="row sans-marge produit grille-content">
-    <div class="col-md-6 photo-cadeau">
-        <div class="apercu-cadeau">
-            <img src="{{asset('assets/img/mdgsm-logo.jpeg') }}"  alt="Produit" height="100%">
-        </div>
-    </div>
-    <div class="col-md-6 infos-cadeau">
-        <div class="row entete-cadeau sans-marge">
-                <div class="rond-point"><p class="txt-rond">500</p><p class="txt-pts">pts</p></div>
-            <div class="titre-cadeau">
-            Bon d'achat de 10€ chez MaisonDuGSM!
+       {% endif %}
+    
+{% for gift in gifts %}    
+    <div class="row sans-marge produit grille-content">
+        <div class="col-md-6 photo-cadeau">
+            <div class="apercu-cadeau">
+                <img src="{{asset('assets/img/mdgsm-logo.jpeg') }}"  alt="Produit" height="100%">
             </div>
         </div>
-        <div class="row description-cadeau sans-marge">
-            Description du produit : Lorem ipsum dolor sit amet, consectetur adipiscing elit.Quisque vel congue quam. Pellentesque dapibus elementum neque feugiat vestibulum. 
-            Nunc dui dui, sollicitudin in justo ut, pulvinar tincidunt velit. Phasellus aliquam lacus arcu, et ultricies tortor lacinia eu. Vestibulum feugiat non lacus a pharetra. Morbi pellentesque lorem commodo, fringilla lorem in, pretium nulla.
-            In non eros magna. Sed vel justo non velit cursus venenatis sed quis odio.
-        </div>
-        <div class="row">
-            <div class="bloc-boutons-produit">
-                <a target="blank" href="#">
-                    <button type="button" class="bouton-choisir-produit">Je le veux!</button>
-                </a>
+        <div class="col-md-6 infos-cadeau">
+            <div class="row entete-cadeau sans-marge">
+                <div class="rond-point"><p class="txt-rond">{{gift.price}}</p><p class="txt-pts">pts</p></div>
+                <div class="titre-cadeau">
+                    {{gift.price}}
+                </div>
+            </div>
+            <div class="row description-cadeau sans-marge">
+                Description du produit : {{gift.description | raw}}
+            </div>
+            <div class="row">
+                <div class="bloc-boutons-produit">
+                    <a target="blank" href="#">
+                        <button type="button" class="bouton-choisir-produit" data-toggle="modal" data-target="#ModalValidation">Je le veux!</button>
+                    </a>
+                </div>
             </div>
         </div>
-
     </div>
+ {% endfor %}
+    
 </div>
 
+{#Bloc modal lors du choix d'un cadeau#}
+
+{% if is_granted('ROLE_USER') and app.user.cagnotte > 10 %}
+
+<div class="modal fade text-center" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="validation-dialog">
+        <div class="validation-content">
+            <div class="validation-body">
+                <p>Vous êtes sur le point de choisir un cadeau.</p>
+                <p>Il coûte 500pts. Etes-vous sûr de votre choix?</p>
+            </div>
+            <div class="validation-footer">
+                <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button>
+                <a href="{{path('smart_unity_boutique_confirmation')}}"><button type="button" class="btn bouton-validation">Valider</button></a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  
+                    {% endif %}
 {% endblock body %}
 

@@ -1,3 +1,8 @@
 smart_unity_boutique_homepage:
     pattern:  /
     defaults: { _controller: SmartUnityBoutiqueBundle:Boutique:index }
+
+smart_unity_boutique_confirmation:
+    pattern:  /confirmation-cadeau
+    defaults: { _controller: SmartUnityBoutiqueBundle:Boutique:confirmGift}
+    

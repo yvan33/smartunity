@@ -128,3 +128,34 @@ text-align: center;
     border: 1px solid #e8e4dc;
 }
 
+.validation-dialog {
+position: relative;
+background-color: #FFF;
+width: 500px;
+border-radius: 5px;
+margin: 20% auto;
+}
+
+.validation-body {
+font-family: centrale;
+width: 500px;
+padding-top: .6em;
+}
+
+.validation-footer {
+height: 30px;
+margin-bottom: 5px;
+}
+
+.bouton-annulation, .bouton-validation {
+background: #e37151;
+color: #FFF;
+font-size: 13px;
+height: 20px;
+width: 80px;
+font-family: centrale;
+border-radius: 2px;
+cursor: pointer;
+padding: 0;
+}
+
