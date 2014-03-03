@@ -25,18 +25,18 @@
                     marqués d’un <span style="color: red;">*</span> sont obligatoires. L’adresse e-mail doit être valide pour que
                     le compte soit créé. Un mail de confirmation vous sera envoyé à la fin de l’inscription.
                 </p><br/>
-                <div class="cgu">
-                	<input type="checkbox" name="option1" value="CGU"><p class="accept-cgu"> J'ai lu et accepté les <a href="{{ path('smart_unity_app_conditionsPage') }}">conditions générales d'utilisation</a> de Smart'Unity.</p><br/>
-                </div>
             </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-offset-1 col-md-10">
-            <div class="row text-center cookie-title titre-inscription">
-                Inscription
+                            <div class="pad-l">{{ facebook_login_button({'autologoutlink': false, 'size': 'xlarge', 'label': "Se connecter avec Facebook"}) }}</div>
+                            <div class="row text-center separateur-choix-inscription">OU</div>
+                            <div class="row text-center cookie-title titre-inscription">
+                Créer un compte
             </div>
+        
             <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
 
                 <div class="erreur">
@@ -64,9 +64,9 @@
                         <div class="grille-2 police-text">{{form_widget(form.plainPassword.second)}}</div>
                     </div> 
 
-                    <div class="cent-h bouton-bas-block">
+{#                    <div class="cent-h bouton-bas-block">
                         <button type="submit" class="btn-inscription">Inscription express</button>
-                    </div> 
+                    </div> #}
                 </fieldset>
 
 
@@ -97,30 +97,12 @@
                         <div class="grille-2 police-text">{{form_widget(form.info_plus)}}</div>
                     </div>                
                 </fieldset>
-
-                <fieldset>
-                    <legend>Préférences</legend>
-                    <div class="row  premiere-ligne">
-                        <div class="grille-1 pref police-text">{{form_label(form.pref_comm)}}</div>
-                        <div class="grille-2 pref police-text">{{form_widget(form.pref_comm)}}</div>
-                    </div>    
-                    <div class="row ">
-                        <div class="grille-1 pref police-text">{{form_label(form.pref_rep)}}</div>
-                        <div class="grille-2 pref police-text">{{form_widget(form.pref_rep)}}</div>
-                    </div>
-                    <div class="row  ">
-                        <div class="grille-1 pref police-text">{{form_label(form.pref_repValidee)}}</div>
-                        <div class="grille-2 pref police-text">{{form_widget(form.pref_repValidee)}}</div>
-                    </div>
-                    <div class="row  ">
-                        <div class="grille-1 pref police-text">{{form_label(form.pref_repCertifiee)}}</div>
-                        <div class="grille-2 pref police-text">{{form_widget(form.pref_repCertifiee)}}</div>
-                    </div>
-
-                </fieldset>
                 <div class="cent-h bouton-bas-block">
-                    <button type="submit" class="btn-inscription">Inscription complète</button>
-                </div> 
+                    <button type="submit" class="btn-inscription">Créer un compte</button>
+                </div>
+               <div class="text-center">
+               <p class="accept-cgu"> En validant votre inscription, vous acceptez <a href="{{ path('smart_unity_app_conditionsPage') }}">CGU</a> de Smart'Unity.</p>
+                </div>
 
 {{form_end(form)}}
 

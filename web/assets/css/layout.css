@@ -193,7 +193,9 @@ body.bg
 
 .pad-l
 {
-    margin: 10px;	
+    margin: 10px;
+    text-align: center;
+    
 }
 
 .cook-foot
@@ -282,7 +284,6 @@ body.bg
 {
     height: 55px;
 }
-
 
 .cadre-general{
     box-shadow: 0px 0px 30px #758c92;
