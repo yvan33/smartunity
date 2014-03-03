@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "04cc058951d60562937e7e46193f85bc",
+    "hash": "c153912cae8e32b4c47a7428457aca31",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -117,10 +117,9 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan H. Wage",
+                    "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -719,12 +718,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "82e9809cebcd8ec977b1da0b1345cd8be72aa2c1"
+                "reference": "c8c72f5f0bf8566b8ecf9b4ebddbb3db2cb23a0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/82e9809cebcd8ec977b1da0b1345cd8be72aa2c1",
-                "reference": "82e9809cebcd8ec977b1da0b1345cd8be72aa2c1",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/c8c72f5f0bf8566b8ecf9b4ebddbb3db2cb23a0a",
+                "reference": "c8c72f5f0bf8566b8ecf9b4ebddbb3db2cb23a0a",
                 "shasum": ""
             },
             "require": {
@@ -793,7 +792,7 @@
                 "propel",
                 "search"
             ],
-            "time": "2014-01-30 21:42:09"
+            "time": "2014-02-20 22:23:45"
         },
         {
             "name": "friendsofsymfony/facebook-bundle",
@@ -919,12 +918,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "23d15ad680fe5b695df1565e7854342e608bc483"
+                "reference": "815055bcb1936a0bba0af93cf1b44fddf98a64b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/23d15ad680fe5b695df1565e7854342e608bc483",
-                "reference": "23d15ad680fe5b695df1565e7854342e608bc483",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/815055bcb1936a0bba0af93cf1b44fddf98a64b5",
+                "reference": "815055bcb1936a0bba0af93cf1b44fddf98a64b5",
                 "shasum": ""
             },
             "require": {
@@ -979,87 +978,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-01-26 23:20:11"
-        },
-        {
-            "name": "gedmo/doctrine-extensions",
-            "version": "v2.3.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
-                "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/common": ">=2.2,<2.5-dev",
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "doctrine/common": ">=2.4.0-RC3",
-                "doctrine/dbal": ">=2.4.0-RC1",
-                "doctrine/mongodb": ">=1.0.3",
-                "doctrine/mongodb-odm": ">=1.0.0-BETA9",
-                "doctrine/orm": ">=2.4.0-RC1",
-                "symfony/yaml": "2.3.1"
-            },
-            "suggest": {
-                "doctrine/dbal": ">=2.3.2",
-                "doctrine/mongodb": ">=1.0.1",
-                "doctrine/mongodb-odm": ">=1.0.0-BETA7",
-                "doctrine/orm": ">=2.3.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Gedmo\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Buchmann",
-                    "email": "david@liip.ch"
-                },
-                {
-                    "name": "Gediminas Morkevicius",
-                    "email": "gediminas.morkevicius@gmail.com"
-                },
-                {
-                    "name": "Gustavo Falco",
-                    "email": "comfortablynumb84@gmail.com"
-                }
-            ],
-            "description": "Doctrine2 behavioral extensions",
-            "homepage": "http://gediminasm.org/",
-            "keywords": [
-                "Blameable",
-                "behaviors",
-                "doctrine2",
-                "extensions",
-                "gedmo",
-                "loggable",
-                "nestedset",
-                "sluggable",
-                "sortable",
-                "timestampable",
-                "translatable",
-                "tree",
-                "uploadable"
-            ],
-            "time": "2014-01-12 16:34:06"
+            "time": "2014-02-21 12:52:40"
         },
         {
             "name": "helios-ag/fm-elfinder-bundle",
@@ -1319,163 +1238,6 @@
             "time": "2014-01-12 16:20:24"
         },
         {
-            "name": "jms/aop-bundle",
-            "version": "1.0.1",
-            "target-dir": "JMS/AopBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/JMSAopBundle.git",
-                "reference": "93f41ab85ed409430bc3bab2e0b7c7677f152aa8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSAopBundle/zipball/93f41ab85ed409430bc3bab2e0b7c7677f152aa8",
-                "reference": "93f41ab85ed409430bc3bab2e0b7c7677f152aa8",
-                "shasum": ""
-            },
-            "require": {
-                "jms/cg": "1.*",
-                "symfony/framework-bundle": "2.*"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JMS\\AopBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes M. Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
-                    "role": "Developer of wrapped JMSSerializerBundle"
-                }
-            ],
-            "description": "Adds AOP capabilities to Symfony2",
-            "keywords": [
-                "annotations",
-                "aop"
-            ],
-            "time": "2013-07-29 09:34:26"
-        },
-        {
-            "name": "jms/cg",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/cg-library.git",
-                "reference": "ce8ef43dd6bfe6ce54e5e9844ab71be2343bf2fc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/cg-library/zipball/ce8ef43dd6bfe6ce54e5e9844ab71be2343bf2fc",
-                "reference": "ce8ef43dd6bfe6ce54e5e9844ab71be2343bf2fc",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "CG\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes M. Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
-                    "role": "Developer of wrapped JMSSerializerBundle"
-                }
-            ],
-            "description": "Toolset for generating PHP code",
-            "keywords": [
-                "code generation"
-            ],
-            "time": "2012-01-02 20:40:52"
-        },
-        {
-            "name": "jms/di-extra-bundle",
-            "version": "1.4.0",
-            "target-dir": "JMS/DiExtraBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/JMSDiExtraBundle.git",
-                "reference": "7fffdb6c96fb922a131af06d773e1e6c5301d070"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSDiExtraBundle/zipball/7fffdb6c96fb922a131af06d773e1e6c5301d070",
-                "reference": "7fffdb6c96fb922a131af06d773e1e6c5301d070",
-                "shasum": ""
-            },
-            "require": {
-                "jms/aop-bundle": ">=1.0.0,<1.2-dev",
-                "jms/metadata": "1.*",
-                "symfony/finder": "~2.1",
-                "symfony/framework-bundle": "~2.1",
-                "symfony/process": "~2.1"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "*",
-                "doctrine/orm": "*",
-                "jms/security-extra-bundle": "1.*",
-                "phpcollection/phpcollection": ">=0.1,<0.3-dev",
-                "sensio/framework-extra-bundle": "*",
-                "symfony/browser-kit": "*",
-                "symfony/class-loader": "*",
-                "symfony/form": "*",
-                "symfony/security-bundle": "*",
-                "symfony/twig-bundle": "*",
-                "symfony/validator": "*",
-                "symfony/yaml": "*"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JMS\\DiExtraBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes M. Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
-                    "role": "Developer of wrapped JMSSerializerBundle"
-                }
-            ],
-            "description": "Allows to configure dependency injection using annotations",
-            "homepage": "http://jmsyst.com/bundles/JMSDiExtraBundle",
-            "keywords": [
-                "annotations",
-                "dependency injection"
-            ],
-            "time": "2013-06-08 13:13:40"
-        },
-        {
             "name": "jms/metadata",
             "version": "1.5.0",
             "source": {
@@ -1561,77 +1323,6 @@
             ],
             "description": "A library for easily creating recursive-descent parsers.",
             "time": "2012-11-18 18:08:43"
-        },
-        {
-            "name": "jms/security-extra-bundle",
-            "version": "1.5.1",
-            "target-dir": "JMS/SecurityExtraBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/JMSSecurityExtraBundle.git",
-                "reference": "f5f6c6df69ceae8b709e57b49fcc2a42d9280bcc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSSecurityExtraBundle/zipball/f5f6c6df69ceae8b709e57b49fcc2a42d9280bcc",
-                "reference": "f5f6c6df69ceae8b709e57b49fcc2a42d9280bcc",
-                "shasum": ""
-            },
-            "require": {
-                "jms/aop-bundle": "~1.0",
-                "jms/di-extra-bundle": "~1.3",
-                "jms/metadata": "~1.0",
-                "jms/parser-lib": "~1.0",
-                "symfony/framework-bundle": "~2.1",
-                "symfony/security-bundle": "*"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "*",
-                "doctrine/orm": "*",
-                "sensio/framework-extra-bundle": "*",
-                "symfony/browser-kit": "*",
-                "symfony/class-loader": "*",
-                "symfony/css-selector": "*",
-                "symfony/finder": "*",
-                "symfony/form": "*",
-                "symfony/process": "*",
-                "symfony/twig-bundle": "*",
-                "symfony/validator": "*",
-                "symfony/yaml": "*"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JMS\\SecurityExtraBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes M. Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
-                    "role": "Developer of wrapped JMSSerializerBundle"
-                }
-            ],
-            "description": "Enhances the Symfony2 Security Component by adding several new features",
-            "homepage": "http://jmsyst.com/bundles/JMSSecurityExtraBundle",
-            "keywords": [
-                "annotations",
-                "authorization",
-                "expression",
-                "secure",
-                "security"
-            ],
-            "time": "2013-06-09 10:29:54"
         },
         {
             "name": "jms/serializer",
@@ -1758,7 +1449,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1772,126 +1463,6 @@
                 "xml"
             ],
             "time": "2014-02-09 12:04:09"
-        },
-        {
-            "name": "knplabs/knp-components",
-            "version": "1.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/knp-components.git",
-                "reference": "8803fdaa18bd24bd158143e3d9099f4b243a31dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/8803fdaa18bd24bd158143e3d9099f4b243a31dd",
-                "reference": "8803fdaa18bd24bd158143e3d9099f4b243a31dd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "suggest": {
-                "doctrine/common": "to allow usage pagination with Doctrine ArrayCollection",
-                "doctrine/mongodb-odm": "to allow usage pagination with Doctrine ODM MongoDB",
-                "doctrine/orm": "to allow usage pagination with Doctrine ORM",
-                "propel/propel1": "to allow usage pagination with Propel ORM",
-                "ruflin/Elastica": "to allow usage pagination with ElasticSearch Client",
-                "solarium/solarium": "to allow usage pagination with Solarium Client"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Knp\\Component": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "KnpLabs Team",
-                    "homepage": "http://knplabs.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://github.com/KnpLabs/knp-components/contributors"
-                }
-            ],
-            "description": "Knplabs component library",
-            "homepage": "http://github.com/KnpLabs/knp-components",
-            "keywords": [
-                "components",
-                "knp",
-                "knplabs",
-                "pager",
-                "paginator"
-            ],
-            "time": "2014-01-09 16:23:31"
-        },
-        {
-            "name": "knplabs/knp-paginator-bundle",
-            "version": "2.3.3",
-            "target-dir": "Knp/Bundle/PaginatorBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "ce6b7b36d3bed5cb6bfb9645018dd407395fce15"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/ce6b7b36d3bed5cb6bfb9645018dd407395fce15",
-                "reference": "ce6b7b36d3bed5cb6bfb9645018dd407395fce15",
-                "shasum": ""
-            },
-            "require": {
-                "knplabs/knp-components": "~1.2",
-                "php": ">=5.3.3",
-                "symfony/framework-bundle": "~2.0",
-                "twig/twig": "~1.5"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Knp\\Bundle\\PaginatorBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "KnpLabs Team",
-                    "homepage": "http://knplabs.com"
-                },
-                {
-                    "name": "Symfony2 Community",
-                    "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle/contributors"
-                }
-            ],
-            "description": "Paginator bundle for Symfony2 to automate pagination and simplify sorting and other features",
-            "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle",
-            "keywords": [
-                "Symfony2",
-                "bundle",
-                "knp",
-                "knplabs",
-                "pager",
-                "pagination",
-                "paginator"
-            ],
-            "time": "2013-07-30 20:36:09"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2032,70 +1603,6 @@
             "time": "2013-11-14 19:48:31"
         },
         {
-            "name": "mv/mv-blog-bundle",
-            "version": "v1.3.3",
-            "target-dir": "Mv/BlogBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpmike/MvBlogBundle.git",
-                "reference": "4186a3fabb6844eacf8f3844561d59a7d9d2323e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpmike/MvBlogBundle/zipball/4186a3fabb6844eacf8f3844561d59a7d9d2323e",
-                "reference": "4186a3fabb6844eacf8f3844561d59a7d9d2323e",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/doctrine-bundle": "1.2.*",
-                "egeloen/ckeditor-bundle": ">=2.1.3",
-                "gedmo/doctrine-extensions": "2.3.*",
-                "helios-ag/fm-elfinder-bundle": ">=1.0",
-                "jms/di-extra-bundle": ">=1.3.0@dev",
-                "jms/security-extra-bundle": "~1.4",
-                "knplabs/knp-paginator-bundle": "2.3.*",
-                "php": ">=5.3.3",
-                "symfony/assetic-bundle": "2.3.*",
-                "symfony/swiftmailer-bundle": "2.3.*",
-                "symfony/symfony": "~2.3.0@stable"
-            },
-            "suggest": {
-                "friendsofsymfony/user-bundle": "to use authentication"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Mv\\BlogBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL"
-            ],
-            "authors": [
-                {
-                    "name": "Michaël VEROUX",
-                    "homepage": "https://github.com/phpmike"
-                },
-                {
-                    "name": "Jarrett Croll",
-                    "homepage": "https://github.com/jcroll",
-                    "role": "Translator"
-                }
-            ],
-            "description": "Symfony2 Blog Bundle",
-            "homepage": "https://github.com/phpmike/MvBlogBundle",
-            "keywords": [
-                "blog"
-            ],
-            "time": "2013-09-01 10:30:21"
-        },
-        {
             "name": "phpcollection/phpcollection",
             "version": "0.2.0",
             "source": {
@@ -2129,7 +1636,7 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -2965,7 +2472,6 @@
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
         "friendsofsymfony/elastica-bundle": 20,
-        "mv/mv-blog-bundle": 0,
         "friendsofsymfony/jsrouting-bundle": 0,
         "jms/serializer-bundle": 20
     },

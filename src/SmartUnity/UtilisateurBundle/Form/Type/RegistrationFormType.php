@@ -13,9 +13,10 @@ class RegistrationFormType extends BaseType {
 
 
         $builder
-                ->add('nom')
+                ->add('nom','text', array('required'=>false))
+                ->add('prenom','text', array('required'=>false))
                 ->add('email', 'email', array('label' => 'Adresse e-mail'))
-                ->add('username', null, array('label' => 'Nom d\'utilisateur'))
+                ->add('username', null, array('label' => 'Pseudonyme'))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
                     'options' => array('translation_domain' => 'FOSUserBundle'),
@@ -45,35 +46,6 @@ class RegistrationFormType extends BaseType {
                 ->add('info_plus','textarea',array(
                     'required'=> false,
                     'label' => 'Un peu plus sur moi'
-                ))
-        
-               ->add('pref_comm', 'choice', array(
-                    'label' => 'Recevoir les notifications lorsqu\' un membre a commenté une de mes questions ou réponses',
-                    'choices' => array(
-                        '1' => 'Oui', '0' => 'Non'),
-                    'expanded' => true,
-                    'data' => 1
-                ))
-                ->add('pref_rep', 'choice', array(
-                    'label' => 'Recevoir les notifications lorsqu\'une réponse m\'est proposée',
-                    'choices' => array(
-                        '1' => 'Oui', '0' => 'Non'),
-                    'expanded' => true,
-                  'data' => 1
-                ))
-                ->add('pref_repValidee', 'choice', array(
-                    'label' => 'Recevoir une notification lorsque mes réponses sont validées',
-                    'choices' => array(
-                        '1' => 'Oui', '0' => 'Non'),
-                    'expanded' => true,
-                    'data' => 1
-                ))
-                ->add('pref_repCertifiee', 'choice', array(
-                    'label' => 'Recevoir une notification lorsque mes réponses sont certifiées',
-                    'choices' => array(
-                        '1' => 'Oui', '0' => 'Non'),
-                    'expanded' => true,
-                    'data' => 1
                 ))
                 ->add('parrain', 'hidden_entity', array(
                     'entity' => 'SmartUnityAppBundle:membre',

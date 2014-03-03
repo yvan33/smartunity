@@ -77,6 +77,13 @@ class question
      * @ORM\Column(name="remuneration", type="integer", nullable=false)
      */
     private $remuneration;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="supplementRemuneration", type="integer", nullable=true)
+     */
+    private $supplementRemuneration=0;
     
     /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question")
@@ -565,5 +572,28 @@ class question
     public function getIsCertifiedQuestion()
     {
         return $this->isCertifiedQuestion;
+    }
+
+    /**
+     * Set supplementRemuneration
+     *
+     * @param integer $supplementRemuneration
+     * @return question
+     */
+    public function setSupplementRemuneration($supplementRemuneration)
+    {
+        $this->supplementRemuneration = $supplementRemuneration;
+    
+        return $this;
+    }
+
+    /**
+     * Get supplementRemuneration
+     *
+     * @return integer 
+     */
+    public function getSupplementRemuneration()
+    {
+        return $this->supplementRemuneration;
     }
 }

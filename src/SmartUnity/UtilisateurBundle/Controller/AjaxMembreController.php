@@ -63,9 +63,10 @@ class AjaxMembreController extends Controller {
                 $dateBestReponse = null;
                 $is_certif_question = false;
                 $is_validated_question = false;
+                $remunerationtotale = $Question->getRemuneration() + $Question->getSupplementRemuneration();
 
 
-if ($questionRepository->isQuestionValid($Question->getId())){    
+if ($Question->getIsValidatedQuestion()){    
     foreach($Question->getReponses() as $reponse){
         if ($reponse->getDateCertification() instanceof \DateTime){
             $auteurBestreponse = $reponse->getMembre()->getUsername();
@@ -110,7 +111,7 @@ else{
                     'description'=>$Question->getDescription(),
                     'date'=>$Question->getDate()->format('d-m-Y à H:i'),
                     'membre_username'=>$Question->getMembre()->getUsername(),
-                    'remuneration'=>$Question->getRemuneration(),
+                    'remuneration'=>$remunerationtotale,
                     'nb_reponses'=>$Question->getReponses()->count(),
                     'best_reponse'=>$descriptionBestReponse,
                     'auteur_best_reponse'=>$auteurBestreponse,
@@ -184,7 +185,7 @@ if($listeQuestion[0] != null){
                 $dateBestReponse = null;
                 $is_certif_question = false;
                 $is_validated_question = false;
-
+                $remunerationtotale = $Question->getRemuneration()+ $Question->getSupplementRemuneration();
 
 if ($Question->getIsValidatedQuestion()){    
     foreach($Question->getReponses() as $reponse){
@@ -231,7 +232,7 @@ else{
                     'description'=>$Question->getDescription(),
                     'date'=>$Question->getDate()->format('d-m-Y à H:i'),
                     'membre_username'=>$Question->getMembre()->getUsername(),
-                    'remuneration'=>$Question->getRemuneration(),
+                    'remuneration'=>$remunerationtotale,
                     'nb_reponses'=>$Question->getReponses()->count(),
                     'best_reponse'=>$descriptionBestReponse,
                     'auteur_best_reponse'=>$auteurBestreponse,

@@ -2,30 +2,34 @@
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width">
         <title>{% block title %}Bienvenue{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}" />
 
         <!-- Additional meta content -->
     {% block meta %}{% endblock %}
+        
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/chosen/chosen.min.css' 
+				 'assets/css/bootstrap.min.css'
+				 'assets/css/layout.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 
-        <!-- Bootstrap core CSS -->
-{#        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap2.css') }}">#}
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/chosen/chosen.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
 
 {% block stylesheets %}{% endblock %}
 
-        <!-- Bootstrap core and general JavaScript files -->
-        <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
-        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('assets/chosen/chosen.jquery.js') }}"></script>
+{% javascripts filter='yui_js' 
+				'assets/js/jquery-1.10.2.js' 
+				'assets/js/bootstrap.min.js'
+				'assets/chosen/chosen.jquery.js'
+				'bundles/fosjsrouting/js/router.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
         <!-- Additional Javascript src -->
-<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
 {% block initJS %}{% endblock %}
 
@@ -46,13 +50,11 @@
         }
     }
 </script>
-
-
     </head>
     <!-- bg body -->
-    <NOSCRIPT> <div class="alert alert-danger message-js">Javascript n'est pas activé sur votre navigateur. Vous devez l'activer pour naviguer correctement sur Smart'Unity.</div></NOSCRIPT>
     <body class="bg">
-        
+ <NOSCRIPT> <div class="alert alert-danger message-js">Javascript n'est pas activé sur votre navigateur. Vous devez l'activer pour naviguer correctement sur Smart'Unity.</div></NOSCRIPT>
+       
 {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 
         <nav class="navbar navbar-inverse navbar-fixed-top menu-bg" role="navigation">
@@ -83,11 +85,10 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                             	<li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage'%} class="fleur-active" {% else %} class="fleur-inactive" {% endif %}><a href={{ path('smart_unity_app_homepage') }}><img onmouseover="fleurNavHover(this)" onmouseout="fleurNavUnHover(this)" src="{{ asset('assets/img/logo-su-nb-bleue.png') }}"/></a></li>
-                                <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_homepage'
-                             or  app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
+                                <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_demander_questions'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
-                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_homepage') }}" class="menu-pad">QUESTIONS/REPONSES</a></li>
+                       %}class="active"{% endif %}><a href="{{ path('smart_unity_question_reponse_list_of_question') }}" class="menu-pad">QUESTIONS/REPONSES</a></li>
                                 <li {% if app.request.attributes.get('_route') == 'smart_unity_boutique_homepage' %}class="active"{% endif %}><a href={{ path('smart_unity_boutique_homepage') }} class="menu-pad">BOUTIQUE CADEAUX</a></li>
                                 <li><a target="blank" href="http://blog.smartunity.fr" class="menu-pad">BLOG</a></li>
                             </ul>
@@ -333,7 +334,7 @@ $(".cadre-general").css('min-height', minimumHeightCadreGeneral);
                     $('#clic-pop').attr('href', '#');
                     $("#clic-pop,#pop").click(function(event) {
                         $("#top-barre-recherche").hide();
-{#                         $("#pop").slideDown(); #}
+//                          $("#pop").slideDown(); 
                         $(".modal.fade").modal('show');
                         event.stopPropagation();
 
@@ -370,6 +371,7 @@ var cheminFleur = '{{ asset('assets/img/')}}';
 
 </script>
 {#////////////////////////////////////#}
+
         <!-- call Javascript & scripts -->
 {% block callJS %}{% endblock %}
 

@@ -9,14 +9,14 @@
 </div>  
     
 
-<form action="{{ path('smart_unity_utilisateur_setinfos') }}" {{ form_enctype(form_infos) }} method="POST" class="form_moncompte">
+<form action="{{ path('smart_unity_utilisateur_editinfos') }}" {{ form_enctype(form_infos) }} method="POST" class="form_moncompte">
 
 {#{{form_start(form_infos)}}#}
     {{form_errors(form_infos)}}
 
     <div class="row premiere-ligne ">
         <div class="grille-1">
-        Nom d'utilisateur
+        Pseudonyme
         </div>
         <div class="grille-2">
         {{form_widget(form_infos.username)}}

@@ -75,15 +75,8 @@ class QuestionReponseMembreController extends Controller {
                 {unset($listeQuestions[0]);}
             else
                 {throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityUtilisateurBundle:AjaxMembreController');}
-            //On récupère les dernières questions
-            $response = $this->forward('SmartUnityUtilisateurBundle:AjaxMembre:getQuestions', array(
-                'type' => $type,
-                'page' => $page,
-                'nbParPage' => $nbParPage,
-                'membreId' => $id,
-                'route' => $route,
-            ));
 
+                
             //Génération de la pagination en statique (si pas de JS)
             $pagination = array();
             if ($page != 1) {
@@ -91,8 +84,9 @@ class QuestionReponseMembreController extends Controller {
                 array_push($pagination, array('<', $page - 1, '-4'));
             }
             for ($i = -2; $i < 3; $i++) {
-                if (($page + $i) >= 1 && ($page + $i) <= $nbPages)
+                if (($page + $i) >= 1 && ($page + $i) <= $nbPages) {
                     array_push($pagination, array($page + $i, $page + $i, $i));
+                }
             }
             if ($page < $nbPages) {
                 array_push($pagination, array('>', $page + 1, '3'));
@@ -146,10 +140,12 @@ class QuestionReponseMembreController extends Controller {
                 {$page = 1;}
 
             //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
-            if ($listeQuestions[0]->type == $type && $listeQuestions[0]->nbParPage == $nbParPage && $listeQuestions[0]->page == $page)
+            if ($listeQuestions[0]->type == $type && $listeQuestions[0]->nbParPage == $nbParPage && $listeQuestions[0]->page == $page) {
                 unset($listeQuestions[0]);
-            else
+            }
+            else {
                 throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityUtilisateurBundle:AjaxMembreController');
+            }
 
 
             //Génération de la pagination en statique (si pas de JS)
@@ -159,8 +155,9 @@ class QuestionReponseMembreController extends Controller {
                 array_push($pagination, array('<', $page - 1, '-4'));
             }
             for ($i = -2; $i < 3; $i++) {
-                if (($page + $i) >= 1 && ($page + $i) <= $nbPages)
+                if (($page + $i) >= 1 && ($page + $i) <= $nbPages) {
                     array_push($pagination, array($page + $i, $page + $i, $i));
+                }
             }
             if ($page < $nbPages) {
                 array_push($pagination, array('>', $page + 1, '3'));

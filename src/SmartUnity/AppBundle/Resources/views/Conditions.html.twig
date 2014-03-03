@@ -3,7 +3,10 @@
 {% block title %}Conditions générales d'utilisation{% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/formulaire.css') }}"  rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/formulaire.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 {% block body %}
@@ -12,47 +15,47 @@ Bonjour {{ app.user.username}}
 {% endif %} </p>  -->
 
 <div class="row titre-conditions">
-	<h1>Conditions générales d'utilisation de Smart'Unity</h1>
-	<p>Le site web communautaire Smart’Unity.fr est un espace destiné à l'échange de connaissances, d'expériences et d'opinions autour des smartphones.<br/>
-En vous inscrivant, puis en postant vos questions et réponses sur smartunity.fr, vous acceptez ces conditions générales d'utilisation et l'autorité des administrateurs.<br/>
-Les propos tenus n'engagent que vous et ne sauraient représenter l'opinion de l'équipe administrant smartunity.fr.</p><br/>
-	
-	<span class="articles-conditions">Accès et inscription</span>
-	<p>Pour poser une question ou pour répondre à une question vous devez vous être inscrit.<br/>
-	Pour cela, il vous faut choisir un identifiant et fournir une adresse de courrier électronique valide et un mot de passe. Vous pouvez également vous inscrire et vous connecter grâce à votre compte Facebook.</p><br/>
-	
-	<span class="articles-conditions">Règles à respecter en matière de contributions</span>
-	<p>Vous êtes responsable du contenu des messages que vous postez. Nous vous rappelons que les messages que vous postez peuvent être lus par tous librement. Les règles suivantes s'appliquent au texte du message mais également aux images et aux liens hypertextes que vous insérez.<br/><br/>
-Nous vous sommes également reconnaissant de respecter les règles d’orthographe et de grammaire de la langue française. Nos yeux sont sensibles.<br/><br/>
-De même, le sujet que vous comptez aborder a déjà peut être fait l'objet d'une question il y'a peu. N'hésitez pas à vous servir du moteur de recherche, la réponse se trouve peut-être déjà sur smartunity !
-Vos messages sont stockés sur le forum sans limite de temps. Vous pouvez les supprimer ou les modifier en utilisant la fonction «éditer » disponible dans chaque page des questions que vous avez posées ou des réponses que vous avez apportées.</p><br/>
+    <h1>Conditions générales d'utilisation de Smart'Unity</h1>
+    <p>Le site web communautaire Smart’Unity.fr est un espace destiné à l'échange de connaissances, d'expériences et d'opinions autour des smartphones.<br/>
+        En vous inscrivant, puis en postant vos questions et réponses sur smartunity.fr, vous acceptez ces conditions générales d'utilisation et l'autorité des administrateurs.<br/>
+        Les propos tenus n'engagent que vous et ne sauraient représenter l'opinion de l'équipe administrant smartunity.fr.</p><br/>
 
-	<span class="articles-conditions">Modérations</span>
-	<p>Les contributions que vous postez peuvent être modérées si elles ne sont pas conformes aux présentes conditions générales d’utilisation. Le forum est modéré après la publication des messages.<br/>
-Le rôle des administrateurs de smartunity.fr est de veiller au bon respect des règles des présentes conditions générales d’utilisation qui ont en particulier pour but de faire respecter le droit des tiers et la réglementation française, et bien entendu de veiller au bon déroulement des discussions.<br/><br/>
-Le site effectue toutes les opérations nécessaires pour s'assurer de la conformité des messages à la réglementation des contenus et au respect du droit d'autrui. Toutefois si malgré tous les moyens mis en oeuvre vous constatez un message litigieux, vous pouvez prévenir un modérateur grâce au bouton «Signaler» en bas à gauche de chaque message ou à droite de chaque commentaire.<br/>
-En cas de doute sur la conformité d'un message avec les présentes conditions générales d’utilisations, vous pouvez demander un avis à un administrateur avant de publier un messsage.</p><br/>
+    <span class="articles-conditions">Accès et inscription</span>
+    <p>Pour poser une question ou pour répondre à une question vous devez vous être inscrit.<br/>
+        Pour cela, il vous faut choisir un identifiant et fournir une adresse de courrier électronique valide et un mot de passe. Vous pouvez également vous inscrire et vous connecter grâce à votre compte Facebook.</p><br/>
 
-	<span class="articles-conditions">Sanctions</span>
-	<p>Un post contraire aux CGU pourra être modifié ou supprimé. La modification peut concerner une partie ou la totalité du message. Outre cela, l'utilisateur postant un message contraire aux présentes conditions générales d’utilisations, pourra être banni de la communauté Smart’Unity.</p><br/>
+    <span class="articles-conditions">Règles à respecter en matière de contributions</span>
+    <p>Vous êtes responsable du contenu des messages que vous postez. Nous vous rappelons que les messages que vous postez peuvent être lus par tous librement. Les règles suivantes s'appliquent au texte du message mais également aux images et aux liens hypertextes que vous insérez.<br/><br/>
+        Nous vous sommes également reconnaissant de respecter les règles d’orthographe et de grammaire de la langue française. Nos yeux sont sensibles.<br/><br/>
+        De même, le sujet que vous comptez aborder a déjà peut être fait l'objet d'une question il y'a peu. N'hésitez pas à vous servir du moteur de recherche, la réponse se trouve peut-être déjà sur smartunity !
+        Vos messages sont stockés sur le forum sans limite de temps. Vous pouvez les supprimer ou les modifier en utilisant la fonction «éditer » disponible dans chaque page des questions que vous avez posées ou des réponses que vous avez apportées.</p><br/>
 
-	<span class="articles-conditions">Mentions légales</span>
-	<p>Smart'Unity est pour l'heure l'aboutissement de quelques mois de travail de 3 jeunes entrepreneurs qui espèrent pouvoir concrétiser ce projet en montant une structure le plus vite possible !</p><hr></hr>
-	
-	<p style="font-style:italic;">Textes légaux (sur le web de la CNIL)
-Loi nº78-17 du 6 Janvier 1978, relative à l'informatique, aux fichiers et aux libertés, dite loi Informatique et Libertés Délibération de la CNIL nº 81-94 du 21 juillet 1981 portant adoption d'une recommandation relative aux mesures générales de sécurité des systèmes informatiques Loi nº 88-19 du 5 janvier 1988 relative à la fraude informatique, dite loi Godfrain.</p>
+    <span class="articles-conditions">Modérations</span>
+    <p>Les contributions que vous postez peuvent être modérées si elles ne sont pas conformes aux présentes conditions générales d’utilisation. Le forum est modéré après la publication des messages.<br/>
+        Le rôle des administrateurs de smartunity.fr est de veiller au bon respect des règles des présentes conditions générales d’utilisation qui ont en particulier pour but de faire respecter le droit des tiers et la réglementation française, et bien entendu de veiller au bon déroulement des discussions.<br/><br/>
+        Le site effectue toutes les opérations nécessaires pour s'assurer de la conformité des messages à la réglementation des contenus et au respect du droit d'autrui. Toutefois si malgré tous les moyens mis en oeuvre vous constatez un message litigieux, vous pouvez prévenir un modérateur grâce au bouton «Signaler» en bas à gauche de chaque message ou à droite de chaque commentaire.<br/>
+        En cas de doute sur la conformité d'un message avec les présentes conditions générales d’utilisations, vous pouvez demander un avis à un administrateur avant de publier un messsage.</p><br/>
+
+    <span class="articles-conditions">Sanctions</span>
+    <p>Un post contraire aux CGU pourra être modifié ou supprimé. La modification peut concerner une partie ou la totalité du message. Outre cela, l'utilisateur postant un message contraire aux présentes conditions générales d’utilisations, pourra être banni de la communauté Smart’Unity.</p><br/>
+
+    <span class="articles-conditions">Mentions légales</span>
+    <p>Smart'Unity est pour l'heure l'aboutissement de quelques mois de travail de 3 jeunes entrepreneurs qui espèrent pouvoir concrétiser ce projet en montant une structure le plus vite possible !</p><hr></hr>
+
+    <p style="font-style:italic;">Textes légaux (sur le web de la CNIL)
+        Loi nº78-17 du 6 Janvier 1978, relative à l'informatique, aux fichiers et aux libertés, dite loi Informatique et Libertés Délibération de la CNIL nº 81-94 du 21 juillet 1981 portant adoption d'une recommandation relative aux mesures générales de sécurité des systèmes informatiques Loi nº 88-19 du 5 janvier 1988 relative à la fraude informatique, dite loi Godfrain.</p>
 
 
 </div>
 
 
-                
 
 
- 
 
 
-  </div>
+
+
+</div>
 </div>
 
 {% endblock %}

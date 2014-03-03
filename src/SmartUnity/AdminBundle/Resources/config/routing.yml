@@ -1,7 +1,0 @@
-smart_unity_admin_homepage:
-    pattern:  /
-    defaults: { _controller: SmartUnityAdminBundle:Default:index }
-
-smart_unity_admin_blog:
-    resource: "@SmartUnityBlogBundle/Resources/config/routing_admin.yml"
-    prefix: /blog

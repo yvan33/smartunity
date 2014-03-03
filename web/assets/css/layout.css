@@ -16,165 +16,6 @@
     src : url(../fonts/neuropol.ttf);
 }
 
-@media (min-width: 1201px){
-
-    .container {
-        max-width: 1170px;
-    }
-
-
-    .valign-row
-    {
-        display:table;
-
-    }
-    .valign-col
-    {
-        float: none;
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    .hid-home
-    {
-        display:none;
-    }
-
-    .connection
-    {
-        width: 250px;
-        margin-left: -60px;
-    }
-
-    .nav img {
-        margin-top: -3px;
-        width: 50%;
-        margin-right: -35px;
-    }
-
-}
-
-@media (min-width: 993px) and (max-width: 1200px) {
-
-    .container {
-        max-width: 970px;
-    }    
-
-    .menu-pad 
-    {
-        font-family: centrale;
-        font-size: 14px;
-        line-height: 43px;
-        margin: 0px 10px -7px 8px;
-    }
-
-    .valign-row
-    {
-        display:table;
-    }
-
-    .valign-col
-    {
-        float:none;
-        display:table-cell;
-        vertical-align:middle;
-    }
-
-    .hid-home
-    {
-        display:none;
-    }
-
-    .connection
-    {
-        width: 250px;
-        margin-left: -60px;
-    }
-
-    .nav img {
-        margin-top: -3px;
-        width: 50%;
-        margin-right: -35px;
-    }
-   
-}
-
-@media screen and (min-width: 769px) and (max-width: 992px) {
-
-    .container {
-        max-width: 750px;
-    }
-
-    .menu-pad 
-    {
-        font-family: centrale;
-        font-size: 13px;
-        line-height: 43px;
-        margin: 0px 0px -7px 0px;
-    }
-
-    .hid-home
-    {
-        display:none;
-    }
-    .connection
-    {
-        width: 250px;
-        margin-left: -90px;
-    }
-
-    .nav img {
-        margin-top: -3px;
-        width: 50%;
-        margin-right: -35px;
-    }
-
-}
-
-@media screen and (max-width: 768px) {
-
-    .container
-    {
-        min-width:600px;
-
-    }
-
-    .logo2
-    {
-        z-index:101; 
-    }
-    
-    .logo {
-	    display: none;
-    }
-
-    .menu-pad
-    {
-        font-family: centrale;
-        font-size: 15px;
-        line-height: 43px;
-        text-align: center ;
-    }
-
-    .menu-pad 
-    {
-        font-family: centrale;
-        font-size:14px;
-        padding-top:5px;
-    }
-
-    .connection
-    {
-        width: 500px;
-        margin-left: 20px;
-    }
-
-    .nav img {
-        width: 30px;
-        margin-left : 47%;
-    }
-}
-
 button,
 input,
 select[multiple],
@@ -191,9 +32,8 @@ nav.navbar.navbar-inverse.navbar-fixed-top.menu-bg
 .navbar-inverse .navbar-nav>li>a {
     color: #99bbc3;
     padding-bottom: 0;
-    padding-top: 14px;
-    padding-left: 5px;
-    padding-right: 5px;
+    font-family: centrale;
+    font-size: 15px;
 }
 
 .navbar-inverse {
@@ -259,8 +99,7 @@ body.bg
 
 .logo
 {
-    padding-top:5px;
-    height: 60px;
+    height: 55px;
     margin-left: 30px;
 }
 
@@ -354,7 +193,9 @@ body.bg
 
 .pad-l
 {
-    margin: 10px;	
+    margin: 10px;
+    text-align: center;
+    
 }
 
 .cook-foot
@@ -378,6 +219,14 @@ body.bg
     margin-top:3px;
     margin-bottom:-3px;
     font-size: 20pt;
+}
+
+.cookie-title
+{
+    font-family: centrale;
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 25px;
 }
 
 .connection
@@ -444,13 +293,12 @@ body.bg
     height: 55px;
 }
 
-
 .cadre-general{
     box-shadow: 0px 0px 30px #758c92;
     background-color: #f3f0eb;
     overflow: hidden; 
     padding: 30px 30px 0px 30px;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: 25px;
 }
 
@@ -962,8 +810,210 @@ body.bg
 transform: rotate(90deg);
 
 }
+
 @media (max-width: 1000px) { 
 #submit-a-bug {
      display:none;
 }
+}
+
+@media (min-width: 1201px){
+
+    .container {
+        max-width: 1170px;
+    }
+
+
+    .valign-row
+    {
+        display: table;
+
+    }
+    .valign-col
+    {
+        float: none;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .hid-home
+    {
+        display:none;
+    }
+
+    .connection
+    {
+        width: 250px;
+        margin-left: -60px;
+    }
+
+    .nav img {
+        margin-top: -3px;
+        width: 62%;
+        margin-right: -47px;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+    .container {
+        max-width: 970px;
+    }    
+
+    .valign-row
+    {
+        display:table;
+    }
+
+    .valign-col
+    {
+        float:none;
+        display:table-cell;
+        vertical-align:middle;
+    }
+
+    .hid-home
+    {
+        display:none;
+    }
+
+    .connection
+    {
+        width: 250px;
+        margin-left: -60px;
+    }
+
+    .nav img {
+        margin-top: -3px;
+        width: 62%;
+        margin-right: -47px;
+    }
+    
+    .nav>li>a {
+	    padding-left: 10px;
+	    padding-right: 10px;
+    }
+    
+    .footer-text {
+	    margin-top: -8px;
+    }
+   
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+    .container {
+        max-width: 750px;
+    }
+
+    .menu-pad 
+    {
+        margin: 0px 0px -7px 0px;
+    }
+
+    .hid-home
+    {
+        display:none;
+    }
+    
+    .connection
+    {
+        width: 250px;
+        margin-left: -90px;
+    }
+
+    .nav img {
+        margin-top: -3px;
+        width: 62%;
+        margin-right: -47px;
+    }
+    
+    .nav>li>a {
+	    padding-left: 10px;
+	    padding-right: 10px;
+    }
+    
+    .navbar-inverse .navbar-nav>li>a {
+    	font-size: 13px;
+    }
+    
+    .footer-text {
+	    margin-top: -8px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .container
+    {
+        min-width:600px;
+    }
+
+    .logo2
+    {
+        z-index:101; 
+    }
+    
+    .logo {
+	    display: none;
+    }
+
+    .menu-pad
+    {
+        font-family: centrale;
+        font-size: 15px;
+        line-height: 43px;
+        text-align: center;
+    }
+
+    .menu-pad 
+    {
+        font-family: centrale;
+        font-size:14px;
+        padding-top:5px;
+    }
+
+    .connection
+    {
+        width: 500px;
+        margin-left: 20px;
+    }
+
+    .nav img {
+        width: 30px;
+        margin-left : 47%;
+    }
+    
+    .navbar-inverse .navbar-toggle {
+    	display: block;
+	    border-color: #99bbc3;
+	    width: 40px;
+	    height: 35px;
+	    float: right;
+	    margin-right: 25px;
+	    
+    }
+    
+    .navbar-toggle .icon-bar {
+	    margin-left: -9px;
+	    margin-top: -4px;
+    }
+    
+    .navbar-inverse .navbar-toggle:hover {
+	    border-color: white;
+	    background-color: transparent;
+    }
+    
+    .navbar-inverse .navbar-toggle:focus {
+	    background-color: transparent;
+    }
+    
+    .navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #99bbc3;
+    }
+    
+    .footer-text {
+	    margin-top: -8px;
+    }
 }

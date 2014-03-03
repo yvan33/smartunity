@@ -5,7 +5,6 @@ namespace SmartUnity\QuestionReponseBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Model\UserInterface;
 
 class AjaxController extends Controller {
@@ -61,9 +60,9 @@ class AjaxController extends Controller {
                 $dateBestReponse = null;
                 $is_certif_question = false;
                 $is_validated_question = false;
+                $remunerationQuestion=$Question->getRemuneration() + $Question->getSupplementRemuneration();
 
-
-                if ($questionRepository->isQuestionValid($Question->getId())) {
+                if ($Question->getIsValidatedQuestion()) {
                     foreach ($Question->getReponses() as $reponse) {
                         if ($reponse->getDateCertification() instanceof \DateTime) {
                             $auteurBestreponse = $reponse->getMembre()->getUsername();
@@ -104,7 +103,7 @@ class AjaxController extends Controller {
                     'description' => $Question->getDescription(),
                     'date' => $Question->getDate()->format('d-m-Y à H:i'),
                     'membre_username' => $Question->getMembre()->getUsername(),
-                    'remuneration' => $Question->getRemuneration(),
+                    'remuneration' => $remunerationQuestion,
                     'nb_reponses' => $Question->getReponses()->count(),
                     'best_reponse' => $descriptionBestReponse,
                     'auteur_best_reponse' => $auteurBestreponse,
@@ -135,6 +134,7 @@ class AjaxController extends Controller {
         $commentaireReponseRepository = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:commentaireReponse');
+        
         $avatarRepository = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:avatar');
@@ -145,12 +145,9 @@ class AjaxController extends Controller {
 
         if ($Question == null) {
             throw new NotFoundHttpException("Cette question n'a pas encore été posée!");
-            exit();
         } else {
             $QuestionId = $Question->getId();
         }
-
-
 
         //Récupération de la liste des réponses
         $listeReponse = $reponseRepository->getReponsesWithVotes($QuestionId, $page, $nbParPage, $tri);
@@ -177,15 +174,11 @@ class AjaxController extends Controller {
         $isdown = 0;
         $upvote_global = 0;
         $downvote_global = 0;
-        $compteur = 0;
 
         //On parcourt les réponses
         if ($listeReponse[0] != null) {
 
-
             foreach ($listeReponse as $reponse) {
-
-
 
                 $commentairesReturn = array();
 
@@ -203,6 +196,7 @@ class AjaxController extends Controller {
                         'membre_id' => $commentaire->getMembre()->getId()
                     ));
                 }
+                
                 $isCertif = false;
                 $dateCertification = false;
                 if ($reponse[0]->getDateCertification() != null) {
@@ -283,8 +277,6 @@ class AjaxController extends Controller {
         );
 
         array_push($returnArray, $array2);
-        // $array_global=array($returnArray, $array2);
-        // }
 
         return new Response(json_encode($returnArray));
     }
@@ -352,8 +344,6 @@ class AjaxController extends Controller {
                             'error_msg' => 'Vous avez déjà voté!'
                 )));
             } else {
-
-                $reponseEntity = $reponseRepository->findById($reponse);
 
                 if (count($reponse) < 1) {
                     return new Response(json_encode(array(

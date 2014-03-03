@@ -1,9 +1,5 @@
-smart_unity_question_reponse_homepage:
-    pattern:  /
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:index  }
-
 smart_unity_question_reponse_list_of_question:
-    pattern:  /listeQuestion/{type}/{page}
+    pattern:  /questions/{type}/{page}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayListOfQuestion, type:'last', page:'1' }
     requirements:
         type: onFire|last|reponses|question
@@ -18,7 +14,7 @@ smart_unity_question_reponse_repondre_questions:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchRepondreQuestion, page:'1' }
     
 smart_unity_question_reponse_display_reponse:
-    pattern:  /reponse/{slug}/{tri}/{page}/{haveAddedAnswer}/{haveEditedQuestion}/{haveEditedReponse}/{alreadyAnswered}
+    pattern:  /question/{slug}/{tri}/{page}/{haveAddedAnswer}/{haveEditedQuestion}/{haveEditedReponse}/{alreadyAnswered}
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'', tri:'vote', haveAddedAnswer:'0', haveEditedQuestion:'0', haveEditedReponse:'0', alreadyAnswered:'0' }
     requirements:
         tri: vote|date

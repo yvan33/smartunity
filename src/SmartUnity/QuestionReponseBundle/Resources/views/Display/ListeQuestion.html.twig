@@ -3,19 +3,13 @@
 {% block title %}Questions/Réponses{% endblock %}
 
 {% block stylesheets %}
-<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/question.css')}}" rel="stylesheet" type="text/css">
-<link href="{{ asset('assets/css/barreDeRecherche.css') }}"  rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/magnificpopup.css' 
+				 'assets/css/question.css'
+				 'assets/css/barreDeRecherche.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
-
-{% block initJS %}
-<script src="{{asset('assets/js/bootstrap-paginator.js')}}"></script>
-<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
-<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
-{% endblock %}
-
-
-
 
 {% block body %}
 
@@ -285,6 +279,13 @@
 {% endblock %}
 
 {% block callJS %}
+
+{% javascripts filter='yui_js' 
+				'assets/js/bootstrap-paginator.js' 
+				'assets/js/magnificpopup-0.9.9.min.js'
+				'assets/js/jquery.animateAuto-1.0.0.js'	 %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
 <script language="javascript">
 

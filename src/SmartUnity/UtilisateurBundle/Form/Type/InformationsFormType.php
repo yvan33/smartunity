@@ -14,12 +14,16 @@ class InformationsFormType extends AbstractType {
         ->add('prenom', 'text', array(
             'required' => false, 
         ))                
-        ->add('email', 'email', array('label' => 'Adresse e-mail'))
-        ->add('username', null, array('label' => 'Nom d\'utilisateur'))
+        ->add('email', 'email', array(
+            'label' => 'Adresse e-mail',
+            'error_bubbling' => true
+            ))
+        ->add('username', 'text', array(
+            'error_bubbling' => true
+        ))
         ->add('sexe', 'choice', array(
         'choices' => array(
             'na' =>'Non renseigné', 'm' => 'Masculin', 'f' => 'Féminin'),
-//        'data' => ""
         ))
         ->add('date_naissance', 'date', array(
         'empty_value' => '',

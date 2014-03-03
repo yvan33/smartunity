@@ -3,122 +3,127 @@
 {% block title %}Comment ça marche ?{% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/description.css') }}" rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/description.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 {% block body %}
 
 <div class="menu-ccm">        
-<ul class="nav">
-            <li class="active"><a href="#">Smart'Unity</a></li>
-            <li><a href="#fonctionnement">Fonctionnement</a></li>
-            <li><a href="#simplicite">Simplicité</a></li>
-            <li><a href="#cadeaux">Des cadeaux !</a></li>  
-        </ul>
+    <ul class="nav">
+        <li class="active"><a href="#">Smart'Unity</a></li>
+        <li><a href="#fonctionnement">Fonctionnement</a></li>
+        <li><a href="#simplicite">Simplicité</a></li>
+        <li><a href="#cadeaux">Des cadeaux !</a></li>  
+    </ul>
 </div>
 
-        <div class="text-center cookie-title"><h1>Bienvenue sur Smart'Unity !</h1></div>
+<div class="text-center cookie-title"><h1>Bienvenue sur Smart'Unity !</h1></div>
 
-        <div class="contenu-comment">
-			<h2 class="title-comment">Des réponses à vos problèmes sans perte de temps.</h2>
-			<p><b>Smart'Unity</b> est une plateforme communautaire en ligne d'entraide à l'utilisation des smartphones. Que vous rencontriez des problèmes avec votre terminal ou que vous puissiez apporter aux autres vos connaissances, Smart'Unity est fait pour vous !<br/>Que ce soit un problème sur le matériel, sur le logiciel, sur les applications installées ou même sur le choix d'un terminal, toutes les questions en rapport avec le monde des smartphones sont acceptées sur Smart'Unity !</p>
-			
-			<h3 class="title-comment text-center">Les Questions/Réponses, un système qui en vaut la peine.</h3>
-			<p id="fonctionnement">Trouver une information dans la jungle que représente le web est bien souvent une difficulté insurmontable... C'est pourquoi nous avons décidé de mettre en place le système des Questions/Réponses agrémenté d'un système de valorisation sous forme de points (et de cadeaux...).</p>
-			
-			<h2 class="title-comment">Le fonctionnement de Smart'Unity</h2>
-			<h3 class="title-comment text-center">1) Inscription</h3>
-			<img class="sign-in-logo" src="{{ asset('assets/img/logo-checkemail.png') }}"/>
-			<p class="paragraphe">La consultation de la totalité des Questions/Réponses du site Smart'Unity est totalement libre et ne demande pas d'être inscrit.<br/><br/>Néanmoins, pour participer à la communauté, vous devez vous inscrire soit grâce à votre compte Facebook, soit après une inscription plus classique. Tout cela en cliquant sur Connexion.<br/><br/>Cela vous permettra de poser vos questions et d'apporter vos réponses aux autres membres. De nombreuses fonctionnalités sont à venir... :)</p>
-			
-			<h3 class="title-comment text-center">2) Faire une recherche</h3>
-			<p>Après vous être gratuitement inscrit(e), vous pouvez effectuer une recherche sur le site grâce à la barre de recherche (passez la souris sur l'image ci-dessous).<br/><br/>La barre de recherche simple (bouton Demander) est pratique pour trouver des solutions à un problème.<br/><br/>La barre de recherche avec filtres (bouton Répondre) permet de rechercher des questions auxquelles répondre. Elle permet de trier facilement par catégories pour rechercher celles de votre domaine de compétence !<br/><br/></p>
-			
-			<div class="dem-rep">
-				<img class="dem-howto" onmouseover="HideDem(this);" src="{{ asset('assets/img/quest-howto.png') }}"/>
-				<img class="rep-howto" onmouseout="DisplayDem(this);" src="{{ asset('assets/img/repondre-howto.png') }}"/>
-			</div>
-			
-			<h3 class="title-comment text-center">3.1) Poser une question</h3>
-			<p>Si vous n'avez pas trouvé de solution à votre problème en recherchant dans les questions existantes, vous pouvez poser votre question. Choisissez des mots clés pertinents et des catégories adaptées dans le formulaire d'ajout d'une question. Cela optimisera vos chances d'avoir une réponse !</p>
-			
-			<h3 class="title-comment text-center">3.2) Répondre à des questions</h3>
-			<p id="simplicite">La rubrique QUESTIONS/REPONSES du menu comprend tout les sujets abordés par les membres de la communauté. Vous pouvez leur apporter votre expérience en solutionnant leurs problèmes via le bouton Répondre pour filtrer la totalité des messages du site.</p>
-			
-			<h2 class="title-comment">Pourquoi est-ce un système efficace ?</h2>
-			<h4><span class="glyphicon glyphicon-ok"></span>Mise en avant des meilleures réponses</h4>
-			<p class="prec-img">Chaque réponse peut être votée par les membres de la communauté grâce aux flèches suivantes :</p>
-			<img class="up-down" src="{{ asset('assets/img/up-down.png') }}"/>
-			<p>Pour chaque question, les meilleures réponses peuvent ensuite être affichées en haut de la liste pour ainsi avoir un bon aperçu du contenu intéressant.</p>
+<div class="contenu-comment">
+    <h2 class="title-comment">Des réponses à vos problèmes sans perte de temps.</h2>
+    <p><b>Smart'Unity</b> est une plateforme communautaire en ligne d'entraide à l'utilisation des smartphones. Que vous rencontriez des problèmes avec votre terminal ou que vous puissiez apporter aux autres vos connaissances, Smart'Unity est fait pour vous !<br/>Que ce soit un problème sur le matériel, sur le logiciel, sur les applications installées ou même sur le choix d'un terminal, toutes les questions en rapport avec le monde des smartphones sont acceptées sur Smart'Unity !</p>
 
-			<h4 class="second-title"><span class="glyphicon glyphicon-ok"></span>Validation et certification de la meilleure réponse</h4>
-			
-				<div class="div-valid-1">
-					<h5 class="text-center">Validation</h5>
-					<p class="prec-img">Si une réponse a solutionné le problème d'un membre, il peut "Valider" cette réponse. Celle-ci sera ensuite collée sous la réponse et le logo ci-dessous apparaitra :</p>
-					<img class="valid" src="{{ asset('assets/img/check.png') }}"/>
-				</div>
-				<div class="div-valid-2">
-					<h5 class="text-center">Certification</h5>
-					<p>Si une réponse déjà validée est réellement pertinente, l'équipe Smart'Unity la certifiera et le logo ci-dessous apparaitra :</p>
-					<img class="valid" src="{{ asset('assets/img/certif.png') }}"/>
-				</div>
-			
-			<h4 class="second-title"><span class="glyphicon glyphicon-ok"></span>Chaque membre est évalué par sa réputation</h4>
-			<img class="membre-img" src="{{ asset('assets/img/membre-img.png') }}"/>
-			<p>En participant aux questions et réponses, les membres gagnent en réputation. Ce score représente l’implication, et la pertinence d’un membre sur la communauté, il est inscrit à côté de l’étoile grise.<br/><br/></p>
-			<p id="cadeaux">Vous ferez certainement plus confiance aux réponses d’un membre ayant une forte reputation !<br/><br/></p>
-			
-			<h2 class="trois-title title-comment">Qu'est-ce que je gagne à aider les autres ? Des cadeaux !</h2>
-			<h3 class="title-comment text-center">Avec les points, c'est donnant-donnant.</h3>
-			<p>Smart’Unity repose sur un système de points intelligents qui permet à chacun d’y gagner :</p>
-			<ul> 
-				<li>A l'inscription, vous obtenez une cagnotte de 50 points.</li> 
-				<li>Lorsqu'une question est posée, une dotation de 10 points offerte par Smart'Unity est apportée à la question.</li>
-				<li>Vous pouvez utiliser les points de votre cagnotte pour valoriser la question et la rendre plus attractive pour les répondeurs !</li>
-				<li>Ces points seront remportés par le membre dont la réponse a été validée !</li>
-				<li>Si cette réponse est certifiée par Smart'Unity, le membre l'ayant apportée remporte de nouveaux 30 points !</li>
-			</ul>
-			
-			<h3 class="title-comment text-center">Que faire avec tout ces points ?</h3>
-			<img class="pts-cadeaux" src="{{ asset('assets/img/pts-cadeaux.png') }}"/>
-			<p>Grâce à la <a href={{ path('smart_unity_boutique_homepage') }}>boutique cadeaux</a>, vous pouvez échanger les points que vous avez accumulés en répondant aux questions en cadeaux ! Des bons d'achat ou des accessoires pour smartphones vous y attendent !<br/><br/>Vous pouvez également les utiliser pour valoriser vos questions si elles sont urgentes !</p>
-			
-			<h3 class="title-comment text-center">Soutenir les questions des autres !</h3>			
-			<img class="soutien-img" src="{{ asset('assets/img/soutien.png') }}"/>
-			<p>Si vous trouvez une question correspondant à l'un de vos critères de recherche, vous pouvez la soutenir en cliquant sur la croix verte ci-contre. Deux options sont alors possibles : 
-				<ul> 
-					<li>Vous pouvez simplement soutenir la question. Vous serez ainsi notifié si une réponse est validée.</li> 
-					<li>Vous pouvez également revaloriser la dotation de la question en rajoutant des points de votre cagnotte personnelle pour rendre la question plus attractive.</li> 
-				</ul>
-			<img class="points-SU" src="{{ asset('assets/img/points-SU.png') }}"/>
-			
-			<div class="title-go">
-				<h2 class="text-center">Rendez-vous sur la page <a href="{{ path('smart_unity_question_reponse_homepage') }}">Questions/Réponses</a> pour ajouter votre pierre à l'édifice :-)</h2>
-			</div>
-			
-        </div>
-      
+    <h3 class="title-comment text-center">Les Questions/Réponses, un système qui en vaut la peine.</h3>
+    <p id="fonctionnement">Trouver une information dans la jungle que représente le web est bien souvent une difficulté insurmontable... C'est pourquoi nous avons décidé de mettre en place le système des Questions/Réponses agrémenté d'un système de valorisation sous forme de points (et de cadeaux...).</p>
+
+    <h2 class="title-comment">Le fonctionnement de Smart'Unity</h2>
+    <h3 class="title-comment text-center">1) Inscription</h3>
+    <img class="sign-in-logo" src="{{ asset('assets/img/logo-checkemail.png') }}"/>
+    <p class="paragraphe">La consultation de la totalité des Questions/Réponses du site Smart'Unity est totalement libre et ne demande pas d'être inscrit.<br/><br/>Néanmoins, pour participer à la communauté, vous devez vous inscrire soit grâce à votre compte Facebook, soit après une inscription plus classique. Tout cela en cliquant sur Connexion.<br/><br/>Cela vous permettra de poser vos questions et d'apporter vos réponses aux autres membres. De nombreuses fonctionnalités sont à venir... :)</p>
+
+    <h3 class="title-comment text-center">2) Faire une recherche</h3>
+    <p>Après vous être gratuitement inscrit(e), vous pouvez effectuer une recherche sur le site grâce à la barre de recherche (passez la souris sur l'image ci-dessous).<br/><br/>La barre de recherche simple (bouton Demander) est pratique pour trouver des solutions à un problème.<br/><br/>La barre de recherche avec filtres (bouton Répondre) permet de rechercher des questions auxquelles répondre. Elle permet de trier facilement par catégories pour rechercher celles de votre domaine de compétence !<br/><br/></p>
+
+    <div class="dem-rep">
+        <img class="dem-howto" onmouseover="HideDem(this);" src="{{ asset('assets/img/quest-howto.png') }}"/>
+        <img class="rep-howto" onmouseout="DisplayDem(this);" src="{{ asset('assets/img/repondre-howto.png') }}"/>
+    </div>
+
+    <h3 class="title-comment text-center">3.1) Poser une question</h3>
+    <p>Si vous n'avez pas trouvé de solution à votre problème en recherchant dans les questions existantes, vous pouvez poser votre question. Choisissez des mots clés pertinents et des catégories adaptées dans le formulaire d'ajout d'une question. Cela optimisera vos chances d'avoir une réponse !</p>
+
+    <h3 class="title-comment text-center">3.2) Répondre à des questions</h3>
+    <p id="simplicite">La rubrique QUESTIONS/REPONSES du menu comprend tout les sujets abordés par les membres de la communauté. Vous pouvez leur apporter votre expérience en solutionnant leurs problèmes via le bouton Répondre pour filtrer la totalité des messages du site.</p>
+
+    <h2 class="title-comment">Pourquoi est-ce un système efficace ?</h2>
+    <h4><span class="glyphicon glyphicon-ok"></span>Mise en avant des meilleures réponses</h4>
+    <p class="prec-img">Chaque réponse peut être votée par les membres de la communauté grâce aux flèches suivantes :</p>
+    <img class="up-down" src="{{ asset('assets/img/up-down.png') }}"/>
+    <p>Pour chaque question, les meilleures réponses peuvent ensuite être affichées en haut de la liste pour ainsi avoir un bon aperçu du contenu intéressant.</p>
+
+    <h4 class="second-title"><span class="glyphicon glyphicon-ok"></span>Validation et certification de la meilleure réponse</h4>
+
+    <div class="div-valid-1">
+        <h5 class="text-center">Validation</h5>
+        <p class="prec-img">Si une réponse a solutionné le problème d'un membre, il peut "Valider" cette réponse. Celle-ci sera ensuite collée sous la réponse et le logo ci-dessous apparaitra :</p>
+        <img class="valid" src="{{ asset('assets/img/check.png') }}"/>
+    </div>
+    <div class="div-valid-2">
+        <h5 class="text-center">Certification</h5>
+        <p>Si une réponse déjà validée est réellement pertinente, l'équipe Smart'Unity la certifiera et le logo ci-dessous apparaitra :</p>
+        <img class="valid" src="{{ asset('assets/img/certif.png') }}"/>
+    </div>
+
+    <h4 class="second-title"><span class="glyphicon glyphicon-ok"></span>Chaque membre est évalué par sa réputation</h4>
+    <img class="membre-img" src="{{ asset('assets/img/membre-img.png') }}"/>
+    <p>En participant aux questions et réponses, les membres gagnent en réputation. Ce score représente l’implication, et la pertinence d’un membre sur la communauté, il est inscrit à côté de l’étoile grise.<br/><br/></p>
+    <p id="cadeaux">Vous ferez certainement plus confiance aux réponses d’un membre ayant une forte reputation !<br/><br/></p>
+
+    <h2 class="trois-title title-comment">Qu'est-ce que je gagne à aider les autres ? Des cadeaux !</h2>
+    <h3 class="title-comment text-center">Avec les points, c'est donnant-donnant.</h3>
+    <p>Smart’Unity repose sur un système de points intelligents qui permet à chacun d’y gagner :</p>
+    <ul> 
+        <li>A l'inscription, vous obtenez une cagnotte de 50 points.</li> 
+        <li>Lorsqu'une question est posée, une dotation de 10 points offerte par Smart'Unity est apportée à la question.</li>
+        <li>Vous pouvez utiliser les points de votre cagnotte pour valoriser la question et la rendre plus attractive pour les répondeurs !</li>
+        <li>Ces points seront remportés par le membre dont la réponse a été validée !</li>
+        <li>Si cette réponse est certifiée par Smart'Unity, le membre l'ayant apportée remporte de nouveaux 30 points !</li>
+    </ul>
+
+    <h3 class="title-comment text-center">Que faire avec tout ces points ?</h3>
+    <img class="pts-cadeaux" src="{{ asset('assets/img/pts-cadeaux.png') }}"/>
+    <p>Grâce à la <a href={{ path('smart_unity_boutique_homepage') }}>boutique cadeaux</a>, vous pouvez échanger les points que vous avez accumulés en répondant aux questions en cadeaux ! Des bons d'achat ou des accessoires pour smartphones vous y attendent !<br/><br/>Vous pouvez également les utiliser pour valoriser vos questions si elles sont urgentes !</p>
+
+    <h3 class="title-comment text-center">Soutenir les questions des autres !</h3>			
+    <img class="soutien-img" src="{{ asset('assets/img/soutien.png') }}"/>
+    <p>Si vous trouvez une question correspondant à l'un de vos critères de recherche, vous pouvez la soutenir en cliquant sur la croix verte ci-contre. Deux options sont alors possibles : 
+    <ul> 
+        <li>Vous pouvez simplement soutenir la question. Vous serez ainsi notifié si une réponse est validée.</li> 
+        <li>Vous pouvez également revaloriser la dotation de la question en rajoutant des points de votre cagnotte personnelle pour rendre la question plus attractive.</li> 
+    </ul>
+    <img class="points-SU" src="{{ asset('assets/img/points-SU.png') }}"/>
+
+    <div class="title-go">
+        <h2 class="text-center">Rendez-vous sur la page <a href="{{ path('smart_unity_question_reponse_list_of_question') }}">Questions/Réponses</a> pour ajouter votre pierre à l'édifice :-)</h2>
+    </div>
+
+</div>
+
 {% endblock %}
- 
+
 {% block callJS %}
 
 <script>
 /// Affichage image
 
-$(document).ready(function() {
-	$('.rep-howto').hide();
-});
+    $(document).ready(function() {
+        $('.rep-howto').hide();
+    });
 
-function HideDem(e) {
-   $('.rep-howto').show();
-   $('.dem-howto').hide();
-};
+    function HideDem(e) {
+        $('.rep-howto').show();
+        $('.dem-howto').hide();
+    }
+    ;
 
-function DisplayDem(e) {
-   $('.rep-howto').hide();
-   $('.dem-howto').show();
-};
+    function DisplayDem(e) {
+        $('.rep-howto').hide();
+        $('.dem-howto').show();
+    }
+    ;
 
 </script>
 

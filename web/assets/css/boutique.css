@@ -1,26 +1,161 @@
-<<<<<<< HEAD
-@font-face{
-    font-family : "centrale";
-    src : url(../fonts/Centrale.ttf) format ('truetype');
-    /* pour IE */
-    src : url(../fonts/Centrale.ttf);
-=======
 @font-face {
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
     src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/Centrale.woff) format('woff'),
-         url(../fonts/Centrale.ttf) format('truetype'),
-         url(../fonts/Centrale.svg#centrale) format('svg');
+        url(../fonts/Centrale.woff) format('woff'),
+        url(../fonts/Centrale.ttf) format('truetype'),
+        url(../fonts/Centrale.svg#centrale) format('svg');
     font-weight: normal;
     font-style: normal;
->>>>>>> 58610be9ef44f1134887e65c62b51375358e2b95
 }
 
-.cookie-title
-{
-    font-family: centrale;
-    font-size: 40px;
-    margin-bottom: 15px;
-    line-height: 40px;
+.sans-marge{
+    margin-left: 0;
+    margin-right: 0;
 }
+
+.texte-presentation-boutique {
+    margin-bottom: 50px;
+}
+
+/*.infos-cadeau {
+    padding: 0 100px 0 0;
+}*/
+
+.description-cadeau{
+    margin-bottom: 20px;
+
+}
+
+.apercu-cadeau {
+    margin: 0 auto;
+    width : 60%;
+    height: 200px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.entete-cadeau{
+    text-align: center;
+    font-family: centrale;
+    margin-bottom: 20px;
+    display: table;
+    vertical-align: middle;
+    width: 100%;
+}
+.titre-cadeau{
+    font-size: 22px;
+    margin-top: 20px;
+    text-align: left;
+    
+}
+
+.bloc-boutons-produit{
+    text-align: center;
+
+}
+
+.bouton-choisir-produit{
+    background-color: #e37151;
+    color: #FFF;
+    font-family: centrale;
+    font-size: 15px;
+    line-height: 17px;
+    text-align: center;
+    width: 160px;
+    height: 30px;
+    border-radius: 2px;
+    border: 0;
+}
+
+.produit{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.rond-point
+{
+    float:left;
+    background: linear-gradient(to top, #E0E0E0,#FFF);
+    border-radius: 80px;
+    margin-right: 30px;
+    width: 80px;
+    height: 80px;
+    border: solid 1px #e8e4dc;
+    text-align: center;
+    font-weight: 200;
+}
+
+.txt-rond {
+    font-size: 24px;
+    margin-top: 17px;
+}
+
+.txt-pts {
+    font-size: 13px;
+    position:relative;
+    top: -15px;
+}
+
+.bloc-cagnotte{
+text-align: center;    
+}
+
+.cochon{
+     position:relative;
+}
+
+.bloc-cagnotte img {
+}
+
+.nb-pts-cagnotte {
+	color: white;
+	font-family: centrale;
+	font-size: 25px;
+	top: 0%;
+	left: 42%;
+	position: absolute;
+}
+
+.grille-content
+{   
+    margin-bottom: 30px;
+/*    margin-right: 20px;
+    margin-left: 20px;*/
+    padding:15px;
+    background-color: #ffffff;
+    border-radius:3px;
+    border: 1px solid #e8e4dc;
+}
+
+.validation-dialog {
+position: relative;
+background-color: #FFF;
+width: 500px;
+border-radius: 5px;
+margin: 20% auto;
+}
+
+.validation-body {
+font-family: centrale;
+width: 500px;
+padding-top: .6em;
+}
+
+.validation-footer {
+height: 30px;
+margin-bottom: 5px;
+}
+
+.bouton-annulation, .bouton-validation {
+background: #e37151;
+color: #FFF;
+font-size: 13px;
+height: 20px;
+width: 80px;
+font-family: centrale;
+border-radius: 2px;
+cursor: pointer;
+padding: 0;
+}
+
