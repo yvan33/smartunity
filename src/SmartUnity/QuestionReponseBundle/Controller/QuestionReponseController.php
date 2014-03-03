@@ -917,13 +917,11 @@ class QuestionReponseController extends Controller {
                     //Envoi du mail
                     $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
                     $sujetMail = "Vous avez une nouvelle réponse!";
-                    $expediteurMail = "ne-pas-repondre@smartunity.fr";
-
-                    $contenu = $user . "a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : " . $urlQuestion;
+                    $contenu = $user . " a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : " . $urlQuestion;
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
-                            ->setFrom($expediteurMail)
+                            ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                             ->setTo($mailMembreQuestion)
                             ->setBody($contenu);
                     $this->get('mailer')->send($message);
@@ -1040,7 +1038,7 @@ class QuestionReponseController extends Controller {
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
-                                ->setFrom("ne-pas-repondre@smartunity.fr")
+                                ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                                 ->setTo($mailMembreReponse)
                                 ->setBody($contenu);
                         $this->get('mailer')->send($message);
@@ -1091,7 +1089,7 @@ class QuestionReponseController extends Controller {
                     $message = \Swift_Message::newInstance()
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
-                            ->setFrom("ne-pas-repondre@smartunity.fr")
+                            ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                             ->setTo($mailMembreReponse)
                             ->setBody($contenu);
                     $this->get('mailer')->send($message);
@@ -1140,7 +1138,7 @@ class QuestionReponseController extends Controller {
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
-                                ->setFrom("ne-pas-repondre@smartunity.fr")
+                                ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                                 ->setTo($mailMembreQuestion)
                                 ->setBody($contenu);
                         $this->get('mailer')->send($message);
@@ -1192,7 +1190,7 @@ class QuestionReponseController extends Controller {
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
-                                ->setFrom("ne-pas-repondre@smartunity.fr")
+                                ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                                 ->setTo($mailMembreQuestion)
                                 ->setBody($contenu);
                         $this->get('mailer')->send($message);
@@ -1363,12 +1361,11 @@ class QuestionReponseController extends Controller {
 
                 $sujetQuestion = $commentaireQuestion->getQuestion()->getSujet();
                 $sujetMail = "Commentaire question numéro :" . $idCommentaireQuestion . " signalé ";
-                $expediteurMail = "ne-pas-repondre@smartunity.fr";
                 $contenu = "Le commentaire sur la question " . $sujetQuestion . "Son id est le : " . $idCommentaireQuestion;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
-                        ->setFrom($expediteurMail)
+                        ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                         ->setTo("contact@smartunity.fr")
                         ->setBody($contenu);
                 $this->get('mailer')->send($message);
@@ -1402,12 +1399,11 @@ class QuestionReponseController extends Controller {
 
                 $sujetReponse = $commentaireReponse->getReponse()->getDescription();
                 $sujetMail = "Commentaire réponse numéro :" . $idCommentaireReponse . " signalé ";
-                $expediteurMail = "ne-pas-repondre@smartunity.fr";
                 $contenu = "Le commentaire sur la réponse " . $sujetReponse . "Son id est le : " . $idCommentaireReponse;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
-                        ->setFrom($expediteurMail)
+                        ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                         ->setTo("contact@smartunity.fr")
                         ->setBody($contenu);
                 $this->get('mailer')->send($message);
