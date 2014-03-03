@@ -24,8 +24,6 @@ security:
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
-
-                    
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -39,7 +37,7 @@ security:
                 check_path: fos_user_security_check
                 target_path_parameter: _target_path
                 use_referer:        true
-                default_target_path: /mon-compte
+                default_target_path: /Utilisateur/mon-compte
                 
             fos_facebook:
                 app_url: "http://apps.facebook.com/smartunity/"

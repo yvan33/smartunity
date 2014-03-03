@@ -123,7 +123,8 @@ select, input:active {
 {
     font-family: centrale;
     font-size: 40px;
-    margin-bottom: 15px;
+    line-height: 40px;
+    margin-bottom: 25px;
 }
 
 .description{
@@ -176,18 +177,10 @@ select, input:active {
 
 /* Registration */
 
-.cgu {
-    border: 1px solid #CCC;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 3px;
-}
 .accept-cgu {
     font-family: centrale;
-    margin: 0;
-    display: inline;
-    font-size: 16px;
+    font-size: 12px;
+    margin-top: 10px;
 }
 
 .text-why {
@@ -221,7 +214,13 @@ legend {
 }
 
 .titre-inscription {
-    margin-bottom: -15px;
+    margin-bottom: 15px;
+    font-size: 30px;
+}
+
+.separateur-choix-inscription {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 fieldset {
@@ -333,11 +332,6 @@ fieldset {
 
 .description {
     margin: 0 50px 20px 50px;
-}
-
-.cookie-title {
-    line-height: 40px;
-    margin-bottom: 25px;
 }
 
 .form-textarea {
