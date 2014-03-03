@@ -80,18 +80,6 @@
     width:16%;
 }
 
-.grille-content
-{
-    padding:15px;
-    background-color: #f8f8ef;
-    margin-top:10px;
-    margin-bottom:5px;
-    border-radius:7px;
-    -webkit-box-shadow: 0 0 20px  #CCCCCC;
-    -moz-box-shadow: 0 0 20px  #CCCCCC;
-    box-shadow: 0 0 20px  #CCCCCC;
-}
-
 .forminfo
 {
     height: 130%;
