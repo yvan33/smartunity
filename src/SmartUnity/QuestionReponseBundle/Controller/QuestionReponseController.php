@@ -1133,7 +1133,7 @@ class QuestionReponseController extends Controller {
                         $sujetQuestion = $question->getSujet();
                         $sujetMail = "Commentaire à votre question sur smartunity.fr";
                         $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
-                        $contenu = "Bonjour " . $question->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à votre question " . $sujetQuestion . " par " . $user->getUsername() . ". <br/>  Rendez-vous sur ". $urlQuestion ."pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
+                        $contenu = "Bonjour " . $question->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à votre question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur ". $urlQuestion ." pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
                         $mailMembreQuestion = $question->getMembre()->getEmail();
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
@@ -1185,7 +1185,7 @@ class QuestionReponseController extends Controller {
                         $sujetQuestion = $reponse->getQuestion()->getSujet();
                         $sujetMail = "Commentaire à votre réponse sur smartunity.fr";
                         $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
-                        $contenu = "Bonjour " . $reponse->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à votre réponse concernant la question: " . $sujetQuestion . " par " . $user->getUsername() . ". <br/>  Rendez-vous sur ". $urlQuestion ."pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
+                        $contenu = "Bonjour " . $reponse->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à votre réponse concernant la question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur ". $urlQuestion ." pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
                         $mailMembreQuestion=$reponse->getMembre()->getEmail();
                         $message = \Swift_Message::newInstance()
                                 ->setContentType('text/html')
