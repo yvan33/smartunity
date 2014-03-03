@@ -52,7 +52,8 @@ class FacebookProvider implements UserProviderInterface
             }
 
             // TODO use http://developers.facebook.com/docs/api/realtime
-            if (empty($user->getUsername())){
+            $nameUser= $username->getUsername();
+            if (empty($nameUser)){
             $user->setFBData($fbdata);
             }
             
