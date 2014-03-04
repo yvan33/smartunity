@@ -1,5 +1,18 @@
 {% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
-{#{% form_theme formQuestion 'SmartUnityUtilisateurBundle:Form:form_register.html.twig' %}#}
+
+{% form_theme formQuestion _self %}
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    <ul class="erreur">
+        {% for error in errors %}
+            <li>{{ error.message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
 
 {% block title %}Posez votre question{% endblock %}
 
@@ -17,7 +30,6 @@
 
 
 {% block body %}
-{#<a ><span class="glyphicon glyphicon-chevron-left bouton-retour" onclick="javascript:history.back()"></span></a>#}
 
 <div class="row form-addquestion">
 {#        <div class="grille-content panneau-bas">  #}
@@ -34,7 +46,7 @@
 	    </div>
 	    <div class="row premiere-ligne" >
 	        <div class="grille-1">{{ form_label(formQuestion.sujet) }}</div>
-	        <div class="grille-2 text-area">{{ form_errors(formQuestion.sujet) }}{{ form_widget(formQuestion.sujet, { 'attr': {'class': 'text-subject'}}) }}</div>
+	        <div class="grille-2 text-area">{{ form_errors(formQuestion.sujet)}}{{ form_widget(formQuestion.sujet, { 'attr': {'class': 'text-subject'}}) }}</div>
 	    </div>
 	    <div class="row">
 	        <div class="grille-1">{{ form_label(formQuestion.description) }}</div>

@@ -3,11 +3,13 @@
 namespace SmartUnity\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Question
  *
  * @ORM\Table()
+ * @UniqueEntity(fields="sujet", message="Ce sujet à déjà été donné à une autre question. Veuillez le modifier")
  * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\questionRepository")
  */
 class question
