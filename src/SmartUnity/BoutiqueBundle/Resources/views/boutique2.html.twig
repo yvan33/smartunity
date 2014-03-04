@@ -11,9 +11,12 @@
 {%endblock%}
 
 {% block body %}
+
+
+
 <div class="row sans-marge">
     <div class="title text-center cookie-title">
-        Boutique 
+        Boutique cadeaux
     </div>
     <div class="col-md-12 texte-presentation-boutique">
         <p class="police-text"> Vous vous trouvez dans la caverne d'Alibaba de Smart'Unity. Chaque cadeaux à une valeur en points. 
@@ -32,7 +35,7 @@
         </div>
     </div>
        {% endif %}
-    
+
 {% for gift in gifts %}    
     <div class="row sans-marge produit grille-content">
         <div class="col-md-6 photo-cadeau">
@@ -44,7 +47,7 @@
             <div class="row entete-cadeau sans-marge">
                 <div class="rond-point"><p class="txt-rond">{{gift.price}}</p><p class="txt-pts">pts</p></div>
                 <div class="titre-cadeau">
-                    {{gift.price}}
+                    {{gift.name}}
                 </div>
             </div>
             <div class="row description-cadeau sans-marge">
@@ -52,35 +55,67 @@
             </div>
             <div class="row">
                 <div class="bloc-boutons-produit">
-                    <a target="blank" href="#">
-                        <button type="button" class="bouton-choisir-produit" data-toggle="modal" data-target="#ModalValidation">Je le veux!</button>
-                    </a>
+                    <button type="button" class="bouton-choisir-produit" data-toggle="modal" data-target="#ModalValidation" data-giftid="{{gift.id}}" data-giftname="{{gift.name}}" data-giftprice="{{gift.price}}">Je le veux!</button>
                 </div>
+
+{% for flashMessage in app.session.flashbag.get('insufficientPool') %}
+                <div class="row">
+                    <div class="flash">
+                        {{ flashMessage }}
+                    </div>
+                </div>
+{% endfor %}    
+                
             </div>
         </div>
     </div>
  {% endfor %}
-    
+
 </div>
 
-{#Bloc modal lors du choix d'un cadeau#}
-
+{#///////////////////////Bloc modal lors du choix d'un cadeau////////////////////////////#}
 {% if is_granted('ROLE_USER') and app.user.cagnotte > 10 %}
 
 <div class="modal fade text-center" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="validation-dialog">
         <div class="validation-content">
             <div class="validation-body">
-                <p>Vous êtes sur le point de choisir un cadeau.</p>
-                <p>Il coûte 500pts. Etes-vous sûr de votre choix?</p>
+                <p class="gift-choice">Vous êtes sur le point de choisir le cadeau : </p>
+                <p class="gift-price">Il coûte : </p>
+                <p>Etes-vous sûr de votre choix?</p>
             </div>
             <div class="validation-footer">
                 <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button>
-                <a href="{{path('smart_unity_boutique_confirmation')}}"><button type="button" class="btn bouton-validation">Valider</button></a>
+                <a id="confirm-get-gift" class="btn bouton-validation" href="#">Valider</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->  
                     {% endif %}
+{#/////////////////////END Bloc modal lors du choix d'un cadeau///////////////////////////////#}
+
 {% endblock body %}
+
+{% block callJS %}
+
+
+<script>
+//////Ajout des variables correspondant au cadeau à la vue modale ////////
+    $('.bouton-choisir-produit').click(function() {
+        var giftId = $(this).data("giftid");
+        var giftName = $(this).data("giftname");
+        var giftPrice = $(this).data("giftprice");
+
+
+        $('.gift-choice').append(giftName);
+        $('.gift-price').append(giftPrice + " pts");
+        $('#confirm-get-gift').attr('href', Routing.generate('smart_unity_boutique_confirmation', {id: giftId}));
+    });
+
+</script>    
+
+
+
+{% endblock %}
+
 

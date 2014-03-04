@@ -1177,10 +1177,7 @@ class QuestionReponseController extends Controller {
                 $newCommentaireReponse->setDate(new \DateTime(date("Y-m-d H:i:s"))); //date locale
                 $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($idReponse);
                 $newCommentaireReponse->setReponse($reponse);
-
                 $newCommentaireReponse->setSignaler(false);
-
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newCommentaireReponse);
                 $em->flush();
