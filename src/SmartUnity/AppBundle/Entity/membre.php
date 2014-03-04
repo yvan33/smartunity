@@ -258,6 +258,10 @@ class membre extends BaseUser {
         $this->setDateInscription($date);
         $this->setPrefMp(1);
         $this->setPrefSmartcafe(1);
+        $this->setPrefComm(1);
+        $this->setPrefRepValidee(1);
+        $this->setPrefRepCertifiee(1);
+        $this->setPrefRep(1);
     }
 
     /**
