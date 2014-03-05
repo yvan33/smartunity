@@ -12,17 +12,20 @@
 {% block body %}
 <div class="row sans-marge">
     <div class="title text-center cookie-title">
-        Félicitations, vous avec commandé un cadeau
+        Félicitations, vous avec commandé ce cadeau : {{ gift.name }}
     </div>
     <div class="col-md-12 texte-presentation-boutique">
-        <p class="police-text"> Vous vous trouvez dans la caverne d'Alibaba de Smart'Unity. Chaque cadeaux à une valeur en points. 
-            Pour commander un cadeaux, vous devez avoir suffisament de points dans votre cagnotte.
+        <p class="police-text"> Votre commande est bien enregistrée, vous allez recevoir un email de confirmation à votre adresse : {{app.user.email}}.
+            Votre commande sera traitée dans les meilleurs délais, nous nous en occupons dès à présent!
         </p>
 
     </div>
     <div class="bloc-boutons-produit">
-        <a href="{{ path('smart_unity_app_homepage')}}">
-            <button type="button" class="bouton-choisir-produit">Retour à l'accueil</button>
+        <a class="btn bouton-repondre" href="{{ path('smart_unity_app_homepage')}}">
+            Retour à l'accueil
+        </a>
+        <a class="btn bouton-repondre" href="{{ path('smart_unity_boutique_homepage')}}">
+            Retour à la boutique
         </a>
     </div>
 {% endblock body %}

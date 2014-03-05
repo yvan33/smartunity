@@ -12,9 +12,8 @@ class BoutiqueController extends Controller {
                 ->getRepository('SmartUnityAppBundle:gift');
         $gifts = $giftRepository->findAll();
 
-        return $this->render('SmartUnityBoutiqueBundle::boutique.html.twig');
-//        return $this->render('SmartUnityBoutiqueBundle::boutique2.html.twig', array(
-//                    'gifts' => $gifts));
+        return $this->render('SmartUnityBoutiqueBundle::boutique.html.twig', array(
+                    'gifts' => $gifts));
     }
 
     public function confirmGiftAction($id) {
@@ -23,44 +22,51 @@ class BoutiqueController extends Controller {
         $giftRepository = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('SmartUnityAppBundle:gift');
-        
+
         $gift = $giftRepository->findOneById($id);
         $user = $this->getUser();
         $cagnotte = $user->getCagnotte();
         $giftPrice = $gift->getPrice();
 
-        //Gestion cagnotte User
-        if ($cagnotte > $giftPrice) {
-            $user->setCagnotte($cagnotte - $giftPrice);
-        }
-        else {
+        //Check quantity
+        if ($gift->getQuantity() > 0) {
+            //Check pool and handle it
+            if ($cagnotte > $giftPrice) {
+                $user->setCagnotte($cagnotte - $giftPrice);
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                        'insufficientPool', 'Vous n\'avez pas assez de points'
+                );
+                return $this->redirect($this->generateUrl('smart_unity_boutique_homepage'));
+            }
+
+            $gift->setQuantity($gift->getQuantity() - 1);
+        } else {
             $this->get('session')->getFlashBag()->add(
-            'insufficientPool',
-            'Vous n\'avez pas assez de points'
-        );
+                    'insufficientQuantity', 'Nous sommes désolé, mais ce cadeau n\'est plus disponible'
+            );
             return $this->redirect($this->generateUrl('smart_unity_boutique_homepage'));
         }
-        
-        //Décrémenter quantité
-        $gift->setQuantity($gift->getQuantity()-1);
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
+        $em->persist($gift);
         $em->flush();
 
         //Envoi du mail`
-//        $sujetMail = "Vous avez commandé une cadeau";
-//        $contenu = "Bonjour " . $user->getUsername() . ", <br/> Vous avez commandé ce cadeau: \"" . $gift->getName() ."\" . <br/> "
-//                . " Nous vous recontacterons . <br/><br/>A bientöt sur smartunity.fr ";
-//        $user->getEmail();
-//        $message = \Swift_Message::newInstance()
-//                ->setContentType('text/html')
-//                ->setSubject($sujetMail)
-//                ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-//                ->setTo($mailMembreQuestion)
-//                ->setBody($contenu);
-//        $this->get('mailer')->send($message);
+        $sujetMail = "Vous avez commandé un cadeau!";
+        $contenu = "Bonjour " . $user->getUsername() . ", <br/> Vous avez commandé ce cadeau : \"" . $gift->getName() . "\". <br/> "
+                . " Nous allons traiter votre commande très rapidement et revenons vers vous! <br/><br/>A bientôt sur smartunity.fr, <br/><br/>L'équipe Smart'Unity";
+        $message = \Swift_Message::newInstance()
+                ->setContentType('text/html')
+                ->setSubject($sujetMail)
+                ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
+                ->setTo($user->getEmail())
+                ->setBody($contenu);
+        $this->get('mailer')->send($message);
 
-        return $this->render('SmartUnityBoutiqueBundle::giftConfirmation.html.twig');
+        return $this->render('SmartUnityBoutiqueBundle::giftConfirmation.html.twig', array(
+                    'gift' => $gift));
     }
 
 }

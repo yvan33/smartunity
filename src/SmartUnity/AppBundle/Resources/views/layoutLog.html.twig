@@ -9,12 +9,12 @@
 
         <!-- Additional meta content -->
     {% block meta %}{% endblock %}
-        
+
 {% stylesheets filter='cssrewrite, yui_css'
-				 'assets/chosen/chosen.min.css' 
+				 'assets/chosen/chosen.min.css'
 				 'assets/css/bootstrap.min.css'
 				 'assets/css/layout.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 {% endstylesheets %}
 
 
@@ -25,36 +25,36 @@
 				'assets/js/bootstrap.min.js'
 				'assets/chosen/chosen.jquery.js'
 				'bundles/fosjsrouting/js/router.js' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
+        <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 
         <!-- Additional Javascript src -->
-	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
 {% block initJS %}{% endblock %}
 
-<script>
-    function goLogIn(){
-        window.location.href = "{{ path('_security_check') }}";
-    }
+        <script>
+            function goLogIn() {
+                window.location.href = "{{ path('_security_check') }}";
+            }
 
-    function onFbInit() {
-        if (typeof(FB) != 'undefined' && FB != null ) {              
-            FB.Event.subscribe('auth.statusChange', function(response) {
-                if (response.session || response.authResponse) {
-                    setTimeout(goLogIn, 500);
-                } else {
-                    window.location.href = "{{ path('_security_logout') }}";
+            function onFbInit() {
+                if (typeof (FB) != 'undefined' && FB != null) {
+                    FB.Event.subscribe('auth.statusChange', function(response) {
+                        if (response.session || response.authResponse) {
+                            setTimeout(goLogIn, 500);
+                        } else {
+                            window.location.href = "{{ path('_security_logout') }}";
+                        }
+                    });
                 }
-            });
-        }
-    }
-</script>
+            }
+        </script>
     </head>
     <!-- bg body -->
     <body class="bg">
- <NOSCRIPT> <div class="alert alert-danger message-js">Javascript n'est pas activé sur votre navigateur. Vous devez l'activer pour naviguer correctement sur Smart'Unity.</div></NOSCRIPT>
-       
+        <NOSCRIPT> <div class="alert alert-danger message-js">Javascript n'est pas activé sur votre navigateur. Vous devez l'activer pour naviguer correctement sur Smart'Unity.</div></NOSCRIPT>
+
 {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 
         <nav class="navbar navbar-inverse navbar-fixed-top menu-bg" role="navigation">
@@ -84,7 +84,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                            	<li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage'%} class="fleur-active" {% else %} class="fleur-inactive" {% endif %}><a href={{ path('smart_unity_app_homepage') }}><img onmouseover="fleurNavHover(this)" onmouseout="fleurNavUnHover(this)" src="{{ asset('assets/img/logo-su-nb-bleue.png') }}"/></a></li>
+                                <li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage'%} class="fleur-active" {% else %} class="fleur-inactive" {% endif %}><a href={{ path('smart_unity_app_homepage') }}><img onmouseover="fleurNavHover(this)" onmouseout="fleurNavUnHover(this)" src="{{ asset('assets/img/logo-su-nb-bleue.png') }}"/></a></li>
                                 <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_demander_questions'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
@@ -114,7 +114,7 @@
                                     <a href="{{ path('fos_user_security_login') }}" class="menu-pad" id="clic-pop" >
                                         Connexion
                                     </a>      
- </li>
+                                </li>
             {% endif %}
                             </ul>
 
@@ -125,48 +125,48 @@
         </nav>
 
         <!-- end nav -->
-        
+
 {# modal de connexion  #}
-<div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Se connecter</h4>
-      </div>
-      <div class="modal-body">
- <div class="panel-body logo2">
-                                                    <form action="{{ path("fos_user_security_check") }}" method="post">
-                                                        <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
-                                                        <fieldset>
-                                                            <div class="form-group">
-                                                                <input class="form-control username-input" style="background-color: #FFF; color:#666" placeholder="Nom d'utilisateur" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />        
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Mot de passe" type="password" id="password" name="_password" required="required" />
-                                                            </div>
-                                                            <div class="passwd-forgotten"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a></div>
-                                                            <div class="checkbox souvenir-de-moi" >
-                                                                <label>
-                                                                    <input id="remember_me" type="checkbox"  name="_remember_me" value="on" /> Se souvenir de moi
-                                                                </label>
-                                                            </div>
-                                                            <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="Connexion" />
-                                                                                                                  </fieldset>
-                                                    </form>
-                                                    <p class="ou-fb">ou alors avec Facebook :</p>
-                                                    <div class="pad-l bouton-fb-log">{{ facebook_login_button({'autologoutlink': false, 'size': 'large', 'label': "Se connecter"}) }}</div>
-                                                    <a href="{{ path('fos_user_registration_register') }} ">
-                                                        <input class="btn btn-lg bouton-signin" id="_submit" name="_submit" type="submit" value="S'inscrire" />
-                                                    </a>
-                                                    <p class="bonne-visite">Bonne visite :)</p>
-                                             </div>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-        
-        
+        <div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Se connecter</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body logo2">
+                            <form action="{{ path("fos_user_security_check") }}" method="post">
+                                <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input class="form-control username-input" style="background-color: #FFF; color:#666" placeholder="Nom d'utilisateur" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />        
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" style="background-color: #FFF; color:#666" placeholder="Mot de passe" type="password" id="password" name="_password" required="required" />
+                                    </div>
+                                    <div class="passwd-forgotten"><a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a></div>
+                                    <div class="checkbox souvenir-de-moi" >
+                                        <label>
+                                            <input id="remember_me" type="checkbox"  name="_remember_me" value="on" /> Se souvenir de moi
+                                        </label>
+                                    </div>
+                                    <input class="btn btn-lg bouton-login" id="_submit" name="_submit" type="submit" value="Connexion" />
+                                </fieldset>
+                            </form>
+                            <p class="ou-fb">ou alors avec Facebook :</p>
+                            <div class="pad-l bouton-fb-log">{{ facebook_login_button({'autologoutlink': false, 'size': 'large', 'label': "Se connecter"}) }}</div>
+                            <a href="{{ path('fos_user_registration_register') }} ">
+                                <input class="btn btn-lg bouton-signin" id="_submit" name="_submit" type="submit" value="S'inscrire" />
+                            </a>
+                            <p class="bonne-visite">Bonne visite :)</p>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
         <div id="cont"></div>
         <div id="main-content">
 
@@ -199,7 +199,7 @@
 
                         </div>
                         <div class="espace-vide-pour-cadre-repondre"></div>
-                        
+
                     </div>
 
 
@@ -232,75 +232,75 @@
             </div>
         </div>
 {#        Fin footer    #}
-        
- <div id="submit-a-bug"><a href="{{ path( 'smart_unity_app_bugPage') }}" class="btn btn-primary btn-bug">Signaler un bug</a></div>       
-        
+
+        <div id="submit-a-bug"><a href="{{ path( 'smart_unity_app_bugPage') }}" class="btn btn-primary btn-bug">Signaler un bug</a></div>       
+
 {% block modal %}{% endblock %}
 
-     <script>
-//logo réseau sociaux footer
-	function logoFacebookHover(e) {
-        var cheminLogoFacebookBlanc = '{{ asset('assets/img/')}}';
-        $(e).attr('src', cheminLogoFacebookBlanc + 'logo-facebook-footer-blanc.png');
-        }
-    
-    function logoFacebookUnHover(e) {
-        var cheminLogoFacebookBleu = '{{ asset('assets/img/')}}';
-        $(e).attr('src', cheminLogoFacebookBleu + 'logo-facebook-footer-bleu.png');
-        }
-        
-    function logoTwitterHover(e) {
-        var cheminLogoTwitterBlanc = '{{ asset('assets/img/')}}';
-        $(e).attr('src', cheminLogoTwitterBlanc + 'logo-twitter-footer-blanc.png');
-        }
-    
-    function logoTwitterUnHover(e) {
-        var cheminLogoTwitterBleu = '{{ asset('assets/img/')}}';
-        $(e).attr('src', cheminLogoTwitterBleu + 'logo-twitter-footer-bleu.png');
-        }
-        
-    function logoGoogleHover(e) {
-        var cheminLogoTwitterBlanc = '{{ asset('assets/img/')}}';
-        $(e).attr('src', cheminLogoTwitterBlanc + 'logo-google-footer-blanc.png');
-        }
-    
-    function logoGoogleUnHover(e) {
-        var cheminLogoGoogleBleu = '{{ asset('assets/img/')}}';
-        $(e).attr('src', cheminLogoGoogleBleu + 'logo-google-footer-bleu.png');
-        }
-        
-//logo fleur hover navbar
-	function fleurNavHover(e) {
-        var cheminFleur = '{{ asset('assets/img/')}}';
-        if ($(e)[0] !== $('.fleur-active a img')[0]) {
-        $(e).attr('src', cheminFleur + 'logo-su-nb.png');
-    }
-        }
-    
-    function fleurNavUnHover(e) {
-        var cheminFleur = '{{ asset('assets/img/')}}';
+        <script>
+            //logo réseau sociaux footer
+            function logoFacebookHover(e) {
+                var cheminLogoFacebookBlanc = '{{ asset('assets/img/')}}';
+                $(e).attr('src', cheminLogoFacebookBlanc + 'logo-facebook-footer-blanc.png');
+            }
+
+            function logoFacebookUnHover(e) {
+                var cheminLogoFacebookBleu = '{{ asset('assets/img/')}}';
+                $(e).attr('src', cheminLogoFacebookBleu + 'logo-facebook-footer-bleu.png');
+            }
+
+            function logoTwitterHover(e) {
+                var cheminLogoTwitterBlanc = '{{ asset('assets/img/')}}';
+                $(e).attr('src', cheminLogoTwitterBlanc + 'logo-twitter-footer-blanc.png');
+            }
+
+            function logoTwitterUnHover(e) {
+                var cheminLogoTwitterBleu = '{{ asset('assets/img/')}}';
+                $(e).attr('src', cheminLogoTwitterBleu + 'logo-twitter-footer-bleu.png');
+            }
+
+            function logoGoogleHover(e) {
+                var cheminLogoTwitterBlanc = '{{ asset('assets/img/')}}';
+                $(e).attr('src', cheminLogoTwitterBlanc + 'logo-google-footer-blanc.png');
+            }
+
+            function logoGoogleUnHover(e) {
+                var cheminLogoGoogleBleu = '{{ asset('assets/img/')}}';
+                $(e).attr('src', cheminLogoGoogleBleu + 'logo-google-footer-bleu.png');
+            }
+
+            //logo fleur hover navbar
+            function fleurNavHover(e) {
+                var cheminFleur = '{{ asset('assets/img/')}}';
                 if ($(e)[0] !== $('.fleur-active a img')[0]) {
-        $(e).attr('src', cheminFleur + 'logo-su-nb-bleue.png');
-                }              
-        }
-     
-//Responsivité des rubriques de la navbar
+                    $(e).attr('src', cheminFleur + 'logo-su-nb.png');
+                }
+            }
+
+            function fleurNavUnHover(e) {
+                var cheminFleur = '{{ asset('assets/img/')}}';
+                if ($(e)[0] !== $('.fleur-active a img')[0]) {
+                    $(e).attr('src', cheminFleur + 'logo-su-nb-bleue.png');
+                }
+            }
+
+            //Responsivité des rubriques de la navbar
             window.onresize = function() {
                 initDisplay();
             };
 
-//Initialisation du document
+            //Initialisation du document
             $(document).ready(function() {
                 initDisplay();
             });
 
             function initDisplay(event) {
 
-	//Determination de lahauteur minimale d'une page
-var minimumHeightMainContent = $(window).height()-$('.bg').css('padding-top').replace("px", "") - $('.foot-sep').css('margin-top').replace("px", "") - $('.foot-sep').height();
-var minimumHeightCadreGeneral = minimumHeightMainContent-$('.cadre-general').css('margin-top').replace("px", "")-$('.cadre-general').css('margin-bottom').replace("px", "");
-$("#main-content").css('min-height', minimumHeightMainContent);
-$(".cadre-general").css('min-height', minimumHeightCadreGeneral);
+                //Determination de lahauteur minimale d'une page
+                var minimumHeightMainContent = $(window).height() - $('.bg').css('padding-top').replace("px", "") - $('.foot-sep').css('margin-top').replace("px", "") - $('.foot-sep').height();
+                var minimumHeightCadreGeneral = minimumHeightMainContent - $('.cadre-general').css('margin-top').replace("px", "") - $('.cadre-general').css('margin-bottom').replace("px", "");
+                $("#main-content").css('min-height', minimumHeightMainContent);
+                $(".cadre-general").css('min-height', minimumHeightCadreGeneral);
                 if ($(window).width() > 768 && $(window).width() < 992) {
                     $("#comment-marche-connecter").attr('class', 'nav navbar-nav');
 
@@ -314,35 +314,30 @@ $(".cadre-general").css('min-height', minimumHeightCadreGeneral);
                     //Affichage de la barre de recherche
                     $("#loupe").show();
                     $("#loupe").click(function(event) {
-                        $("#pop").hide();
-                        if($("#top-barre-recherche").is(':visible')){
+                        if ($("#top-barre-recherche").is(':visible')) {
                             $("#top-barre-recherche").hide();
                             event.stopPropagation();
-                        }else{
+                        } else {
                             $("#top-barre-recherche").slideDown(200);
                             event.stopPropagation();
                         }
 
                     });
                     $("#top-barre-recherche").click(function(event) {
-                        $("#pop").hide();
                         $("#top-barre-recherche").slideDown(200);
                         event.stopPropagation();
                     });
 
                     //Affichage du panel de connexion
                     $('#clic-pop').attr('href', '#');
-                    $("#clic-pop,#pop").click(function(event) {
+                    $("#clic-pop").click(function(event) {
                         $("#top-barre-recherche").hide();
-//                          $("#pop").slideDown(); 
                         $(".modal.fade").modal('show');
                         event.stopPropagation();
-
                     });
 
                     //Disparition des panels connexion et recherche lors d'un click à coté       
                     $(document).click(function(event) {
-                        $("#pop").hide();
                         $("#top-barre-recherche").hide();
                     });
 
@@ -351,25 +346,32 @@ $(".cadre-general").css('min-height', minimumHeightCadreGeneral);
                     $("#loupe").hide();
                 }
 
-///Couleur de la fleur de la navbar 
-var cheminFleur = '{{ asset('assets/img/')}}';
-        $('.fleur-active a img').attr('src', cheminFleur + 'logo-su-nb.png');
-        
+                ///Couleur de la fleur de la navbar 
+                var cheminFleur = '{{ asset('assets/img/')}}';
+                $('.fleur-active a img').attr('src', cheminFleur + 'logo-su-nb.png');
+
             }
-                        
-                                </script> 
+
+        </script> 
 
 {#///////Google Analytics/////////#}
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-47425623-1', 'smartunity.fr');
-  ga('send', 'pageview');
+            ga('create', 'UA-47425623-1', 'smartunity.fr');
+            ga('send', 'pageview');
 
-</script>
+        </script>
 {#////////////////////////////////////#}
 
         <!-- call Javascript & scripts -->

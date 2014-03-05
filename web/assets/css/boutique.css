@@ -18,13 +18,8 @@
     margin-bottom: 50px;
 }
 
-/*.infos-cadeau {
-    padding: 0 100px 0 0;
-}*/
-
 .description-cadeau{
     margin-bottom: 20px;
-
 }
 
 .apercu-cadeau {
@@ -47,25 +42,10 @@
     font-size: 22px;
     margin-top: 20px;
     text-align: left;
-    
 }
 
 .bloc-boutons-produit{
     text-align: center;
-
-}
-
-.bouton-choisir-produit{
-    background-color: #e37151;
-    color: #FFF;
-    font-family: centrale;
-    font-size: 15px;
-    line-height: 17px;
-    text-align: center;
-    width: 160px;
-    height: 30px;
-    border-radius: 2px;
-    border: 0;
 }
 
 .produit{
@@ -98,30 +78,28 @@
 }
 
 .bloc-cagnotte{
-text-align: center;    
+    text-align: center;    
 }
 
 .cochon{
-     position:relative;
+    position:relative;
 }
 
 .bloc-cagnotte img {
 }
 
 .nb-pts-cagnotte {
-	color: white;
-	font-family: centrale;
-	font-size: 25px;
-	top: 0%;
-	left: 42%;
-	position: absolute;
+    color: white;
+    font-family: centrale;
+    font-size: 25px;
+    top: 0%;
+    left: 42%;
+    position: absolute;
 }
 
 .grille-content
 {   
     margin-bottom: 30px;
-/*    margin-right: 20px;
-    margin-left: 20px;*/
     padding:15px;
     background-color: #ffffff;
     border-radius:3px;
@@ -129,33 +107,26 @@ text-align: center;
 }
 
 .validation-dialog {
-position: relative;
-background-color: #FFF;
-width: 500px;
-border-radius: 5px;
-margin: 20% auto;
+    position: relative;
+    background-color: #FFF;
+    width: 500px;
+    border-radius: 5px;
+    margin: 20% auto;
 }
 
 .validation-body {
-font-family: centrale;
-width: 500px;
-padding-top: .6em;
+    font-family: centrale;
+    width: 500px;
+    padding-top: .6em;
 }
 
 .validation-footer {
-height: 30px;
-margin-bottom: 5px;
+    height: 30px;
+    margin-bottom: 5px;
 }
 
-.bouton-annulation, .bouton-validation {
-background: #e37151;
-color: #FFF;
-font-size: 13px;
-height: 20px;
-width: 80px;
-font-family: centrale;
-border-radius: 2px;
-cursor: pointer;
-padding: 0;
+.flash {
+    color:red;
+    margin-top: 10px;
 }
 
