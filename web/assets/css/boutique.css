@@ -18,40 +18,8 @@
     margin-bottom: 50px;
 }
 
-.description-cadeau{
-    margin-bottom: 20px;
-}
 
-.apercu-cadeau {
-    margin: 0 auto;
-    width : 60%;
-    height: 200px;
-    text-align: center;
-    padding-bottom: 20px;
-}
 
-.entete-cadeau{
-    text-align: center;
-    font-family: centrale;
-    margin-bottom: 20px;
-    display: table;
-    vertical-align: middle;
-    width: 100%;
-}
-.titre-cadeau{
-    font-size: 22px;
-    margin-top: 20px;
-    text-align: left;
-}
-
-.bloc-boutons-produit{
-    text-align: center;
-}
-
-.produit{
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
 
 .rond-point
 {
@@ -77,16 +45,6 @@
     top: -15px;
 }
 
-.bloc-cagnotte{
-    text-align: center;    
-}
-
-.cochon{
-    position:relative;
-}
-
-.bloc-cagnotte img {
-}
 
 .nb-pts-cagnotte {
     color: white;
@@ -104,6 +62,68 @@
     background-color: #ffffff;
     border-radius:3px;
     border: 1px solid #e8e4dc;
+}
+
+.produit{
+    margin-right: 80px;
+    margin-left: 80px;
+    padding: 15px;
+}
+
+.description-cadeau{
+    margin-bottom: 20px;
+    padding-left: 15px;
+}
+
+
+.apercu-cadeau img{
+    width : 100%;
+}
+
+.photo-cadeau{
+    padding:15px;
+
+}
+
+.infos-cadeau{
+    padding:15px;
+
+}
+
+
+.entete-cadeau{
+    text-align: center;
+    font-family: centrale;
+    margin-bottom: 20px;
+    display: table;
+    vertical-align: middle;
+    width: 100%;
+}
+.titre-cadeau{
+    font-size: 21px;
+    margin-top: 11px;
+    text-align: left;
+}
+
+.bloc-boutons-produit{
+    text-align: center;
+}
+
+.bloc-cagnotte{
+    text-align: center; 
+    margin-right: 80px;
+    float:right;
+    padding:5px;
+
+}
+
+.cochon{
+    position:relative;
+}
+
+.text-bloc-cagnotte{
+    font-family: centrale;
+    padding-left: 10px;
 }
 
 .validation-dialog {
@@ -130,3 +150,12 @@
     margin-top: 10px;
 }
 
+@media (max-width: 991px) { 
+.apercu-cadeau{
+   text-align: center;
+}
+.apercu-cadeau img{
+    width : 200px;
+}
+
+}

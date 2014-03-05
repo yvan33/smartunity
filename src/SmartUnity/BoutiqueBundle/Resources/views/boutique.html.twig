@@ -25,10 +25,10 @@
     </div>
     {% if is_granted('ROLE_USER') %}
     <div class="row sans-marge">
-        <div class="col-md-6 col-md-offset-6 bloc-cagnotte police-text grille-content">
-            Votre cagnotte actuelle:
+        <div class="bloc-cagnotte grille-content">
+            <span class="text-bloc-cagnotte">Votre cagnotte actuelle:</span>
             <span class="cochon">	
-                <img src="{{ asset('assets/img/piggy-bank.png') }}"/>
+                <img src="{{ asset('assets/img/piggy-bank.png') }}" height="130px"/>
                 <p class="nb-pts-cagnotte">{{ app.user.cagnotte }}</p>
             </span>
         </div>
@@ -37,12 +37,12 @@
 
 {% for gift in gifts %}    
     <div class="row sans-marge produit grille-content">
-        <div class="col-md-6 photo-cadeau">
+        <div class="col-md-4 photo-cadeau">
             <div class="apercu-cadeau">
-                <img src="{{asset('assets/img/mdgsm-logo.jpeg') }}"  alt="Produit" height="100%">
+                <img src="{{asset('assets/img/mdgsm-logo.jpeg') }}"  alt="Cadeau">
             </div>
         </div>
-        <div class="col-md-6 infos-cadeau">
+        <div class="col-md-8 infos-cadeau">
             <div class="row entete-cadeau sans-marge">
                 <div class="rond-point"><p class="txt-rond">{{gift.price}}</p><p class="txt-pts">pts</p></div>
                 <div class="titre-cadeau">
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="row description-cadeau sans-marge">
-                Description du produit : {{gift.description | raw}}
+                <strong>Description du produit :</strong> {{gift.description | raw}}
             </div>
             <div class="row sans-marge">
                 <div class="bloc-boutons-produit">
