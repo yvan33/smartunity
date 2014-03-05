@@ -58,7 +58,7 @@ class BoutiqueController extends Controller {
         $em->persist($gift);
         $em->flush();
 
-        //Envoi du mail`
+        //Send mail to the user
         $sujetMail = "Vous avez commandé un cadeau!";
         $contenu = "Bonjour " . $user->getUsername() . ", <br/> Vous avez commandé ce cadeau : \"" . $gift->getName() . "\". <br/> "
                 . " Nous allons traiter votre commande très rapidement et revenons vers vous! <br/><br/>A bientôt sur smartunity.fr, <br/><br/>L'équipe Smart'Unity";
@@ -67,6 +67,18 @@ class BoutiqueController extends Controller {
                 ->setSubject($sujetMail)
                 ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                 ->setTo($user->getEmail())
+                ->setBody($contenu);
+        $this->get('mailer')->send($message);
+        
+        //Send mail to Smart'Unity
+        $sujetMail = $user->getUsername(). " vient de commander un cadeau";
+        $contenu = $user->getUsername() . " a commandé ce cadeau : \"" . $gift->getName() . "\". <br/> "
+                . " Il en reste : ".$gift->getQuantity();
+        $message = \Swift_Message::newInstance()
+                ->setContentType('text/html')
+                ->setSubject($sujetMail)
+                ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
+                ->setTo('contact@smartunity.fr')
                 ->setBody($contenu);
         $this->get('mailer')->send($message);
 
