@@ -12,6 +12,10 @@ class BoutiqueController extends Controller {
                 ->getRepository('SmartUnityAppBundle:gift');
         $gifts = $giftRepository->findAll();
 
+        if (empty($gifts)) {
+            return $this->render('SmartUnityBoutiqueBundle::boutique_no_gifts.html.twig');
+        }
+
         return $this->render('SmartUnityBoutiqueBundle::boutique.html.twig', array(
                     'gifts' => $gifts));
     }
