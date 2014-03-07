@@ -49,7 +49,7 @@
                             <div class="text-autre carousel-caption">
                             	<h1>Efficacité</h1><hr />
 						  		<h2>Un système de Q/R innovant.</h2>
-						  		<h3>Smart’Unity est une plateforme de Question/Réponse : posez votre question, obtenez des réponses. Pas de blabla.<br><br>Toujours pas de réponse au bout de 48h ? Pas d’inquiétude, votre question est mise en avant.</h3>
+						  		<h3>Smart’Unity est une plateforme de Question/Réponse : posez votre question, obtenez des réponses. Pas de blabla.<br><br>Toujours pas de réponse au bout de 48h ? Pas d’inquiétude, votre question est mise en avant.</h3>
                             </div>
                           </div>
                           <div class="item">
@@ -65,7 +65,7 @@
                             <div class="text-autre carousel-caption">
                             	<h1>Récompensé</h1><hr />
 						  		<h2>C'est donnant-donnant.</h2>
-						  		<h3>En répondant aux questions de la communauté, vous gagnez des points que vous pourrez échanger contre des cadeaux !<br><br>Apportez vos connaissances aux autres membres de la communauté et profitez de leur expérience dans d’autres domaines.</h3>
+						  		<h3>En répondant aux questions de la communauté, vous gagnez des points que vous pourrez échanger contre des cadeaux !<br><br>Apportez vos connaissances aux autres membres de la communauté et profitez de leur expérience dans d’autres domaines.</h3>
                             </div>
                           </div>
                           <div class="item">
@@ -73,7 +73,7 @@
                             <div class="text-autre carousel-caption">
                             	<h1>Simplicité</h1><hr />
 						  		<h2>Aller à l'essentiel.</h2>
-						  		<h3>Nous avons mis en oeuvre les fonctionnalités qui vous sont utiles. Pas plus.<br><br>Aucune information superflue ne vient perturber votre experience utilisateur.<br><br>Les réponses certifiées sont assurément simples et compréhensibles par tous.</h3>
+						  		<h3>Nous avons mis en oeuvre les fonctionnalités qui vous sont utiles. Pas plus.<br><br>Aucune information superflue ne vient perturber votre experience utilisateur.<br><br>Les réponses certifiées sont assurément simples et compréhensibles par tous.</h3>
                             </div>
                           </div>
                        
@@ -113,13 +113,13 @@
                                     <div class="grille-question-centent">
                                     <div class="grille-question-rond">
                                     {% if question.is_certif_question %}
-                                        <img src="{{ asset('assets/img/certif.png') }}" style="margin-right:0px"/>
+                                        <img alt="certification" src="{{ asset('assets/img/certif.png') }}" style="margin-right:0px"/>
                                     {% else %}   
-                                        <img src="{{ asset('assets/img/check.png') }}" style="margin-right:0px"/>
+                                        <img alt="validation" src="{{ asset('assets/img/check.png') }}" style="margin-right:0px"/>
                                     {% endif %} 
                                       </div>
                                       <div class="grille-question-det">
-                                        <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="bouton-repondre">Détails</button></a>
+                                        <a class="bouton-repondre" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">Détails</a>
                                       </div>
                                       <div class="grille-question-txt">
                                           <p>{{ question.sujet }}</p>
@@ -147,7 +147,7 @@
                                             </div>
                                         </div>
                                         <div class="grille-question-det">
-                                          <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="bouton-repondre">Détails</button></a>
+                                          <a class="bouton-repondre" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">Détails</a>
                                         </div>
                                         <div class="grille-question-txt">
                                             <p>{{ question.sujet }}</p>
@@ -176,7 +176,7 @@
                                             </div>
                                         </div>
                                         <div class="grille-question-det">
-                                          <a href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><button type="button" class="bouton-repondre">Détails</button></a>
+                                          <a class="bouton-repondre" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">Détails</a>
                                         </div>
                                         <div class="grille-question-txt">
                                             <p>{{ question.sujet }}</p>
@@ -201,7 +201,7 @@
                           <img src="{{asset('assets/img/cafe1.jpg') }}" alt="" />
                           <p>Un coin où vous pouvez découvrir notre vision sur le monde des smartphones ! Tutos, idées, astuces ou même banalités, tout y est ! </p>
                           <div class="bouton-decouvrir">
-                          	<a target="blank" href="http://blog.smartunity.fr"><button type="button" class="bouton-repondre">Découvrir</button></a>
+                          	<a class="bouton-repondre" target="blank" href="http://blog.smartunity.fr">Découvrir</a>
                           </div>
                       </div>
     </div>
@@ -212,7 +212,9 @@
                       <div class="row cadre-cafe-boutique">
                           <img src="{{asset('assets/img/poche.jpg') }}" alt="" />
                           <p>Utilisez vos points pour les convertir en cadeaux et profitez ainsi de nombreux accessoires pour optimiser l’utilisation de vos smartphones !</p>
-                          <div class="bouton-decouvrir"><a href={{ path('smart_unity_boutique_homepage') }} target="blank"><button type="button" class="bouton-repondre">Découvrir</button></a></div>
+                          <div class="bouton-decouvrir">
+                          	<a class="bouton-repondre" href={{ path('smart_unity_boutique_homepage') }} target="blank">Découvrir</a>
+                          </div>
                       </div>
               </div>
   </div>

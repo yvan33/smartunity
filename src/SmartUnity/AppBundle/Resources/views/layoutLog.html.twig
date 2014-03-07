@@ -61,7 +61,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="container" style="padding-left: 0; padding-right: 0;">
 
-                <a type="button" class="fixed-right-corner" id="loupe" ><span class="glyphicon glyphicon-search"></span></a>
+                <a class="fixed-right-corner" id="loupe"><span class="glyphicon glyphicon-search"></span></a>
                 <div spellcheck="false" id="top-barre-recherche">
                     <form action="{{ path('smart_unity_question_reponse_demander_questions') }}" method="GET">
                         <input type="text" name="q" id="q" class="top-barre-recherche-input" placeholder="Entrez votre question...">
@@ -84,7 +84,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage'%} class="fleur-active" {% else %} class="fleur-inactive" {% endif %}><a href={{ path('smart_unity_app_homepage') }}><img onmouseover="fleurNavHover(this)" onmouseout="fleurNavUnHover(this)" src="{{ asset('assets/img/logo-su-nb-bleue.png') }}"/></a></li>
+                                <li {% if app.request.attributes.get('_route') == 'smart_unity_app_homepage'%} class="fleur-active" {% else %} class="fleur-inactive" {% endif %}><a href={{ path('smart_unity_app_homepage') }}><img onmouseover="fleurNavHover(this)" onmouseout="fleurNavUnHover(this)" alt="Page d'accueil Smart'Unity" src="{{ asset('assets/img/logo-su-nb-bleue.png') }}"/></a></li>
                                 <li {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_list_of_question'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_demander_questions'
                              or app.request.attributes.get('_route') == 'smart_unity_question_reponse_display_reponse'
@@ -156,9 +156,7 @@
                             </form>
                             <p class="ou-fb">ou alors avec Facebook :</p>
                             <div class="pad-l bouton-fb-log">{{ facebook_login_button({'autologoutlink': false, 'size': 'large', 'label': "Se connecter"}) }}</div>
-                            <a href="{{ path('fos_user_registration_register') }} ">
-                                <input class="btn btn-lg bouton-signin" id="_submit" name="_submit" type="submit" value="S'inscrire" />
-                            </a>
+                            <a class="btn btn-lg bouton-signin" href="{{ path('fos_user_registration_register') }} ">S'inscrire</a>
                             <p class="bonne-visite">Bonne visite :)</p>
                         </div>
                     </div>
@@ -175,7 +173,7 @@
 {% if  app.request.attributes.get('_route')  == 'smart_unity_app_homepage' %}                   
 
                 <div class="row titre-smartunity">
-                    <div class="col-md-offset-1 col-md-6"><img src="{{ asset('assets/img/logo-su1.png') }}"  class="img-responsive logo"/></div>
+                    <div class="col-md-offset-1 col-md-6"><img alt="logo de Smart'Unity" src="{{ asset('assets/img/logo-su1.png') }}"  class="img-responsive logo"/></div>
                     <div class="col-md-5">
 
 
