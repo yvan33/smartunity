@@ -12,7 +12,7 @@
 {% block fos_user_content %}
 <div class="row text-center cookie-title">Demande prise en compte !</div>
 <div class="row text-center"><br/>
-	<p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p><br/>
+	<p>{{ 'resetting.check_email'|trans({'%email%': user.email}) }}</p><br/>
 	<h4>Il se peut que le mail se trouve dans votre dossier 'Spam'...<br/>
 	Pensez à y jeter un coup d'oeil !</h4>
 </div>

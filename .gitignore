@@ -21,3 +21,7 @@ web/phpconsole/install.php
 /.settings
 .buildpath
 web/phpconsole/install.php
+/web/js
+/web/css
+/web/assets/chosen
+

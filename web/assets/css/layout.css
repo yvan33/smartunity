@@ -2,9 +2,9 @@
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
     src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
-        url(../fonts/Centrale.woff) format('woff'),
-        url(../fonts/Centrale.ttf) format('truetype'),
-        url(../fonts/Centrale.svg#centrale) format('svg');
+    url(../fonts/Centrale.woff) format('woff'),
+    url(../fonts/Centrale.ttf) format('truetype'),
+    url(../fonts/Centrale.svg#centrale) format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -25,8 +25,10 @@ textarea {
 
 nav.navbar.navbar-inverse.navbar-fixed-top.menu-bg
 {
-    margin-right:0;
-    padding-right:0;
+
+	margin-right:0;
+	padding-right:0;
+
 }
 
 .navbar-inverse .navbar-nav>li>a {
@@ -37,6 +39,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top.menu-bg
 }
 
 .navbar-inverse {
+<<<<<<< HEAD
     border: none;
 }
 
@@ -146,6 +149,7 @@ body.bg
 
 .footer a:hover
 {
+    
     text-decoration: none;
     color: white;
 }
@@ -311,7 +315,9 @@ body.bg
 
 .titre-smartunity .col-md-6
 {
-    padding-left: 0px;
+
+	padding-left: 0px;
+
 }
 
 .nav-tabs a
@@ -336,8 +342,8 @@ body.bg
 
 .fixed-right-corner:hover
 {
-    cursor: pointer;
-    color: #fff;
+	cursor: pointer;
+	color: #fff;
 }
 
 #top-barre-recherche
@@ -432,7 +438,6 @@ body.bg
 .tab-ajax > .nav>li>a:hover, .nav > li > a:focus {
     background-color: #ffffff;
     color: black;
-
 }
 
 .tab-ajax > .nav-tabs>li>a {
@@ -478,7 +483,6 @@ body.bg
     top:25px;
     left:5px;
     cursor: pointer;
-
 }
 
 .bouton-repondre:focus
@@ -504,7 +508,6 @@ body.bg
     color: #2b3a41;
     text-decoration: none;
 }
-
 .bouton-valid-modif
 {
 
@@ -528,6 +531,7 @@ body.bg
 {
     background: #559aa9;
     border: 0;
+
 }
 
 .fleur-active
@@ -737,6 +741,7 @@ body.bg
 }
 
 .bouton-signin-fix {
+
     position: absolute;
     top: 60%;
     left: 52%;
@@ -752,6 +757,7 @@ body.bg
 }
 
 .bouton-signin-fix:focus {
+
     outline:0;
 }
 
@@ -823,6 +829,7 @@ body.bg
     #submit-a-bug {
         display:none;
     }
+
 }
 
 @media (min-width: 1201px){
@@ -962,7 +969,6 @@ body.bg
     {
         z-index:101; 
     }
-
     .logo {
         display: none;
     }

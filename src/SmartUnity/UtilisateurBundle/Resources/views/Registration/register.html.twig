@@ -36,7 +36,6 @@
                             <div class="row text-center cookie-title titre-inscription">
                 Créer un compte
             </div>
-        
             <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
 
                 <div class="erreur">
@@ -63,7 +62,6 @@
                         <div class="grille-1 police-text">{{form_label(form.plainPassword.second)}}<span style="color: red;"> *</span></div>
                         <div class="grille-2 police-text">{{form_widget(form.plainPassword.second)}}</div>
                     </div> 
-
 {#                    <div class="cent-h bouton-bas-block">
                         <button type="submit" class="btn-inscription">Inscription express</button>
                     </div> #}
