@@ -7,3 +7,4 @@ smart_unity_boutique_confirmation:
     defaults: { _controller: SmartUnityBoutiqueBundle:Boutique:confirmGift}
     options:
         expose: true    
+
