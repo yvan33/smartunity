@@ -773,6 +773,12 @@ margin: 20% auto;
 .head-blue .glyphicon:hover {
 	color: #333;
 }
+h1.head-blue  {
+	
+	font-size: 15px;
+	line-height: 15px;
+	margin-top:0px;
+}
 
 .send-answer {
 	margin-top: 10px;
