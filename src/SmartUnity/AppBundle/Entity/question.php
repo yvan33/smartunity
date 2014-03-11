@@ -3,10 +3,7 @@
 namespace SmartUnity\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-<<<<<<< HEAD
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-=======
->>>>>>> initialisation nouveau dépôt florent
 
 /**
  * Question
