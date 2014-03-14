@@ -20,6 +20,7 @@ class QuestionReponseController extends Controller {
 
     public function displayListOfQuestionAction($type, $page, Request $request) {
 
+        
         $nbParPage = 20;
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
@@ -927,21 +928,12 @@ class QuestionReponseController extends Controller {
                 $newReponse->setSignaler(false);
 
                 $membreQuestion = $question->getMembre();
+                $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
                 $prefRepmembre = $membreQuestion->getPrefRep();
-                $mailMembreQuestion = $membreQuestion->getEmail();
                 if ($prefRepmembre == true) {
 
                     //Envoi du mail
-                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
-                    $sujetMail = "Vous avez une nouvelle réponse!";
-                    $contenu = $user . " a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : " . $urlQuestion;
-                    $message = \Swift_Message::newInstance()
-                            ->setContentType('text/html')
-                            ->setSubject($sujetMail)
-                            ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-                            ->setTo($mailMembreQuestion)
-                            ->setBody($contenu);
-                    $this->get('mailer')->send($message);
+                    $this->get('smart_unity_app.mailer')->sendReponseMessage($membreQuestion, $user, $urlQuestion);
                 }
 
                 $em = $this->getDoctrine()->getManager();
