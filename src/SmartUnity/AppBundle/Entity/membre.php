@@ -101,42 +101,42 @@ class membre extends BaseUser {
      *
      * @ORM\Column(name="pref_mp", type="boolean")
      */
-    private $pref_mp;
+    private $pref_mp=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_smartcafe", type="boolean")
      */
-    private $pref_smartcafe;
+    private $pref_smartcafe=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_comm", type="boolean")
      */
-    private $pref_comm;
+    private $pref_comm=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_rep", type="boolean")
      */
-    private $pref_rep;
+    private $pref_rep=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_repValidee", type="boolean")
      */
-    private $pref_repValidee;
+    private $pref_repValidee=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_repCertifiee", type="boolean")
      */
-    private $pref_repCertifiee;
+    private $pref_repCertifiee=1;
 
     /**
      * @var string
