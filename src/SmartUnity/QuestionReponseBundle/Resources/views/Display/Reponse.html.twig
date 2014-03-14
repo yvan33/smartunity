@@ -119,7 +119,8 @@
                                     <p style="margin:0px">{{smart_reponses}} Smart'Reponse{% if smart_reponses > 1 %}s{%endif%}</p>
                                     <p style="margin:0px">{{nb_questions_membre}} Question{% if nb_questions_membre > 1 %}s{%endif%}</p>
                                     <p style="margin:0px">{{nb_reponses_membre}} Réponse{% if nb_reponses_membre > 1 %}s{%endif%}</p>
-                            {% if question.membre.granted('ROLE_ADMIN') %}
+                            
+{% if question.membre.granted('ROLE_ADMIN') %}
                                     <p class="admin">ADMIN</p>
                             {% else %}
                                     <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/>
@@ -846,10 +847,17 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                                             <p style="margin:0px">' + pEntry['nb_reponses_membre'] + ' Réponse';
                                             if (pEntry['nb_reponses_membre'] > 1 )
                                                 {entity+='s';}
-                                            entity+='</p> \
-                                            <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/> \
-                                            <p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p> \
-                                            </div> \
+                                            entity+='</p>';
+                                            
+                                            if (pEntry['membre_role'] == 'ROLE_ADMIN') {
+                                    entity+= '<p class="admin">ADMIN</p>';
+                                               }
+                                            else {   
+                                     entity+='<img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/> \
+                                            <p class="reputation" style="margin:0px; display:inline;">'+pEntry['membre_reputation']+'</p>';
+                                }
+                                
+                               entity+='             </div> \
                                         </div> \
                                 </div> \
                                 </div> \
