@@ -274,8 +274,9 @@
 </div>  <!-- row fin-->
 
 		<div class="bouton-com-rep">
-        	<a id="popupQuestion"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour poser une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_question')}}{% else %}#{% endif %}">Posez votre question</a>
+        	<a id="popupQuestion"{% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour poser une question." href= "{{ path('fos_user_security_login') }}" {% else %} href="{{ path('smart_unity_question_reponse_add_question')}}"{% endif %}">Posez votre question</a>
 		</div>
+
 {% endblock %}
 
 {% block callJS %}
@@ -557,9 +558,13 @@ $(document).ready(function(){
   $('#popupQuestion').tooltip();
   $('#popupQuestion').click(function(e){
     e.preventDefault();
+    $("#modalConnexion").modal('show');
+    
   })
 });
 {% endif %}
-</script>
 
+
+
+</script>
 {% endblock %}

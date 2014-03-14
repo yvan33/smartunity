@@ -28,7 +28,7 @@
 
         <div class="grille-1" style="text-align:center">
             <div class="roww" id="vote{{reponse.id}}" style="display:inline-block;text-align:center" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% elseif reponse.is_voted %}Vous avez déjà noté cette question.
-{% elseif app.user.id == reponse.membre_id %}Vous ne pouvez pas voter pour votre réponse.{% endif %}">
+{% elseif app.user.id == reponse.membre_id %}Vous ne pouvez pas voter pour votre réponse.{% endif %}" {% if not is_granted('ROLE_USER') %} href="path('fos_user_security_check')"{% endif%} >
                 {% if (reponse.id == isup ) %} 
                 <div class="fleche upVote" onmouseover="upVoteHover(this);" {% if is_granted('ROLE_USER') and not reponse.is_voted  and app.user.id != reponse.membre_id %}onClick="javascript:upVote({{reponse.id}})"{% endif %}> 
                     <img src="{{ asset('assets/img/fleche_plus.png') }}" />{% if reponse.up_vote > 9 and reponse.up_vote < 100 %}<p class="textevert-moyen"> {% elseif reponse.up_vote > 100 %} <p class="textevert-petit"> {% else %}<p class="textevert-grand"> {% endif %} {{reponse.up_vote}}</p>
@@ -134,7 +134,7 @@
                         <div class="grille-3-btn">
 
                             <div id="bloc-commenter-reponse{{reponse.id}}">{#ICI LE FORMULAIRE POUR COMMENTER#}</div>
-                            <div id="bouton-commenter{{reponse.id}}" class="commentaire-btn-reponse bouton-com-rep" onClick="javascript:displayCommentFormReponse(this, {{reponse.id}})"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div>
+                            <div id="bouton-commenter{{reponse.id}}" class="commentaire-btn-reponse bouton-com-rep" onClick="javascript:displayCommentFormReponse(this, {{reponse.id}})"  {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question." href="path('fos_user_security_check')"{% endif %}>Commenter</div>
         {% if not (reponse.is_certif or reponse.is_validated) %}                 
           {% if is_granted('ROLE_USER') and app.user.id == reponse.membre_id %}
 
