@@ -144,6 +144,7 @@ class membre extends BaseUser {
      * @ORM\Column(name="info_plus", type="text", nullable=true)
      */
     private $info_plus;
+
     /**
      * @ORM\OneToMany(targetEntity="question", mappedBy="membre")
      */
@@ -228,18 +229,18 @@ class membre extends BaseUser {
      * @ORM\Column(name="ip_inscription", type="string", length=50, nullable=true)
      */
     private $ip_inscription;
-    
+
     /** @var string
      *
      * @ORM\Column(name="ip_confirmation", type="string", length=50, nullable=true)
      */
     private $ip_confirmation;
 
-    /**	
+    /** 	
      * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\gift", inversedBy="membres")
      *
      */
-    private $gifts;    
+    private $gifts;
 
     /**
      * Constructor
@@ -706,14 +707,12 @@ class membre extends BaseUser {
             $this->setEmail($fbdata['email']);
         }
         if (isset($fbdata['gender'])) {
-            if($fbdata['gender'] == 'male'){
-            $this->setSexe('m');                
-            }
-            elseif($fbdata['gender'] == 'female'){
-            $this->setSexe('f');                
-            }
-            else {
-            $this->setSexe('na');  
+            if ($fbdata['gender'] == 'male') {
+                $this->setSexe('m');
+            } elseif ($fbdata['gender'] == 'female') {
+                $this->setSexe('f');
+            } else {
+                $this->setSexe('na');
             }
         }
         $this->setPrefComm('1');
@@ -722,11 +721,10 @@ class membre extends BaseUser {
         $this->setPrefRepValidee('1');
         $this->setPrefSmartcafe('1');
         $this->setPrefRepCertifiee('1');
-        
-        if (isset($fbdata['birthday'])) {
-           $this->setDateNaissance(new \DateTime($fbdata['birthday']));
-        }   
 
+        if (isset($fbdata['birthday'])) {
+            $this->setDateNaissance(new \DateTime($fbdata['birthday']));
+        }
     }
 
     /**
@@ -1016,17 +1014,15 @@ class membre extends BaseUser {
         return $this->parrain;
     }
 
-
     /**
      * Set info_plus
      *
      * @param string $infoPlus
      * @return membre
      */
-    public function setInfoPlus($infoPlus)
-    {
+    public function setInfoPlus($infoPlus) {
         $this->info_plus = $infoPlus;
-    
+
         return $this;
     }
 
@@ -1035,8 +1031,7 @@ class membre extends BaseUser {
      *
      * @return string 
      */
-    public function getInfoPlus()
-    {
+    public function getInfoPlus() {
         return $this->info_plus;
     }
 
@@ -1046,10 +1041,9 @@ class membre extends BaseUser {
      * @param string $ipInscription
      * @return membre
      */
-    public function setIpInscription($ipInscription)
-    {
+    public function setIpInscription($ipInscription) {
         $this->ip_inscription = $ipInscription;
-    
+
         return $this;
     }
 
@@ -1058,8 +1052,7 @@ class membre extends BaseUser {
      *
      * @return string 
      */
-    public function getIpInscription()
-    {
+    public function getIpInscription() {
         return $this->ip_inscription;
     }
 
@@ -1068,10 +1061,9 @@ class membre extends BaseUser {
      * @param string $ipConfirmation
      * @return membre
      */
-    public function setIpConfirmation($ipConfirmation)
-    {
+    public function setIpConfirmation($ipConfirmation) {
         $this->ip_confirmation = $ipConfirmation;
-    
+
         return $this;
     }
 
@@ -1080,8 +1072,7 @@ class membre extends BaseUser {
      *
      * @return string 
      */
-    public function getIpConfirmation()
-    {
+    public function getIpConfirmation() {
         return $this->ip_confirmation;
     }
 
@@ -1091,10 +1082,9 @@ class membre extends BaseUser {
      * @param \SmartUnity\AppBundle\Entity\gift $gifts
      * @return membre
      */
-    public function addGift(\SmartUnity\AppBundle\Entity\gift $gifts)
-    {
+    public function addGift(\SmartUnity\AppBundle\Entity\gift $gifts) {
         $this->gifts[] = $gifts;
-    
+
         return $this;
     }
 
@@ -1103,8 +1093,7 @@ class membre extends BaseUser {
      *
      * @param \SmartUnity\AppBundle\Entity\gift $gifts
      */
-    public function removeGift(\SmartUnity\AppBundle\Entity\gift $gifts)
-    {
+    public function removeGift(\SmartUnity\AppBundle\Entity\gift $gifts) {
         $this->gifts->removeElement($gifts);
     }
 
@@ -1113,9 +1102,12 @@ class membre extends BaseUser {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getGifts()
-    {
+    public function getGifts() {
         return $this->gifts;
+    }
+    
+    public function isGranted($role) {
+        return in_array($role, $this->getRoles());
     }
 
 }

@@ -107,8 +107,12 @@
                                     <p style="margin:0px">{{reponse.smart_reponses}} Smart'Reponse{% if reponse.smart_reponses > 1 %}s{%endif%}</p>
                                     <p style="margin:0px">{{reponse.nb_questions_membre}} Question{% if reponse.nb_questions_membre > 1 %}s{%endif%}</p>
                                     <p style="margin:0px">{{reponse.nb_reponses_membre}} Réponse{% if reponse.nb_reponses_membre > 1 %}s{%endif%}</p>
+                            {% if reponse.membre_role == 'ROLE_ADMIN' %}
+                                    <p class="admin">ADMIN</p>
+                            {% else %}
                                     <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/>
                                     <p class="reputation" style="margin:0px; display:inline;">{{reponse.membre_reputation}}</p>
+                               {% endif %}
                                 </div>
                             </div>
 

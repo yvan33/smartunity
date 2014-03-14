@@ -815,3 +815,9 @@ h1.head-blue  {
 	top: 3px;
 	left: 3px;
 }
+
+p.admin{
+     margin:0px;
+     font-weight: 600;
+     font-family: tahoma;
+}
