@@ -667,9 +667,13 @@ function validationFormulaire(){
 
     
     function generateContent(pEntry, i, isup, isdown) {
-	 	$('.fleche').click(function(e) {
-                    e.preventDefault();
-    				$("#modalConnexion").modal('show');
+    
+    $(document).on('click','.fleche', function() {
+
+    {% if not is_granted('ROLE_USER') %}
+$("#modalConnexion").modal('show');
+	{% endif %}
+		
         });  
         var route_vers_profil = '{{ path("smart_unity_membre_profil", {'id' : 'membre_id' }) }}';
         route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);        
