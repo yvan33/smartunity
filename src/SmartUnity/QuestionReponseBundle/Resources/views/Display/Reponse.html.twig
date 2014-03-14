@@ -541,9 +541,9 @@ Toast
             {{ form_errors(formSoutien) }} \
             </div> \
         <div class="row row-soutenir"> \
-            <div class="grille-1 grille-1-soutenir"> Augmenter dotation </div> \
-            <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}, 'id':'valeurSoutien'}) }}</div> \
-</div> \
+            <div class="grille-1 grille-1-soutenir"> Augmenter dotation : </div> \
+            <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}, 'id':'valeurSoutien'}) }}Max : {{app.user.cagnotte}}</div> \
+	</div> \
         <div class="row row-soutenir"> \
                 <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'btn bouton-repondre', 'onClick':'validationFormulaire()'},'id':'boutonSoutien'})}}</div> \
             </div> \
