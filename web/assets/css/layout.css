@@ -294,12 +294,15 @@ body.bg
     background-color:#2a3940;
     overflow: hidden;
     margin-top: 10px;
+	width:100%;
+	min-width:660px;
 
 }
 
 .footer
 {
     text-align: center;
+	
 }
 
 .footer a
