@@ -120,7 +120,7 @@
                     {% endif %}
                 </div>                
                 <div class="head-blue"><p style="float:left">{{ question.sujet }}</p>
-                    {% if app.user==question.membre.username and not is_validated and listeReponses is empty %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-edit"></span></a> {% endif %}
+                    {% if (app.user==question.membre.username and not is_validated and listeReponses is empty) or  is_granted('ROLE_ADMIN') %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-edit"></span></a> {% endif %}
                     {# <button class="btn share-button"><a href="#" class="btn" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on bottom"><span class="glyphicon glyphicon-share"></span></a></button> #}
                     
                     <p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
@@ -605,6 +605,7 @@ Toast
         }
     };
     tri = '{{ tri }}';
+    slug = '{{ slug }}';
     $(document).ready(function() {
         $('#pages').bootstrapPaginator(options);
         $('#triVote').attr('href', '#');
@@ -856,7 +857,26 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
 
         entity += '        <div class="bloc-commenter-repondre"> \
                                     <div class="grille-3-btn">';
-              
+                {% if is_granted('ROLE_ADMIN') %}
+                entity +='<div class="valider rep"> \
+                        <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalSuppression" >Supprimer</button> \
+                    </div>  \
+                    <div class="modal fade" id="ModalSuppression" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                        <div class="validation-dialog">\
+                            <div class="validation-content">\
+                                <div class="validation-body">\
+                                    <p>Vous êtes sur le point de supprimer votre réponse, en êtes vous sûr?</p>\
+                                </div>\
+                                <div class="validation-footer">\
+                                    <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button>\
+                              <a href="' + Routing.generate('smart_unity_question_reponse_supprimer_reponse', {slug : slug, id: pEntry['id']}) + '"> \
+                                    <button type="button" class="btn bouton-validation">Valider</button></a>\
+                                </div>\
+                            </div><!-- /.modal-content -->\
+                        </div><!-- /.modal-dialog -->\
+                    </div><!-- /.modal -->'; 
+                
+                {% endif %} 
                 {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
                entity+= '<div class="valider rep"> \
                     <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalValidation" >Valider</button> \
@@ -876,25 +896,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                     </div> \
                   </div> \
                 </div>';
-                /*{% if is_granted('ROLE_AMIN')%}
-                entity +='<div class="valider rep"> \
-                        <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalSuppression" >Supprimer</button> \
-                    </div>  \
-                    <div class="modal fade" id="ModalSuppression" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
-                        <div class="validation-dialog">\
-                            <div class="validation-content">\
-                                <div class="validation-body">\
-                                    <p>Vous êtes sur le point de supprimer votre réponse, en êtes vous sûr?</p>\
-                                </div>\
-                                <div class="validation-footer">\
-                                    <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button>\
-                            <a href="' + Routing.generate('smart_unity_question_reponse_supprimer_reponse', {slug : pEntry['slug'], id: pEntry['id']}) + '"> \
-                                    <button type="button" class="btn bouton-validation">Valider</button></a>\
-                                </div>\
-                            </div><!-- /.modal-content -->\
-                        </div><!-- /.modal-dialog -->\
-                    </div><!-- /.modal -->'; 
-                    {% endif %} */
+                
 
        // entity += '<div style = "float:left; margin-right:5px;"> \
        //      <a href = "'+ Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a></div>';    
