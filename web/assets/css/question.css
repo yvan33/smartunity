@@ -109,6 +109,8 @@
 	line-height: 1.428571429;
         font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
         font-weight:500;
+	width : 400px;
+	
 }
 
 p.user-and-date{
@@ -260,6 +262,7 @@ p.user-and-date{
 	border: 0;
 	padding-left: 8px;
 	padding-right: 8px;
+	margin-right : 20px;
 }
 
 .bouton-repondre:hover {
