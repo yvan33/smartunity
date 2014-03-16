@@ -132,8 +132,8 @@
 	font-family:centrale;
 	font-size:1.8em;
 	line-height:2em;
-	padding-left:10px;
-	padding-right:10px;
+	padding-left:1.4em;
+	padding-right:1.4em;
 	border-radius:3px;
 	display:inline-block;
 	background-color:#3e4956;
@@ -161,8 +161,8 @@ input[type="radio"]:checked + .switch--off {
 }
 
 .switch {
-	padding-bottom: 2px;
-	padding-top: 2px;
+	padding-bottom: 10px;
+	padding-top: 10px;
 }
 
 .glyph-barre {

@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
     src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
@@ -329,16 +329,17 @@
 {
 	background: #e37151 ;
 	color:#FFF;
-	font-size:13px;
+	font-size:16px;
 	line-height:30px;
-	height:30px;
+	
 	float:right;
 	text-align:center;
 	width:135px;
 	font-family: centrale;
 	border-radius:2px;
 	cursor:pointer;
-	margin-left: 10px;
+	margin-left: 30px;
+        padding : 1em 1.5em 1em 1.5em;
 
 }
 .bouton-com-del

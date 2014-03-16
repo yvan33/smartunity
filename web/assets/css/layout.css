@@ -386,7 +386,7 @@ body.bg
     font-family: neuro;
     font-size: 14px;
     font-weight: 500;
-    margin-left:10px;
+    margin-left:-50px;
     margin-top:3px;
     margin-bottom:-3px;
     font-size: 20pt;
@@ -654,12 +654,12 @@ body.bg
 {
 	border-radius:2px;
 	background-color: #e37151;
-	height:25px;
+	
 	color: white;
 	font-family: centrale;	
-    font-size: 13px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    font-size: 15px;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 .bouton-valid-modif
 {

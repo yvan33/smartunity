@@ -212,15 +212,15 @@
 
 .tab-content .bouton-repondre
 {
-    margin-top: 7px;
+    margin-top: -5px;
 }
 
 .bouton-repondre
 {
     border: 0;
     outline: 0;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
 }
 
 .bouton-repondre:hover
