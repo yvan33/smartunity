@@ -72,7 +72,26 @@
                     </div><!-- /.modal -->  
 
                     {% endif %}
-                    
+                     {% if is_granted('ROLE_ADMIN') %}
+                        <div class="valider rep">
+                        <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalSuppression" >Supprimer</button>
+                    </div>  
+
+                    <div class="modal fade" id="ModalSuppression" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="validation-dialog">
+                            <div class="validation-content">
+                                <div class="validation-body">
+                                    <p>Vous êtes sur le point de supprimer votre réponse, en êtes vous sûr?</p>
+                                </div>
+                                <div class="validation-footer">
+
+                                    <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button>
+                                    <a href="{{path('smart_unity_question_reponse_supprimer_reponse', {slug: question.slug, id: reponse.id})}}"><button type="button" class="btn bouton-validation">Valider</button></a>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->  
+                    {% endif %}    
         {% if reponse.is_certif %}
                     <div class="roww" rel="tooltip" data-original-title="Cette réponse à été certifiée Smart'Solution le {{reponse.date_certification}} .">
                         <img class="certif-img" src="{{ asset('assets/img/certif.png') }}" style="margin-bottom:10px"/>
@@ -149,10 +168,8 @@
                             <input id="reponseDescription" type="hidden" value="{{reponse.description}}" />
                             <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this)">
                                 <div class="bouton-com-rep">Editer</div>
-                            </div>      
-                            <div class="edit-reponse" onClick="javascript:displayDeleteFormReponse(this)">
-                                <div class="bouton-com-del">Supprimer</div>
-                            </div>                     
+                            </div>     
+                                  
           {% endif %}
           {% endif %}
 

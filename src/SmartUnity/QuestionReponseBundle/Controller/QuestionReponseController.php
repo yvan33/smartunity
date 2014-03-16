@@ -991,25 +991,18 @@ class QuestionReponseController extends Controller {
         return new \Exception('Votre réponse n\'a pas pu être éditée');
     }
      public function SupprimerReponseAction($id, $slug) {
+            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }
         $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($id);
 
-              $formDeleteReponse = $this->createFormBuilder($reponse)
-                ->add('oui', 'submit')
-                ->getForm();
-
-            if ($this->getRequest()->getMethod() == 'POST') {
-
-            $formDeleteReponse->bind($this->getRequest());
-
-            if ($formDeleteReponse->isValid()) {
+                     
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($reponse);
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveDeletedReponse' => '1')));
-            }
-        }
-        return new \Exception('Votre réponse n\'a pas pu être éditée');
+
     }
 
     public function validationReponseAction($idReponse) {

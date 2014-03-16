@@ -876,6 +876,25 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                     </div> \
                   </div> \
                 </div>';
+                /*{% if is_granted('ROLE_AMIN')%}
+                entity +='<div class="valider rep"> \
+                        <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalSuppression" >Supprimer</button> \
+                    </div>  \
+                    <div class="modal fade" id="ModalSuppression" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                        <div class="validation-dialog">\
+                            <div class="validation-content">\
+                                <div class="validation-body">\
+                                    <p>Vous êtes sur le point de supprimer votre réponse, en êtes vous sûr?</p>\
+                                </div>\
+                                <div class="validation-footer">\
+                                    <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button>\
+                            <a href="' + Routing.generate('smart_unity_question_reponse_supprimer_reponse', {slug : pEntry['slug'], id: pEntry['id']}) + '"> \
+                                    <button type="button" class="btn bouton-validation">Valider</button></a>\
+                                </div>\
+                            </div><!-- /.modal-content -->\
+                        </div><!-- /.modal-dialog -->\
+                    </div><!-- /.modal -->'; 
+                    {% endif %} */
 
        // entity += '<div style = "float:left; margin-right:5px;"> \
        //      <a href = "'+ Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a></div>';    
@@ -892,14 +911,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
     }
           {% endif %}
 
-    {% if is_granted('ROLE_USER')%}
-    if (userId == pEntry['membre_id']) {    
-    entity += ' <input id="reponseId" type="hidden" value="'+ pEntry['id'] +'" > \
-                <input id="reponseDescription" type="hidden" value="' + pEntry['description'] + '"> \
- <div class="delete-reponse" onClick="javascript:displayDeleteFormReponse(this)"> \
-                                <div class="bouton-com-del">Supprimer</div></div>';  
-    }
-          {% endif %}
+   
            entity += ' </div> \
             </div> \
             </div> \
