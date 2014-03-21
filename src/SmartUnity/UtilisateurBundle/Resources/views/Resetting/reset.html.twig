@@ -1,21 +1,12 @@
-<<<<<<< HEAD
-{% extends "FOSUserBundle::layout.html.twig" %}
-
-{% block fos_user_content %}
-
-<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" /> 
-    </div>
-</form>
-=======
 {% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
 
 {% block title %}Choisir un nouveau mot de passe{% endblock %}
 
 {% block stylesheets %} 
-<link href="{{ asset('assets/css/formulaire.css') }}" rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/formulaire.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {%endblock%}
 
 {% block fos_user_content %}
@@ -49,6 +40,4 @@
         </div>
     </div>
 </div>
->>>>>>> 58610be9ef44f1134887e65c62b51375358e2b95
-
 {% endblock fos_user_content %}

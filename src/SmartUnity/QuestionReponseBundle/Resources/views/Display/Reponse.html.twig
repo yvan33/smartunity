@@ -2,15 +2,13 @@
 
 {% block title %}Q/R - {{ question.sujet }}{% endblock %}
 
-{% block stylesheets %}
-<link href="{{ asset('assets/css/reponse.css') }}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
-{% endblock %}
 
-{% block initJS %}
-<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
-<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
-<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
+{% block stylesheets %}
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/reponse.css' 
+				 'assets/css/magnificpopup.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 
@@ -18,7 +16,7 @@
 
 <div class="row row-sans-margin">
     <div class="col-md-12" style="padding:0px;">
-        
+
 {% if is_granted('ROLE_USER') %}
 
 {#/////////////////////////////////////////////////#}
@@ -26,53 +24,54 @@
 {#///////////////////////////////////////////////////#}
 
 {#Formulaire de Réponse#}
-<div id="addReponseHolder">
-    <div class="container"  style="padding-left: 0; padding-right: 0;">
-        <div class="row">
-            <div class="col-md-offset-1 col-md-10" style="padding-left:0px; padding-right:0px; position:relative">
-                <div class="container cadre-form-reponse">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div  style="position:absolute;cursor:pointer;right:4px;top:5px;color:#FFF;font-size:20px" id="closeFrame">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                            </div>
-                            <div class="grille-content">
+        <div id="addReponseHolder">
+            <div class="container"  style="padding-left: 0; padding-right: 0;">
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-10" style="padding-left:0px; padding-right:0px; position:relative">
+                        <div class="container cadre-form-reponse">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div  style="position:absolute;cursor:pointer;right:4px;top:5px;color:#FFF;font-size:20px" id="closeFrame">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                    </div>
+                                    <div class="grille-content">
 {%if not is_answered_by_user %}
-                                <form action="{{path('smart_unity_question_reponse_add_reponse', {slug: question.slug})}}" method="POST">
-                                    <div class="erreur">{{ form_errors(formReponse) }}
-                                    </div>
-                                    <div class="row">
-                                        <div class="head-blue">Formuler une réponse</div>
-                                    </div>
-                                    <div class="row row-avec-margin">
+                                        <form action="{{path('smart_unity_question_reponse_add_reponse', {slug: question.slug})}}" method="POST">
+                                            <div class="erreur">{{ form_errors(formReponse) }}
+                                            </div>
+                                            <div class="row">
+                                                <div class="head-blue">Formuler une réponse</div>
+                                            </div>
+                                            <div class="row row-avec-margin">
 	        {{ form_widget(formReponse.description,{'attr': {'class': 'form-control forminfo reponse-input'}}) }}</div>
                                     	    {{form_widget(formReponse._token)}}
-                                    <div class="row">
-                                        <div class="cent-h send-answer">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
-                                    </div>
-                                </form> 
+                                            <div class="row">
+                                                <div class="cent-h send-answer">{{form_widget(formReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
+                                            </div>
+                                        </form> 
 {% else %}
-                                <form class="edit-reponse-form" action="{{path('smart_unity_question_reponse_editer_reponse', {slug: question.slug, id: 'init'})}}" method="POST">
-                                    <div class="erreur">
+                                        <form class="edit-reponse-form" action="{{path('smart_unity_question_reponse_editer_reponse', {slug: question.slug, id: 'init'})}}" method="POST">
+                                            <div class="erreur">
             {{ form_errors(formEditReponse) }}
-                                    </div>
-                                    <div class="row">
-                                        <div class="head-blue">Editer ma réponse</div>
-                                    </div>
-                                    <div class="row row-avec-margin">
+                                            </div>
+                                            <div class="row">
+                                                <div class="head-blue">Editer ma réponse</div>
+                                            </div>
+                                            <div class="row row-avec-margin">
 	        {{ form_errors(formEditReponse.description) }}{{ form_widget(formEditReponse.description,{'attr': {'class': 'form-control forminfo reponse-input edit-input'}}) }}</div>
                                     	    {{form_widget(formEditReponse._token)}}
                                     <div class="row">
                                         <div class="cent-h send-answer">{{form_widget(formEditReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
                                     </div>
                                 </form>
-                                
 
 {% endif %}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </div>     
                     </div>
-                </div>     
+                </div>
             </div>
         </div>
     </div>
@@ -110,27 +109,29 @@
         </div>
     </div>
 </div>
+
 {% endif %}        
 
         <div class="grille-content-2">
             <div class="grille-reponse" onmouseover="displaySignalQuestion(this);" onmouseout="hideSignalQuestion(this);">
                 <div class="bouton-signaler">
                     {% if is_granted('ROLE_USER') %}
-                        <a href="{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}"><img class="signaler-comment" alt="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>
+                    <a href="{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}"><img class="signaler-comment" alt="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>
                     {% endif %}
                 </div>                
-                <div class="head-blue"><p style="float:left">{{ question.sujet }}</p>
-                    {% if (app.user==question.membre.username and not is_validated and listeReponses is empty) or  is_granted('ROLE_ADMIN') %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-edit"></span></a> {% endif %}
+
+                <div class="head-blue"><p style="float:left"><h1 class="head-blue">{{ question.sujet }}</h1></p>
+                    {% if app.user==question.membre.username and not is_validated and listeReponses is empty %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-edit"></span></a> {% endif %}
                     {# <button class="btn share-button"><a href="#" class="btn" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on bottom"><span class="glyphicon glyphicon-share"></span></a></button> #}
-                    
+
                     <p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                 </div>
 {% if not is_certif and not is_validated %}
                 <div class="grille-1">
-                    <div class="rond-point"><p>{{ question.remuneration }} pts</p></div>
+                    <div class="rond-point"><p>{{ question.remuneration + question.supplementremuneration }} pts</p></div>
 
 
-                    <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien {% if question.soutienMembres|length > 1 %}s{% endif %}</p>
+                    <div class="grille-soutient"><p style="margin:0px">{{ question.soutienMembres|length }} soutien{% if question.soutienMembres|length > 1 %}s{% endif %}</p>
                         <button type="button" class="bouton-soutien" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour soutenir une question."{% endif %}><span class="glyphicon glyphicon-plus-sign" style="font-size:24px"></span></button>
                     </div>
                 </div>
@@ -152,20 +153,24 @@
 
                                 </div>
                                 <div class=" grille-3-txt">
-                                    <p style="margin:0px; font-weight:600"><a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}">{{ question.membre.username }}</a></p>
+                                    <p style="margin:0px;"><a href="{{ path('smart_unity_membre_profil', {id: membre_id}) }}">{{ question.membre.username }}</a></p>
                                     <p style="margin:0px">{{smart_reponses}} Smart'Reponse{% if smart_reponses > 1 %}s{%endif%}</p>
                                     <p style="margin:0px">{{nb_questions_membre}} Question{% if nb_questions_membre > 1 %}s{%endif%}</p>
                                     <p style="margin:0px">{{nb_reponses_membre}} Réponse{% if nb_reponses_membre > 1 %}s{%endif%}</p>
 
+{% if question.membre.granted('ROLE_ADMIN') %}
+                                    <p class="admin">ADMIN</p>
+                            {% else %}
                                     <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/>
                                     <p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p>
+                               {% endif %}
                                 </div>
                             </div>
 
 
                         </div>
                     </div>
-                    
+
                     <div class="min">{{ question.description | raw}}</div>
                     <div style="float:left;margin-bottom:10px;" >
                               {% if question.marque.nom is defined %}<span class="label label-default">{{question.marque.nom}}</span>{% endif %}
@@ -186,7 +191,7 @@
                         <p style="float:left">{{commentaire.description}}</p><p style="float:right">
                             <a href="{{ path('smart_unity_membre_profil', {id: commentaire.membre.id}) }}">{{commentaire.membre.username}}</a> le {{commentaire.date|date('d-m-Y H:i')}}
                             {% if is_granted('ROLE_USER') %}
-                                <a href="{{path('smart_unity_question_reponse_signaler_commentaire_question', {idCommentaireQuestion: commentaire.id})}}" style="display: inline-block; margin-right: -15px;"><img class= "signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a>
+                            <a href="{{path('smart_unity_question_reponse_signaler_commentaire_question', {idCommentaireQuestion: commentaire.id})}}" style="display: inline-block; margin-right: -15px;"><img class= "signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a>
                             {% endif %}
                         </p>
                     </div>
@@ -211,10 +216,10 @@
 
         {% if not is_validated and not is_certif and not is_answered_by_user %}
 
-                            <a class="reponse" href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}">
+                            <a id= "repondre-bouton" class="reponse" href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_reponse',{ 'slug': slug })}}{% else %}#{% endif %}">
                                 <div class="bouton-com-rep" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour répondre à une question."{% endif %} >Répondre</div>
                             </a>                        
-                           
+
         {% endif %}
 
                         </div>
@@ -229,8 +234,9 @@
 
             <div id="form-commenter-reponse">
                 <form action="{{path('smart_unity_question_reponse_add_commentaire_reponse', { slug: question.slug, idReponse: reponse.id})}}" method="POST">
-                    <div  id="commentaire-input-reponse"class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, {'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
+                    <div  id="commentaire-input-reponse" class="commentaire-input" style="display:block;">{{ form_widget(formCommentaireReponse.description, { 'id': 'textarea-commentaire-reponse', 'attr': {'class': 'form-control forminfo', 'style': 'resize: none'}} )}}
                         <span class="croix-close" onClick="closeCommentReponse(this)"> &#10006;</span>
+                        <input id="id-current-reponse" type="hidden" value="" />
                     </div>
                     <input type="submit" value="Envoyer" id="bouton-com-envoyer-reponse" class="bouton-com-rep-input commentaire-btn"/>
                          {{  form_rest(formCommentaireReponse) }}
@@ -250,7 +256,7 @@
                               {% endif %}
                           {% endfor %}
         </div>
-   
+
     </div>
 </div>
 
@@ -298,12 +304,17 @@ Toast
 
 {% endblock %}
 {% block callJS %}
-
+{% javascripts filter='yui_js' 
+				'assets/js/bootstrap-paginator.js' 
+				'assets/js/magnificpopup-0.9.9.min.js'
+				'assets/js/jquery.animateAuto-1.0.0.js'	 %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
 <script>
 /////Définition variable User///////////
       {% if  is_granted('ROLE_USER') %}
-        var userId = {{app.user.id}};
+    var userId = {{app.user.id}};
       {% endif %}
 ///////////////////////////////////////
 
@@ -376,7 +387,7 @@ Toast
                 $('#vote' + pId + ' .downVote').attr('onclick', '');
                 $('.roww').tooltip({
                     'placement': 'right'
-                });   
+                });
 
             } else if (donnees['status'] == 'error') {
 
@@ -391,28 +402,28 @@ Toast
         });
     }
 
-    
+
 ////////////////////////////
 ///////////Affichage des boutons signaler
 ////////////////////////////
 
     function displaySignalComment(e) {
-        $(e).children().next().children().next().children().css('display','inline-block');
+        $(e).children().next().children().next().children().css('display', 'inline-block');
     }
     function hideSignalComment(e) {
-        $(e).children().next().children().next().children().css('display','none');
+        $(e).children().next().children().next().children().css('display', 'none');
     }
     function displaySignalerReponse(e) {
-        $(e).children().children().children('img.signaler-comment').css('display','inline-block');
+        $(e).children().children().children('img.signaler-comment').css('display', 'inline-block');
     }
     function hideSignalerReponse(e) {
-        $(e).children().children().children('img.signaler-comment').css('display','none');
+        $(e).children().children().children('img.signaler-comment').css('display', 'none');
     }
     function displaySignalQuestion(e) {
-        $(e).children().children().children('img').css('display','inline-block');
+        $(e).children().children().children('img').css('display', 'inline-block');
     }
     function hideSignalQuestion(e) {
-        $(e).children().children().children('img').css('display','none');
+        $(e).children().children().children('img').css('display', 'none');
     }
 
 
@@ -432,25 +443,28 @@ Toast
 
     });
 
+
     $('#closeFrame').click(function() {
         $('#addReponseHolder').hide('fast');
         $('.espace-vide-pour-cadre-repondre').hide();
 
     });
-    
+
 // Bouton Editer
-   function displayEditFormReponse(e) {
+    function displayEditFormReponse(e) {
     {% if is_granted('ROLE_USER') %}
-            var reponseId = $('#reponseId').val();
-            var reponseDescription = $('#reponseDescription').val();
-                    
+        var reponseId = $('#reponseId').val();
+        var reponseDescription = $('#reponseDescription').val();
+
         $('.edit-reponse-form').attr('action', function(i, url) {
-  return url.replace(url.substr(url.lastIndexOf('/') + 1), reponseId); });
-  
+            return url.replace(url.substr(url.lastIndexOf('/') + 1), reponseId);
+        });
+
         CKEDITOR.instances.form_description.setData(reponseDescription);
         $('#addReponseHolder').show('fast');
         $('.espace-vide-pour-cadre-repondre').show();
     {% endif %}
+
     };
 // Bouton Supprimer
    function displayDeleteFormReponse(e) {
@@ -476,6 +490,8 @@ Toast
         $(this).children([0]).hide();
         $(this).prev().children([1]).show();
         $(this).next().hide();
+	{% else %}
+		$("#modalConnexion").modal('show');
     {% endif %}
     });
 
@@ -485,10 +501,7 @@ Toast
         $(e).parent().hide();
         $(e).prev().val('');
         $(e).parent().next([0]).hide();
-
-
         $(e).parent().parent().next().children().show();
-
         $(e).parent().parent().next().next().show();
     }
 
@@ -504,29 +517,35 @@ Toast
 {#        $('#form-commenter-reponse').parent().next().show();#}
         //Efface formulaire et bouton envoyer
 
-
         //Modification de l'attribut 'action' du form pour faire correspondre à la réponse
         var actionUrl = $('#form-commenter-reponse').children().get(0).getAttribute('action');
         $('#form-commenter-reponse').children().get(0).setAttribute('action', actionUrl.replace(/\d+$/, reponseId));
-
+        //Ajout de l'id de la réponse correspondante au clic à la valeur du champ hidden pour le récupérer dans la fonction "closeCommentReponse"
+        $('#id-current-reponse').val(reponseId);
         //Déplacement du form pour le mettre sous la réponse correspondante.
-        $(e).parent().prev().append($('#form-commenter-reponse'));
+        $('#bloc-commenter-reponse' + reponseId).append($('#form-commenter-reponse'));
+        //Affichage du form et du bouton envoyer
         $('#form-commenter-reponse').show();
-        $(e).parent().prev().show();
-        $(e).parent().next().hide();
-        $(e).parent().hide();
-        
+        //Masquer le bouton editer
+        $('#bouton-editer' + reponseId).hide();
+        //masquer le bouton commenter
+        $(e).hide();
+    {% else %}
+    	$("#modalConnexion").modal('show');	
+
     {% endif %}
     }
 
     function closeCommentReponse(e) {
+        //Récupération de l'id de la réponse
+        reponseId = $('#id-current-reponse').val();
+        ///Vidage du champ
+        $('#textarea-commentaire-reponse').val('');
         //Affichage bouton commenter
-        
-        $(e).prev().val('');
-        $(e).parent().parent().parent().parent().next().show();
-        
+        $('#bouton-editer' + reponseId).show();
+        $('#bouton-commenter' + reponseId).show();
         //Efface formulaire et bouton envoyer
-        $(e).parent().parent().parent().hide();
+        $('#form-commenter-reponse').hide();
     }
 
 
@@ -552,8 +571,20 @@ Toast
         $('.bouton-soutien').tooltip({
             'placement': 'right'
         });
-
+        $('.bouton-soutien').click(function(e) {
+                    e.preventDefault();
+    				$("#modalConnexion").modal('show');
+        });
+        $('.fleche').click(function(e) {
+                    e.preventDefault();
+    				$("#modalConnexion").modal('show');
+        });
+        $('#repondre-bouton').click(function(e) {
+                    e.preventDefault();
+    				$("#modalConnexion").modal('show');
+        });
   {% else %}
+
         $('.bouton-soutien').popover({
             'html': true,
             'content': '<div id="addSoutienHolder"> \
@@ -563,16 +594,16 @@ Toast
         {% else %} \
         <legend class="legend-soutenir">Soutenir la question</legend> \
         {% endif %} \
-           {{ form_start(formSoutien)}} \
+           {{ form_start(formSoutien,{'attr': {'id':'formSoutien'}})}} \
                 <div class="erreur"> \
             {{ form_errors(formSoutien) }} \
             </div> \
         <div class="row row-soutenir"> \
-  <div class="grille-1 grille-1-soutenir"> Augmenter dotation: </div> \
-                   <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}}) }}</div> \
-</div> \
+            <div class="grille-1 grille-1-soutenir"> Augmenter dotation : </div> \
+            <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}, 'id':'valeurSoutien'}) }}Max : {{app.user.cagnotte}}</div> \
+	</div> \
         <div class="row row-soutenir"> \
-                <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'btn bouton-repondre'}})}}</div> \
+                <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'btn bouton-repondre', 'onClick':'validationFormulaire()'},'id':'boutonSoutien'})}}</div> \
             </div> \
             {{form_end(formSoutien)}} \
         </div> \
@@ -631,10 +662,31 @@ Toast
             e.preventDefault();
         });
     });
-    function clickOnPagination(pPage) {
-        $('#reponses-frame').height(function(i, h) {
-            return h;
+
+    function validationFormulaire() {
+        $('#formSoutien').submit(function(event) {
+            var valeur = parseInt($('#valeurSoutien').val());
+            var min = parseInt($('#valeurSoutien').attr('min'));
+            var max = parseInt($('#valeurSoutien').attr('max'));
+            if (valeur <= max && valeur >= min) {
+                $('.erreur').hide();
+                return true;
+            }
+            else {
+                var message = "La valeur doit être comprise entre: " + $('#valeurSoutien').attr('min') + " et " + $('#valeurSoutien').attr('max');
+                $('.erreur').css("font-size", "4 px");
+                $('.erreur').show().text(message);
+                return false;
+            }
         });
+    }
+
+
+
+    function clickOnPagination(pPage) {
+
+        //On fixe la hauteur pendant l'animation        
+        $('#reponses-frame').height($('#reponses-frame').height());
 
         $('#form-commenter-reponse').hide();
         $('#reponses-frame').before($('#form-commenter-reponse'));
@@ -643,24 +695,28 @@ Toast
         //On récupère le JSON depuis le controller AjaxController
         $.getJSON('{{ path('smart_unity_question_reponse_ajax_get_reponses', {slug: slug}) }}/' + tri + '/' + pPage + '/{{nbParPage}}', function(donnees) {
             var content = '';
-            
+
             var bestWorstReponses = donnees.pop();
             var isup = bestWorstReponses['isup'];
             var isdown = bestWorstReponses['isdown'];
-            
+
             if (donnees[0]['page'] == pPage && donnees[0]['slug'] == '{{slug}}' && donnees[0]['nbParPage'] == {{nbParPage}} && donnees[0]['tri'] == tri) {
                 donnees.shift(); //On supprime la ligne de check du JSON
                 //On supprime la ligne de check du JSON
 
                 donnees.forEach(function(pEntry, i) {
-                    if (!pEntry['is_validated'] && !pEntry['is_certif'])
+                    if (!pEntry['is_validated'] && !pEntry['is_certif']) {
                         content += generateContent(pEntry, i, isup, isdown);
+                    }
                 }); //Generation du code
 
                 //Affichage du nouveau contenu dasn le tab, et fadeIn
                 $('#reponses-container').html(content);
                 $('#reponses-container').fadeIn('fast');
-                $('#reponses-frame').animateAuto('height', 'fast');
+                $('#reponses-frame').animateAuto('height', 'fast', function() {
+                    $('#reponses-frame').css('height', 'auto');
+                });
+
             } else { //Si la première ligne de check du JSON n'est pas conforme à ce qui à été demandé
                 $('#reponses-container').html('<div class="alert alert-danger">Erreur de communication avec le serveur</div>');
                 $('#reponses-container').fadeIn('fast');
@@ -670,16 +726,23 @@ Toast
             });
         });
     }
-    
 
-    
+
+
     function generateContent(pEntry, i, isup, isdown) {
+    
+    $(document).on('click','.fleche', function() {
 
+    {% if not is_granted('ROLE_USER') %}
+$("#modalConnexion").modal('show');
+	{% endif %}
+		
+        });  
         var route_vers_profil = '{{ path("smart_unity_membre_profil", {'id' : 'membre_id' }) }}';
-        route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);        
+        route_vers_profil = route_vers_profil.replace("membre_id", pEntry['membre_id']);
         var entity = '<div style="position:relative;"> \
     <div class="grille-reponse" onmouseout="hideSignalerReponse(this);" onmouseover="displaySignalerReponse(this);"> \
-                <div class = "bouton-signaler">{% if is_granted('ROLE_USER') %} <a href="'+ Routing.generate('smart_unity_question_reponse_signaler_reponse', {idReponse: pEntry['id']}) + '"> <img class="signaler-comment" alt="Signaler" src = "{{ asset('assets/img/signaler.png') }}"/></a>{% endif %}</div>';
+                <div class = "bouton-signaler">{% if is_granted('ROLE_USER') %} <a href="' + Routing.generate('smart_unity_question_reponse_signaler_reponse', {idReponse: pEntry['id']}) + '"> <img class="signaler-comment" alt="Signaler" src = "{{ asset('assets/img/signaler.png') }}"/></a>{% endif %}</div>';
 
           {% if  is_granted('ROLE_ADMIN') %}
         entity += '          <div class="dropdown bouton-admin"> \
@@ -688,7 +751,7 @@ Toast
 
         if (!(pEntry['is_certif']) && pEntry['is_validated']) {
 
-            entity += ' <li><a href="' + Routing.generate('smart_unity_question_reponse_certification', {idReponse: '12'}) + '" tabindex="-1">Certifier réponse</a></li>';
+            entity += ' <li><a href="' + Routing.generate('smart_unity_question_reponse_certification', {idReponse: pEntry['id']}) + '" tabindex="-1">Certifier réponse</a></li>';
         }
         entity += '      <li><a tabindex="-1" href="#">Another action</a></li> \
             <li><a tabindex="-1" href="#">Something else here</a></li> \
@@ -701,113 +764,143 @@ Toast
         {% endif %}
         entity += '                        <div class="grille-1" style="text-align:center"> \
                                     <div class="roww" id="vote' + pEntry['id'] + '" style="display:inline-block" rel="tooltip" data-original-title="{% if not is_granted('ROLE_USER') %}Vous devez être connecté pour noter une réponse.{% endif %}';
-       
-    
-    if (pEntry['is_voted']) {
+
+
+        if (pEntry['is_voted']) {
             entity += 'Vous avez déjà noté cette question.';
         }
         {% if is_granted('ROLE_USER') %}
-    if ( userId == pEntry['membre_id']) {        
-entity += 'Vous ne pouvez pas voter pour votre réponse.';
-    }
+        if (userId == pEntry['membre_id']) {
+            entity += 'Vous ne pouvez pas voter pour votre réponse.';
+        }
     {% endif %}
-        
+
         entity += '"> ';
-        
+
         if (pEntry['id'] == isup)
-        {   entity+='<div class="fleche upVote" {% if is_granted('ROLE_USER') %}';
+        {
+            entity += '<div class="fleche upVote" {% if is_granted('ROLE_USER') %}';
             if (!pEntry['is_voted'] && userId !== pEntry['membre_id'])
-                {entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';}
+            {
+                entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
+            }
             entity += ' {% endif %}> \
                     <img src="{{ asset('assets/img/fleche_plus.png') }}" />';
             if (pEntry['up_vote'] > 9 && pEntry['up_vote'] < 100)
             {
-                entity+='<p class="textevert-moyen">';
+                entity += '<p class="textevert-moyen">';
             }
-            else if(pEntry['up_vote'] > 100)
+            else if (pEntry['up_vote'] > 100)
             {
-                entity+='<p class="textevert-petit">';
+                entity += '<p class="textevert-petit">';
             }
-            else{
-                entity+='<p class="textevert-grand">';
+            else {
+                entity += '<p class="textevert-grand">';
             }
-            entity+= pEntry['up_vote'] + '</p> \
+            entity += pEntry['up_vote'] + '</p> \
                                         </div>';
         }
-        else        
-            { 
-                entity+='<div class="fleche upVote" onmouseover="upVoteHover(this);" onmouseout="upVoteUnhover(this);" {% if is_granted('ROLE_USER') %}';
-            if (!pEntry['is_voted'] && userId !== pEntry['membre_id'] )
-                {entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';}
+        else
+        {
+            entity += '<div class="fleche upVote" onmouseover="upVoteHover(this);" onmouseout="upVoteUnhover(this);" {% if is_granted('ROLE_USER') %}';
+            if (!pEntry['is_voted'] && userId !== pEntry['membre_id'])
+            {
+                entity += 'onClick="javascript:upVote(' + pEntry['id'] + ')"';
+            }
             entity += ' {% endif %}> \
                 <img src="{{ asset('assets/img/fleche_plus_grise.png') }}" />';
             if (pEntry['up_vote'] > 9 && pEntry['up_vote'] < 100)
             {
-                entity+='<p class="textegris-moyen">';
+                entity += '<p class="textegris-moyen">';
             }
-            else if(pEntry['up_vote'] > 100)
+            else if (pEntry['up_vote'] > 100)
             {
-                entity+='<p class="textegris-petit">';
+                entity += '<p class="textegris-petit">';
             }
-            else{
-                entity+='<p class="textegris-grand">';
+            else {
+                entity += '<p class="textegris-grand">';
             }
             entity += pEntry['up_vote'] + '</p> \
                                         </div> ';
         }
-        
-        if ( pEntry['id'] == isdown )
-        {   entity+='<div class="fleche downVote" {% if is_granted('ROLE_USER') %}';
+
+        if (pEntry['id'] == isdown)
+        {
+            entity += '<div class="fleche downVote" {% if is_granted('ROLE_USER') %}';
             if (!pEntry['is_voted'] && userId !== pEntry['membre_id'])
                 entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
             entity += ' {% endif %}> \
                                           <img src="{{ asset('assets/img/fleche_moins.png') }}" />';
 
-            if (pEntry['down_vote']< -9 && pEntry['down_vote'] > -100)
+            if (pEntry['down_vote'] < -9 && pEntry['down_vote'] > -100)
             {
-                entity+='<p class="texterouge-moyen">';
+                entity += '<p class="texterouge-moyen">';
             }
-            else if(pEntry['down_vote'] < -100)
+            else if (pEntry['down_vote'] < -100)
             {
-                entity+='<p class="texterouge-petit">';
+                entity += '<p class="texterouge-petit">';
             }
-            else{
-                entity+='<p class="texterouge-grand">';
+            else {
+                entity += '<p class="texterouge-grand">';
             }
-            entity+= pEntry['down_vote'] + '</p> \
+            entity += pEntry['down_vote'] + '</p> \
                                         </div>';
         }
-        
-        else        
-         {   entity+='<div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') %}';
+
+        else
+        {
+            entity += '<div class="fleche downVote" onmouseover="downVoteHover(this);" onmouseout="downVoteUnhover(this);" {% if is_granted('ROLE_USER') %}';
             if (!pEntry['is_voted'] && {{ is_granted('ROLE_USER') }} && userId !== pEntry['membre_id'])
                 entity += 'onClick="javascript:downVote(' + pEntry['id'] + ')"';
             entity += ' {% endif %}> \
                 <img src="{{ asset('assets/img/fleche_moins_grise.png') }}" />';
-            if (pEntry['down_vote']< -9 && pEntry['down_vote'] > -100)
+            if (pEntry['down_vote'] < -9 && pEntry['down_vote'] > -100)
             {
-                entity+='<p class="textegris-moyen">';
+                entity += '<p class="textegris-moyen">';
             }
-            else if(pEntry['down_vote'] < -100)
+            else if (pEntry['down_vote'] < -100)
             {
-                entity+='<p class="textegris-petit">';
+                entity += '<p class="textegris-petit">';
             }
-            else{
-                entity+='<p class="textegris-grand">';
-            } 
+            else {
+                entity += '<p class="textegris-grand">';
+            }
             entity += pEntry['down_vote'] + '</p>\
-            </div>';     
+            </div>';
         }
-        
-        entity+='</div> \
+
+        entity += '</div> \
                                     <div class="roww"> \
                                       <p style="font-size:11px">' + pEntry['date'] + '</p> \
                                     </div>';
-        if (pEntry['is_validated'] || pEntry['is_certif'])
+
+                {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
+        entity += '<div class="valider rep"> \
+                    <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalValidation" >Valider</button> \
+                </div> \
+                <div class="modal fade" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> \
+                  <div class="validation-dialog"> \
+                    <div class="validation-content"> \
+                      <div class="validation-body"> \
+                        <p>Vous êtes sur le point de valider la réponse suivante: ' + pEntry['description'] + '</p> \
+                      <p> Les points de votre question seront attibués au membre ayant apporté cette réponse. Ce choix est définitif. Etes-vous sûr de votre choix?</p> \
+</div> \
+                      <div class="validation-footer"> \
+                        <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button> \
+                        <a href="' + Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '> \
+                                <button type="button" class="btn bouton-validation">Valider</button></a> \
+                      </div> \
+                    </div> \
+                  </div> \
+                </div>';
+                             {% endif %}
+
+        if (pEntry['is_validated'] || pEntry['is_certif']) {
             entity += '\
                                     <div class="roww"> \
                                       <img class="certif-img" src="{{ asset('assets/img/certif.png') }}" style="margin-top:10px"/> \
                                     </div>';
+        }
         entity += ' \
                                 </div> \
                                  \
@@ -819,30 +912,45 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
                                         <div class="grille-3-grey"> \
                                             <div class="grille-3-im">';
 
-        if (pEntry['avatar'])
+        if (pEntry['avatar']) {
             entity += ' \
  <img src="{{ asset('') }}' + pEntry['avatar'] + ' " alt="avatar" height="80" width="80" />';
-        else
+        }
+        else {
             entity += '\
                                              <img src="{{ asset('uploads/documents/logo.png') }}" height="80" width="80" />';
+        }
         entity += '      </div> \
                                             <div class=" grille-3-txt"> \
                                               <p style="margin:0px; font-weight:600"><a href="' + route_vers_profil + '">' + pEntry['membre_username'] + '</a></p> \
                                             <p style="margin:0px">' + pEntry['smart_reponses'] + ' Smart\'Reponse';
-                                            if (pEntry['smart_reponses'] > 1 )
-                                                {entity+='s';}
-                                            entity+='</p> \
+        if (pEntry['smart_reponses'] > 1)
+        {
+            entity += 's';
+        }
+        entity += '</p> \
                                             <p style="margin:0px">' + pEntry['nb_questions_membre'] + ' Question';
-                                            if (pEntry['nb_questions_membre'] > 1 )
-                                                {entity+='s';}
-                                            entity+='</p> \
+        if (pEntry['nb_questions_membre'] > 1)
+        {
+            entity += 's';
+        }
+        entity += '</p> \
                                             <p style="margin:0px">' + pEntry['nb_reponses_membre'] + ' Réponse';
-                                            if (pEntry['nb_reponses_membre'] > 1 )
-                                                {entity+='s';}
-                                            entity+='</p> \
-                                            <img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/> \
-                                            <p class="reputation" style="margin:0px; display:inline;">{{question.membre.reputation}}</p> \
-                                            </div> \
+        if (pEntry['nb_reponses_membre'] > 1)
+        {
+            entity += 's';
+        }
+        entity += '</p>';
+
+        if (pEntry['membre_role'] == 'ROLE_ADMIN') {
+            entity += '<p class="admin">ADMIN</p>';
+        }
+        else {
+            entity += '<img class="etoile" src="{{ asset('assets/img/etoile.png') }}"/> \
+                                            <p class="reputation" style="margin:0px; display:inline;">' + pEntry['membre_reputation'] + '</p>';
+        }
+
+        entity += '             </div> \
                                         </div> \
                                 </div> \
                                 </div> \
@@ -851,12 +959,13 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
 
             entity += '<div class="commentaire" onmouseover="displaySignalComment(this);" onmouseout="hideSignalComment(this);"> \
                                     <p style="float:left">' + pCom['description'] + '</p><p style="float:right">' + pCom['membre_username'] + ' le ' + pCom['date'] + ' \
-                                                        {% if is_granted('ROLE_USER') %}<a href="'+ Routing.generate('smart_unity_question_reponse_signaler_commentaire_reponse', {idCommentaireReponse: pCom['id']})+'><img class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
-                                    </div>{% endif %}';
+                                                        {% if is_granted('ROLE_USER') %}<a href="' + Routing.generate('smart_unity_question_reponse_signaler_commentaire_reponse', {idCommentaireReponse: pCom['id']}) + '><img class="signaler-comment" src="{{ asset('assets/img/signaler.png') }}"/></a></p> \
+                                    {% endif %}</div>';
         });
 
         entity += '        <div class="bloc-commenter-repondre"> \
                                     <div class="grille-3-btn">';
+                            
                 {% if is_granted('ROLE_ADMIN') %}
                 entity +='<div class="valider rep"> \
                         <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalSuppression" >Supprimer</button> \
@@ -902,18 +1011,18 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
        //      <a href = "'+ Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a></div>';    
                              {% endif %}
           
-         entity += '<div><div class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question."{% endif %}>Commenter</div></div>';
+         entity +='<div id="bloc-commenter-reponse' + pEntry['id'] + '">{#ICI LE FORMULAIRE POUR COMMENTER#}</div>';
+         entity += '<div id="bouton-commenter' + pEntry['id'] + '" class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question." href="{{ path('fos_user_security_login') }}" {% endif %}>Commenter</div>';
     
      {% if is_granted('ROLE_USER')%}
-    if (userId == pEntry['membre_id']) {    
-    entity += ' <input id="reponseId" type="hidden" value="'+ pEntry['id'] +'" > \
+        if (userId == pEntry['membre_id']) {
+            entity += ' <input id="reponseId" type="hidden" value="' + pEntry['id'] + '" > \
                 <input id="reponseDescription" type="hidden" value="' + pEntry['description'] + '"> \
- <div class="edit-reponse" onClick="javascript:displayEditFormReponse(this)"> \
-                                <div class="bouton-com-rep">Editer</div></div>';  
-    }
+ <div id="bouton-editer' + pEntry['id'] + '" class="edit-reponse" onClick="javascript:displayEditFormReponse(this)"> \
+                                <div class="bouton-com-rep">Editer</div></div>';
+        }
           {% endif %}
 
-   
            entity += ' </div> \
             </div> \
             </div> \
@@ -922,6 +1031,7 @@ entity += 'Vous ne pouvez pas voter pour votre réponse.';
 
         return entity;
     }
+
 </script>
 
 {% endblock %}

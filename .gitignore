@@ -1,5 +1,6 @@
 *.DS_Store
 /web/bundles/
+/web/assetic/
 /app/bootstrap*
 /app/cache/*
 /app/logs/*
@@ -12,8 +13,15 @@
 /nbproject
 /web/phpconsole/
 /web/app_dev.php
+/web/app.php
 .htaccess
+web/phpconsole/install.php
 /web/uploads/
 .project
 /.settings
 .buildpath
+web/phpconsole/install.php
+/web/js
+/web/css
+/web/assets/chosen
+

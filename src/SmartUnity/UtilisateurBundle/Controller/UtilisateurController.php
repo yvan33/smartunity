@@ -6,13 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use SmartUnity\AppBundle\Entity\avatar;
 use SmartUnity\AppBundle\Entity\parrainage;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 
 class UtilisateurController extends Controller {
 
     public function indexAction( $formPassword = null, $formInfos = null, $formAvatar = null) {
 
         $user = $this->getUser();
-
         $parrainage = new parrainage($user);
 
         $form_pref = $this->createForm('smartunity_user_preference', $user);
@@ -99,11 +100,24 @@ class UtilisateurController extends Controller {
         }
     }
 
-    public function editInfosAction() {
+    public function editInfosAction(Request $request) {
 
-        $user = $this->getUser();
+        $user = $this->getUser();       
         $formInfos = $this->createForm('smartunity_user_informations', $user);
+        
+                if ('POST' === $request->getMethod()) {
+            $formInfos->bind($request);
+                            
+            if ($formInfos->isValid()) {
+                $userManager = $this->container->get('fos_user.user_manager');
+                $userManager->updateUser($user);
 
+                    $url = $this->generateUrl('smart_unity_utilisateur_homepage');
+                    $response = new RedirectResponse($url);
+                    
+                return $response;
+            }
+        }
         return $this->forward(
                         'SmartUnityUtilisateurBundle:Utilisateur:index', array(
                     'formInfos' => $formInfos->createView(),
@@ -123,8 +137,6 @@ class UtilisateurController extends Controller {
             $em->persist($user);
             $em->flush();
         }
-
-
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
     }
 
@@ -141,7 +153,6 @@ class UtilisateurController extends Controller {
             $em->persist($user);
             $em->flush();
         }
-
 
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
     }

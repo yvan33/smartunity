@@ -1,0 +1,32 @@
+{% extends "SmartUnityAppBundle::layoutLog.html.twig" %}
+
+{% block title %}Boutique cadeaux{% endblock %}
+
+{% block stylesheets %} 
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/boutique.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
+{%endblock%}
+
+{% block body %}
+<div class="row sans-marge">
+    <div class="title text-center cookie-title">
+        Félicitations, vous avec commandé ce cadeau : {{ gift.name }}
+    </div>
+    <div class="col-md-12 texte-presentation-boutique">
+        <p class="police-text"> Votre commande est bien enregistrée, vous allez recevoir un email de confirmation à votre adresse : {{app.user.email}}.
+            Votre commande sera traitée dans les meilleurs délais, nous nous en occupons dès à présent!
+        </p>
+
+    </div>
+    <div class="bloc-boutons-produit">
+        <a class="btn bouton-repondre" href="{{ path('smart_unity_app_homepage')}}">
+            Retour à l'accueil
+        </a>
+        <a class="btn bouton-repondre" href="{{ path('smart_unity_boutique_homepage')}}">
+            Retour à la boutique
+        </a>
+    </div>
+{% endblock body %}
+

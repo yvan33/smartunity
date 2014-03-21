@@ -3,15 +3,11 @@
 {% block title %}Réponses de {{username}} {% endblock %}
 
 {% block stylesheets %}
-<link href="{{asset('assets/css/question.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
-
-{% endblock %}
-
-{% block initJS %}
-<script src="{{asset('assets/js/bootstrap-paginator.js')}}"></script>
-<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
-<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/magnificpopup.css' 
+				 'assets/css/question.css'  %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 {% block body %}
@@ -220,7 +216,7 @@
                                     <div data-toggle="collapse" data-parent="#accordion-certified" href="#collapse{{loop.index}}">
                                 <h4 class="panel-title">
                                     <!-- rond pts-->
-                                    <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration}} pts</p></div></div>
+                                    <div class="grille-1"><div class="rond-point"><p class="txt-rond" style="font-weight:200;">{{question.remuneration }} pts</p></div></div>
                                     <!-- rond pts fin-->
                                     <!-- describ question-->
                                         <div class="grille-2" ><a onClick="event.stopPropagation();" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}"><p>{{question.sujet}}</p></a>
@@ -290,6 +286,12 @@
 
 
 {% block callJS %}
+{% javascripts filter='yui_js' 
+				'assets/js/bootstrap-paginator.js' 
+				'assets/js/magnificpopup-0.9.9.min.js'
+				'assets/js/jquery.animateAuto-1.0.0.js'	 %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
 <script language="javascript">
 

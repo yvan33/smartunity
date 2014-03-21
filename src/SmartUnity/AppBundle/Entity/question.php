@@ -3,11 +3,13 @@
 namespace SmartUnity\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Question
  *
  * @ORM\Table()
+ * @UniqueEntity(fields="sujet", message="Ce sujet à déjà été donné à une autre question. Veuillez le modifier")
  * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\questionRepository")
  */
 class question
@@ -77,6 +79,13 @@ class question
      * @ORM\Column(name="remuneration", type="integer", nullable=false)
      */
     private $remuneration;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="supplementRemuneration", type="integer", nullable=true)
+     */
+    private $supplementRemuneration=0;
     
     /**
      * @ORM\OneToMany(targetEntity="SmartUnity\AppBundle\Entity\reponse", mappedBy="question")
@@ -565,5 +574,28 @@ class question
     public function getIsCertifiedQuestion()
     {
         return $this->isCertifiedQuestion;
+    }
+
+    /**
+     * Set supplementRemuneration
+     *
+     * @param integer $supplementRemuneration
+     * @return question
+     */
+    public function setSupplementRemuneration($supplementRemuneration)
+    {
+        $this->supplementRemuneration = $supplementRemuneration;
+    
+        return $this;
+    }
+
+    /**
+     * Get supplementRemuneration
+     *
+     * @return integer 
+     */
+    public function getSupplementRemuneration()
+    {
+        return $this->supplementRemuneration;
     }
 }

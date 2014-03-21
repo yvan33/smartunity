@@ -3,7 +3,10 @@
 {% block title %}Smart'Unity - A propos de Smart'Unity {% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/accueil.css') }}"  rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/accueil.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 {% block body %}

@@ -11,6 +11,9 @@
 
 namespace SmartUnity\UtilisateurBundle\Controller;
 
+
+
+use Symfony\Component\HttpFoundation\generateUrl;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -126,13 +129,19 @@ class RegistrationController extends BaseController
      */
     public function confirmAction(Request $request, $token)
     {
+    
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->container->get('fos_user.user_manager');
 
         $user = $userManager->findUserByConfirmationToken($token);
 
         if (null === $user) {
-            throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
+    	
+//             throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
+				$url = $this->container->get('router')->generate('smart_unity_app_homepage');
+            	$response = new RedirectResponse($url);
+				return $response;
+				
         }
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
@@ -152,7 +161,9 @@ class RegistrationController extends BaseController
         if (null === $response = $event->getResponse()) {
             $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
             $response = new RedirectResponse($url);
+            p('confirmé');
         }
+        
 
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
 
