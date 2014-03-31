@@ -221,8 +221,8 @@ class questionRepository extends EntityRepository {
         $query = $this->_em->createNativeQuery($sql, $rsm);
         $query->setParameter('offset', (int) $offset);
         $query->setParameter('nbParPage', (int) $nbParPage);
-
-        $result = $query->getResult();
+		
+        $result = $query->getArrayResult();
 
         if (count($result) != 0)
             return $result;
