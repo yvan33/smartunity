@@ -75,6 +75,10 @@
         </div>
 {% endif %}        
 
+ {#/////////////////////////////////////////////////#}
+{# FIN Blocs en display : none#}
+{#///////////////////////////////////////////////////#}
+        
         <div class="grille-content-2">
             <div class="grille-reponse" onmouseover="displaySignalQuestion(this);" onmouseout="hideSignalQuestion(this);">
                 <div class="bouton-signaler">
@@ -82,8 +86,8 @@
                     <a href="{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}"><img class="signaler-comment" alt="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>
                     {% endif %}
                 </div>                
-                <div class="head-blue"><p style="float:left"><h1 class="head-blue">{{ question.sujet }}</h1></p>
-                    {% if app.user==question.membre.username and not is_validated and listeReponses is empty %} <a href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-edit"></span></a> {% endif %}
+                <div class="head-blue"><h1 class="sujet-question" style="float:left">{{ question.sujet }}</h1>
+                    {% if app.user.username==question.membre.username and not is_validated and listeReponses is empty %} <a style="float:left" href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-edit"></span></a> {% endif %}
                     {# <button class="btn share-button"><a href="#" class="btn" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on bottom"><span class="glyphicon glyphicon-share"></span></a></button> #}
 
                     <p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
@@ -548,7 +552,7 @@ Toast
             <div class="grille-2 grille-2-soutenir">{{ form_errors(formSoutien.soutien) }}{{ form_widget(formSoutien.soutien,{'attr': {'style': 'width: 100%', 'class': 'form-control'}, 'id':'valeurSoutien'}) }}Max : {{app.user.cagnotte}}</div> \
 	</div> \
         <div class="row row-soutenir"> \
-                <div class="cent-h">{{form_widget(formSoutien.soutenir,{'attr': {'class': 'btn bouton-repondre', 'onClick':'validationFormulaire()'},'id':'boutonSoutien'})}}</div> \
+                <div class="cent-h">{{form_widget(formSoutien.valider,{'attr': {'class': 'btn bouton-repondre', 'onClick':'validationFormulaire()'},'id':'boutonSoutien'})}}</div> \
             </div> \
             {{form_end(formSoutien)}} \
         </div> \

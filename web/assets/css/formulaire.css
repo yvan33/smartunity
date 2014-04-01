@@ -30,7 +30,7 @@
 }
 
 
-.form-addquestion .grille-1 
+.addquestion .grille-1 
 {
     width: 15%;
     margin: 3px 2.5% 3px 5%;
@@ -38,7 +38,7 @@
     text-align: right;
 }
 
-.form-addquestion .grille-2 
+.addquestion .grille-2 
 {
     width:65%;
     margin: 3px 10% 3px 2.5%;
@@ -336,7 +336,7 @@ textarea {
     max-width: 600px;
     max-height: 300px;
 }
-.form-addquestion textarea {
+.addquestion textarea {
     max-width:none;
 }
 

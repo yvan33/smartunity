@@ -618,10 +618,11 @@ class QuestionReponseController extends Controller {
                 }
             }
 
+
             $formSoutien = $this->createFormBuilder()
                     ->setAction($this->generateUrl('smart_unity_question_reponse_add_soutien_question', array('slug' => $slug)))
                     ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
-                    ->add('soutenir', 'submit')
+                    ->add('valider', 'submit')
                     ->getForm();
         } else {
             $formSoutien = $this->createFormBuilder()->getForm();
@@ -809,6 +810,7 @@ class QuestionReponseController extends Controller {
                     'required' => false))
                 ->add('remuneration', 'integer', array(
 	                   'attr' => array(
+                        'class' => 'input-dotation',
                         'min' => '10',
                         'max' => $dotationMax
                     ),

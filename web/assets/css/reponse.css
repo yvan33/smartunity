@@ -2,9 +2,9 @@
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
     src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/Centrale.woff) format('woff'),
-         url(../fonts/Centrale.ttf) format('truetype'),
-         url(../fonts/Centrale.svg#centrale) format('svg');
+        url(../fonts/Centrale.woff) format('woff'),
+        url(../fonts/Centrale.ttf) format('truetype'),
+        url(../fonts/Centrale.svg#centrale) format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -17,11 +17,6 @@
         margin:15px 10px;
     }
 
-    .head-blue
-    {
-        height:35px;
-        line-height:35px;
-    }
     .grille-1
     {
         width:80px;
@@ -52,11 +47,6 @@
         margin:15px 10px;
     } 
 
-    .head-blue
-    {
-        height:35px;
-        line-height:35px;
-    }
     .grille-1
     {
         width:80px;
@@ -86,11 +76,6 @@
         margin:15px 10px;
     }
 
-    .head-blue
-    {
-        height:35px;
-        line-height:35px;
-    }
     .grille-1
     {
         width:80px;
@@ -127,10 +112,7 @@
         margin:15px 1% 15px 2%;
 
     }
-    .head-blue
-    {
-        padding-top:7px;
-    }
+
     .grille-3-over
     {
         width:100%;
@@ -149,21 +131,22 @@
 
 }
 
+
 .grille-1
 {	
     float:left;	
 }
 
 .certif-img {
-	width: 50%;
+    width: 50%;
 }
 
 .fleche
 {
-	display: inline-block;
-	font-weight:600;
-	margin: 0px 5px;
-	cursor:pointer;
+    display: inline-block;
+    font-weight:600;
+    margin: 0px 5px;
+    cursor:pointer;
 
 }
 
@@ -207,17 +190,17 @@
 
 .grille-3-grey
 {	
-	background-color: rgba(164,164,164, 0.5);
-	border-radius: 2px;
-	overflow: hidden;
-	padding: 10px 29px 10px 10px;
-	clear: both;
+    background-color: rgba(164,164,164, 0.5);
+    border-radius: 2px;
+    overflow: hidden;
+    padding: 10px 29px 10px 10px;
+    clear: both;
 
 }
 
 .grille-3-im
 {
-	float:left;
+    float:left;
 
 }
 
@@ -231,9 +214,9 @@
 
 .grille-3-rond
 {
-	margin-left:15px;
-	float:left;
-	margin-top:5px;
+    margin-left:15px;
+    float:left;
+    margin-top:5px;
 
 }
 .grille-3-btn
@@ -244,31 +227,31 @@
 
 .grille-3 p
 {
-	font-family: centrale;
-	color: #505050;
+    font-family: centrale;
+    color: #505050;
 }
 
 .etoile
 {
-	position: relative;
-	display: inline;
-	bottom: 3px;
-	width: 14px;
+    position: relative;
+    display: inline;
+    bottom: 3px;
+    width: 14px;
 }
 
 .grille-3 .reputation
 {
-	font-weight: 600;
-	font-family: tahoma;
-	font-size: 1.1em;
+    font-weight: 600;
+    font-family: tahoma;
+    font-size: 1.1em;
 }
 
 .grille-3 a
 {
-	color: #505050;
-	font-family: tahoma;
-	font-weight: 600;
-	font-size: 1.1em;
+    color: #505050;
+    font-family: tahoma;
+    font-weight: 600;
+    font-size: 1.1em;
 }
 
 .grille-reponse
@@ -290,23 +273,25 @@
 .grille-content-2
 {    
     margin-bottom: 25px;
-	background-color: #f8f8ef;
-	border-radius: 3px;
-	border:1px solid #e8e4dc;
+    background-color: #f8f8ef;
+    border-radius: 3px;
+    border:1px solid #e8e4dc;
 }
 
 .head-blue
 {
-	background: #559aa9;
-	width:100%;
-	overflow:hidden;
-	color:#FFF;
-	font-family: centrale;
-	padding-left:2%;
-	padding-right:2%;
-	clear:both;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
+    line-height: 35px;
+    height:35px;
+    background: #559aa9;
+    width:100%;
+    overflow:hidden;
+    color:#FFF;
+    font-family: centrale;
+    padding-left:2%;
+    padding-right:2%;
+    clear:both;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 .head-blue a
@@ -327,18 +312,18 @@
 
 .bouton-com-rep
 {
-	background: #e37151 ;
-	color:#FFF;
-	font-size:13px;
-	line-height:30px;
-	height:30px;
-	float:right;
-	text-align:center;
-	width:135px;
-	font-family: centrale;
-	border-radius:2px;
-	cursor:pointer;
-	margin-left: 10px;
+    background: #e37151 ;
+    color:#FFF;
+    font-size:13px;
+    line-height:30px;
+    height:30px;
+    float:right;
+    text-align:center;
+    width:135px;
+    font-family: centrale;
+    border-radius:2px;
+    cursor:pointer;
+    margin-left: 10px;
 
 }
 .bouton-validation
@@ -369,47 +354,47 @@
 }
 .bouton-com-rep-input
 {
-	margin-left: 0px;
-	background: #e37151;
-	color:#FFF;
-	font-size:13px;
-	height:30px;
-	float:right;
-	text-align:center;
-	width:135px;
-	font-family: centrale;
-	border-radius:2px;
-	cursor:pointer;
-	border:0;
+    margin-left: 0px;
+    background: #e37151;
+    color:#FFF;
+    font-size:13px;
+    height:30px;
+    float:right;
+    text-align:center;
+    width:135px;
+    font-family: centrale;
+    border-radius:2px;
+    cursor:pointer;
+    border:0;
 }
 
 .bouton-com-rep-input:focus
 {
-	outline:0;
+    outline:0;
 }
 
 .bouton-com-rep-input:hover
 {
-	background: #e37151;
-	color: #2b3a41;
+    background: #e37151;
+    color: #2b3a41;
 }
 
 .bouton-com-rep:hover
 {
-	background: #e37151;
-	color: #2b3a41;
+    background: #e37151;
+    color: #2b3a41;
 }
 
 .bouton-com-rep:focus
 {
-	outline: 0;
+    outline: 0;
 }
 
 .bouton-com-rep:active
 {
 
-	background: #e37151;
-	color: #2b3a41;
+    background: #e37151;
+    color: #2b3a41;
 
 }
 
@@ -444,19 +429,19 @@
 }    
 
 .bouton-soutenir {
-	background: #ff3800 ;
-	border-color:#999;
-	color:#FFF;
-	font-size:13px;
-	line-height:30px;
-	height:30px;
-	float:right;
-	margin-bottom:5px;
-	text-align:center;
-	width:135px;
-	font-family: centrale;
-	border-radius:2px;
-	cursor:pointer;
+    background: #ff3800 ;
+    border-color:#999;
+    color:#FFF;
+    font-size:13px;
+    line-height:30px;
+    height:30px;
+    float:right;
+    margin-bottom:5px;
+    text-align:center;
+    width:135px;
+    font-family: centrale;
+    border-radius:2px;
+    cursor:pointer;
 }
 
 .commentaire
@@ -472,17 +457,17 @@
 
 .commentaire a
 {
-	color: #A4A4A4;
-	font-weight: 600;
+    color: #A4A4A4;
+    font-weight: 600;
 }
 
 .commentaire img {
-	width: 50%;
+    width: 50%;
 }
 
 .signaler-comment
 {
-	display: none;
+    display: none;
 }
 
 span.label-default{
@@ -579,8 +564,8 @@ a.reponse:hover{
 
 input
 {
-	border: 0;
-	line-height: 0;
+    border: 0;
+    line-height: 0;
 }
 
 #form-commenter-reponse{
@@ -595,7 +580,7 @@ input
 }
 
 .bouton-signaler img {
-	width: 50%;
+    width: 50%;
 }
 
 .tooltip {
@@ -618,11 +603,11 @@ input
 }
 
 textarea.reponse-input {
-	height: 150px;
-	margin-left: 2.8%;
-	margin-right: 2.8%;
-	width: 94.4%;
-	margin-top: 10px;
+    height: 150px;
+    margin-left: 2.8%;
+    margin-right: 2.8%;
+    width: 94.4%;
+    margin-top: 10px;
     resize: vertical;
 }
 
@@ -713,38 +698,15 @@ textarea.reponse-input {
     font-size:26px;
 }
 
-/*.textegris{
-
-    color:#7e7e7e;
-}*/
-/*.bouton-validation.popover.right{
-        background-color: #333;
-        width: 200px;   
-    }
-.bouton-validation.popover.right .arrow::after{
-        border-right-color: #333;   
-    }
-.bouton-validation.popover-content{
-        padding: 0.1em 0.3em; 
-        color:#fff;
-        font-size: 11px;
-        font-family: centrale;  
-    }*/
-.coucou a{
-    background-color: #7e7e7e;
-    font-size: 12px;
-    color:#7e7e7e;
-}    
-
 .validation-dialog{
     position: relative;
     background-color: #FFF;
     width:500px;
     border-radius: 5px;
     /*margin:300px auto auto auto;*/
-margin: 20% auto;
+    margin: 20% auto;
 
-    }
+}
 .validation-body{
 
     font-family: centrale;
@@ -753,10 +715,10 @@ margin: 20% auto;
 
 }
 .validation-body p{
-/*
-    margin-top: 30px;*/
+    /*
+        margin-top: 30px;*/
 
-    
+
 }
 .validation-footer{
 
@@ -771,53 +733,54 @@ margin: 20% auto;
 }
 
 .head-blue .glyphicon:hover {
-	color: #333;
+    color: #333;
 }
-h1.head-blue  {
-	
-	font-size: 15px;
-	line-height: 15px;
-	margin-top:0px;
+.head-blue h1  {
+
+    font-size: 15px;
+    margin: .67em 0;
+    font-family: centrale;
+    font-weight: normal;
+
 }
 
 .send-answer {
-	margin-top: 10px;
-	margin-bottom : 20px;
+    margin-top: 10px;
+    margin-bottom : 20px;
 }
 
 .glyphicon-share {
-	cursor: pointer;
-	color: white;
+    cursor: pointer;
+    color: white;
 }
 
 
 .glyphicon-share:hover {
-	color: #e37151;
+    color: #e37151;
 }
 
 .share-button {
-	background: none;
-	width: 15px;
-	padding: 0;
-	margin-left: 10px;
+    background: none;
+    width: 15px;
+    padding: 0;
+    margin-left: 10px;
 }
 
 .share-button:focus {
-	outline: 0;
+    outline: 0;
 }
 
 .share-button:active {
-	box-shadow: none;
+    box-shadow: none;
 }
 
 .glyphicon-edit {
-	font-size: 14px;
-	top: 3px;
-	left: 3px;
+    font-size: 14px;
+    left: 3px;
 }
 
 p.admin{
-     margin:0px;
-     font-weight: 600;
-     font-family: tahoma;
+    margin:0px;
+    font-weight: 600;
+    font-family: tahoma;
 }
