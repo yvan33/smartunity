@@ -17,10 +17,13 @@
 {% block title %}Posez votre question{% endblock %}
 
 {% block stylesheets %}
-<link href="{{asset('assets/css/formulaire.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
-
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/formulaire.css'
+				 'assets/css/magnificpopup.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
+
 
 {% block initJS %}
 <script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
@@ -31,7 +34,7 @@
 
 {% block body %}
 
-<div class="row form-addquestion">
+<div class="row addquestion">
 {#        <div class="grille-content panneau-bas">  #}
             <div class="row text-center cookie-title">
                 Poser une question
