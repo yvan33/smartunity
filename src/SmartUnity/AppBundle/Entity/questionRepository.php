@@ -222,7 +222,7 @@ class questionRepository extends EntityRepository {
         $query->setParameter('offset', (int) $offset);
         $query->setParameter('nbParPage', (int) $nbParPage);
 		
-        $result = $query->getArrayResult();
+        $result = $query->getResult();
 
         if (count($result) != 0)
             return $result;
