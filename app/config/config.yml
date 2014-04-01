@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: "@SmartUnityUtilisateurBundle/Resources/config/services.yml"}
     - { resource: "@SmartUnityQuestionReponseBundle/Resources/config/services.yml"}
+    - { resource: "@SmartUnityAppBundle/Resources/config/services.yml"}
+    
 
 framework:
     #esi:             ~

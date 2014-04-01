@@ -9,13 +9,11 @@ use SmartUnity\AppBundle\Entity\parrainage;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
-
 class UtilisateurController extends Controller {
 
     public function indexAction( $formPassword = null, $formInfos = null, $formAvatar = null) {
 
         $user = $this->getUser();
-        
         $parrainage = new parrainage($user);
 
         $form_pref = $this->createForm('smartunity_user_preference', $user);
@@ -139,6 +137,23 @@ class UtilisateurController extends Controller {
             $em->persist($user);
             $em->flush();
         }
+        return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
+    }
+
+    public function setInfosAction() {
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $form = $this->createForm('smartunity_user_informations', $user);
+        $form->bind($this->getRequest());
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+
         return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
     }
 

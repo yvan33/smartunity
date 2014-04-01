@@ -238,6 +238,7 @@ class AjaxController extends Controller {
                 }
 
                 $membre = $reponse[0]->getMembre();
+                $membre_role = $membre->getRoles()[0];
 
                 $smartReponses = $reponseRepository->getNbCertifForUser($membre->getId());
                 $nb_questions_membre = $questionRepository->getNbQuestionsForUser($membre->getId());
@@ -257,6 +258,7 @@ class AjaxController extends Controller {
                     'membre_username' => $membre->getUsername(),
                     'membre_id' => $membre->getId(),
                     'membre_reputation' => $membre->getReputation(),
+                    'membre_role' => $membre_role,
                     'commentaires' => $commentairesReturn,
                     'is_certif' => $isCertif,
                     'is_validated' => $isValid,

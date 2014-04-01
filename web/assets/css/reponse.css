@@ -423,6 +423,7 @@
 .grille-1-soutenir {
     width : auto;
     color:black;
+    margin-right: 5px;
 }
 
 .grille-2-soutenir{
@@ -772,6 +773,12 @@ margin: 20% auto;
 .head-blue .glyphicon:hover {
 	color: #333;
 }
+h1.head-blue  {
+	
+	font-size: 15px;
+	line-height: 15px;
+	margin-top:0px;
+}
 
 .send-answer {
 	margin-top: 10px;
@@ -807,4 +814,10 @@ margin: 20% auto;
 	font-size: 14px;
 	top: 3px;
 	left: 3px;
+}
+
+p.admin{
+     margin:0px;
+     font-weight: 600;
+     font-family: tahoma;
 }

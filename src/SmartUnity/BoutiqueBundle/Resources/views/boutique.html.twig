@@ -5,14 +5,12 @@
 {% block stylesheets %} 
 {% stylesheets filter='cssrewrite, yui_css'
 				 'assets/css/boutique.css'
-                                 'assets/css/formulaire.css' %}
+                'assets/css/formulaire.css' %}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 {% endstylesheets %}
 {%endblock%}
 
 {% block body %}
-
-
 
 <div class="row sans-marge">
     <div class="title text-center cookie-title">
@@ -57,7 +55,7 @@
                     <button type="button" class="bouton-repondre bouton-choisir-produit" 
                             {% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour commander un cadeau."{% elseif is_granted('ROLE_USER') and app.user.cagnotte < gift.price %} 
                             rel="tooltip" data-original-title="Vous n'avez pas assez de point :-(" {% endif %}
-                            data-toggle="modal" data-target="#ModalValidation" data-giftid="{{gift.id}}" data-giftname="{{gift.name}}" data-giftprice="{{gift.price}}">Je le veux!</button>
+                            data-toggle="modal" data-target="#ModalValidation" data-giftid="{{gift.id}}" data-giftname="{{gift.name}}" data-giftprice="{{gift.price}}">Je le veux !</button>
                 </div>
 
 {% for flashMessage in app.session.flashbag.get('insufficientPool') %}
@@ -156,5 +154,4 @@
 
 
 {% endblock %}
-
 

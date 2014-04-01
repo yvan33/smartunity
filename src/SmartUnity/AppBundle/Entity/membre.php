@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="SmartUnity\AppBundle\Entity\membreRepository")
  * @UniqueEntity(fields="email", message="Cet adresse email est déjà utilisée par un autre utilisateur")
  * @UniqueEntity(fields="username", message="Ce pseudo est déjà utilisé par un autre utilisateur")
+
  */
 class membre extends BaseUser {
 
@@ -100,42 +101,42 @@ class membre extends BaseUser {
      *
      * @ORM\Column(name="pref_mp", type="boolean")
      */
-    private $pref_mp;
+    private $pref_mp=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_smartcafe", type="boolean")
      */
-    private $pref_smartcafe;
+    private $pref_smartcafe=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_comm", type="boolean")
      */
-    private $pref_comm;
+    private $pref_comm=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_rep", type="boolean")
      */
-    private $pref_rep;
+    private $pref_rep=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_repValidee", type="boolean")
      */
-    private $pref_repValidee;
+    private $pref_repValidee=1;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="pref_repCertifiee", type="boolean")
      */
-    private $pref_repCertifiee;
+    private $pref_repCertifiee=1;
 
     /**
      * @var string
@@ -143,6 +144,7 @@ class membre extends BaseUser {
      * @ORM\Column(name="info_plus", type="text", nullable=true)
      */
     private $info_plus;
+
     /**
      * @ORM\OneToMany(targetEntity="question", mappedBy="membre")
      */
@@ -208,7 +210,6 @@ class membre extends BaseUser {
     private $parrainages;
 
     /**
-     *
      * @ORM\OneToMany(targetEntity="membre", mappedBy="parrain")
      *
      * */
@@ -228,18 +229,18 @@ class membre extends BaseUser {
      * @ORM\Column(name="ip_inscription", type="string", length=50, nullable=true)
      */
     private $ip_inscription;
-    
+
     /** @var string
      *
      * @ORM\Column(name="ip_confirmation", type="string", length=50, nullable=true)
      */
     private $ip_confirmation;
 
-    /**	
+    /** 	
      * @ORM\ManyToMany(targetEntity="SmartUnity\AppBundle\Entity\gift", inversedBy="membres")
      *
      */
-    private $gifts;    
+    private $gifts;
 
     /**
      * Constructor
@@ -261,7 +262,6 @@ class membre extends BaseUser {
         $this->setPrefComm(1);
         $this->setPrefRepValidee(1);
         $this->setPrefRepCertifiee(1);
-        $this->setPrefRep(1);
     }
 
     /**
@@ -582,9 +582,11 @@ class membre extends BaseUser {
     /**
      * Remove questions
      *
+
      * @param question $questions
      */
     public function removeQuestion(question $questions) {
+
         $this->questions->removeElement($questions);
     }
 
@@ -604,6 +606,7 @@ class membre extends BaseUser {
      * @return membre
      */
     public function addReponse(reponse $reponses) {
+
         $this->reponses[] = $reponses;
 
         return $this;
@@ -615,6 +618,7 @@ class membre extends BaseUser {
      * @param reponse $reponses
      */
     public function removeReponse(reponse $reponses) {
+
         $this->reponses->removeElement($reponses);
     }
 
@@ -634,6 +638,7 @@ class membre extends BaseUser {
      * @return membre
      */
     public function addNoteReponse(noteReponse $noteReponses) {
+
         $this->noteReponses[] = $noteReponses;
 
         return $this;
@@ -645,6 +650,7 @@ class membre extends BaseUser {
      * @param noteReponse $noteReponses
      */
     public function removeNoteReponse(noteReponse $noteReponses) {
+
         $this->noteReponses->removeElement($noteReponses);
     }
 
@@ -663,11 +669,13 @@ class membre extends BaseUser {
      */
     public function setFacebookId($facebookId) {
         $this->facebookId = $facebookId;
+
 //        if ($this->username != $facebookId && $this->username != null){
 //        }
 //        else{
 //                 $this->setUsername($facebookId);
 //        }
+
         $this->salt = '';
     }
 
@@ -699,14 +707,12 @@ class membre extends BaseUser {
             $this->setEmail($fbdata['email']);
         }
         if (isset($fbdata['gender'])) {
-            if($fbdata['gender'] == 'male'){
-            $this->setSexe('m');                
-            }
-            elseif($fbdata['gender'] == 'female'){
-            $this->setSexe('f');                
-            }
-            else {
-            $this->setSexe('na');  
+            if ($fbdata['gender'] == 'male') {
+                $this->setSexe('m');
+            } elseif ($fbdata['gender'] == 'female') {
+                $this->setSexe('f');
+            } else {
+                $this->setSexe('na');
             }
         }
         $this->setPrefComm('1');
@@ -715,11 +721,10 @@ class membre extends BaseUser {
         $this->setPrefRepValidee('1');
         $this->setPrefSmartcafe('1');
         $this->setPrefRepCertifiee('1');
-        
-        if (isset($fbdata['birthday'])) {
-           $this->setDateNaissance(new \DateTime($fbdata['birthday']));
-        }   
 
+        if (isset($fbdata['birthday'])) {
+            $this->setDateNaissance(new \DateTime($fbdata['birthday']));
+        }
     }
 
     /**
@@ -729,6 +734,7 @@ class membre extends BaseUser {
      * @return membre
      */
     public function addAppareil(appareil $appareils) {
+
         $this->appareils[] = $appareils;
 
         return $this;
@@ -740,6 +746,7 @@ class membre extends BaseUser {
      * @param appareil $appareils
      */
     public function removeAppareil(appareil $appareils) {
+
         $this->appareils->removeElement($appareils);
     }
 
@@ -759,6 +766,7 @@ class membre extends BaseUser {
      * @return membre
      */
     public function addReponsesCertifiee(reponse $reponsesCertifiees) {
+
         $this->reponsesCertifiees[] = $reponsesCertifiees;
 
         return $this;
@@ -770,6 +778,7 @@ class membre extends BaseUser {
      * @param reponse $reponsesCertifiees
      */
     public function removeReponsesCertifiee(reponse $reponsesCertifiees) {
+
         $this->reponsesCertifiees->removeElement($reponsesCertifiees);
     }
 
@@ -818,6 +827,7 @@ class membre extends BaseUser {
      * @return membre
      */
     public function setVille(ville $ville = null) {
+
         $this->ville = $ville;
 
         return $this;
@@ -839,6 +849,7 @@ class membre extends BaseUser {
      * @return membre
      */
     public function addCommentaireReponse(commentaireReponse $commentaireReponses) {
+
         $this->commentaireReponses[] = $commentaireReponses;
 
         return $this;
@@ -850,6 +861,7 @@ class membre extends BaseUser {
      * @param commentaireReponse $commentaireReponses
      */
     public function removeCommentaireReponse(commentaireReponse $commentaireReponses) {
+
         $this->commentaireReponses->removeElement($commentaireReponses);
     }
 
@@ -879,7 +891,9 @@ class membre extends BaseUser {
      * @return membre
      */
 
+
     public function addCommentaireQuestion(commentaireQuestion $commentaireQuestions) {
+
         $this->commentareQuestions[] = $commentaireQuestions;
 
         return $this;
@@ -899,7 +913,9 @@ class membre extends BaseUser {
      * @param \SmartUnity\AppBundle\Entity\commentaireQuestion $commentaireQuestions
      */
 
+
     public function removeCommentaireQuestion(commentaireQuestion $commentaireQuestions) {
+
         $this->commentaireQuestions->removeElement($commentaireQuestions);
     }
 
@@ -919,6 +935,7 @@ class membre extends BaseUser {
      * @return membre
      */
     public function addParrainage(parrainage $parrainages) {
+
         $this->parrainages[] = $parrainages;
 
         return $this;
@@ -930,6 +947,7 @@ class membre extends BaseUser {
      * @param parrainage $parrainages
      */
     public function removeParrainage(parrainage $parrainages) {
+
         $this->parrainages->removeElement($parrainages);
     }
 
@@ -949,6 +967,7 @@ class membre extends BaseUser {
      * @return membre
      */
     public function addFilleul(membre $filleuls) {
+
         $this->filleuls[] = $filleuls;
 
         return $this;
@@ -960,6 +979,7 @@ class membre extends BaseUser {
      * @param membre $filleuls
      */
     public function removeFilleul(membre $filleuls) {
+
         $this->filleuls->removeElement($filleuls);
     }
 
@@ -979,6 +999,7 @@ class membre extends BaseUser {
      * @return membre
      */
     public function setParrain(membre $parrain = null) {
+
         $this->parrain = $parrain;
 
         return $this;
@@ -993,17 +1014,15 @@ class membre extends BaseUser {
         return $this->parrain;
     }
 
-
     /**
      * Set info_plus
      *
      * @param string $infoPlus
      * @return membre
      */
-    public function setInfoPlus($infoPlus)
-    {
+    public function setInfoPlus($infoPlus) {
         $this->info_plus = $infoPlus;
-    
+
         return $this;
     }
 
@@ -1012,8 +1031,7 @@ class membre extends BaseUser {
      *
      * @return string 
      */
-    public function getInfoPlus()
-    {
+    public function getInfoPlus() {
         return $this->info_plus;
     }
 
@@ -1023,10 +1041,9 @@ class membre extends BaseUser {
      * @param string $ipInscription
      * @return membre
      */
-    public function setIpInscription($ipInscription)
-    {
+    public function setIpInscription($ipInscription) {
         $this->ip_inscription = $ipInscription;
-    
+
         return $this;
     }
 
@@ -1035,8 +1052,7 @@ class membre extends BaseUser {
      *
      * @return string 
      */
-    public function getIpInscription()
-    {
+    public function getIpInscription() {
         return $this->ip_inscription;
     }
 
@@ -1045,10 +1061,9 @@ class membre extends BaseUser {
      * @param string $ipConfirmation
      * @return membre
      */
-    public function setIpConfirmation($ipConfirmation)
-    {
+    public function setIpConfirmation($ipConfirmation) {
         $this->ip_confirmation = $ipConfirmation;
-    
+
         return $this;
     }
 
@@ -1057,8 +1072,7 @@ class membre extends BaseUser {
      *
      * @return string 
      */
-    public function getIpConfirmation()
-    {
+    public function getIpConfirmation() {
         return $this->ip_confirmation;
     }
 
@@ -1068,10 +1082,9 @@ class membre extends BaseUser {
      * @param \SmartUnity\AppBundle\Entity\gift $gifts
      * @return membre
      */
-    public function addGift(\SmartUnity\AppBundle\Entity\gift $gifts)
-    {
+    public function addGift(\SmartUnity\AppBundle\Entity\gift $gifts) {
         $this->gifts[] = $gifts;
-    
+
         return $this;
     }
 
@@ -1080,8 +1093,7 @@ class membre extends BaseUser {
      *
      * @param \SmartUnity\AppBundle\Entity\gift $gifts
      */
-    public function removeGift(\SmartUnity\AppBundle\Entity\gift $gifts)
-    {
+    public function removeGift(\SmartUnity\AppBundle\Entity\gift $gifts) {
         $this->gifts->removeElement($gifts);
     }
 
@@ -1090,8 +1102,12 @@ class membre extends BaseUser {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getGifts()
-    {
+    public function getGifts() {
         return $this->gifts;
     }
+    
+    public function isGranted($role) {
+        return in_array($role, $this->getRoles());
+    }
+
 }

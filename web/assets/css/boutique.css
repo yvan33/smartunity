@@ -15,11 +15,8 @@
 }
 
 .texte-presentation-boutique {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
-
-
-
 
 .rond-point
 {
@@ -90,7 +87,6 @@
 
 }
 
-
 .entete-cadeau{
     text-align: center;
     font-family: centrale;
@@ -155,7 +151,8 @@
    text-align: center;
 }
 .apercu-cadeau img{
-    width : 200px;
+    width : 150px;
 }
 
 }
+
