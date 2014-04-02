@@ -785,6 +785,6 @@ p.admin{
     font-family: tahoma;
 }
 
-p.reponseDescription-data {
+.reponseDescription-data {
     display:none;
 }
