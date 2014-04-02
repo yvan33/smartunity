@@ -416,7 +416,10 @@ Toast
     function displayEditFormReponse(e) {
     {% if is_granted('ROLE_USER') %}
         var reponseId = $('#reponseId').val();
-        var reponseDescription = $('#reponseDescription').val();
+        
+    reponseDescription = $('.reponseDescription-data').html();
+    console.log(reponseDescription);
+
 
         $('.edit-reponse-form').attr('action', function(i, url) {
             return url.replace(url.substr(url.lastIndexOf('/') + 1), reponseId);
@@ -427,7 +430,6 @@ Toast
         $('.espace-vide-pour-cadre-repondre').show();
     {% endif %}
     }
-    ;
 
 ////////////////////////////
 ///////////Commenter question

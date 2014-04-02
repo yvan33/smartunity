@@ -141,8 +141,9 @@
                             <div id="bouton-editer{{reponse.id}}" class="edit-reponse" onClick="javascript:displayEditFormReponse(this)">
                                 <div class="bouton-com-rep">Editer</div>
                             </div>  
+                            <p class="reponseDescription" data-which="1"></p>
+                            <p class="reponseDescription-data" data-which="1">{{reponse.description}}</p>
                             <input id="reponseId" type="hidden" value="{{reponse.id}}" />
-                            <input id="reponseDescription" type="hidden" value="{{reponse.description}}" />
           {% endif %}
           {% endif %}
 
