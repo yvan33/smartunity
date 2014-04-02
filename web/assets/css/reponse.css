@@ -711,15 +711,9 @@ textarea.reponse-input {
 
     font-family: centrale;
     width:500px;
-    padding-top: 0.6em;
-
+    padding: 1em 0.7em 0.7em 0.7em;
 }
-.validation-body p{
-    /*
-        margin-top: 30px;*/
 
-
-}
 .validation-footer{
 
     height: 30px;
