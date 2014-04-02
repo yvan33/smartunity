@@ -784,3 +784,7 @@ p.admin{
     font-weight: 600;
     font-family: tahoma;
 }
+
+p.reponseDescription-data {
+    display:none;
+}
