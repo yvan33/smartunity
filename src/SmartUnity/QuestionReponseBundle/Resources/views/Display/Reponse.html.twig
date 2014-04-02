@@ -416,13 +416,12 @@ Toast
     function displayEditFormReponse(e) {
     {% if is_granted('ROLE_USER') %}
         var reponseId = $('#reponseId').val();
-        
-    reponseDescription = $('.reponseDescription-data').contents();
-
+        var reponseDescription = $('.reponseDescription-data').html();
+console.log(reponseDescription);
         $('.edit-reponse-form').attr('action', function(i, url) {
             return url.replace(url.substr(url.lastIndexOf('/') + 1), reponseId);
         });
-console.log(reponseDescription);
+
         CKEDITOR.instances.form_description.setData(reponseDescription);
         $('#addReponseHolder').show('fast');
         $('.espace-vide-pour-cadre-repondre').show();
@@ -919,7 +918,7 @@ $("#modalConnexion").modal('show');
      {% if is_granted('ROLE_USER')%}
         if (userId == pEntry['membre_id']) {
             entity += ' <input id="reponseId" type="hidden" value="' + pEntry['id'] + '" > \
-        <div class="reponseDescription-data" data-which="1">' + pEntry['description'] + '</div> \
+        <div class="reponseDescription-data">' + pEntry['description'] + '</div> \
  <div id="bouton-editer' + pEntry['id'] + '" class="edit-reponse" onClick="javascript:displayEditFormReponse(this)"> \
                                 <div class="bouton-com-rep">Editer</div></div>';
         }
