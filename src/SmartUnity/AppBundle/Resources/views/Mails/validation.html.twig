@@ -169,9 +169,9 @@
                                                     <table class="w580" width="580" cellpadding="0" cellspacing="0" border="0">
                                                         <tbody><tr>
                                                                 <td class="w580" width="580">
-                                                                    <p align="left" class="article-title"><singleline label="Title">{{repondant}} vous a r&eacute;pondu</singleline></p>
+                                                                    <p align="left" class="article-title"><singleline label="Title">Une de vos réponses a été validée !</singleline></p>
                                                         <div align="left" class="article-content">
-                                                            <multiline label="Description">Vous avez obtenu une r&eacute;ponse à votre question de la part de {{repondant}}. Allez vite voir sa r&eacute;ponse !</multiline>
+                                                            <multiline label="Description">{{demandeur.username}} a validé votre réponse à "{{question.sujet}}"</multiline>
                                                         </div>
                                                         </td>
                                                         </tr>
@@ -181,7 +181,7 @@
                                                                 <table width="180" height="35" bgcolor="#E37151" style="border-radius:4px">
                                                                     <tbody><tr>
                                                                             <td align="center">
-                                                                                <a style="font-size:18px; color:#ffffff; text-decoration:none" href="{{url}}" target="_blank">Voir la r&eacute;ponse</a>
+                                                                                <a style="font-size:18px; color:#ffffff; text-decoration:none" href="{{url}}" target="_blank">Voir la question</a>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody></table>
@@ -193,7 +193,7 @@
                                                         
                                                         <tr>
                                                         	<td class="w580" width="580"><div align="center" class="article-content">
-                                                            <multiline label="Description">Si cette réponse solutionne votre question, n'oubliez pas de la valider ;)<br/>N'hésitez pas à consulter la page des <a href="http://smartunity.fr/questions">Questions/Réponses</a> pour fournir ou obtenir des solutions !</multiline></td>
+                                                            <multiline label="Description">Cette réponse vous a apporté <span style="font-weight: bold; font-size: 1.2em;">{{question.remuneration}} points</span> !<br/>N'hésitez pas à solutionner d'autres questions en consultant la page <a href="http://smartunity.fr/questions">Questions/Réponses</a>.</multiline></td>
                                                         </tr>
                                                         
                                                         </tr>
@@ -210,7 +210,7 @@
                 
                 <tr>
                 	<td align="middle" width="60" height="80" bgcolor="#ffffff">
-                		<img style="width: 60px; margin-top: -20px;" src="{{ app.request.schemeAndHttpHost }}{{ asset('assets/img/logo-mail.png') }}"/>
+                		<img style="width: 60px; margin-top: -20px;" src="{{ app.request.schemeAndHttpHost }}{{asset('assets/img/logo-mail.png')}}"/>
                 	</td>
                 </tr>
                 
@@ -221,13 +221,13 @@
                                						<td width="185"></td>
                                             		<td align="left" width="125">Rejoignez-nous :</td>
                                                     <td valign="middle" width="50">
-                                                    	<a href="http://facebook.com/smartunityy"><img alt="facebook" src="{{ app.request.schemeAndHttpHost }}{{ asset('assets/img/logo-facebook-footer-blanc.png') }}" width="40px" height="40px"/></a>
+                                                        <a href="http://facebook.com/smartunityy"><img alt="facebook" src="{{ app.request.schemeAndHttpHost }}{{asset('assets/img/logo-facebook-footer-blanc.png')}}" width="40px" height="40px"/></a>
                                                     </td>
                                                     <td valign="middle" width="50">
-                                                    	<a href="http://twitter.com/Smart_unity"><img alt="twitter" style="margin:0;" src="{{ app.request.schemeAndHttpHost }}{{ asset('assets/img/logo-twitter-footer-blanc.png') }}" width="40px" height="40px"/></a>
+                                                    	<a href="http://twitter.com/Smart_unity"><img alt="twitter" style="margin:0;" src="{{ app.request.schemeAndHttpHost }}{{asset('assets/img/logo-twitter-footer-blanc.png')}}" width="40px" height="40px"/></a>
                                                     </td>
                                                     <td valign="middle" width="50">
-                                                    	<a href="http://plus.google.com/103420400147208470743"><img alt="google" src="{{ app.request.schemeAndHttpHost }}{{ asset('assets/img/logo-google-footer-blanc.png') }}" width="40px" height="40"/></a>
+                                                    	<a href="http://plus.google.com/103420400147208470743"><img alt="google" src="{{ app.request.schemeAndHttpHost }}{{asset('assets/img/logo-google-footer-blanc.png')}}" width="40px" height="40"/></a>
                                                     </td>
                                                     <td width="185"></td>      
                                    </tr>
