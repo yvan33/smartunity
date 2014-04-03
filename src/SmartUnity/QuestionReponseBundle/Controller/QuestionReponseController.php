@@ -1073,7 +1073,8 @@ class QuestionReponseController extends Controller {
                 $repondant = $reponse[0]->getMembre();
                 $repondant->setReputation($repondant->getReputation() + 50);
                 $question->setIsCertifiedQuestion(true);
-
+                $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug()), true);
+                
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse[0]);
                 $em->persist($repondant);
@@ -1081,21 +1082,12 @@ class QuestionReponseController extends Controller {
                 $em->flush();
 
                 $prefRepCertifieemembre = $repondant->getPrefRepCertifiee();
-                $mailMembreReponse = $repondant->getEmail();
 
                 if ($prefRepCertifieemembre == true) {
-
+                    
                     //Envoi du mail
-                    $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
-                    $sujetMail = "Votre réponse à la question : " . $sujetQuestion . "sur smartunity.fr a été certifiée";
-                    $contenu = "Bonjour " . $repondant->getUsername() . ", <br/> La réponse que vous avez apportée à la question " . $sujetQuestion . " vient d'être certifiée. <br/> Merci pour votre contribution. <br/> La certification de cette réponse vous a permis d'augmenter votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr ";
-                    $message = \Swift_Message::newInstance()
-                            ->setContentType('text/html')
-                            ->setSubject($sujetMail)
-                            ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-	                        ->setTo($mailMembreReponse)
-                            ->setBody($contenu);
-                    $this->get('mailer')->send($message);
+                    $this->get('smart_unity_app.mailer')->certifiedAnswerMessage($repondant ,$question, $urlQuestion);
+                    
                 }
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug())));
