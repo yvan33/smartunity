@@ -14,8 +14,8 @@ smart_unity_question_reponse_repondre_questions:
     defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:searchRepondreQuestion, page:'1' }
     
 smart_unity_question_reponse_display_reponse:
-    pattern:  /question/{slug}/{tri}/{page}/{haveAddedAnswer}/{haveEditedQuestion}/{haveEditedReponse}/{alreadyAnswered}
-    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'', tri:'vote', haveAddedAnswer:'0', haveEditedQuestion:'0', haveEditedReponse:'0', alreadyAnswered:'0' }
+    pattern:  /question/{slug}/{tri}/{page}
+    defaults: { _controller: SmartUnityQuestionReponseBundle:QuestionReponse:displayReponse, page:'1', slug:'', tri:'vote' }
     requirements:
         tri: vote|date
         page: \d+

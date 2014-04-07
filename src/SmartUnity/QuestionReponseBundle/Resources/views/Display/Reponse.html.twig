@@ -86,7 +86,7 @@
                     <a href="{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}"><img class="signaler-comment" alt="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>
                     {% endif %}
                 </div>                
-                <div class="head-blue"><h1 class="sujet-question" style="float:left">{{ question.sujet }}</h1>
+                <div class="head-blue"><h1 class="sujet-question" style="float:left">{{ question.sujet }} </h1>
                     {% if app.user.username==question.membre.username and not is_validated and listeReponses is empty %} <a style="float:left" href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-edit"></span></a> {% endif %}
                     {# <button class="btn share-button"><a href="#" class="btn" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on bottom"><span class="glyphicon glyphicon-share"></span></a></button> #}
 
@@ -241,21 +241,21 @@
 Toast
 ///////////////////////////////////////////////////#}
 
-{% if haveAddedAnswer == 1 %}
-<div class="toast"> Votre réponse a bien été ajoutée </div>
- {% endif%}
+{% for flashMessage in app.session.flashbag.get('addedAnswer') %}
+<div class="toast">{{ flashMessage }}</div>
+{% endfor %}
 
-{% if haveEditedQuestion == 1 %}
-<div class="toast"> Votre question a bien été modifiée </div>
- {% endif%}
+{% for flashMessage in app.session.flashbag.get('editedQuestion') %}
+<div class="toast">{{ flashMessage }}</div>
+{% endfor %}
 
-{% if haveEditedReponse == 1 %}
-<div class="toast"> Votre réponse a bien été modifiée </div>
- {% endif%}
+{% for flashMessage in app.session.flashbag.get('editedAnswer') %}
+<div class="toast">{{ flashMessage }}</div>
+{% endfor %}
 
-{% if alreadyAnswered == 1 %}
-<div class="toast"> Vous avez déjà répondu à cette question! Vous pouvez seulement modifier votre réponse. </div>
- {% endif%}
+{% for flashMessage in app.session.flashbag.get('alreadyAnswered') %}
+<div class="toast">{{ flashMessage }}</div>
+{% endfor %}
 
 </div>
 </div>

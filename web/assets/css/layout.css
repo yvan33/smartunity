@@ -407,10 +407,10 @@ body.bg
 
 .toast{
     position: fixed;
-    bottom: 50px;
+    bottom: 100px;
     left: 50%;
     width: 300px;
-    margin-left: -100px;
+    margin-left: -150px;
     border: 1px solid #CCC;
     border-radius: 3px;
     background-color: #7b7a7a;
@@ -513,18 +513,26 @@ body.bg
     margin-top:30px;
 }
 
+.bouton-com-rep {
+	margin: 0 auto;	
+	background-color: #e37151;
+	color:#FFF;
+	font-family: centrale;
+	font-size:22px;
+	line-height:44px;
+	margin-bottom:25px;
+	text-align:center;
+	width:250px;
+	border-radius:2px;
+	cursor: pointer;
+}
+
 .grille-content h3 
 {
     font-family: centrale;
     margin-top: 0px;
     color: #e37151;
 }
-
-#popupQuestion
-{
-    color: white;
-}
-
 
 .pagination>.active>a
 {
@@ -542,6 +550,7 @@ body.bg
 {
     margin-right: -20px;
 }
+
 
 /* Fenêtre modale log in */
 

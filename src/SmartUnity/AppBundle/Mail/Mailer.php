@@ -56,13 +56,12 @@ class Mailer {
     }
     
     //Au répondant quand sa réponse à été validée par le demandeur
-    public function certifiedAnswerMessage($repondant, $demandeur, $question, $urlQuestion) {
+    public function certifiedAnswerMessage($repondant, $question, $urlQuestion) {
 
-        $subject = "Votre réponse a été validée !";
-        $template = 'SmartUnityAppBundle:Mails:validation.html.twig';
+        $subject = "Votre réponse a été certifiée par notre équipe !";
+        $template = 'SmartUnityAppBundle:Mails:certification.html.twig';
         $to = $repondant->getEmail();
         $body = $this->templating->render($template, array(
-            'demandeur' => $demandeur,
             'repondant' => $repondant,
             'question' => $question,
             'url' => $urlQuestion,
