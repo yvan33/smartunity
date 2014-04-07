@@ -258,6 +258,10 @@ Toast
 <div class="toast">{{ flashMessage }}</div>
 {% endfor %}
 
+{% for flashMessage in app.session.flashbag.get('ProblemeCommentaire') %}
+<div class="toast toast-red">{{ flashMessage }}</div>
+{% endfor %}
+
 </div>
 </div>
 {% endblock %}

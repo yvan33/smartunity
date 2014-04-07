@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class commentaireQuestionRepository extends EntityRepository
 {
+    	public function getMembresCommentedQuestion($questionId) {
+		$em = $this->getEntityManager();
+		$query = $em->createQuery(
+    	'SELECT DISTINCT IDENTITY (cq.membre)
+    	FROM SmartUnityAppBundle:commentaireQuestion cq
+    	WHERE cq.question = :question'
+		)->setParameter('question', $questionId);
+
+		$membres = $query->getResult();
+		return $membres;
+	}
 }

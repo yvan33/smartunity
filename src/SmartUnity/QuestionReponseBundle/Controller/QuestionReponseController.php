@@ -909,11 +909,11 @@ class QuestionReponseController extends Controller {
 
         foreach ($question->getReponses() as $reponse) {
             if ($reponse->getMembre() == $user) {
-                
+
                 $this->get('session')->getFlashBag()->add(
                         'alreadyAnswered', 'Vous avez déjà répondu à cette question! Vous pouvez seulement modifier votre réponse.'
                 );
-                
+
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
@@ -1162,12 +1162,13 @@ class QuestionReponseController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newCommentaireQuestion);
                 $em->flush();
+                
                 if ($question->getMembre() != $user) {
-                    $comment = $this->getDoctrine()->getRepository('SmartUnityAppBundle:CommentaireQuestion')->getMembreCommentedAQuestion($question->getId());
+                    $comment = $this->getDoctrine()->getRepository('SmartUnityAppBundle:commentaireQuestion')->getMembresCommentedQuestion($question->getId());
 
                     foreach ($comment as $c) {
 
-                        if ($c[1] != $user->getId()) {
+                        if ($c[1] != $user->getId() && $question->getMembre() != $user) {
 
                             $membre = $this->getDoctrine()->getRepository('SmartUnityAppBundle:membre')->find($c[1]);
 
@@ -1188,7 +1189,7 @@ class QuestionReponseController extends Controller {
                             }
                         }
                     }
-                    if ($prefCommentaireMembre == true) {
+                    if ($prefCommentaireMembre == true && $question->getMembre() != $user) {
 
                         //Envoi du mail`
                         $sujetQuestion = $question->getSujet();
@@ -1207,10 +1208,19 @@ class QuestionReponseController extends Controller {
                 }
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
+            else {
+         $this->get('session')->getFlashBag()->add(
+                'ProblemeCommentaire', 'Un problème est survenu'
+        );
+        return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));               
+            }
         }
-
-        return "";
-    }
+        else {
+        $this->get('session')->getFlashBag()->add(
+                'ProblemeCommentaire', 'Un problème est survenu'
+        );
+        return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
+    }}  
 
     public function addCommentaireReponseAction($idReponse, $slug) {
 
@@ -1236,59 +1246,61 @@ class QuestionReponseController extends Controller {
                 $em->persist($newCommentaireReponse);
                 $em->flush();
 
-                if ($reponse->getMembre() != $user) {
-                    $prefCommentaireMembre = $reponse->getMembre()->getPrefComm();
+                $prefCommentaireMembre = $reponse->getMembre()->getPrefComm();
 
-                    $comment = $this->getDoctrine()->getRepository('SmartUnityAppBundle:CommentaireReponse')->getMembreCommentedAnswer($reponse->getId());
+                $idMembresCommentaires = $this->getDoctrine()->getRepository('SmartUnityAppBundle:CommentaireReponse')->getMembresCommentedAnswer($reponse->getId());
 
-                    foreach ($comment as $c) {
+                foreach ($idMembresCommentaires as $Commentaire) {
+                    if ($Commentaire[1] != $this->getUser()->getId() && $reponse->getMembre() != $user) {
 
-                        if ($c[1] != $this->getUser()->getId()) {
+                        $membre = $this->getDoctrine()->getRepository('SmartUnityAppBundle:membre')->find($Commentaire[1]);
 
-                            $membre = $this->getDoctrine()->getRepository('SmartUnityAppBundle:membre')->find($c[1]);
-
-                            if ($membre->getPrefComm() == true) {
-                                //Envoi du mail`
-                                $sujetQuestion = $reponse->getQuestion()->getSujet();
-                                $sujetMail = "Commentaire à votre réponse sur smartunity.fr";
-                                $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
-                                $contenu = "Bonjour " . $reponse->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à la réponse que vous avez également commentée concernant la question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
-                                $mailMembreQuestion = $reponse->getMembre()->getEmail();
-                                $message = \Swift_Message::newInstance()
-                                        ->setContentType('text/html')
-                                        ->setSubject($sujetMail)
-                                        ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-                                        ->setTo($mailMembreQuestion)
-                                        ->setBody($contenu);
-                                $this->get('mailer')->send($message);
-                            }
+                        if ($membre->getPrefComm() == true) {
+                            //Envoi du mail`
+                            $sujetQuestion = $reponse->getQuestion()->getSujet();
+                            $sujetMail = "Commentaire à votre réponse sur smartunity.fr";
+                            $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
+                            $contenu = "Bonjour " . $reponse->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à la réponse que vous avez également commentée concernant la question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
+                            $mailMembreQuestion = $reponse->getMembre()->getEmail();
+                            $message = \Swift_Message::newInstance()
+                                    ->setContentType('text/html')
+                                    ->setSubject($sujetMail)
+                                    ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
+                                    ->setTo($mailMembreQuestion)
+                                    ->setBody($contenu);
+                            $this->get('mailer')->send($message);
                         }
                     }
+                }
 
-                    if ($prefCommentaireMembre == true) {
+                if ($reponse->getMembre() != $user && $prefCommentaireMembre == true) {
 
-                        //Envoi du mail`
-                        $sujetQuestion = $reponse->getQuestion()->getSujet();
-                        $sujetMail = "Commentaire à votre réponse sur smartunity.fr";
-                        $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
-                        $contenu = "Bonjour " . $reponse->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à votre réponse concernant la question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
-                        $mailMembreQuestion = $reponse->getMembre()->getEmail();
-                        $message = \Swift_Message::newInstance()
-                                ->setContentType('text/html')
-                                ->setSubject($sujetMail)
-                                ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-                                ->setTo($mailMembreQuestion)
-                                ->setBody($contenu);
-                        $this->get('mailer')->send($message);
-                    }
+                    //Envoi du mail`
+                    $sujetQuestion = $reponse->getQuestion()->getSujet();
+                    $sujetMail = "Commentaire à votre réponse sur smartunity.fr";
+                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
+                    $contenu = "Bonjour " . $reponse->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à votre réponse concernant la question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
+                    $mailMembreQuestion = $reponse->getMembre()->getEmail();
+                    $message = \Swift_Message::newInstance()
+                            ->setContentType('text/html')
+                            ->setSubject($sujetMail)
+                            ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
+                            ->setTo($mailMembreQuestion)
+                            ->setBody($contenu);
+                    $this->get('mailer')->send($message);
                 }
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             } else {
-
-                return new Response("cassé");
+                $this->get('session')->getFlashBag()->add(
+                        'ProblemeCommentaire', 'Un problème est survenu'
+                );
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
-        return "";
+        $this->get('session')->getFlashBag()->add(
+                'ProblemeCommentaire', 'Un problème est survenu'
+        );
+        return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
     }
 
     public function addSoutienQuestionAction($slug) {
@@ -1302,12 +1314,13 @@ class QuestionReponseController extends Controller {
                         'max' => ($user->getCagnotte())
                     )
                 ))
-                ->add('soutenir', 'submit')
+                ->add('valider', 'submit')
                 ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSoutien->bind($this->getRequest());
 
+            p($formSoutien->getErrors());
             if ($formSoutien->isValid()) {
 
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
@@ -1331,8 +1344,10 @@ class QuestionReponseController extends Controller {
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
-
-        return new Response("cassé");
+        $this->get('session')->getFlashBag()->add(
+                'ProblemeCommentaire', 'Un problème est survenu'
+        );
+        return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
     }
 
     public function signalerQuestionAction($slug) {
