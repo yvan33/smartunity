@@ -87,8 +87,9 @@
                     {% endif %}
                 </div>                
                 <div class="head-blue"><h1 class="sujet-question" style="float:left">{{ question.sujet }} </h1>
+                    {% if is_granted('ROLE_USER') %}
                     {% if app.user.username==question.membre.username and not is_validated and listeReponses is empty %} <a style="float:left" href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-edit"></span></a> {% endif %}
-                    {# <button class="btn share-button"><a href="#" class="btn" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on bottom"><span class="glyphicon glyphicon-share"></span></a></button> #}
+                    {% endif %}
 
                     <p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                 </div>
