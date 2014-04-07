@@ -10,7 +10,7 @@
 
                 <input type="radio" name="s1" id="sOff" value="0" hidden {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_repondre_questions' %} checked{% endif %}>
                 <label for="sOff" class="back-color switch switch--off" id="sli-re">Répondre</label>#}
-                Rechercher :
+                Rechercher
             </h1>
         </div>
     </div>
@@ -23,11 +23,11 @@
         <div class="find-content">
             <form action="{{ path('smart_unity_question_reponse_demander_questions') }}" method="GET">
                 <div spellcheck="false" class="input-group cent-h find-slider" style="position: relative;">
-                    <input type="text" placeholder="Entrez votre question ici..." name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">
-       <div class="rech-switch" id="sli-re"><a>Recherche avancée</a></div>                
+                    <input type="text" placeholder="Entrez votre question ici..." name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">               
                     <input type="hidden" name="p" id="p" value="1" class="form-control">
                     <span class="input-group-btn">
                         <button class="search-btn" type="submit"><span class="glyphicon glyph-barre glyphicon-search" ></span></button>
+                        <button type="button" id="sli-re" class="search-answer inactive-advanced-search" ><span  class="glyphicon glyphicon-filter"></span></button>
                     </span>
                 </div>
             </form>
@@ -49,10 +49,10 @@
                     {{ form_widget(formQuestion.os, { 'attr': {'class': 'chosen-select', 'data-placeholder':"Système logiciel"} }) }}
                     {{ form_widget(formQuestion.typeQuestion, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Type de question'} }) }}
                     {{ form_widget(formQuestion.motCle, { 'attr': {'class': 'text-mot-cle', 'placeholder':'Mot(s) clé(s)'} }) }}
-                    <div class="rech-switch" id="sli-de"><a>Recherche normale</a></div> 
                     {{form_widget(formQuestion._token)}} 
                     <input type="hidden" name="p" id="p" value="1" class="form-control">
                     <button class="search-answer" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
+                    <button type="button" id="sli-de" class="search-answer" ><span class="glyphicon glyphicon-filter"></span></button>
                 </div>
                 </div>    
             </form>
@@ -64,11 +64,12 @@
 <div class="ou row text-center">OU</div>
 
     		<div class="text-center">
-                    <a id="popupQuestion"{% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour poser une question." href= "{{ path('fos_user_security_login') }}" {% else %} href="{{ path('smart_unity_question_reponse_add_question')}}"{% endif %}"><button class="bouton-repondre poser-question" >Posez votre question</button></a>
+                    <a id="popupQuestion"{% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour poser une question." href= "{{ path('fos_user_security_login') }}" {% else %} href="{{ path('smart_unity_question_reponse_add_question')}}"{% endif %}"><button class="bouton-repondre poser-question" >Poser une question</button></a>
 		</div>
 
 <script>
-    $("#sli-re").click(function() {
+    $("#sli-re").click(function(e) {
+        e.preventDefault();
         if ($("#sli1").is(':visible')) {
 
             $('#sli1').fadeToggle(100, 'linear', function() {
@@ -76,7 +77,8 @@
             });
         }
     });
-    $("#sli-de").click(function() {
+    $("#sli-de").click(function(e) {
+        e.preventDefault();
         if ($("#sli2").is(':visible')) {
             $('#sli2').fadeToggle(100, 'linear', function() {
                 $('#sli1').fadeToggle(100);
