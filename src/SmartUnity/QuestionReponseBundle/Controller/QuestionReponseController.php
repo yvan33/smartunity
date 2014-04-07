@@ -428,7 +428,7 @@ class QuestionReponseController extends Controller {
         return $listeQuestions;
     }
 
-    public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion, $haveEditedReponse, $alreadyAnswered) {
+    public function displayReponseAction(Request $request, $slug, $tri, $page) {
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -655,10 +655,6 @@ class QuestionReponseController extends Controller {
                     'formReponse' => $formReponse->createView(),
                     'formEditReponse' => $formEditReponse->createView(),
                     'formSoutien' => $formSoutien->createView(),
-                    'haveAddedAnswer' => $haveAddedAnswer,
-                    'haveEditedQuestion' => $haveEditedQuestion,
-                    'haveEditedReponse' => $haveEditedReponse,
-                    'alreadyAnswered' => $alreadyAnswered,
                     'is_answered_by_user' => $isAnswered,
                     'isup' => $isup_rep,
                     'isdown' => $isdown_rep
@@ -834,7 +830,12 @@ class QuestionReponseController extends Controller {
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($question);
                     $em->flush();
-                    return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedQuestion' => '1')));
+
+                    $this->get('session')->getFlashBag()->add(
+                            'editedQuestion', 'Votre question a bien été modifiée'
+                    );
+
+                    return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
                 }
             }
         }
@@ -908,7 +909,12 @@ class QuestionReponseController extends Controller {
 
         foreach ($question->getReponses() as $reponse) {
             if ($reponse->getMembre() == $user) {
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'alreadyAnswered' => '1')));
+                
+                $this->get('session')->getFlashBag()->add(
+                        'alreadyAnswered', 'Vous avez déjà répondu à cette question! Vous pouvez seulement modifier votre réponse.'
+                );
+                
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
 
@@ -942,16 +948,20 @@ class QuestionReponseController extends Controller {
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
                             ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-                            ->setTo($mailMembreQuestion)
+                            ->setTo($membreQuestion->getEmail())
                             ->setBody($contenu);
-                    $this->get('mailer')->send($message);                    
+                    $this->get('mailer')->send($message);
                 }
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newReponse);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveAddedAnswer' => '1')));
+                $this->get('session')->getFlashBag()->add(
+                        'addedAnswer', 'Votre réponse a bien été ajoutée'
+                );
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
             throw new \Exception('Votre réponse n\'a pas pu être ajoutée');
         }
@@ -1005,7 +1015,11 @@ class QuestionReponseController extends Controller {
                 $em->persist($reponse);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedReponse' => '1')));
+                $this->get('session')->getFlashBag()->add(
+                        'editedAnswer', 'Votre réponse a bien été modifiée'
+                );
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
         return new \Exception('Votre réponse n\'a pas pu être éditée');
@@ -1061,7 +1075,7 @@ class QuestionReponseController extends Controller {
                                 ->setContentType('text/html')
                                 ->setSubject($sujetMail)
                                 ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-                                ->setTo($mailMembreReponse)
+                                ->setTo($repondant->getEmail())
                                 ->setBody($contenu);
                         $this->get('mailer')->send($message);
                     }
@@ -1115,9 +1129,9 @@ class QuestionReponseController extends Controller {
                             ->setContentType('text/html')
                             ->setSubject($sujetMail)
                             ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-	                        ->setTo($mailMembreReponse)
+                            ->setTo($repondant->getEmail())
                             ->setBody($contenu);
-                    $this->get('mailer')->send($message);                    
+                    $this->get('mailer')->send($message);
                 }
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug())));
