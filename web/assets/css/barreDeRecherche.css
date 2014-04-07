@@ -11,7 +11,36 @@
 
 .slider {
 	position:relative;
-	width:100%;
+	width:90%;
+        margin: 0 auto;
+}
+.rech-switch {
+    position: absolute;
+    bottom: -23px;
+    cursor: pointer;
+}
+
+#sli-de {
+    left: 7px;
+}
+
+.rechercher {
+    font-family: centrale;
+    margin-bottom: 20px;
+}
+
+.ou {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-family: centrale;
+}
+
+.poser-question
+{
+    width:250px;
+    height: 40px;
+    font-size: 18px;
 }
 
 .bouton-radio.active {
@@ -218,9 +247,9 @@ input[type="radio"]:checked + .switch--off {
 	background-image: none;
 }
 
-.chosen-single abbr {
+/*.chosen-single abbr {
 	margin-top: 10px;
-}
+}*/
 
 .text-mot-cle {
 	width: 190px;
@@ -236,6 +265,7 @@ input[type="radio"]:checked + .switch--off {
 	display: inline-block;
 	vertical-align: middle;
 	margin: 0 2.5px;
+        position:relative;
 }
 
 .text-mot-cle:focus {

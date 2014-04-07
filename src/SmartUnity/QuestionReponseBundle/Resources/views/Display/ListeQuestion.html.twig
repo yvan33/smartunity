@@ -273,10 +273,6 @@
     </div><!-- col fin-->
 </div>  <!-- row fin-->
 
-		<div class="bouton-com-rep">
-        	<a id="popupQuestion"{% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour poser une question." href= "{{ path('fos_user_security_login') }}" {% else %} href="{{ path('smart_unity_question_reponse_add_question')}}"{% endif %}">Posez votre question</a>
-		</div>
-
 {% endblock %}
 
 {% block callJS %}
