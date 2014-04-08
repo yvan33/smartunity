@@ -1163,13 +1163,15 @@ class QuestionReponseController extends Controller {
                 $em->persist($newCommentaireQuestion);
                 $em->flush();
                 
-                if ($question->getMembre() != $user) {
+                                    
+
                     $comment = $this->getDoctrine()->getRepository('SmartUnityAppBundle:commentaireQuestion')->getMembresCommentedQuestion($question->getId());
 
                     foreach ($comment as $c) {
 
                         if ($c[1] != $user->getId() && $question->getMembre() != $user) {
 
+                            p("demandeur différent du user et user non présent dans les commentaires");
                             $membre = $this->getDoctrine()->getRepository('SmartUnityAppBundle:membre')->find($c[1]);
 
                             if ($membre->getPrefComm() == true) {
@@ -1177,19 +1179,21 @@ class QuestionReponseController extends Controller {
                                 $sujetQuestion = $question->getSujet();
                                 $sujetMail = "Commentaire à votre question sur smartunity.fr";
                                 $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
-                                $contenu = "Bonjour , <br/> Un commentaire a la question que vous avez commentée : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
-                                $mailMembreQuestion = $question->getMembre()->getEmail();
+                                $contenu = "Bonjour , <br/> Un commentaire a été ajouté à la question que vous avez commentée : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
+                                $mailMembre = $membre->getEmail();
                                 $message = \Swift_Message::newInstance()
                                         ->setContentType('text/html')
                                         ->setSubject($sujetMail)
                                         ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-                                        ->setTo($mailMembreQuestion)
+                                        ->setTo($mailMembre)
                                         ->setBody($contenu);
                                 $this->get('mailer')->send($message);
+                                                            p("mail envoyé a tous les autres commenteurs");
                             }
                         }
                     }
                     if ($prefCommentaireMembre == true && $question->getMembre() != $user) {
+                                                            p("envoi de mail au demandeur car il est different du user");
 
                         //Envoi du mail`
                         $sujetQuestion = $question->getSujet();
@@ -1205,7 +1209,7 @@ class QuestionReponseController extends Controller {
                                 ->setBody($contenu);
                         $this->get('mailer')->send($message);
                     }
-                }
+                    
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
             else {
@@ -1261,12 +1265,12 @@ class QuestionReponseController extends Controller {
                             $sujetMail = "Commentaire à votre réponse sur smartunity.fr";
                             $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
                             $contenu = "Bonjour " . $reponse->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à la réponse que vous avez également commentée concernant la question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
-                            $mailMembreQuestion = $reponse->getMembre()->getEmail();
+                            $mailMembre = $membre->getEmail();
                             $message = \Swift_Message::newInstance()
                                     ->setContentType('text/html')
                                     ->setSubject($sujetMail)
                                     ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
-                                    ->setTo($mailMembreQuestion)
+                                    ->setTo($mailMembre)
                                     ->setBody($contenu);
                             $this->get('mailer')->send($message);
                         }
