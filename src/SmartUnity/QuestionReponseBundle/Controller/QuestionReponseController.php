@@ -1171,7 +1171,6 @@ class QuestionReponseController extends Controller {
 
                         if ($c[1] != $user->getId() && $question->getMembre() != $user) {
 
-                            p("demandeur différent du user et user non présent dans les commentaires");
                             $membre = $this->getDoctrine()->getRepository('SmartUnityAppBundle:membre')->find($c[1]);
 
                             if ($membre->getPrefComm() == true) {
@@ -1188,12 +1187,10 @@ class QuestionReponseController extends Controller {
                                         ->setTo($mailMembre)
                                         ->setBody($contenu);
                                 $this->get('mailer')->send($message);
-                                                            p("mail envoyé a tous les autres commenteurs");
                             }
                         }
                     }
                     if ($prefCommentaireMembre == true && $question->getMembre() != $user) {
-                                                            p("envoi de mail au demandeur car il est different du user");
 
                         //Envoi du mail`
                         $sujetQuestion = $question->getSujet();

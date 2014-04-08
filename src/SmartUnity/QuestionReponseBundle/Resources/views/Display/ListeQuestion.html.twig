@@ -547,19 +547,7 @@
 
             });
 
-/////////////
-////// POPUP SUR "POSER VOTRE QUESTION" 
-/////////////
-{% if not is_granted('ROLE_USER') %}
-$(document).ready(function(){
-  $('#popupQuestion').tooltip();
-  $('#popupQuestion').click(function(e){
-    e.preventDefault();
-    $("#modalConnexion").modal('show');
-    
-  })
-});
-{% endif %}
+
 
 
 

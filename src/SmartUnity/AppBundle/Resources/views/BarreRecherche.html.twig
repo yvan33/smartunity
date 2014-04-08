@@ -63,8 +63,8 @@
 
 <div class="ou row text-center">OU</div>
 
-    		<div class="text-center">
-                    <a id="popupQuestion"{% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour poser une question." href= "{{ path('fos_user_security_login') }}" {% else %} href="{{ path('smart_unity_question_reponse_add_question')}}"{% endif %}"><button class="bouton-repondre poser-question" >Poser une question</button></a>
+    		<div class="text-center" id="popupQuestion" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour poser une question." data-placement="bottom"{% endif %}  >
+                    <a {% if not is_granted('ROLE_USER') %} href= "{{ path('fos_user_security_login') }}" {% else %} href="{{ path('smart_unity_question_reponse_add_question')}}"{% endif %}><button class="bouton-repondre poser-question" >Poser une question</button></a>
 		</div>
 
 <script>
@@ -85,11 +85,24 @@
             });
         }
     });
-</script>
 
-<script>
 //// Barre de filtre réponse ////
 $(".chosen-select").chosen({disable_search_threshold: 10, allow_single_deselect: true});
+
+/////////////
+////// POPUP SUR "POSER VOTRE QUESTION" 
+/////////////
+{% if not is_granted('ROLE_USER') %}
+$(document).ready(function(){
+  $('#popupQuestion').tooltip();
+  $('#popupQuestion').click(function(e){
+    e.preventDefault();
+    $("#modalConnexion").modal('show');
+    
+  })
+});
+{% endif %}
+    
 </script>
 
 
