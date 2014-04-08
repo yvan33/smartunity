@@ -1320,7 +1320,6 @@ class QuestionReponseController extends Controller {
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSoutien->bind($this->getRequest());
 
-            p($formSoutien->getErrors());
             if ($formSoutien->isValid()) {
 
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
