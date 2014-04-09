@@ -69,4 +69,19 @@ class Mailer {
         $this->sendMessage($to, $subject, $body);
     }
     
+    //Demande de parrainage
+    public function parrainageMessage($parrain, $mailFilleul, $urlParrainage) {
+
+        $subject = $parrain->getUsername(). "vous invite à rejoindre Smart'Unity !";
+        $template = 'SmartUnityAppBundle:Mails:invitation_parrainage.html.twig';
+        $to = $mailFilleul;
+        $urlCCM = $this->generateUrl('smart_unity_app_descriptionpage', true);
+        $body = $this->templating->render($template, array(
+            'parrain' => $parrain,
+            'urlParrainage' => $urlParrainage,
+            'urlCCM' => $urlCCM
+        ));
+        $this->sendMessage($to, $subject, $body);
+    }
+    
 }   

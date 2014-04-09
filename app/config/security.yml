@@ -27,7 +27,7 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
+        
         main:
             pattern:        ^/
             anonymous:      true
@@ -56,9 +56,9 @@ security:
             #    realm: "Secured Demo Area"
 
     access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
         - { path: ^/Admin/, roles: ROLE_ADMIN }
         - { path: ^/secured/.*, role: [IS_AUTHENTICATED_FULLY] } # This is the route secured with fos_facebook
-        - { path: ^/.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/Utilisateur/mon-compte, role: ROLE_USER }
         - { path: ^/efconnect, role: ROLE_USER }
         - { path: ^/elfinder, role: ROLE_USER }
+        - { path: ^/.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

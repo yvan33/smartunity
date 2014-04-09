@@ -209,7 +209,7 @@ class UtilisateurController extends Controller {
             $form = $this->createForm('smartunity_user_parrainage', $parrainage);
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $mail = $form->get('email')->getData();
+                $mailFilleul = $form->get('email')->getData();
                 $userid = $parrainage->getId();
                 $concat = $mail . $userid;
                 $code = sha1($concat);
@@ -218,17 +218,10 @@ class UtilisateurController extends Controller {
                 $em->persist($parrainage);
                 $em->flush();
 
-                $url = $this->generateUrl('smart_unity_utilisateur_confirmparrainage', array('code' => $code), true);
-                $contenu="Bonjour,  <br/><br/>".$user->getUsername()." te conseille de découvrir le <a href=\"http://smartunity.fr\">smartunity.fr</a>, une plateforme d'entraide sur l'utilisation des smartphones en te parrainant.<br/>";
-                $contenu.="Ce parrainage te permettra d'augmenter ta cagnotte de 30 points. <br/> Il suffit de s'inscrire à l'adresse suivante: <br/>";
-                $contenu.="<a href=\"$url\">".$url."</a><br/> Toute la communauté serait heureuse de t'accueillir. <br/><br/> A bientôt sur Smart'Unity <br/>";
-                $message = \Swift_Message::newInstance()
-                    ->setContentType('text/html')
-                    ->setSubject($user->getUsername()." souhaite te parrainer! Rejoins la communauté Smart'Unity ")
-                    ->setFrom("ne-pas-repondre@smartunity.fr")
-                    ->setTo($mail)
-                    ->setBody($contenu);
-                $this->get('mailer')->send($message);
+                $urlParrainage = $this->generateUrl('smart_unity_utilisateur_confirmparrainage', array('code' => $code), true);
+                
+                    //Envoi du mail
+                    $this->get('smart_unity_app.mailer')->parrainageMessage($user, $mailFilleul, $urlParrainage);
                 
             }
             return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
