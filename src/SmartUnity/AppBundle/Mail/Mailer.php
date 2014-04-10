@@ -72,7 +72,7 @@ class Mailer {
     //Demande de parrainage
     public function parrainageMessage($parrain, $mailFilleul, $urlParrainage) {
 
-        $subject = $parrain->getUsername(). "vous invite à rejoindre Smart'Unity !";
+        $subject = $parrain->getUsername(). " t'invite à rejoindre Smart'Unity !";
         $template = 'SmartUnityAppBundle:Mails:invitation_parrainage.html.twig';
         $to = $mailFilleul;
         $body = $this->templating->render($template, array(

@@ -12,6 +12,19 @@
 
 {% block profil %}
 
+
+
+{#/////////////////////////////////////////////////
+Toast
+///////////////////////////////////////////////////#}
+
+{% for flashMessage in app.session.flashbag.get('parrainageEnvoye') %}
+<div class="toast">{{ flashMessage }}</div>
+{% endfor %}
+{#/////////////////////////////////////////////////
+Fin Toast
+///////////////////////////////////////////////////#}
+
 <div class="row">
     <div class="col-md-12 text-center"><h1>Mon compte</h1>
     </div>
