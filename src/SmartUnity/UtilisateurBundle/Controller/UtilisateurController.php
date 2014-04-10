@@ -193,8 +193,6 @@ class UtilisateurController extends Controller {
 
     public function envoiParrainageAction(Request $request) {
 
-
-
         if (!isset($parrainage)) {
 
             $user = $this->getUser();
@@ -202,6 +200,7 @@ class UtilisateurController extends Controller {
         }
 
         if ($request->getMethod() == 'POST') {
+            
             $form = $this->createForm('smartunity_user_parrainage', $parrainage);
             $form->handleRequest($request);
             if ($form->isValid()) {
@@ -218,18 +217,16 @@ class UtilisateurController extends Controller {
 
                 //Envoi du mail
                 $this->get('smart_unity_app.mailer')->parrainageMessage($user, $mailFilleul, $urlParrainage);
-
-
                 $this->get('session')->getFlashBag()->add(
                         'parrainageEnvoye', 'Une invitation de parranaige à bien été envoyée à cette adresse : '.$mailFilleul
                 );
+                
                 return $this->redirect($this->generateUrl('smart_unity_utilisateur_homepage'));
             }
             throw new Exception('Le formulaire de parrainage n\'est pas valide');
         }
-        return $this->render('SmartUnityUtilisateurBundle:Profile:show.html.twig', array(
-                    'form_parrainage' => $form->createView()
-        ));
+            throw new Exception('L\'accès à la méthode ne s\'est pas fait par soumission du formulaire.');
+
     }
 
     public function confirmParrainageAction($code) {
