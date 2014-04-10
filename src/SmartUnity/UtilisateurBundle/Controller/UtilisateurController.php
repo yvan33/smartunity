@@ -211,7 +211,7 @@ class UtilisateurController extends Controller {
             if ($form->isValid()) {
                 $mailFilleul = $form->get('email')->getData();
                 $userid = $parrainage->getId();
-                $concat = $mail . $userid;
+                $concat = $mailFilleul . $userid;
                 $code = sha1($concat);
                 $parrainage->setCode($code);
                 $em = $this->getDoctrine()->getManager();
