@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new FM\ElfinderBundle\FMElfinderBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new SunCat\MobileDetectBundle\MobileDetectBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

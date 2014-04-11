@@ -26,7 +26,8 @@
         "friendsofsymfony/jsrouting-bundle": "@stable",
         "jms/serializer-bundle": "dev-master",
         "egeloen/ckeditor-bundle": "~2.0",
-        "helios-ag/fm-elfinder-bundle": "1.x"
+        "helios-ag/fm-elfinder-bundle": "1.x",
+        "suncat/mobile-detect-bundle": "0.9.*"
     },
     "scripts": {
         "post-install-cmd": [

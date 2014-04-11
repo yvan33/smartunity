@@ -170,3 +170,9 @@ fm_elfinder:
 #    configs:
 #        default:
 #            filebrowserBrowseRoute: elfinder                
+
+mobile_detect:
+    redirect:
+        mobile: ~
+        tablet: ~
+    switch_device_view: ~
