@@ -3,19 +3,155 @@
 {% block title %}Boutique cadeaux{% endblock %}
 
 {% block stylesheets %} 
-<link href="{{ asset('assets/css/boutique.css') }}"  rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/boutique.css'
+                'assets/css/formulaire.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {%endblock%}
 
 {% block body %}
-<div class="row">
 
-    <div class="col-md-offset-1 col-md-10 text-why">
-            <div class="title text-center cookie-title">
-                {# Boutique #}
-                <img style="width:90%; margin-top: 20px;" src="{{asset('assets/img/cadeaux.png') }}" alt="">
-            </div>
+<div class="row sans-marge">
+    <div class="title text-center cookie-title">
+        Boutique cadeaux
     </div>
+    <div class="col-md-12 texte-presentation-boutique">
+        <p class="police-text"> Vous vous trouvez dans la caverne d'Alibaba de Smart'Unity. Chaque cadeau à une valeur en points. 
+            Pour commander un cadeau, vous devez avoir suffisament de points dans votre cagnotte.
+        </p>
+    </div>
+    {% if is_granted('ROLE_USER') %}
+    <div class="row sans-marge">
+        <div class="bloc-cagnotte grille-content">
+            <span class="text-bloc-cagnotte">Votre cagnotte actuelle:</span>
+            <span class="cochon">	
+                <img src="{{ asset('assets/img/piggy-bank.png') }}" height="130px"/>
+                <p class="nb-pts-cagnotte">{{ app.user.cagnotte }}</p>
+            </span>
+        </div>
+    </div>
+       {% endif %}
+
+{% for gift in gifts %}    
+    <div class="row sans-marge produit grille-content">
+        <div class="col-md-4 photo-cadeau">
+            <div class="apercu-cadeau">
+                <img src="{{asset('assets/img/mdgsm-logo.jpeg') }}"  alt="Cadeau">
+            </div>
+        </div>
+        <div class="col-md-8 infos-cadeau">
+            <div class="row entete-cadeau sans-marge">
+                <div class="rond-point"><p class="txt-rond">{{gift.price}}</p><p class="txt-pts">pts</p></div>
+                <div class="titre-cadeau">
+                    {{gift.name}}
+                </div>
+            </div>
+            <div class="row description-cadeau sans-marge">
+                <strong>Description du produit :</strong> {{gift.description | raw}}
+            </div>
+            <div class="row sans-marge">
+                <div class="bloc-boutons-produit">
+                    <button type="button" class="bouton-repondre bouton-choisir-produit" 
+                            {% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour commander un cadeau."{% elseif is_granted('ROLE_USER') and app.user.cagnotte < gift.price %} 
+                            rel="tooltip" data-original-title="Vous n'avez pas assez de point :-(" {% endif %}
+                            data-toggle="modal" data-target="#ModalValidation" data-giftid="{{gift.id}}" data-giftname="{{gift.name}}" data-giftprice="{{gift.price}}">Je le veux !</button>
+                </div>
+
+{% for flashMessage in app.session.flashbag.get('insufficientPool') %}
+                <div class="flash">
+                        {{ flashMessage }}
+                </div>
+{% endfor %}    
+
+{% for flashMessage in app.session.flashbag.get('insufficientQuantity') %}
+                <div class="flash">
+                        {{ flashMessage }}
+                </div>
+{% endfor %}
+
+            </div>
+        </div>
+    </div>
+ {% endfor %}
+
 </div>
-  
+
+{#///////////////////////Bloc modal lors du choix d'un cadeau////////////////////////////#}
+{% if is_granted('ROLE_USER') and app.user.cagnotte > 10 %}
+
+<div class="modal fade text-center" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="validation-dialog">
+        <div class="validation-content">
+            <div class="validation-body">
+                <p class="gift-choice"></p>
+                <p class="gift-price"></p>
+                <p>Etes-vous sûr de votre choix?</p>
+            </div>
+            <div class="validation-footer">
+                <button type="button" class="btn bouton-repondre" data-dismiss="modal">Annuler</button>
+                <a id="confirm-get-gift" class="btn bouton-repondre" href="#">Valider</a>   
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  
+                    {% endif %}
+{#/////////////////////END Bloc modal lors du choix d'un cadeau///////////////////////////////#}
+
 {% endblock body %}
+
+{% block callJS %}
+
+
+<script>
+/////////Get user variables
+{#    $(document).ready(function(){    
+    var userPool = {{app.user.cagnotte}} ;
+    console.log(userPool);
+    });#}
+
+//////Ajout des variables correspondant au cadeau à la vue modale ////////
+    $('.bouton-choisir-produit').click(function() {
+        var giftId = $(this).data("giftid");
+        var giftName = $(this).data("giftname");
+        var giftPrice = $(this).data("giftprice");
+
+        $('.gift-choice').html("Vous êtes sur le point de choisir le cadeau : "+ giftName);
+        $('.gift-price').html("Il coûte : " +giftPrice + " pts");
+        $('#confirm-get-gift').attr('href', Routing.generate('smart_unity_boutique_confirmation', {id: giftId}));
+    });
+
+/////////////
+////// POPUP SUR "Je le veux" 
+/////////////
+
+///If disconnected
+{% if not is_granted('ROLE_USER') %}
+    $('.bouton-choisir-produit').tooltip();
+    $('.bouton-choisir-produit').click(function(e) {
+        e.preventDefault();
+        $("#top-barre-recherche").hide();
+        $("#modalConnexion").modal('show');
+        event.stopPropagation();
+    });
+
+{% elseif is_granted('ROLE_USER') %}
+
+    $('.bouton-choisir-produit').tooltip();
+    
+    $('.bouton-choisir-produit').click(function(e) {
+        var userPool = {{app.user.cagnotte}};
+        var giftPrice = $(this).data("giftprice");
+        if (userPool < giftPrice) {
+            event.stopPropagation();
+        }
+    });
+
+{% endif %}
+
+</script>    
+
+
+
+{% endblock %}
 

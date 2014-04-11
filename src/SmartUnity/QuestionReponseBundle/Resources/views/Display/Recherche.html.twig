@@ -3,14 +3,12 @@
 {% block title %}Resultats de la recherche{% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/css/question.css') }}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
-<link href="{{ asset('assets/css/barreDeRecherche.css') }}"  rel="stylesheet" type="text/css">
-{% endblock %}
-
-{% block initJS %}
-<script src="{{ asset('assets/js/bootstrap-paginator.js') }}"></script>
-<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/magnificpopup.css' 
+				 'assets/css/question.css'
+				 'assets/css/barreDeRecherche.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
 
 {% block body %}
@@ -136,15 +134,17 @@
                 Tooltip!
             </div>
             <div class="tooltip-arrow"></div>
-        </div>
-        <div class="bouton-com-rep">
-            <a id="popupQuestion"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour poser une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_question')}}{% else %}#{% endif %}">Posez votre question</a>
-        </div>		
+        </div>	
     </div>  <!-- row fin-->
 
 {% endblock %}
 
 {% block callJS %}
+{% javascripts filter='yui_js' 
+				'assets/js/bootstrap-paginator.js' 
+				'assets/js/magnificpopup-0.9.9.min.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
     <script language="javascript">
 
@@ -152,30 +152,12 @@
         ////// POPUP
         /////////////
     {% if is_granted('ROLE_USER') %}
-    {#$('#popupQuestion').magnificPopup({
-      type: 'iframe',
-      callbacks: {
-        open: function(){
-          $('#header').css('z-index', '1000');
-          this.content.css('background-color', '#FFFFFF');
-        },
-        close: function(){
-          $('#header').css('z-index', '1000000');
-        }
-      },
-      disableOn: function() {
-        if( $(window).width() < 768 ) {
-          return false;
-        } 
-        return true;
-      },
-
-    });#}
     {% else %}
         $(document).ready(function() {
             $('#popupQuestion').tooltip();
             $('#popupQuestion').click(function(e) {
-                e.preventDefault();
+                    e.preventDefault();
+    				$("#modalConnexion").modal('show');
             })
         });
     {% endif %}

@@ -1,44 +1,17 @@
-<style>
-.text-mot-cle {
-	width: 190px;
-	background-color: #CCC;
-	color: #7b7a7a;
-	border: 0;
-	font-size: 14px;
-	font-family: centrale;
-	height: 32px;
-	padding-left: 12px;
-	border-radius: 5px;
-	position: relative;
-	display: inline-block;
-	vertical-align: middle;
-	margin: 0 2.5px;
-}
-
-.text-mot-cle:focus {
-	outline: 0;
-}
-
-.chosen-container .chosen-results li.highlighted {
-  	color: #fff;
-	background: #e37151;
-	background-image: none;
-}
-</style>
-
 {% block recherche %}
 
 {#BOUTONS DEMANDER ET REPONDRE#}
 <div class="row question">
     <div class="col-md-6 col-md-offset-3" >
-        <div class="recherche text-center">
-            <p>
-                <input type="radio" name="s1" id="sOn" value="1" hidden {% if app.request.attributes.get('_route') != 'smart_unity_question_reponse_repondre_questions' %} checked {% endif %}>  
+        <div class="text-center">
+            <h1 class="rechercher">
+{#                <input type="radio" name="s1" id="sOn" value="1" hidden {% if app.request.attributes.get('_route') != 'smart_unity_question_reponse_repondre_questions' %} checked {% endif %}>  
                 <label for="sOn" class="back-color switch switch--on" id="sli-de">Demander</label>
 
                 <input type="radio" name="s1" id="sOff" value="0" hidden {% if app.request.attributes.get('_route') == 'smart_unity_question_reponse_repondre_questions' %} checked{% endif %}>
-                <label for="sOff" class="back-color switch switch--off" id="sli-re">Répondre</label>
-            </p>
+                <label for="sOff" class="back-color switch switch--off" id="sli-re">Répondre</label>#}
+                Rechercher
+            </h1>
         </div>
     </div>
 </div>
@@ -49,18 +22,18 @@
     <div style="clear:both;">
         <div class="find-content">
             <form action="{{ path('smart_unity_question_reponse_demander_questions') }}" method="GET">
-                <div spellcheck="false" class="input-group cent-h find-slider">
-                    <input type="text" placeholder="Entrez votre question ici..." name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">
+                <div spellcheck="false" class="input-group cent-h find-slider" style="position: relative;">
+                    <input type="text" placeholder="Entrez votre question ici..." name="q" id="q" value="{% if requete is defined %}{{requete}}{% endif %}" class="form-control">               
                     <input type="hidden" name="p" id="p" value="1" class="form-control">
                     <span class="input-group-btn">
                         <button class="search-btn" type="submit"><span class="glyphicon glyph-barre glyphicon-search" ></span></button>
+                        <button type="button" id="sli-re" class="search-answer inactive-advanced-search" ><span  class="glyphicon glyphicon-filter"></span></button>
                     </span>
                 </div>
             </form>
         </div>
     </div>
-    <div style="clear:both;">
-    </div>
+
 </div>
 {#FIN BARRE RECHERCHE DEMANDER#}
 
@@ -79,18 +52,24 @@
                     {{form_widget(formQuestion._token)}} 
                     <input type="hidden" name="p" id="p" value="1" class="form-control">
                     <button class="search-answer" type="submit"><span class="glyphicon glyphicon-search" ></span></button>
+                    <button type="button" id="sli-de" class="search-answer" ><span class="glyphicon glyphicon-filter"></span></button>
                 </div>
                 </div>    
             </form>
         </div>
     </div>
-    <div style="clear:both;">
-    </div>  
 </div>
 {#FIN BARRE RECHERCHE REPONDRE#}
 
+<div class="ou row text-center">OU</div>
+
+    		<div class="text-center" id="popupQuestion" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour poser une question." data-placement="bottom"{% endif %}  >
+                    <a {% if not is_granted('ROLE_USER') %} href= "{{ path('fos_user_security_login') }}" {% else %} href="{{ path('smart_unity_question_reponse_add_question')}}"{% endif %}><button class="bouton-repondre poser-question" >Poser une question</button></a>
+		</div>
+
 <script>
-    $("#sli-re").click(function() {
+    $("#sli-re").click(function(e) {
+        e.preventDefault();
         if ($("#sli1").is(':visible')) {
 
             $('#sli1').fadeToggle(100, 'linear', function() {
@@ -98,57 +77,34 @@
             });
         }
     });
-    $("#sli-de").click(function() {
+    $("#sli-de").click(function(e) {
+        e.preventDefault();
         if ($("#sli2").is(':visible')) {
             $('#sli2').fadeToggle(100, 'linear', function() {
                 $('#sli1').fadeToggle(100);
             });
         }
     });
-</script>
 
-<script>
 //// Barre de filtre réponse ////
 $(".chosen-select").chosen({disable_search_threshold: 10, allow_single_deselect: true});
-</script>
 
-<script>
-///Initilisation des couleurs pour les boutons demander et répondre
-
-    var nbAl = Math.floor((Math.random() * 6) + 1) - 1;
-    var backColDemand = new Array();
-    backColDemand[0] = "#8AC757";
-    backColDemand[1] = "#3E7F89";
-    backColDemand[2] = "#5B4E9B";
-    backColDemand[3] = "#4AA95F";
-    backColDemand[4] = "#CCDA5F";
-    backColDemand[5] = "#559AA9";
-    var backColRep = new Array();
-    backColRep[0] = "#C7587A";
-    backColRep[1] = "#DF9E62";
-    backColRep[2] = "#DFC762";
-    backColRep[3] = "#DF6E62";
-    backColRep[4] = "#459E6E";
-    backColRep[5] = "#E37151";
-
-{% if app.request.attributes.get('_route') != 'smart_unity_question_reponse_repondre_questions' %}
-    $('#sli-de').css("background-color", backColDemand[nbAl]);
-{#    {% else %}    #}
-{#    $('#sli-de').css("background-color", backColDemand[nbAl]);    #}
+/////////////
+////// POPUP SUR "POSER VOTRE QUESTION" 
+/////////////
+{% if not is_granted('ROLE_USER') %}
+$(document).ready(function(){
+  $('#popupQuestion').tooltip();
+  $('#popupQuestion').click(function(e){
+    e.preventDefault();
+    $("#modalConnexion").modal('show');
+    
+  })
+});
 {% endif %}
     
-//// Modifications des couleurs quand on clique		
-
-    $('#sli-re').click(function() {
-        $(this).css("background-color", backColRep[nbAl]);
-        $('#sli-de').css("background-color", "#3e4956");
-    });
-
-    $('#sli-de').click(function() {
-        $(this).css("background-color", backColDemand[nbAl]);
-        $('#sli-re').css("background-color", "#3e4956");
-    });
-
 </script>
+
+
 
 {% endblock %}

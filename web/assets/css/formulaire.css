@@ -30,7 +30,7 @@
 }
 
 
-.form-addquestion .grille-1 
+.addquestion .grille-1 
 {
     width: 15%;
     margin: 3px 2.5% 3px 5%;
@@ -38,7 +38,7 @@
     text-align: right;
 }
 
-.form-addquestion .grille-2 
+.addquestion .grille-2 
 {
     width:65%;
     margin: 3px 10% 3px 2.5%;
@@ -80,18 +80,6 @@
     width:16%;
 }
 
-.grille-content
-{
-    padding:15px;
-    background-color: #f8f8ef;
-    margin-top:10px;
-    margin-bottom:5px;
-    border-radius:7px;
-    -webkit-box-shadow: 0 0 20px  #CCCCCC;
-    -moz-box-shadow: 0 0 20px  #CCCCCC;
-    box-shadow: 0 0 20px  #CCCCCC;
-}
-
 .forminfo
 {
     height: 130%;
@@ -129,13 +117,6 @@
 
 select, input:active {
     outline: 0;
-}
-
-.cookie-title
-{
-    font-family: centrale;
-    font-size: 40px;
-    margin-bottom: 15px;
 }
 
 .description{
@@ -187,19 +168,10 @@ select, input:active {
 }
 
 /* Registration */
-
-.cgu {
-    border: 1px solid #CCC;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 3px;
-}
 .accept-cgu {
     font-family: centrale;
-    margin: 0;
-    display: inline;
-    font-size: 16px;
+    font-size: 12px;
+    margin-top: 10px;
 }
 
 .text-why {
@@ -233,7 +205,13 @@ legend {
 }
 
 .titre-inscription {
-    margin-bottom: -15px;
+    margin-bottom: 15px;
+    font-size: 30px;
+}
+
+.separateur-choix-inscription {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 fieldset {
@@ -347,11 +325,6 @@ fieldset {
     margin: 0 50px 20px 50px;
 }
 
-.cookie-title {
-    line-height: 40px;
-    margin-bottom: 25px;
-}
-
 .form-textarea {
     padding-left: 10px;
     color: #555;
@@ -363,7 +336,7 @@ textarea {
     max-width: 600px;
     max-height: 300px;
 }
-.form-addquestion textarea {
+.addquestion textarea {
     max-width:none;
 }
 

@@ -20,6 +20,7 @@ class QuestionReponseController extends Controller {
 
     public function displayListOfQuestionAction($type, $page, Request $request) {
 
+
         $nbParPage = 20;
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
@@ -72,10 +73,11 @@ class QuestionReponseController extends Controller {
             $page = 1;
 
         //...Et on la supprime, une fois qu'on a checké que les valeurs correspondaient!
-        if ($listeQuestions[0]->type == $type && $listeQuestions[0]->nbParPage == $nbParPage && $listeQuestions[0]->page == $page)
-        {unset($listeQuestions[0]); }
-        else
-        { throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController'); }
+        if ($listeQuestions[0]->type == $type && $listeQuestions[0]->nbParPage == $nbParPage && $listeQuestions[0]->page == $page) {
+            unset($listeQuestions[0]);
+        } else {
+            throw new \Exception('Erreur sur l\'appel à la BDD via SmartUnityQuestionReponseBundle:AjaxController');
+        }
 
 
         //Génération de la pagination en statique (si pas de JS)
@@ -86,7 +88,8 @@ class QuestionReponseController extends Controller {
         }
         for ($i = -2; $i < 3; $i++) {
             if (($page + $i) >= 1 && ($page + $i) <= $nbPages) {
-             array_push($pagination, array($page + $i, $page + $i, $i)); 
+
+                array_push($pagination, array($page + $i, $page + $i, $i));
             }
         }
         if ($page < $nbPages) {
@@ -191,7 +194,8 @@ class QuestionReponseController extends Controller {
         }
         for ($i = -2; $i < 3; $i++) {
             if (($page + $i) >= 1 && ($page + $i) <= $nbPages) {
-            array_push($pagination, array($page + $i, $page + $i, $i)); }
+                array_push($pagination, array($page + $i, $page + $i, $i));
+            }
         }
         if ($page < $nbPages) {
             array_push($pagination, array('>', $page + 1, '3'));
@@ -368,7 +372,7 @@ class QuestionReponseController extends Controller {
             $dateBestReponse = null;
             $is_certif_question = false;
             $is_validated_question = false;
-
+            $remunerationQuestion = $Question->getRemuneration() + $Question->getSupplementRemuneration();
 
             if ($Question->getIsValidatedQuestion()) {
                 foreach ($Question->getReponses() as $reponse) {
@@ -409,7 +413,7 @@ class QuestionReponseController extends Controller {
                 'description' => $Question->getDescription(),
                 'date' => $Question->getDate()->format('d-m-Y à H:i'),
                 'membre_username' => $Question->getMembre()->getUsername(),
-                'remuneration' => $Question->getRemuneration(),
+                'remuneration' => $remunerationQuestion,
                 'nb_reponses' => $Question->getReponses()->count(),
                 'best_reponse' => $descriptionBestReponse,
                 'auteur_best_reponse' => $auteurBestreponse,
@@ -423,8 +427,6 @@ class QuestionReponseController extends Controller {
         }
         return $listeQuestions;
     }
-
-    public function displayReponseAction(Request $request, $slug, $tri, $page, $haveAddedAnswer, $haveEditedQuestion, $haveEditedReponse, $haveDeletedReponse, $alreadyAnswered) {
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -513,6 +515,7 @@ class QuestionReponseController extends Controller {
         $question = $questionRepository->findOneBySlug($slug);
 
         $isValidated = $question->getIsValidatedQuestion();
+
         $isCertif = $question->getIsCertifiedQuestion();
         $isAnswered = FALSE;
         $membre = $question->getMembre();
@@ -560,11 +563,12 @@ class QuestionReponseController extends Controller {
                             ),
                             array(
                                 'name' => 'colors',
-                                'items' => array('TextColor', 'BGColor')
+                                'items' => array('TextColor' , 'BGColor'),
                             ),
                         ),
+                        'extraPlugins' => 'simpleuploads',
                         'uiColor' => '#ffffff',
-                        'removePlugins' => 'elementspath'
+                        'removePlugins' => 'elementspath',
                     ),
                     'required' => true))
                 ->add('valider', 'submit')
@@ -595,6 +599,7 @@ class QuestionReponseController extends Controller {
                                 'items' => array('TextColor', 'BGColor')
                             ),
                         ),
+                        'extraPlugins' => 'simpleuploads',
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath'
                     ),
@@ -615,10 +620,11 @@ class QuestionReponseController extends Controller {
                 }
             }
 
+
             $formSoutien = $this->createFormBuilder()
                     ->setAction($this->generateUrl('smart_unity_question_reponse_add_soutien_question', array('slug' => $slug)))
                     ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
-                    ->add('soutenir', 'submit')
+                    ->add('valider', 'submit')
                     ->getForm();
         } else {
             $formSoutien = $this->createFormBuilder()->getForm();
@@ -653,12 +659,7 @@ class QuestionReponseController extends Controller {
                     'formEditReponse' => $formEditReponse->createView(),
                     'formDeleteReponse' => $formDeleteReponse->createView(),
                     'formSoutien' => $formSoutien->createView(),
-                    'haveAddedAnswer' => $haveAddedAnswer,
-                    'haveEditedQuestion' => $haveEditedQuestion,
-                    'haveEditedReponse' => $haveEditedReponse,
-                    'haveDeletedReponse' => $haveDeletedReponse,
-                    'alreadyAnswered' => $alreadyAnswered,
-                    'is_answered_by_user' => $isAnswered,
+					'is_answered_by_user' => $isAnswered,
                     'isup' => $isup_rep,
                     'isdown' => $isdown_rep
         ));
@@ -723,7 +724,6 @@ class QuestionReponseController extends Controller {
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formQuestion->bind($this->getRequest());
-
             if ($formQuestion->isValid()) {
                 $newQuestion->setMembre($user);
                 $newQuestion->setSignaler(false);
@@ -731,9 +731,10 @@ class QuestionReponseController extends Controller {
                 $newQuestion->setDate(new \DateTime(date("Y-m-d H:i:s"))); //date locale
 
                 $slug = $this->slugify($formQuestion->get('sujet')->getData());
-                $newQuestion->setSlug($slug);
 
+                $newQuestion->setSlug($slug);
                 $cagnotte = $user->getCagnotte() - $formQuestion->get('remuneration')->getData() + 10;
+
                 if ($cagnotte >= 0) {
                     $user->setCagnotte($cagnotte);
 
@@ -806,7 +807,13 @@ class QuestionReponseController extends Controller {
                     'class' => 'SmartUnityAppBundle:typeQuestion',
                     'property' => 'nom',
                     'required' => false))
-                ->add('remuneration', 'integer', array('attr' => array('min' => $ancienneDotation, 'max' => $dotationMax)))
+                ->add('remuneration', 'integer', array(
+                    'attr' => array(
+                        'class' => 'input-dotation',
+                        'min' => '10',
+                        'max' => $dotationMax
+                    ),
+                ))
                 ->add('save', 'submit', array('label' => 'Modifier ma question'))
                 ->getForm();
 
@@ -818,15 +825,22 @@ class QuestionReponseController extends Controller {
             if ($formEditQuestion->isValid()) {
 
                 $nouvelleDotation = $formEditQuestion->get('remuneration')->getData();
-                $cagnotte = $user->getCagnotte() - $nouvelleDotation - $ancienneDotation;
-                $user->setCagnotte($cagnotte);
-                $question->setDateModification(new \DateTime(date("Y-m-d H:i:s")));
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($question);
-                $em->flush();
+                $cagnotte = $user->getCagnotte() - $nouvelleDotation + $ancienneDotation;
+                if ($cagnotte >= 0 && $nouvelleDotation >= 10) {
+                    $user->setCagnotte($cagnotte);
+                    $question->setDateModification(new \DateTime(date("Y-m-d H:i:s")));
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedQuestion' => '1')));
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($question);
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add(
+                            'editedQuestion', 'Votre question a bien été modifiée'
+                    );
+
+                    return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
+                }
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Frame:EditQuestion.html.twig', array(
@@ -836,14 +850,24 @@ class QuestionReponseController extends Controller {
     }
 
     public function slugify($str) {
-        $str = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $str);
+
+        // transliterate
+        if (function_exists('iconv')) {
+            $str = iconv('utf-8', 'us-ascii//TRANSLIT', $str);
+        }
         $search = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',);
         $replace = array('s', 't', 's', 't', 's', 't', 's', 't', 'i', 'a', 'a', 'i', 'a', 'a', 'e', 'E');
         $str = str_ireplace($search, $replace, strtolower(trim($str)));
         $str = preg_replace('/[^\w\d\-\ ]/', '', $str);
         $str = str_replace(' ', '-', $str);
-        return preg_replace('/\-{2,}/', '-', $str);
-
+        $str = preg_replace('/\-{2,}/', '-', $str);
+//        
+//        ///Test de l'unicité du slug
+//        $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($str);
+//        if (isset($question)) {
+//            return false;
+//        }
+        return $str;
     }
 
     public function addReponseAction($slug) {
@@ -874,11 +898,13 @@ class QuestionReponseController extends Controller {
                             ),
                             array(
                                 'name' => 'colors',
-                                'items' => array('TextColor', 'BGColor')
+                                'items' => array('TextColor', 'BGColor'),
+                                'extraPlugins' => 'simpleuploads'
                             ),
                         ),
+                        'extraPlugins' => 'simpleuploads',
                         'uiColor' => '#ffffff',
-                        'removePlugins' => 'elementspath'
+                        'removePlugins' => 'elementspath',
                     ),
                     'required' => true))
                 ->add('valider', 'submit')
@@ -889,7 +915,12 @@ class QuestionReponseController extends Controller {
 
         foreach ($question->getReponses() as $reponse) {
             if ($reponse->getMembre() == $user) {
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'alreadyAnswered' => '1')));
+
+                $this->get('session')->getFlashBag()->add(
+                        'alreadyAnswered', 'Vous avez déjà répondu à cette question! Vous pouvez seulement modifier votre réponse.'
+                );
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
 
@@ -908,34 +939,39 @@ class QuestionReponseController extends Controller {
                 $newReponse->setSignaler(false);
 
                 $membreQuestion = $question->getMembre();
+                $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
                 $prefRepmembre = $membreQuestion->getPrefRep();
-                $mailMembreQuestion = $membreQuestion->getEmail();
                 if ($prefRepmembre == true) {
 
                     //Envoi du mail
-                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug));
-                    $sujetMail = "Vous avez une nouvelle réponse!";
-                    $expediteurMail = "ne-pas-repondre@smartunity.fr";
-
-                    $contenu = $user . "a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : http://smartunity.fr" . $urlQuestion;
-                    $message = \Swift_Message::newInstance()
-                            ->setContentType('text/html')
-                            ->setSubject($sujetMail)
-                            ->setFrom($expediteurMail)
-                            ->setTo($mailMembreQuestion)
-                            ->setBody($contenu);
-                    $this->get('mailer')->send($message);
+                    $this->get('smart_unity_app.mailer')->newAnswerMessage($membreQuestion, $user, $urlQuestion);
+//                    
+//                    //Envoi du mail
+//                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
+//                    $sujetMail = "Vous avez une nouvelle réponse!";
+//                    $contenu = $user . " a répondu à votre question sur smartunity.fr. Allez vite consulter la réponse : " . $urlQuestion;
+//                    $message = \Swift_Message::newInstance()
+//                            ->setContentType('text/html')
+//                            ->setSubject($sujetMail)
+//                            ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
+//                            ->setTo($membreQuestion->getEmail())
+//                            ->setBody($contenu);
+//                    $this->get('mailer')->send($message);
                 }
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newReponse);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveAddedAnswer' => '1')));
+                $this->get('session')->getFlashBag()->add(
+                        'addedAnswer', 'Votre réponse a bien été ajoutée'
+                );
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
             throw new \Exception('Votre réponse n\'a pas pu être ajoutée');
         }
-        
+
         return $this->render('SmartUnityQuestionReponseBundle:Frame:AddReponse.html.twig', array(
                     'formReponse' => $formReponse->createView(),
         ));
@@ -969,6 +1005,7 @@ class QuestionReponseController extends Controller {
                                 'items' => array('TextColor', 'BGColor')
                             ),
                         ),
+                        'extraPlugins' => 'simpleuploads',
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath'
                     ),
@@ -985,7 +1022,11 @@ class QuestionReponseController extends Controller {
                 $em->persist($reponse);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveEditedReponse' => '1')));
+                $this->get('session')->getFlashBag()->add(
+                        'editedAnswer', 'Votre réponse a bien été modifiée'
+                );
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
         return new \Exception('Votre réponse n\'a pas pu être éditée');
@@ -1029,8 +1070,9 @@ class QuestionReponseController extends Controller {
                     $repondant = $reponse[0]->getMembre();
 
                     $repondant->setReputation($repondant->getReputation() + 50);
-                    $repondant->setCagnotte($repondant->getCagnotte() + $question->getRemuneration());
+                    $repondant->setCagnotte($repondant->getCagnotte() + $question->getRemuneration() + $question->getSupplementRemuneration());
                     $question->setIsValidatedQuestion(true);
+                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug()), true);
 
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($reponse[0]);
@@ -1041,20 +1083,9 @@ class QuestionReponseController extends Controller {
 
 
                     $prefRepValideeMembre = $repondant->getPrefRepValidee();
-                    $mailMembreReponse = $repondant->getEmail();
                     if ($prefRepValideeMembre == true) {
-
-                        //Envoi du mail`
-                        $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
-                        $sujetMail = "Votre réponse à la question : " . $sujetQuestion . " sur smartunity.fr a été validée";
-                        $contenu = "Bonjour " . $repondant->getUsername() . ", <br/> La réponse que vous avez apportée à la question " . $sujetQuestion . " vient d'être validée par " . $reponse[0]->getQuestion()->getMembre() . ". <br/> Merci pour votre contribution. <br/> La validation de cette réponse vous a permis d'augmenter votre cagnotte de " . $reponse[0]->getQuestion()->getRemuneration() . " points et votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr ";
-                        $message = \Swift_Message::newInstance()
-                                ->setContentType('text/html')
-                                ->setSubject($sujetMail)
-                                ->setFrom("ne-pas-repondre@smartunity.fr")
-                                ->setTo($mailMembreReponse)
-                                ->setBody($contenu);
-                        $this->get('mailer')->send($message);
+//                    //Envoi du mail
+                        $this->get('smart_unity_app.mailer')->validatedAnswerMessage($repondant, $user, $question, $urlQuestion);
                     }
 
                     return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug())));
@@ -1082,8 +1113,8 @@ class QuestionReponseController extends Controller {
                 $reponse[0]->setDateCertification(new \DateTime(date("Y-m-d H:i:s")));
                 $repondant = $reponse[0]->getMembre();
                 $repondant->setReputation($repondant->getReputation() + 50);
-                $repondant->setCagnotte($repondant->getCagnotte() + $question->getRemuneration());
                 $question->setIsCertifiedQuestion(true);
+                $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug()), true);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($reponse[0]);
@@ -1092,21 +1123,10 @@ class QuestionReponseController extends Controller {
                 $em->flush();
 
                 $prefRepCertifieemembre = $repondant->getPrefRepCertifiee();
-                $mailMembreReponse = $repondant->getEmail();
 
                 if ($prefRepCertifieemembre == true) {
-
                     //Envoi du mail
-                    $sujetQuestion = $reponse[0]->getQuestion()->getSujet();
-                    $sujetMail = "Votre réponse à la question : " . $sujetQuestion . "sur smartunity.fr a été certifiée";
-                    $contenu = "Bonjour " . $repondant->getUsername() . ", <br/> La réponse que vous avez apportée à la question " . $sujetQuestion . " vient d'être certifiée. <br/> Merci pour votre contribution. <br/> La certification de cette réponse vous a permis d'augmenter votre réputation de 50 points. <br/> <br/> A bientôt sur smartunity.fr ";
-                    $message = \Swift_Message::newInstance()
-                            ->setContentType('text/html')
-                            ->setSubject($sujetMail)
-                            ->setFrom("ne-pas-repondre@smartunity.fr")
-                            ->setTo($mailMembreReponse)
-                            ->setBody($contenu);
-                    $this->get('mailer')->send($message);
+                    $this->get('smart_unity_app.mailer')->certifiedAnswerMessage($repondant, $question, $urlQuestion);
                 }
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $question->getSlug())));
@@ -1133,17 +1153,68 @@ class QuestionReponseController extends Controller {
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
                 $newCommentaireQuestion->SetQuestion($question);
                 $newCommentaireQuestion->setSignaler(false);
-
-
+                $prefCommentaireMembre = $question->getMembre()->getPrefComm();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newCommentaireQuestion);
                 $em->flush();
 
+
+
+                $comment = $this->getDoctrine()->getRepository('SmartUnityAppBundle:commentaireQuestion')->getMembresCommentedQuestion($question->getId());
+
+                foreach ($comment as $c) {
+
+                    if ($c[1] != $user->getId() && $question->getMembre() != $user) {
+
+                        $membre = $this->getDoctrine()->getRepository('SmartUnityAppBundle:membre')->find($c[1]);
+
+                        if ($membre->getPrefComm() == true) {
+                            //Envoi du mail`
+                            $sujetQuestion = $question->getSujet();
+                            $sujetMail = "Commentaire à votre question sur smartunity.fr";
+                            $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
+                            $contenu = "Bonjour , <br/> Un commentaire a été ajouté à la question que vous avez commentée : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
+                            $mailMembre = $membre->getEmail();
+                            $message = \Swift_Message::newInstance()
+                                    ->setContentType('text/html')
+                                    ->setSubject($sujetMail)
+                                    ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
+                                    ->setTo($mailMembre)
+                                    ->setBody($contenu);
+                            $this->get('mailer')->send($message);
+                        }
+                    }
+                }
+                if ($prefCommentaireMembre == true && $question->getMembre() != $user) {
+
+                    //Envoi du mail`
+                    $sujetQuestion = $question->getSujet();
+                    $sujetMail = "Commentaire à votre question sur smartunity.fr";
+                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
+                    $contenu = "Bonjour " . $question->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à votre question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
+                    $mailMembreQuestion = $question->getMembre()->getEmail();
+                    $message = \Swift_Message::newInstance()
+                            ->setContentType('text/html')
+                            ->setSubject($sujetMail)
+                            ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
+                            ->setTo($mailMembreQuestion)
+                            ->setBody($contenu);
+                    $this->get('mailer')->send($message);
+                }
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                        'ProblemeCommentaire', 'Un problème est survenu'
+                );
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
+        } else {
+            $this->get('session')->getFlashBag()->add(
+                    'ProblemeCommentaire', 'Un problème est survenu'
+            );
+            return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
         }
-
-        return "";
     }
 
     public function addCommentaireReponseAction($idReponse, $slug) {
@@ -1166,19 +1237,65 @@ class QuestionReponseController extends Controller {
                 $newCommentaireReponse->setReponse($reponse);
 
                 $newCommentaireReponse->setSignaler(false);
-
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($newCommentaireReponse);
                 $em->flush();
 
+                $prefCommentaireMembre = $reponse->getMembre()->getPrefComm();
+
+                $idMembresCommentaires = $this->getDoctrine()->getRepository('SmartUnityAppBundle:CommentaireReponse')->getMembresCommentedAnswer($reponse->getId());
+
+                foreach ($idMembresCommentaires as $Commentaire) {
+                    if ($Commentaire[1] != $this->getUser()->getId() && $reponse->getMembre() != $user) {
+
+                        $membre = $this->getDoctrine()->getRepository('SmartUnityAppBundle:membre')->find($Commentaire[1]);
+
+                        if ($membre->getPrefComm() == true) {
+                            //Envoi du mail`
+                            $sujetQuestion = $reponse->getQuestion()->getSujet();
+                            $sujetMail = "Commentaire à votre réponse sur smartunity.fr";
+                            $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
+                            $contenu = "Bonjour " . $reponse->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à la réponse que vous avez également commentée concernant la question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
+                            $mailMembre = $membre->getEmail();
+                            $message = \Swift_Message::newInstance()
+                                    ->setContentType('text/html')
+                                    ->setSubject($sujetMail)
+                                    ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
+                                    ->setTo($mailMembre)
+                                    ->setBody($contenu);
+                            $this->get('mailer')->send($message);
+                        }
+                    }
+                }
+
+                if ($reponse->getMembre() != $user && $prefCommentaireMembre == true) {
+
+                    //Envoi du mail`
+                    $sujetQuestion = $reponse->getQuestion()->getSujet();
+                    $sujetMail = "Commentaire à votre réponse sur smartunity.fr";
+                    $urlQuestion = $this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug), true);
+                    $contenu = "Bonjour " . $reponse->getMembre()->getUsername() . ", <br/> Un commentaire a été ajouté à votre réponse concernant la question : \"" . $sujetQuestion . "\" par " . $user->getUsername() . ". <br/>  Rendez-vous sur " . $urlQuestion . " pour le découvrir. <br/><br/>A bientöt sur smartunity.fr ";
+                    $mailMembreQuestion = $reponse->getMembre()->getEmail();
+                    $message = \Swift_Message::newInstance()
+                            ->setContentType('text/html')
+                            ->setSubject($sujetMail)
+                            ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
+                            ->setTo($mailMembreQuestion)
+                            ->setBody($contenu);
+                    $this->get('mailer')->send($message);
+                }
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             } else {
-
-                return new Response("cassé");
+                $this->get('session')->getFlashBag()->add(
+                        'ProblemeCommentaire', 'Un problème est survenu'
+                );
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
-        return "";
+        $this->get('session')->getFlashBag()->add(
+                'ProblemeCommentaire', 'Un problème est survenu'
+        );
+        return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
     }
 
     public function addSoutienQuestionAction($slug) {
@@ -1186,29 +1303,45 @@ class QuestionReponseController extends Controller {
         $user = $this->container->get('security.context')->getToken()->getUser();
         $formSoutien = $this->createFormBuilder()
                 ->setAction($this->generateUrl('smart_unity_question_reponse_add_soutien_question', array('slug' => $slug)))
-                ->add('soutien', 'integer', array('attr' => array('min' => 0, 'max' => ($user->getCagnotte()))))
-                ->add('soutenir', 'submit')
+                ->add('soutien', 'integer', array(
+                    'attr' => array(
+                        'min' => 0,
+                        'max' => ($user->getCagnotte())
+                    )
+                ))
+                ->add('valider', 'submit')
                 ->getForm();
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $formSoutien->bind($this->getRequest());
 
             if ($formSoutien->isValid()) {
+
                 $question = $this->getDoctrine()->getRepository('SmartUnityAppBundle:question')->findOneBySlug($slug);
-                $question->setRemuneration($question->getRemuneration() + ($formSoutien->get('soutien')->getData()));
-                $question->getSoutienMembres()->add($user);
-                $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
 
-                //ajouté l'utilisateur à la liste de soutien
+                if ($question->getSoutienMembres()->contains($user)) {
+                    $question->setSupplementRemuneration($question->getSupplementRemuneration() + ($formSoutien->get('soutien')->getData()));
+                    $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($question);
+                    $em->persist($user);
+                    $em->flush();
+                } else {
 
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
+                    $question->setSupplementRemuneration($question->getSupplementRemuneration() + ($formSoutien->get('soutien')->getData()));
+                    $question->getSoutienMembres()->add($user);
+                    $user->setCagnotte($user->getCagnotte() - ($formSoutien->get('soutien')->getData()));
+                    $em = $this->getDoctrine()->getManager();
+                    $em->flush();
+                }
 
                 return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
             }
         }
-
-        return new Response("cassé");
+        $this->get('session')->getFlashBag()->add(
+                'ProblemeCommentaire', 'Un problème est survenu'
+        );
+        return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug)));
     }
 
     public function signalerQuestionAction($slug) {
@@ -1322,12 +1455,11 @@ class QuestionReponseController extends Controller {
 
                 $sujetQuestion = $commentaireQuestion->getQuestion()->getSujet();
                 $sujetMail = "Commentaire question numéro :" . $idCommentaireQuestion . " signalé ";
-                $expediteurMail = "ne-pas-repondre@smartunity.fr";
                 $contenu = "Le commentaire sur la question " . $sujetQuestion . "Son id est le : " . $idCommentaireQuestion;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
-                        ->setFrom($expediteurMail)
+                        ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                         ->setTo("contact@smartunity.fr")
                         ->setBody($contenu);
                 $this->get('mailer')->send($message);
@@ -1336,7 +1468,8 @@ class QuestionReponseController extends Controller {
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
-                    'formSignaler' => $formSignaler->createView()));
+                    'formSignaler' => $formSignaler->createView(),
+                    'type' => $type));
     }
 
     public function signalerCommentaireReponseAction($idCommentaireReponse) {
@@ -1360,12 +1493,11 @@ class QuestionReponseController extends Controller {
 
                 $sujetReponse = $commentaireReponse->getReponse()->getDescription();
                 $sujetMail = "Commentaire réponse numéro :" . $idCommentaireReponse . " signalé ";
-                $expediteurMail = "ne-pas-repondre@smartunity.fr";
                 $contenu = "Le commentaire sur la réponse " . $sujetReponse . "Son id est le : " . $idCommentaireReponse;
                 $message = \Swift_Message::newInstance()
                         ->setContentType('text/html')
                         ->setSubject($sujetMail)
-                        ->setFrom($expediteurMail)
+                        ->setFrom(array('ne-pas-repondre@smartunity.fr' => 'Smart\'Unity'))
                         ->setTo("contact@smartunity.fr")
                         ->setBody($contenu);
                 $this->get('mailer')->send($message);
@@ -1374,7 +1506,8 @@ class QuestionReponseController extends Controller {
             }
         }
         return $this->render('SmartUnityQuestionReponseBundle:Display:Signaler.html.twig', array(
-                    'formSignaler' => $formSignaler->createView()));
+                    'formSignaler' => $formSignaler->createView(),
+                    'type' => $type));
     }
 
 }

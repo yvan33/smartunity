@@ -272,19 +272,6 @@ p.user-and-date{
 
 /*    RECHERCHE    */
 
-.bouton-com-rep {
-	margin: 0 auto;	
-	background-color: #e37151;
-	color:#FFF;
-	font-family: centrale;
-	font-size:22px;
-	line-height:44px;
-	margin-bottom:25px;
-	text-align:center;
-	width:250px;
-	border-radius:2px;
-	cursor: pointer;
-}
 
 #popupQuestion:hover {
 	color: #333;

@@ -3,19 +3,13 @@
 {% block title %}Questions/Réponses{% endblock %}
 
 {% block stylesheets %}
-<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/question.css')}}" rel="stylesheet" type="text/css">
-<link href="{{ asset('assets/css/barreDeRecherche.css') }}"  rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/magnificpopup.css' 
+				 'assets/css/question.css'
+				 'assets/css/barreDeRecherche.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {% endblock %}
-
-{% block initJS %}
-<script src="{{asset('assets/js/bootstrap-paginator.js')}}"></script>
-<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
-<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
-{% endblock %}
-
-
-
 
 {% block body %}
 
@@ -36,8 +30,9 @@
             <!-- nav div menu fin-->
             
             <div class="tab-content" id="content-frame">
-                
-<!----------------------------------QUESTIONS RESOLUES----------------------------------------->
+
+{# ----------------------------------QUESTIONS RESOLUES----------------------------------------- #}
+
                 <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
                     <div class="panel-group" id="accordion-reponses">
                           {% if type=='reponses' %}
@@ -117,9 +112,9 @@
                                 {% endif %}
                     </div>
                 </div>
-<!----------------------------------FIN QUESTIONS RESOLUES----------------------------------------->
+{# <!----------------------------------FIN QUESTIONS RESOLUES-----------------------------------------> #}
 
-<!----------------------------------QUESTIONS BRULANTES----------------------------------------->
+{# <!----------------------------------QUESTIONS BRULANTES-----------------------------------------> #}
                 <div class="tab-pane fade in out{% if type=='onFire' %} active{% endif %}" id="onFire">
                     <!-- accordion general-->
                     <div class="panel-group" id="accordion-onFire">
@@ -190,10 +185,10 @@
                     </div><!-- accordion general fin-->
 
                 </div>
-<!----------------------------------FIN QUESTIONS BRULANTES----------------------------------------->
+{# <!----------------------------------FIN QUESTIONS BRULANTES-----------------------------------------> #}
                     
                 
-<!---------------------------------- DERNIERES QUESTION----------------------------------------->
+{# <!---------------------------------- DERNIERES QUESTION-----------------------------------------> #}
                 <div class="tab-pane fade in out{% if type=='last' %} active{% endif %}" id="last">
                     <div class="panel-group" id="accordion-last">
                             {% if type=='last' %}
@@ -262,7 +257,7 @@
                                 {% endif %}
                     </div>
                 </div>
-<!----------------------------------FIN DERNIERES QUESTION----------------------------------------->
+{# <!----------------------------------FIN DERNIERES QUESTION-----------------------------------------> #}
                     
             </div><!-- nav div fin--> 
 
@@ -279,14 +274,18 @@
     </div><!-- col fin-->
 </div>  <!-- row fin-->
 
-		<div class="bouton-com-rep">
-        	<a id="popupQuestion"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour poser une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_question')}}{% else %}#{% endif %}">Posez votre question</a>
-		</div>
 {% endblock %}
 
 {% block callJS %}
 
-<script language="javascript">
+{% javascripts filter='yui_js' 
+				'assets/js/bootstrap-paginator.js' 
+				'assets/js/magnificpopup-0.9.9.min.js'
+				'assets/js/jquery.animateAuto-1.0.0.js'	 %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<script>
 
 
 
@@ -548,17 +547,9 @@
 
             });
 
-/////////////
-////// POPUP SUR "POSER VOTRE QUESTION" 
-/////////////
-{% if not is_granted('ROLE_USER') %}
-$(document).ready(function(){
-  $('#popupQuestion').tooltip();
-  $('#popupQuestion').click(function(e){
-    e.preventDefault();
-  })
-});
-{% endif %}
-</script>
 
+
+
+
+</script>
 {% endblock %}

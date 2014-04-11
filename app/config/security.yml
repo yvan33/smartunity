@@ -24,12 +24,10 @@ security:
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
-
-                    
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
+        
         main:
             pattern:        ^/
             anonymous:      true
@@ -39,12 +37,12 @@ security:
                 check_path: fos_user_security_check
                 target_path_parameter: _target_path
                 use_referer:        true
-                default_target_path: /mon-compte
+                default_target_path: /
                 
             fos_facebook:
                 app_url: "http://apps.facebook.com/smartunity/"
                 server_url: "http://local.smartunity.com/~Yvan/workspace/smartunity_remy_12112013/web/app_dev.php"
-                check_path: /login_facebook_check
+                check_path: /login_check
                 provider: my_fos_facebook_provider
                 
             logout:
@@ -58,9 +56,9 @@ security:
             #    realm: "Secured Demo Area"
 
     access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
         - { path: ^/Admin/, roles: ROLE_ADMIN }
         - { path: ^/secured/.*, role: [IS_AUTHENTICATED_FULLY] } # This is the route secured with fos_facebook
-        - { path: ^/.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/Utilisateur/mon-compte, role: ROLE_USER }
         - { path: ^/efconnect, role: ROLE_USER }
         - { path: ^/elfinder, role: ROLE_USER }
+        - { path: ^/.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

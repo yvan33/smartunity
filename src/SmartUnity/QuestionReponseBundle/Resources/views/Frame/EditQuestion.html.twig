@@ -4,22 +4,18 @@
 {% block title %}Modifier ma question{% endblock %}
 
 {% block stylesheets %}
-<link href="{{asset('assets/css/formulaire.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/magnificpopup.css')}}" rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/formulaire.css'
+				 'assets/css/magnificpopup.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 
 {% endblock %}
-
-{% block initJS %}
-<script src="{{asset('assets/js/magnificpopup-0.9.9.min.js')}}"></script>
-<script src="{{ asset('assets/js/jquery.animateAuto-1.0.0.js') }}"></script>
-{% endblock %}
-
 
 
 {% block body %}
-<a ><span class="glyphicon glyphicon-chevron-left bouton-retour" onclick="javascript:history.back()"></span></a>
 
-<div class="row">
+<div class="row addquestion">
 {#        <div class="grille-content panneau-bas">  #}
             <div class="row text-center cookie-title">
                 Modifier ma question
@@ -50,12 +46,12 @@
 	        <div class="grille-2">{{ form_errors(formEditQuestion.typeQuestion) }}{{ form_widget(formEditQuestion.typeQuestion, { 'attr': {'class': 'chosen-select', 'data-placeholder':'Choisissez'} }) }}</div>
 	    </div>
 	    <div class="row">
-                <div class="grille-1">Dotation <a id="popupDotation" rel="tooltip" data-original-title="Vous pouvez augmenter la dotation de la question en utilisant les points de votre cagnotte pour améliorer son attractivité."><span class="glyphicon glyphicon-info-sign" style="color:##BBB;"></span></a></div>
+                <div class="grille-1">Dotation <a id="popupDotation" rel="tooltip" data-original-title="Vous pouvez augmenter la dotation de la question en utilisant les points de votre cagnotte pour améliorer son attractivité."><span class="glyphicon glyphicon-info-sign" style="color:#BBB;"></span></a></div>
                 
-	        <div class="grille-2 dotation">{{ form_errors(formEditQuestion.remuneration) }}{{ form_widget(formEditQuestion.remuneration) }} Max : {{dotationMax}} </div>
+	        <div class="grille-2 dotation">{{ form_errors(formEditQuestion.remuneration) }}{{ form_widget(formEditQuestion.remuneration, { 'attr': {'class': 'input-dotation'}}) }} Max : {{dotationMax}} </div>
 	    </div>
 	    <div class="cent-h bouton-bas-block">
-	        {{form_widget(formEditQuestion.save,{'attr': {'class': 'btn ask-question'}})}}
+	        {{form_widget(formEditQuestion.save,{'attr': {'class': 'btn ask-question','onclick': 'validationFormulaire()'}})}}
 	    </div>
 	    {{form_end(formEditQuestion)}}
 	</div>
@@ -71,6 +67,24 @@ $(document).ready(function(){
     e.preventDefault();
   })
 });
+
+function validationFormulaire(){
+    $('form').submit(function(event) {   
+        var valeur = parseInt($('#form_remuneration').val());
+        var min = parseInt($('#form_remuneration').attr('min')); 
+        var max = parseInt($('#form_remuneration').attr('max'));  
+        if( valeur <= max && valeur >= min ){
+            $('.erreur').hide();
+            return true; 
+         }
+         else{
+            var message="La valeur doit être comprise entre: " + $('#form_remuneration').attr('min') + " et " + $('#form_remuneration').attr('max') ;
+            $('.erreur').css("font-size","4 px"); 
+            $('.erreur').show().text(message);
+            return false;
+         }
+    });
+}
 
 </script>
 {% endblock %}

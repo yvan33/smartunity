@@ -1,9 +1,11 @@
 {% extends "SmartUnityUtilisateurBundle::layout.html.twig" %}
-{#{% extends "FOSUserBundle::layout.html.twig" %}#}
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block stylesheets %} 
-<link href="{{ asset('assets/css/formulaire.css') }}" rel="stylesheet" type="text/css">
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/formulaire.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 {%endblock%}
 
 {% block register %}
@@ -21,7 +23,6 @@
                 <h3 class="police-text" style="margin-top:0px; margin-bottom: 20px;">Pour plus de détails sur le fonctionnement du site, rendez-vous sur la page <a style="color: #CCC; text-decoration: none" href="{{ path('smart_unity_app_descriptionpage') }}">Comment ça marche</a> !</h3>
                 <img style="width:35%" src="{{asset('assets/img/logo-checkemail.png') }}"></img>
             </div>
-        </div>
     </div>
 </div>
 {% endblock %}

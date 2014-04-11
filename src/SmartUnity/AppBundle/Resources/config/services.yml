@@ -1,15 +1,16 @@
 parameters:
-    smart_unity_app.example.class: SmartUnity\AppBundle\Form\Type\RegistrationFormType
 
 services:
-   smart_unity_app.form.type:
-        class: [%smart_unity_app.example.class%]
-        arguments: [%fos_user.model.user.class%]
-        tags:
-            - { name: form.type, alias: smartunity_user_registration }
 
    smart_unity_app.contact.form.type:
         class:  SmartUnity\AppBundle\Form\Type\ContactFormType
         tags:
             - { name: form.type, alias: smart_unity_app_contact }
-   
+            
+   smart_unity_app.mailer:
+      class: SmartUnity\AppBundle\Mail\Mailer
+      arguments: [@mailer, @templating, %kernel.root_dir%]
+      
+   elfinder.driver.filesystem:
+      class: FM\ElFinderPHP\Driver\ElFinderVolumeLocalFileSystem  
+           

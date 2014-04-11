@@ -2,9 +2,9 @@
     font-family: 'Centrale';
     src: url(../fonts/Centrale.eot);
     src: url(../fonts/Centrale.eot?#iefix) format('embedded-opentype'),
-         url(../fonts/Centrale.woff) format('woff'),
-         url(../fonts/Centrale.ttf) format('truetype'),
-         url(../fonts/Centrale.svg#centrale) format('svg');
+        url(../fonts/Centrale.woff) format('woff'),
+        url(../fonts/Centrale.ttf) format('truetype'),
+        url(../fonts/Centrale.svg#centrale) format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -71,7 +71,7 @@
 }
 
 .grille-question-rond img {
-	width: 61%
+    width: 61%
 }
 
 .grille-question-txt
@@ -107,7 +107,7 @@
 }
 
 .nav-tabs {
-	border: 0;
+    border: 0;
 }
 
 
@@ -167,14 +167,14 @@
 
 .carousel-indicators
 {
-	margin-left: 9%;
+    margin-left: 9%;
 }
 
 .carousel-control.left
 {
-	background-image:none;
-	margin: 145px 0 145px 0;
-	z-index: 2;	
+    background-image:none;
+    margin: 145px 0 145px 0;
+    z-index: 2;	
 }
 
 :focus {outline:none;}
@@ -182,32 +182,32 @@
 
 .carousel-control.right
 {
-	background-image:none;
-	margin: 145px 0 145px 0;
-	    z-index: 2;
+    background-image:none;
+    margin: 145px 0 145px 0;
+    z-index: 2;
 }
 
 .carousel-indicators .active
 {
-	background-color: white;
-	width: 14px;
-	height: 14px;
-	margin: 0 2px 0 2px;
+    background-color: white;
+    width: 14px;
+    height: 14px;
+    margin: 0 2px 0 2px;
 }
 
 .carousel-indicators li
 {
-	border: 1px solid white;
-	width: 14px;
-	height: 14px;
-	border-radius: 14px;
-	margin: 0 2px 0 2px;
-	opacity: 0.5;
+    border: 1px solid white;
+    width: 14px;
+    height: 14px;
+    border-radius: 14px;
+    margin: 0 2px 0 2px;
+    opacity: 0.5;
 }
 
 .carousel-indicators li:hover
 {
-	opacity: 1;
+    opacity: 1;
 }	
 
 .tab-content .bouton-repondre
@@ -215,33 +215,20 @@
     margin-top: -5px;
 }
 
-.bouton-repondre
-{
-    border: 0;
-    outline: 0;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
-}
 
-.bouton-repondre:hover
-{
-    color: #2b3a41;
-}
-
-.carousel-inner
 {
     margin-bottom: 30px;
 }
 
 .text-accueil
 {
-	margin-top: 22px;
-	width: 100%;
-	position: absolute;
-	z-index: 1;
-	text-align: center;
-	color: white;
-	opacity: 0;
+    margin-top: 22px;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    opacity: 0;
     -webkit-transition: opacity 2s ease;
     -moz-transition: opacity 2s ease;
     -ms-transition: opacity 2s ease;
@@ -252,109 +239,94 @@
 
 .text-accueil hr
 {
-	margin: 0 0 18px 0;
-	width: 70%;
-	margin-left: 140px;
-	background-color: white;
-	height: 1.5px;
+    margin: 0 0 18px 0;
+    width: 70%;
+    margin-left: 140px;
+    background-color: white;
+    height: 1.5px;
 }
 
 .text-accueil h1 {
-	margin-bottom: 7px;
-	font-size: 2.45em;
-	font-family: centrale;
+    margin-bottom: 7px;
+    font-size: 2.45em;
+    font-family: centrale;
 }
 
 .text-accueil h2 {
-	margin-top: 0;
-	margin-bottom: 18px;
-	font-size: 1.45em;
-	font-family: centrale;
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 1.45em;
+    font-family: centrale;
 }
 
 .text-accueil h3 {
-	margin-top: 0;
-	font-size: 1.05em;
-	font-family: centrale;
+    margin-top: 0;
+    font-size: 1.05em;
+    font-family: centrale;
 }
 
 .savoir-plus {
-	position: absolute;
-	z-index: 2;
-	left: 40%;
-	margin-left: -80px;
-	margin-top: 30px;
-	height: 45px;
-	width: 160px;
-	font-size: 18px;
+    margin-top: 25px;
+    height: 30px;
+    font-size: 14px;
 }
 
 .savoir-plus-log {
-	position: absolute;
-	z-index: 2;
-	left: 50%;
-	margin-left: -80px;
-	margin-top: 30px;
-	height: 45px;
-	width: 160px;
-	font-size: 18px;
+    margin-top: 25px;
+    height: 30px;
+    font-size: 14px;
 }
 
 .nous-rejoindre {
-	position: absolute;
-	z-index: 2;
-	left: 60%;
-	margin-left: -80px;
-	margin-top: 30px;
-	height: 45px;
-	width: 160px;
-	font-size: 18px;
+    margin-top: 25px;
+    height: 30px;
+    font-size: 14px;
 }
 
 .text-autre
 {
-	margin-left: 305px;
-	width: 33%;
-	position: absolute;
-	text-align: left;
-	padding-top: 0;
-	top: 9.5%;
+    margin-left: 305px;
+    width: 33%;
+    position: absolute;
+    text-align: left;
+    padding-top: 0;
+    top: 9.5%;
 }
 
 .text-autre hr
 {
-	margin: 0 0 13px 0;
-	width: 95%;
-	background-color: white;
-	height: 1.5px;
+    margin: 0 0 13px 0;
+    width: 95%;
+    background-color: white;
+    height: 1.5px;
 }
 
 .text-autre h1
 {
-	margin-top: 0;
-	margin-bottom: 7px;
-	font-size: 2.45em;
-	font-family: centrale;
+    margin-top: 0;
+    margin-bottom: 7px;
+    font-size: 2.45em;
+    font-family: centrale;
 }
 
 .text-autre h2
 {
-	margin-top: 0;
-	margin-bottom: 8px;
-	font-size: 1.45em;
-	font-family: centrale;
-	font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.45em;
+    font-family: centrale;
+    font-weight: bold;
 }
 
 .text-autre h3
 {
-	margin-top: 0;
-	font-size: 1.05em;
-	font-family: centrale;
+    margin-top: 0;
+    font-size: 1.05em;
+    font-family: centrale;
 }
 
 .carousel-caption {
-	z-index: 0;
+    z-index: 0;
 }
 
 @media (min-width: 1200px){
@@ -372,93 +344,74 @@
     {
         width:200px;
     }
-    
-    .savoir-plus {
-	    height: 35px;
-		width: 140px;
-		margin-top: 10px;
-		left: 40%;
-		font-size: 14px;
-		z-index: 1000;
+	.text-accueil h1 {
+        font-size: 2em;
     }
-    
-    .nous-rejoindre {
-	    height: 40px;
-		width: 150px;
-		margin-top: 10px;
-		left: 60%;
-		font-size: 14px;
-		z-index: 1000;
+
+    .text-accueil h2 {
+        font-size: 1.3em;
     }
-    
-    .text-accueil h1 {
-	font-size: 2em;
-	}
-	
-	.text-accueil h2 {
-	font-size: 1.3em;
-	}
-	
-	.text-accueil h3 {
-	font-size: 1em;
-	}
-	
-	.text-accueil hr {
-	margin: 0 0 18px 0;
-	width: 64%;
-	margin-left: 140px;
-	background-color: white;
-	height: 1px;
-	}
-	
-	.carousel-control.left {
-		margin: 125px 0 125px 0;
-	}
-	
-	.carousel-control.right {
-		margin: 125px 0 125px 0;
-	}
-	
-	.text-autre {
-		margin-left: 250px;
-	}
-	
-	.text-autre h1 {
-		font-size: 2em;
-	}
 
-	.text-autre h2 {
-		font-size: 1.2em;
-	}
-	
-	.text-autre h3 {
-		font-size: 0.9em;
-	}
-	
-	.text-autre hr {
-	margin: 0 0 10px 0;
-	width: 100%;
-	background-color: white;
-	height: 1px;	
-	}
-	
-	.carousel-indicators {
-		bottom: 10px;
-	}
+    .text-accueil h3 {
+        font-size: 1em;
+    }
 
-	.carousel-indicators li {
-		width: 12px;
-		height: 12px;
-		margin-left: 1px;
-		margin-right: 1px;
-	}
-	
-	.carousel-indicators .active {
-		width: 12px;
-		height: 12px;
-		margin-left: 1px;
-		margin-right: 1px;	
-	}
+    .text-accueil hr {
+        margin: 0 0 18px 0;
+        width: 64%;
+        margin-left: 140px;
+        background-color: white;
+        height: 1px;
+    }
+
+    .carousel-control.left {
+        margin: 125px 0 125px 0;
+    }
+
+    .carousel-control.right {
+        margin: 125px 0 125px 0;
+    }
+
+    .text-autre {
+        margin-left: 250px;
+    }
+
+    .text-autre h1 {
+        font-size: 2em;
+    }
+
+    .text-autre h2 {
+        font-size: 1.2em;
+    }
+
+    .text-autre h3 {
+        font-size: 0.9em;
+    }
+
+    .text-autre hr {
+        margin: 0 0 10px 0;
+        width: 100%;
+        background-color: white;
+        height: 1px;	
+    }
+
+    .carousel-indicators {
+        bottom: 10px;
+    }
+
+    .carousel-indicators li {
+        width: 12px;
+        height: 12px;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+
+    .carousel-indicators .active {
+        width: 12px;
+        height: 12px;
+        margin-left: 1px;
+        margin-right: 1px;	
+    }
 
 }
 
@@ -467,101 +420,82 @@
     {
         width:200px;
     }
-    
-    .savoir-plus {
-	    height: 50px;
-		width: 150px;
-		margin-top: 10px;
-		left: 40%;
-		font-size: 14px;
-		z-index: 1000;
-    }
-    
-    .nous-rejoindre {
-	    height: 50px;
-		width: 150px;
-		margin-top: 10px;
-		left: 60%;
-		font-size: 14px;
-		z-index: 1000;
-		margin-left:-40px
-    }
-    
+
     .text-accueil h1 {
-	font-size: 2em;
-	margin-top: 0;
-	}
-	
-	.text-accueil h2 {
-	font-size: 1.3em;
-	}
-	
-	.text-accueil h3 {
-	font-size: 1em;
-	}
-	
-	.text-accueil hr {
-	margin: 0 0 18px 0;
-	width: 64%;
-	margin-left: 140px;
-	background-color: white;
-	height: 1px;
-	}
-	
-	.carousel-control.left {
-		margin: 115px 0 115px 0;
-	}
-	
-	.carousel-control.right {
-		margin: 115px 0 115px 0;
-	}
-	
-		
-	.text-autre {
-		margin-left: 220px;
-	}
-	
-	.text-autre h1 {
-		font-size: 1.8em;
-		margin-top: -10px;
-	}
+        font-size: 2em;
+        margin-top: 0;
+    }
 
-	.text-autre h2 {
-		font-size: 1.1em;
-	}
-	
-	.text-autre h3 {
-		font-size: 0.85em;
-	}
-	
-	.text-autre hr {
-	margin: 0 0 10px 0;
-	width: 100%;
-	background-color: white;
-	height: 1px;	
-	}
-	
-	.carousel-indicators {
-		bottom: 5px;
-	}
+    .text-accueil h2 {
+        font-size: 1.3em;
+    }
 
-	.carousel-indicators li {
-		width: 12px;
-		height: 12px;
-		margin-left: 1px;
-		margin-right: 1px;
-	}
-	
-	.carousel-indicators .active {
-		width: 12px;
-		height: 12px;
-		margin-left: 1px;
-		margin-right: 1px;	
-	}
-	
-	.cadre-cafe-boutique img {
-		width: 20%;
-	}
+    .text-accueil h3 {
+        font-size: 1em;
+    }
+
+    .text-accueil hr {
+        margin: 0 0 18px 0;
+        width: 64%;
+        margin-left: 140px;
+        background-color: white;
+        height: 1px;
+    }
+
+    .carousel-control.left {
+        margin: 115px 0 115px 0;
+    }
+
+    .carousel-control.right {
+        margin: 115px 0 115px 0;
+    }
+
+
+    .text-autre {
+        margin-left: 220px;
+    }
+
+    .text-autre h1 {
+        font-size: 1.8em;
+        margin-top: -10px;
+    }
+
+    .text-autre h2 {
+        font-size: 1.1em;
+    }
+
+    .text-autre h3 {
+        font-size: 0.85em;
+    }
+
+    .text-autre hr {
+        margin: 0 0 10px 0;
+        width: 100%;
+        background-color: white;
+        height: 1px;	
+    }
+
+    .carousel-indicators {
+        bottom: 5px;
+    }
+
+    .carousel-indicators li {
+        width: 12px;
+        height: 12px;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+
+    .carousel-indicators .active {
+        width: 12px;
+        height: 12px;
+        margin-left: 1px;
+        margin-right: 1px;	
+    }
+
+    .cadre-cafe-boutique img {
+        width: 20%;
+    }
 
 }
 
@@ -576,9 +510,9 @@
         display:none;
 
     }
-    
+
     .cadre-cafe-boutique img {
-		width: 20%;
-	}
+        width: 20%;
+    }
 }
 

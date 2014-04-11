@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new SmartUnity\AppBundle\SmartUnityAppBundle(),
-            new SmartUnity\AdminBundle\SmartUnityAdminBundle(),
             new SmartUnity\BoutiqueBundle\SmartUnityBoutiqueBundle(),
             new SmartUnity\UtilisateurBundle\SmartUnityUtilisateurBundle(),
             new SmartUnity\QuestionReponseBundle\SmartUnityQuestionReponseBundle(),
@@ -28,6 +27,7 @@ class AppKernel extends Kernel
             new FM\ElfinderBundle\FMElfinderBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new SunCat\MobileDetectBundle\MobileDetectBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
