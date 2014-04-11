@@ -30,8 +30,9 @@
             <!-- nav div menu fin-->
             
             <div class="tab-content" id="content-frame">
-                
-<!----------------------------------QUESTIONS RESOLUES----------------------------------------->
+
+{# ----------------------------------QUESTIONS RESOLUES----------------------------------------- #}
+
                 <div class="tab-pane fade in out{% if type=='reponses' %} active{% endif %}" id="reponses">
                     <div class="panel-group" id="accordion-reponses">
                           {% if type=='reponses' %}
@@ -111,9 +112,9 @@
                                 {% endif %}
                     </div>
                 </div>
-<!----------------------------------FIN QUESTIONS RESOLUES----------------------------------------->
+{# <!----------------------------------FIN QUESTIONS RESOLUES-----------------------------------------> #}
 
-<!----------------------------------QUESTIONS BRULANTES----------------------------------------->
+{# <!----------------------------------QUESTIONS BRULANTES-----------------------------------------> #}
                 <div class="tab-pane fade in out{% if type=='onFire' %} active{% endif %}" id="onFire">
                     <!-- accordion general-->
                     <div class="panel-group" id="accordion-onFire">
@@ -184,10 +185,10 @@
                     </div><!-- accordion general fin-->
 
                 </div>
-<!----------------------------------FIN QUESTIONS BRULANTES----------------------------------------->
+{# <!----------------------------------FIN QUESTIONS BRULANTES-----------------------------------------> #}
                     
                 
-<!---------------------------------- DERNIERES QUESTION----------------------------------------->
+{# <!---------------------------------- DERNIERES QUESTION-----------------------------------------> #}
                 <div class="tab-pane fade in out{% if type=='last' %} active{% endif %}" id="last">
                     <div class="panel-group" id="accordion-last">
                             {% if type=='last' %}
@@ -256,7 +257,7 @@
                                 {% endif %}
                     </div>
                 </div>
-<!----------------------------------FIN DERNIERES QUESTION----------------------------------------->
+{# <!----------------------------------FIN DERNIERES QUESTION-----------------------------------------> #}
                     
             </div><!-- nav div fin--> 
 
@@ -273,10 +274,6 @@
     </div><!-- col fin-->
 </div>  <!-- row fin-->
 
-		<div class="bouton-com-rep">
-        	<a id="popupQuestion"{% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour poser une question." href= "{{ path('fos_user_security_login') }}" {% else %} href="{{ path('smart_unity_question_reponse_add_question')}}"{% endif %}">Posez votre question</a>
-		</div>
-
 {% endblock %}
 
 {% block callJS %}
@@ -288,7 +285,7 @@
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 
-<script language="javascript">
+<script>
 
 
 
@@ -550,19 +547,7 @@
 
             });
 
-/////////////
-////// POPUP SUR "POSER VOTRE QUESTION" 
-/////////////
-{% if not is_granted('ROLE_USER') %}
-$(document).ready(function(){
-  $('#popupQuestion').tooltip();
-  $('#popupQuestion').click(function(e){
-    e.preventDefault();
-    $("#modalConnexion").modal('show');
-    
-  })
-});
-{% endif %}
+
 
 
 

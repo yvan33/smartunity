@@ -134,10 +134,7 @@
                 Tooltip!
             </div>
             <div class="tooltip-arrow"></div>
-        </div>
-        <div class="bouton-com-rep">
-            <a id="popupQuestion"{% if not is_granted('ROLE_USER') %}rel="tooltip" data-original-title="Vous devez être connecté pour poser une question."{% endif %} href="{% if is_granted('ROLE_USER') %}{{ path('smart_unity_question_reponse_add_question')}}{% else %}{{ path('fos_user_security_login') }}{% endif %}">Posez votre question</a>
-        </div>		
+        </div>	
     </div>  <!-- row fin-->
 
 {% endblock %}

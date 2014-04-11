@@ -165,14 +165,23 @@ fm_elfinder:
                 upload_deny: ['all']
                 upload_max_size: 2M    
  
-#ivory_ck_editor:
-#    default_config: default
-#    configs:
-#        default:
-#            filebrowserBrowseRoute: elfinder                
 
+         
 mobile_detect:
     redirect:
         mobile: ~
         tablet: ~
     switch_device_view: ~
+
+ivory_ck_editor:
+    default_config: default
+    configs:
+        default:
+            filebrowserBrowseRoute: elfinder
+#            filebrowserUploadUrl: elfinder
+#            filebrowserImageUploadUrl: elfinder
+
+    plugins:
+            simpleuploads:
+                path:     "ckeditor/plugins/simpleuploads/"
+                filename: "plugin.js"    

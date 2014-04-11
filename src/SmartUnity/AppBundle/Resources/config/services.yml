@@ -10,4 +10,7 @@ services:
    smart_unity_app.mailer:
       class: SmartUnity\AppBundle\Mail\Mailer
       arguments: [@mailer, @templating, %kernel.root_dir%]
+      
+   elfinder.driver.filesystem:
+      class: FM\ElFinderPHP\Driver\ElFinderVolumeLocalFileSystem  
            

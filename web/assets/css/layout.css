@@ -427,6 +427,10 @@ body.bg
     transition: opacity 2s ease-out 2s;	
 }
 
+.toast-red {
+    background-color: #ff3333; 
+}
+
 /////Bloc Listequestions
 
 .tab-ajax > .nav-tabs>li>a:hover {
@@ -500,6 +504,8 @@ body.bg
     font-size: 13px;
     padding-top: 4px;
     padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
@@ -513,18 +519,26 @@ body.bg
     margin-top:30px;
 }
 
+.bouton-com-rep {
+	margin: 0 auto;	
+	background-color: #e37151;
+	color:#FFF;
+	font-family: centrale;
+	font-size:22px;
+	line-height:44px;
+	margin-bottom:25px;
+	text-align:center;
+	width:250px;
+	border-radius:2px;
+	cursor: pointer;
+}
+
 .grille-content h3 
 {
     font-family: centrale;
     margin-top: 0px;
     color: #e37151;
 }
-
-#popupQuestion
-{
-    color: white;
-}
-
 
 .pagination>.active>a
 {
@@ -542,6 +556,7 @@ body.bg
 {
     margin-right: -20px;
 }
+
 
 /* Fenêtre modale log in */
 
@@ -669,6 +684,8 @@ body.bg
     border: 0;
     padding-bottom: 0px;
     padding-top: 0px;
+    line-height: 2;
+
 }
 
 .bouton-signin:focus {
