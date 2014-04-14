@@ -269,18 +269,22 @@
     margin-top: 25px;
     height: 30px;
     font-size: 14px;
+    padding: 0 10px 0 10px;
+    margin: 0 10px 0 10px;
 }
 
 .savoir-plus-log {
     margin-top: 25px;
     height: 30px;
     font-size: 14px;
+    padding: 0 10px 0 10px;
 }
 
 .nous-rejoindre {
     margin-top: 25px;
     height: 30px;
     font-size: 14px;
+    padding: 0 10px 0 10px;
 }
 
 .text-autre
