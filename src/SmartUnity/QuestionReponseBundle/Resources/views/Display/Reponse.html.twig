@@ -60,7 +60,7 @@
                                             <div class="row row-avec-margin">
 	        {{ form_errors(formEditReponse.description) }}{{ form_widget(formEditReponse.description,{'attr': {'class': 'form-control forminfo reponse-input edit-input'}}) }}</div>
                                     	    {{form_widget(formEditReponse._token)}}
-                                            <div class="row">
+								             <div class="row">
                                                 <div class="cent-h send-answer">{{form_widget(formEditReponse.valider,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
                                             </div>
                                         </form>
@@ -73,7 +73,42 @@
                 </div>
             </div>
         </div>
-{% endif %}        
+
+        
+<div id="DeleteReponseHolder">
+    <div class="container"  style="padding-left: 0; padding-right: 0;">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10" style="padding-left:0px; padding-right:0px; position:relative">
+                <div class="container cadre-form-reponse">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div  style="position:absolute;cursor:pointer;right:4px;top:5px;color:#FFF;font-size:20px" id="closeFrame">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </div>
+                            <div class="grille-content">
+                                <form class="edit-reponse-form" action="{{path('smart_unity_question_reponse_supprimer_reponse', {slug: question.slug, id: 'init'})}}" method="POST">
+                                    <div class="erreur">
+            {{ form_errors(formDeleteReponse) }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="head-blue">Supprimer ma réponse</div>
+                                    </div>
+                                    <div class="row row-avec-margin">
+                                    Souhaitez-vous supprimer votre réponse ?
+                                    <div class="row">
+                                        <div class="cent-h send-answer">{{form_widget(formDeleteReponse.oui,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
+                                    </div>
+                                </div>
+                                </form>
+                                </div>
+                        </div>
+                    </div>
+                </div>     
+            </div>
+        </div>
+    </div>
+</div> 
+{% endif %}
 
  {#/////////////////////////////////////////////////#}
 {# FIN Blocs en display : none#}
@@ -86,12 +121,12 @@
                     <a href="{{path('smart_unity_question_reponse_signaler_question', {slug: question.slug})}}"><img class="signaler-comment" alt="Signaler" src="{{ asset('assets/img/signaler.png') }}"/></a>
                     {% endif %}
                 </div>                
-                <div class="head-blue"><h1 class="sujet-question" style="float:left">{{ question.sujet }} </h1>
+				<div class="head-blue"><h1 class="sujet-question" style="float:left">{{ question.sujet }} </h1>
                     {% if is_granted('ROLE_USER') %}
                     {% if app.user.username==question.membre.username and not is_validated and listeReponses is empty %} <a style="float:left" href="{{path('smart_unity_question_reponse_edit_question', {slug: question.slug})}}"><span class="glyphicon glyphicon-edit"></span></a> {% endif %}
                     {% endif %}
 
-                    <p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
+			<p style="float:right">{{ question.date|date('d-m-Y H:i:s') }}</p>
                 </div>
 {% if not is_certif and not is_validated %}
                 <div class="grille-1">
@@ -422,7 +457,6 @@ Toast
     {% if is_granted('ROLE_USER') %}
         var reponseId = $('#reponseId').val();
         var reponseDescription = $('.reponseDescription-data').html();
-console.log(reponseDescription);
         $('.edit-reponse-form').attr('action', function(i, url) {
             return url.replace(url.substr(url.lastIndexOf('/') + 1), reponseId);
         });
@@ -431,7 +465,20 @@ console.log(reponseDescription);
         $('#addReponseHolder').show('fast');
         $('.espace-vide-pour-cadre-repondre').show();
     {% endif %}
-    }
+};
+
+// Bouton Supprimer
+   function displayDeleteFormReponse(e) {
+    {% if is_granted('ROLE_USER') %}
+            var reponseId = $('#reponseId').val();
+                    
+        $('.delete-reponse-form').attr('action', function(i, url) {
+  return url.replace(url.substr(url.lastIndexOf('/') + 1), reponseId); });
+  
+        $('#DeleteReponseHolder').show('fast');
+        $('.espace-vide-pour-cadre-repondre').show();
+    {% endif %}
+    };
 
 ////////////////////////////
 ///////////Commenter question
@@ -589,6 +636,7 @@ console.log(reponseDescription);
         }
     };
     tri = '{{ tri }}';
+    slug = '{{ slug }}';
     $(document).ready(function() {
         $('#pages').bootstrapPaginator(options);
         $('#triVote').attr('href', '#');
@@ -916,9 +964,54 @@ $("#modalConnexion").modal('show');
         });
 
         entity += '        <div class="bloc-commenter-repondre"> \
-                                    <div class="grille-3-btn"> \
-                                    <div id="bloc-commenter-reponse' + pEntry['id'] + '">{#ICI LE FORMULAIRE POUR COMMENTER#}</div>';
+            <div class="grille-3-btn">';
+                {% if is_granted('ROLE_ADMIN') %}
+                entity +='<div class="valider rep"> \
+                        <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalSuppression" >Supprimer</button> \
+                    </div>  \
+                    <div class="modal fade" id="ModalSuppression" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                        <div class="validation-dialog">\
+                            <div class="validation-content">\
+                                <div class="validation-body">\
+                                    <p>Vous êtes sur le point de supprimer votre réponse, en êtes vous sûr?</p>\
+                                </div>\
+                                <div class="validation-footer">\
+                                    <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button>\
+                              <a href="' + Routing.generate('smart_unity_question_reponse_supprimer_reponse', {slug : slug, id: pEntry['id']}) + '"> \
+                                    <button type="button" class="btn bouton-validation">Valider</button></a>\
+                                </div>\
+                            </div><!-- /.modal-content -->\
+                        </div><!-- /.modal-dialog -->\
+                    </div><!-- /.modal -->'; 
+                
+                {% endif %} 
+                {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
+               entity+= '<div class="valider rep"> \
+                    <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalValidation" >Valider</button> \
+                </div> \
+                <div class="modal fade" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> \
+                  <div class="validation-dialog"> \
+                    <div class="validation-content"> \
+                      <div class="validation-body"> \
+                        <p>Vous êtes sur le point de valider la réponse suivante: ' + pEntry['description'] +'</p> \
+                      <p> Les points de votre question seront attibués au membre ayant apporté cette réponse. Ce choix est définitif. Etes-vous sûr de votre choix?</p> \
+</div> \
+                      <div class="validation-footer"> \
+                        <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button> \
+                        <a href="' + Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '> \
+                                <button type="button" class="btn bouton-validation">Valider</button></a> \
+                      </div> \
+                    </div> \
+                  </div> \
+                </div>';
+                
+
+       // entity += '<div style = "float:left; margin-right:5px;"> \
+       //      <a href = "'+ Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a></div>';    
+                             {% endif %}
+    
          entity += '<div id="bouton-commenter' + pEntry['id'] + '" class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question." href="{{ path('fos_user_security_login') }}" {% endif %}>Commenter</div>';
+
     
      {% if is_granted('ROLE_USER')%}
         if (userId == pEntry['membre_id']) {
@@ -928,8 +1021,9 @@ $("#modalConnexion").modal('show');
                                 <div class="bouton-com-rep">Editer</div></div>';
         }
           {% endif %}
-        entity += ' </div> \
-            </div> \
+
+           entity += ' </div> \
+ </div> \
             </div> \
             </div> \
             </div>';

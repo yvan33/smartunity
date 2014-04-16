@@ -55,3 +55,7 @@ DirectoryIndex app.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+<FilesMatch "(\.(swp|SWP)[.[:alnum:]]*|\.bak|\.BAK|\$|~)$">
+ order deny,allow
+ deny from all
+</FilesMatch>

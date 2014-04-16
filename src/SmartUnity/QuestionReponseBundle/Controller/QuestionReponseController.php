@@ -608,6 +608,9 @@ class QuestionReponseController extends Controller {
                     'required' => true))
                 ->add('valider', 'submit')
                 ->getForm();
+        $formDeleteReponse = $this->createFormBuilder()
+                ->add('oui', 'submit')
+                ->getForm();
 
         if (true === $this->get('security.context')->isGranted('ROLE_USER')) {
             $user = $this->container->get('security.context')->getToken()->getUser();
@@ -656,8 +659,9 @@ class QuestionReponseController extends Controller {
                     'formCommentaireReponse' => $formCommentaireReponse->createView(),
                     'formReponse' => $formReponse->createView(),
                     'formEditReponse' => $formEditReponse->createView(),
+                    'formDeleteReponse' => $formDeleteReponse->createView(),
                     'formSoutien' => $formSoutien->createView(),
-                    'is_answered_by_user' => $isAnswered,
+					'is_answered_by_user' => $isAnswered,
                     'isup' => $isup_rep,
                     'isdown' => $isdown_rep
         ));
@@ -1028,6 +1032,20 @@ class QuestionReponseController extends Controller {
             }
         }
         return new \Exception('Votre réponse n\'a pas pu être éditée');
+    }
+     public function SupprimerReponseAction($id, $slug) {
+            if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                throw new AccessDeniedException();
+            }
+        $reponse = $this->getDoctrine()->getRepository('SmartUnityAppBundle:reponse')->find($id);
+
+                     
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($reponse);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('smart_unity_question_reponse_display_reponse', array('slug' => $slug, 'haveDeletedReponse' => '1')));
+
     }
 
     public function validationReponseAction($idReponse) {

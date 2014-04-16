@@ -9,6 +9,29 @@
     font-style: normal;
 }
 
+@media (min-width: 1201px){
+	.grille-2
+	{
+		max-width:440px;
+		min-width:380px;
+	}
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+	.grille-2
+		{
+			max-width:440px;
+			min-width:380px;
+		}
+}
+
+@media screen and (max-width: 992px) {
+	.grille-2
+	{
+		width:380px;
+	}
+}
+
 .grille-1
 {
 	width: 80px;
@@ -79,15 +102,15 @@
 {
 	float:left;
 	margin-top:10px;
-	max-width:440px ;
-	min-width:380px ;
-}
-
+	}
+	
 .grille-2 p {
 	margin-bottom: 0px;
 	line-height: 1.428571429;
         font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
         font-weight:500;
+	width : 400px;
+	
 }
 
 p.user-and-date{
@@ -101,6 +124,7 @@ p.user-and-date{
 
 .grille-3
 {
+	position:relative;
 	height: 35px;
 	padding-top: 8px;
 	width: 100px;
@@ -111,6 +135,7 @@ p.user-and-date{
 
 .grille-4
 {
+	position:relative;
 	width: 100px;
 	height: 35px;
 	float: right;
@@ -237,6 +262,7 @@ p.user-and-date{
 	border: 0;
 	padding-left: 8px;
 	padding-right: 8px;
+	margin-right : 20px;
 }
 
 .bouton-repondre:hover {

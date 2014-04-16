@@ -176,7 +176,7 @@
 .grille-2
 {
     float:right;
-    padding-right: 3px;
+    
 }
 
 .grille-3
@@ -312,8 +312,8 @@
 
 .bouton-com-rep
 {
-    background: #e37151 ;
-    color:#FFF;
+	background: #e37151 ;
+	color:#FFF;
     font-size:13px;
     line-height:30px;
     height:30px;
@@ -442,6 +442,13 @@
     font-family: centrale;
     border-radius:2px;
     cursor:pointer;
+}
+
+div.popover.fade.right.in {
+	top: 91.5px;
+	left: 76px;
+	min-width:260px;
+	display: block;
 }
 
 .commentaire
@@ -588,6 +595,15 @@ input
 }
 
 #addReponseHolder{
+    position:fixed;
+    display:none;
+    width:100%;
+    bottom:0px;
+    z-index:1000;
+    left:0;
+}
+
+#DeleteReponseHolder{
     position:fixed;
     display:none;
     width:100%;
