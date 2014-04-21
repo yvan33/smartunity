@@ -25,3 +25,5 @@ web/phpconsole/install.php
 /web/css/
 /web/assets/chosen
 
+
+app/Resources/java/yuicompressor.jar.old

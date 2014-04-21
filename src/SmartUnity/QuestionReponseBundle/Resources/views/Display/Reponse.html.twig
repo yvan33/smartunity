@@ -75,39 +75,7 @@
         </div>
 
         
-<div id="DeleteReponseHolder">
-    <div class="container"  style="padding-left: 0; padding-right: 0;">
-        <div class="row">
-            <div class="col-md-offset-1 col-md-10" style="padding-left:0px; padding-right:0px; position:relative">
-                <div class="container cadre-form-reponse">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div  style="position:absolute;cursor:pointer;right:4px;top:5px;color:#FFF;font-size:20px" id="closeFrame">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                            </div>
-                            <div class="grille-content">
-                                <form class="edit-reponse-form" action="{{path('smart_unity_question_reponse_supprimer_reponse', {slug: question.slug, id: 'init'})}}" method="POST">
-                                    <div class="erreur">
-            {{ form_errors(formDeleteReponse) }}
-                                    </div>
-                                    <div class="row">
-                                        <div class="head-blue">Supprimer ma réponse</div>
-                                    </div>
-                                    <div class="row row-avec-margin">
-                                    Souhaitez-vous supprimer votre réponse ?
-                                    <div class="row">
-                                        <div class="cent-h send-answer">{{form_widget(formDeleteReponse.oui,{'attr': {'class': 'bouton-com-rep-input'}})}}</div>
-                                    </div>
-                                </div>
-                                </form>
-                                </div>
-                        </div>
-                    </div>
-                </div>     
-            </div>
-        </div>
-    </div>
-</div> 
+
 {% endif %}
 
  {#/////////////////////////////////////////////////#}
@@ -894,6 +862,26 @@ $("#modalConnexion").modal('show');
                   </div> \
                 </div>';
                              {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                entity +='<div class="valider rep"> \
+                        <br><button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalSuppression" >Supprimer</button> \
+                    </div>  \
+                    <div class="modal fade" id="ModalSuppression" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                        <div class="validation-dialog">\
+                            <div class="validation-content">\
+                                <div class="validation-body">\
+                                    <p>Vous êtes sur le point de supprimer votre réponse, en êtes vous sûr?</p>\
+                                </div>\
+                                <div class="validation-footer">\
+                                    <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button>\
+                              <a href="' + Routing.generate('smart_unity_question_reponse_supprimer_reponse', {slug : slug, id: pEntry['id']}) + '"> \
+                                    <button type="button" class="btn bouton-validation">Valider</button></a>\
+                                </div>\
+                            </div><!-- /.modal-content -->\
+                        </div><!-- /.modal-dialog -->\
+                    </div><!-- /.modal -->'; 
+                
+                {% endif %} 
 
         if (pEntry['is_validated'] || pEntry['is_certif']) {
             entity += '\
@@ -965,26 +953,7 @@ $("#modalConnexion").modal('show');
 
         entity += '        <div class="bloc-commenter-repondre"> \
             <div class="grille-3-btn">';
-                {% if is_granted('ROLE_ADMIN') %}
-                entity +='<div class="valider rep"> \
-                        <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalSuppression" >Supprimer</button> \
-                    </div>  \
-                    <div class="modal fade" id="ModalSuppression" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
-                        <div class="validation-dialog">\
-                            <div class="validation-content">\
-                                <div class="validation-body">\
-                                    <p>Vous êtes sur le point de supprimer votre réponse, en êtes vous sûr?</p>\
-                                </div>\
-                                <div class="validation-footer">\
-                                    <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button>\
-                              <a href="' + Routing.generate('smart_unity_question_reponse_supprimer_reponse', {slug : slug, id: pEntry['id']}) + '"> \
-                                    <button type="button" class="btn bouton-validation">Valider</button></a>\
-                                </div>\
-                            </div><!-- /.modal-content -->\
-                        </div><!-- /.modal-dialog -->\
-                    </div><!-- /.modal -->'; 
                 
-                {% endif %} 
                 {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
                entity+= '<div class="valider rep"> \
                     <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalValidation" >Valider</button> \
