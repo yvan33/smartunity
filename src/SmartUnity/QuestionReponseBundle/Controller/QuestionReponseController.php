@@ -568,7 +568,7 @@ class QuestionReponseController extends Controller {
                                 'items' => array('TextColor' , 'BGColor'),
                             ),
                         ),
-                        'extraPlugins' => 'simpleuploads',
+                        //'extraPlugins' => 'simpleuploads',
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath',
                     ),
@@ -898,13 +898,13 @@ class QuestionReponseController extends Controller {
                                 'name' => 'styles',
                                 'items' => array('Font', 'FontSize'),
                             ),
-                            array(
+                            /*array(
                                 'name' => 'colors',
                                 'items' => array('TextColor', 'BGColor'),
                                 'extraPlugins' => 'simpleuploads'
-                            ),
+                            ),*/
                         ),
-                        'extraPlugins' => 'simpleuploads',
+                       // 'extraPlugins' => 'simpleuploads',
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath',
                     ),
@@ -1007,7 +1007,7 @@ class QuestionReponseController extends Controller {
                                 'items' => array('TextColor', 'BGColor')
                             ),
                         ),
-                        'extraPlugins' => 'simpleuploads',
+                        //'extraPlugins' => 'simpleuploads',
                         'uiColor' => '#ffffff',
                         'removePlugins' => 'elementspath'
                     ),
