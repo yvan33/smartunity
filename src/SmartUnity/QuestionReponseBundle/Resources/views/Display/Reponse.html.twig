@@ -954,30 +954,7 @@ $("#modalConnexion").modal('show');
         entity += '        <div class="bloc-commenter-repondre"> \
             <div class="grille-3-btn">';
                 
-                {% if not is_validated and is_granted('ROLE_USER') and app.user.id == question.membre.id %}
-               entity+= '<div class="valider rep"> \
-                    <button type="button" class="btn bouton-validation" data-toggle="modal" data-target="#ModalValidation" >Valider</button> \
-                </div> \
-                <div class="modal fade" id="ModalValidation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> \
-                  <div class="validation-dialog"> \
-                    <div class="validation-content"> \
-                      <div class="validation-body"> \
-                        <p>Vous êtes sur le point de valider la réponse suivante: ' + pEntry['description'] +'</p> \
-                      <p> Les points de votre question seront attibués au membre ayant apporté cette réponse. Ce choix est définitif. Etes-vous sûr de votre choix?</p> \
-</div> \
-                      <div class="validation-footer"> \
-                        <button type="button" class="btn bouton-annulation" data-dismiss="modal">Annuler</button> \
-                        <a href="' + Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '> \
-                                <button type="button" class="btn bouton-validation">Valider</button></a> \
-                      </div> \
-                    </div> \
-                  </div> \
-                </div>';
                 
-
-       // entity += '<div style = "float:left; margin-right:5px;"> \
-       //      <a href = "'+ Routing.generate('smart_unity_question_reponse_validation_reponse', {idReponse: pEntry['id']}) + '"><img src="{{ asset('assets/img/valid-btn.png') }}"/></a></div>';    
-                             {% endif %}
     
          entity += '<div id="bouton-commenter' + pEntry['id'] + '" class="commentaire-btn-reponse bouton-com-rep"  onClick="javascript:displayCommentFormReponse(this,' + pEntry['id'] + ')" {% if not is_granted('ROLE_USER') %} rel="tooltip" data-original-title="Vous devez être connecté pour commenter une question." href="{{ path('fos_user_security_login') }}" {% endif %}>Commenter</div>';
 
