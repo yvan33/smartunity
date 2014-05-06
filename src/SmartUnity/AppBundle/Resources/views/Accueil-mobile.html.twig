@@ -1,0 +1,83 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+{% endblock %}
+
+
+{% block body %}
+
+<div data-role="header" style="position:fixed;width:100%;overflow:hidden">
+<h1>Smart'Unity</h1>
+    <a href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Connexion</a>
+</div>
+
+<div data-role="footer" style="position:fixed;bottom:0px;width:100%;">
+        <div data-role="navbar">
+            <ul>
+                <li><a href={{ path('smart_unity_app_homepage') }} data-icon="grid"  class="ui-btn-active">Q/R</a></li>
+                <li><a href="#cadeaux" data-icon="star">Boutique cadeaux</a></li>
+                <li><a href="#blog" data-icon="gear">Blog</a></li>
+                <li><a href={{ path('smart_unity_app_descriptionpage') }} data-icon="gear">Comment ça marche?</a></li>
+            </ul>
+        </div><!-- /navbar -->
+</div><!-- /footer -->
+
+	
+<div data-role="tabs" id="tabs" style="position:relative;top:40px">
+<form>
+	 <label for="search-6" class="ui-hidden-accessible">Search:</label>
+     <input type="search" name="search-6" id="search-6" value="">
+</form>
+	<div id="reponses" data-role="navbar" data-grid="b">
+    	<ul>
+        	<li><a href="#solutions" class="ui-btn-active" data-toggle="tab">Solutions</a></li>
+        	<li><a href="#onFire" data-toggle="tab">Questions brûlantes</a></li>
+        	<li><a href="#last" data-toggle="tab">Dernières questions</a></li>
+    	</ul>
+	</div><!-- /navbar -->
+
+	<div class="tab-content">
+    	<div class="tab-pane active fade in out">
+			<ul data-role="listview" data-inset="false" id=solutions>
+ 			{% for question in listeSolvedQuestions %}
+ 				<div class="grille-question-det">
+ 				{% if question.is_certif_question %}
+ 		    		<a class="bouton-repondre" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">{{ question.sujet }} - Certifié Smart'Réponse</a>
+  				{% else %}
+  					<a class="bouton-repondre" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">{{ question.sujet }}</a>
+  				{% endif %} 
+        		</div>
+  			<p style="font-style:italic">Posté par {{ question.membre_username }} le {{ question.date }} </p>
+  		
+			{% endfor %}
+			</ul>
+	</div>
+
+		<div class="tab-pane active fade in out" id="onFire">
+		<ul data-role="listview" data-inset="false" id=onFire>
+ 			{% for question in listeQuestionsOnFire %}
+ 				<div class="grille-question-det">
+    				<a class="bouton-repondre" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">{{ question.sujet }}</a>
+    			</div>
+  				<p style="font-style:italic">Posté par {{ question.membre_username }} le {{ question.date }} </p>
+  			{% endfor %}
+		</ul>
+	</div>
+
+		<div class="tab-pane active fade in out" id="last">
+		<ul data-role="listview" data-inset="false" id=last>
+ 			{% for question in listeLastQuestions %}
+ 				<div class="grille-question-det">
+    				<a class="bouton-repondre" href="{{ path('smart_unity_question_reponse_display_reponse', {slug:question.slug, page:'1'}) }}">{{ question.sujet }}</a>
+    			</div>
+  				<p style="font-style:italic">Posté par {{ question.membre_username }} le {{ question.date }} </p>
+  			{% endfor %}
+</ul>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+

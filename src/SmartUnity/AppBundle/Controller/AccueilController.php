@@ -121,7 +121,7 @@ class AccueilController extends Controller {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function renderLogin(array $data) {
-        $template = sprintf('SmartUnityAppBundle::Accueil.html.twig');
+        $template = sprintf('SmartUnityAppBundle::Accueil-mobile.html.twig');
 
         return $this->container->get('templating')->renderResponse($template, $data);
     }
@@ -139,7 +139,7 @@ class AccueilController extends Controller {
 
     public function affichageDescriptionAction() {
 
-        $template = 'SmartUnityAppBundle::Description.html.twig';
+        $template = 'SmartUnityAppBundle::Description-mobile.html.twig';
 
         return $this->render($template);
         

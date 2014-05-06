@@ -1,0 +1,30 @@
+{% block stylesheets %}
+{% stylesheets filter='cssrewrite, yui_css'
+				 'assets/css/accueil.css' 
+				 'assets/css/barreDeRecherche.css' %}
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+{% endstylesheets %}
+{% endblock %}
+
+<div data-role="header" style="position:fixed;width:100%;overflow:hidden">
+<h1>Smart'Unity</h1>
+    <a href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a>
+</div>
+
+{% block body %}
+
+{% endblock %}
+
+
+<div data-role="footer" style="position:fixed;bottom:0px;width:100%;">
+        <div data-role="navbar">
+            <ul>
+                <li><a href={{ path('smart_unity_app_homepage') }} data-icon="grid"  class="ui-btn-active">Q/R</a></li>
+                <li><a href="#cadeaux" data-icon="star">Boutique cadeaux</a></li>
+                <li><a href="#blog" data-icon="gear">Blog</a></li>
+                <li><a href={{ path('smart_unity_app_descriptionpage') }} data-icon="gear">Comment ça marche?</a></li>
+            </ul>
+        </div><!-- /navbar -->
+</div><!-- /footer -->
